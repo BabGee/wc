@@ -1,0 +1,178 @@
+{% load staticfiles %}
+{% load interface_tags %}
+<!doctype html>
+<html>
+
+<head>
+
+  <title>unquote</title>
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="{% static "polymer/components/webcomponentsjs/webcomponents.js" %}">
+  </script>
+
+  <link rel="import" href="{% static "polymer/components/font-roboto/roboto.html" %}">
+  <link rel="import"
+    href="{% static "polymer/components/core-header-panel/core-header-panel.html" %}">
+  <link rel="import"
+    href="{% static "polymer/components/core-toolbar/core-toolbar.html" %}">
+  <link rel="import"
+    href="{% static "polymer/components/paper-tabs/paper-tabs.html" %}">
+  <link rel="import" href="{% static "polymer/components/core-ajax/core-ajax.html" %}">
+  <link rel="import" href="{% static "polymer/elements/post-list.html" %}">
+  <link rel="import" href="{% static "polymer/components/core-menu/core-menu.html" %}">
+  <link rel="import" href="{% static "polymer/components/core-item/core-item.html" %}">
+  <link rel="import" href="{% static "polymer/components/core-drawer-panel/core-drawer-panel.html" %}">
+  <link rel="import" href="{% static "polymer/components/core-icons/core-icons.html" %}">
+  <link rel="import" href="{% static "polymer/components/paper-icon-button/paper-icon-button.html" %}">
+  <link rel="import" href="{% static "polymer/components/core-scaffold/core-scaffold.html" %}">
+  <style>
+  html,body {
+    height: 100%;
+    margin: 0;
+    background-color: #E5E5E5;
+    font-family: 'RobotoDraft', sans-serif;
+  }
+  </style>
+
+</head>
+
+<body unresolved>
+{% verbatim %}
+<polymer-element name="post-pageload">
+  <template>
+<!-- 
+  <style>
+  core-header-panel {
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  core-toolbar {
+    background: #03a9f4;
+    color: white;
+  }
+  #tabs {
+    width: 100%;
+    margin: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+        text-transform: uppercase;
+  }
+  .container {
+    width: 80%;
+    margin: 50px auto;
+  }
+  @media (min-width: 481px) {
+    #tabs {
+      width: 200px;
+    }
+    .container {
+      width: 400px;
+    }
+  }
+  </style>
+
+
+<core-header-panel>
+<core-toolbar class="medium-tall">
+
+  <paper-icon-button id="navicon"
+    icon="menu"></paper-icon-button>
+
+  <span flex>Title</span>
+
+  <paper-icon-button id="morebutton"
+    icon="more-vert"></paper-icon-button>
+
+  <paper-tabs id="tabs" class="bottom fit" selected="all" self-end>
+        <paper-tab name="all">All</paper-tab>
+        <paper-tab name="favorites">Favorites</paper-tab>
+  </paper-tabs>
+  
+</core-toolbar>
+
+    <div class="container" layout vertical center>
+      <post-list show="all"></post-list>
+    </div>
+
+  </core-header-panel>
+-->
+  <core-header-panel>
+    <style>    
+      :host {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+      #core_scaffold {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+      }
+      #core_header_panel {
+        background-color: rgb(255, 255, 255);
+      }
+      #core_toolbar {
+        color: rgb(255, 255, 255);
+        background-color: rgb(79, 125, 201);
+      }
+      #core_menu {
+        font-size: 16px;
+      }
+    </style>
+    <core-scaffold id="core_scaffold">
+      <core-header-panel mode="seamed" id="core_header_panel" navigation flex>
+        <core-toolbar id="core_toolbar"></core-toolbar>
+        <core-menu valueattr="label" id="core_menu" theme="core-light-theme">
+          <core-item id="core_item" icon="settings" label="Item1" horizontal center layout></core-item>
+          <core-item id="core_item1" icon="settings" label="Item2" horizontal center layout></core-item>
+        </core-menu>
+      </core-header-panel>
+      <div id="div" tool>Title</div>
+    </core-scaffold>
+  </core-header-panel>
+
+    <core-ajax id="ajax"
+      auto
+      url="/api/START%20SERVICE/"
+      on-core-response="{{postsLoaded}}"
+      handleAs="json">
+    </core-ajax>
+  </template>
+</polymer-element>
+<script>
+
+    Polymer('post-pageload', {
+        postsLoaded: function(event, response) {
+            this.response = JSON.stringify(response);
+        }
+    });
+</script>
+{% endverbatim %}
+<post-pageload></post-pageload>
+
+<script>
+/*
+document.addEventListener('polymer-ready', function() {
+  var tabs = document.querySelector('paper-tabs');
+  var list = document.querySelector('post-list');
+
+  tabs.addEventListener('core-select', function() {
+    list.show = tabs.selected;
+  });
+   });
+*/
+</script>
+</body>
+
+</html>
+

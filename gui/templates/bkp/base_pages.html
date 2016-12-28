@@ -1,0 +1,252 @@
+{% load staticfiles %}
+{% load interface_tags %}
+{% verbatim %}
+  <div class="topbar gray" ng-show="response">
+        <div class="container">
+                <div class="row">
+            <div class="col-md-6 col-xs-12 header-top-left">
+                <div>
+                    <div class="news">
+                        <div class="inner">
+                                <ul class="news-list">
+                                    <li>Chrysler plans new <a href="#">product</a> at Windsor, Ontario, plant, report says</li>
+                                    <li>Tesla retail model faces new legal challenge in Ohio</li>
+                                    <li>Toyota revealing new model</li>
+
+                                </ul><!-- /.news-list -->
+                        </div><!-- /.inner -->
+                    </div><!-- /.news -->
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xs-12 header-top-right">
+                <div>
+                    <div class="social">
+                        <div class="inner">
+                                <ul class="social-links">
+                                    <li class="social-icon google-plus"><a href="#">Google+</a></li>
+                                    <li class="social-icon youtube"><a href="#">YouTube</a></li>
+                                    <li class="social-icon twitter"><a href="#">Twitter</a></li>
+                                    <li class="social-icon pinterest"><a href="#">Pinterest</a></li>
+                                    <li class="social-icon facebook"><a href="#">Facebook</a></li>
+                                </ul><!-- /.social-links -->
+                        </div><!-- /.inner -->
+                    </div><!-- /.social -->
+
+                  <div class="languages">
+                        <ul>
+				{% endverbatim %}
+                            <li><a href="#"><img src="{% static "carat/assets/img/flags/en.png" %}" alt="#"></a></li>
+                            <li><a href="#"><img src="{% static "carat/assets/img/flags/ru.png" %}" alt="#"></a></li>
+				{% verbatim %}
+                        </ul>
+                    </div><!-- /.languages -->
+
+                    <form class="navbar-form search-form" role="search">
+                        <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" required="required">
+
+                                <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default"><i class="icon icon-normal-magnifier"></i></button>
+                                </span><!-- /.input-group-btn -->
+                        </div><!-- /.input-group -->
+                    </form><!-- /.search-form -->
+                </div>
+            </div><!-- /.col-md-5 -->
+                </div><!-- /.row -->
+        </div><!-- /.container -->
+</div><!-- /.topbar -->
+
+
+
+<header id="header"  ng-show="response">
+        <div class="header-inner">
+                <div class="container">
+                        <div class="row">
+                                <div class="col-md-12 clearfix">
+                                        <div ng-if="response.get_institution_details" class="brand">
+                                                <div class="logo">
+                                                        <a href="/">
+		<img src="{{static}}images/logos/{{ response.get_institution_details.logo }}" style="height:50px;" class="img-rounded"  alt="Logo">
+
+                                                        </a>
+                                                </div><!-- /.logo -->
+                                             <div class="slogan"><a><h2>{{ response.get_institution_details.name }}</h2></a>
+						<br>{{ response.get_institution_details.tagline }}</div><!-- /.slogan -->
+                                        </div><!-- /.brand -->
+                                        <div ng-if="!response.get_institution_details" class="brand">
+					{% endverbatim %}
+
+						{% if request.session.subnet %}
+                                                <div class="logo">
+                                                        <a href="/">
+								<img src="{{ request.session.subnet.logo }}" style="height:50px;" class="img-rounded"  alt="Logo">
+                                                        </a>
+                                                </div><!-- /.logo -->
+	                                             <div class="slogan"><a><h2>{{ request.session.subnet.name|title }}</h2></a>
+							<br>{{ request.session.subnet.description|title }}</div><!-- /.slogan -->
+						{% else %}
+							{{gateway}}
+						{% endif %}
+
+					{% verbatim %}
+                                        </div><!-- /.brand -->
+
+
+                                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        <nav class="collapse navbar-collapse navbar-collapse" role="navigation" ng-show="menu.1">
+                                                <ul class="navigation text-capitalize" ng-repeat="(key, value) in menu">
+						<li class="menuparent has-regularmenu" ng-repeat="(keys, values) in value" ng-show="values.1">
+							<a href="#">
+								{{keys}}
+							</a>
+                                                        <div class="regularmenu">
+                                                                <ul class="regularmenu-inner">
+									<span ng-repeat="(k, v) in values">
+                                                          <li  ng-show="v.0 == activeMenu">
+                                                                        <a href="#/pages//?SERVICE={{v.0 | uppercase}}" ng-click="response='';reloadPage();" style="text-transform:capitalize;">
+                                                                        <i class="{{v.1}}"></i>&nbsp;{{v.0|lowercase}}<!--<span class="badge">14</span>-->
+                                                                        </a>
+                                                                        </li>
+                                                          <li ng-if="v.0 != activeMenu">
+                                                                        <a href="#/pages//?SERVICE={{v.0 | uppercase}}"  ng-click="response='';" style="text-transform:capitalize;">
+                                                                        <i class="{{v.1}}"></i>&nbsp;{{v.0|lowercase}}<!--<span class="badge">14</span>-->
+                                                                        </a>
+                                                                        </li>
+									</span>
+								</ul>
+							</div>
+						</li>
+						<li ng-repeat="(keys, values) in value" ng-show="!values.1">No values: {{keys}}</li>
+						{%endverbatim%}
+						{% if request.session.user_id %}
+				                        <li style="float:right;"><a href="#/logout"><i class="icon-normal-door-out"></i>&nbsp;Sign Out</a></li>
+						{% endif %}
+						{%verbatim%}
+                                                </ul><!-- /.nav -->
+                                        </nav>
+                                </div><!-- /.col-md-12 -->
+                        </div><!-- /.row -->
+                </div><!-- /.container -->
+        </div><!-- /.header-inner -->
+</header><!-- /#header -->
+
+<div id="content" >
+<div class="infobar">
+        <div class="container">
+                <div class="row">
+                        <div class="col-md-12">
+                                <ol class="breadcrumb pull-left">
+                                        <li><a href="#">&nbsp;</a></li>
+					<!--
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="#">Featured Cars</a></li>
+                                        <li class="active">Buy</li>
+					-->
+                                </ol>
+
+                                <div class="contact pull-right">
+					<!--
+                                        <div class="contact-item phone">
+                                                <div class="label"><i class="icon icon-normal-mobile-phone"></i></div>
+                                                <div class="value">123-456-789</div>
+                                        </div>
+
+                                        <div class="contact-item mail">
+                                                <div class="label"><i class="icon icon-normal-mail"></i></div>
+                                                <div class="value"><a href="mailto:example@example.com">example@example.com</a></div>
+                                        </div>
+
+                                        <div class="contact-item opening">
+                                                <div class="label"><i class="icon icon-normal-clock"></i></div>
+                                                <div class="value">Mon - Sun: 8:00 - 16:00</div>
+                                        </div>
+					-->
+                                </div><!-- /.contact -->
+                        </div><!-- /.col-md-12 -->
+                </div><!-- /.row -->
+        </div><!-- /.container -->
+</div><!-- /.infobar -->
+
+<div class="section gray-light">
+<div class="container">
+                        <div  class="row" ng-show="!response&&!timeout">
+                                <div class="col-xs-12">
+                                        <div class="spinner">
+                                                <div class="bounce1"></div>
+                                                <div class="bounce2"></div>
+                                                <div class="bounce3"></div>
+                                        </div>
+                                </div>
+                        </div>
+
+
+
+<div class="row">
+<!--                        <div class="page-header">
+                            <div class="page-header-inner">
+                                <div class="heading" >
+                                    <h2>&nbsp;</h2>
+                                </div>
+                                <div class="line">
+                                    <hr/>
+                                </div>
+                            </div>
+                        </div>
+
+-->
+<div class="alert alert-success row" role="alert"  ng-if="response_status!='00'" ng-repeat="(key, value) in response track by $index" ng-show="value|notObject">
+	<span><strong style="text-transform: capitalize;">{{ key|splitJoin }}</strong> &nbsp;{{ value}}</span>
+</div>
+<div id="main" ng-repeat="(k, v) in interface track by $index">
+    <div class="{{values.input_var.6}}" ng-repeat="(keys, values) in v track by $index" >
+	<div class="block block-inner checkout" ng-init="section=values.input_var.5;response=null;"><!-- SECTION COMES BEFORE CTRL to ensure it does not change|Response assigns null to omitt spill to profileCtrl-->
+		<div class="row" id="removecontent" ng-controller="profileCtrl">
+			<div class="col-md-12" ng-repeat="(k, v) in interface track by $index" >
+				<div class="block-inner white block-shadow" ng-repeat="(keys, values) in v track by $index" ng-if="values.input_var.5==section"><!--section compares to the form input variable and only matching sections previewed|eliminates duplicate page on multiple forms on page -->
+						<div class="row" ng-include src="'/form/'"></div>
+        	                               <!--<iframe ng-src="/iframe/" frame-with-scope data-tap-disabled="true" style="margin:0; width:100%; height:150px; border:none; overflow:hidden;" scrolling="no" frameborder="0" seamless></iframe>-->
+				</div><!--block checkout-->
+			</div><!--row-->
+		</div><!--controller-->
+	</div><!--section init-->
+   </div><!--v loop-->
+</div><!--interface loop-->
+</div><!--row-->
+</div><!--container-->
+</div><!--section gray-light-->
+</div><!--content-->
+
+<footer id="footer"  ng-show="response">
+        <div class="footer-bottom">
+                <div class="container">
+                        <div class="row">
+                                <div class="col-md-12 clearfix">
+                                        <div class="copyright">
+						{%endverbatim%}
+                                                &copy; 2014 {{gateway}}<span class="separator">/</span> <a href="http://interintel.co.ke">InterIntel</a> <span class="separator">/</span> All rights reserved
+						{% verbatim %}
+                                        </div><!-- /.pull-left -->
+
+                                        <ul class="nav nav-pills">
+						<!--
+                                                <li><a href="#">Home</a></li>
+                                                <li><a href="#">Features</a></li>
+                                                <li><a href="#">Reservation</a></li>
+                                                <li><a href="#">Our Offer</a></li>
+                                                <li><a href="#">Contact</a></li>
+						-->
+                                        </ul><!-- /.nav -->
+                                </div><!-- /.col-md-12 -->
+                        </div><!-- /.row -->
+                </div><!-- /.container -->
+        </div><!-- /.footer-bottom -->
+</footer><!-- /#footer -->
+{% endverbatim %}
+
+

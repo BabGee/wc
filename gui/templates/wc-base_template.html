@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+    <title>{{gateway}} | {{description}}</title>
+    {% load staticfiles %}
+    {% load interface_tags %}
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="{% static 'polymer/manifest.json' %}">
+
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer/src/css/main.css' %}">-->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer/src/css/normalize.css' %}">-->
+
+    <!--<script src="{% static 'polymer/src/js/vendor/modernizr-2.6.2.min.js' %}"></script>-->
+
+
+    <script src="{% static 'polymer/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
+    <link rel="import" href="{% static 'polymer/bower_components/polymer/polymer.html' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polymer/src/elements/sections.css' %}">
+
+    {% block header %}{% endblock %}
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: #E5E5E5;
+            font-family: 'RobotoDraft', sans-serif;
+            word-wrap: break-word;
+        }
+
+        @media print {
+            body {
+                height: 1000px;
+            }
+        }
+    </style>
+</head>
+<body>
+{% block body %}{% endblock %}
+</body>

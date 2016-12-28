@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+<title>Term URL</title>
+</head>
+<body onload="document.PaymentForm.submit ();">
+<form id="PaymentForm" name="PaymentForm" method="POST" action="/GOTO/PAYMENT/">
+{% csrf_token %}
+	<input type="hidden" name="payment_method" value="CARD" />
+	<input type="hidden" name="merchant_data" value="{{request.POST.MD}}" />
+	<input type="hidden" name="signedpares" value="{{request.POST.PaRes}}" />
+
+</form>
+</body>
+<!--<body><p>{{request.POST.items}}</p></body>-->
+</html>

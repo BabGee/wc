@@ -1,0 +1,15 @@
+{% extends "wc-base_preview.html" %}
+{% load staticfiles %}
+{% load interface_tags %}
+{% block body %}
+	{% if 'data_name' in params.keys %}
+        <h1>{{params.data_name|title}}</h1>
+	{% else %}
+        <h1>{{service|title}}</h1>
+	{% endif %}
+        <div class="form" id="form">
+	{% csrf_token %}
+
+		{{params}}
+		</div>   
+{% endblock %}

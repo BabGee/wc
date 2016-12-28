@@ -1,0 +1,682 @@
+{% verbatim %}
+<form class="form-section col-md-12" name='form' ng-submit="submitForm(payload,values.input_var.4, form.$valid)" action="javascript:void(0);" method="POST" role="form" enctype="multipart/form-data">
+	<div class="block-title">
+		<h3>{{keys}}</h3>
+	</div>
+	<div class="progress" ng-if="dynamic<99">
+	<progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{dynamic}}% Loaded <i ng-show="showWarning">!!! Watch out !!!</i></progressbar>
+	</div>
+	<div class="alert alert-success" role="alert"  ng-repeat="(key, value) in response track by $index" ng-show="value|notObject">
+		<span><strong style="text-transform: capitalize;">{{ key|splitJoin }}</strong> &nbsp;{{ value}}</span>
+	</div>
+	<div ng-repeat="(key, value) in values track by $index" style="text-transform:capitalize;">
+		<div ng-show="key!=input_var">
+
+				<div class="team" ng-class="value.7" ng-if="value.1=='PROFILE INFO'">
+
+                                    <div class="inner">
+                                        <div class="picture">
+                                            <img src="assets/img/testimonials-4.png" alt="#">
+                                        </div><!-- /.picture -->
+                                    </div><!-- /.inner -->
+
+                                    <div class="content-inner">
+                                        <h2>{{value.5.first_name}} {{value.5.last_name}}</h2>
+                                        <h4>{{value.5.access_level}}</h4>
+                                        <div class="social">
+                                            <div class="inner">
+                                                <ul class="social-links">
+                                                    <li class="social-icon google-plus"><a href="#">Google+</a></li>
+                                                    <li class="social-icon twitter"><a href="#">Twitter</a></li>
+                                                    <li class="social-icon pinterest"><a href="#">Pinterest</a></li>
+                                                    <li class="social-icon facebook"><a href="#">Facebook</a></li>
+                                                </ul><!-- /.social-links -->
+                                            </div><!-- /.inner -->
+                                        </div><!-- /.social -->
+                                    </div>
+                                </div><!-- /.team -->
+
+			<div class="overview"  ng-class="value.7" ng-if="value.1=='TABSET VIEW'">
+				<div id="overview" class="active">
+					<tabset justified="true"  id="tab-container">
+						<tab heading="{{k}}" ng-repeat="(k,v) in value.5">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <table class="table">
+                                                                    <tbody>
+                                                                        <tr ng-if="kk!='logo'" ng-repeat="(kk,vv) in v">
+                                                                            <td class="property">{{kk}}</td>
+                                                                            <td class="value">{{vv}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table><!-- /.table -->
+                                                            </div><!-- /.col-md-7 -->
+                                                        </div><!-- /.row -->
+						</tab>
+					</tabset>
+                                                        <!--<div class="info">
+                                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum</p>
+                                                        </div> /.info
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="actions">
+                                                                    <ul>
+                                                                        <li>
+		                                                                <div class="producer-logo">
+                		                                                    <img src="assets/img/partners/bmw.png" alt="#">
+                                		                                </div>
+
+                                                                            <button href="#" cbox-element class="btn btn-primary">
+                                                                                <i class="icon icon-normal-mail"></i>Contact Seller
+                                                                            </button>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <button href="#" cbox-element class="btn btn-primary">
+                                                                                <i class="icon icon-normal-cart-plus"></i>Add to cart
+                                                                            </button>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="http://micromobile.co.ke" cbox-element>
+                                                                                <i class="icon icon-normal-piggy-bank"></i>Leasing options
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <i class="icon icon-normal-school-ring"></i>Watch this product
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <i class="icon icon-normal-profile-rays"></i>Send to friend
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <i class="icon icon-normal-printer"></i>Print this page
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div> /.actions
+                                                            </div> /.col-sm-12  -->
+								</div> <!-- /. overview -->
+					</div> <!-- /. overview -->
+
+				<div id="gallery-wrapper"  ng-class="value.7" ng-if="value.1=='GALLERY VIEW'">
+                                                <div class="gallery" init-gallery>
+                                                    <div class="slide" ng-class="{active: $index==0}" notify-when-repeat-finished ng-repeat="img in value.5 track by $index">
+                                                        <div class="picture-wrapper">
+                                                            <div class="picture">
+								<a href="{{media}}{{img}}" cbox-element>
+								<img src="{{media}}{{img}}" alt="#"><i class="icon fa fa-expand"></i>
+
+								</a>
+								</div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div><!-- /.gallery -->
+
+                                                <div id="gallery-pager" class="white block-shadow">
+                                                    <div class="prev">
+                                                        <i class="icon-normal-left-arrow-small"></i>
+                                                    </div>
+
+                                                    <div class="pager">
+                                                    </div>
+
+                                                    <div class="next">
+                                                        <i class="icon-normal-right-arrow-small"></i>
+                                                    </div>
+                                                </div><!-- /#gallery-pager -->
+
+
+                                                <div class="gallery-thumbnails">
+                                                    <div class="thumbnail-{{ $index }}" ng-repeat="img in value.5 track by $index">
+                                                            <img src="{{media}}{{img}}" alt="#">
+                                                    </div>
+
+                                                </div><!-- /.gallery-thumbnails -->
+
+                                            </div> <!-- /#gallery-wrapper -->
+
+					 <div class="category-boxes"   ng-class="value.7" ng-if="value.1=='CATEGORY BOXES'">
+							<div class="row">
+								<div class="category-box col-lg-3 col-md-3 col-sm-6" ng-repeat="(item, desc) in value.5">
+									<div class="wrapper">
+										<div class="picture"><br><br><br><br><i ng-class="desc.icon"></i>
+											<!--<a href="detail.html">
+												<img src="assets/img/filter/sedan.png" class="cover-me" alt="#">
+											</a>-->
+										</div><!-- /.picture -->
+
+										<div class="meta">
+											<div class="title">
+												<a href="javascript:;">{{item}}</a>
+											</div><!-- /.title -->
+
+											<div class="offers">&nbsp;</div><!-- /.offers -->
+										</div><!-- /.meta -->
+
+										<div class="options">
+											<ul>
+												<li ng-if="kk!='icon'&&kk!='id'" ng-repeat="(kk,vv) in desc"><a href="{{vv.0}}">({{vv.1}}) {{kk}}</a></li>
+											</ul>
+										</div><!-- /.options -->
+									</div><!-- /.wrapper -->
+								</div><!-- /.category-box -->
+							</div><!-- /.row -->
+						</div><!-- /.category-boxes-->
+
+                    <div class="sidebar"   ng-class="value.7"  ng-if="value.1=='SIDEBAR VIEW'">
+						<div class="row">
+
+							<div class="teaser-item-wrapper col-lg-12 col-md-12 col-sm-4" ng-repeat="(item, desc) in value.5">
+							<div class="teaser-item">
+								<div class="title">
+									<a href="#/pages//?SERVICE={{values.input_var.4}}&institution_id={{payload.institution_id}}&reference={{desc.reference}}">{{desc.name}}</a>
+								</div><!-- /.title -->
+
+								<div class="subtitle">{{desc.kind}}</div><!-- /.subtitle -->
+
+								<div class="row">
+									<div class="col-sm-5 col-md-5 picture-wrapper">
+										<div class="picture">
+															<a  href="{{media}}{{desc.image}}"  cbox-element >
+												<span class="hover">
+													<span class="hover-inner">
+														<i class="icon icon-normal-link"></i>
+													</span><!-- /.hover-inner -->
+												</span><!-- /.hover -->
+
+												<img src="{{media}}{{desc.image}}" alt="#">
+											</a>
+										</div><!-- /.picture -->
+									</div><!-- /.picture-wrapper -->
+
+									<div class="col-sm-7 col-md-7 content-wrapper ">
+										<div class="price">{{desc.price}}</div>
+									</div><!-- /.content-wrapper -->
+								</div><!-- /.row -->
+							</div><!-- /.teaser-item -->				
+							</div><!-- /.teaser-item-wrapper -->
+
+							</div><!-- /.row-->
+							</div>
+
+							<div class="highlighted-wrapper gray"   ng-class="value.7"  ng-if="value.1=='SLIDE VIEW'">
+
+									<div class="highlighted section">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-3 col-sm-3">
+													<div id="overviews">
+														<div class="overview" ng-class="{active: $index == 0 }" ng-repeat="(item, desc) in value.5 track by $index">
+															<div class="overview-table">
+																<div class="item title">
+																	<h3>{{desc.name}}</h3>
+																	<div class="subtitle">{{desc.kind}}</div>
+																</div><!-- /.item -->
+
+																<div class="item tags">
+																	<div class="price">{{desc.price}}</div>
+																	<div class="type">{{desc.trading}}</div>
+																</div><!-- /.item -->
+
+																<div class="item line" ng-if="kk!='image'&&kk!='trading'&&kk!='kind'&&kk!='name'&&kk!='price'" ng-repeat="(kk,vv) in desc">
+																	<span class="property">&nbsp;{{kk}}</span>
+																	<span class="value">&nbsp;{{vv}}</span>
+																</div><!-- /.item -->
+
+															</div><!-- /.overview-table -->
+														</div><!-- /.overview -->
+
+
+														<div id="slider-navigation">
+															<div class="prev"></div><!-- /.prev -->
+															<div class="next"></div><!-- /.next -->
+														</div><!-- /.slider-navigation -->
+													</div><!-- /.overviews -->
+												</div>
+
+
+												<div class="col-md-7 col-sm-7">
+													<div id="slider" init-slider>
+														<div class="slide"   ng-class="{active: $index == 0 }" ng-repeat="(item, desc) in value.5 track by $index" notify-when-repeat-finished>
+															<a href="#/pages//?SERVICE={{values.input_var.4}}&institution_id={{payload.institution_id}}&reference={{desc.reference}}">
+													<img src="{{media}}{{desc.image}}" alt="#"  class="img-responsive" >
+												</a>
+															<div class="color-overlay"></div><!-- /.color-overlay -->
+														</div><!-- /.slide -->
+													</div><!-- /#slider -->
+												</div>
+											</div><!-- /.row -->
+										</div><!-- /.container -->
+									</div><!-- /.highligted -->
+
+
+							</div>
+
+							<div ng-if="value.1=='LIST VIEW'" ng-class="value.7" >
+											<div id="main">
+												<div class="row-block block block-margin">
+<div ng-init="bigTotalItems=(value.5|objectLength);bigCurrentPage=1;numPerPage=10;maxSize=5;"  class="block-inner gray">
+Page: {{bigCurrentPage}} / {{numPages}} 
+</div>
+													<div class="row">
+														<div class="col-md-12">
+															<div class="content white">
+																<div class="inner">
+										<div class="row-item" ng-repeat="desc in value.5|filterObject: bigCurrentPage :numPerPage">
+											<div class="inner">
+												<div class="row">
+													<div class="col-lg-4 col-md-5 col-sm-5" ng-show="desc.images">
+														<div class="picture">
+															<div class="image-slider" preview-cycle>
+																	<a href="{{media}}{{image}}"  cbox-element class="slide" notify-when-repeat-finished ng-repeat="image in desc.images">
+																		<img src="{{media}}{{image}}" alt="#">
+																	</a><!-- /.slide -->																
+																<div class="cycle-pager"></div><!-- /.cycle-pager -->
+															</div><!-- /.image-slider -->
+														</div><!-- /.picture -->
+													</div><!-- /.col-md-4 -->
+
+													<div class="col-lg-8 col-md-7 col-sm-7">
+
+														<div class="content-inner">
+															<h3>
+																<a href="detail.html">{{desc.name}}</a>
+															</h3>
+															<div class="subtitle">{{desc.kind}}</div><!-- /.subtitle -->
+															<div ng-show="desc.quantity" class="price">{{desc.quantity}}</div><!-- /.price -->
+
+															<div ng-show="desc.price" class="price">{{desc.price}}</div><!-- /.price -->
+
+															<div class="description">
+																<span class="col-md-6" ng-if="kk!='images'&&kk!='trading'&&kk!='kind'&&kk!='name'&&kk!='price'" ng-repeat="(kk,vv) in desc"><span class="property">{{kk}}:&nbsp;</span><span class="value">{{vv}}</span>,&nbsp;</span>
+															</div><!-- /.description -->
+														</div><!-- /.content-inner -->
+													</div><!-- /.col-md-8 -->
+												</div><!-- /.row -->
+											</div><!-- /.inner -->
+										</div><!-- /.row-item -->                                                    </div>
+															</div>
+														</div>
+													</div>
+
+ <pagination items-per-page="numPerPage" total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm pager" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+
+												</div>
+											</div>
+
+											<!-- /#main -->
+								</div>
+								
+							<div id="recent-cars" class="grid-block block"  ng-class="value.7"  ng-if="value.1=='LIST SLIDE'">
+
+								<div class="row">
+									<div class="col-md-12">
+										<div class="inner-block white">
+											<div class="grid-carousel" grid-carousel>
+
+																		<div class="inner">
+														<div class="grid-item">
+
+								<div class="inner">
+									<div class="picture">
+										<div class="image-slider" preview-cycle>
+											
+																<a href="detail.html" class="slide">
+													<img src="assets/img/content/toyota2.jpg" alt="#">
+												</a><!-- /.slide -->
+																<a href="detail.html" class="slide">
+													<img src="assets/img/content/toyota1.jpg" alt="#">
+												</a><!-- /.slide -->
+																<a href="detail.html" class="slide">
+													<img src="assets/img/content/toyota.jpg" alt="#">
+												</a><!-- /.slide -->
+																<a href="detail.html" class="slide">
+													<img src="assets/img/content/toyota7.jpg" alt="#">
+												</a><!-- /.slide -->
+											
+											<div class="cycle-pager"></div><!-- /.cycle-pager -->
+										</div><!-- /.image-slider -->
+									</div><!-- /.picture -->
+
+									<div class="like">
+										<a href="detail.html"><i class="icon icon-outline-thumb-up"></i></a>
+									</div><!-- /.like -->
+
+									<h3>
+										<a href="detail.html">Toyota Verso</a>
+									</h3>
+
+									<div class="subtitle">DPF Active</div><!-- /.subtitle -->
+
+									<div class="price">20,888$</div><!-- /.price -->
+
+									<div class="meta">
+										<ul class="clearfix ">
+											<li>
+												<i class="icon icon-normal-dashboard"></i> 2013                </li>
+
+											<li>
+												<i class="icon icon-normal-car-door"></i> Fuel                </li>
+
+											<li>
+												<i class="icon icon-normal-cog-wheel"></i> 1500                </li>
+										</ul>
+									</div><!-- /.meta -->
+								</div><!-- /.inner -->
+							</div><!-- /.grid-item -->                        </div><!-- /.inner -->
+																</div><!-- /.grid-carousel -->
+										</div><!-- /.inner-block -->
+									</div><!-- /.col-md-12 -->
+								</div>
+
+								<div class="row">
+									<div class="col-md-12">
+										<div id="grid-carousel-pager">
+											<div class="prev"></div><!-- /.prev -->
+											<div class="next"></div><!-- /.next -->
+										</div><!-- /.grid-carousel-pager -->
+									</div><!-- /.col-md-12 -->
+								</div><!-- /.row -->
+							</div><!-- /.grid-block -->
+
+
+
+			<div ng-if="value.1=='VIDEO VIEW'" ng-class="value.7" >
+				<div class="media-player"  play-content>
+
+					<video width="100%" src="" controls>
+						 Your browser does not support the <code>video</code> element.
+					</video>
+<!-- <div id="controls" class="alert alert-info" style="position: relative;width: 100%;height: height:10px;backgroud-color: #000;"><span id="duration" style="position: absolute;top: 0;left: 0;width: 0;height: 100%;background-color: #ccc;"></span> -->
+				<div id="controls" class="media-controls">
+					<span class="col-md-2">
+						<span id="replay"><i class="fa fa-repeat fa-lg"></i>&nbsp;</span>	
+						<span id="play"><i class="fa fa-play fa-lg"></i>&nbsp;</span>
+						<span id="stop"><i class="fa fa-stop fa-lg"></i>&nbsp;</span>
+						<span id="duration"></span>
+					</span>
+					<span class="col-md-8"><input type="range" value="1" max="1" step="0.01" ng-model="slider1"/></span>
+					<span id="volume" class="col-md-2">
+						<i class="fa fa-volume-off fa-lg"></i>
+							<input type="range" ng-model="slider2">
+						<i class="fa fa-volume-up fa-lg"></i>&nbsp;
+					</span>
+				</div>
+
+					Slider 1: {{slider1}} Slider 2 {{slider2}}
+				<div class="media-play-list">
+					<h2>Play list</h2>
+					<ul class="play-list">
+						<li><span class='play-item' onclick='loadVideo("parrots.webm", "parrots.mp4");'>Parrots</span></li>
+						<li><span class='play-item' onclick='loadVideo("paddle-wheel.webm", "paddle-wheel.mp4");'>Paddle Steamer Wheel</span></li>
+						<li><span class='play-item' onclick='loadVideo("grass.webm", "grass.mp4");'>Grass</span></li>
+					</ul>
+				</div>
+				</div>
+			<div class="clearfix"></div>
+			</div>
+
+			<div ng-if="value.1=='CHART VIEW'" ng-class="value.7" >
+
+				<li class="list-group-item">
+				<h3 class="panel-title"><small>{{value.0}}</small>
+					<button class="btn btn-xs btn-default" ng-show="!(value.5.1|notObject)"  ng-csv="value.5" style="float:right;">Download CSV</button>
+				 </h3>
+				</li>
+				<div ng-show="(value.5.1|notObject)"><h4>&nbsp;<small>Sorry, no data found</small></h4></div>
+				<div class="list-group-item" ng-show="!(value.5.1|notObject)" chart-view-model="payload['{{value.0}}']" chartdata="value.5" charttype="{{value.4}}" payload="payload" title="{{value.0}}"></div>
+			</div>
+			
+			<div ng-if="value.1=='BOXES'" ng-class="value.7" >
+				<div class="col-xs-12">
+					<div class="smallstat box">
+						<div class="boxchart-overlay">
+							<div class="boxchart {{value.4}}">
+							<div class="boxchart"><i width="64" height="30" style="display: inline-block; vertical-align: top; width: 64px; height: 30px;color:#fff;padding:4px;" class="{{value.6}}"></i></div>
+							</div>
+						</div>	
+						<span class="title">{{value.0}}</span><br>
+						<span class="value">{{value.5.1}}</span>
+					</div>
+					<div class="clearfix"></div>
+				 </div>
+			</div>
+
+			<div ng-if="value.1=='MAP VIEW'"  ng-class="value.7" >
+
+				<h3 class="panel-title"><small>{{value.0}}</small> </h3>
+				<div ng-show="(value.5.1|notObject)"><h4>&nbsp;<small>Sorry, no data found</small></h4></div>
+				<div class="list-group-item"  ng-show="!(value.5.1|notObject)" mapdata="value.5"  map-view="payload[value.0]" maptype="{{value.4}}" title="{{value.0}}"></div>
+			</div>
+	
+			<div class="form-group" ng-class="value.7" ng-if="value.1 == 'MULTIPLE INPUT'">
+
+				<h4 class="list-group-item active"><i class="{{value.6}}"></i><em ng-bind-html="value.0|lowercase">&nbsp;</em></h4>
+				<div class="list-group" style="overflow: scroll; height:200px;"  ng-if="!value.8">
+					<span ng-repeat="(k,v) in value.5">
+						<a  href="javascript:;" class="list-group-item">{{v}}
+							<small class="text-muted"><em>{{v}}</em></small>                    
+							<input type="checkbox"  pval="{{value.4}}" multiple-input-model="payload[value.4]" value="{{k}}" class="pull-right">
+						</a>
+					</span>
+				</div>
+					<div class="input-group"  ng-if="value.8">
+						<p>{{value.8}} <small><a href="javascript:;" ng-click="value.8=''">Click to Edit</a></small></p>
+					</div>
+
+			</div>
+
+			<div class="form-group" ng-class="value.7" ng-if="value.1 == 'TEL INPUT'">
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+					<div class="input-group"  ng-if="!value.8">
+						<input type="tel" ng-model="payload[value.4]" class="form-control" name="{{ value.4 }}" placeholder="{{value.0|lowercase}}"  ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}" />
+					</div>
+					<div class="input-group"  ng-if="value.8">
+						<p>{{value.8}} <small><a href="javascript:;" ng-click="value.8=''">Click to Edit</a></small></p>
+					</div>
+
+			</div>
+
+			<div class="form-group" ng-class="value.7" ng-if="value.1=='INSTRUCTION'" ><h3><small>{{value.4}}</small></h3></div>
+
+			<div ng-if="value.1=='HIDDEN'">
+				<div hidden-model="payload[value.4]" pval="{{value.4}}" ng-init="payload[value.4]=value.5"></div>
+			</div>
+	
+			<div class="form-group" ng-class="value.7" ng-if="value.1 == 'TEXT INPUT'" >
+<!--{{newItemType}}
+    <div class="btn-group" data-toggle="buttons">
+       <label class="btn" ng-class="{'btn-default':newItemType!='Yes',  'btn-info active':newItemType=='Yes'}" ng-click="newItemType='Yes'" > 
+         <input type="radio" value="No" ng-model="newItemType">Yes&nbsp;<span class="glyphicon glyphicon-file"></span> 
+      </label> 
+      <label class="btn" ng-class="{'btn-default':newItemType!='No',  'btn-info active':newItemType=='No'}" ng-click="newItemType='No'" >
+        <input type="radio" value="No" ng-model="newItemType">No&nbsp;<span class="glyphicon glyphicon-adjust"></span>
+      </label>
+    </div>
+-->
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+					<div class="input-group"  ng-if="!value.8">
+						<input type="text" ng-model="payload[value.4]" class="form-control" name="{{ value.4 }}" placeholder="{{value.0|lowercase}}"  ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}" />
+					</div>
+					<div class="input-group"  ng-if="value.8">
+						<p>{{value.8}} <small><a href="javascript:;" ng-click="value.8=''">Click to Edit</a></small></p>
+					</div>
+			</div>
+
+			<div class="form-group"  ng-class="value.7" ng-if="value.1 == 'TEXT AREA'">
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+					<div class="input-group" ng-if="!value.8"> 
+						<textarea rows="3" ng-model="payload[value.4]" class="form-control" name="{{ value.4 }}" placeholder="{{ value.0|lowercase }}"   ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}">        
+						</textarea>
+					</div>
+					<div class="input-group"  ng-if="value.8">
+						<p>{{value.8}} <small><a href="javascript:;" ng-click="value.8=''">Click to Edit</a></small></p>
+					</div>
+			</div>
+
+			<div class="form-group"  ng-class="value.7" ng-if="value.1 == 'RANGE'">
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+                            <div class="filter-range-slider">
+                                <input type="text" values="{{value.5}}" range-filter-model="payload[value.4]">
+                            </div>
+			</div>
+
+			<div class="form-group"  ng-class="value.7" ng-if="value.1 == 'NUMBER INPUT'">
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+					<div class="input-group" ng-if="!value.8"> 
+						<input type="number" ng-model="payload[value.4]" class="form-control" name="{{ value.4 }}" placeholder="{{ value.0|lowercase }}"  ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}" step="any"/>
+					</div>
+					<div class="input-group"  ng-if="value.8">
+						<p>{{value.8}} <small><a href="javascript:;" ng-click="value.8=''">Click to Edit</a></small></p>
+					</div>
+			</div>
+
+			<div class="form-group"  ng-class="value.7" ng-if="value.1 == 'EMAIL INPUT'">
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+				<div class="input-group" ng-if="!value.8"> 
+						<input type="email" ng-model="payload[value.4]" class="form-control" name="{{ value.4 }}" placeholder="{{value.0|lowercase}}"  ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}"/>
+				</div>
+					<div class="input-group"  ng-if="value.8">
+						<p>{{value.8}} <small><a href="javascript:;" ng-click="value.8=''">Click to Edit</a></small></p>
+					</div>
+
+			</div>
+
+			<div class="form-group"  ng-class="value.7" ng-if="value.1 == 'PASSWORD INPUT'">
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+					<div class="input-group"> 
+						<input type="password" ng-model="payload[value.4]" class="form-control" name="{{ value.4 }}" placeholder="{{value.0|lowercase}}"  ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}"/>
+					</div>
+			</div>
+
+			<div class="form-group"  ng-class="value.7" ng-if="value.1 == 'SEARCH BOX'">
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+				<div class="input-group"> 
+					<input type="text"  ng-model="payload[value.0]" name="{{ value.0 }}" class="form-control" placeholder="{{ value.4 }}"  ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit"><i  class="fa fa-search"></i>Search</button><!-- /.btn -->
+					</span><!-- /.input-group-btn -->
+				</div><!-- /.input-group -->
+			</div>
+
+			<div  class="form-group"  ng-class="value.7" ng-if="value.1 == 'DEPENDENT SELECT'" >
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+				<div class="input-group col-md-12" dependent-select-model="payload[value.4]" pval="{{value.4}}" ng-init="data={};data[value.4]=value.5;cinput={};" ng-if="!value.8">
+					<div class="col-md-6">
+					<select id="parentSelect" ng-model="placeholder" name="{{ value.4 }}" class="form-control"  ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}" >
+						<option value="" selected>{{ value.0|lowercase }}</option>
+						<option ng-repeat="(k,v) in value.5  track by $index" value="{{k}}">{{k|lowercase}}</option>
+					</select>
+					</div>
+					<div class="col-md-6">
+					<select id="childSelect" name="{{ value.4 }}" class="form-control">
+						<option ng-repeat="item in cinput[value.4]" value="{{item}}">{{item|lowercase}}</option>
+					</select>
+					</div>
+				</div>
+					<div class="input-group"  ng-if="value.8">
+						<p>{{value.8}} <small><a href="javascript:;" ng-click="value.8=''">Click to Edit</a></small></p>
+					</div>
+
+			</div>
+
+			<div  class="form-group"  ng-class="value.7" ng-if="value.1 == 'SELECT'" >
+
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+				<div class="input-group" ng-if="!value.8"> 
+					<select ng-model="payload[value.4]" name="{{ value.4 }}" class="form-control"  ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}" >
+						<option value="" selected>{{ value.0|lowercase }}</option>
+						<option ng-repeat="(k,v) in value.5  track by $index" value="{{k}}">{{v|lowercase}}</option>
+					</select>
+				</div>
+					<div class="input-group"  ng-if="value.8">
+						<p>{{value.8}} <small><a href="javascript:;" ng-click="value.8=''">Click to Edit</a></small></p>
+					</div>
+
+			</div>
+
+			<div class="form-group"  ng-class="value.7" ng-if="value.1 == 'DATE'" >
+
+					<label><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</label>
+				<div class="input-group" ng-controller="DatePickerCtrl" >
+					<input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" is-open="opened" min-date="mindate" max-date="maxdate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="false" close-text="Close" ng-model="payload[value.4]" name="{{value.4}}" placeholder="{{ value.0 }}"  ng-required="{{value.2|isRequired}}"/><span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button></span>
+				</div>
+			</div>
+
+
+			<div class="form-group"  ng-class="value.7" ng-if="value.1 == 'IMAGE INPUT'">
+				<div class="input-group btn btn-default btn-file col-md-12" image-model="payload['{{value.4}}']">
+					<div class="col-md-12" id="display"><i class="{{value.6}}"></i>&nbsp;{{value.0|lowercase}}</div>
+					<input type="file"/>
+				</div>
+			</div>
+
+			<li class="list-group-item"  ng-class="value.7" ng-if="value.1 == 'CHECKED RADIO'" >
+				<input type="radio" ng-model="payload[value.0]"  class="form-control" name="{{ value.0 }}" placeholder="value.4" value="value.4" checked   ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}"/><span> {{ value.4 }} </span><br><br>
+			</li>
+			<li ng-if="value.1 == 'RADIO'">
+				<input type="radio" ng-model="payload[value.0]"  class="form-control" name="{{ value.0 }}" placeholder="value.4" value="value.4"   ng-minlength="{{value.2}}" ng-maxlength="{{value.3}}" ng-required="{{value.2|isRequired}}"/><span> {{ value.4 }} </span><br>
+
+			</li>
+
+			<div class="form-group"  ng-class="value.7" ng-if="value.1 == 'INCREMENTAL INPUT'">
+				<div class="col-sm-12 col-md-12" pval="{{value.4}}" incremental-model="payload['{{value.4}}']"><div class="block default">
+
+				  <div class="block-inner row">
+				    <div class="col-md-8">
+				      <div class="form-group">
+				        <input id="key" placeholder="Reference" type="text" name="maker" class="form-control">
+				      </div>
+				      <div class="form-group">
+				        <input id="value" placeholder="Description" type="text" name="maker" class="form-control">
+				      </div>
+
+				      </div><!-- /.col-md-8-->
+
+					<div class="col-md-4">
+					      <div class="form-group">
+
+						<span id="add-detail" class="send btn btn-primary btn-primary-color">
+							<i class="fa fa-angle-double-right"></i></span>
+						</div>
+					</div><!-- /.col-md-4-->
+				  </div><!-- /.block-inner-->
+				</div>
+					<table class="table">
+						<tbody>
+							<tr ng-repeat="(k,v) in (payload[value.4]|fromJson)">
+								<td class="property">{{k}}</td>
+								<td class="value">{{v}}</td>
+							</tr>
+						</tbody>
+					</table><!-- /.table -->
+				</div>
+			</div>
+
+			<li class="list-group-item"  ng-class="value.7" ng-if="value.1 == 'HYPERLINK BUTTON'" >
+				<a href="{{ value.4 }}" class="btn btn-primary">{{ value.0 }}</a>
+			</li>
+
+			<li class="item form-group"  ng-class="value.7" ng-if="value.1 == 'HYPERLINK'">
+				<a href="{{ value.4 }}" style="color:#2869af; font-weight:600;">{{ value.0 }}</a>
+			</li>
+
+			<div class="form-group" ng-class="value.7" ng-if="value.1 == 'SUBMIT'">
+					<label>&nbsp;</label>
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button type="submit"  ng-disabled="form.$invalid" class="btn btn-default" name="{{value.4}}"><i class="{{value.6}}"></i>&nbsp;{{ value.0|lowercase }}</button>
+					</span>
+				</div>
+			</div>
+
+		</div><!--input var-->
+	</div><!--ng-repeat-->
+</form>
+{% endverbatim %}

@@ -1,0 +1,64 @@
+from django.db import models
+from django.contrib.auth.models import User
+
+class Groups(models.Model):
+	group_name = models.CharField(max_length=45)
+	description =  models.CharField(max_length=100)		
+	date_modified  = models.DateTimeField(auto_now=True)
+	date_created = models.DateTimeField(auto_now_add=True)
+	def __unicode__(self):
+		return u'%s' % (self.group_name)
+ 		
+class StaffUser(models.Model):
+	user_id = models.ForeignKey(User, related_name='staffuser_user_id')
+	staff_id = models.CharField(max_length=20,unique=True)
+	nationality = models.CharField(max_length=100)	
+	nat_id = models.CharField(max_length=20)
+	group = models.ForeignKey(Groups)
+	created_by = models.ForeignKey(User, related_name='staffuser_created_by')
+	date_modified  = models.DateTimeField(auto_now=True)
+	date_created = models.DateTimeField(auto_now_add=True)
+	def __unicode__(self):
+		return u'%s' % (self.staff_id)
+
+class Modules(models.Model):
+	module_name = models.CharField(max_length=45)	
+	display_name = models.CharField(max_length=45)	
+	description =  models.CharField(max_length=100)	
+	module_page = models.CharField(max_length=45)	
+	display_order = models.IntegerField(max_length=5)
+	display = models.NullBooleanField(blank=True)
+	date_modified  = models.DateTimeField(auto_now=True)
+	date_created = models.DateTimeField(auto_now_add=True)
+	def __unicode__(self):
+		return u'%s' % (self.module_name)    
+
+
+class PermissionStatus(models.Model):
+	name = models.CharField(max_length=45, unique=True)
+	description = models.CharField(max_length=100)
+	date_modified  = models.DateTimeField(auto_now=True)
+	date_created = models.DateTimeField(auto_now_add=True)
+	def __unicode__(self):
+		return u'%s' % (self.name)
+
+class AccessLevels(models.Model):
+	name = models.CharField(max_length=45, unique=True)
+	description = models.CharField(max_length=100)
+	date_modified  = models.DateTimeField(auto_now=True)
+	date_created = models.DateTimeField(auto_now_add=True)
+	def __unicode__(self):
+		return u'%s' % (self.name)
+ 
+class Permissions(models.Model):
+	name = models.CharField(max_length=45, unique=True)
+	group = models.ForeignKey(Groups)	
+	module = models.ForeignKey(Modules)
+	access_level = models.ForeignKey(AccessLevels)
+	status = models.ForeignKey(PermissionStatus)
+	created_by = models.ForeignKey(StaffUser)
+	date_modified  = models.DateTimeField(auto_now=True)
+	date_created = models.DateTimeField(auto_now_add=True)
+	def __unicode__(self):
+		return u'%s' % (self.group_name)   
+

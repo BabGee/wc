@@ -1,0 +1,50 @@
+{% extends "wc-base_preview.html" %}
+{% load staticfiles %}
+{% load interface_tags %}
+{% block body %}
+        <h1>{{service|title}}</h1>
+	<div style="display:none;" id="params">{{params|jsonify}}</div>
+        <div class="form" id="form">
+	{% csrf_token %}
+		</div>   
+<script>		
+var params = JSON.parse(document.getElementById('params').innerHTML);
+var xhr = new XMLHttpRequest();
+xhr.open("post", "/GOTO/{{service}}/", true);
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader("X-CSRFToken", "{{csrf_token}}");
+xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+xhr.send(JSON.stringify(params));
+
+xhr.onreadystatechange = function () {
+	if (xhr.readyState < 4)                         // while waiting response from server
+	console.log("Loading...");
+	else if (xhr.readyState === 4) {                // 4 = Response from server has been completely loaded.
+		if (xhr.status > 199 && xhr.status < 300){  // http status between 200 to 299 are all successful
+			response = JSON.parse(xhr.responseText);
+			console.log('Response: '+JSON.stringify(response));
+			if ('response' in response && typeof response.response == 'object'){
+				for(var i in response.response){
+					console.log(i+' : '+response.response[i]);
+					var span = document.createElement('span');
+					span.setAttribute("class","number");
+					span.innerHTML = i.substring(0,1).toUpperCase();
+					var legend = document.createElement('legend');
+					legend.appendChild(span);
+					legend.setAttribute("style","text-transform: capitalize;");
+					legend.appendChild(document.createTextNode(i.substring(1,i.length).toLowerCase().replace(/_/g," ")));
+					var div = document.createElement('div')
+					div.setAttribute("class", "desc");
+					div.innerHTML = response.response[i]
+					var fieldset = document.createElement('fieldset');
+					fieldset.appendChild(legend);
+					fieldset.appendChild(div);
+					document.getElementById("form").appendChild(fieldset);
+					}
+				}
+
+		}	
+	}
+}
+</script>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load interface_tags %}
+
+{% block html %}
+{% verbatim %}
+<!doctype html>
+<html ng-app="home">
+<head>
+</head>
+<body>
+<style>
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+.videogular-container {
+	width: 100%;
+	height: 320px;
+	margin: auto;
+	overflow: hidden;
+}
+
+@media (min-width: 1200px) {
+	.videogular-container {
+		width: 1170px;
+		height: 658.125px;
+	}
+
+	.videogular-container.audio {
+		width: 1170px;
+		height: 50px;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	.videogular-container {
+		width: 940px;
+		height: 528.75px;
+	}
+
+	.videogular-container.audio {
+		width: 940px;
+		height: 50px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.videogular-container {
+		width: 728px;
+		height: 409.5px;
+	}
+
+	.videogular-container.audio {
+		width: 728px;
+		height: 50px;
+	}
+}
+</style>
+<div ng-app="myApp">
+<div ng-controller="HomeCtrl as controller" class="videogular-container">
+	<videogular vg-theme="controller.config.theme.url">
+		<vg-media vg-src="controller.config.sources" vg-dash></vg-media>
+
+		<vg-controls>
+			<vg-play-pause-button></vg-play-pause-button>
+			<vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+			<vg-scrub-bar>
+				<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+			</vg-scrub-bar>
+			<vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+			<vg-volume>
+				<vg-mute-button></vg-mute-button>
+				<vg-volume-bar></vg-volume-bar>
+			</vg-volume>
+			<vg-fullscreen-button></vg-fullscreen-button>
+		</vg-controls>
+
+		<vg-overlay-play></vg-overlay-play>
+		<vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+	</videogular>
+</div>
+</div>
+
+<script src="http://videogular.com/demo/scripts/dash/dash.all.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-sanitize.min.js"></script>
+<script src="http://static.videogular.com/scripts/videogular/latest/videogular.js"></script>
+<script src="http://static.videogular.com/scripts/controls/latest/vg-controls.js"></script>
+<script src="http://static.videogular.com/scripts/overlay-play/latest/vg-overlay-play.js"></script>
+<script src="http://static.videogular.com/scripts/poster/latest/vg-poster.js"></script>
+<script src="http://static.videogular.com/scripts/dash/latest/vg-dash.js"></script>
+<script>
+'use strict';
+var app = angular.module('home',
+		[
+			"ngSanitize",
+			"com.2fdevs.videogular",
+			"com.2fdevs.videogular.plugins.controls",
+			"com.2fdevs.videogular.plugins.overlayplay",
+			"com.2fdevs.videogular.plugins.poster",
+			"com.2fdevs.videogular.plugins.dash"
+		]
+	);
+
+app.controller('HomeCtrl',
+		["$sce", function ($sce) {
+			this.config = {
+				sources: [
+                                        //{src: "http://regix.org/media/videogular/videogular_dash.mpd"}
+                                        {src: "http://regix.org/media/penguins/penguins_dash.mpd"}
+					//{src: "http://regix.org/media/mpeg_dash/elephants_dream_480p_heaac5_1.mpd"}
+					//{src: "http://dash.edgesuite.net/akamai/test/caption_test/ElephantsDream/elephants_dream_480p_heaac5_1.mpd"}
+
+				],
+				theme: {
+					url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+				},
+				plugins: {
+					poster: "http://www.videogular.com/assets/images/videogular.png"
+				}
+			};
+		}]
+	);
+
+</script>
+
+</body>
+</html>
+{% endverbatim %}
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+    <title>{{gateway}} | {{description}}</title>
+    {% load staticfiles %}
+{% load interface_tags %}
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="{% static 'polymer/1.0/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'polymer/1.0/src/elements/sections.css' %}">
+ {% block header %}
+
+ {% endblock %}
+
+  <style>
+  html,body {
+    margin: 0;
+    background-color: #E5E5E5;
+    font-family: 'RobotoDraft', sans-serif;
+    word-wrap: break-word;
+
+  }
+@media print {
+    body{
+	height: 1000px;
+    }
+}
+
+  </style>
+</head>
+<body>
+ {% block body %}
+ {% endblock %}
+<script>
+</script>
+</body>
+</html>

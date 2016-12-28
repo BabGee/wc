@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load interface_tags %}
+
+{% block body %}
+<body>
+<script>
+var pricingCtrl = function($scope, $http){
+$scope.payload = {}
+
+
+ $scope.payload[0] = [['Free'],['Free'],['One Account',
+'One Till',
+'100 one time Free SMS',
+'Mobile Money Payments Acceptance',
+'Card Payments Acceptance (Card Present & Card not Present(eCommerce))',
+'Settlement within 3 - 5 days']]
+
+ $scope.payload[1] = [['Bronze'],['$100 setup','$100 a year','or $10 a month.'],['One Account',
+'One Till',
+'50 Free notification SMS each month (Delivery to anywhere in the world)',
+'UNIQUE Nikobizz hostname (username.nikobizz.com)',
+'Nikobizz Payment Terminal',
+'Customer Records and Statistics',
+'Limited Support (2 Calls a month)',
+'No Page Customization',
+'Mobile Money Payments Acceptance',
+'Card Payments Acceptance (Card Present & Card not Present(eCommerce))',
+'Settlement within 3 - 5 days']]
+
+ $scope.payload[2] = [['Silver'],['$500 setup','$500 a year','or $50 a month.'],['One Account',
+'2 Tills',
+'100 Free notification SMS each month (Delivery to anywhere in the world)',
+'UNIQUE Nikobizz hostname (username.nikobizz.com)',
+'Nikobizz Payment Terminal',
+'Customer Records and Statistics',
+'Limited Support (10 Calls a month)',
+'Limited Page Customization',
+'Mobile Money Payments Acceptance',
+'Card Payments Acceptance (Card Present & Card not Present(eCommerce))',
+'Settlement within 3 - 5 days']]
+
+ $scope.payload[3] = [['Gold'],['$1000 setup','$1000 a year','or $100 a month.'],['One Account',
+'4 Tills',
+'200 Free notification SMS each month (Delivery to anywhere in the world)',
+'UNIQUE Nikobizz hostname (username.nikobizz.com)',
+'Setup to a self owned unique domain name (Provided by subscriber or purchased at an extra fee)',
+'Nikobizz Payment Terminal',
+'Customer Records and Statistics',
+'A free 1 g-tel phone, 1 jackpin payment terminal',
+'Unlimited Support',
+'Limited Page Customization',
+'Mobile Money Payments Acceptance',
+'Card Payments Acceptance (Card Present & Card not Present(eCommerce))',
+'Settlement within 3 - 5 days']]
+
+$scope.payload[4] = [['Platinum'],['$2000 setup','$2000 a year','or $250 a month'],['One Account',
+'Unlimited Tills',
+'500 Free notification SMS each month (Delivery to anywhere in the world)',
+'Nikobizz Payment Terminal',
+'Unique nikobizz domain',
+'Setup to a self owned unique domain name (Provided by subscriber or purchased at an extra fee)',
+'SSL Certificate',
+'Full Page Customization',
+'Customer Records and Statistics',
+'Unlimited Support',
+'Free Till Integration',
+'Free Ipad air/g-tel tab and hub 1 jackpin payment terminals',
+'Mobile Money Payments Acceptance',
+'Card Payments Acceptance (Card Present & Card not Present(eCommerce))',
+'Settlement within 3 - 5 days']]
+
+console.log(JSON.stringify($scope.payload));
+
+};
+
+app.controller('pricingCtrl', pricingCtrl); 
+
+
+
+</script>
+
+
+{% verbatim %}
+<div id="content" class="pricing-page" ng-controller="pricingCtrl">
+    <div id="page-heading">
+        <div class="container">
+            <div class="row">
+
+<div class="col-md-12">
+</div>
+                <div class="col-md-8">
+                    <div class="heading">
+                        <div class="title">
+                            <h1>Pricing</h1>
+                        </div>
+                        <!-- /.title -->
+                    </div>
+                    <!-- /.heading -->
+                </div>
+                <!-- /.col-md-8 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#page-heading -->
+
+    <div class="section gray-light" ng-show="payload.1">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="main" class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="headline">
+					Niko Bizz Product Pricing<br />
+					by InterIntel.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricing">
+                            <div class="row">
+
+                                <div class="col-sm-6 col-md-4 block-margin"  ng-repeat="(key, value) in payload track by $index">
+                                    <div class="pricing-package block block-shadow white" ng-class="{popular: value.0.0 =='Silver'}">
+                                        <div class="block-inner">
+					<div class="popular-label block-shadow" ng-if="value.0.0=='Silver'">
+                                                Popular
+                                            </div>
+                                            <div class="title">
+                                                <h2>{{value.0.0}}</h2>
+                                            </div>
+
+                                            <div class="price gray-light block-shadow block-margin">
+                                                <div class="block-inner" ng-repeat="kk in value.1">
+                                                    {{kk}}
+                                                </div>
+                                            </div>
+
+                                            <div class="product">
+                                                <ul class="product-list">
+                                                    <li ng-repeat="key in value.2">{{key}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="action-button">
+                                                <a class="btn btn-primary" href="#">Sign up now</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /#main -->
+                </div>
+                <!-- /.col-md-12 -->
+            </div>
+            <!-- /.row -->
+    </div>
+    <!-- /.section -->
+
+
+</div>
+<!-- /#content -->
+
+{% endverbatim %}
+</body>
+{% endblock %}

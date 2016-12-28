@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+	<title>{{params.response.get_gateway_details.name }} | {{params.response.get_gateway_details.tagline}}</title>
+
+
+    {% load staticfiles %}
+    {% load interface_tags %}
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="{% static 'polymer2/manifest.json' %}">
+
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer/src/css/main.css' %}">-->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer/src/css/normalize.css' %}">-->
+
+    <!--<script src="{% static 'polymer/src/js/vendor/modernizr-2.6.2.min.js' %}"></script>-->
+
+
+    <script src="{% static 'polymer2/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
+    <link rel="import" href="{% static 'polymer2/bower_components/polymer/polymer.html' %}">
+
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer2/src/elements/sections.css' %}">-->
+
+
+
+
+        <style is="custom-style">
+            :root {
+
+                --app-primary-color: #202020;
+                --app-secondary-color: #ffffff;
+                --app-accent-color: #172C50;
+                --app-default-color: {{params.response.get_gateway_details.default_color}};
+
+                --paper-button-ink-color: var(--app-accent-color);
+                --paper-icon-button-ink-color: var(--app-accent-color);
+                --paper-spinner-color: var(--app-accent-color);
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+                color: var(--app-primary-color);
+
+            }
+
+            paper-fab {
+                color: var(--app-default-color);;
+
+            }
+            app-header {
+                background-color: var(--app-default-color);
+                /*background:{{params.response.get_gateway_details.background_image}};*/
+                color: var(--app-primary-color);
+                box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+            }
+        </style>
+
+<link rel="import" href="{% static 'polymer2/src/elements/landing-page.html' %}">
+
+</head>
+<body>
+
+
+    <landing-page
+          id="landing_page"
+
+				csrf_token="{{csrf_token}}"
+				{% if request.is_secure %}
+				protocol="https:"
+				{% else %}
+				protocol="http:"
+				{% endif %}
+				static="{{ STATIC_URL }}"
+				params="{{params|paramify}}"
+				media="{{ MEDIA_URL }}"
+				hostname="{{request.META.HTTP_HOST}}"
+				channel="1"
+				page="{{params.response.get_interface.this_page_inputs|jsonify}}"
+				{% if request.session.session_id%}
+				session="true"
+				{% else %}
+            			session="false"
+				{% endif %}
+
+				showCart="{{params.response.get_gateway_details.showCart}}"
+				color="{{params.response.get_gateway_details.default_color}}"
+				{% verbatim %}selected="{{ selected }}"{% endverbatim %}
+				{% verbatim %}group="{{ group }}"{% endverbatim %}
+
+          name = "{{params.response.get_gateway_details.name}}"
+          tagline = "{{params.response.get_gateway_details.tagline}}"
+          header_bg = "{{MEDIA_URL}}{{params.response.get_gateway_details.logo}}">
+
+
+  </landing-page>
+
+
+        <script>
+
+			el = document.querySelector('#landing_page');
+			el.selected = 0;
+			el.group = 0;
+
+		
+        </script>
+
+
+
+</body>

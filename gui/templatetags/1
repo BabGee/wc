@@ -1,0 +1,34 @@
+from django import template
+from django.utils.datastructures import SortedDict
+import logging
+lgr = logging.getLogger('gui')
+
+
+register = template.Library()
+
+@register.filter(name='sort')
+def listsort(value):
+        if isinstance(value, dict):
+            new_dict = SortedDict()
+            key_list = value.keys()
+            key_list.sort()
+            for key in key_list:
+                new_dict[key] = value[key]
+            return new_dict
+        elif isinstance(value, list):
+            new_list = list(value)
+            new_list.sort()
+            return new_list
+        else:
+            return value
+        listsort.is_safe = True
+
+@register.filter(name='page_inputs')
+def page_inputs(payload):
+	if isinstance(payload, dict):
+		for key, value in payload.items():
+			for key, value in value.items():
+				for key, value in value.items():
+					return value.items()
+	else:
+		return {}

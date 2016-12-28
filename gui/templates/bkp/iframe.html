@@ -1,0 +1,78 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" ng-app="home">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{% static "BASE/images/favicon.ico" %}">
+
+    <title>RegiX - Registry & eXchange</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "BASE/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="{% static "BASE/css/bootstrap-theme.min.css" %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static "BASE/font-awesome-4.1.0/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "REGIX/css/theme.css" %}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body ng-controller="IframeCtrl">                                      
+     <div ng-include="'/form/'" onload="updateHeight();"></div>      
+	<script type="text/javascript" src="{% static "BASE/js/jquery-1.11.1.min.js" %}"></script>
+	<script src="{% static "BASE/js/ang/angular.min.js" %}"></script>
+	<script src="{% static "BASE/js/ang/angular-cookies.min.js" %}"></script>
+	<script src="{% static "BASE/js/ang/angular-ui-router.min.js" %}"></script>
+	<script src="{% static "BASE/js/bootstrap.min.js" %}"></script>
+	<script src="{% static "BASE/js/ang/ui-bootstrap-tpls-0.11.0.min.js" %}"></script>
+	<script src="{% static "BASE/js/ang/angular-sanitize.js" %}"></script>
+	<script src="{% static "BASE/js/ang/ng-csv.js" %}"></script>
+	<script src="{% static "BASE/js/ang/app.js" %}" ></script>
+	<script src="{% static "BASE/js/ang/controllers.js" %}" ></script>
+	<script src="{% static "BASE/js/ang/filters.js" %}" ></script>
+        <script>
+          var IframeCtrl = function($scope) {
+              console.log("Started Iframe Controller");
+              try{ 
+                   $scope.value = "Test";
+                      window.updatedata = function(values, response) {
+                          $scope.$apply(function(){
+                            $scope.values = values;
+                            $scope.response = response;
+                          });
+                        };
+
+	function updateHeight(){
+		parent.document.getElementById("iframe").style.height=(window.document.body.scrollHeight)+"px";
+		}
+
+                  $scope.payload={};
+              
+              }catch(e){alert('Window Error'+e);}
+      }      
+      app.controller('IframeCtrl', IframeCtrl);
+        app.filter('splitJoin', function() {
+            return function(input, scope) {
+                return input.replace(/_/g, " ");
+            }
+        });          
+        </script>
+
+
+  </body>
+</html>

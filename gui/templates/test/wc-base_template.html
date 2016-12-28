@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+    <title>{{gateway}} | {{description}}</title>
+    {% load staticfiles %}
+    {% load interface_tags %}
+
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polymer_test/1.0/css/normalize.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'polymer_test/1.0/css/main.css' %}">
+    <script src="{% static 'polymer_test/1.0/js/vendor/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'polymer_test/1.0/js/vendor/modernizr-2.6.2.min.js' %}"></script>
+
+
+    <script src="{% static 'polymer_test/1.0/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'polymer_test/1.0/elements/sections.css' %}">
+
+    {% block header %}{% endblock %}
+
+<style>
+html,body{height: 100%; margin:0;background-color:#E5E5E5;font-family:'RobotoDraft',sans-serif;word-wrap:break-word;}@media print {body{height:1000px;}}
+</style>
+</head>
+<body>
+{% block body %}{% endblock %}
+</body>

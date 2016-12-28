@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+	<title>{{params.response.get_gateway_details.name }} | {{params.response.get_gateway_details.tagline}}</title>
+
+
+    {% load staticfiles %}
+    {% load interface_tags %}
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="{% static 'polymer2/manifest.json' %}">
+
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer/src/css/main.css' %}">-->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer/src/css/normalize.css' %}">-->
+
+    <!--<script src="{% static 'polymer/src/js/vendor/modernizr-2.6.2.min.js' %}"></script>-->
+
+
+    <script src="{% static 'polymer2/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
+    <link rel="import" href="{% static 'polymer2/bower_components/polymer/polymer.html' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polymer2/src/elements/sections.css' %}">
+
+
+<link rel="import" href="{% static 'polymer2/bower_components/iron-flex-layout/iron-flex-layout.html' %}">
+
+<link rel="import" href="{% static 'polymer2/bower_components/paper-spinner/paper-spinner.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/paper-dialog/paper-dialog.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/paper-drawer-panel/paper-drawer-panel.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/iron-collapse/iron-collapse.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/iron-dropdown/iron-dropdown.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/iron-form/iron-form.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/iron-overlay-behavior/iron-overlay-behavior.html' %}">
+
+<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-drawer/app-drawer.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-scroll-effects/app-scroll-effects.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-header/app-header.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-header-layout/app-header-layout.html' %}">
+<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-toolbar/app-toolbar.html' %}">
+
+
+        <style is="custom-style">
+            :root {
+
+                --app-primary-color: #202020;
+                --app-secondary-color: #ffffff;
+                --app-accent-color: #172C50;
+                --app-default-color: {{params.response.get_gateway_details.default_color}};
+
+                --paper-button-ink-color: var(--app-accent-color);
+                --paper-icon-button-ink-color: var(--app-accent-color);
+                --paper-spinner-color: var(--app-accent-color);
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+                color: var(--app-primary-color);
+
+            }
+
+            paper-fab {
+                color: var(--app-default-color);;
+
+            }
+            app-header {
+                background-color: var(--app-default-color);
+                background:{{params.response.get_gateway_details.background_image}};
+                color: var(--app-primary-color);
+                box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+            }
+        </style>
+
+<link rel="import" href="{% static 'polymer2/src/elements/page-element.html' %}">
+
+</head>
+<body>
+	<template id="my-element" is="dom-bind">
+        <style >
+
+
+
+            .close_dialog {
+                /*
+                width: 40px;
+                height: 40px;
+                */
+                position: absolute;
+                left: -16px;
+                top: -16px;
+                background: white;
+                border: 1px solid #ededed;
+                /*border-radius: 50%;*/
+                padding: 0;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+            }
+
+            #overlay_element {
+                position: fixed;
+                z-index: 12;
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 13px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                background: transparent;
+                outline: 1px solid rgba(0, 0, 0, 0.2);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+                top: 1%;
+                left: 1%;
+                bottom: 1%;
+                right: 1%;
+            }
+
+        </style>
+
+        {% verbatim %}<iron-media-query query="min-width: 600px" query-matches="{{wideLayout}}"></iron-media-query>{%endverbatim %}
+        <app-drawer-layout force-narrow>
+            <app-drawer id="drawer">
+
+                <app-toolbar><img src="{{MEDIA_URL}}{{params.response.get_gateway_details.logo}}" alt="LOGO" height="60"></app-toolbar>
+                <paper-menu {% verbatim %}selected="{{group}}" {% endverbatim %}>
+			{% for k,v in params.response.get_interface.this_page_inputs.items|dictsort %}
+                        <paper-item name="{{v.section_var.0}}">
+                            <iron-icon icon="{{v.section_var.1}}"></iron-icon>
+                            {{ v.section_var.0 }}
+                        </paper-item>
+				{% endfor %}
+                </paper-menu>
+
+            </app-drawer>
+
+            <app-header-layout>
+
+                <app-header
+                        id="appHeader"
+                        condenses="true"
+
+                        reveals
+                        effects="waterfall">
+                    <app-toolbar>
+                       {% verbatim %} <paper-icon-button icon="menu" drawer-toggle hidden$="{{wideLayout}}"></paper-icon-button> {% endverbatim %}
+
+                        		<img src="{{MEDIA_URL}}{{params.response.get_gateway_details.logo}}" alt="LOGO" {% verbatim %} hidden$="{{!wideLayout}}" {% endverbatim %} height="60">
+
+                        <div main-title>{{params.response.get_gateway_details.name}}</div>
+
+                        <div>
+                            <paper-icon-button id="number2" icon="icons:shopping-cart" on-tap="shopping">
+                            </paper-icon-button>
+                            <paper-badge for="number2" label="0" class="pink">
+                            </paper-badge>
+                        </div>
+
+                        <paper-menu-button horizontal-align="right" horizontal-offset="13" vertical-align="top"
+                                           vertical-offset="50">
+                            <paper-icon-button icon="more-vert" class="dropdown-trigger"></paper-icon-button>
+                            <paper-menu class="dropdown-content">
+                                <paper-item on-tap="refresh">
+                                    <iron-icon icon="refresh"></iron-icon>
+                                    <span style="margin-left:14px">Refresh</span>
+                                </paper-item>
+
+				{% if request.session.session_id%}
+                                    <paper-item><a is="pushstate-anchor" href="/logout">
+                                        <iron-icon icon="exit-to-app"></iron-icon>
+                                        <span style="margin-left:14px">Logout</span></a>
+                                    </paper-item>
+				{% endif %}
+                            </paper-menu>
+                        </paper-menu-button>
+
+                    </app-toolbar>
+
+
+                    {% verbatim %} <app-toolbar class="tabs-bar" sticky hidden$="{{!wideLayout}}"> {% endverbatim %}
+                        <paper-tabs id="menu" {% verbatim %} selected="{{group}}" {% endverbatim %} bottom-item>
+				{% for k,v in params.response.get_interface.this_page_inputs.items|dictsort %}
+                                <paper-tab name="{{v.section_var.0}}">
+					<iron-icon icon="{{v.section_var.1}}"></iron-icon>
+					{{v.section_var.0}}
+                                </paper-tab>
+				{% endfor %}
+                        </paper-tabs>
+                    </app-toolbar>
+
+                </app-header>
+
+                <div>
+
+                    <page-element
+				id="page_element"
+				csrf_token="{{csrf_token}}"
+				{% if request.is_secure %}
+				protocol="https:"
+				{% else %}
+				protocol="http:"
+				{% endif %}
+				static="{{ STATIC_URL }}"
+				params="{{params|paramify}}"
+				media="{{ MEDIA_URL }}"
+				hostname="{{request.META.HTTP_HOST}}"
+				channel="1"
+				page="{{params.response.get_interface.this_page_inputs|jsonify}}"
+				{% if request.session.session_id%}
+				session="true"
+				{% else %}
+            			session="false"
+				{% endif %}
+
+				showCart="{{params.response.get_gateway_details.showCart}}"
+				color="{{params.response.get_gateway_details.default_color}}"
+				{% verbatim %}selected="{{ selected }}"{% endverbatim %}
+				{% verbatim %}group="{{ group }}"{% endverbatim %}>
+                    </page-element>
+                </div>
+
+            </app-header-layout>
+
+            <paper-dialog entry-animation="scale-up-animation"
+                          style=""
+                          modal
+                          exit-animation="scale-down-animation"
+                          id="dialog">
+                <paper-fab dialog-dismiss mini style="margin: 0;" class="close_dialog" icon="close">
+                </paper-fab>
+                <paper-dialog-scrollable>
+                    <div id="dialogContent"></div>
+                </paper-dialog-scrollable>
+
+            </paper-dialog>
+            <paper-dialog id="overlay_element" modal layout vertical center>
+            </paper-dialog>
+
+        </app-drawer-layout>
+
+        </template>
+
+
+        <script>
+
+			el = document.querySelector('#my-element');
+			el.selected = 0;
+			el.group = 0;
+
+		
+        </script>
+
+
+
+</body>

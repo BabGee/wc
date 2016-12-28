@@ -1,0 +1,41 @@
+{% load staticfiles %}
+{% load interface_tags %}
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+    <title>{{gateway}} | {{description}}</title>
+
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="{% static "git/polymer/1.0/bower_components/webcomponentsjs/webcomponents-lite.js" %}"></script>
+
+
+  <link rel="import" href="{% static "git/polymer/1.0/elements/mysection-element.html" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "git/polymer/1.0/elements/sections.css" %}">
+
+
+  <style>
+  html,body {
+    margin: 0;
+    background-color: #E5E5E5;
+    font-family: 'RobotoDraft', sans-serif;
+    word-wrap: break-word;
+
+  }
+@media print {
+    body{
+	height: 1000px;
+    }
+}
+
+  </style>
+</head>
+<body>
+<mysection-element csrf_token="{{csrf_token}}" {% if request.session.session_id%}session="true"{% endif %} static="{{ STATIC_URL }}" params="{{request.GET|jsonify}}" service="EMAIL VERIFICATION" media="{{ MEDIA_URL }}"></mysection-element>
+<script>
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+from django.contrib import admin
+from interface.models import *
+from django.forms.widgets import TextInput, Textarea
+from django import forms
+
+		
+class StaffUserAdmin(admin.ModelAdmin):
+	list_display = ('user_id','staff_id', 'nationality','nat_id','group','created_by','date_modified','date_created',)
+admin.site.register(StaffUser, StaffUserAdmin)
+		
+ 
+class PermissionsAdmin(admin.ModelAdmin):
+	list_display = ('name','group','module','access_level','status','created_by','date_modified','date_created')   
+admin.site.register(Permissions, PermissionsAdmin)
+
+class GroupsAdmin(admin.ModelAdmin):
+	list_display = ('group_name','date_modified','date_created',)
+admin.site.register(Groups, GroupsAdmin)
+ 
+class ModulesAdmin(admin.ModelAdmin):
+	list_display = ('module_name','display_name','description','module_page','display_order','display','date_modified','date_created')    
+admin.site.register(Modules, ModulesAdmin)
+
+class PermissionStatusAdmin(admin.ModelAdmin):
+	list_display = ('name','description','date_modified','date_created',)
+admin.site.register(PermissionStatus, PermissionStatusAdmin)
+
+class AccessLevelsAdmin(admin.ModelAdmin):
+	list_display = ('name','description','date_modified','date_created',)
+admin.site.register(AccessLevels, AccessLevelsAdmin)
+

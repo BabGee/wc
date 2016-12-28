@@ -1,0 +1,354 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+	<title>{{params.response.get_gateway_details.name }} | {{params.response.get_gateway_details.tagline}}</title>
+    {% load staticfiles %}
+    {% load interface_tags %}
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+<link rel="stylesheet" type="text/css" href="{% static 'polymer_isaac/1.0/css/main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'polymer_isaac/1.0/css/normalize.css' %}">
+
+<!-- For Theme three
+<link rel="stylesheet" type="text/css" href="/static/git/polymer/1.0/css/jquery.jscrollpane.css">
+<link rel="stylesheet" type="text/css" href="/static/git/polymer/1.0/css/jquery.jscrollpane.lozenge.css"> -->
+
+<script src="{% static 'polymer_isaac/1.0/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'polymer_isaac/1.0/elements/sections.css' %}">
+<link rel="import" href="{% static 'polymer_isaac/1.0/elements/my-element.raw.html' %}">
+<style>
+	html,body{height: 100%; margin:0;font-family:'RobotoDraft',sans-serif;word-wrap:break-word;}@media print {body{height:1000px;}}
+
+
+
+
+
+</style>
+<!-- <link rel="stylesheet" href="/static/git/polymer/1.0/elements/mchaama_theme_1.css" type="text/css" /> -->
+<style type="text/css">
+	.loggedInBg{
+	background-color: #E0EEE0;
+}
+#ftrHolder{
+	border: 1px solid #00a858; border-radius: 8px; padding: 3px 0 3px 2px; width: 214px;
+}
+.scroller {
+	overflow: auto;
+	border: 1px solid #00a858;
+	height: 410px;
+	margin-top: -21px;
+	/* min-height: 450px;
+	 max-height: 4500px;
+	 height: var(--grouped-select-height); */
+}
+.card-holder {
+	display: inline-block;
+	position: relative;
+	background-color: rgb(255, 255, 255);
+	box-shadow: rgba(123, 204, 112, 1) 0px 2px 4px, rgba(123, 204, 112, 1) 0px 0px 3px;
+	/* width: 88 %; */
+	/* margin: 2%;
+	 padding: 3%; */
+}
+.card-holder-fix-size {
+	/* height:610px; */
+}
+
+.primg {
+	background-image: url("../images/isaacprf-01-54.jpg");
+}
+.pr_1 {
+	background-size: 54px 54px;
+	border-radius: 50%;
+	display: block;
+	height: 54px;
+	overflow: hidden;
+	position: relative;
+	width: 54px;
+}
+.mainThemeBgc {
+	background-color: #00a858;
+}
+
+.gb_jb {
+	animation: 0.2s ease 0s normal none 1 running gb__a;
+	border-color: transparent transparent #fff;
+	border-style: dashed dashed solid;
+	border-width: 0 8.5px 8.5px;
+	display: block;
+	height: 0;
+	left: 142px;
+	position: absolute;
+	top: -8px;
+	width: 0;
+}
+
+/* vertical tabs for UI Flattening and Easy Usability :- Nielsen Norman Standard */
+.vtabs {
+	position: relative;
+	background: #EFF1E4;
+	width: 100%;
+}
+
+.vtabs nav {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	background-color: #00a858; /* remove for glass theme setting*/
+	color: #FFFFFF;
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
+	width: 186px;
+	padding-left: 10px;
+}
+
+.vtabs nav a {
+	padding: 10px 0px;
+	text-align: center;
+	width: 100%;
+	cursor: pointer;
+	color: #FFFFFF;
+	border-left: 1px solid #E0EEE0;
+	border-bottom: 1px solid #E0EEE0;
+	border-radius: 10px 0 0 10px;
+}
+
+.vtabs nav a:hover {
+	background: #8ba870;
+	color: #FFFFFF;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	text-decoration: none;
+}
+.vtabs nav a.selected {
+	background: #E0EEE0;
+	color: #00a858;
+	text-decoration: none;
+}
+
+.vtabs .contentVt {
+	position: relative;
+	top: 0px;
+	height: 100%;
+	overflow: auto;
+}
+
+.vtabs .contentVt.visible {
+	padding: 20px;
+	width: calc(100% - 150px);
+	overflow: scroll;
+	opacity: 1;
+}
+.vtabs .contentVt p {
+	padding-bottom: 2px;
+}
+
+.vtabs .contentVt p:last-of-type {
+	padding-bottom: 0px;
+}
+.vtabs-icon {
+	--iron-icon-height: 30px;
+	--iron-icon-width: 30px;
+	padding: 0;
+}
+
+/* Profile spinner */
+#prf_rotate {
+	display: block;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	width: 83px;
+	height: 83px;
+	margin: -13px 0 0 -44px;
+	border-radius: 50%;
+	border: 3px solid transparent;
+	border-top-color: #ffffff;
+	-webkit-animation: spinx 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+	animation: spinx 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+#prf_rotate:before {
+	content: "";
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	right: 5px;
+	bottom: 5px;
+	border-radius: 50%;
+	border: 3px solid transparent;
+	border-top-color: #ffffff;
+	-webkit-animation: spinx 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+	animation: spinx 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+@-webkit-keyframes spinx {
+	0%   {
+		-webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+		-ms-transform: rotate(0deg);  /* IE 9 */
+		transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+	100% {
+		-webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+		-ms-transform: rotate(360deg);  /* IE 9 */
+		transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+}
+@keyframes spinx {
+	0%   {
+		-webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+		-ms-transform: rotate(0deg);  /* IE 9 */
+		transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+	100% {
+		-webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+		-ms-transform: rotate(360deg);  /* IE 9 */
+		transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+	}
+}
+
+/* scroll bar */
+.scroll-pane {
+	height: 30%;
+	overflow: auto;
+}
+.jspCap {
+	display: block;
+	background: #eeeef4;
+}
+
+.jspVerticalBar .jspCap {
+	height: 20px;
+}
+
+.jspHorizontalBar .jspCap {
+	width: 50px;
+	height: 100%;
+}
+#paper_toolbar_main_1 {
+	background: #00a858 none repeat scroll 0 0;
+}
+#paper_toolbar_header_m1{
+	background-color: #00a858;
+}
+#tabheadVt{
+	background-image: linear-gradient(to right, #00a858 186px, rgba(204, 0, 0, 0) 0px);
+	float: left;
+	height: 465px;
+	left: 0;
+	position: relative;
+	width: 200px;
+}
+#profile_holder_1{
+	background-image: radial-gradient(circle at 100% 100% , rgba(204, 0, 0, 0) 14px, #00a858 0px);
+	height: 14px;
+	position: relative;
+}
+#profile_holder_2{
+	text-align: center;
+	margin: 0px 14px 10px;
+	color: rgb(255, 255, 255);
+}
+#prfHld_1{
+	background-color: rgb(255, 255, 255);
+	border-radius: 50%;
+	padding: 3px;
+	width: 60px;
+	height: 60px;
+	margin: 0px 55px;
+}
+
+paper-tabs, paper-toolbar {
+            background: none;
+            color: #fff;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        paper-toolbar paper-tabs {
+            box-shadow: none;
+        }
+
+        paper-tabs[alignBottom] {
+            box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        iron-pages > div {
+            width: 100%;
+        }
+		/* Isaac set through property - remove and put in common theme settings file*/
+		iron-pages {
+			border-left: 3px solid #00a858; /* remove for glass */
+			border-right: 3px solid #00a858; /* remove for glass */
+			border-bottom: 3px solid #00a858; /* remove for glass */
+			border-radius: 0 0 10px 10px;
+			background-color: #ffffff;
+			/* background-color: rgba(0, 168, 88, 0.48); - glass */
+        }
+		paper-tabs {
+			display: flex;
+			width: 100%;
+		}
+		paper-tabs[no-bar] paper-tab {
+			background-color: #8BA870; /* default color */
+			/* background-color: rgba(139, 168, 112, 0.64); - glass theme set*/
+			background-repeat: no-repeat;
+			border-radius: 10px 10px 0 0;
+			margin-right: 1px;
+		}
+		paper-tabs[no-bar] paper-tab.iron-selected {
+			background-color: #00a656; /* default color */
+			/* background-color: rgba(0, 168, 88, 0.48); - glass theme set*/
+			background-repeat: no-repeat;
+			border-radius: 10px 10px 0 0;
+			margin-right: 1px;
+		}
+
+.tabInner_1{
+	border-bottom: 3px solid #00a656;
+	box-shadow: none;
+}
+.dialogBtn_thm_1{
+	color:#00a858;
+	padding: 0px;
+	float: right;
+	min-width: 0px;
+	background-color: rgb(255, 255, 255);
+	width: 26px;
+	margin: 0px;
+}
+
+.initShow_thm_1{
+	border: 1px solid; color: #00a858; height: 35px; width: 200px;margin: 4px;
+}
+
+.submitBtn_thm_1{
+	background-color: #00a858; color: #ffffff; height: 30px; margin-top: 10px; width: 100%;
+}
+</style>
+
+</head>
+<body>
+<div id="loader-wrapper">
+			<div id="loader"></div>
+
+			<div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+
+		</div>
+<div id="outerCtn" style="height: 100%; justify-content: center; display: flex; align-items: center;">
+<div id="ftrHolder">
+    <my-element csrf_token="{{csrf_token}}"
+            {% if request.session.session_id%}
+            session="true"
+            {% endif %}
+            static="{{ STATIC_URL }}"
+            params="{{params|paramify}}"
+            service="{{service}}"
+            media="{{ MEDIA_URL }}">
+
+</my-element>
+<!--<my-element csrf_token="nzX0rJI8tUKTjfhPqaFj1A1ES8zUvU6r" static="/static/" params="{}" service="HOME" media="/media/"></my-element>-->
+</div>
+</div>
+
+</body>
+</html>

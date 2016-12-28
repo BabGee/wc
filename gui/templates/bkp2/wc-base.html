@@ -1,0 +1,12 @@
+{% extends "wc-base_template.html" %}
+{% load staticfiles %}
+{% load interface_tags %}
+
+{% block header %}
+  <link rel="import" href="{% static 'polymer/1.0/src/elements/mysection-element.html' %}">
+{% endblock %}
+
+{% block body %}
+<mysection-element csrf_token="{{csrf_token}}" {% if request.session.session_id%}session="true"{% endif %} static="{{ STATIC_URL }}" params="{{params|jsonify}}" service="{{service}}" media="{{ MEDIA_URL }}"></mysection-element>
+{% endblock %}
+
