@@ -124,11 +124,6 @@
                 background: transparent;
             }
 
-            #paper_toolbar, #paper_toolbar_header {
-
-                background: none;
-                background-repeat: no-repeat;
-            }
 
             h3 {
                 font-size: 16px;
@@ -136,11 +131,7 @@
                 padding-top: 20px;
             }
 
-            /*  .container {
-                width: 90%;
-                margin: 2%;
-              }
-            */
+
             .loading {
                 position: fixed;
                 z-index: 999;
@@ -213,6 +204,7 @@
 				media="{{ MEDIA_URL }}"
 				params="{{params|paramify}}"
 				original_items="{{ v3 | jsonify }}"
+				
 				style="margin:0;padding:0;">
 			</post-list>
 			{% endfor %}
