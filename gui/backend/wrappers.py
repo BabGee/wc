@@ -50,6 +50,33 @@ class Home:
 
         return payload
 
+    def approve_bid_application(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def deny_bid_application(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def view_bid_applications(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
 
     def view_requirement_application(self, request, page):
         payload = request.GET.copy()
