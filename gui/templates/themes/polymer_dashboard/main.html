@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+    <title>{{params.response.get_gateway_details.name }} | {{params.response.get_gateway_details.tagline}}</title>
+
+
+    {% load staticfiles %}
+    {% load interface_tags %}
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="{% static 'polymer_dashboard/manifest.json' %}">
+
+
+    <script src="{% static 'polymer_dashboard/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
+
+
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer3/src/elements/sections.css' %}">-->
+            <style is="custom-style">
+            :root {
+
+                --app-primary-color: #202020;
+                --app-secondary-color: #ffffff;
+                --app-accent-color: #172C50;
+                --app-default-color: {{params.response.get_gateway_details.default_color}};
+
+                --paper-button-ink-color: var(--app-accent-color);
+                --paper-icon-button-ink-color: var(--app-accent-color);
+                --paper-spinner-color: var(--app-accent-color);
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                color: var(--app-primary-color);
+            }
+
+            paper-fab {
+                color: var(--app-default-color);
+            }
+
+            app-header {
+                background-color: var(--app-default-color);
+                background:{{params.response.get_gateway_details.background_image}};
+                color: var(--app-primary-color);
+                box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+            }
+        </style>
+
+
+    <link rel="import" href="{% static 'polymer_dashboard/app/components/pd-data/pd-data.html' %}">
+    <link rel="import" href="{% static 'polymer_dashboard/app/components/pd-dashboard/pd-dashboard.html' %}">
+
+</head>
+<body>
+<pd-data id="pd-data"></pd-data>
+<pd-dashboard
+        {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
+        static="{{ STATIC_URL }}"
+        payloadjson="{{params|jsonify}}"
+        media="{{ MEDIA_URL }}"
+        hostname="{{request.META.HTTP_HOST}}"
+        channel="1"
+        csrf_token="{{csrf_token}}">
+
+</pd-dashboard>
+
+
+<paper-dialog entry-animation="scale-up-animation"
+              style=""
+              modal
+              exit-animation="scale-down-animation"
+              id="dialog">
+    <paper-fab dialog-dismiss mini style="margin: 0;" class="close_dialog" icon="close">
+    </paper-fab>
+    <paper-dialog-scrollable>
+
+
+	<div  class="m-t-1 m-b-1">
+            <pd-ui-grid>
+             <pd-ui-grid-item large="24" medium="7" small="24" id="dialogContent">
+             </pd-ui-grid-item>
+            </pd-ui-grid>
+
+        </div>
+
+
+    </paper-dialog-scrollable>
+
+</paper-dialog>
+<paper-dialog id="overlay_element" modal layout vertical center>
+</paper-dialog>
+
+
+</body>

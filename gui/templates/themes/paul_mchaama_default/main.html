@@ -11,37 +11,33 @@
 
 
     <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="{% static 'polymer2/manifest.json' %}">
-
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer/src/css/main.css' %}">-->
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer/src/css/normalize.css' %}">-->
-
-    <!--<script src="{% static 'polymer/src/js/vendor/modernizr-2.6.2.min.js' %}"></script>-->
+    <link rel="manifest" href="{% static 'polymer3/manifest.json' %}">
 
 
-    <script src="{% static 'polymer2/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
-    <link rel="import" href="{% static 'polymer2/bower_components/polymer/polymer.html' %}">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'polymer2/src/elements/sections.css' %}">
+    <script src="{% static 'polymer3/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
+    <link rel="import" href="{% static 'polymer3/bower_components/polymer/polymer.html' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polymer3/src/elements/sections.css' %}">
 
 
-<link rel="import" href="{% static 'polymer2/bower_components/iron-flex-layout/iron-flex-layout.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/iron-flex-layout/iron-flex-layout.html' %}">
 
-<link rel="import" href="{% static 'polymer2/bower_components/paper-spinner/paper-spinner.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/paper-dialog/paper-dialog.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/paper-drawer-panel/paper-drawer-panel.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/iron-collapse/iron-collapse.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/iron-dropdown/iron-dropdown.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/iron-form/iron-form.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/iron-overlay-behavior/iron-overlay-behavior.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/paper-spinner/paper-spinner.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/paper-dialog/paper-dialog.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/paper-drawer-panel/paper-drawer-panel.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/iron-collapse/iron-collapse.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/iron-dropdown/iron-dropdown.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/iron-form/iron-form.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/iron-overlay-behavior/iron-overlay-behavior.html' %}">
 
-<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-drawer/app-drawer.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-scroll-effects/app-scroll-effects.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-header/app-header.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-header-layout/app-header-layout.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/app-layout/app-toolbar/app-toolbar.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/app-layout/app-drawer/app-drawer.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/app-layout/app-scroll-effects/app-scroll-effects.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/app-layout/app-header/app-header.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/app-layout/app-header-layout/app-header-layout.html' %}">
+<link rel="import" href="{% static 'polymer3/bower_components/app-layout/app-toolbar/app-toolbar.html' %}">
 
 
         <style is="custom-style">
@@ -50,7 +46,8 @@
                 --app-primary-color: #202020;
                 --app-secondary-color: #ffffff;
                 --app-accent-color: #172C50;
-                --app-default-color: {{params.response.get_gateway_details.default_color}};
+                /*--app-default-color: {{params.response.get_gateway_details.default_color}};*/
+                --app-default-color: #FF0000;
 
                 --paper-button-ink-color: var(--app-accent-color);
                 --paper-icon-button-ink-color: var(--app-accent-color);
@@ -73,7 +70,7 @@
             }
         </style>
 
-<link rel="import" href="{% static 'polymer2/src/elements/page-element.html' %}">
+<link rel="import" href="{% static 'polymer3/src/elements/page-element.html' %}">
 
 </head>
 <body>
@@ -83,10 +80,7 @@
 
 
             .close_dialog {
-                /*
-                width: 40px;
-                height: 40px;
-                */
+
                 position: absolute;
                 left: -16px;
                 top: -16px;
@@ -143,13 +137,12 @@
                 <app-header
                         id="appHeader"
                         condenses="true"
-
                         reveals
                         effects="waterfall">
                     <app-toolbar>
-                       {% verbatim %} <paper-icon-button icon="menu" drawer-toggle hidden$="{{wideLayout}}"></paper-icon-button> {% endverbatim %}
+                       <paper-icon-button icon="menu" drawer-toggle ></paper-icon-button>
 
-                        		<img src="{{MEDIA_URL}}{{params.response.get_gateway_details.logo}}" alt="LOGO" {% verbatim %} hidden$="{{!wideLayout}}" {% endverbatim %} height="60">
+                        		<img src="{{MEDIA_URL}}{{params.response.get_gateway_details.logo}}" alt="LOGO" height="60">
 
                         <div main-title>{{params.response.get_gateway_details.name}}</div>
 
@@ -182,17 +175,7 @@
 
                     </app-toolbar>
 
-
-                    {% verbatim %} <app-toolbar class="tabs-bar" sticky hidden$="{{!wideLayout}}"> {% endverbatim %}
-                        <paper-tabs id="menu" {% verbatim %} selected="{{group}}" {% endverbatim %} bottom-item>
-				{% for k,v in params.response.get_interface.this_page_inputs.items|dictsort %}
-                                <paper-tab name="{{v.section_var.0}}">
-					<iron-icon icon="{{v.section_var.1}}"></iron-icon>
-					{{v.section_var.0}}
-                                </paper-tab>
-				{% endfor %}
-                        </paper-tabs>
-                    </app-toolbar>
+                    
 
                 </app-header>
 

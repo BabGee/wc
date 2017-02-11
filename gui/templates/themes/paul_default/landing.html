@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+    <title>{{params.response.get_gateway_details.name }} | {{params.response.get_gateway_details.tagline}}</title>
+
+
+    {% load staticfiles %}
+    {% load interface_tags %}
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <script src="{% static 'landing/bower_components/webcomponentsjs/webcomponents-lite.min.js' %}"></script>
+
+    <!--[if lte IE 8]>
+    <script src="{% static 'landing/src/js/ie/html5shiv.js' %}"></script>
+    <![endif]-->
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="{% static 'landing/src/css/ie8.css' %}"/>
+    <![endif]-->
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="{% static 'landing/src/css/ie9.css' %}"/>
+    <![endif]-->
+
+    <link rel="stylesheet" href="{% static 'landing/src/css/main_landing.css' %}"/>
+    <link rel="import" href="{% static 'landing/src/elements/header-nav.html' %}">
+    <link rel="import" href="{% static 'landing/src/elements/slider-element.html' %}">
+    <link rel="import" href="{% static 'landing/src/elements/banner-element.html' %}">
+    <link rel="import" href="{% static 'landing/src/elements/read-element.html' %}">
+    <link rel="import" href="{% static 'landing/src/elements/second-read-element.html' %}">
+    <link rel="import" href="{% static 'landing/src/elements/third-read-element.html' %}">
+    <link rel="import" href="{% static 'landing/src/elements/login-element.html' %}">
+    <link rel="import" href="{% static 'landing/src/elements/footer-element.html' %}">
+    <link rel="import" href="{% static 'landing/src/elements/dialog-open.html' %}">
+    <!--<script src="{% static 'landing/bower_components/webcomponentsjs/webcomponents.js' %}"></script>-->
+    <link rel="import" href="{% static 'landing/bower_components/app-layout/app-header/app-header.html' %}">
+
+
+    <link rel="import" href="{% static 'landing/bower_components/iron-icons/iron-icons.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/iron-image/iron-image.html' %}">
+    <!--<link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html' %}">-->
+    <link rel="import" href="{% static 'landing/bower_components/paper-icon-button/paper-icon-button.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/app-layout/app-toolbar/app-toolbar.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/paper-item/paper-icon-item.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/app-layout/demo/sample-content.html' %}">
+    <link rel="import"
+          href="{% static 'landing/bower_components/app-layout/app-scroll-effects/app-scroll-effects.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/app-layout/app-header/app-header.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/paper-drawer-panel/paper-drawer-panel.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/app-layout/app-drawer/app-drawer.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/app-layout/app-layout.html' %}">
+
+    <link rel="import" href="{% static 'landing/bower_components/paper-dialog/paper-dialog.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/paper-input/paper-input.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/paper-checkbox/paper-checkbox.html' %}">
+    <link rel="import" href="{% static 'landing/bower_components/paper-button/paper-button.html' %}">
+    <style is="custom-style">
+
+        /*body {paper-drawer-panel
+          margin: 0;
+          font-family: 'Roboto', 'Noto', sans-serif;
+          background-color: #eee;
+        }*/
+
+        app-header {
+            z-index: 9999 !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100% !important;
+            color: #fc0000;
+            /*background-image: url(//app-layout-assets.appspot.com/assets/bg3.jpg);
+            background-position: bottom center;
+            background-size: cover;
+
+            --app-header-background-front-layer: {
+              background: -webkit-linear-gradient(top, transparent 0%, transparent 50%, rgba(0,0,0,0.5) 100%);
+            };*/
+
+            --app-header-background-rear-layer: {
+                background-color: #260000;
+            };
+        }
+
+        paper-icon-button {
+            --paper-icon-button-ink-color: white;
+        }
+
+        app-toolbar.tall {
+
+        }
+
+        app-drawer {
+            --app-drawer-content-container: {
+                background-color: #BF0300;
+
+            } z-index: 9999 !important;
+        }
+
+        .drawer-contents {
+            height: 100% !important;
+            overflow-y: auto;
+        }
+
+        ul {
+            list-style: none !important;
+            text-align: left;
+        }
+
+        paper-dialog {
+            position: inherit;
+            max-width: 180%;
+        }
+
+    </style>
+</head>
+<body class="landing">
+
+
+<div id="page-wrapper">
+    <!--<header-nav></header-nav>-->
+
+    <app-header condenses fixed
+                effects="waterfall resize-snapped-title fade-background"
+                effects-config='{"resize-snapped-title": {"startsAt": 0.8, "duration": "100ms"}, "fade-background": {"startsAt": 0.8, "endsAt": 0.9}}'>
+
+        <app-toolbar>
+            <a href="index.html">
+                <iron-image alt="BidFather logo." src="{% static 'landing/images/logo.png' %}"
+                            style="zoom: 40%; -moz-zoom: 40%; -ms-zoom: 40%;"></iron-image>
+            </a>
+            <!--<paper-icon-button icon="search"></paper-icon-button>-->
+            <h4 condensed-title>GiveDirectly</h4>
+            <div>Menu</div>
+            <paper-icon-button icon="menu">
+            </paper-icon-button>
+        </app-toolbar>
+    </app-header>
+
+    <!--<sample-content size="100"></sample-content>-->
+
+    <app-drawer id="drawer" align="end" swipe-open size="100">
+        <div class="drawer-contents">
+
+            <paper-icon-item>
+                <iron-icon class="grayIcon" icon="[[item]]" item-icon></iron-icon>
+                <span>Navigation</span>
+            </paper-icon-item>
+
+            <ul style="text-transform: uppercase; margin-top: 60px; ">
+                <li style="border-bottom-width: thin; border-style: solid; padding: 3px;"><a href="index.html">Home</a>
+                </li>
+                <li style="border-bottom-width: thin; border-style: solid; padding: 3px;"><a href="aboutus.html">About
+                    Us</a></li>
+                <li style="border-bottom-width: thin; border-style: solid; padding: 3px;"><a href="contacts.html">Contact
+                    Us</a></li>
+                <li style="border-bottom-width: thin; border-style: solid; padding: 3px;"><a href="#">
+                    <dialog-open></dialog-open>
+
+                    <paper-dialog id="modal" modal>
+                        <form is="iron-form" method="get" action="/" id="eventsDemo">
+                            <paper-input name="name" label="Name" required auto-validate></paper-input>
+                            <paper-input name="password" label="Password" type="password" required
+                                         auto-validate></paper-input>
+                            <paper-checkbox name="read" required>You must check this box</paper-checkbox>
+                            <br>
+                            <paper-button raised onclick="_delayedSubmit(event)" disabled id="eventsDemoSubmit"
+                                          style="margin-top: 20px;">
+                                <paper-spinner id="spinner" hidden></paper-spinner>
+                                Submit
+                            </paper-button>
+                            <paper-button raised onclick="_reset(event)">Reset</paper-button>
+                            <div class="output"></div>
+                        </form>
+                        <script>
+                            eventsDemo.addEventListener('change', function (event) {
+                                // Validate the entire form to see if we should enable the `Submit` button.
+                                eventsDemoSubmit.disabled = !eventsDemo.validate();
+                            });
+                            function _delayedSubmit(event) {
+                                spinner.active = true;
+                                spinner.hidden = false;
+                                eventsDemoSubmit.disabled = true;
+                                // Simulate a slow server response.
+                                setTimeout(function () {
+                                    Polymer.dom(event).localTarget.parentElement.submit();
+                                }, 1000);
+                            }
+                            function _reset(event) {
+                                var form = Polymer.dom(event).localTarget.parentElement
+                                form.reset();
+                                form.querySelector('.output').innerHTML = '';
+                            }
+                            document.getElementById('eventsDemo').addEventListener('iron-form-submit', function (event) {
+                                spinner.active = false;
+                                spinner.hidden = true;
+                                eventsDemoSubmit.disabled = false;
+                                this.querySelector('.output').innerHTML = JSON.stringify(event.detail);
+                            });
+                        </script>
+                        <div class="buttons">
+                            <paper-button dialog-confirm autofocus>close</paper-button>
+                        </div>
+                    </paper-dialog>
+                    <script>
+
+                        var modal = document.querySelector('paper-dialog');
+                        document.querySelector('dialog-open').addEventListener('tap', function () {
+                            modal.open();
+                        });
+                    </script>
+                </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+    </app-drawer>
+    <script>
+
+        var drawer = document.querySelector('app-drawer');
+        document.querySelector('paper-icon-button').addEventListener('tap', function () {
+            drawer.toggle();
+        });
+    </script>
+    <!--<h1 main-title>GiveDirectly</h1>-->
+    <slider-element></slider-element>
+    <!--<banner-element></banner-element>-->
+    <read-element></read-element>
+    <second-read-element></second-read-element>
+    <third-read-element></third-read-element>
+    <login-element></login-element>
+    <footer-element></footer-element>
+
+
+</div>
+
+</body>
+</html>

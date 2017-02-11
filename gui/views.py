@@ -48,7 +48,12 @@ class UI:
 			home_page = '/index/'
 		'''
 		#home_page = '/index/#?u=username'
-		home_page = '/home/'
+
+		session_id = request.session.get('session_id')
+		if session_id is not None:
+			home_page = '/index/'
+		else:
+			home_page = '/home/'
 
 		return HttpResponseRedirect(home_page)
 
@@ -160,6 +165,7 @@ class UI:
 								'params': responseParams,
 								'service': page_service
 								}
+							lgr.info(c)
 							def render_enabled(request, template_file, c):
 								response = render(request, template_file, c)
 								#Added to support cookies on explorer

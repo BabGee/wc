@@ -40,8 +40,16 @@ class Home:
 
         return payload
 
-
     def view_bid_application(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def selected_bid_requirements(self, request, page):
         payload = request.GET.copy()
         payload.update(request.POST)
 
@@ -59,7 +67,97 @@ class Home:
 
         return payload
 
+    def bid_document_form(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def create_bid_document(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def confirm_delete_bid_requirement(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def confirm_delete_bid_document(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def view_edit_bid_requirement(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def view_edit_bid_document(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def edit_bid_document(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
     def deny_bid_application(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def edit_bid_requirement(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def delete_bid_requirement(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    def delete_bid_document(self, request, page):
         payload = request.GET.copy()
         payload.update(request.POST)
 
@@ -196,6 +294,16 @@ class Home:
 
         return payload
 
+    def bid_application_details(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+
     def open_bid_details(self, request, page):
         payload = request.GET.copy()
         payload.update(request.POST)
@@ -272,7 +380,7 @@ class Home:
 
         payload = WebService().request_processor(request, page.service, payload)
         payload = WebService().response_processor(request, page.service, payload)
-	lgr.info('Institution Page: %s' % payload)
+        lgr.info('Institution Page: %s' % payload)
 
         return payload
 
