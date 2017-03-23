@@ -5,17 +5,20 @@
     <title>{{params.response.get_gateway_details.name }} | {{params.response.get_gateway_details.tagline}}</title>
     {% load staticfiles %}{% load interface_tags %}
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
     <script src="{% static 'polymer_dashboard/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'polymer_dashboard/app/components/bundle.js' %}"></script>
     <link rel="import" href="{% static 'polymer_dashboard/app/src/elements/landing-page.html' %}">
+
     <style is="custom-style">
         :root {
 
-                --app-primary-color: #202020;
-                --app-secondary-color: #ffffff;
-                --app-accent-color: #172C50;
-                --app-default-color: {{params.response.get_gateway_details.default_color}};
+		--app-primary-color: {{params.response.get_gateway_details.primary_color}};
+		--app-secondary-color: {{params.response.get_gateway_details.secondary_color}};
+		--app-accent-color: {{params.response.get_gateway_details.accent_color}};
+		--app-default-color: {{params.response.get_gateway_details.default_color}};
+                 --app-background-image: {{params.response.get_gateway_details.background_image}};
 
                 --paper-button-ink-color: var(--app-accent-color);
                 --paper-icon-button-ink-color: var(--app-accent-color);
@@ -79,9 +82,14 @@
             position: inherit;
             max-width: 180%;
         }
+
+        body {
+        background: var(--app-background-image);
+}
     </style>
-
-
+    <style>
+        input{    color: {{params.response.get_gateway_details.default_color}} !important;}
+    </style>
 </head>
 <body class="landing">
 <landing-page
