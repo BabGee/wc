@@ -10,57 +10,49 @@
 
 
     <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="{% static 'polymer2/manifest.json' %}">
-
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer/src/css/main.css' %}">-->
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer/src/css/normalize.css' %}">-->
-
-    <!--<script src="{% static 'polymer/src/js/vendor/modernizr-2.6.2.min.js' %}"></script>-->
+    <link rel="manifest" href="{% static 'polymer/app/manifest.json' %}">
 
 
-    <script src="{% static 'polymer2/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
-    <link rel="import" href="{% static 'polymer2/bower_components/polymer/polymer.html' %}">
+    <script src="{% static 'polymer_dashboard/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
+    <link rel="import" href="{% static 'polymer_dashboard/bower_components/polymer/polymer.html' %}">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'polymer2/src/elements/sections.css' %}">
 
         <style  is="custom-style">
             :root {
 
-                --app-primary-color: #202020;
-                --app-secondary-color: #ffffff;
-                --app-accent-color: #172C50;
+                --app-primary-color: {{params.response.get_gateway_details.primary_color}};
+                --app-secondary-color: {{params.response.get_gateway_details.secondary_color}};
+                --app-accent-color: {{params.response.get_gateway_details.accent_color}};
                 --app-default-color: {{params.response.get_gateway_details.default_color}};
+                 --app-background-image:{{params.response.get_gateway_details.background_image}};  
 
                 --paper-button-ink-color: var(--app-accent-color);
                 --paper-icon-button-ink-color: var(--app-accent-color);
                 --paper-spinner-color: var(--app-accent-color);
                 -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
                 color: var(--app-primary-color);
 
             }
         </style>
+	<style>
+		input{    color: {{params.response.get_gateway_details.default_color}} !important;}
+	</style>
 
+          <style>
+           form {
+                        }
+          </style>
 
-
-<link rel="import" href="{% static 'polymer2/bower_components/iron-flex-layout/iron-flex-layout.html' %}">
-
-<link rel="import" href="{% static 'polymer2/bower_components/paper-spinner/paper-spinner.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/paper-dialog/paper-dialog.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/paper-drawer-panel/paper-drawer-panel.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/iron-collapse/iron-collapse.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/iron-dropdown/iron-dropdown.html' %}">
-<link rel="import" href="{% static 'polymer2/bower_components/iron-form/iron-form.html' %}">
-
-<link rel="import" href="{% static 'polymer2/src/post-ajax/post-ajax.html' %}">
-
-<link rel="import" href="{% static 'polymer2/src/elements/post-list.html' %}">
+<link rel="import" href="{% static 'polymer_dashboard/app/components/pd-dashboard/pd-dashboard.html' %}">
 
 </head>
 <body>
 	<template id="mysection-element" is="dom-bind">
         <style>
+
+            body{
+                background-color: rgba(162, 162, 162, 0.41);;
+            }
 
             paper-fab {
                 color: var(--app-default-color);;
@@ -72,10 +64,10 @@
                 height: 40px;
                 */
                 position: absolute;
-                left: -16px;
+                left: -25px;
                 top: -16px;
-                background: white;
-                border: 1px solid #ededed;
+                /*background: white;
+                border: 1px solid #ededed;*/
                 /*border-radius: 50%;*/
                 padding: 0;
                 margin: 0;
@@ -84,51 +76,6 @@
                 justify-content: center;
                 cursor: pointer;
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-            }
-
-            paper-tabs {
-                background-color: var(--app-default-color);
-            }
-
-            .cards-container {
-                /*background-color: white;*/
-                max-width: 90%;
-                margin: 16px auto;
-
-            }
-
-            .card {
-                background-color: white;
-                max-width: 100%;
-                /*height: 500px;*/
-                padding: 10px;
-                margin: 16px auto;
-                box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
-            }
-
-            #section {
-                background: transparent;
-            }
-
-            #section1 {
-                height: 100%;
-                box-sizing: border-box;
-
-                background: transparent;
-            }
-
-            #section2 {
-
-                height: 100%;
-
-                background: transparent;
-            }
-
-
-            h3 {
-                font-size: 16px;
-                font-weight: 400;
-                padding-top: 20px;
             }
 
 
@@ -161,35 +108,31 @@
             iron-icon {
                 height: inherit;
             }
+            
 
-            @media (max-width: 768px) {
-
-                #iron_pages {
-
-                }
-
-                .cards-container {
-                    max-width: 100% !important;
-                    width: 100%;
-                    margin: 0 !important;
-                }
-
-                .post-list {
-                    padding: 0;
-                }
-            }
         </style>
-        <section id="section2" class="content container-default" content>
+
+		<link rel="stylesheet" href="{% static 'polymer_dashboard/app/components/pd-drawer/pd-drawer.css' %}">
+
+
+		<div class="main c-n-dark pc-mode-main">
+			<div class="main-section">
 		{% for k,v in params.response.get_section.this_page_inputs.items %}
 		{% for k0,v0 in v.items %}
 		{% if k0 != 'section_var' %}
 		{% for k1,v1 in v0.items %}
 		{% if k1 != 'page_var' %}
-		<div class="cards-container row">
-			{% for k2,v2 in v1.items %}
+            <div class="m-t-1 m-b-1">
+                <pd-ui-grid>
+<!--                    <pd-ui-grid-item sizes="24|24|24">-->
+                        {% for k2,v2 in v1.items %}
 			{% for k3,v3 in v2.items %}
+                    <pd-ui-grid-item sizes="{{v3.input_var.7}}">
+
 			<post-list
-				class="{{ v3.input_var.7 }} card col-xs-12"
+					payloadjson="{{params|jsonify}}"
+
+					class="card col-xs-12"
 				show="all"
 				istitle="{{ k1 }}"
 				csrf_token="{{csrf_token}}"
@@ -207,22 +150,27 @@
 				
 				style="margin:0;padding:0;">
 			</post-list>
+                    </pd-ui-grid-item>
+
 			{% endfor %}
 			{% endfor %}
-		</div>
+<!--                    </pd-ui-grid-item>-->
+                </pd-ui-grid>
+            </div>
 		{% endif %}
 		{% endfor %}
 		{% endif %}
 		{% endfor %}
 		{% endfor %}
 
-        </section>
+        </div>
+        </div>
 
         <paper-dialog entry-animation="scale-up-animation"
                       style=""
                       modal
                       exit-animation="scale-down-animation"
-                      id="dialog">
+                      id="dialogm">
             <paper-fab dialog-dismiss mini class="close_dialog" icon="close"></paper-fab>
             <paper-dialog-scrollable>
                 <div id="dialogContent"></div>
