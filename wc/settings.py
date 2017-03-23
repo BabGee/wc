@@ -36,7 +36,7 @@ SESSION_COOKIE_HTTPONLY = True
 
 ALLOWED_HOSTS = [
 		'.mipay.club', '.regix.org','.nikobizz.com','69.64.68.226','.muziqbit.com','.shikangoma.com','.mamtag.com',
-		'.gus.gs', '.mipaymobile.com','.bidfatherafrica.com','.bidfather.com','.mchaama.com',
+		'.gus.gs', '.mipaymobile.com','.bidfatherafrica.com','.bidfather.com','.mchaama.com','.gomipay.com','.sortika.com',
 		]
 
 GEOIP_PATH = '/usr/share/GeoIP'

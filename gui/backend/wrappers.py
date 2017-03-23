@@ -31,6 +31,33 @@ class Home:
 
         return payload
 
+    #CONTACT GROUP SEND REQUEST
+    def contact_group_send_request(self, request, page):
+        payload = request.POST.copy()
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    #NOTIFICATION PRODUCT SEND REQUEST
+    def notification_product_send_request(self, request, page):
+        payload = request.POST.copy()
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+    
+    #QUICK SEND REQUEST
+    def quick_send_request(self, request, page):
+        payload = request.POST.copy()
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
     def landing_page(self, request, page):
         payload = request.GET.copy()
         payload.update(request.POST)
@@ -266,6 +293,17 @@ class Home:
         payload = WebService().response_processor(request, page.service, payload)
 
         return payload
+
+
+    def amka_investment(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
 
     def live_selected_bidding(self, request, page):
         payload = request.GET.copy()

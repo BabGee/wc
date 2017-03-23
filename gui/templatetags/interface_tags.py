@@ -50,6 +50,7 @@ def paramify(payload):
 	return json.dumps(params)
 
 
+
 @register.filter(name='istitle')
 def istitle(payload):
 	title = ''
