@@ -267,6 +267,16 @@ class Home:
 
         return payload
 
+    def msisdn_validation(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+
     def view_closed_bid(self, request, page):
         payload = request.GET.copy()
         payload.update(request.POST)
@@ -424,6 +434,52 @@ class Home:
 
     def forgot_password(self, request, page):
         payload = request.POST.copy()
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+
+    def sale_payment(self, request, page):
+        params = request.GET.copy()
+        params.update(request.POST)
+
+	payload = {}
+
+	#payload['trigger'] = 'sale_payment'
+
+	payload['payment_method'] = params['payment_method']
+	payload['institution_id'] = params['institution_id']
+
+	if 'product_item_id' in params.keys():
+		payload['product_item_id'] = params['product_item_id']
+	elif 'item' in params.keys():
+		payload['item'] = params['item']
+
+
+	if 'quantity' in params.keys():
+		payload['quantity'] = params['quantity']
+	elif 'amount' in params.keys():
+		payload['amount'] = params['amount']
+		
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+
+    def checkout_payment(self, request, page):
+        params = request.GET.copy()
+        params.update(request.POST)
+
+	payload = {}
+
+	#payload['trigger'] = 'checkout_payment'
+
+	payload['payment_method'] = params['payment_method']
+	payload['reference'] = params['reference']
+
 
         payload = WebService().request_processor(request, page.service, payload)
         payload = WebService().response_processor(request, page.service, payload)
