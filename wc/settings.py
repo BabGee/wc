@@ -35,7 +35,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_HTTPONLY = True
 
 ALLOWED_HOSTS = [
-		'.mipay.club', '.regix.org','.nikobizz.com','69.64.68.226','.muziqbit.com','.shikangoma.com','.mamtag.com',
+		'.mipay.club', '.regix.org','.nikobizz.com','69.64.68.226','.muziqbit.com','.shikangoma.com','.mamtag.com','.heri.shop',
 		'.gus.gs', '.mipaymobile.com','.bidfatherafrica.com','.bidfather.com','.mchaama.com','.gomipay.com','.sortika.com',
 		]
 

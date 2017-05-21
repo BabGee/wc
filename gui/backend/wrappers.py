@@ -85,6 +85,47 @@ class Home:
 
         return payload
 
+    #EDIT ENROLLMENT SAVE
+    def edit_enrollment_save(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+
+    #VIEW ACCOUNT
+    def view_account(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    #EDIT ENROLLMENT
+    def edit_enrollment(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+    #VIEW ENROLLMENT
+    def view_enrollment(self, request, page):
+        payload = request.GET.copy()
+        payload.update(request.POST)
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
     def approve_bid_application(self, request, page):
         payload = request.GET.copy()
         payload.update(request.POST)
@@ -441,6 +482,46 @@ class Home:
         return payload
 
 
+    def sale(self, request, page):
+        params = request.GET.copy()
+        params.update(request.POST)
+
+	payload = {}
+
+	if 'product_item_id' in params.keys():
+		payload['product_item_id'] = params['product_item_id']
+	elif 'item' in params.keys():
+		payload['item'] = params['item']
+		payload['institution_id'] = params['institution_id']
+	else:
+		payload = {}
+
+	if 'quantity' in params.keys():
+		payload['quantity'] = params['quantity']
+	elif 'amount' in params.keys():
+		payload['amount'] = params['amount']
+	else:
+		payload = {}
+		
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
+
+    def checkout(self, request, page):
+        params = request.GET.copy()
+        params.update(request.POST)
+
+	payload = {}
+
+	payload['reference'] = params['reference']
+
+        payload = WebService().request_processor(request, page.service, payload)
+        payload = WebService().response_processor(request, page.service, payload)
+
+        return payload
+
     def sale_payment(self, request, page):
         params = request.GET.copy()
         params.update(request.POST)
@@ -449,19 +530,29 @@ class Home:
 
 	#payload['trigger'] = 'sale_payment'
 
+
 	payload['payment_method'] = params['payment_method']
-	payload['institution_id'] = params['institution_id']
 
 	if 'product_item_id' in params.keys():
 		payload['product_item_id'] = params['product_item_id']
 	elif 'item' in params.keys():
 		payload['item'] = params['item']
-
+		payload['institution_id'] = params['institution_id']
+	else:
+		payload = {}
 
 	if 'quantity' in params.keys():
 		payload['quantity'] = params['quantity']
 	elif 'amount' in params.keys():
 		payload['amount'] = params['amount']
+	else:
+		payload = {}
+
+	if 'email' in params.keys():
+		payload['email'] = params['email']
+
+	if 'msisdn' in params.keys():
+		payload['msisdn'] = params['msisdn']
 		
         payload = WebService().request_processor(request, page.service, payload)
         payload = WebService().response_processor(request, page.service, payload)
