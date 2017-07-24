@@ -77,7 +77,7 @@
         protocol="http:"
         {% endif %}
         media="{{ MEDIA_URL }}"
-        hostname="{{request.META.HTTP_HOST}}"
+        hostname="{{host}}"
         channel="1"
         csrf_token="{{csrf_token}}"></pd-config>
 
@@ -90,7 +90,7 @@
         {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
         static="{{ STATIC_URL }}"
         media="{{ MEDIA_URL }}"
-        hostname="{{request.META.HTTP_HOST}}"
+        hostname="{{host}}"
         channel="1"
         csrf_token="{{csrf_token}}">
 

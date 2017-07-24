@@ -41,22 +41,30 @@ class UI:
 			raise Http404
 		
 	def home_page(self, request):
-		'''
-		if request.session.get('user_id'):
-			home_page = '/dashboard/'
-		else:
-			home_page = '/index/'
-		'''
-		#home_page = '/index/#?u=username'
+
+		def default_initial_page(session_id):
+			if session_id is not None:
+				home_page = '/index/'
+			else:
+				home_page = '/home/'
+
+			return HttpResponseRedirect(home_page)
 
 		session_id = request.session.get('session_id')
-		if session_id is not None:
-			home_page = '/index/'
+
+		gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
+		if gateway_path.exists():
+			active_session = True if session_id is not None else False
+			initial_page = InitialPage.objects.filter(Q(page__display=True),\
+					 Q(gateway=gateway_path[0].gateway)|Q(gateway=None),\
+					 Q(status__name='ACTIVE'),Q(active_session=active_session))
+			if initial_page.exists():
+				return self.pages(request, initial_page[0].page.path)
+			else:
+				return default_initial_page(session_id)
+
 		else:
-			home_page = '/home/'
-
-		return HttpResponseRedirect(home_page)
-
+			return default_initial_page(session_id)
 
         def logout_user(self,request):
                 logout(request)
@@ -65,6 +73,7 @@ class UI:
 		lgr.info("Request: %s" % str(request)[:100])
 		if request.is_ajax and request.method == 'POST':
 			try:
+				lgr.info('Request Processor: %s' % request.META)
 				payload = request.POST.copy()
 				payload = WebService().request_processor(request,SERVICE, payload)
 				payload = WebService().response_processor(request, SERVICE, payload)
@@ -78,71 +87,53 @@ class UI:
 
 	def error_page(self, request, error):
 
-	 	return render(request, 'error.html', {'error':error})
+	 	return self.pages(request, "error")
+
 
 	def str_to_class(self, s):
 	    if s in globals() and isinstance(globals()[s], types.ClassType):
 		    return globals()[s]
 	    return None
 
-	def pages(self, request, page):
+	def pages(self, request, page, subdomain=None):
 		responseParams = {'response_status':'30',}
 		try:
+			lgr.info('Request Host: %s' % request.get_host())
+			lgr.info('Sub-domain %s' % subdomain)
 			gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
-			if len(gateway_path)>0:
-				lgr.info('Request Gateway: %s' % gateway_path)
-				lgr.info('Request Path: {%s}' % request.path)
-				this_page = Pages.objects.get(path=request.path)
-				lgr.info('Got Page: %s' % this_page)
+			if gateway_path.exists():
 
-				permissions = Permission.objects.filter(Q(page__path=request.path), Q(page__display=True),\
+				permissions = Permission.objects.filter(Q(page__path=page), Q(page__display=True),\
 						 Q(gateway=gateway_path[0].gateway)|Q(gateway=None),\
 						 Q(status__name='ENABLED')|Q(status__name='ALLOWED'))
 
-				lgr.info('Permissions: %s Len %s' % (permissions, len(permissions)))
 
 				if permissions.exists():
-					try:	
-						page_name = page
-						menu = {}										
-						for permitted in permissions:
-							if  permitted.page.display_order > 0:
-								if permitted.page.module.display_order in menu.keys():
-									pass
-								else:
-									menu[permitted.page.module.display_order] = {}
-
-									menu[permitted.page.module.display_order]['module_name'] = permitted.page.module.display_name
-									menu[permitted.page.module.display_order]['module_path'] = permitted.page.module.path
-								if 'pages' not in menu[permitted.page.module.display_order].keys():
-									lgr.info('Pages Does not Exist')
-									menu[permitted.page.module.display_order]['pages']={}
-								page = {}
-								page['page_name'] = permitted.page.display_name
-								page['page_path'] = permitted.page.path
-								menu[permitted.page.module.display_order]['pages'][permitted.page.display_order] = page
-
-						lgr.info('Menu to Display: %s' % menu)
-					
-						class_name = str(this_page.module.display_name.replace(" ","_").title())
+					try:
+						class_name = str(permissions[0].page.module.display_name.replace(" ","_").title())
 						lgr.info('Class Name: %s' % class_name)
-						processing_function = this_page.display_name.lower().replace(" ","_")
+						processing_function = page.lower().replace(" ","_")
 						lgr.info('Processing Function: %s' % processing_function)
 						c = self.str_to_class(class_name)
 						fn = c()
-						func = getattr(fn, processing_function)
-						responseParams = func (request, this_page)
+						try:
+							func = getattr(fn, processing_function)
+							responseParams = func (request, permissions[0].page, subdomain)
+						except: 
+							func = getattr(fn, "default_page")
+							responseParams = func (request, permissions[0].page, subdomain)
+
 						lgr.info('Response Params: %s' % str(responseParams)[:100])
 
-						template_file = str(this_page.template.template_file)
-						#template_file = page_name+'.html'
-						page_service = this_page.service
+						template_file = "theme-loader.html"
+						#template_file = str(permissions[0].page.template.template_file)
+						page_service = permissions[0].page.service
 						lgr.info('Template File: %s' % template_file)
 						if 'data_format' in responseParams.keys() and responseParams['data_format'] == 'csv':
 							#Create the HttpResponse object with the appropriate CSV header.
 							response = HttpResponse(content_type='text/csv')
 							if 'data_name' not in responseParams.keys() or responseParams['data_name'] in ['', None]:
-								somefilename = page_name
+								somefilename = page
 							else:
 								somefilename = request.POST['data_name'].replace(" ","_").lower()
 							response['Content-Disposition'] = 'attachment; filename="' + somefilename +'.csv"'
@@ -156,15 +147,21 @@ class UI:
 							return response
 						elif 'redirect_to_url' in responseParams.keys() and responseParams['redirect_to_url'] not in ['',None]:
 							return HttpResponseRedirect(responseParams['redirect_to_url'])
-						else:					
+						else:			
+							host = subdomain  if subdomain else request.get_host()
+							#host = request.get_host()
 							c = {
+								'host': host,
+								'template_file': str(permissions[0].page.template.template_file),
 								'gateway': gateway_path[0].gateway.name, 
 								'color': gateway_path[0].gateway.default_color,
 								'favicon': gateway_path[0].gateway.favicon,
 								'description': gateway_path[0].gateway.description, 
 								'params': responseParams,
-								'service': page_service
+								'service': page_service,
+								'page': page
 								}
+
 							lgr.info(c)
 							def render_enabled(request, template_file, c):
 								response = render(request, template_file, c)

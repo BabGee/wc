@@ -58,7 +58,7 @@
                 protocol="http:"
                 {% endif %}
                 media="{{ MEDIA_URL }}"
-                hostname="{{request.META.HTTP_HOST}}"
+                hostname="{{host}}"
                 channel="1"
                 csrf_token="{{csrf_token}}">
         </pd-config>
@@ -83,7 +83,7 @@
                 {% else %}
                 protocol="http:"
                 {% endif %}
-                hostname="{{request.META.HTTP_HOST}}"
+                hostname="{{host}}"
                 channel="1"
                 static="{{ STATIC_URL }}"
                 media="{{ MEDIA_URL }}">

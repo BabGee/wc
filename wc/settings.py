@@ -34,10 +34,12 @@ SECURE_SSL_REDIRECT=True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_HTTPONLY = True
 
-ALLOWED_HOSTS = [
-		'.mipay.club', '.regix.org','.nikobizz.com','69.64.68.226','.muziqbit.com','.shikangoma.com','.mamtag.com','.heri.shop',
-		'.gus.gs', '.mipaymobile.com','.bidfatherafrica.com','.bidfather.com','.mchaama.com','.gomipay.com','.sortika.com',
-		]
+#ALLOWED_HOSTS = [
+#		'.mipay.club', '.regix.org','.nikobizz.com','69.64.68.226','.muziqbit.com','.shikangoma.com','.mamtag.com','.heri.shop','.interintel.co',
+#		'.gus.gs', '.mipaymobile.com','.bidfatherafrica.com','.bidfather.com','.ichaama.com','.mchaama.com','.gomipay.com','.sortika.com',
+#		]
+
+ALLOWED_HOSTS = ['*']
 
 GEOIP_PATH = '/usr/share/GeoIP'
 '''

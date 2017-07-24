@@ -9,12 +9,11 @@
     <script src="{% static 'polymer_dashboard2/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'polymer_dashboard2/app/components/bundle.js' %}"></script>
-    <link rel="import" href="{% static 'polymer_dashboard2/app/src/elements/landing-page.html' %}">
+    <link rel="import" href="{% static 'polymer_dashboard2/app/src/elements/shop-page.html' %}">
     <link rel="import" href="{% static 'polymer_dashboard2/app/src/elements2/service-dialog.html' %}">
-    <link rel="import" href="{% static 'polymer_dashboard2/app/src/elements2/service-dialog2.html' %}">
     <link rel="import" href="{% static 'polymer_dashboard2/app/src/elements2/pd-config.html' %}">
+    <!-- <link rel="import" href="../mqtt-element/mqtt-client.html"  -->
     <link rel="import" href="{% static 'polymer_dashboard2/app/src/mqtt-element/mqtt-client.html' %}">
-
 
     <style is="custom-style">
         :root {
@@ -90,6 +89,7 @@
 
         body {
         background: var(--app-background-image);
+        background: #fff !important;
         max-width: 100%;
         overflow-x: hidden;
 }
@@ -114,8 +114,7 @@
         csrf_token="{{csrf_token}}"></pd-config>
 <mqtt-client></mqtt-client>
 
-
-<landing-page
+<shop-page
         csrf_token="{{csrf_token}}"
         {% if request.is_secure %} protocol="https:" {% else %} protocol="http:" {% endif %}
         static="{{ STATIC_URL }}"
@@ -131,7 +130,8 @@
         tagline = "{{params.response.get_gateway_details.tagline}}"
         logo = "{{MEDIA_URL}}{{params.response.get_gateway_details.logo}}">
 
-</landing-page>
+</shop-page>
+
 <service-dialog
         {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
         static="{{ STATIC_URL }}"
@@ -141,13 +141,5 @@
         csrf_token="{{csrf_token}}">
 
 </service-dialog>
-<service-dialog2
-        {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
-        static="{{ STATIC_URL }}"
-        media="{{ MEDIA_URL }}"
-        hostname="{{host}}"
-        channel="1"
-        csrf_token="{{csrf_token}}">
-</service-dialog2>
 </body>
 </html>

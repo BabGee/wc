@@ -5,6 +5,7 @@ from decimal import Decimal, ROUND_DOWN
 import types
 from django.contrib.gis.geoip import GeoIP
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.middleware.csrf import get_token
 from django.http import HttpResponseForbidden
 from django.shortcuts import HttpResponseRedirect, HttpResponse
 import simplejson as json
@@ -114,8 +115,14 @@ class Wrappers(Authorize):
 		def on_site(request, service, payload):
 	                #payload['SERVICE'] = service.command_function
 			payload['CHID'] = '1'
-			payload['gateway_host'] = request.get_host()
-			
+			payload['csrf_token'] = get_token(request)
+
+			#subdomain to use domain gateway_host
+			if 'GATEWAY_HOST' in request.META.keys():
+				payload['gateway_host'] = request.META['GATEWAY_HOST']
+			else:
+				payload['gateway_host'] = request.get_host()
+
 			g = GeoIP()
 			city = g.city(ip_address)
 			lgr.info('City: %s' % city)

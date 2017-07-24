@@ -10,7 +10,7 @@ from processor.views import *
 import simplejson as json
 from django.contrib.gis.geoip import GeoIP
 from datetime import datetime
-import base64, os, time
+import base64, os, time, random, string
 import urllib, urllib2, pycurl
 from urlparse import urlparse, parse_qs
 
@@ -125,7 +125,12 @@ class Interface(Wrapper):
 					extension = extension_chunks[len(extension_chunks)-1]
 					extension = extension if len(extension)<=4 else str(file_object.content_type).split('/')[1]
 					lgr.info('Extension: %s' % str(extension))
-					filename = "%s_%s" % (timestamp,extension_chunks[0][:50])
+
+		                        chars = string.ascii_letters + string.punctuation + string.digits
+                		        rnd = random.SystemRandom()
+		                        rnd_name = ''.join(rnd.choice(chars) for i in range(4))
+
+					filename = "%s_%s_%s" % (timestamp,rnd_name,extension_chunks[0][:50])
 					filename = "%s.%s" % (base64.urlsafe_b64encode(filename), extension)
 
 					obj = str(file_object.content_type).split("/")[0]

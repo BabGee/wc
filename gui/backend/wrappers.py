@@ -11,425 +11,20 @@ lgr = logging.getLogger('gui')
 
 
 class Home:
-    def forgot_test(self, request, page):
-        payload = request.POST.copy()
-
-        payload = WebService().request_processor(request, page.service, payload)
-        lgr.info('Payload: %s' % payload)
-
-        payload = WebService().response_processor(request, page.service, payload)
-
-        lgr.info('Payload: %s' % payload)
-
-        return payload
-
-    def home(self, request, page):
-        payload = request.POST.copy()
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    #CONTACT GROUP SEND REQUEST
-    def contact_group_send_request(self, request, page):
-        payload = request.POST.copy()
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    #NOTIFICATION PRODUCT SEND REQUEST
-    def notification_product_send_request(self, request, page):
-        payload = request.POST.copy()
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-    
-    #QUICK SEND REQUEST
-    def quick_send_request(self, request, page):
-        payload = request.POST.copy()
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def landing_page(self, request, page):
+    def default_page(self, request, page, subdomain):
         payload = request.GET.copy()
         payload.update(request.POST)
 
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def view_bid_application(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
+	if subdomain:
+		payload['subdomain'] = subdomain
+		payload['trigger'] = "with_subdomain"
 
         payload = WebService().request_processor(request, page.service, payload)
         payload = WebService().response_processor(request, page.service, payload)
 
         return payload
 
-    def selected_bid_requirements(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    #EDIT ENROLLMENT SAVE
-    def edit_enrollment_save(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    #VIEW ACCOUNT
-    def view_account(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    #EDIT ENROLLMENT
-    def edit_enrollment(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    #VIEW ENROLLMENT
-    def view_enrollment(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def approve_bid_application(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def bid_document_form(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def create_bid_document(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def confirm_delete_bid_requirement(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def confirm_delete_bid_document(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def view_edit_bid_requirement(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def view_edit_bid_document(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def edit_bid_document(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def deny_bid_application(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def edit_bid_requirement(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def delete_bid_requirement(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def delete_bid_document(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def view_bid_applications(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    def view_requirement_application(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def requirement_application(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def create_bid_requirement_application(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    def edit_bid_application(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def edit_requirement_application(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def edit_bid(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def view_edit_bid(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def msisdn_validation(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    def view_closed_bid(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def view_delete_bid(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def live_created_bidding(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    def amka_investment(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    def live_selected_bidding(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def created_bid_details(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def selected_bid_details(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def bid_application_details(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    def open_bid_details(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def bid_application(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def bid_requirement(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def report(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def migs_url(self, request, page):
+    def migs_url(self, request, page, subdomain):
         payload = request.GET.copy()
         payload.update(request.POST)
 
@@ -450,7 +45,7 @@ class Home:
 
         return payload
 
-    def email_verification(self, request, page):
+    def email_verification(self, request, page, subdomain):
         payload = request.GET.copy()
         payload.update(request.POST)
         session_id = request.session.get('session_id')
@@ -458,143 +53,23 @@ class Home:
             lgr.info('Logged Out an Active session')
             logout(request)
 
+	if subdomain:
+		payload['subdomain'] = subdomain
+		payload['trigger'] = "with_subdomain"
+
+
         payload = WebService().request_processor(request, page.service, payload)
         payload = WebService().response_processor(request, page.service, payload)
 
         return payload
 
-    def institution_page(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-        lgr.info('Institution Page: %s' % payload)
-
-        return payload
-
-    def forgot_password(self, request, page):
+    def index(self, request, page, subdomain):
         payload = request.POST.copy()
 
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
+	if subdomain:
+		payload['subdomain'] = subdomain
+		payload['trigger'] = "with_subdomain"
 
-        return payload
-
-
-    def sale(self, request, page):
-        params = request.GET.copy()
-        params.update(request.POST)
-
-	payload = {}
-
-	if 'product_item_id' in params.keys():
-		payload['product_item_id'] = params['product_item_id']
-	elif 'item' in params.keys():
-		payload['item'] = params['item']
-		payload['institution_id'] = params['institution_id']
-	else:
-		payload = {}
-
-	if 'quantity' in params.keys():
-		payload['quantity'] = params['quantity']
-	elif 'amount' in params.keys():
-		payload['amount'] = params['amount']
-	else:
-		payload = {}
-		
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    def checkout(self, request, page):
-        params = request.GET.copy()
-        params.update(request.POST)
-
-	payload = {}
-
-	payload['reference'] = params['reference']
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-    def sale_payment(self, request, page):
-        params = request.GET.copy()
-        params.update(request.POST)
-
-	payload = {}
-
-	#payload['trigger'] = 'sale_payment'
-
-
-	payload['payment_method'] = params['payment_method']
-
-	if 'product_item_id' in params.keys():
-		payload['product_item_id'] = params['product_item_id']
-	elif 'item' in params.keys():
-		payload['item'] = params['item']
-		payload['institution_id'] = params['institution_id']
-	else:
-		payload = {}
-
-	if 'quantity' in params.keys():
-		payload['quantity'] = params['quantity']
-	elif 'amount' in params.keys():
-		payload['amount'] = params['amount']
-	else:
-		payload = {}
-
-	if 'email' in params.keys():
-		payload['email'] = params['email']
-
-	if 'msisdn' in params.keys():
-		payload['msisdn'] = params['msisdn']
-		
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    def checkout_payment(self, request, page):
-        params = request.GET.copy()
-        params.update(request.POST)
-
-	payload = {}
-
-	#payload['trigger'] = 'checkout_payment'
-
-	payload['payment_method'] = params['payment_method']
-	payload['reference'] = params['reference']
-
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    def payment(self, request, page):
-        payload = request.GET.copy()
-        payload.update(request.POST)
-
-        payload = WebService().request_processor(request, page.service, payload)
-        payload = WebService().response_processor(request, page.service, payload)
-
-        return payload
-
-
-    def term_url(self, request, page):
-        payload = request.POST.copy()
-
-        return payload
-
-    def home_page(self, request, page):
-        payload = request.POST.copy()
 
         payload = WebService().request_processor(request, page.service, payload)
         payload = WebService().response_processor(request, page.service, payload)
@@ -603,7 +78,7 @@ class Home:
 
 
 class My_Profile:
-    def profile(self, request, page):
+    def profile(self, request, page, subdomain):
         payload = {}
 
         return payload
