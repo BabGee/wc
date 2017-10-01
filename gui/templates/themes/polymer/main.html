@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+    <title>{{params.response.get_gateway_details.name }} | {{params.response.get_gateway_details.tagline}}</title>
+
+
+    {% load staticfiles %}
+    {% load interface_tags %}
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+
+    <link rel="manifest" href="{% static 'polymer/manifest.json' %}">
+    <script src="{% static 'polymer/bower_components/webcomponentsjs/webcomponents-lite.js' %}"></script>
+
+
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'polymer3/src/elements/sections.css' %}">-->
+    <style is="custom-style">
+        :root {
+
+            --app-primary-color: {{params.response.get_gateway_details.primary_color}};
+        --app-secondary-color: {{params.response.get_gateway_details.secondary_color}};
+        --app-accent-color: {{params.response.get_gateway_details.accent_color}};
+        --app-default-color: {{params.response.get_gateway_details.default_color}};
+        --app-background-image:{{params.response.get_gateway_details.background_image}};
+
+        --paper-button-ink-color: var(--app-accent-color);
+        --paper-icon-button-ink-color: var(--app-accent-color);
+        --paper-spinner-color: var(--app-accent-color);
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        color: var(--app-primary-color);
+        }
+
+        paper-fab {
+            color: var(--app-default-color);
+        }
+
+        app-header {
+            background-color: var(--app-default-color);
+        background:{{params.response.get_gateway_details.background_image}};
+        color: var(--app-primary-color);
+        box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+        }
+        @media (max-width:425px){
+            .mobile-mode-main .pd-g {
+                width: 100%;
+            }
+            .mobile-mode-main .pd-g .pd-u-sm-1-2, .mobile-mode-main .pd-g .pd-u-sm-12-24 {
+                width: 100%;
+            }
+            .mobile-mode-main .pd-g .pd-u-sm-1-3, .mobile-mode-main .pd-g .pd-u-sm-8-24 {
+                width: 100%;
+            }
+        }
+
+
+    </style>
+
+
+    <!--<link rel="stylesheet" href="{% static 'polymer_dashboard/app/src/elements/sections.css' %}">-->
+    <link rel="import" href="{% static 'polymer/app/components/pd-data/pd-data.html' %}">
+    <link rel="import" href="{% static 'polymer/app/components/pd-dashboard/pd-dashboard.html' %}">
+    <link rel="import" href="{% static 'polymer/app/src/elements2/service-dialog.html' %}">
+    <link rel="import" href="{% static 'polymer/app/src/elements2/pd-config.html' %}">
+
+</head>
+<body>
+<pd-data id="pd-data"></pd-data>
+<pd-config
+        id="pd-config"
+        {% if request.is_secure %}
+        protocol="https:"
+        {% else %}
+        protocol="http:"
+        {% endif %}
+        media="{{ MEDIA_URL }}"
+        hostname="{{host}}"
+        channel="1"
+        csrf_token="{{csrf_token}}"></pd-config>
+
+
+<pd-dashboard
+        payloadjson="{{params|jsonify}}">
+</pd-dashboard>
+
+<service-dialog
+        {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
+        static="{{ STATIC_URL }}"
+        media="{{ MEDIA_URL }}"
+        hostname="{{host}}"
+        channel="1"
+        csrf_token="{{csrf_token}}">
+
+</service-dialog>
+
+
+</body>

@@ -70,10 +70,10 @@ class UI:
                 logout(request)
 
 	def request_processor(self, request, SERVICE):
-		lgr.info("Request: %s" % str(request)[:100])
+		#lgr.info("Request: %s" % str(request)[:100])
 		if request.is_ajax and request.method == 'POST':
 			try:
-				lgr.info('Request Processor: %s' % request.META)
+				#lgr.info('Request Processor: %s' % request.META)
 				payload = request.POST.copy()
 				payload = WebService().request_processor(request,SERVICE, payload)
 				payload = WebService().response_processor(request, SERVICE, payload)
@@ -98,8 +98,8 @@ class UI:
 	def pages(self, request, page, subdomain=None):
 		responseParams = {'response_status':'30',}
 		try:
-			lgr.info('Request Host: %s' % request.get_host())
-			lgr.info('Sub-domain %s' % subdomain)
+			#lgr.info('Request Host: %s' % request.get_host())
+			#lgr.info('Sub-domain %s' % subdomain)
 			gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
 			if gateway_path.exists():
 
@@ -111,9 +111,9 @@ class UI:
 				if permissions.exists():
 					try:
 						class_name = str(permissions[0].page.module.display_name.replace(" ","_").title())
-						lgr.info('Class Name: %s' % class_name)
+						#lgr.info('Class Name: %s' % class_name)
 						processing_function = page.lower().replace(" ","_")
-						lgr.info('Processing Function: %s' % processing_function)
+						#lgr.info('Processing Function: %s' % processing_function)
 						c = self.str_to_class(class_name)
 						fn = c()
 						try:
@@ -123,12 +123,12 @@ class UI:
 							func = getattr(fn, "default_page")
 							responseParams = func (request, permissions[0].page, subdomain)
 
-						lgr.info('Response Params: %s' % str(responseParams)[:100])
+						#lgr.info('Response Params: %s' % str(responseParams)[:100])
 
 						template_file = "theme-loader.html"
 						#template_file = str(permissions[0].page.template.template_file)
 						page_service = permissions[0].page.service
-						lgr.info('Template File: %s' % template_file)
+						#lgr.info('Template File: %s' % template_file)
 						if 'data_format' in responseParams.keys() and responseParams['data_format'] == 'csv':
 							#Create the HttpResponse object with the appropriate CSV header.
 							response = HttpResponse(content_type='text/csv')
@@ -162,7 +162,7 @@ class UI:
 								'page': page
 								}
 
-							lgr.info(c)
+							#lgr.info(c)
 							def render_enabled(request, template_file, c):
 								response = render(request, template_file, c)
 								#Added to support cookies on explorer
@@ -179,7 +179,7 @@ class UI:
 								return response
 
 
-							lgr.info('Permission: %s|%s' % (permissions,permissions[0].status.name))
+							#lgr.info('Permission: %s|%s' % (permissions,permissions[0].status.name))
 							if permissions[0].status.name == 'ALLOWED':
 								return render_allowed(request, template_file, c)
 							else:
@@ -187,10 +187,10 @@ class UI:
 									if 'HTTP_REFERER' in request.META.keys():
 										referer = request.META['HTTP_REFERER']
 										referer_name = referer.split("/")[2]
-										lgr.info("Current Site Domain Referer: %s|%s" % (referer, referer_name)) #Referer gives even frame redirecting domains
+										#lgr.info("Current Site Domain Referer: %s|%s" % (referer, referer_name)) #Referer gives even frame redirecting domains
 										referer_host = RefererHost.objects.filter(host=referer_name,permissions=permissions[0],status__name='ALLOWED')
 										if referer_host.exists():
-											lgr.info('Referer Exists')
+											#lgr.info('Referer Exists')
 											return render_allowed(request, template_file, c)
 										else:
 											return render_enabled(request, template_file, c)

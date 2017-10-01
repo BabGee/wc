@@ -110,18 +110,17 @@ class Wrappers(Authorize):
 		#ip_address = request.META.get('REMOTE_ADDR')
 		ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
 
+		#subdomain to use domain gateway_host
+		if 'GATEWAY_HOST' in request.META.keys():
+			payload['gateway_host'] = request.META['GATEWAY_HOST']
+		else:
+			payload['gateway_host'] = request.get_host()
 
 		@csrf_protect		
 		def on_site(request, service, payload):
 	                #payload['SERVICE'] = service.command_function
 			payload['CHID'] = '1'
 			payload['csrf_token'] = get_token(request)
-
-			#subdomain to use domain gateway_host
-			if 'GATEWAY_HOST' in request.META.keys():
-				payload['gateway_host'] = request.META['GATEWAY_HOST']
-			else:
-				payload['gateway_host'] = request.get_host()
 
 			g = GeoIP()
 			city = g.city(ip_address)

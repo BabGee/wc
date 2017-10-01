@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+    <title>{{params.response.get_gateway_details.name }} | {{params.response.get_gateway_details.tagline}}</title>
+
+
+    {% load staticfiles %}
+    {% load interface_tags %}
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+
+    <link rel="manifest" href="{% static 'polymer2.0/manifest.json' %}">
+    <script src="{% static 'polymer2.0/bower_components/webcomponentsjs/webcomponents-loader.js' %}"></script>
+
+   <link rel="import"  href="{% static 'polymer2.0/app/components/pd-styles/main-styles.html' %}">
+
+
+
+    <custom-style>
+        <style include="main-styles">
+
+
+
+            :host > * {
+
+            --app-primary-color: #fcfcfc;
+        --app-secondary-color: #eb2027;
+        --app-accent-color: rgba(38,0,0,0.9);
+        --app-default-color: #FF0000;
+        --app-background-image:radial-gradient(ellipse farthest-corner at 50% 100%,rgb(213, 213, 213) 10%,#ff0000 60%,rgb(213, 213, 213) 90%);
+
+        --paper-button-ink-color: var(--app-accent-color);
+        --paper-icon-button-ink-color: var(--app-accent-color);
+        --paper-spinner-color: var(--app-accent-color);
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        color: var(--app-primary-color);
+        }
+
+        paper-fab {
+            color: var(--app-default-color);
+        }
+
+        app-header {
+            background-color: var(--app-default-color);
+        background:radial-gradient(ellipse farthest-corner at 50% 100%,rgb(213, 213, 213) 10%,#ff0000 60%,rgb(213, 213, 213) 90%);
+        color: var(--app-primary-color);
+        box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+        }
+        @media (max-width:425px){
+            .mobile-mode-main .pd-g {
+                width: 100%;
+            }
+            .mobile-mode-main .pd-g .pd-u-sm-1-2, .mobile-mode-main .pd-g .pd-u-sm-12-24 {
+                width: 100%;
+            }
+            .mobile-mode-main .pd-g .pd-u-sm-1-3, .mobile-mode-main .pd-g .pd-u-sm-8-24 {
+                width: 100%;
+            }
+        }
+
+
+    </style>
+    </custom-style>
+    
+
+    <link rel="import" href="{% static 'polymer2.0/app/components/pd-dashboard/pd-dashboard.html' %}">
+    <link rel="import" href="{% static 'polymer2.0/app/src/elements2/service-dialog.html' %}">
+    <link rel="import" href="{% static 'polymer2.0/app/src/elements2/pd-config.html' %}">
+
+
+</head>
+<body>
+
+
+<pd-config
+        id="pd-config"
+        {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
+        static="{{ STATIC_URL }}"
+        media="{{ MEDIA_URL }}"
+        hostname="{{request.META.HTTP_HOST}}"
+        channel="1"
+        csrf_token="{{csrf_token}}">
+</pd-config>
+
+<pd-dashboard
+        {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
+        static="{{ STATIC_URL }}"
+        payloadjson="{{params|jsonify}}"
+        media="{{ MEDIA_URL }}"
+        hostname="{{request.META.HTTP_HOST}}"
+        channel="1"
+        csrf_token="{{csrf_token}}">
+</pd-dashboard>
+
+
+<service-dialog
+        {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
+        static="{{ STATIC_URL }}"
+        media="{{ MEDIA_URL }}"
+        hostname="{{request.META.HTTP_HOST}}"
+        channel="1"
+        csrf_token="{{csrf_token}}">
+</service-dialog>
+
+
+
+
+</body>
