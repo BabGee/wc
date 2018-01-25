@@ -4,7 +4,7 @@ from django.forms.widgets import TextInput, Textarea
 from django import forms
 
 class GatewayAdmin(admin.ModelAdmin):
-	list_display = ('name', 'favicon','description', 'date_modified', 'date_created')
+	list_display = ('id','name','favicon','description','date_modified','date_created')
 admin.site.register(Gateway, GatewayAdmin)
 
 class GatewayHostStatusAdmin(admin.ModelAdmin):

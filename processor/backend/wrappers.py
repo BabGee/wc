@@ -111,8 +111,8 @@ class Wrappers(Authorize):
 		ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
 
 		#subdomain to use domain gateway_host
-		if 'GATEWAY_HOST' in request.META.keys():
-			payload['gateway_host'] = request.META['GATEWAY_HOST']
+		if 'X-GATEWAY_HOST' in request.META.keys():
+			payload['gateway_host'] = request.META['X-GATEWAY_HOST']
 		else:
 			payload['gateway_host'] = request.get_host()
 

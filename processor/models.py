@@ -29,6 +29,8 @@ class ServiceCommand(models.Model):
 	description = models.CharField(max_length=100)
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)	
+	gateway = models.ForeignKey(Gateway)
 	def __unicode__(self):
-		return u'%s %s' % (self.command_function, self.status.name)
+		return u'%s %s %s' % (self.command_function, self.status.name, self.gateway)
+
 

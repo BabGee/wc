@@ -14,10 +14,12 @@
 
 
     <script src="{% static 'polymer2.0/bower_components/webcomponentsjs/webcomponents-loader.js' %}"></script>
-    <link rel="import" href="{% static 'polymer2.0/app/components/pd-styles/main-styles.html' %}">
+    <!--<link rel="import" href="{% static 'polymer2.0/app/components/pd-styles/main-styles.html' %}">-->
+	<link rel="import"  href="{% static 'polymer2.0/themes/furniture/section-page.html' %}">
+
 
 	<custom-style>
-		<style include="main-styles">
+		<style include="section-styles">
 
 			:host > * {
 
@@ -34,21 +36,27 @@
                 color: var(--app-primary-color);
 
             }
-
-			input{ color: {{params.response.get_gateway_details.default_color}} !important;}
 	</style>
 	</custom-style>
-
-
-
-<link rel="import" href="{% static 'polymer2.0/app/components/pd-dashboard/pd-dashboard.html' %}">
-<link rel="import" href="{% static 'polymer2.0/app/src/elements2/service-dialog.html' %}">
-<link rel="import" href="{% static 'polymer2.0/app/src/elements/section-page.html' %}">
-<link rel="import" href="{% static 'polymer2.0/app/src/elements2/pd-config.html' %}">
 
 </head>
 <body>
 
+<switch-config
+		id="switch-config"
+
+		primary_color="{{params.response.get_gateway_details.primary_color}}";
+		secondary_color="{{params.response.get_gateway_details.secondary_color}}";
+		accent_color="{{params.response.get_gateway_details.accent_color}}";
+		default_color="{{params.response.get_gateway_details.default_color}}";
+
+		{% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
+		static="{{ STATIC_URL }}"
+		media="{{ MEDIA_URL }}"
+		hostname="{{request.META.HTTP_HOST}}"
+		channel="1"
+		csrf_token="{{csrf_token}}">
+</switch-config>
 {% for k,v in params.response.get_section.this_page_inputs.items %}
 {% for k0,v0 in v.items %}
 {% if k0 != 'section_var' %}
@@ -61,17 +69,7 @@
 <section-page
 		size="{{v3.input_var.7}}"
 		payloadjson="{{params|jsonify}}"
-		csrf_token="{{csrf_token}}"
-		{% if request.is_secure %}
-		protocol="https:"
-		{% else %}
-		protocol="http:"
-		{% endif %}
-		params="{{params|paramify}}"
-		hostname="{{host}}"
-		channel="1"
-		static="{{ STATIC_URL }}"
-		media="{{ MEDIA_URL }}">
+		params="{{params|paramify}}">
 
 </section-page>
 
@@ -88,35 +86,5 @@
 {% endfor %}
 
 
-
-<service-dialog
-
-		csrf_token="{{csrf_token}}"
-		{% if request.is_secure %}
-		protocol="https:"
-		{% else %}
-		protocol="http:"
-		{% endif %}
-		hostname="{{host}}"
-		channel="1"
-		static="{{ STATIC_URL }}"
-		media="{{ MEDIA_URL }}">
-
-</service-dialog>
-
-
-
-<pd-config
-		id="pd-config"
-		{% if request.is_secure %}
-		protocol="https:"
-		{% else %}
-		protocol="http:"
-		{% endif %}
-		media="{{ MEDIA_URL }}"
-		hostname="{{host}}"
-		channel="1"
-		csrf_token="{{csrf_token}}"></pd-config>
-
-
 </body>
+</html>

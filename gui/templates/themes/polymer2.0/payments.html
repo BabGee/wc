@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="{{favicon}}">
+	<title>{{params.response.get_gateway_details.name }} | {{params.response.get_gateway_details.tagline}}</title>
+
+    {% load staticfiles %}
+    {% load interface_tags %}
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="{% static 'polymer/app/manifest.json' %}">
+
+
+    <script src="{% static 'polymer2.0/bower_components/webcomponentsjs/webcomponents-loader.js' %}"></script>
+    <link rel="import"  href="{% static 'polymer2.0/themes/furniture/payments-page.html' %}">
+
+
+    <style  is="payments-styles">
+        :host > * {
+
+            --app-primary-color: {{params.response.get_gateway_details.primary_color}};
+        --app-secondary-color: {{params.response.get_gateway_details.secondary_color}};
+        --app-accent-color: {{params.response.get_gateway_details.accent_color}};
+        --app-default-color: {{params.response.get_gateway_details.default_color}};
+        --app-background-image:{{params.response.get_gateway_details.background_image}};
+
+        --paper-button-ink-color: var(--app-accent-color);
+        --paper-icon-button-ink-color: var(--app-accent-color);
+        --paper-spinner-color: var(--app-accent-color);
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        color: var(--app-primary-color);
+
+        }
+        </style>
+
+</head>
+
+<body>
+<switch-config
+        id="switch-config"
+
+        primary_color="{{params.response.get_gateway_details.primary_color}}";
+        secondary_color="{{params.response.get_gateway_details.secondary_color}}";
+        accent_color="{{params.response.get_gateway_details.accent_color}}";
+        default_color="{{params.response.get_gateway_details.default_color}}";
+
+        {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
+        static="{{ STATIC_URL }}"
+        media="{{ MEDIA_URL }}"
+        hostname="{{request.META.HTTP_HOST}}"
+        channel="1"
+        csrf_token="{{csrf_token}}">
+</switch-config>
+<payments-page
+    params="{{params|paramify}}"
+    page="{{params.response.get_interface.this_page_inputs|jsonify}}"
+    payloadjson="{{params|jsonify}}"
+    color="{{params.response.get_gateway_details.default_color}}"
+    name = "{{params.response.get_gateway_details.name}}"
+    tagline = "{{params.response.get_gateway_details.tagline}}"
+    logo = "{{MEDIA_URL}}{{params.response.get_gateway_details.logo}}">
+
+</payments-page>
+
+</body>
+</html>

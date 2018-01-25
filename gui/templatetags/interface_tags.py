@@ -44,7 +44,7 @@ def paramify(payload):
 	params = {}
 	if isinstance(payload, dict):
 		for key, value in payload.items():
-			if key <> 'response' and key <> 'response_status':
+			if key <> 'response' and key <> 'action_id' and key <> 'last_response' and key <> 'response_status' and key <> 'overall_status':
 				params[key] = value
 					
 	return json.dumps(params)

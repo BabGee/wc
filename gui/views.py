@@ -52,13 +52,25 @@ class UI:
 
 		session_id = request.session.get('session_id')
 
-		gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
+		if 'X-GATEWAY_HOST' in request.META.keys():
+			gateway_path = GatewayHost.objects.filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
+		else:
+			gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
+
+		lgr.info('Gateway Path: %s' % gateway_path)
 		if gateway_path.exists():
 			active_session = True if session_id is not None else False
-			initial_page = InitialPage.objects.filter(Q(page__display=True),\
-					 Q(gateway=gateway_path[0].gateway)|Q(gateway=None),\
-					 Q(status__name='ACTIVE'),Q(active_session=active_session))
+			initial_page = InitialPage.objects.filter(page__display=True,gateway=gateway_path[0].gateway,
+					 status__name='ACTIVE',active_session=active_session)
+
+			if 'X-SUBDOMAIN' in request.META.keys():
+				initial_page = initial_page.filter(subdomain=True)
+			else:
+				initial_page = initial_page.filter(subdomain=False)
+		
+
 			if initial_page.exists():
+				lgr.info('Initial Page: %s' % initial_page)
 				return self.pages(request, initial_page[0].page.path)
 			else:
 				return default_initial_page(session_id)
@@ -100,7 +112,14 @@ class UI:
 		try:
 			#lgr.info('Request Host: %s' % request.get_host())
 			#lgr.info('Sub-domain %s' % subdomain)
-			gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
+			lgr.info('Request META: %s' % request.META)
+			if 'X-SUBDOMAIN' in request.META.keys(): subdomain=request.META['X-SUBDOMAIN']
+
+			if 'X-GATEWAY_HOST' in request.META.keys():
+				gateway_path = GatewayHost.objects.filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
+			else:
+				gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
+
 			if gateway_path.exists():
 
 				permissions = Permission.objects.filter(Q(page__path=page), Q(page__display=True),\

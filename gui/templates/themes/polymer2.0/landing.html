@@ -8,19 +8,17 @@
 
     <script src="{% static 'polymer2.0/bower_components/webcomponentsjs/webcomponents-loader.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'polymer2.0/app/components/bundle.js' %}"></script>
-    <link rel="import" href="{% static 'polymer2.0/app/src/mqtt-element/mqtt-client.html' %}">
-    <link rel="import" href="{% static 'polymer2.0/app/components/pd-styles/main-styles.html' %}">
+    <link rel="import" href="{% static 'polymer2.0/themes/furniture/landing-page.html' %}">
 
     <custom-style>
         <style include="main-styles">
             :host > * {
 
-		--app-primary-color: {{params.response.get_gateway_details.primary_color}};
-		--app-secondary-color: {{params.response.get_gateway_details.secondary_color}};
-		--app-accent-color: {{params.response.get_gateway_details.accent_color}};
-		--app-default-color: {{params.response.get_gateway_details.default_color}};
-                 --app-background-image: {{params.response.get_gateway_details.background_image}};
+                --app-primary-color: {{params.response.get_gateway_details.primary_color}};
+                --app-secondary-color: {{params.response.get_gateway_details.secondary_color}};
+                --app-accent-color: {{params.response.get_gateway_details.accent_color}};
+                --app-default-color: {{params.response.get_gateway_details.default_color}};
+                --app-background-image:radial-gradient(ellipse farthest-corner at 50% 100%,rgb(213, 213, 213) 10%,#ff0000 60%,rgb(213, 213, 213) 90%);
 
                 --paper-button-ink-color: var(--app-accent-color);
                 --paper-icon-button-ink-color: var(--app-accent-color);
@@ -29,96 +27,31 @@
                 color: var(--app-primary-color);
             }
 
-        paper-fab {
-            color: var(--app-default-color);
-        }
-        /*
-        app-header {
 
-            background:{{params.response.get_gateway_details.background_image}};
-            color: var(--app-primary-color);
-            box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
-        }
-    */
-
-        app-header {
-            z-index: 9999 !important;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100% !important;
-            color: #fff;
-            background-color: var(--app-default-color);
-
-
-        }
-
-        paper-icon-button {
-            --paper-icon-button-ink-color: white;
-        }
-
-        app-toolbar.tall {
-        }
-
-        app-drawer {
-            --app-drawer-content-container: {
-                background-color: var(--app-default-color);
-                color:black;
-
-            };
-            z-index: 9999 !important;
-        }
-
-        .drawer-contents {
-            height: 100% !important;
-            overflow-y: auto;
-        }
-
-        ul {
-            list-style: none !important;
-            text-align: left;
-        }
-
-        paper-dialog {
-            position: inherit;
-            max-width: 180%;
-        }
-
-        body {
-        background: var(--app-background-image);
-}
-
-        input{    color: {{params.response.get_gateway_details.default_color}} !important;}
-    </style>
+        </style>
     </custom-style>
-
-    <link rel="import" href="{% static 'polymer2.0/app/src/elements/landing-page.html' %}">
-    <link rel="import" href="{% static 'polymer2.0/app/src/elements2/service-dialog.html' %}">
-    <link rel="import" href="{% static 'polymer2.0/app/src/elements2/service-dialog.html' %}">
-    <link rel="import" href="{% static 'polymer2.0/app/src/elements2/pd-config.html' %}">
 
 
 </head>
 <body class="landing">
-<pd-config
-        id="pd-config"
+<switch-config
+        id="switch-config"
+
+        primary_color="{{params.response.get_gateway_details.primary_color}}";
+        secondary_color="{{params.response.get_gateway_details.secondary_color}}";
+        accent_color="{{params.response.get_gateway_details.accent_color}}";
+        default_color="{{params.response.get_gateway_details.default_color}}";
+
         csrf_token="{{csrf_token}}"
         {% if request.is_secure %} protocol="https:" {% else %} protocol="http:" {% endif %}
         static="{{ STATIC_URL }}"
         params="{{params|paramify}}"
         media="{{ MEDIA_URL }}"
         hostname="{{request.META.HTTP_HOST}}"
-        channel="1"></pd-config>
-<mqtt-client></mqtt-client>
+        channel="1"></switch-config>
+
 <landing-page
-        csrf_token="{{csrf_token}}"
-        {% if request.is_secure %} protocol="https:" {% else %} protocol="http:" {% endif %}
-        static="{{ STATIC_URL }}"
         params="{{params|paramify}}"
-        media="{{ MEDIA_URL }}"
-        hostname="{{request.META.HTTP_HOST}}"
-        channel="1"
         page="{{params.response.get_interface.this_page_inputs|jsonify}}"
         payloadjson="{{params|jsonify}}"
         {% if request.session.session_id%} session="true" {% else %} session="false" {% endif %}
@@ -128,21 +61,5 @@
         logo = "{{MEDIA_URL}}{{params.response.get_gateway_details.logo}}">
 
 </landing-page>
-<service-dialog
-        csrf_token="{{csrf_token}}"
-        {% if request.is_secure %} protocol="https:" {% else %} protocol="http:" {% endif %}
-        static="{{ STATIC_URL }}"
-        params="{{params|paramify}}"
-        media="{{ MEDIA_URL }}"
-        hostname="{{request.META.HTTP_HOST}}"
-        channel="1"></service-dialog>
-<service-dialog2
-        csrf_token="{{csrf_token}}"
-        {% if request.is_secure %} protocol="https:" {% else %} protocol="http:" {% endif %}
-        static="{{ STATIC_URL }}"
-        params="{{params|paramify}}"
-        media="{{ MEDIA_URL }}"
-        hostname="{{request.META.HTTP_HOST}}"
-        channel="1"></service-dialog2>
 </body>
 </html>

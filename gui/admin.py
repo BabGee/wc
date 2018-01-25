@@ -23,7 +23,7 @@ class InitialPageStatusAdmin(admin.ModelAdmin):
 admin.site.register(InitialPageStatus, InitialPageStatusAdmin)
 
 class InitialPageAdmin(admin.ModelAdmin):
-	list_display = ('name','page','gateway_list','status','active_session')
+	list_display = ('name','page','gateway','status','active_session','subdomain',)
 admin.site.register(InitialPage, InitialPageAdmin)
 
 

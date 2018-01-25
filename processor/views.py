@@ -16,14 +16,27 @@ class Processor:
 	def action_exec(self, request, function, payload):
 
                 try:
-			service = ServiceCommand.objects.filter(command_function=function)
 
-			if len(service)>0 and service[0].status.name == 'ACTIVE':
-				lgr.info('Enables SWITCH Call')
+			if 'X-GATEWAY_HOST' in request.META.keys():
+				gateway_path = GatewayHost.objects.filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
+			else:
+				gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
+
+
+			lgr.info('Gateway Path: %s' % gateway_path)
+			if gateway_path.exists():
+
+				service = ServiceCommand.objects.filter(Q(command_function=function),\
+							 Q(gateway=None)|Q(gateway=gateway_path[0].gateway))
+			else:
+				service =ServiceCommand.objects.none()
+
+			if service.exists() and service[0].status.name == 'ACTIVE':
+				#lgr.info('Enables SWITCH Call')
 				#lgr.info('Payload: %s' % payload)
 				payload = Wrappers().create_payload(request, service[0], payload)
 
-				#lgr.info('Payload: %s' % payload)
+				lgr.info('Payload: %s' % payload)
 				path = '/%s/' % (service[0].command_function)
 				service_path = urllib.quote(path)
 			
@@ -48,10 +61,10 @@ class Processor:
                 	        response = b.getvalue()
                         	payload = json.loads(response)
 
-				#lgr.info('Payload: %s' % payload)
+				lgr.info('Payload: %s' % payload)
 				payload = Wrappers().create_payload(request, service[0], payload)
 
-				#lgr.info('Payload: %s' % payload)
+				lgr.info('Payload: %s' % payload)
 			else:
 				payload['overall_status'] = 'Service Does not Exist'
 				payload['response_status'] = '96'
