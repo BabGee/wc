@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^processor/', include('processor.urls')),
     url(r'^api/', include('api.urls')),
-    url(r'^', include('gui.urls')),
+    url(r'^', include('gui.urls'))
 
 ]

@@ -8,7 +8,7 @@ urlpatterns = [
 	url(r'^cybersource_termurl/$', UI().cybersource_termurl, name='cybersource_termurl'),
 	url(r'^site/(?P<subdomain>[\.\w]{1,100})/$', UI().pages, { 'page': 'site'} ),
 	url(r'^(?P<page>\w{1,30})(?:/(?P<subdomain>[\.\w]{1,100}))?/$', UI().pages ),
-	url(r'^$', UI().home_page, name='home_page'),
+	url(r'^$', UI().home_page, name='home_page')
 ]
 
 #from django.views.generic import RedirectView
