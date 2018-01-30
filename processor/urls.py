@@ -1,13 +1,13 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import *
 from processor.views import *
 
-urlpatterns = patterns('',
+urlpatterns = [
 
 
 	#url(r'^application/$',  Processor().application),
 	#url(r'^contact/$',  Processor().contact),
 
-)
+]
 
 
 
