@@ -62,7 +62,7 @@ class Processor:
                         	payload = json.loads(response)
 
 				lgr.info('Payload: %s' % payload)
-				payload = Wrappers().create_payload(request, service[0], payload)
+				#payload = Wrappers().create_payload(request, service[0], payload)
 
 				lgr.info('Payload: %s' % payload)
 			else:
