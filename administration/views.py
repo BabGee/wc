@@ -14,6 +14,7 @@ class WebService:
 	def response_processor(self, request, service, payload):
 		try:
 			lgr.info('Service: %s' % service)
+			lgr.info('Payload: %s' % payload)
 
 			if payload['response_status'] == '00' and service in ['LOGIN','SET PASSWORD']:
 				lgr.info('Succesful Response Status')
@@ -24,7 +25,7 @@ class WebService:
 				if 'session' in payload['response'].keys():
 					request.session['session_id'] = payload['response']['session']
 
-			else:
+			elif payload['response_status'] <> '00':
 				lgr.info('Failed Transaction')
 
 			#remove secure data
