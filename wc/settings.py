@@ -15,6 +15,36 @@ import psycopg2
 #from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+import ConfigParser
+
+cf = ConfigParser.ConfigParser()
+cf.read('wc/conf/wc.properties')
+
+#print cf._sections
+
+
+conf_products = cf.get('INSTALLED_APPS','products')
+products=conf_products.split(",")
+
+conf_thirdparty = cf.get('INSTALLED_APPS','thirdparty')
+thirdparty=conf_thirdparty.split(",")
+
+
+dbengine = cf.get('DATABASES','default_dbengine')
+dbname = cf.get('DATABASES','default_dbname')
+dbuser = cf.get('DATABASES','default_dbuser')
+dbpassword = cf.get('DATABASES','default_dbpassword')
+dbhost = cf.get('DATABASES','default_dbhost')
+dbport = cf.get('DATABASES','default_dbport')
+
+conf_hosts = cf.get('ALLOWED_HOSTS','hosts')
+hosts = conf_hosts.split(",")
+
+installed_apps = products+thirdparty
+installed_apps = filter(None, installed_apps)
+
+
 #TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 
@@ -39,7 +69,11 @@ SESSION_COOKIE_HTTPONLY = True
 #		'.gus.gs', '.mipaymobile.com','.bidfatherafrica.com','.bidfather.com','.ichaama.com','.mchaama.com','.gomipay.com','.sortika.com',
 #		]
 
-ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = hosts
+
+
 
 GEOIP_PATH = '/usr/share/GeoIP'
 '''
@@ -128,16 +162,20 @@ WSGI_APPLICATION = 'wc.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'wc',
-	'USER': 'wc',
-	'PASSWORD':'wc',
-	'HOST': '192.168.137.5',
-	'PORT':'',
+        'ENGINE': dbengine, # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': dbname,                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': dbuser,
+        'PASSWORD': dbpassword,
+        'HOST': dbhost,                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': dbport,                      # Set to empty string for default.
+        #'CONN_MAX_AGE': '600',
     }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

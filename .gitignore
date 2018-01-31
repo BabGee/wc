@@ -3,6 +3,20 @@ gui/static/
 wc/media/
 
 
+*.sw[nop]
+switch/media.bkp/
+.idea/
+
+wc/conf/wc.properties
+
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+
+test
+
+a
+
 
 
 # Created by .ignore support plugin (hsz.mobi)
