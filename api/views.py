@@ -14,7 +14,6 @@ import base64, os, time, random, string
 import urllib, urllib2, pycurl
 from urlparse import urlparse, parse_qs
 from io import BytesIO
-from reportlab.pdfgen import canvas
 
 from django.http import Http404, StreamingHttpResponse
 import logging
@@ -49,14 +48,15 @@ class Wrapper:
 
                 return data
 
-
-from reportlab.pdfgen.canvas import Canvas
-from reportlab.platypus import Table
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.units import cm
-from reportlab.lib.pagesizes import A4, inch, landscape, letter
-
 class PDFGenerator:
+
+	from reportlab.pdfgen import canvas
+	from reportlab.pdfgen.canvas import Canvas
+	from reportlab.platypus import Table
+	from reportlab.lib.pagesizes import A4
+	from reportlab.lib.units import cm
+	from reportlab.lib.pagesizes import A4, inch, landscape, letter
+
 	def draw_header(self, canvas):
 		""" Draws the invoice header """
 		canvas.setStrokeColorRGB(0.9, 0.5, 0.2)

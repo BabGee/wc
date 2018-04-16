@@ -17,7 +17,8 @@
     <script src="{% static 'polymer2.0/bower_components/webcomponentsjs/webcomponents-loader.js' %}"></script>
 
    <link rel="import"  href="{% static 'polymer2.0/themes/furniture/service-page.html' %}">
-    <link rel="import" href="{% static 'polymer2.0/core/network/switch-mqtt.html' %}">
+    <!--<link rel="import" href="{% static 'polymer2.0/core/network/switch-mqtt.html' %}">-->
+
 
 
 
@@ -61,13 +62,15 @@
         channel="1"
         csrf_token="{{csrf_token}}">
 </switch-config>
-<switch-mqtt></switch-mqtt>
+
+<!--<switch-mqtt></switch-mqtt>-->
 
 <service-page
         id="full"
         payloadjson="{{params|jsonify}}">
 </service-page>
 
+<link rel="import" href="{% static 'polymer2.0/core/adaptive-ui.html' %}">
 
 </body>
 </html>
