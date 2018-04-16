@@ -49,7 +49,7 @@ class Wrapper:
                 return data
 
 
-class Interface(Wrapper, PDFGenerator):
+class Interface(Wrapper):
 	def facebook(self, request, names):
 		try:
 
