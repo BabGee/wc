@@ -15,13 +15,8 @@
 
     <link rel="manifest" href="{% static 'polymer2.0/manifest.json' %}">
     <script src="{% static 'polymer2.0/bower_components/webcomponentsjs/webcomponents-loader.js' %}"></script>
-
-   <link rel="import"  href="{% static 'polymer2.0/themes/furniture/service-page.html' %}">
+    <link rel="import"  href="{% static 'polymer2.0/themes/furniture/service-page.html' %}">
     <!--<link rel="import" href="{% static 'polymer2.0/core/network/switch-mqtt.html' %}">-->
-
-
-
-
 
     <custom-style>
         <style include="main-styles">
@@ -63,14 +58,26 @@
         csrf_token="{{csrf_token}}">
 </switch-config>
 
-<!--<switch-mqtt></switch-mqtt>-->
-
 <service-page
         id="full"
+
+        primary_color="{{params.response.get_gateway_details.primary_color}}"
+        secondary_color="{{params.response.get_gateway_details.secondary_color}}"
+        accent_color="{{params.response.get_gateway_details.accent_color}}"
+        default_color="{{params.response.get_gateway_details.default_color}}"
+        {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
+        static="{{ STATIC_URL }}"
+        media="{{ MEDIA_URL }}"
+        hostname="{{request.META.HTTP_HOST}}"
+        channel="1"
+        csrf_token="{{csrf_token}}"
+
+
         payloadjson="{{params|jsonify}}">
 </service-page>
 
 <link rel="import" href="{% static 'polymer2.0/core/adaptive-ui.html' %}">
+
 
 </body>
 </html>

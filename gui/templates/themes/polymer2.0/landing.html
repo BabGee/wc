@@ -51,6 +51,13 @@
         channel="1"></switch-config>
 
 <landing-page
+
+
+        primary_color="{{params.response.get_gateway_details.primary_color}}";
+        secondary_color="{{params.response.get_gateway_details.secondary_color}}";
+        accent_color="{{params.response.get_gateway_details.accent_color}}";
+        default_color="{{params.response.get_gateway_details.default_color}}";
+
         params="{{params|paramify}}"
         page="{{params.response.get_interface.this_page_inputs|jsonify}}"
         payloadjson="{{params|jsonify}}"
