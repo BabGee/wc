@@ -17,6 +17,10 @@ import psycopg2
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 import ConfigParser
+from keyczar import keyczar
+
+location = '/opt/kz'
+crypter = keyczar.Crypter.Read(location)
 
 cf = ConfigParser.ConfigParser()
 cf.read('wc/conf/wc.properties')
@@ -34,7 +38,9 @@ thirdparty=conf_thirdparty.split(",")
 dbengine = cf.get('DATABASES','default_dbengine')
 dbname = cf.get('DATABASES','default_dbname')
 dbuser = cf.get('DATABASES','default_dbuser')
+dbuser = crypter.Decrypt(dbuser)
 dbpassword = cf.get('DATABASES','default_dbpassword')
+dbpassword = crypter.Decrypt(dbpassword)
 dbhost = cf.get('DATABASES','default_dbhost')
 dbport = cf.get('DATABASES','default_dbport')
 
