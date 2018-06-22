@@ -16,7 +16,7 @@ class WebService:
 			lgr.info('Service: %s' % service)
 			lgr.info('Payload: %s' % payload)
 
-			if payload['response_status'] == '00' and service in ['LOGIN','SET PASSWORD','CONFIRM ONE TIME PASSWORD']:
+			if payload['response_status'] == '00' and service in ['LOGIN','SET PASSWORD','CONFIRM ONE TIME PASSWORD','CONFIRM ONE TIME PIN']:
 				lgr.info('Succesful Response Status')
 				if 'login' in payload['response'].keys():
 					request.session['api_key'] = payload['response']['login']['api_key']
