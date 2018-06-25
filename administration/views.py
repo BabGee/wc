@@ -16,7 +16,7 @@ class WebService:
 			lgr.info('Service: %s' % service)
 			lgr.info('Payload: %s' % payload)
 
-			if payload['response_status'] == '00' and service in ['LOGIN','SET PASSWORD','CONFIRM ONE TIME PASSWORD','CONFIRM ONE TIME PIN']:
+			if payload['response_status'] == '00':
 				lgr.info('Succesful Response Status')
 				if 'login' in payload['response'].keys():
 					request.session['api_key'] = payload['response']['login']['api_key']
@@ -27,6 +27,10 @@ class WebService:
 
 			elif payload['response_status'] <> '00':
 				lgr.info('Failed Transaction')
+
+			if 'response' in payload.keys():
+				if 'logout' in payload['response'].keys() and payload['response']['logout'] == True:
+					logout(request)
 
 			#remove secure data
 			if 'SESSION_ID' in payload.keys():del payload['SESSION_ID']
