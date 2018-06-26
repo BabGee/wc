@@ -28,10 +28,6 @@ class WebService:
 			elif payload['response_status'] <> '00':
 				lgr.info('Failed Transaction')
 
-			if 'response' in payload.keys():
-				if 'logout' in payload['response'].keys() and payload['response']['logout'] == True:
-					logout(request)
-
 			#remove secure data
 			if 'SESSION_ID' in payload.keys():del payload['SESSION_ID']
 			if 'sec_hash' in payload.keys():del payload['sec_hash']
