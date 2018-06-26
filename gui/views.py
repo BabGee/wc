@@ -149,7 +149,7 @@ class UI:
 						page_service = permissions[0].page.service
 						#lgr.info('Template File: %s' % template_file)
 						if 'response' in responseParams.keys() and 'redirect' in responseParams['response'] and responseParams['response']['redirect'] not in ['',None]:
-							return HttpResponseRedirect(responseParams['redirect'])
+							return HttpResponseRedirect(responseParams['response']['redirect'])
 						else:			
 							host = subdomain  if subdomain else request.get_host()
 							#host = request.get_host()
