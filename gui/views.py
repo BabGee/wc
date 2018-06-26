@@ -148,24 +148,8 @@ class UI:
 						#template_file = str(permissions[0].page.template.template_file)
 						page_service = permissions[0].page.service
 						#lgr.info('Template File: %s' % template_file)
-						if 'data_format' in responseParams.keys() and responseParams['data_format'] == 'csv':
-							#Create the HttpResponse object with the appropriate CSV header.
-							response = HttpResponse(content_type='text/csv')
-							if 'data_name' not in responseParams.keys() or responseParams['data_name'] in ['', None]:
-								somefilename = page
-							else:
-								somefilename = request.POST['data_name'].replace(" ","_").lower()
-							response['Content-Disposition'] = 'attachment; filename="' + somefilename +'.csv"'
-
-							writer = csv.writer(response)
-							writer.writerow(responseParams['response']['data_source']['data'].keys())
-
-							report_list = responseParams['response']['data_source']['data']
-							for listing in report_list:
-								writer.writerow(listing)
-							return response
-						elif 'redirect_to_url' in responseParams.keys() and responseParams['redirect_to_url'] not in ['',None]:
-							return HttpResponseRedirect(responseParams['redirect_to_url'])
+						if 'response' in responseParams.keys() and 'redirect' in responseParams['response'] and responseParams['response']['redirect'] not in ['',None]:
+							return HttpResponseRedirect(responseParams['redirect'])
 						else:			
 							host = subdomain  if subdomain else request.get_host()
 							#host = request.get_host()
