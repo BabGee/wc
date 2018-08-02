@@ -1,0 +1,6 @@
+Django==1.11.12
+psycopg2-binary==2.7.4
+python-keyczar==0.716
+django-suit==0.2.26
+pycurl==7.43.0.2
+simplejson==3.13.2
