@@ -208,13 +208,14 @@ class Interface(Wrapper):
 
 
 	@csrf_exempt
-	def interface(self, request, SERVICE):
+	def interface(self, request, SERVICE, data = {}):
 		lgr.info('API Request: %s' % str(request)[:250] )
 		try:
 			if request.method == "POST":
 				try:view_data = request.read(); payload = json.loads(view_data);
 				except:view_data = request.POST.copy();payload = view_data;
-
+				payload.update(data)
+				lgr.info('Payload: %s' % payload)
 				#try:view_data = request.read(); payload.update( json.loads(view_data) )
 				#except:view_data = request.POST.copy();payload.update( view_data )
 				payload = Processor().action_exec(request, SERVICE, payload)

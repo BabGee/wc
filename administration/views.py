@@ -50,12 +50,14 @@ class WebService:
 			import copy
 			req_copy = copy.copy(request)
 
-
 			req_copy.method = "POST"
 			req_copy.POST = request.POST.copy()
+
 			req_copy.POST.update(payload)
 
-			response = Interface().interface(req_copy, service)
+			lgr.info('Req: %s | %s' % (req_copy.POST,payload))
+
+			response = Interface().interface(req_copy, service, payload.dict())
 			if response.status_code == 200:
 				payload = json.loads(response.content)
 			else:
