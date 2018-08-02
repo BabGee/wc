@@ -87,6 +87,12 @@ class UI:
 			try:
 				#lgr.info('Request Processor: %s' % request.META)
 				payload = request.POST.copy()
+
+				if 'X-SUBDOMAIN' in request.META.keys():
+					subdomain=request.META['X-SUBDOMAIN']
+					payload['subdomain'] = subdomain
+					payload['trigger'] = "with_subdomain"
+
 				payload = WebService().request_processor(request,SERVICE, payload)
 				payload = WebService().response_processor(request, SERVICE, payload)
 				json_results = json.dumps(payload)		

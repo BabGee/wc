@@ -17,7 +17,7 @@ class ServiceCommandAdmin(admin.ModelAdmin):
 		list_display = ('id','command_function','node_system', 'status',\
 		 'description', 'gateway')
 		search_fields = ('command_function',)
-		list_filter = ('node_system','gateway',)
+		list_filter = ('node_system__name','gateway__name',)
 admin.site.register(ServiceCommand, ServiceCommandAdmin)
 
 
