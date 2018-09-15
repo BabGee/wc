@@ -150,14 +150,18 @@ class UI:
 							func = getattr(fn, "default_page")
 							responseParams = func (request, permissions[0].page, subdomain)
 
-						#lgr.info('Response Params: %s' % str(responseParams)[:100])
+						#lgr.info('Response Params: %s' % str(responseParams))
 
 						template_file = "theme-loader.html"
 						#template_file = str(permissions[0].page.template.template_file)
 						page_service = permissions[0].page.service
 						#lgr.info('Template File: %s' % template_file)
+
 						if 'response' in responseParams.keys() and 'redirect' in responseParams['response'] and responseParams['response']['redirect'] not in ['',None]:
 							return HttpResponseRedirect(responseParams['response']['redirect'])
+						elif 'manifest' in responseParams.keys() and responseParams['manifest'] not in ['',None]:
+							lgr.info('Manifest Response: %s' % responseParams['manifest'])
+							return HttpResponse(responseParams['manifest'], content_type='application/json')
 						else:			
 							host = subdomain  if subdomain else request.get_host()
 							#host = request.get_host()
