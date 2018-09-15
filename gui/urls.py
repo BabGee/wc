@@ -3,7 +3,7 @@ from django.contrib.auth import views
 from gui.views import *
 
 urlpatterns = [
-        url(r'^GOTO/(?P<SERVICE>[\w\ ]{1,45})/$',  UI().request_processor),
+        url(r'^GOTO/(?P<SERVICE>[\w\-\ ]{1,50})/$',  UI().request_processor),
 	#url(r'^logout(?:/(?P<template_name>[\.\w]{1,100}))?/$', 'django.contrib.auth.views.logout',
         #                          {'next_page': '/'}, name='logout'),
 	#url(r'^logout(?:/(?P<template_name>[\.\w]{1,100}))?/$', views.LogoutView.as_view(next_page='/')),
