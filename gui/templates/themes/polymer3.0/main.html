@@ -18,15 +18,15 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
       a) Add a `basePath` property to the build configuration in your `polymer.json`.
       b) Use the `--base-path` command-line option for `polymer build`.
     -->
-    <base href="/static/polymer3.0/build/es6-bundled-2/">
+    <base href="/static/polymer3.0/build/es6-bundled-42/">
 
     <link rel="icon" href="{% if favicon %}{{favicon}}{% else %}images/favicon.ico{% endif %}">
 
     <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest/">
 
     <!-- See https://goo.gl/qRE0vM -->
-    <meta name="theme-color" content="#3f51b5">
+    <meta name="theme-color" content="{{params.response.get_gateway_details.default_color}}">
 
     <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -63,12 +63,57 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
 <script>if("serviceWorker"in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("service-worker.js",{scope:"/"})})}window.process={env:{NODE_ENV:"production"}};</script>
 
     <!-- Add any global styles for body, document, etc. -->
-    <style>@font-face{font-family:'Pacifico';font-style:normal;font-weight:400;src:local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/Q_Z9mv4hySLTMoMjnk_rCXYhjbSpvc47ee6xR_80Hnw.woff2) format('woff2');font-display:swap;}body{margin:0;font-family:Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;}</style>
+    <style>
+
+      /*! minireset.css v0.0.2 | MIT License | github.com/jgthms/minireset.css */
+      blockquote,body,dd,dl,dt,fieldset,figure,h1,h2,h3,h4,h5,h6,hr,html,iframe,legend,li,ol,p,pre,textarea,ul{margin:0;padding:0}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:400}ul{list-style:none}button,input,select,textarea{margin:0}html{box-sizing:border-box}*{box-sizing:inherit}:after,:before{box-sizing:inherit}audio,embed,img,object,video{height:auto;max-width:100%}iframe{border:0}table{border-collapse:collapse;border-spacing:0}td,th{padding:0;text-align:left}html{background-color:#fff;font-size:14px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;min-width:300px;overflow-x:hidden;overflow-y:scroll;text-rendering:optimizeLegibility}article,aside,figure,footer,header,hgroup,section{display:block}body,button,input,select,textarea{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,pre{-moz-osx-font-smoothing:auto;-webkit-font-smoothing:auto;font-family:Inconsolata,Consolas,Monaco,monospace}body{color:#4a4a4a;font-size:1rem;font-weight:400;line-height:1.5}a{color:#00d1b2;cursor:pointer;text-decoration:none;-webkit-transition:none 86ms ease-out;transition:none 86ms ease-out}a:hover{color:#363636}code{background-color:#f5f5f5;color:#ff3860;font-size:.8em;font-weight:400;padding:.25em .5em .25em}hr{background-color:#dbdbdb;border:none;display:block;height:1px;margin:1.5rem 0}img{max-width:100%}input[type=checkbox],input[type=radio]{vertical-align:baseline}small{font-size:.8em}span{font-style:inherit;font-weight:inherit}strong{color:#363636;font-weight:700}pre{/*background-color:#f5f5f5*/;color:#4a4a4a;/*font-size:.8em*/;white-space:pre;word-wrap:normal}pre code{background:0 0;color:inherit;display:block;/*font-size:1.4em;*/overflow-x:auto;padding:1.25rem 1.5rem}
+
+
+      html {
+        background-color: #fff;
+        font-size: 14px;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        min-width: 300px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        text-rendering: optimizeLegibility;
+
+        --app-default-color: {{params.response.get_gateway_details.default_color}};
+        --app-secondary-color: {{params.response.get_gateway_details.secondary_color}};
+        --app-primary-color: {{params.response.get_gateway_details.primary_color}};
+        --app-accent-color: {{params.response.get_gateway_details.accent_color}};
+
+
+      }
+      html {
+        box-sizing: border-box;
+      }
+      * {
+         box-sizing: inherit;
+      }
+      :after, :before {
+        box-sizing: inherit;
+      }
+
+
+      body::-webkit-scrollbar {
+        width: 10px
+      }
+
+      body::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: rgba(0, 0, 0, 0.2)
+      }
+
+    </style>
   </head>
   <body>
     <adaptive-ui
+            template="service"
+            csrftoken="{{csrf_token}}"
             payloadjson="{{params|jsonify}}"
-            apptitle="Adaptive Ui"></adaptive-ui>
+            apptitle="{{params.response.get_gateway_details.name}}"></adaptive-ui>
     <noscript>
       Please enable JavaScript to view this website.
     </noscript>
@@ -76,9 +121,21 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
     <!-- /static/adaptive-ui-web/ -->
     <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <!-- Built with love using PWA Starter Kit -->
+    <script src="node_modules/web-animations-js/web-animations-next.min.js"></script>
+
     <!-- /static/adaptive-ui-web/ -->
     <script>"use strict";(function(){function a(a,b,c){var d=a;if(d.state=b,d.stateData=c,0<d.onNextStateChange.length){var e=d.onNextStateChange.slice();d.onNextStateChange.length=0;for(var f,g=0,h=e;g<h.length;g++)f=h[g],f()}return d}function b(b){function d(){try{document.head.removeChild(f)}catch(a){}}var e=a(b,"Loading",void 0),f=document.createElement("script");return f.src=b.url,f.onload=function(){var a,b;void 0===q?(a=[],b=void 0):(f=q(),a=f[0],b=f[1]),c(e,a,b),d();var f},f.onerror=function(){g(b,new TypeError("Failed to fetch "+b.url)),d()},document.head.appendChild(f),e}function c(b,c,e){var f=d(b,c),g=f[0],h=f[1];return a(b,"WaitingForTurn",{args:g,deps:h,moduleBody:e})}function d(a,c){for(var e,f=[],g=[],i=0,j=c;i<j.length;i++){if(e=j[i],"exports"===e){f.push(a.exports);continue}if("require"===e){f.push(function(b,c,e){var f=d(a,b),g=f[0],i=f[1];h(i,function(){c&&c.apply(null,g)},e)});continue}if("meta"===e){f.push({url:!0===a.isTopLevel?t:a.url});continue}var l=k(n(a.urlBase,e));f.push(l.exports),g.push(l),"Initialized"===l.state&&b(l)}return[f,g]}function e(b){var c=a(b,"WaitingOnDeps",b.stateData);return h(b.stateData.deps,function(){return f(c)},function(a){return g(c,a)}),c}function f(b){var c=b.stateData;if(null!=c.moduleBody)try{c.moduleBody.apply(null,c.args)}catch(a){return g(b,a)}return a(b,"Executed",void 0)}function g(b,c){return!0===b.isTopLevel&&setTimeout(function(){throw c}),a(b,"Failed",c)}function h(a,b,c){var d=a.shift();return void 0===d?void(b&&b()):"WaitingOnDeps"===d.state?(!1,void h(a,b,c)):void i(d,function(){h(a,b,c)},c)}function i(a,b,c){switch(a.state){case"WaitingForTurn":return e(a),void i(a,b,c);case"Failed":return void(c&&c(a.stateData));case"Executed":return void b();case"Loading":case"WaitingOnDeps":return void a.onNextStateChange.push(function(){return i(a,b,c)});case"Initialized":throw new Error("All dependencies should be loading already before pressureDependencyToExecute is called.");default:throw new Error("Impossible module state: "+a.state);}}function j(a,b){switch(a.state){case"Executed":case"Failed":return void b();default:a.onNextStateChange.push(function(){return j(a,b)});}}function k(a){var b=p[a];return void 0===b&&(b=p[a]={url:a,urlBase:m(a),exports:Object.create(null),state:"Initialized",stateData:void 0,isTopLevel:!1,onNextStateChange:[]}),b}function l(a){return u.href=a,u.href}function m(a){return a=a.split("?")[0],a=a.split("#")[0],a.substring(0,a.lastIndexOf("/")+1)}function n(a,b){return-1===b.indexOf("://")?l(a+b):b}function o(){return document.baseURI||(document.querySelector("base")||window.location).href}var p=Object.create(null),q=void 0,r=0,s=void 0,t=o();window.define=function(a,b){var d=!1;q=function(){return d=!0,q=void 0,[a,b]},setTimeout(function(){if(!1==d){q=void 0;var f=t+"#"+r++,g=k(f);g.isTopLevel=!0;var h=c(g,a,b);s===void 0?e(h):j(k(s),function(){e(h)}),s=f}},0)},window.define._reset=function(){for(var a in p)delete p[a];q=void 0,r=0,s=void 0,t=o()};var u=document.createElement("a")})();</script>
 <script crossorigin="">define(['src/components/adaptive-ui.js']);</script>
+
+
+<!-- Sentry Exception Tracking -->
+<script src="https://cdn.ravenjs.com/3.26.4/raven.min.js" crossorigin="anonymous"></script>
+<script>
+    if (window.process['env']['NODE_ENV'] === 'production1') {
+        Raven.config('https://c1d4eca95ac7417eaa4a09a16b4b2cf9@sentry.io/1272205').install();
+    }
+</script>
+<!-- End Sentry Exception Tracking -->
 
 
 </body></html>
