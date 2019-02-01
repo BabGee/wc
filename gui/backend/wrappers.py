@@ -9,17 +9,20 @@ from gui.models import *
 
 lgr = logging.getLogger('gui')
 
+class responseParam: pass
 
 class Home:
     def manifest(self, request, page, subdomain):
-        payload = request.GET.copy()
-        payload.update(request.POST)
+        params = request.GET.copy()
+        params.update(request.POST)
 
 	if subdomain:
-		payload['subdomain'] = subdomain
-		payload['trigger'] = "with_subdomain"
+		params['subdomain'] = subdomain
+		params['trigger'] = "with_subdomain"
 
-        payload = WebService().request_processor(request, page.service, payload)
+	responseParam.request = params
+
+        payload = WebService().request_processor(request, page.service, params)
         payload = WebService().response_processor(request, page.service, payload)
 
 	if 'response_status' in payload.keys() and payload['response_status'] == '00' and 'response' in payload.keys() and \
@@ -37,12 +40,12 @@ class Home:
 				"background_color": payload['response']['get_gateway_details']['primary_color'],
 				"icons": [
 					{
-						"src": "images/manifest/icon-192x192.png",
+						"src": "/static/polymer3.0/images/manifest/icon-192x192.png",
 						"sizes": "192x192",
 						"type": "image/png"
 					},
 					{
-						"src": "images/manifest/icon-512x512.png",
+						"src": "/static/polymer3.0/images/manifest/icon-512x512.png",
 						"sizes": "512x512",
 						"type": "image/png"
 					}
@@ -54,20 +57,26 @@ class Home:
 
 	lgr.info('Manifest: %s' % payload)
 
-        return payload
+	responseParam.response = payload
+        return responseParam
 
     def default_page(self, request, page, subdomain):
-        payload = request.GET.copy()
-        payload.update(request.POST)
+        params = request.GET.copy()
+        params.update(request.POST)
 
 	if subdomain:
-		payload['subdomain'] = subdomain
-		payload['trigger'] = "with_subdomain"
+		params['subdomain'] = subdomain
+		params['trigger'] = "with_subdomain"
 
-        payload = WebService().request_processor(request, page.service, payload)
+	responseParam.request = params
+        payload = WebService().request_processor(request, page.service, params)
         payload = WebService().response_processor(request, page.service, payload)
 
-        return payload
+
+	responseParam.response = payload
+        return responseParam
+
+
 
     def migs_url(self, request, page, subdomain):
         payload = request.GET.copy()
@@ -88,7 +97,12 @@ class Home:
 
         payload['amount'] = get_amount(payload['vpc_Amount'])
 
-        return payload
+	responseParam.request = payload
+
+	responseParam.response = payload
+        return responseParam
+
+
 
     def email_verification(self, request, page, subdomain):
         payload = request.GET.copy()
@@ -103,27 +117,42 @@ class Home:
 		payload['trigger'] = "with_subdomain"
 
 
+	responseParam.request = payload
         payload = WebService().request_processor(request, page.service, payload)
         payload = WebService().response_processor(request, page.service, payload)
 
-        return payload
+
+	responseParam.response = payload
+        return responseParam
+
+
 
     def index(self, request, page, subdomain):
-        payload = request.POST.copy()
+        params = request.POST.copy()
 
 	if subdomain:
-		payload['subdomain'] = subdomain
-		payload['trigger'] = "with_subdomain"
+		params['subdomain'] = subdomain
+		params['trigger'] = "with_subdomain"
 
 
-        payload = WebService().request_processor(request, page.service, payload)
+	responseParam.request = params
+        payload = WebService().request_processor(request, page.service, params)
         payload = WebService().response_processor(request, page.service, payload)
 
-        return payload
+
+	responseParam.response = payload
+        return responseParam
+
+
 
 
 class My_Profile:
     def profile(self, request, page, subdomain):
         payload = {}
 
-        return payload
+	responseParam.request = payload
+
+	responseParam.response = payload
+        return responseParam
+
+

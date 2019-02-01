@@ -18,9 +18,9 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
       a) Add a `basePath` property to the build configuration in your `polymer.json`.
       b) Use the `--base-path` command-line option for `polymer build`.
     -->
-    <base href="/static/polymer3.0/build/es6-bundled-45/">
+    <base href="/static/polymer3.0/build/es6-unbundled-127/">
 
-    <link rel="icon" href="{% if favicon %}{{favicon}}{% else %}images/favicon.ico{% endif %}">
+    <link rel="icon" href="/media/{% if params.response.get_gateway_details.icon_image %}{{params.response.get_gateway_details.icon_image}}{% else %}upc_institution_icon_image/InterIntel_Icon.png{% endif %}">
 
     <!-- See https://goo.gl/OOhYW5 -->
     <link rel="manifest" href="/manifest/">
@@ -111,8 +111,53 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
     <adaptive-ui
             template="landing"
             csrftoken="{{csrf_token}}"
+            params="{{request|jsonify}}"
             payloadjson="{{params|jsonify}}"
-            apptitle="{{params.response.get_gateway_details.name}}"></adaptive-ui>
+            apptitle="{{params.response.get_gateway_details.name}}">
+        <!--
+      Placeholder Content: This content will be replaced when <start-polymer3>
+      is rendered.
+
+      Placeholder content improves perceived render time and makes sure
+      users with JavaScript disabled will see something helpful.
+    -->
+
+        <style>
+
+            .loader{
+                position: fixed;
+                text-align: center;
+              left: 0px;
+              top: 0px;
+              width: 100%;
+              height: 100%;
+              z-index: 9999;
+            padding-top:10%;
+            color:black;
+              background: {{params.response.get_gateway_details.default_color}};
+            }
+
+
+        </style>
+
+        <div class="loader">
+            <h1 style="font-size: 50px;">{{params.response.get_gateway_details.name}}</h1>
+            <img src="/media/{{params.response.get_gateway_details.logo}}" alt="{{params.response.get_gateway_details.name}}">
+            <p style="font-size: 10px;">Loading ...</p>
+        </div>
+
+
+
+
+        <!--
+    <p id="jsyes"></p>
+    <script type="text/javascript">
+      document.getElementById('jsyes').innerHTML='Loading...'
+    </script>
+        -->
+
+
+    </adaptive-ui>
     <noscript>
       Please enable JavaScript to view this website.
     </noscript>

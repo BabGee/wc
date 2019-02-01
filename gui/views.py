@@ -116,7 +116,6 @@ class UI:
 	    return None
 
 	def pages(self, request, page, subdomain=None):
-		responseParams = {'response_status':'30',}
 		try:
 			#lgr.info('Request Host: %s' % request.get_host())
 			#lgr.info('Sub-domain %s' % subdomain)
@@ -150,18 +149,20 @@ class UI:
 							func = getattr(fn, "default_page")
 							responseParams = func (request, permissions[0].page, subdomain)
 
-						#lgr.info('Response Params: %s' % str(responseParams))
+						#lgr.info('Response Params - Request: %s' % str(responseParams.request))
+
+						#lgr.info('Response Params - Response: %s' % str(responseParams.response))
 
 						template_file = "theme-loader.html"
 						#template_file = str(permissions[0].page.template.template_file)
 						page_service = permissions[0].page.service
 						#lgr.info('Template File: %s' % template_file)
 
-						if 'response' in responseParams.keys() and 'redirect' in responseParams['response'] and responseParams['response']['redirect'] not in ['',None]:
-							return HttpResponseRedirect(responseParams['response']['redirect'])
-						elif 'manifest' in responseParams.keys() and responseParams['manifest'] not in ['',None]:
-							lgr.info('Manifest Response: %s' % responseParams['manifest'])
-							return HttpResponse(responseParams['manifest'], content_type='application/json')
+						if 'response' in responseParams.response.keys() and 'redirect' in responseParams.response['response'] and responseParams.response['response']['redirect'] not in ['',None]:
+							return HttpResponseRedirect(responseParams.response['response']['redirect'])
+						elif 'manifest' in responseParams.response.keys() and responseParams.response['manifest'] not in ['',None]:
+							lgr.info('Manifest Response: %s' % responseParams.response['manifest'])
+							return HttpResponse(responseParams.response['manifest'], content_type='application/json')
 						else:			
 							host = subdomain  if subdomain else request.get_host()
 							#host = request.get_host()
@@ -172,7 +173,8 @@ class UI:
 								'color': gateway_path[0].gateway.default_color,
 								'favicon': gateway_path[0].gateway.favicon,
 								'description': gateway_path[0].gateway.description, 
-								'params': responseParams,
+								'params': responseParams.response,
+								'request': responseParams.request,
 								'service': page_service,
 								'page': page
 								}
