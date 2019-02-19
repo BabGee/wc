@@ -23,7 +23,6 @@ class WebService:
 					if 'status' in payload['response']['login'].keys(): request.session['status'] = payload['response']['login']['status']
 					if 'access_level' in payload['response']['login'].keys(): request.session['access_level'] = payload['response']['login']['access_level']
 				if 'session' in payload['response'].keys(): request.session['session_id'] = payload['response']['session']
-
 			elif payload['response_status'] <> '00':
 				lgr.info('Failed Transaction')
 
