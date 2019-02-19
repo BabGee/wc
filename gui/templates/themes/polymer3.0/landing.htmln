@@ -18,7 +18,7 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
       a) Add a `basePath` property to the build configuration in your `polymer.json`.
       b) Use the `--base-path` command-line option for `polymer build`.
     -->
-    <base href="/static/polymer3.0/build/es6-unbundled-141/">
+    <base href="/static/polymer3.0/build/es6-unbundled-140/">
 
     <link rel="icon" href="/media/{% if params.response.get_gateway_details.icon_image %}{{params.response.get_gateway_details.icon_image}}{% else %}upc_institution_icon_image/InterIntel_Icon.png{% endif %}">
 
@@ -84,7 +84,6 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
         --app-primary-color: {{params.response.get_gateway_details.primary_color}};
         --app-accent-color: {{params.response.get_gateway_details.accent_color}};
 
-
       }
       html {
         box-sizing: border-box;
@@ -110,18 +109,11 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
   </head>
   <body>
     <adaptive-ui
-            template="payments"
-            {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
-            static="{{ STATIC_URL }}"
-            media="{{ MEDIA_URL }}"
-            hostname="{{request.META.HTTP_HOST}}"
-            channel="1"
-            params="{{request|jsonify}}"
-            page="{{params.response.get_interface.this_page_inputs|jsonify}}"
+            template="landing"
             csrftoken="{{csrf_token}}"
+            params="{{request|jsonify}}"
             payloadjson="{{params|jsonify}}"
             apptitle="{{params.response.get_gateway_details.name}}">
-
         <!--
       Placeholder Content: This content will be replaced when <start-polymer3>
       is rendered.
@@ -151,7 +143,7 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
         <div class="loader">
             <h1 style="font-size: 50px;">{{params.response.get_gateway_details.name}}</h1>
             <img src="/static/polymer3.0/images/splash-loader.gif" style="width: 20%" alt="{{params.response.get_gateway_details.name}}">
-            <img src="/media/{{params.response.get_getway_details.logo}}" style="width:10%; display: block; margin: auto;">
+            <img alt="logo" src="/media/{{params.response.get_gateway_details.logo}}" style="width:10%; display:block; margin:auto;">
         </div>
 
 
@@ -163,6 +155,7 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
       document.getElementById('jsyes').innerHTML='Loading...'
     </script>
         -->
+
 
     </adaptive-ui>
     <noscript>
@@ -187,6 +180,5 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
     }
 </script>
 <!-- End Sentry Exception Tracking -->
-
 
 </body></html>
