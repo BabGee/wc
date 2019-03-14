@@ -38,14 +38,15 @@ class Home:
 				"display": "standalone",
 				"theme_color": payload['response']['get_gateway_details']['default_color'],
 				"background_color": payload['response']['get_gateway_details']['primary_color'],
+				"gcm_sender_id": "103953800507",
 				"icons": [
 					{
-						"src": "/static/polymer3.0/images/manifest/icon-192x192.png",
+						"src": "/media/"+payload['response']['get_gateway_details']['logo'],
 						"sizes": "192x192",
 						"type": "image/png"
 					},
 					{
-						"src": "/static/polymer3.0/images/manifest/icon-512x512.png",
+						"src": "/media/"+payload['response']['get_gateway_details']['logo'],
 						"sizes": "512x512",
 						"type": "image/png"
 					}
