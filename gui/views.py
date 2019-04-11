@@ -133,7 +133,7 @@ class UI:
 
 				permissions = Permission.objects.filter(Q(page__path=page), Q(page__display=True),\
 						 Q(gateway=gateway_path[0].gateway)|Q(gateway=None),\
-						 Q(status__name='ENABLED')|Q(status__name='ALLOWED'))
+						 Q(status__name='ENABLED'))
 
 
 				if permissions.exists():
@@ -183,46 +183,71 @@ class UI:
 								}
 
 							#lgr.info(c)
+
+							P3P = 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"'
+
 							def render_enabled(request, template_file, c):
 								response = render(request, template_file, c)
 								#Added to support cookies on explorer
-								response["P3P"] = 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"'
+								response["P3P"] = P3P
+
+								return response
+
+							@csrf_exempt
+							def render_csrf_exempt(request, template_file, c):
+								response = render(request, template_file, c)
+								#Added to support cookies on explorer
+								response["P3P"] = P3P 
 
 								return response
 
 							@xframe_options_exempt
-							def render_allowed(request, template_file, c):
+							def render_xframe_exempt(request, template_file, c):
 								response = render(request, template_file, c)
 								#Added to support cookies on explorer
-								response["P3P"] = 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"'
+								response["P3P"] = P3P 
+
+								return response
+
+							@csrf_exempt
+							@xframe_options_exempt
+							def render_csrf_xframe_exempt(request, template_file, c):
+								response = render(request, template_file, c)
+								#Added to support cookies on explorer
+								response["P3P"] = P3P 
 
 								return response
 
 
-							lgr.info('Permission: %s|%s' % (permissions,permissions[0].status.name))
-							if permissions[0].status.name == 'ALLOWED':
-								lgr.info('Permission ALLOWED')
-								return render_allowed(request, template_file, c)
-							else:
+							csrf_exempted = permissions[0].csrf_exempted
+							xframe_exempted = permissions[0].xframe_exempted
 
-								try:
-									if 'HTTP_REFERER' in request.META.keys():
-										referer = request.META['HTTP_REFERER']
-										referer_name = referer.split("/")[2]
-										lgr.info("Current Site Domain Referer: %s|%s" % (referer, referer_name)) #Referer gives even frame redirecting domains
-										referer_host = RefererHost.objects.filter(host=referer_name,permissions=permissions[0],status__name='ALLOWED')
-										if referer_host.exists():
-											lgr.info('Referer Exists')
-											return render_allowed(request, template_file, c)
-										else:
-											lgr.info('Permission ENABLED referer does not exist')
-											return render_enabled(request, template_file, c)
-									else:
-										lgr.info('Permission ENABLED no referer')
-										return render_enabled(request, template_file, c)
-								except Exception, e:
-									lgr.info("Error Getting Domain: %s" % e)
-									return render_enabled(request, template_file, c)
+							try:
+								if 'HTTP_REFERER' in request.META.keys():
+									referer = request.META['HTTP_REFERER']
+									referer_name = referer.split("/")[2]
+									lgr.info("Current Site Domain Referer: %s|%s" % (referer, referer_name)) #Referer gives even frame redirecting domains
+									referer_host = RefererHost.objects.filter(host=referer_name, permissions=permissions[0],status__name='ENABLED')
+									if referer_host.exists():
+										csrf_exempted = referer_host[0].csrf_exempted
+										xframe_exempted = referer_host[0].xframe_exempted
+
+							except Exception, e: lgr.info("Error Getting Domain: %s" % e)
+
+							if xframe_exempted and csrf_exempted:
+								lgr.info('xframe csrf exempted')
+								return render_csrf_xframe_exempt(request, template_file, c)
+
+							elif xframe_exempted:
+								lgr.info('xframe exempted')
+								return render_xframe_exempt(request, template_file, c)
+
+							elif csrf_exempted:
+								lgr.info('csrf exempted')
+								return render_csrf_exempt(request, template_file, c)
+							else:
+								return render_enabled(request, template_file, c)
+
 					except Exception, e:
 						lgr.info('Error getting page: %s' % e)
 						error = 'Error getting Page'

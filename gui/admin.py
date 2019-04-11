@@ -32,10 +32,10 @@ class PermissionStatusAdmin(admin.ModelAdmin):
 admin.site.register(PermissionStatus, PermissionStatusAdmin)
 
 class PermissionAdmin(admin.ModelAdmin):
-	list_display = ('name','page','gateway_list','status','x_frame_exempted','csrf_exempted',)
+	list_display = ('name','page','gateway_list','status','xframe_exempted','csrf_exempted',)
 admin.site.register(Permission, PermissionAdmin)
 
 class RefererHostAdmin(admin.ModelAdmin):
-	list_display = ('host', 'permissions','status','description','x_frame_exempted','csrf_exempted')
+	list_display = ('host', 'permissions','status','description','xframe_exempted','csrf_exempted')
 admin.site.register(RefererHost, RefererHostAdmin)
 
