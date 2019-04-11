@@ -9,11 +9,13 @@ urlpatterns = [
 	#url(r'^logout(?:/(?P<template_name>[\.\w]{1,100}))?/$', views.LogoutView.as_view(next_page='/')),
 	url(r'^logout/$', views.logout, {'next_page': '/'}),
 	url(r'^cybersource_termurl/$', UI().cybersource_termurl, name='cybersource_termurl'),
-	url(r'^site/(?P<subdomain>[\.\w]{1,100})/$', UI().pages, { 'page': 'site'} ),
-	url(r'^(?P<page>\w{1,30})(?:/(?P<subdomain>[\.\w]{1,100}))?/$', UI().pages ),
+	#url(r'^site/(?P<subdomain>[\.\w]{1,100})/$', UI().pages, { 'page': 'site'} ),
+	url(r'^(?P<page>\w{1,30})(?:/(?P<route>[\-\w]{1,100}))?(?:/(?P<subdomain>[\.\w]{1,100}))?/$', UI().pages ),
+	#url(r'^(?P<page>\w{1,30})(?:/(?P<route>[\-\w]{1,100}))?/$', UI().pages ),
 	url(r'^$', UI().home_page, name='home_page')
 ]
 
+#
 #from django.views.generic import RedirectView
 #url(r'^$', RedirectView.as_view(url='/index/', permanent=False), name='home_page'),
 #url(r'^(?P<page>\w{1,30})/$', UI().pages ),

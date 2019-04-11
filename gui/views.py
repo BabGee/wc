@@ -115,10 +115,12 @@ class UI:
 		    return globals()[s]
 	    return None
 
-	def pages(self, request, page, subdomain=None):
+	def pages(self, request, page, subdomain=None, route=None):
 		try:
 			#lgr.info('Request Host: %s' % request.get_host())
-			#lgr.info('Sub-domain %s' % subdomain)
+			lgr.info('Sub-domain %s' % subdomain)
+
+			lgr.info('Route %s' % route)
 			lgr.info('Request META: %s' % request.META)
 			if 'X-SUBDOMAIN' in request.META.keys(): subdomain=request.META['X-SUBDOMAIN']
 
@@ -167,6 +169,7 @@ class UI:
 							host = subdomain  if subdomain else request.get_host()
 							#host = request.get_host()
 							c = {
+								'route': route,
 								'host': host,
 								'template_file': str(permissions[0].page.template.template_file),
 								'gateway': gateway_path[0].gateway.name, 
@@ -196,22 +199,26 @@ class UI:
 								return response
 
 
-							#lgr.info('Permission: %s|%s' % (permissions,permissions[0].status.name))
+							lgr.info('Permission: %s|%s' % (permissions,permissions[0].status.name))
 							if permissions[0].status.name == 'ALLOWED':
+								lgr.info('Permission ALLOWED')
 								return render_allowed(request, template_file, c)
 							else:
+
 								try:
 									if 'HTTP_REFERER' in request.META.keys():
 										referer = request.META['HTTP_REFERER']
 										referer_name = referer.split("/")[2]
-										#lgr.info("Current Site Domain Referer: %s|%s" % (referer, referer_name)) #Referer gives even frame redirecting domains
+										lgr.info("Current Site Domain Referer: %s|%s" % (referer, referer_name)) #Referer gives even frame redirecting domains
 										referer_host = RefererHost.objects.filter(host=referer_name,permissions=permissions[0],status__name='ALLOWED')
 										if referer_host.exists():
-											#lgr.info('Referer Exists')
+											lgr.info('Referer Exists')
 											return render_allowed(request, template_file, c)
 										else:
+											lgr.info('Permission ENABLED referer does not exist')
 											return render_enabled(request, template_file, c)
 									else:
+										lgr.info('Permission ENABLED no referer')
 										return render_enabled(request, template_file, c)
 								except Exception, e:
 									lgr.info("Error Getting Domain: %s" % e)

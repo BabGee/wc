@@ -71,6 +71,8 @@ class Permission(models.Model):
 	status = models.ForeignKey(PermissionStatus)
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)
+	x_frame_exempted = models.BooleanField(default=False)
+	csrf_exempted = models.BooleanField(default=False)
 	def __unicode__(self):
 		return u'%s' % (self.name)  
 	def gateway_list(self):
@@ -82,7 +84,9 @@ class RefererHost(models.Model):
 	host = models.CharField(max_length=100)
 	permissions = models.ForeignKey(Permission)
 	status = models.ForeignKey(PermissionStatus)
-	description =  models.CharField(max_length=100)		
+	description =  models.CharField(max_length=100)	
+	x_frame_exempted = models.BooleanField(default=False)
+	csrf_exempted = models.BooleanField(default=False)
 	def __unicode__(self):
 		return u'%s' % (self.host)
 

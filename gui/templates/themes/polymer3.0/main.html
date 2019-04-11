@@ -53,6 +53,10 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
     <!-- Default twitter cards -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@username">
+    <meta name="twitter:title" content="{{params.response.get_gateway_details.name }}"/>
+    <meta name="twitter:description" content="{{params.response.get_gateway_details.tagline}}" />
+    <meta name="twitter:image" content="/media/{% if params.response.get_gateway_details.icon_image %}{{params.response.get_gateway_details.icon_image}}{% else %}upc_institution_icon_image/InterIntel_Icon.png{% endif %}" />
+
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="adaptive-ui">
     <meta property="og:image" content="images/manifest/icon-144x144.png">
