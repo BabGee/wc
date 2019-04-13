@@ -17,11 +17,13 @@ from django.contrib.gis.geoip import GeoIP
 from gui.models import *
 from api.models import *
 from django.http import Http404
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_protect, ensure_csrf_cookie, requires_csrf_token
 from django.views.decorators.clickjacking import xframe_options_exempt
+from django.utils.decorators import method_decorator
 
 import logging
 lgr = logging.getLogger('gui')
+
 
 class UI:
 	@csrf_exempt
@@ -115,6 +117,8 @@ class UI:
 		    return globals()[s]
 	    return None
 
+
+	@method_decorator([csrf_exempt, requires_csrf_token])
 	def pages(self, request, page, subdomain=None, route=None):
 		try:
 			#lgr.info('Request Host: %s' % request.get_host())
@@ -138,6 +142,28 @@ class UI:
 
 				if permissions.exists():
 					try:
+
+						csrf_exempted = permissions[0].csrf_exempted
+						xframe_exempted = permissions[0].xframe_exempted
+
+						lgr.info('PERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (permissions[0], csrf_exempted, xframe_exempted))
+						try:
+							if 'HTTP_REFERER' in request.META.keys():
+								referer = request.META['HTTP_REFERER']
+								referer_name = referer.split("/")[2]
+								lgr.info("Current Site Domain Referer: %s|%s" % (referer, referer_name)) #Referer gives even frame redirecting domains
+								referer_host = RefererHost.objects.filter(host=referer_name, permissions=permissions[0],status__name='ENABLED')
+								if referer_host.exists():
+									csrf_exempted = referer_host[0].csrf_exempted
+									xframe_exempted = referer_host[0].xframe_exempted
+
+							lgr.info('PERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (permissions[0], csrf_exempted, xframe_exempted))
+						except Exception, e: lgr.info("Error Getting Domain: %s" % e)
+
+						request.permissions = permissions[0]
+						request.csrf_exempted = csrf_exempted
+						request.xframe_exempted = xframe_exempted
+
 						class_name = str(permissions[0].page.module.display_name.replace(" ","_").title())
 						#lgr.info('Class Name: %s' % class_name)
 						processing_function = page.lower().replace(" ","_")
@@ -184,15 +210,16 @@ class UI:
 
 							#lgr.info(c)
 
+
 							P3P = 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"'
 
+							@csrf_protect
 							def render_enabled(request, template_file, c):
 								response = render(request, template_file, c)
 								#Added to support cookies on explorer
 								response["P3P"] = P3P
 
 								return response
-
 							@csrf_exempt
 							def render_csrf_exempt(request, template_file, c):
 								response = render(request, template_file, c)
@@ -201,6 +228,7 @@ class UI:
 
 								return response
 
+							@csrf_protect
 							@xframe_options_exempt
 							def render_xframe_exempt(request, template_file, c):
 								response = render(request, template_file, c)
@@ -208,7 +236,6 @@ class UI:
 								response["P3P"] = P3P 
 
 								return response
-
 							@csrf_exempt
 							@xframe_options_exempt
 							def render_csrf_xframe_exempt(request, template_file, c):
@@ -219,29 +246,14 @@ class UI:
 								return response
 
 
-							csrf_exempted = permissions[0].csrf_exempted
-							xframe_exempted = permissions[0].xframe_exempted
-
-							try:
-								if 'HTTP_REFERER' in request.META.keys():
-									referer = request.META['HTTP_REFERER']
-									referer_name = referer.split("/")[2]
-									lgr.info("Current Site Domain Referer: %s|%s" % (referer, referer_name)) #Referer gives even frame redirecting domains
-									referer_host = RefererHost.objects.filter(host=referer_name, permissions=permissions[0],status__name='ENABLED')
-									if referer_host.exists():
-										csrf_exempted = referer_host[0].csrf_exempted
-										xframe_exempted = referer_host[0].xframe_exempted
-
-							except Exception, e: lgr.info("Error Getting Domain: %s" % e)
-
 							if xframe_exempted and csrf_exempted:
 								lgr.info('xframe csrf exempted')
-								return render_csrf_xframe_exempt(request, template_file, c)
 
+								return render_csrf_xframe_exempt(request, template_file, c)
+								#return render_enabled(request, template_file, c)
 							elif xframe_exempted:
 								lgr.info('xframe exempted')
 								return render_xframe_exempt(request, template_file, c)
-
 							elif csrf_exempted:
 								lgr.info('csrf exempted')
 								return render_csrf_exempt(request, template_file, c)

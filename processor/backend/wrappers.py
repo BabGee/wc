@@ -116,7 +116,6 @@ class Wrappers(Authorize):
 		else:
 			payload['gateway_host'] = request.get_host()
 
-		@csrf_protect		
 		def on_site(request, service, payload):
 	                #payload['SERVICE'] = service.command_function
 			payload['CHID'] = '1'
@@ -148,23 +147,31 @@ class Wrappers(Authorize):
 				payload = self.check_hash(payload, API_KEY)
 
 			payload = self.hash_payload(payload, API_KEY)
-			return HttpResponse(payload)  
-		try:
-			payload_check = on_site(request, service, payload)
-			if payload_check.status_code == 403:
-				lgr.info('Did Not Pass Onsite Check')
-				if 'ip_address' in payload.keys() and payload['ip_address'] <> ip_address:
-					lgr.info('IP Did not Match. Injecting IP to cause failure. IP ADDRESS: %s' % ip_address)
-					payload['ip_address'] = 'None'
-				if 'ip_address' not in payload.keys():
-					lgr.info('No IP Defined. Injecting IP to cause failure. IP ADDRESS: %s' % ip_address)
-					payload['ip_address'] = 'None'
-			elif payload_check.status_code == 200:
-				lgr.info('Onsite Check Passed')
+			return payload 
 
-				#Payload automaticaly inherits the newly created items by django dict injection
+		@csrf_protect
+		def on_site_protected(request, service, payload):
+			return HttpResponse(on_site(request, service, payload))
+		try:
+			lgr.info('\n\tREQUEST\n\n\nPERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (request.permissions, request.csrf_exempted, request.xframe_exempted))
+			if request.csrf_exempted:
+					payload = on_site(request, service, payload)
+					lgr.info('CSRF Exempted hence no on-site check')
 			else:
-				pass
+
+				payload_check = on_site_protected(request, service, payload)
+				if payload_check.status_code == 403:
+					lgr.info('Did Not Pass Onsite Check')
+					if 'ip_address' in payload.keys() and payload['ip_address'] <> ip_address:
+						lgr.info('IP Did not Match. Injecting IP to cause failure. IP ADDRESS: %s' % ip_address)
+						payload['ip_address'] = 'None'
+					if 'ip_address' not in payload.keys():
+						lgr.info('No IP Defined. Injecting IP to cause failure. IP ADDRESS: %s' % ip_address)
+						payload['ip_address'] = 'None'
+				elif payload_check.status_code == 200:
+					lgr.info('Onsite Check Passed')
+					#Payload automaticaly inherits the newly created items by django dict injection
+				else:pass
 		except Exception, e:
 			lgr.info('Error on Protect: %s ' % e)
 
