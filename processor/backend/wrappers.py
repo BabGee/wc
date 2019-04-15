@@ -153,8 +153,8 @@ class Wrappers(Authorize):
 		def on_site_protected(request, service, payload):
 			return HttpResponse(on_site(request, service, payload))
 		try:
-			lgr.info('\n\tREQUEST\n\n\nPERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (request.permissions, request.csrf_exempted, request.xframe_exempted))
-			if request.csrf_exempted:
+			if hasattr(request, 'csrf_exempted') and request.csrf_exempted:
+					#lgr.info('\n\tREQUEST\n\n\nPERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (request.permissions, request.csrf_exempted, request.xframe_exempted))
 					payload = on_site(request, service, payload)
 					lgr.info('CSRF Exempted hence no on-site check')
 			else:
