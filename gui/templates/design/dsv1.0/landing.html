@@ -18,7 +18,7 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
       a) Add a `basePath` property to the build configuration in your `polymer.json`.
       b) Use the `--base-path` command-line option for `polymer build`.
     -->
-    <base href="/static/polymer3.0/build/es6-unbundled/">
+    <base href="/static/adaptive-ui-web/build/uncompiled-unbundled/">
 
     <link rel="icon" href="/media/{% if params.response.get_gateway_details.icon_image %}{{params.response.get_gateway_details.icon_image}}{% else %}upc_institution_icon_image/InterIntel_Icon.png{% endif %}">
 
@@ -89,7 +89,6 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
         --app-primary-color: {{params.response.get_gateway_details.primary_color}};
         --app-accent-color: {{params.response.get_gateway_details.accent_color}};
 
-
       }
       html {
         box-sizing: border-box;
@@ -115,18 +114,12 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
   </head>
   <body>
     <adaptive-ui
-            template="payments"
-            {% if request.is_secure %}protocol="https:"{% else %}protocol="http:"{% endif %}
-            static="{{ STATIC_URL }}"
-            media="{{ MEDIA_URL }}"
-            hostname="{{request.META.HTTP_HOST}}"
-            channel="1"
-            params="{{request|jsonify}}"
-            page="{{params.response.get_interface.this_page_inputs|jsonify}}"
+            template="landing"
+            path="{{page}}"
             csrftoken="{{csrf_token}}"
+            params="{{request|jsonify}}"
             payloadjson="{{params|jsonify}}"
             apptitle="{{params.response.get_gateway_details.name}}">
-
         <!--
       Placeholder Content: This content will be replaced when <start-polymer3>
       is rendered.
@@ -135,42 +128,245 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
       users with JavaScript disabled will see something helpful.
     -->
 
-        <style>
+    <style>                    
+      header{
+        background-color: var(--app-default-color) ;
+        height:64px;
+        width:100vw;
+      }
 
-            .loader{
-                position: fixed;
-                text-align: center;
-              left: 0px;
-              top: 0px;
-              width: 100%;
-              height: 100%;
-              z-index: 9999;
-            padding-top:10%;
-            color:black;
-              background: {{params.response.get_gateway_details.default_color}};
-            }
+      main{
+        background-color:#dddddd ;
+        height:calc(100vh - 79px - 64px);
+        width:100vw;
+        text-align:center;
+      }
+
+      footer{
+        background-color:#4a4a4a;
+        padding-top:25px;
+        /* text-align:center; */
+        height:79px;
+        font-size: 14.5px;
+        color: white;
+        width:100vw;
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
+
+      #logo {
+          padding-bottom: 19px;
+          max-height: 47px;
+          padding-top: 10px;
+          padding-left: 30px;
+      }
+
+    </style>
+
+    
+</style>
+<style>
+/* https://cloudcannon.com/deconstructions/2014/11/15/facebook-content-placeholder-deconstruction.html */
+
+.timeline-wrapper {
+background-color: #e9eaed;
+color: #141823;
+/* padding: 20px; */
+/* border: 1px solid #ccc; */
+margin: 0; /* auto 1em;*/ 
+}
 
 
-        </style>
+/* A Wrapper */
+.timeline-item {
+background: #fff;
+border: 1px solid;
+border-color: #e5e6e9 #dfe0e4 #d0d1d5;
 
-        <div class="loader">
-            <h1 style="font-size: 50px;">{{params.response.get_gateway_details.name}}</h1>
-            <img src="/static/polymer3.0/images/splash-loader.gif" style="width: 20%" alt="{{params.response.get_gateway_details.name}}">
-            <img src="/media/{{params.response.get_getway_details.logo}}" style="width:10%; display: block; margin: auto;">
+padding: 12px;
+
+margin: 0 auto;
+max-width: 90vw;
+min-height: 30vh;
+}
+
+/* A Fancy Animated Background */
+@keyframes placeHolderShimmer{
+0%{
+  background-position: -468px 0
+}
+100%{
+  background-position: 468px 0
+}
+}
+
+.animated-background {
+animation-duration: 1s;
+animation-fill-mode: forwards;
+animation-iteration-count: infinite;
+animation-name: placeHolderShimmer;
+animation-timing-function: linear;
+background: #f6f7f8;
+background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+background-size: 800px 104px;
+height: 200px;
+position: relative;
+}
+
+
+.aside-animated-background {
+animation-duration: 2s;
+animation-fill-mode: forwards;
+animation-iteration-count: infinite;
+animation-name: placeHolderShimmer;
+animation-timing-function: linear;
+background: #f6f7f8;
+background: linear-gradient(to right, var(--app-default-color) 8%, var(--app-accent-color) 18%, var(--app-default-color) 33%);
+background-size: 800px 104px;
+height: 96px;
+position: relative;
+}
+
+
+
+/* Plenty of Tiny Masking Blocks */
+.background-masker {
+background: #fff;
+position: absolute;
+}
+
+/* Every thing below this is just positioning */
+
+.background-masker.header-top,
+.background-masker.header-bottom,
+.background-masker.subheader-bottom {
+top: 0;
+left: 0;
+right: 0;
+height: 10px;
+}
+
+.background-masker.header-left,
+.background-masker.subheader-left,
+.background-masker.header-right,
+.background-masker.subheader-right {
+top: 0;
+left: 0;
+height: 30px;
+width: 20vw;
+}
+
+.background-masker.element1 {
+top: 30px;
+height: 20px;
+}
+
+.background-masker.element2 {
+top: 110px;
+height: 20px;
+}
+
+.background-masker.subheader-left,
+.background-masker.subheader-right {
+top: 24px;
+height: 6px;
+}
+
+
+.background-masker.header-right,
+.background-masker.subheader-right {
+width: auto;
+left: 50vw;
+right: 0;
+}
+
+.background-masker.subheader-right {
+left: 230px;
+}
+
+.background-masker.subheader-bottom {
+top: 30px;
+height: 10px;
+}
+
+.background-masker.content-top,
+.background-masker.content-second-line,
+.background-masker.content-third-line,
+.background-masker.content-second-end,
+.background-masker.content-third-end,
+.background-masker.content-first-end {
+top: 40px;
+left: 0;
+right: 0;
+height: 6px;
+}
+
+.background-masker.content-top {
+height:20px;
+}
+
+.background-masker.content-first-end,
+.background-masker.content-second-end,
+.background-masker.content-third-end{
+width: auto;
+left: 380px;
+right: 0;
+top: 60px;
+height: 8px;
+}
+
+.background-masker.content-second-line  {
+top: 68px;
+}
+
+.background-masker.content-second-end {
+left: 420px;
+top: 74px;
+}
+
+.background-masker.content-third-line {
+top: 82px;
+}
+
+.background-masker.content-third-end {
+left: 300px;
+top: 88px;
+}
+
+
+</style>
+
+
+
+<header>              
+<img id="logo" alt="logo" src="/media/{{params.response.get_gateway_details.logo}}"> 
+    
+
+</header>
+<main class ="content" style="padding-top: 10px;">
+
+    
+    <div class="timeline-item">
+        <div class="animated-background">
+
+            <div class="background-masker header-bottom element1"></div>
+            <div class="background-masker header-bottom element2"></div>
+
         </div>
+    </div>
 
 
+</main>
 
-
-        <!--
-    <p id="jsyes"></p> -->
+<footer class ="">
+{{params.response.get_gateway_details.name}}, Copyright © 2019.
+</footer>
+       
     <script type="text/javascript">
 window.THEME =
         //'bare';
         //'looper';
         'bulkit';
-
-    </script>
+</script>
 
     </adaptive-ui>
     <noscript>
@@ -184,7 +380,7 @@ window.THEME =
 
     <!-- /static/adaptive-ui-web/ -->
     <script>"use strict";(function(){function a(a,b,c){var d=a;if(d.state=b,d.stateData=c,0<d.onNextStateChange.length){var e=d.onNextStateChange.slice();d.onNextStateChange.length=0;for(var f,g=0,h=e;g<h.length;g++)f=h[g],f()}return d}function b(b){function d(){try{document.head.removeChild(f)}catch(a){}}var e=a(b,"Loading",void 0),f=document.createElement("script");return f.src=b.url,f.onload=function(){var a,b;void 0===q?(a=[],b=void 0):(f=q(),a=f[0],b=f[1]),c(e,a,b),d();var f},f.onerror=function(){g(b,new TypeError("Failed to fetch "+b.url)),d()},document.head.appendChild(f),e}function c(b,c,e){var f=d(b,c),g=f[0],h=f[1];return a(b,"WaitingForTurn",{args:g,deps:h,moduleBody:e})}function d(a,c){for(var e,f=[],g=[],i=0,j=c;i<j.length;i++){if(e=j[i],"exports"===e){f.push(a.exports);continue}if("require"===e){f.push(function(b,c,e){var f=d(a,b),g=f[0],i=f[1];h(i,function(){c&&c.apply(null,g)},e)});continue}if("meta"===e){f.push({url:!0===a.isTopLevel?t:a.url});continue}var l=k(n(a.urlBase,e));f.push(l.exports),g.push(l),"Initialized"===l.state&&b(l)}return[f,g]}function e(b){var c=a(b,"WaitingOnDeps",b.stateData);return h(b.stateData.deps,function(){return f(c)},function(a){return g(c,a)}),c}function f(b){var c=b.stateData;if(null!=c.moduleBody)try{c.moduleBody.apply(null,c.args)}catch(a){return g(b,a)}return a(b,"Executed",void 0)}function g(b,c){return!0===b.isTopLevel&&setTimeout(function(){throw c}),a(b,"Failed",c)}function h(a,b,c){var d=a.shift();return void 0===d?void(b&&b()):"WaitingOnDeps"===d.state?(!1,void h(a,b,c)):void i(d,function(){h(a,b,c)},c)}function i(a,b,c){switch(a.state){case"WaitingForTurn":return e(a),void i(a,b,c);case"Failed":return void(c&&c(a.stateData));case"Executed":return void b();case"Loading":case"WaitingOnDeps":return void a.onNextStateChange.push(function(){return i(a,b,c)});case"Initialized":throw new Error("All dependencies should be loading already before pressureDependencyToExecute is called.");default:throw new Error("Impossible module state: "+a.state);}}function j(a,b){switch(a.state){case"Executed":case"Failed":return void b();default:a.onNextStateChange.push(function(){return j(a,b)});}}function k(a){var b=p[a];return void 0===b&&(b=p[a]={url:a,urlBase:m(a),exports:Object.create(null),state:"Initialized",stateData:void 0,isTopLevel:!1,onNextStateChange:[]}),b}function l(a){return u.href=a,u.href}function m(a){return a=a.split("?")[0],a=a.split("#")[0],a.substring(0,a.lastIndexOf("/")+1)}function n(a,b){return-1===b.indexOf("://")?l(a+b):b}function o(){return document.baseURI||(document.querySelector("base")||window.location).href}var p=Object.create(null),q=void 0,r=0,s=void 0,t=o();window.define=function(a,b){var d=!1;q=function(){return d=!0,q=void 0,[a,b]},setTimeout(function(){if(!1==d){q=void 0;var f=t+"#"+r++,g=k(f);g.isTopLevel=!0;var h=c(g,a,b);s===void 0?e(h):j(k(s),function(){e(h)}),s=f}},0)},window.define._reset=function(){for(var a in p)delete p[a];q=void 0,r=0,s=void 0,t=o()};var u=document.createElement("a")})();</script>
-<script crossorigin="">define(['src/components/adaptive-ui.js']);</script>
+<script type="module" src='src/components/adaptive-ui.js'></script>
 
     <script>
 
@@ -233,6 +429,8 @@ subscribe();
 
     </script>
 
+    <script src="node_modules/jspdf/dist/jspdf.min.js"></script>
+    <script src="node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js"></script>
 
 <!-- Sentry Exception Tracking -->
 <!--<script src="https://cdn.ravenjs.com/3.26.4/raven.min.js" crossorigin="anonymous"></script>-->
@@ -242,6 +440,5 @@ subscribe();
     }
 </script>
 <!-- End Sentry Exception Tracking -->
-
 
 </body></html>

@@ -89,13 +89,13 @@ class UI:
 			try:
 				#lgr.info('Request Processor: %s' % request.META)
 				payload = request.POST.copy()
-				lgr.info('Payload Original: %s' % payload)	
+				#lgr.info('Payload Original: %s' % payload)	
 				if 'X-SUBDOMAIN' in request.META.keys():
 					subdomain=request.META['X-SUBDOMAIN']
 					payload['subdomain'] = subdomain
 					payload['trigger'] = "with_subdomain"
 
-					lgr.info('Subdomain in request:%s | %s' % (subdomain, payload))
+					#lgr.info('Subdomain in request:%s | %s' % (subdomain, payload))
 
 				payload = WebService().request_processor(request,SERVICE, payload)
 				payload = WebService().response_processor(request, SERVICE, payload)
@@ -125,7 +125,7 @@ class UI:
 			lgr.info('Sub-domain %s' % subdomain)
 
 			lgr.info('Route %s' % route)
-			lgr.info('Request META: %s' % request.META)
+			#lgr.info('Request META: %s' % request.META)
 			if 'X-SUBDOMAIN' in request.META.keys(): subdomain=request.META['X-SUBDOMAIN']
 
 			if 'X-GATEWAY_HOST' in request.META.keys():
@@ -146,7 +146,7 @@ class UI:
 						csrf_exempted = permissions[0].csrf_exempted
 						xframe_exempted = permissions[0].xframe_exempted
 
-						lgr.info('PERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (permissions[0], csrf_exempted, xframe_exempted))
+						#lgr.info('PERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (permissions[0], csrf_exempted, xframe_exempted))
 						try:
 							if 'HTTP_REFERER' in request.META.keys():
 								referer = request.META['HTTP_REFERER']
@@ -157,7 +157,7 @@ class UI:
 									csrf_exempted = referer_host[0].csrf_exempted
 									xframe_exempted = referer_host[0].xframe_exempted
 
-							lgr.info('PERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (permissions[0], csrf_exempted, xframe_exempted))
+							#lgr.info('PERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (permissions[0], csrf_exempted, xframe_exempted))
 						except Exception, e: lgr.info("Error Getting Domain: %s" % e)
 
 						request.permissions = permissions[0]

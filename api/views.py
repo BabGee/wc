@@ -137,7 +137,7 @@ class Interface(Wrapper):
 
 					obj = str(file_object.content_type).split("/")[0]
 					lgr.info('Object is: %s' % obj)
-					if  (int(file_object.size) > 500000 and obj in ['image','text']) or \
+					if  (int(file_object.size) > 12000000 and obj in ['image','text']) or \
 					(int(file_object.size) > 12000000 and obj in ['audio']) or \
 					obj not in ['image','text','audio'] and file_object.content_type \
 									not in ['application/vnd.ms-excel','application/pdf']:

@@ -36,7 +36,7 @@ class Processor:
 				#lgr.info('Payload: %s' % payload)
 				payload = Wrappers().create_payload(request, service[0], payload)
 
-				lgr.info('Payload: %s' % payload)
+				#lgr.info('Payload: %s' % payload)
 				path = '/%s/' % (service[0].command_function)
 				service_path = urllib.quote(path)
 			
@@ -61,10 +61,10 @@ class Processor:
                 	        response = b.getvalue()
                         	payload = json.loads(response)
 
-				lgr.info('Payload: %s' % payload)
+				#lgr.info('Payload: %s' % payload)
 				#payload = Wrappers().create_payload(request, service[0], payload)
 
-				lgr.info('Payload: %s' % payload)
+				#lgr.info('Payload: %s' % payload)
 			else:
 				payload['overall_status'] = 'Service Does not Exist'
 				payload['response_status'] = '96'
