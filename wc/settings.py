@@ -5,17 +5,8 @@ import psycopg2
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-<<<<<<< HEAD
 #import ConfigParser
 import configparser
-=======
-import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
-
-import ConfigParser
-from keyczar import keyczar
->>>>>>> 438317eb825d2e36f6690e3505d6431c2c721476
 
 #cf = ConfigParser.ConfigParser()
 
