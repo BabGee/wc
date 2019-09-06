@@ -24,12 +24,12 @@ class CommandStatus(models.Model):
 
 class ServiceCommand(models.Model):
 	command_function = models.CharField(max_length=50)
-	node_system = models.ForeignKey(NodeSystem)
-	status = models.ForeignKey(CommandStatus)
+	node_system = models.ForeignKey(NodeSystem, on_delete=models.CASCADE)
+	status = models.ForeignKey(CommandStatus, on_delete=models.CASCADE)
 	description = models.CharField(max_length=100)
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)	
-	gateway = models.ForeignKey(Gateway)
+	gateway = models.ForeignKey(Gateway, on_delete=models.CASCADE)
 	def __unicode__(self):
 		return u'%s %s %s' % (self.command_function, self.status.name, self.gateway)
 

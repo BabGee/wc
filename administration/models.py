@@ -21,8 +21,8 @@ class GatewayHostStatus(models.Model):
 
 class GatewayHost(models.Model):
 	host = models.CharField(max_length=50, unique=True)
-	status = models.ForeignKey(GatewayHostStatus)
-	gateway = models.ForeignKey(Gateway)
+	status = models.ForeignKey(GatewayHostStatus, on_delete=models.CASCADE)
+	gateway = models.ForeignKey(Gateway, on_delete=models.CASCADE)
 	description =  models.CharField(max_length=100)		
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)

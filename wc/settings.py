@@ -1,14 +1,3 @@
-"""
-Django settings for wc project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import datetime
 import psycopg2
@@ -16,39 +5,41 @@ import psycopg2
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-import ConfigParser
-from keyczar import keyczar
+#import ConfigParser
+import configparser
 
-location = '/opt/kz'
-crypter = keyczar.Crypter.Read(location)
+#cf = ConfigParser.ConfigParser()
 
-cf = ConfigParser.ConfigParser()
-cf.read('wc/conf/wc.properties')
+cf = configparser.ConfigParser()
+cf.read(os.path.join(BASE_DIR, 'wc/conf/wc.properties'))
+logroot =  os.getenv("LOG_root", cf.get('LOG','root')).strip()
 
 #print cf._sections
 
+dbengine =  os.getenv("DATABASES_default_dbengine", cf.get('DATABASES','default_dbengine'))
+dbname =  os.getenv("DATABASES_default_dbname", cf.get('DATABASES','default_dbname'))
+dbuser =  os.getenv("DATABASES_default_dbuser", cf.get('DATABASES','default_dbuser'))
+dbpassword =  os.getenv("DATABASES_default_dbpassword", cf.get('DATABASES','default_dbpassword'))
+dbhost =  os.getenv("DATABASES_default_dbhost", cf.get('DATABASES','default_dbhost'))
+dbport =  os.getenv("DATABASES_default_dbport", cf.get('DATABASES','default_dbport'))
+                                   
+smtphost =  os.getenv("SMTP_default_host", cf.get('SMTP','default_host'))
+smtpport =  os.getenv("SMTP_default_port", cf.get('SMTP','default_port'))
+smtptls_default =  os.getenv("SMTP_tls", cf.get('SMTP','tls'))
+tls_default = {'True': True, 'False': False}
+smtptls = tls_default[smtptls_default]
+                                     
+conf_hosts =  os.getenv("ALLOWED_HOSTS_hosts", cf.get('ALLOWED_HOSTS','hosts'))
+hosts = conf_hosts.split(",")        
+ 
 
-conf_products = cf.get('INSTALLED_APPS','products')
-products=conf_products.split(",")
+installed_apps = (
+    'administration',
+    'gui',
+    'processor',
+    'api',
 
-conf_thirdparty = cf.get('INSTALLED_APPS','thirdparty')
-thirdparty=conf_thirdparty.split(",")
-
-
-dbengine = cf.get('DATABASES','default_dbengine')
-dbname = cf.get('DATABASES','default_dbname')
-dbuser = cf.get('DATABASES','default_dbuser')
-dbuser = crypter.Decrypt(dbuser)
-dbpassword = cf.get('DATABASES','default_dbpassword')
-dbpassword = crypter.Decrypt(dbpassword)
-dbhost = cf.get('DATABASES','default_dbhost')
-dbport = cf.get('DATABASES','default_dbport')
-
-conf_hosts = cf.get('ALLOWED_HOSTS','hosts')
-hosts = conf_hosts.split(",")
-
-installed_apps = products+thirdparty
-installed_apps = filter(None, installed_apps)
+)
 
 
 #TEST_RUNNER = 'django.test.runner.DiscoverRunner'
@@ -113,30 +104,27 @@ MANAGERS = ADMINS
 # Application definition
 
 INSTALLED_APPS = (
-    'suit',
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
-    'administration',
-    'gui',
-    'processor',
-    'api',
+    'django_extensions',
+) + installed_apps
 
-)
-
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+
+]
 
 ##REQUEST CONTEXT PROCESSOR
 #TEMPLATE_CONTEXT_PROCESSORS += (
@@ -203,13 +191,10 @@ MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media').replace('\\','/')
 
 MEDIA_URL = '/media/'
 
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static').replace('\\','/')
+
 STATIC_URL = '/static/'
 
-VENV_ROOT = '/opt/logs/wc/'
-
-print VENV_ROOT
-today = datetime.date.today()
-today = str(today)
 LOGFILE='info.log'
 
 LOGGING = {
@@ -229,63 +214,15 @@ LOGGING = {
         }
     },
     'handlers': {
-    
-        'default_rotating_file':{
-            'level' : 'INFO',
-            'formatter' : 'verbose', # from the django doc example
-            'class' : 'logging.handlers.TimedRotatingFileHandler',
-            'filename' : os.path.join(VENV_ROOT, '', LOGFILE), # full path works
-            'when' : 'midnight',
-            'interval' : 1,
-            'backupCount' : 7,
-        },  
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
             'filters': ['special']
         },
         
-        'file_actions': {                # define and name a handler
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler', # set the logging class to log to a file
-            'formatter': 'verbose',         # define the formatter to associate
-            'filename': os.path.join(VENV_ROOT, '', LOGFILE) # log file
-        },     
-        
     },
+
     'loggers': {
-    
-         'my_logger': {
-            'handlers': ['default_rotating_file'],
-            'level': 'INFO',
-        },    
-         'api': {
-            'handlers': ['default_rotating_file'],
-            'level': 'INFO',
-        },    
-      
-
-         'administration': {
-            'handlers': ['default_rotating_file'],
-            'level': 'INFO',
-        },    
-      
-    
-         'gui': {
-            'handlers': ['default_rotating_file'],
-            'level': 'INFO',
-        },    
-
-         'processor': {
-            'handlers': ['default_rotating_file'],
-            'level': 'INFO',
-        },    
-         
-        'logview.usersaves': {               # define another logger
-            'handlers': ['file_actions'],  # associate a different handler
-            'level': 'INFO',                 # specify the logging level
-            'propagate': True,
-        }, 
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
@@ -294,5 +231,61 @@ LOGGING = {
 
     }
 }
+
+if logroot not in [None,""]:
+	LOGGING['handlers']['file_actions'] = {                # define and name a handler
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler', # set the logging class to log to a file
+            #'class': 'logging.handlers.QueueHandler', # set the logging class to log to a file
+            'formatter': 'verbose',         # define the formatter to associate
+            'filename': os.path.join(logroot, '', LOGFILE) # log file
+        }
+	LOGGING['loggers']['logview.usersaves']: {               # define another logger
+            'handlers': ['file_actions'],  # associate a different handler
+            'level': 'INFO',                 # specify the logging level
+            'propagate': True,
+        } 
+
+	for app in installed_apps:
+		LOGGING['handlers'][app] = {
+	            'level' : 'INFO',
+        	    'formatter' : 'verbose', # from the django doc example
+	            'class' : 'logging.handlers.TimedRotatingFileHandler',
+	            #'class' : 'logging.handlers.QueueHandler',
+        	    'filename' : os.path.join(logroot, '', app+'.log'), # full path works
+	            'when' : 'midnight',
+	            'interval' : 1,
+		    'backupCount': 5,
+	        }
+
+		LOGGING['loggers'][app] = {
+	            'handlers': [app],
+	            'level': 'INFO',
+	        }
+
+else:
+	LOGGING['file_actions'] = {
+            'level':'INFO',
+            'class':'logging.StreamHandler',
+            'formatter': 'verbose',
+        }
+	LOGGING['loggers']['logview.usersaves']: {               # define another logger
+            'handlers': ['file_actions'],  # associate a different handler
+            'level': 'INFO',                 # specify the logging level
+            'propagate': True,
+        } 
+
+	for app in installed_apps:
+		LOGGING['handlers'][app] = {
+	            'level':'INFO',
+        	    'class':'logging.StreamHandler',
+	            'formatter': 'verbose',
+	        }
+
+		LOGGING['loggers'][app] = {
+	            'handlers': [app],
+	            'level': 'INFO',
+	        }
+
 
 
