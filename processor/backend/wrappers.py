@@ -18,26 +18,30 @@ lgr = logging.getLogger('processor')
 class Authorize:
 	def secure(self, payload, API_KEY):
                 new_payload = {}
-                payload = dict(map(lambda (key, value):(string.lower(key),str(value) if isinstance(value, dict) is False else json.dumps(value)), payload.items()))
+
+                payload = dict(map(lambda x:(str(x[0]).lower(), json.dumps(x[1]) if isinstance(x[1], dict) else str(x[1]) ), payload.items()))
                 for key, value in payload.items():
                         if 'sec_hash' not in key and 'credentials' not in key:
 				try:value=json.loads(value, parse_float=Decimal);value=str(value) if isinstance(value,Decimal) else value #(BUG!!) JSON loads converts decimal places
 				except:pass
 				if isinstance(value, dict) is False: new_payload[key]=value
 		p = []
+
 		for n in sorted(new_payload.keys()):
 			k = '%s=%s' % (n,new_payload[n])
 			p.append(k)
+
 		p1 = '&'.join(p)
-		a = hmac.new( base64.b64decode(API_KEY), p1, hashlib.sha256)
-		return base64.b64encode(a.digest())
+		lgr.info('Hash: %s' % p1)
+		a = hmac.new( base64.urlsafe_b64decode(API_KEY.encode()), p1, hashlib.sha256)
+		return base64.urlsafe_b64encode(a.digest())
 
 	def check_hash(self, payload, API_KEY):
-		lgr.info("Check Hash: %s" % base64.b64decode(API_KEY))
+		lgr.info("Check Hash: %s" % base64.urlsafe_b64decode(API_KEY.encode()))
 		secret = payload['sec_hash']
 		#remove sec_hash and hash_type	
 		sec_hash = self.secure(payload,API_KEY) 
-		if base64.b64decode(secret) == base64.b64decode(sec_hash):
+		if base64.urlsafe_b64decode(secret) == base64.urlsafe_b64decode(sec_hash):
 			payload['response_status'] = '00'
 		else:
 			lgr.info("Secret: %s Sec Hash: %s" % (str(secret)[:100], str(sec_hash)[:100]))
@@ -48,7 +52,7 @@ class Authorize:
 
 	def hash_payload(self, payload, API_KEY):
 		try:
-			lgr.info("Check Hash: %s" % base64.b64decode(API_KEY))
+			lgr.info("Check Hash: %s" % base64.urlsafe_b64decode(API_KEY.encode()))
 			sec_hash = self.secure(payload,API_KEY) 
 			payload['sec_hash'] =  sec_hash
 		except Exception, e:
@@ -126,8 +130,8 @@ class Wrappers(Authorize):
 			lgr.info('City: %s' % city)
 			if city is not None and ('lat' not in payload.keys() and 'lng' not in payload.keys() ):
 				lgr.info('Got Params')
-				payload['lat'] = city['latitude']
-				payload['lng'] = city['longitude']
+				payload['lat'] = str(city['latitude'])
+				payload['lng'] = str(city['longitude'])
 			elif 'lat' not in payload.keys() and 'lng' not in payload.keys():
 				lgr.info('No Params')
 				payload['lat'] = '0.0'
@@ -143,10 +147,12 @@ class Wrappers(Authorize):
 			if API_KEY is not None:lgr.info('API KEY EXISTS: %s' % API_KEY)
 			else:API_KEY = service.node_system.service_signature
 
-			if 'sec_hash' in payload.keys(): #If Sec Hash Exists, the request has a response payload hence validate/Always comes before hash payload
-				payload = self.check_hash(payload, API_KEY)
+			if 'api_token' in payload.keys(): pass
+			else:
+				if 'sec_hash' in payload.keys(): #If Sec Hash Exists, the request has a response payload hence validate/Always comes before hash payload
+					payload = self.check_hash(payload, API_KEY)
 
-			payload = self.hash_payload(payload, API_KEY)
+				payload = self.hash_payload(payload, API_KEY)
 			return payload 
 
 		@csrf_protect

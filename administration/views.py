@@ -13,8 +13,8 @@ lgr = logging.getLogger('administration')
 class WebService:
 	def response_processor(self, request, service, payload):
 		try:
-			lgr.info('Service: %s' % service)
-			lgr.info('Payload: %s' % payload)
+			#lgr.info('Service: %s' % service)
+			#lgr.info('Payload: %s' % payload)
 
 			if payload['response_status'] == '00':
 				lgr.info('Succesful Response Status')
@@ -53,7 +53,7 @@ class WebService:
 
 			req_copy.POST.update(payload)
 
-			lgr.info('Req: %s | %s' % (req_copy.POST,payload))
+			#lgr.info('Req: %s | %s' % (req_copy.POST,payload))
 
 			response = Interface().interface(req_copy, service, payload.dict())
 			if response.status_code == 200:

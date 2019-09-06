@@ -5,8 +5,17 @@ import psycopg2
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+<<<<<<< HEAD
 #import ConfigParser
 import configparser
+=======
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
+import ConfigParser
+from keyczar import keyczar
+>>>>>>> 438317eb825d2e36f6690e3505d6431c2c721476
 
 #cf = ConfigParser.ConfigParser()
 
@@ -166,7 +175,7 @@ DATABASES = {
         'PASSWORD': dbpassword,
         'HOST': dbhost,                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': dbport,                      # Set to empty string for default.
-        #'CONN_MAX_AGE': '600',
+        'CONN_MAX_AGE': 600,
     }
 }
 
