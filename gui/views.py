@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.exceptions import PermissionDenied
 from django.template import TemplateDoesNotExist
 from gui.models import *
@@ -13,7 +13,7 @@ import types
 import csv
 from processor.views import *
 import simplejson as json
-from django.contrib.gis.geoip import GeoIP
+from django.contrib.gis.geoip2 import GeoIP2
 from gui.models import *
 from api.models import *
 from django.http import Http404
@@ -38,7 +38,7 @@ class UI:
 
 			return response
 
-		except Exception, e:
+		except Exception as e:
 			lgr.info("Error on cybersource_termurl: %s" % e)
 			raise Http404
 		
@@ -80,8 +80,8 @@ class UI:
 		else:
 			return default_initial_page(session_id)
 
-        def logout_user(self,request):
-                logout(request)
+	def logout_user(self,request):
+		logout(request)
 
 	def request_processor(self, request, SERVICE):
 		#lgr.info("Request: %s" % str(request)[:100])
@@ -101,7 +101,7 @@ class UI:
 				payload = WebService().response_processor(request, SERVICE, payload)
 				json_results = json.dumps(payload)		
 				return HttpResponse(json_results, content_type='application/json')
-			except Exception, e:
+			except Exception as e:
 				lgr.info("Error Processing Request: %s" % e)
 				return HttpResponse('Error: %s' % e)
 		else:
@@ -158,7 +158,7 @@ class UI:
 									xframe_exempted = referer_host[0].xframe_exempted
 
 							#lgr.info('PERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (permissions[0], csrf_exempted, xframe_exempted))
-						except Exception, e: lgr.info("Error Getting Domain: %s" % e)
+						except Exception as e: lgr.info("Error Getting Domain: %s" % e)
 
 						request.permissions = permissions[0]
 						request.csrf_exempted = csrf_exempted
@@ -260,7 +260,7 @@ class UI:
 							else:
 								return render_enabled(request, template_file, c)
 
-					except Exception, e:
+					except Exception as e:
 						lgr.info('Error getting page: %s' % e)
 						error = 'Error getting Page'
 						return self.error_page(request, error)
@@ -272,7 +272,7 @@ class UI:
 				lgr.info('Host not Found')
 				raise Http404
 
-		except Exception, e:
+		except Exception as e:
 			lgr.info('Error getting page permissions: %s' % e)
 					
 			raise Http404

@@ -8,11 +8,10 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from processor.views import *
 import simplejson as json
-from django.contrib.gis.geoip import GeoIP
+from django.contrib.gis.geoip2 import GeoIP2
 from datetime import datetime
 import base64, os, time, random, string
-import urllib, urllib2, pycurl
-from urlparse import urlparse, parse_qs
+import urllib, pycurl
 from io import BytesIO
 
 from django.http import Http404, StreamingHttpResponse
@@ -20,33 +19,33 @@ import logging
 lgr = logging.getLogger('api')
 
 class Wrapper:
-        def validate_url(self, url):
-                val = URLValidator()
-                try:
-                        val(url)
-                        return True
-                except ValidationError, e:
-                        lgr.info("URL Validation Error: %s" % e)
-                        return False
+	def validate_url(self, url):
+		val = URLValidator()
+		try:
+			val(url)
+			return True
+		except ValidationError as e:
+			lgr.info("URL Validation Error: %s" % e)
+			return False
 
-        def post_request(self, data, node):
-                if self.validate_url(node):
-                        c = pycurl.Curl()
-                        c.setopt(pycurl.CONNECTTIMEOUT, 5)
-                        c.setopt(pycurl.TIMEOUT, 5)
-                        c.setopt(pycurl.NOSIGNAL, 1)
-                        c.setopt(pycurl.URL, str(node) )
-                        c.setopt(pycurl.POST, 1)
-                        header=['Content-Type: application/json; charset=utf-8','Content-Length: '+str(len(data))]
-                        c.setopt(pycurl.HTTPHEADER, header)
-                        c.setopt(pycurl.POSTFIELDS, str(data))
-                        import StringIO
-                        b = StringIO.StringIO()
-                        c.setopt(pycurl.WRITEFUNCTION, b.write)
-                        c.perform()
-                        data = b.getvalue()
+	def post_request(self, data, node):
+		if self.validate_url(node):
+			c = pycurl.Curl()
+			c.setopt(pycurl.CONNECTTIMEOUT, 5)
+			c.setopt(pycurl.TIMEOUT, 5)
+			c.setopt(pycurl.NOSIGNAL, 1)
+			c.setopt(pycurl.URL, str(node) )
+			c.setopt(pycurl.POST, 1)
+			header=['Content-Type: application/json; charset=utf-8','Content-Length: '+str(len(data))]
+			c.setopt(pycurl.HTTPHEADER, header)
+			c.setopt(pycurl.POSTFIELDS, str(data))
+			import StringIO
+			b = StringIO.StringIO()
+			c.setopt(pycurl.WRITEFUNCTION, b.write)
+			c.perform()
+			data = b.getvalue()
 
-                return data
+		return data
 
 
 class Interface(Wrapper):
@@ -62,32 +61,32 @@ class Interface(Wrapper):
 			#Get Access Token
 			url = 'https://graph.facebook.com/oauth/access_token'
 
-			data = urllib.urlencode({'code' : code,
+			data = urllib.parse.urlencode({'code' : code,
 				 'client_id': client_id,
 				 'client_secret': client_secret,
-	                         'redirect_uri'  : 'http://'+request.get_host()+'/api/facebook/'+names+'/'})
+				 'redirect_uri'  : 'http://'+request.get_host()+'/api/facebook/'+names+'/'})
 
 
 			lgr.info('URL: %s| Data: %s' % (url,data))
-                        data_string = self.post_request(data, url)
+			data_string = self.post_request(data, url)
 			lgr.info('Data String: %s' % data_string)
 
-			params=parse_qs(str(data_string).strip())
+			params=urllib.parse.parse_qs(str(data_string).strip())
 
 			#Post message
 			url = 'https://graph.facebook.com/me/feed' 
 
-			data = urllib.urlencode({'access_token' : params['access_token'][0],
-	                         'message'  : names+' Just bought a tool to build Kenya.','link': 'http://buildke.nikobizz.com/'})
+			data = urllib.parse.urlencode({'access_token' : params['access_token'][0],
+				 'message'  : names+' Just bought a tool to build Kenya.','link': 'http://buildke.nikobizz.com/'})
 
 			lgr.info('URL: %s| Data: %s' % (url,data))
-                        payload = self.post_request(data, url)
+			payload = self.post_request(data, url)
 
 			response = HttpResponse('Your Message has been posted to your FaceBook timeline! '+ str(payload))
 			#response["Access-Control-Allow-Origin"] = "*"  
 			response["Cache-Control"] = "no-cache"  
 			return response
-		except Exception, e:
+		except Exception as e:
 			lgr.info("Error on social media request: %s" % e)
 			raise Http404
 
@@ -99,7 +98,7 @@ class Interface(Wrapper):
 			response["Access-Control-Allow-Origin"] = "*"  
 			response["Cache-Control"] = "no-cache"  
 			return response
-		except Exception, e:
+		except Exception as e:
 			lgr.info("Error Loading Video File: %s" % e)
 			raise Http404
 
@@ -119,7 +118,7 @@ class Interface(Wrapper):
 				for f in request.FILES:
 					file_object = request.FILES[f]
 					lgr.info('File : %s' % file_object)
-       	                                lgr.info('File Size: %s' % file_object.size)
+					lgr.info('File Size: %s' % file_object.size)
 					try: lgr.info('Blob Read'); xs=file_object.read()
 					except: lgr.info('No Blob Read');
 					lgr.info('Content Type : %s' % str(file_object.content_type))
@@ -128,9 +127,9 @@ class Interface(Wrapper):
 					extension = extension if len(extension)<=4 else str(file_object.content_type).split('/')[1]
 					lgr.info('Extension: %s' % str(extension))
 
-		                        chars = string.ascii_letters + string.punctuation + string.digits
-                		        rnd = random.SystemRandom()
-		                        rnd_name = ''.join(rnd.choice(chars) for i in range(4))
+					chars = string.ascii_letters + string.punctuation + string.digits
+					rnd = random.SystemRandom()
+					rnd_name = ''.join(rnd.choice(chars) for i in range(4))
 
 					filename = "%s_%s_%s" % (timestamp,rnd_name,extension_chunks[0][:50])
 					filename = "%s.%s" % (base64.urlsafe_b64encode(filename), extension)
@@ -168,7 +167,7 @@ class Interface(Wrapper):
 				return response  
 			else:
 				raise Http404
-		except Exception, e:
+		except Exception as e:
 			lgr.info("Error Uploading Image: %s" % e)
 			raise Http404
 
@@ -180,7 +179,7 @@ class Interface(Wrapper):
 			payload = {}
 			#ip_address = request.META.get('REMOTE_ADDR') 
 			ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
-			g = GeoIP()
+			g = GeoIP2()
 			city = g.city(ip_address)
 			lgr.info('City: %s' % city)
 			if city is not None:
@@ -202,7 +201,7 @@ class Interface(Wrapper):
 				response = HttpResponse(json_results, content_type='application/json')  
 			response["Access-Control-Allow-Origin"] = "*"  
 			return response  
-		except Exception, e:
+		except Exception as e:
 			lgr.info("Error Getting IP: %s" % e)
 			return HttpResponse('Error: %s' % e)
 
@@ -227,7 +226,7 @@ class Interface(Wrapper):
 				lgr.info('REQUEST is not POST')
 				return HttpResponse('Request is not POST')
 
-		except Exception, e:
+		except Exception as e:
 			lgr.info("Error Processing Request: %s" % e)
 			return HttpResponse('Error: %s' % e)
 

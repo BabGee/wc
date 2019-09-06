@@ -4,7 +4,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth import authenticate
 from api.views import *
 from processor.models import ServiceCommand
-from django.contrib.gis.geoip import GeoIP
+from django.contrib.gis.geoip2 import GeoIP2
 from django.contrib.auth import logout
 
 import logging
@@ -23,7 +23,7 @@ class WebService:
 					if 'status' in payload['response']['login'].keys(): request.session['status'] = payload['response']['login']['status']
 					if 'access_level' in payload['response']['login'].keys(): request.session['access_level'] = payload['response']['login']['access_level']
 				if 'session' in payload['response'].keys(): request.session['session_id'] = payload['response']['session']
-			elif payload['response_status'] <> '00':
+			elif payload['response_status'] != '00':
 				lgr.info('Failed Transaction')
 
 			#remove secure data
@@ -34,7 +34,7 @@ class WebService:
 			if 'response' in payload.keys() and 'login' in payload['response'].keys():del payload['response']['login']
 
 
-		except Exception, e:
+		except Exception as e:
 			lgr.info('Error Processing response: %s' % e)
 			payload['response_status'] = '96'
 
@@ -61,7 +61,7 @@ class WebService:
 			else:
 				payload['response_status'] = '96'
 			#return HttpResponseRedirect(reverse('polls:results', payload))
-		except Exception, e:
+		except Exception as e:
 			lgr.info('Error Processing request: %s' % e)
 			payload['response_status'] = '96'
 

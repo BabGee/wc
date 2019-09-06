@@ -51,25 +51,10 @@ installed_apps = (
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'rx%g*kcl*1u_m(%5viy8kfl4whtbj5_^l_=gq5rt6gfk18%m6a'
 
+timezone='Africa/Nairobi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-TEMPLATE_DEBUG = DEBUG
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE=True
-SECURE_SSL_REDIRECT=True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_HTTPONLY = True
-
-#ALLOWED_HOSTS = [
-#		'.mipay.club', '.regix.org','.nikobizz.com','69.64.68.226','.muziqbit.com','.shikangoma.com','.mamtag.com','.heri.shop','.interintel.co',
-#		'.gus.gs', '.mipaymobile.com','.bidfatherafrica.com','.bidfather.com','.ichaama.com','.mchaama.com','.gomipay.com','.sortika.com',
-#		]
-
-#ALLOWED_HOSTS = ['*']
-
 ALLOWED_HOSTS = hosts
-
 
 
 GEOIP_PATH = '/usr/share/GeoIP'
@@ -82,16 +67,25 @@ EMAIL_USE_TLS = True
 '''
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = '192.168.137.3'
-EMAIL_PORT = 25
+EMAIL_HOST = smtphost
+#EMAIL_PORT = 25
+EMAIL_PORT = smtpport
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
+EMAIL_USE_TLS = smtptls
+#EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'InterIntel <noreply@interintel.co.ke>'
 
 
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
+
+
+
 ADMINS = (
-     ('Sam Arita', 'samson.arita@gmail.com'),
+     ('InterIntel Support', 'support@interintel.co.ke'),
 )
 
 SUIT_CONFIG = {
@@ -115,7 +109,7 @@ INSTALLED_APPS = (
     'django_extensions',
 ) + installed_apps
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -146,6 +140,8 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
 
 ROOT_URLCONF = 'wc.urls'

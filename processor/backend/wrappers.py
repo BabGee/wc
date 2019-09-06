@@ -1,9 +1,7 @@
 import hashlib, hmac, base64, socket
-from processor.models import *
-#from bridge.backend.local import *
 from decimal import Decimal, ROUND_DOWN
 import types
-from django.contrib.gis.geoip import GeoIP
+from django.contrib.gis.geoip2 import GeoIP2
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.middleware.csrf import get_token
 from django.http import HttpResponseForbidden
@@ -17,11 +15,11 @@ lgr = logging.getLogger('processor')
 
 class Authorize:
 	def secure(self, payload, API_KEY):
-                new_payload = {}
+		new_payload = {}
 
-                payload = dict(map(lambda x:(str(x[0]).lower(), json.dumps(x[1]) if isinstance(x[1], dict) else str(x[1]) ), payload.items()))
-                for key, value in payload.items():
-                        if 'sec_hash' not in key and 'credentials' not in key:
+		payload = dict(map(lambda x:(str(x[0]).lower(), json.dumps(x[1]) if isinstance(x[1], dict) else str(x[1]) ), payload.items()))
+		for key, value in payload.items():
+			if 'sec_hash' not in key and 'credentials' not in key:
 				try:value=json.loads(value, parse_float=Decimal);value=str(value) if isinstance(value,Decimal) else value #(BUG!!) JSON loads converts decimal places
 				except:pass
 				if isinstance(value, dict) is False: new_payload[key]=value
@@ -55,7 +53,7 @@ class Authorize:
 			lgr.info("Check Hash: %s" % base64.urlsafe_b64decode(API_KEY.encode()))
 			sec_hash = self.secure(payload,API_KEY) 
 			payload['sec_hash'] =  sec_hash
-		except Exception, e:
+		except Exception as e:
 			lgr.info('Error on hash: %s' % e)
 			payload['response_status'] = '96'
 
@@ -86,7 +84,7 @@ class Wrappers(Authorize):
 			lgr.info("Payment : %s Service Charge: %s" % (payment, service_charge))
 			for charge in service_charge:
 				lgr.info("Charge: %s" % charge)
-				if charge.is_percentage is False and (payment['currency'] <> charge.currency.code):
+				if charge.is_percentage is False and (payment['currency'] != charge.currency.code):
 					payment = {}
 					break
 				elif payment['amount'] > charge.max_amount or payment['amount']< charge.min_amount:
@@ -102,14 +100,14 @@ class Wrappers(Authorize):
 
 			payment['amount'], payment['charge'] = payment['amount'].quantize(Decimal('.01'), rounding=ROUND_DOWN), payment['charge'].quantize(Decimal('.01'), rounding=ROUND_DOWN)
 			lgr.info("Payment: %s" % payment)
-		except Exception, e:
+		except Exception as e:
 			payment = {}
 			lgr.info('Payment Processing Failed: %s' % e)
 
 		return payment
 
-        def create_payload(self, request, service, payload):
-                lgr.info('Started Creating Payload')
+	def create_payload(self, request, service, payload):
+		lgr.info('Started Creating Payload')
 
 		#ip_address = request.META.get('REMOTE_ADDR')
 		ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
@@ -121,11 +119,11 @@ class Wrappers(Authorize):
 			payload['gateway_host'] = request.get_host()
 
 		def on_site(request, service, payload):
-	                #payload['SERVICE'] = service.command_function
+			#payload['SERVICE'] = service.command_function
 			payload['CHID'] = '1'
 			payload['csrf_token'] = get_token(request)
 
-			g = GeoIP()
+			g = GeoIP2()
 			city = g.city(ip_address)
 			lgr.info('City: %s' % city)
 			if city is not None and ('lat' not in payload.keys() and 'lng' not in payload.keys() ):
@@ -168,7 +166,7 @@ class Wrappers(Authorize):
 				payload_check = on_site_protected(request, service, payload)
 				if payload_check.status_code == 403:
 					lgr.info('Did Not Pass Onsite Check')
-					if 'ip_address' in payload.keys() and payload['ip_address'] <> ip_address:
+					if 'ip_address' in payload.keys() and payload['ip_address'] != ip_address:
 						lgr.info('IP Did not Match. Injecting IP to cause failure. IP ADDRESS: %s' % ip_address)
 						payload['ip_address'] = 'None'
 					if 'ip_address' not in payload.keys():
@@ -178,10 +176,10 @@ class Wrappers(Authorize):
 					lgr.info('Onsite Check Passed')
 					#Payload automaticaly inherits the newly created items by django dict injection
 				else:pass
-		except Exception, e:
+		except Exception as e:
 			lgr.info('Error on Protect: %s ' % e)
 
-                return payload
+		return payload
 
 	def call_api(self, item, function, payload):
 
@@ -189,27 +187,27 @@ class Wrappers(Authorize):
 		lgr.info('processorFinal: We are now processing the transaction')
 
 		try:
-		        node_info = {'url': item.node_system.URL,
-		                       	'timeout': item.node_system.timeout_time,
-		                       	'key_file': item.node_system.key_path,
-		                       	'cert_file': item.node_system.cert_path,
-		                       	'use_ssl': item.node_system.use_ssl,
+			node_info = {'url': item.node_system.URL,
+				       	'timeout': item.node_system.timeout_time,
+				       	'key_file': item.node_system.key_path,
+				       	'cert_file': item.node_system.cert_path,
+				       	'use_ssl': item.node_system.use_ssl,
 					'username': item.node_system.username,
 					'password': item.node_system.password,
 					'api_key': item.node_system.api_key
-		                       }
-		        lgr.info('processorFinal: node_info %s' % node_info)
-		        client = xmlrpc_client()
-		        lgr.info('processorFinal: Client %s' % client)
-		        server = client.server(node_info)
-		        
+				       }
+			lgr.info('processorFinal: node_info %s' % node_info)
+			client = xmlrpc_client()
+			lgr.info('processorFinal: Client %s' % client)
+			server = client.server(node_info)
+			
 			lgr.info('processorFinal: server %s' % server)
 			
 			lgr.info('\n\n\n\n\n\n\n\n\n\n\nFuncions\n(payload: %s)\n(function: %s)\n(node info: %s)' % (payload, function, node_info))
 
-		        responseParams = client.clientcall(server, payload, function, item.node_system.node_handler)
-		except Exception, e:
-		        lgr.info('processFinal: Error %s' % e);
+			responseParams = client.clientcall(server, payload, function, item.node_system.node_handler)
+		except Exception as e:
+			lgr.info('processFinal: Error %s' % e);
 		return  responseParams
 
 		#(self, server, details, function, sub_node_handler):
@@ -220,33 +218,36 @@ class Wrappers(Authorize):
 		responseParams = {}
 		lgr.info('processorFinal: We are now processing the transaction: %s' % item)
 		try:	
-		        node_info = {'url': item.node_system.URL,
-		                       	'timeout': item.node_system.timeout_time,
-		                       	'key_file': item.node_system.key_path,
-		                       	'cert_file': item.node_system.cert_path,
-		                       	'use_ssl': item.node_system.use_ssl,
+			node_info = {'url': item.node_system.URL,
+				       	'timeout': item.node_system.timeout_time,
+				       	'key_file': item.node_system.key_path,
+				       	'cert_file': item.node_system.cert_path,
+				       	'use_ssl': item.node_system.use_ssl,
 					'username': item.node_system.username,
 					'password': item.node_system.password,
 					'api_key': item.node_system.api_key
-		                       }
+				       }
 			lgr.info('\n\n\n\n\n\n\n\n\n\n\nFuncions\n(payload: %s)\n(function: %s)\n(node info: %s)' % (payload, function, node_info))
 
+			import importlib
 			node_to_call = str(item.node_system.URL.lower())
 			class_name = str(item.service.product.name.title())
-			lgr.info("Node To Call: %s Class Name: %s" % (node_to_call, class_name))
-			exec 'from '+ node_to_call+'.views import '+class_name+' as c'
-
-			lgr.info("Class: %s" % c)
-			fn = c()
+			module =  importlib.import_module(node_to_call+'.tasks')
+			#module = __import__.import_module(node_to_call+'.tasks')
+			lgr.info('Module: %s' % module)
+			my_class = getattr(module, class_name)
+			lgr.info('My Class: %s' % my_class)
+			fn = my_class()
 			lgr.info("Call Class: %s" % fn)
+
 			func = getattr(fn, function)
-			lgr.info("Run Func: %s" % func)
+			lgr.info("Run Func: %s TimeOut: %s" % (func, item.node_system.timeout_time))
 			responseParams = func (payload, node_info)
 			lgr.info('Response: %s' % responseParams)
 
-		except Exception, e:
+		except Exception as e:
 			responseParams['response_status'] = '96'
-		        lgr.info('processFinal: Error %s' % e);
+			lgr.info('processFinal: Error %s' % e);
 		return  responseParams
 
 
