@@ -5,7 +5,6 @@ from django.urls import reverse
 from django.core.exceptions import PermissionDenied
 from django.template import TemplateDoesNotExist
 from gui.models import *
-from gui.backend.wrappers import *
 from django.db.models import Q
 from itertools import chain
 from django.contrib.auth import authenticate
@@ -111,13 +110,6 @@ class UI:
 
 	 	return self.pages(request, "error")
 
-
-	def str_to_class(self, s):
-	    if s in globals() and isinstance(globals()[s], types.ClassType):
-		    return globals()[s]
-	    return None
-
-
 	@method_decorator([csrf_exempt, requires_csrf_token])
 	def pages(self, request, page, subdomain=None, route=None):
 		try:
@@ -168,8 +160,17 @@ class UI:
 						#lgr.info('Class Name: %s' % class_name)
 						processing_function = page.lower().replace(" ","_")
 						#lgr.info('Processing Function: %s' % processing_function)
-						c = self.str_to_class(class_name)
-						fn = c()
+
+						import importlib
+						node_to_call = str('gui.backend.wrappers')
+						class_name = str(class_name)
+						module =  importlib.import_module(node_to_call)
+						lgr.info('Module: %s' % module)
+						my_class = getattr(module, class_name)
+						lgr.info('My Class: %s' % my_class)
+						fn = my_class()
+						lgr.info("Call Class: %s" % fn)
+
 						try:
 							func = getattr(fn, processing_function)
 							responseParams = func (request, permissions[0].page, subdomain)
