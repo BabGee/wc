@@ -12,7 +12,7 @@ from django.contrib.gis.geoip2 import GeoIP2
 from datetime import datetime
 import base64, os, time, random, string
 import urllib, pycurl
-from io import BytesIO
+from io import BytesIO, StringIO
 
 from django.http import Http404, StreamingHttpResponse
 import logging
@@ -39,8 +39,7 @@ class Wrapper:
 			header=['Content-Type: application/json; charset=utf-8','Content-Length: '+str(len(data))]
 			c.setopt(pycurl.HTTPHEADER, header)
 			c.setopt(pycurl.POSTFIELDS, str(data))
-			import StringIO
-			b = StringIO.StringIO()
+			b = BytesIO()
 			c.setopt(pycurl.WRITEFUNCTION, b.write)
 			c.perform()
 			data = b.getvalue()

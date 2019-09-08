@@ -8,6 +8,7 @@ from django.utils.dateformat import DateFormat
 from django.utils.formats import get_format
 from django.db.models import Q
 import pycurl
+from io import BytesIO, StringIO
 
 import logging
 lgr = logging.getLogger('processor')
@@ -50,8 +51,7 @@ class Processor:
 				header=['Content-Type: application/json; charset=utf-8','Content-Length: '+str(len(jdata))]
 				c.setopt(pycurl.HTTPHEADER, header)
 				c.setopt(pycurl.POSTFIELDS, str(jdata))
-				import StringIO
-				b = StringIO.StringIO()
+				b = BytesIO()
 				c.setopt(pycurl.WRITEFUNCTION, b.write)
 				c.perform()
 				response = b.getvalue()
