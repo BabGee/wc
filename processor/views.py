@@ -19,18 +19,18 @@ class Processor:
 		try:
 
 			if 'X-GATEWAY_HOST' in request.META.keys():
-				gateway_path = GatewayHost.objects.filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
+				gateway_path = GatewayHost.objects.using('read').filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
 			else:
-				gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
+				gateway_path = GatewayHost.objects.using('read').filter(host=request.get_host(), status__name='ENABLED')
 
 
 			lgr.info('Gateway Path: %s' % gateway_path)
 			if gateway_path.exists():
 
-				service = ServiceCommand.objects.filter(Q(command_function=function),\
+				service = ServiceCommand.objects.using('read').filter(Q(command_function=function),\
 							 Q(gateway=None)|Q(gateway=gateway_path[0].gateway))
 			else:
-				service =ServiceCommand.objects.none()
+				service =ServiceCommand.objects.using('read').none()
 
 			if service.exists() and service[0].status.name == 'ACTIVE':
 				#lgr.info('Enables SWITCH Call')

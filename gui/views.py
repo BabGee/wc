@@ -54,14 +54,14 @@ class UI:
 		session_id = request.session.get('session_id')
 
 		if 'X-GATEWAY_HOST' in request.META.keys():
-			gateway_path = GatewayHost.objects.filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
+			gateway_path = GatewayHost.objects.using('read').filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
 		else:
-			gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
+			gateway_path = GatewayHost.objects.using('read').filter(host=request.get_host(), status__name='ENABLED')
 
 		lgr.info('Gateway Path: %s' % gateway_path)
 		if gateway_path.exists():
 			active_session = True if session_id is not None else False
-			initial_page = InitialPage.objects.filter(page__display=True,gateway=gateway_path[0].gateway,
+			initial_page = InitialPage.objects.using('read').filter(page__display=True,gateway=gateway_path[0].gateway,
 					 status__name='ACTIVE',active_session=active_session)
 
 			if 'X-SUBDOMAIN' in request.META.keys():
@@ -121,13 +121,13 @@ class UI:
 			if 'X-SUBDOMAIN' in request.META.keys(): subdomain=request.META['X-SUBDOMAIN']
 
 			if 'X-GATEWAY_HOST' in request.META.keys():
-				gateway_path = GatewayHost.objects.filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
+				gateway_path = GatewayHost.objects.using('read').filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
 			else:
-				gateway_path = GatewayHost.objects.filter(host=request.get_host(), status__name='ENABLED')
+				gateway_path = GatewayHost.objects.using('read').filter(host=request.get_host(), status__name='ENABLED')
 
 			if gateway_path.exists():
 
-				permissions = Permission.objects.filter(Q(page__path=page), Q(page__display=True),\
+				permissions = Permission.objects.using('read').filter(Q(page__path=page), Q(page__display=True),\
 						 Q(gateway=gateway_path[0].gateway)|Q(gateway=None),\
 						 Q(status__name='ENABLED'))
 
@@ -144,7 +144,7 @@ class UI:
 								referer = request.META['HTTP_REFERER']
 								referer_name = referer.split("/")[2]
 								lgr.info("Current Site Domain Referer: %s|%s" % (referer, referer_name)) #Referer gives even frame redirecting domains
-								referer_host = RefererHost.objects.filter(host=referer_name, permissions=permissions[0],status__name='ENABLED')
+								referer_host = RefererHost.objects.using('read').filter(host=referer_name, permissions=permissions[0],status__name='ENABLED')
 								if referer_host.exists():
 									csrf_exempted = referer_host[0].csrf_exempted
 									xframe_exempted = referer_host[0].xframe_exempted

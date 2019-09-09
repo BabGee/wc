@@ -64,7 +64,7 @@ class Wrappers(Authorize):
 	def process_responsestatus(self,response_status):
 		payload = {}
 		try:
-			response_status = ResponseStatus.objects.get(response=str(response_status))
+			response_status = ResponseStatus.objects.using('read').get(response=str(response_status))
 			if str(response_status.action) == '1':
 				payload['reverse'] = True
 			else:
@@ -78,7 +78,7 @@ class Wrappers(Authorize):
 		payment = {'charge': 0, "raise_charge": True}
 
 		try:
-			service_charge = ServiceCharge.objects.filter(service=service)
+			service_charge = ServiceCharge.objects.using('read').filter(service=service)
 
 			payment['amount'] = Decimal(0) if 'amount' not in payload.keys() else Decimal(payload['amount'])
 			payment['currency'] = 'USD' if 'currency' not in payload.keys() else payload['currency']
