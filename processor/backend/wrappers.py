@@ -125,7 +125,8 @@ class Wrappers(Authorize):
 			payload['csrf_token'] = get_token(request)
 
 			g = GeoIP2()
-			city = g.city(ip_address)
+			try: city = g.city(ip_address)
+			except: city = None
 			lgr.info('City: %s' % city)
 			if city is not None and ('lat' not in payload.keys() and 'lng' not in payload.keys() ):
 				lgr.info('Got Params')
