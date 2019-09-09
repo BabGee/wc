@@ -36,7 +36,7 @@ class Authorize:
 		return base64.urlsafe_b64encode(a.digest())
 
 	def check_hash(self, payload, API_KEY):
-		lgr.info("Check Hash: %s" % base64.urlsafe_b64decode(API_KEY.encode()))
+		lgr.info("Check Hash: %s" % base64.urlsafe_b64decode(API_KEY))
 		secret = payload['sec_hash'].encode('uttf-8')
 		#remove sec_hash and hash_type	
 		sec_hash = self.secure(payload,API_KEY) 
