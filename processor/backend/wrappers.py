@@ -32,12 +32,12 @@ class Authorize:
 
 		p1 = '&'.join(p)
 		lgr.info('Hash: %s' % p1)
-		a = hmac.new( base64.urlsafe_b64decode(API_KEY.encode()), p1, hashlib.sha256)
+		a = hmac.new( base64.urlsafe_b64decode(API_KEY), p1.encode('utf-8'), hashlib.sha256)
 		return base64.urlsafe_b64encode(a.digest())
 
 	def check_hash(self, payload, API_KEY):
 		lgr.info("Check Hash: %s" % base64.urlsafe_b64decode(API_KEY.encode()))
-		secret = payload['sec_hash']
+		secret = payload['sec_hash'].encode('uttf-8')
 		#remove sec_hash and hash_type	
 		sec_hash = self.secure(payload,API_KEY) 
 		if base64.urlsafe_b64decode(secret) == base64.urlsafe_b64decode(sec_hash):
@@ -53,7 +53,7 @@ class Authorize:
 		try:
 			lgr.info("Check Hash: %s" % base64.urlsafe_b64decode(API_KEY.encode()))
 			sec_hash = self.secure(payload,API_KEY) 
-			payload['sec_hash'] =  sec_hash
+			payload['sec_hash'] =  sec_hash.encode('utf-8')
 		except Exception as e:
 			lgr.info('Error on hash: %s' % e)
 			payload['response_status'] = '96'
