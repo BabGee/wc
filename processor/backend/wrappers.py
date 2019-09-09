@@ -51,7 +51,7 @@ class Authorize:
 
 	def hash_payload(self, payload, API_KEY):
 		try:
-			lgr.info("Check Hash: %s" % base64.urlsafe_b64decode(API_KEY.encode()))
+			lgr.info("Check Hash: %s" % base64.urlsafe_b64decode(API_KEY))
 			sec_hash = self.secure(payload,API_KEY) 
 			payload['sec_hash'] =  sec_hash.encode('utf-8')
 		except Exception as e:
