@@ -8,6 +8,7 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import HttpResponseRedirect, HttpResponse
 import simplejson as json
 import string
+from processor.models import *
 
 import logging
 lgr = logging.getLogger('processor')
