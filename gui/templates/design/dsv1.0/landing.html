@@ -18,7 +18,7 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
       a) Add a `basePath` property to the build configuration in your `polymer.json`.
       b) Use the `--base-path` command-line option for `polymer build`.
     -->
-    <base href="/static/adaptive-ui-web/build/uncompiled-unbundled/">
+    <base href="/static/uncompiled-unbundled/">
 
     <link rel="icon" href="/media/{% if params.response.get_gateway_details.icon_image %}{{params.response.get_gateway_details.icon_image}}{% else %}upc_institution_icon_image/InterIntel_Icon.png{% endif %}">
 
@@ -429,13 +429,10 @@ subscribe();
 
     </script>
 
-    <script src="node_modules/jspdf/dist/jspdf.min.js"></script>
-    <script src="node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js"></script>
-
 <!-- Sentry Exception Tracking -->
 <!--<script src="https://cdn.ravenjs.com/3.26.4/raven.min.js" crossorigin="anonymous"></script>-->
 <script>
-    if (window.process['env']['NODE_ENV'] === 'production1') {
+    if (window.process['env']['NODE_ENV'] === 'production') {
         Raven.config('https://c1d4eca95ac7417eaa4a09a16b4b2cf9@sentry.io/1272205').install();
     }
 </script>
