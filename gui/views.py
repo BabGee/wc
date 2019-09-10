@@ -19,6 +19,7 @@ from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt, csrf_protect, ensure_csrf_cookie, requires_csrf_token
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.utils.decorators import method_decorator
+from administration.views import *
 
 import logging
 lgr = logging.getLogger('gui')
