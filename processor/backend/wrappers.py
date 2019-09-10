@@ -53,7 +53,7 @@ class Authorize:
 		try:
 			lgr.info("Check Hash: %s" % base64.urlsafe_b64decode(API_KEY))
 			sec_hash = self.secure(payload,API_KEY) 
-			payload['sec_hash'] =  sec_hash.encode('utf-8')
+			payload['sec_hash'] =  sec_hash
 		except Exception as e:
 			lgr.info('Error on hash: %s' % e)
 			payload['response_status'] = '96'
