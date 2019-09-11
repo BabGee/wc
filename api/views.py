@@ -108,8 +108,8 @@ class Interface(Wrapper):
 			lgr.info('Files: %s' % request.FILES)
 			if request.method == 'POST' and len(request.FILES.keys())>0:
 				#ip_address = request.META.get('REMOTE_ADDR')
-				ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
-
+				#ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
+				ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR')))
 				filename = None 
 				#timestamp = datetime.now().isoformat()
 				timestamp = int(time.time()*1000)
@@ -177,7 +177,8 @@ class Interface(Wrapper):
 			lgr.info('Get My IP')
 			payload = {}
 			#ip_address = request.META.get('REMOTE_ADDR') 
-			ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
+			#ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
+			ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR')))
 			g = GeoIP2()
 			city = g.city(ip_address)
 			lgr.info('City: %s' % city)

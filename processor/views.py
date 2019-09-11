@@ -1,4 +1,5 @@
-import urllib, json, pycurl
+import simplejson as json
+import urllib, pycurl
 from .models import *
 from .backend.wrappers import Wrappers
 from django.utils.formats import date_format
@@ -46,14 +47,24 @@ class Processor:
 				jdata = json.dumps(payload)
 				lgr.info('Got Node To Call: %s' % node)
 				c = pycurl.Curl()
+				c.setopt(pycurl.CONNECTTIMEOUT, timeout)
+				c.setopt(pycurl.TIMEOUT, timeout)
+				c.setopt(pycurl.NOSIGNAL, 1)
 				c.setopt(pycurl.URL, str(node) )
 				c.setopt(pycurl.POST, 1)
 				header=['Content-Type: application/json; charset=utf-8','Content-Length: '+str(len(jdata))]
 				c.setopt(pycurl.HTTPHEADER, header)
+
+				c.setopt(c.VERBOSE, False)
+				c.setopt(c.FOLLOWLOCATION, True)
+				c.setopt(c.USERAGENT, 'InterIntel Integrator')
+
 				c.setopt(pycurl.POSTFIELDS, str(jdata))
+
 				b = BytesIO()
 				c.setopt(pycurl.WRITEFUNCTION, b.write)
 				c.perform()
+
 				response = b.getvalue()
 				payload = json.loads(response)
 
