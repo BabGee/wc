@@ -1,3 +1,6 @@
+/* eslint-disable no-throw-literal */
+
+/* eslint-disable guard-for-in */
 import "../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js";
 import "../../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import "../../../../../../node_modules/@polymer/paper-button/paper-button.js";
@@ -1070,14 +1073,13 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
                 </div>
             </div>        
             ` : html``}
-
             <!-- Table starts here -->
             ${this._type('table') ? html`
             
                      <!-- Responsive table starts here -->
             <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
             <div class="table-responsive-vertical" style="max-height: 60vh;">
-             
+            
                 <table id="table" class="table table-hover table-mc-light-blue">
                 <thead>
                 <tr>

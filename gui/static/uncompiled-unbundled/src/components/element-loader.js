@@ -20,8 +20,6 @@ class ElementLoader extends LitElement {
     }`;
   }
 
-  firstUpdated(changedProps) {}
-
   createRenderRoot() {
     return this;
   }
@@ -67,14 +65,12 @@ class ElementLoader extends LitElement {
   }
 
   elementPath(el) {
-    if (!el) {
-      el = this._element;
-    }
-
+    if (!el) el = this._element;
     let switchName = el.variableType.toLocaleLowerCase(); // if element variable type is 1 worded, warn and append element
 
     if (switchName.split(' ').length === 1) {
-      Logger.i.warn('[SWITCH CONFIGURATION] single worded element naming is not recommended -> ', switchName.toUpperCase());
+      Logger.i.switchConfiguration(`Single worded element naming is not recommended -> ${switchName.toUpperCase()}`); // backward compatibility for single element names
+
       switchName += ' element';
     } // replace spaces with dashes
 
@@ -121,7 +117,7 @@ class ElementLoader extends LitElement {
                }
                .loading-bar:nth-child(1) {
                  background-color: var(--app-default-color);
-                 animation-delay: 0;
+                 animation-delay: 0s;
                }
                .loading-bar:nth-child(2) {
                  background-color: var(--app-default-color);
@@ -183,83 +179,69 @@ class ElementLoader extends LitElement {
         }
       } catch (e) {
         if (e.message === 'newElement.init is not a function') {
-          Logger.i.error("Custom Element Doesn't implement init: " + elementProps.path);
+          Logger.i.error('Custom Element Doesn\'t implement init: ' + elementProps.path);
         } else {
           Logger.i.error(e);
         }
       }
     });
   }
+  /**
+   * Dynamically imports a module from elementPath,
+   * creates a new node of elementName then passes it to a callback function cb
+   *
+   * @param elementPath {string} Module Path relative to this file
+   * @param elementName {string} Custom Element registration name
+   * @param renderInstance {number}
+   * @param cb {function} Callback Function
+   */
 
-  loadDynamic(elementProps, rI, cb) {
+
+  importAndInit(elementPath, elementName, renderInstance, cb) {
     const self = this;
-    var elementPath = elementProps.path;
-    var elementName = elementProps.name;
-    let l = self.autoLoad(elementProps.switchName);
-
-    if (l) {
-      //check config first
-      self.autoLoadDynamic(l, rI, cb);
-    } else {
-      //do networking here
-      import(elementPath).then(module => {
-        //NETWORK
-        // Put code in here that you want to run every time when
-        // navigating to view1 after my-view1.js is loaded
-        // .
-        // console.log(module);
-        // console.log("Auto-Loaded " + elementPath + " Element: " + elementName);
-        // console.log(holder);
-        // e.target.import is the import document.
-        let newElement = document.createElement(elementName);
-
-        if (newElement.constructor === HTMLElement) {
-          throw new DOMException("Custom Element Not Found: " + elementName);
-        }
-
-        if (cb) return cb(newElement, rI, self);
-      }).catch(error => {
-        // todo OPTIMIZATION, test which is faster, network first or auto-load configs check
-        Logger.i.info(`
-                ${elementName} Couldn't be loaded using the naming convention, 
-                    trying to get path for ${elementName} from current auto-load configs
-                `);
-        Logger.i.error(elementName + 'element wasn\'t found neither has an auto-load configuration!');
-        Logger.i.error(error);
-        let missingElementConfig = {
-          'path': '../elements/missing-element.js',
-          'name': 'missing-element'
-        };
-        const content = this.querySelector('#content');
-        self.autoLoadDynamic(missingElementConfig, rI, function (newElement, hl) {
-          newElement.msg = elementProps.switchName; //todo self.replaceWith(newElement);
-
-          content.firstChild ? content.firstChild.replaceWith(newElement) : content.appendChild(newElement);
-        });
-      });
-    }
-  } //Todo Remove Duplications from top function
-
-
-  autoLoadDynamic(elementProps, rI, cb) {
-    var self = this;
-    var elementPath = elementProps.path;
-    var elementName = elementProps.name;
     import(elementPath).then(module => {
-      //todo console.log("Auto-Loaded " + elementPath + " Element: " + elementName);
-      // console.log(e.target.import);
-      // e.target.import is the import document.
+      Logger.i.debug(`Auto-Loaded ${elementName} from ${elementPath}.`); // e.target.import is the import document.
+
       let newElement = document.createElement(elementName);
 
       if (newElement.constructor === HTMLElement) {
-        throw new DOMException("Custom Element Not Found: " + elementName);
+        throw new DOMException('Custom Element Not Found: ' + elementName);
       }
 
-      if (cb) return cb(newElement, rI, self);
+      if (cb) return cb(newElement, renderInstance, self);
     }).catch(error => {
-      Logger.i.error("Auto-Loading " + elementPath + " Error");
+      Logger.i.info(`${elementName} Couldn't be loaded`);
       Logger.i.error(error);
+      const missingElementPath = '../elements/missing-element.js';
+      const missingElementName = 'missing-element';
+      self.importAndInit(missingElementPath, missingElementName, renderInstance, (newElement, hl) => {
+        const content = this.querySelector('#content');
+        newElement.msg = elementName; //todo self.replaceWith(newElement);
+
+        content.firstChild ? content.firstChild.replaceWith(newElement) : content.appendChild(newElement);
+      });
     });
+  }
+  /**
+   * Checks element module existence in auto-load configs
+   * then triggers the loading from the right location
+   *
+   * @param elementProps
+   * @param rI
+   * @param cb
+   */
+
+
+  loadDynamic(elementProps, rI, cb) {
+    let l = ElementLoader.autoLoad(elementProps.switchName);
+
+    if (l) {
+      // Load from config
+      this.importAndInit(l.path, l.name, rI, cb);
+    } else {
+      // Load from naming convention
+      this.importAndInit(elementProps.path, elementProps.name, rI, cb);
+    }
   }
   /**
    * Manual Autoload Configs,
@@ -270,7 +252,7 @@ class ElementLoader extends LitElement {
    */
 
 
-  autoLoad(elementName) {
+  static autoLoad(elementName) {
     switch (elementName) {
       case 'HIDDEN':
         return {

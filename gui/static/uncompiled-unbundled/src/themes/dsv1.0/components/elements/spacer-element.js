@@ -6,7 +6,10 @@ class SpacerElement extends spacerElementBase {
     return html`
         <style>
             .spacer{
-                margin-top: 90px
+                margin-top: 90px;
+                width: ${this.getWidth()};
+                height: ${this.getHeight()};
+                
             }
         </style>
         <div class="spacer"></div>

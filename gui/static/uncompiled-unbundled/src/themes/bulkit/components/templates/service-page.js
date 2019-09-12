@@ -59,6 +59,21 @@ nav {
     background-color: var(--app-default-color);
 }
 */
+@media (max-width: 767px){
+    .dashboard-wrapper {
+        margin-left: 60px;
+        padding: 33px 0 0 0;
+    }
+    .mobile-borderless, .flex-card{
+        border-radius: 0!important;
+    }
+    .column.mobile-fullwidth{
+        width: 100%!important;
+    }
+    .columns, .column{
+        padding: 0;
+    }
+}
 </style>        
             <!-- Main sidebar menu -->
         <nav class="main-menu">
@@ -418,9 +433,9 @@ nav {
                                 <div class="columns dashboard-columns is-multiline">
                                     <!-- YOUR CONTENT COLUMNS GO HERE -->
                                     ${this.page.pageInputGroups.map((feed, feedIndex) => html`
-                                    <div class="column ${this._gridClasses(feed)}"> 
+                                    <div class="column ${this._gridClasses(feed)} mobile-fullwidth"> 
                                     
-                                    <div class="flex-card light-bordered">
+                                    <div class="flex-card light-bordered mobile-borderless">
                                             
                                             <div class="card-body is-responsive" style="padding: 0px;">
                                             
@@ -532,11 +547,7 @@ nav {
 
   _closeChildMenu(e) {
     // activate main view mode, page might have changed
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
+    this.scrollToTop();
 
     if (this.view !== VIEW_MODE_MAIN) {
       this.viewMain();

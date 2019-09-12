@@ -119,35 +119,6 @@ body, html{
 	100%{opacity:1;}
 }		
 
-/* .yt{
-	margin: 0 auto;
-	margin-top: 50px;
-	position: relative;
-	width: 150px;
-	height:50px;
-	border: outset #2c2c2c 4px;
-	border-radius: 10px;
-	text-align: center;
-	font-size: 30pt;
-	transition: .5s;
-}
-
-.yt a{
-	text-decoration: none;
-	color: #4c4c4c;
-	transition: .5s;
-}
-
-.yt:hover{
-	background: #4c4c4c;
-	transition: .3s;
-}
-
-.yt:hover a{
-	color: #fff;
-	transition: .3s;
-}
- */
 @media screen and (max-width: 685px){
 	.slider-wrapper{
 		border: none;
@@ -177,11 +148,10 @@ visibility: hidden;
 </style>
 <div class="slider-wrapper">
 	
-	<input class ="checkbox" type="radio" id="i0" name="images" checked />
-	<input class ="checkbox" type="radio" id="i1" name="images" />
-	<input class ="checkbox" type="radio" id="i2" name="images" />
-	<input class ="checkbox" type="radio" id="i3" name="images" />
-	<input class ="checkbox" type="radio" id="i4" name="images" />	
+${this.rows.map((slide, index) => html` 
+
+<input class ="checkbox" type="radio" id="i${index}" name="images" ?checked=${index === 0} />`)}
+
 	    ${this.rows.map((slide, index) => html`   
 	<div class="slide_img" id="slide_${index}">			
 			
@@ -202,23 +172,20 @@ visibility: hidden;
 </div>`;
   }
 
-  constructor() {
-    super();
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties); // todo should wait for after data loaded
-
+  onLoadData(dsc) {
     this.showSlidesAuto();
   }
 
   showSlidesAuto() {
-    var i = 0;
-    var self = this;
+    let i = 0;
+    const self = this;
 
     function Move() {
-      if (i > self.rows.length) {
+      if (i === self.rows.length - 1) {
+        // means we have reached the end
         i = 0;
+        self.shadowRoot.querySelector('#i' + i).checked = true;
+        return;
       }
 
       i = i % self.rows.length + 1;

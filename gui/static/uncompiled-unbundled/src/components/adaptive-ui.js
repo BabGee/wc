@@ -14,6 +14,7 @@ import { Logger } from '../core/logger.js'; // This element is connected to the 
 import { store } from '../store.js'; // These are the actions needed by this element.
 
 import { navigate, updateOffline, getPayload, loadTemplate } from '../actions/app.js';
+import { COMMAND_GET_SECTION } from "../core/parsers/response.js";
 /**
  * Does Template Selection and Loading
  */
@@ -41,7 +42,7 @@ class AdaptiveUi extends connect(store)(LitElement) {
 
   get _cleanPayload() {
     if (this._payload) {
-      return this._payload.serviceCommands['get_section'];
+      return this._payload.serviceCommands[COMMAND_GET_SECTION];
     }
 
     return null;

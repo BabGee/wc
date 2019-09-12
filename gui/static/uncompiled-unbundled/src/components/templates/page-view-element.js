@@ -142,8 +142,9 @@ export class PageViewElement extends connect(store)(utilsMixin(LitElement)) {
     } else {
       // activate dialog view mode
       store.dispatch(updateView(VIEW_MODE_DIALOG));
-    } // wait for section-dialog and other nodes to resolve
+    }
 
+    this.scrollToTop(); // wait for section-dialog and other nodes to resolve
 
     await this.updateComplete; // todo display loader
 
@@ -213,6 +214,15 @@ export class PageViewElement extends connect(store)(utilsMixin(LitElement)) {
     this._snackbarOpened = state.app.snackbarOpened;
     this._snackbarMessage = state.app.snackbarMessage;
     this._offline = state.app.offline;
+  } // To scroll to top of window
+
+
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
 }

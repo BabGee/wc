@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 import { serviceCallMixin } from "./servicecall-mixin.js";
 import { DataSource } from "../parsers/commands/data-source.js";
 import { COMMAND_DATA_SOURCE } from "../parsers/response.js";
@@ -64,6 +65,10 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
 
   dataResponseType() {
     return Symbol.for('LIST');
+  }
+
+  refresh() {
+    this.loadData().then(dsc => {});
   } // todo move up into http mixin
 
 
