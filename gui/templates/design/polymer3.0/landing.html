@@ -437,9 +437,9 @@ subscribe();
 
 
 <!-- Sentry Exception Tracking -->
-<!--<script src="https://cdn.ravenjs.com/3.26.4/raven.min.js" crossorigin="anonymous"></script>-->
+<script src="https://cdn.ravenjs.com/3.26.4/raven.min.js" crossorigin="anonymous"></script>
 <script>
-    if (window.process['env']['NODE_ENV'] === 'production1') {
+    if (window.process['env']['NODE_ENV'] === 'production') {
         Raven.config('https://c1d4eca95ac7417eaa4a09a16b4b2cf9@sentry.io/1272205').install();
     }
 </script>
