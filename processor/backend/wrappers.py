@@ -112,7 +112,8 @@ class Wrappers(Authorize):
 
 		#ip_address = request.META.get('REMOTE_ADDR')
 		#ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
-		ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR')))
+		#ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR')))
+		ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('HTTP_X_REAL_IP', request.META.get('REMOTE_ADDR'))))
 
 		#subdomain to use domain gateway_host
 		if 'X-GATEWAY_HOST' in request.META.keys():
@@ -171,10 +172,10 @@ class Wrappers(Authorize):
 					lgr.info('Did Not Pass Onsite Check')
 					if 'ip_address' in payload.keys() and payload['ip_address'] != ip_address:
 						lgr.info('IP Did not Match. Injecting IP to cause failure. IP ADDRESS: %s' % ip_address)
-						payload['ip_address'] = 'None'
+						#payload['ip_address'] = 'None'
 					if 'ip_address' not in payload.keys():
 						lgr.info('No IP Defined. Injecting IP to cause failure. IP ADDRESS: %s' % ip_address)
-						payload['ip_address'] = 'None'
+						#payload['ip_address'] = 'None'
 				elif payload_check.status_code == 200:
 					lgr.info('Onsite Check Passed')
 					#Payload automaticaly inherits the newly created items by django dict injection
