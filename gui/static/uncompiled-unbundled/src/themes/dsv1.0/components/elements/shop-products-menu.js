@@ -5,7 +5,7 @@ import { ShopProductsMenuBase } from "../../../../elements/base/shop-products-me
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class ShopProductsMenu extends ShopProductsMenuBase {
-  render() {
+  renderDefault() {
     return html`   
         
 

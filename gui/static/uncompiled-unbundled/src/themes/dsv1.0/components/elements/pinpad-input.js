@@ -5,7 +5,7 @@ import { PinPadInputBase } from "../../../../elements/base/pinpad-input.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class PinPadInput extends PinPadInputBase {
-  render() {
+  renderDefault() {
     return html`
  
   <div class="column">

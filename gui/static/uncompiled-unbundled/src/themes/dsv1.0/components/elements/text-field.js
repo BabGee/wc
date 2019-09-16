@@ -2,7 +2,7 @@ import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { TextFieldBase } from "../../../../elements/base/text-field.js";
 
 class TextField extends TextFieldBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
             .input-field{

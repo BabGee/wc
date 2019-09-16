@@ -6,7 +6,7 @@ import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
 import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 
 class TextInput extends TextInputBase {
-  render() {
+  renderDefault() {
     return html`
 ${SharedStyles}
  <style>

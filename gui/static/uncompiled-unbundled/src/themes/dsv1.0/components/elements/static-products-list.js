@@ -3,7 +3,7 @@ import { StaticProductsListBase } from "../../../../elements/base/static-product
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class StaticProductsList extends StaticProductsListBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
         /* The Modal (background) */

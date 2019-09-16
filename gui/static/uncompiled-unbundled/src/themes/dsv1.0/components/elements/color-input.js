@@ -8,7 +8,7 @@ class ColorInput extends ColorInputBase {
     return this;
   }
 
-  render() {
+  renderDefault() {
     return html`
            
            <div class="column">

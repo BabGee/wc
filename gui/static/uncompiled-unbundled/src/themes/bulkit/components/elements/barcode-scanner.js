@@ -6,7 +6,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { BarcodeScannerBase } from "../../../../elements/base/barcode-scanner.js";
 
 class BarcodeScanner extends BarcodeScannerBase {
-  render() {
+  renderDefault() {
     return html`
 
   ${SharedStyles}

@@ -1,8 +1,13 @@
 import { SerializableElement } from "../core/serializable-element.js";
+import { html } from "../../node_modules/lit-element/lit-element.js";
 
 class HiddenElement extends SerializableElement {
   static get is() {
     return 'hidden-element';
+  }
+
+  render() {
+    return html``;
   }
 
   static get properties() {

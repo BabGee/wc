@@ -4,7 +4,7 @@ import { ServiceButtonBase } from "../../../../elements/base/service-button.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class ServiceButton extends ServiceButtonBase {
-  render() {
+  renderDefault() {
     return html`
                 <style include="flex-grid">
             .ccc {

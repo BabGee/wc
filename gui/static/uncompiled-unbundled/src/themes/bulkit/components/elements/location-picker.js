@@ -5,7 +5,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { LocationPickerBase } from "../../../../elements/base/location-picker.js";
 
 class LocationPicker extends LocationPickerBase {
-  render() {
+  renderDefault() {
     return html`
   ${SharedStyles}
         <style>

@@ -17,7 +17,7 @@ class Navbar10 extends NavbarBase {
     this.newProductsDropDownMenuHidden = true;
   }
 
-  render() {
+  renderDefault() {
     return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 

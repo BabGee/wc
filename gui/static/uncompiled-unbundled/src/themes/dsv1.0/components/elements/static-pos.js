@@ -5,7 +5,7 @@ import { StaticPosBase } from "../../../../elements/base/static-pos.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class StaticPos extends StaticPosBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
         html {

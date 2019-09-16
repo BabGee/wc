@@ -3,7 +3,7 @@ import { ReceiveSyncBase } from "../../../../elements/base/receive-sync.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class ReceiveSync extends ReceiveSyncBase {
-  render() {
+  renderDefault() {
     return html`
  
 <div class="field">

@@ -5,7 +5,7 @@ import { PinInputBase } from "../../../../elements/base/pin-input.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class PinInput extends PinInputBase {
-  render() {
+  renderDefault() {
     return html`
   <div class="column">
 <div class="field">

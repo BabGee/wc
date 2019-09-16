@@ -4,7 +4,7 @@ import { CcExpirationBase } from "../../../../elements/base/cc-expiration.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class CcExpiration extends CcExpirationBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
         .inp{

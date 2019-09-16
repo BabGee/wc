@@ -4,7 +4,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { MenuServiceButtonBase } from "../../../../elements/base/menu-service-button.js";
 
 class MenuServiceButton extends MenuServiceButtonBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
          <style>

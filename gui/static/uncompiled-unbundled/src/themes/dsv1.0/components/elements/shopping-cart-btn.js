@@ -4,7 +4,7 @@ import { ShoppingCartBtnBase } from "../../../../elements/base/shopping-cart-btn
 // TODO IMPLEMENT OWN LOCAL STORAGE
 
 class ShoppingCartBtn extends ShoppingCartBtnBase {
-  render() {
+  renderDefault() {
     return html`
              
              <style>

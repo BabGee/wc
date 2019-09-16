@@ -5,7 +5,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { ImageInputBase } from "../../../../elements/base/image-input.js";
 
 class ImageInput extends ImageInputBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
 

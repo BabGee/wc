@@ -4,7 +4,7 @@ import { CvcInputBase } from "../../../../elements/base/cvc-input.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class CvcInput extends CvcInputBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
         .inp{

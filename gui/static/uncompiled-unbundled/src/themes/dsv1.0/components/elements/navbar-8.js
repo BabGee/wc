@@ -4,8 +4,8 @@ import "../../../../../node_modules/fa-icons/index.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class Navbar8 extends NavbarBase {
-  render() {
-    let light = html`
+  renderDefault() {
+    const light = html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="bind-box">
           <div class="block">

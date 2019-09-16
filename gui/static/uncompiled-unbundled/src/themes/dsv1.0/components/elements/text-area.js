@@ -4,7 +4,7 @@ import { Logger } from "../../../../core/logger.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class TextArea extends TextAreaBase {
-  render() {
+  renderDefault() {
     return html`
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <div class="field">

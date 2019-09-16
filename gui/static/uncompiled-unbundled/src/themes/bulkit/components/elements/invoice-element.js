@@ -7,7 +7,7 @@ class InvoiceElement extends InvoiceElementBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         <style>
         :host {

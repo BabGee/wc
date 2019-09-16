@@ -7,7 +7,7 @@ import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
 import { FileInputBase } from "../../../../elements/base/file-input.js";
 
 class FileInput extends FileInputBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}       
 ${DASHBOARD_STYLES} 

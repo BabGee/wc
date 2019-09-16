@@ -8,7 +8,7 @@ class CcInput extends CcInputBase {
     return this;
   }
 
-  render() {
+  renderDefault() {
     return html`
  <div class="column">
 <div class="field">

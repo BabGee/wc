@@ -7,7 +7,7 @@ import { IndustriesCategoriesBase } from "../../../../elements/base/industries-c
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class IndustriesCategories extends IndustriesCategoriesBase {
-  render() {
+  renderDefault() {
     return html`
   
         <style>

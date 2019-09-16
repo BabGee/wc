@@ -8,7 +8,7 @@ class InputSubmit extends InputSubmitBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}
         <div class="field">

@@ -5,7 +5,7 @@ import { LoginMipayBase } from "../../../../elements/base/login-mipay.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class LoginMipay extends LoginMipayBase {
-  render() {
+  renderDefault() {
     return html`
         
         <style>

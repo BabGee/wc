@@ -2,7 +2,7 @@ import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { MonthYearBase } from "../../../../elements/base/month-year.js";
 
 class MonthYear extends MonthYearBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
             .inp{

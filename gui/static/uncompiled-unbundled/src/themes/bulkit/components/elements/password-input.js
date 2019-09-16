@@ -5,7 +5,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { PasswordInputBase } from "../../../../elements/base/password-input.js";
 
 class PasswordInput extends PasswordInputBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
   <div class="column">

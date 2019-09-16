@@ -4,7 +4,7 @@ import { HyperlinkWindowBase } from "../../../../elements/base/hyperlink-window.
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class HyperlinkWindow extends HyperlinkWindowBase {
-  render() {
+  renderDefault() {
     return html`
                  <div class="column is-3 is-offset-5">
         <div class="field" style="margin-top: 20px; margin-bottom: 20px;">

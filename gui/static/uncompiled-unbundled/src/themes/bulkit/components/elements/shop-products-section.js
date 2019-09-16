@@ -5,7 +5,7 @@ import { shopProductItemTheme } from "../../styles/shop-product-item-styles.js";
 import { ShopProductsSectionBase } from "../../../../elements/base/shop-products-section.js";
 
 class ShopProductsSection extends ShopProductsSectionBase {
-  render() {
+  renderDefault() {
     return html`
         ${shopProductsSectionTheme}
         ${shopProductItemTheme}

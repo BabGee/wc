@@ -2,9 +2,10 @@ import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import "../../../../../node_modules/@polymer/paper-card/paper-card.js";
 import '../../icons/my-icons.js';
 import { SummaryBoxesBase } from "../../../../elements/base/summary-boxes.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SummaryBoxes extends SummaryBoxesBase {
-  render() {
+  renderDefault() {
     return html`
 
         <style>

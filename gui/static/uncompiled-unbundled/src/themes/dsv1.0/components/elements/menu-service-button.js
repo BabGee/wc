@@ -3,7 +3,7 @@ import { MenuServiceButtonBase } from "../../../../elements/base/menu-service-bu
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class MenuServiceButton extends MenuServiceButtonBase {
-  render() {
+  renderDefault() {
     return html`
 
          <style>

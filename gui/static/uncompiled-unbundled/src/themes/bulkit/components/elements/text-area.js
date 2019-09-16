@@ -5,7 +5,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
 
 class TextArea extends TextAreaBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}       
 ${DASHBOARD_STYLES} 

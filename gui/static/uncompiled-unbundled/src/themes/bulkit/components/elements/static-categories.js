@@ -7,7 +7,7 @@ import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
 import { StaticCategoriesBase } from "../../../../elements/base/static-categories.js";
 
 class StaticCategories extends StaticCategoriesBase {
-  render() {
+  renderDefault() {
     return html`   
         ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 

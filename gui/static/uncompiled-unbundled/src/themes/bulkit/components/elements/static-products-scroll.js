@@ -7,7 +7,7 @@ import { LANDING_STYLES } from "../../styles/landing-style.js";
 import { StaticProductsScrollBase } from "../../../../elements/base/static-products-scroll.js";
 
 class StaticProductsScroll extends StaticProductsScrollBase {
-  render() {
+  renderDefault() {
     return html`
         ${SHOP_STYLES}
         ${SharedStyles}

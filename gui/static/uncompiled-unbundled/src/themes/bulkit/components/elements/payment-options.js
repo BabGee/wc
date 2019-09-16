@@ -7,7 +7,7 @@ import "../../icons/payments-icons.js";
 import { PaymentOptionsBase } from "../../../../elements/base/payment-options.js";
 
 class PaymentOptions extends PaymentOptionsBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
 <style>

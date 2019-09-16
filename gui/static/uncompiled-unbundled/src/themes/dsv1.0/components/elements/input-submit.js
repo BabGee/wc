@@ -7,7 +7,7 @@ class InputSubmit extends InputSubmitBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         
         <div class="field">

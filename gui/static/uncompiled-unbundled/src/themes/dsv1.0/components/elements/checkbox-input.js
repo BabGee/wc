@@ -7,7 +7,7 @@ class CheckboxInput extends CheckboxInputBase {
     return this;
   }
 
-  render() {
+  renderDefault() {
     return html`
 <style>
 /* The container */

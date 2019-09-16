@@ -4,7 +4,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { ColorInputBase } from "../../../../elements/base/color-input.js";
 
 class ColorInput extends ColorInputBase {
-  render() {
+  renderDefault() {
     return html`
             ${SharedStyles}
            <div class="column">

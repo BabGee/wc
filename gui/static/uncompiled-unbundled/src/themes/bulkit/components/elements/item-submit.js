@@ -7,7 +7,7 @@ class ItemSubmit extends ItemSubmitBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html``;
   }
 

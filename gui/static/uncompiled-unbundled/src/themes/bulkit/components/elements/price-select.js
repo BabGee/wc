@@ -6,7 +6,7 @@ import { LANDING_STYLES } from "../../styles/landing-style.js";
 import { PriceSelectBase } from "../../../../elements/base/price-select.js";
 
 class PriceSelect extends PriceSelectBase {
-  render() {
+  renderDefault() {
     return html`
         ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 

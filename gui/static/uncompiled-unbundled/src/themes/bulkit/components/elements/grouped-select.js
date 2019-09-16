@@ -8,7 +8,7 @@ class GroupedSelect extends GroupedSelectBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         <div id="scroller" class="scroller" style="height:600px;">
 	<iron-selector id="iron_selector"

@@ -5,7 +5,7 @@ import { LoginGoogleBase } from "../../../../elements/base/login-google.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class LoginGoogle extends LoginGoogleBase {
-  render() {
+  renderDefault() {
     return html`
         
         <style>

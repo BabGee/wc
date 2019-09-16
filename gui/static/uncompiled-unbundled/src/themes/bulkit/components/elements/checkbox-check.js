@@ -3,7 +3,7 @@ import '../../icons/my-icons.js';
 import { CheckboxCheckBase } from "../../../../elements/base/checkbox-check.js";
 
 class CheckboxCheck extends CheckboxCheckBase {
-  render() {
+  renderDefault() {
     return html`
 <style>
 .switch {

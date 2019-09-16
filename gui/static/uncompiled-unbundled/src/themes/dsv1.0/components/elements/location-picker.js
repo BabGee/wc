@@ -4,7 +4,7 @@ import { LocationPickerBase } from "../../../../elements/base/location-picker.js
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class LocationPicker extends LocationPickerBase {
-  render() {
+  renderDefault() {
     return html`
 
         <style>

@@ -9,7 +9,7 @@ class RichTextEditor extends RichTextEditorBase {
     this.value = '';
   }
 
-  render() {
+  renderDefault() {
     return html`
          ${SharedStyles}
          <link rel="stylesheet" type="text/css" href="https://unpkg.com/pell/dist/pell.min.css">

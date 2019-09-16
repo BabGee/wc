@@ -3,7 +3,7 @@ import { ToggleInputBase } from "../../../../elements/base/toggle-input.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class ToggleInput extends ToggleInputBase {
-  render() {
+  renderDefault() {
     return html`
 <style>
 .switch {

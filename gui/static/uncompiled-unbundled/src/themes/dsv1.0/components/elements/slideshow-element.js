@@ -3,7 +3,7 @@ import { SlideshowElementBase } from "../../../../elements/base/slideshow-elemen
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SlideshowElement extends SlideshowElementBase {
-  render() {
+  renderDefault() {
     return html`
   <style>
 

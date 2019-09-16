@@ -5,7 +5,7 @@ import { LANDING_STYLES } from "../../styles/landing-style.js";
 import { SectionPElementBase } from "../../../../elements/base/section-pelement.js";
 
 class SectionHero extends SectionPElementBase {
-  render() {
+  renderDefault() {
     return html`
      ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 

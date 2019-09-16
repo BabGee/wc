@@ -6,7 +6,7 @@ import "../../../../../node_modules/slim-select/dist/slimselect.min.js";
 import { Logger } from "../../../../core/logger.js";
 
 class DropdownSelect extends DropdownSelectBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
  <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet"/>

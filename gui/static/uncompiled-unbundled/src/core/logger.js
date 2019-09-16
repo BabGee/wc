@@ -45,7 +45,7 @@ export class Logger {
   }
 
   incompleteDev(...message) {
-    this.info('[INCOMPLETE DEV]', ...message);
+    this.warn('[INCOMPLETE DEV]', ...message);
   }
 
   switchConfiguration(...message) {

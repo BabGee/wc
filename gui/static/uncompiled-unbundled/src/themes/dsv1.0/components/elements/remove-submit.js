@@ -7,7 +7,7 @@ class RemoveSubmit extends RemoveSubmitBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         <a class="button is-primary is-rounded">
             <span class="icon">

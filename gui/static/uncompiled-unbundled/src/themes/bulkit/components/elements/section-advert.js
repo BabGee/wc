@@ -5,7 +5,7 @@ import { LANDING_STYLES } from "../../styles/landing-style.js";
 import { SectionPElementDsc } from "../../../../elements/base/section-pelement-dsc.js";
 
 class SectionAdvert extends SectionPElementDsc {
-  render() {
+  renderDefault() {
     return html`
      ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 

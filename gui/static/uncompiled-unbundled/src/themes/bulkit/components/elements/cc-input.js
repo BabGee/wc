@@ -5,7 +5,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { CcInputBase } from "../../../../elements/base/cc-input.js";
 
 class CcInput extends CcInputBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
  <div class="column">

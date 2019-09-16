@@ -5,7 +5,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { CvcInputBase } from "../../../../elements/base/cvc-input.js";
 
 class CvcInput extends CvcInputBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
  <div class="column">

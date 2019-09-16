@@ -4,7 +4,7 @@ import { SubdomainInputBase } from "../../../../elements/base/subdomain-input.js
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SubdomainInput extends SubdomainInputBase {
-  render() {
+  renderDefault() {
     return html`
 
         <style>

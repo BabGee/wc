@@ -3,7 +3,7 @@ import { TextViewBase } from "../../../../elements/base/text-view.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class TextView extends TextViewBase {
-  render() {
+  renderDefault() {
     return html`
 
 <div class="field">

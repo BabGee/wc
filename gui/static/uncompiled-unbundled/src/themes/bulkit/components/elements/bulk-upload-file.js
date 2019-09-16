@@ -6,7 +6,7 @@ import { BulkUploadFileBase } from "../../../../elements/base/bulk-upload-file.j
 import { Dropzone } from "./dropzone/dropzone.js";
 
 class BulkUploadFile extends BulkUploadFileBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
 

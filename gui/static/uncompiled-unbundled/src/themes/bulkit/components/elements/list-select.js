@@ -7,7 +7,7 @@ class ListSelect extends ListSelectBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html``;
   }
 

@@ -15,7 +15,8 @@ class DataListElement extends DataListElementBase {
     this.empty = false;
   }
 
-  render() {
+  renderDefault() {
+    // TODO convert to li-html svg tag
     const emptyStateSvg = html`
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 415.998 415.998" style="enable-background:new 0 0 415.998 415.998;" xml:space="preserve" width="100px" height="100px"><g><g>
 	<g>
@@ -83,9 +84,7 @@ class DataListElement extends DataListElementBase {
   }
   </style>
 
-${this.loading ? html`
-  <loader-element></loader-element>
-` : html`
+
 <div class="column">
     <div class="field">
       <div>
@@ -101,7 +100,9 @@ ${this.loading ? html`
           <iron-icon icon="icons:refresh"></iron-icon>
         </button>
       </div>
-      
+      ${this.loading ? html`
+  <loader-element></loader-element>
+` : html`
         ${this.empty ? html`
     <div class="wrapper">
       <div class="page-container">
@@ -146,8 +147,11 @@ ${this.loading ? html`
         .totalPages="${this.totalPages}">
       </datasource-list>
       `}
+`}
     </div>
-  </div>`}
+  </div>
+
+
 `;
   }
 

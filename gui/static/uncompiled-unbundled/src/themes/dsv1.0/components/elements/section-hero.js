@@ -3,7 +3,7 @@ import { SectionPElementBase } from "../../../../elements/base/section-pelement.
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SectionHero extends SectionPElementBase {
-  render() {
+  renderDefault() {
     return html`
     
         <div class="Wallop Wallop--fade">

@@ -4,7 +4,7 @@ import { BULMA_STYLES } from "../../styles/bulma-styles.js";
 import { HyperlinkElementBase } from "../../../../elements/base/hyperlink-element.js";
 
 class HyperlinkElement extends HyperlinkElementBase {
-  render() {
+  renderDefault() {
     return html`
         ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 

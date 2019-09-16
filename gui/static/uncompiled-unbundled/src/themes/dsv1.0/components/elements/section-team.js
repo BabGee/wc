@@ -3,7 +3,7 @@ import { SectionPElementDsc } from "../../../../elements/base/section-pelement-d
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SectionTeam extends SectionPElementDsc {
-  render() {
+  renderDefault() {
     return html`
         
         <section class="section is-small">

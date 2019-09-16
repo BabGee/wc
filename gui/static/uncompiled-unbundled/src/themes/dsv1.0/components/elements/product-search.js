@@ -3,7 +3,7 @@ import { ProductSearchBase } from "../../../../elements/base/product-search.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class ProductSearch extends ProductSearchBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
         .search-wrapper{

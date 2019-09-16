@@ -3,7 +3,7 @@ import { SectionPElementDsc } from "../../../../elements/base/section-pelement-d
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SectionBox extends SectionPElementDsc {
-  render() {
+  renderDefault() {
     return html`
             <style>
                 img {  

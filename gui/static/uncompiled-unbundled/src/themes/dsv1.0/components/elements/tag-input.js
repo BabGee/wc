@@ -7,7 +7,7 @@ import { TagInputBase } from "../../../../elements/base/tag-input.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class TagInput extends TagInputBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
             :host {

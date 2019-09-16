@@ -5,7 +5,7 @@ import { LANDING_STYLES } from "../../styles/landing-style.js";
 import { SlideshowElementBase } from "../../../../elements/base/slideshow-element.js";
 
 class SlideshowElement extends SlideshowElementBase {
-  render() {
+  renderDefault() {
     return html`
      ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 

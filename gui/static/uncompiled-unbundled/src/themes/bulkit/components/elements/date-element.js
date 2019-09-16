@@ -5,7 +5,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { DateElementBase } from "../../../../elements/base/date-element.js";
 
 class DateElement extends DateElementBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
   <style>

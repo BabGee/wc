@@ -5,7 +5,7 @@ import { MsisdnInputBase } from "../../../../elements/base/msisdn-input.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class MsisdnInput extends MsisdnInputBase {
-  render() {
+  renderDefault() {
     return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
         <style>

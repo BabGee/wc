@@ -4,7 +4,7 @@ import { SummaryBoxesBase } from "../../../../elements/base/summary-boxes.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SummaryBoxes extends SummaryBoxesBase {
-  render() {
+  renderDefault() {
     return html`
 
         <style>

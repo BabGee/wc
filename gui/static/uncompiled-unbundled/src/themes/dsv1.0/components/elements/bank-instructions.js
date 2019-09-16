@@ -7,7 +7,7 @@ class BankInstructions extends BankInstructionsBase {
     return this;
   }
 
-  render() {
+  renderDefault() {
     return html`
     <style>
     .inp{

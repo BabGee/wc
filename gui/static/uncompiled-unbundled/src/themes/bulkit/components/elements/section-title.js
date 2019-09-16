@@ -8,7 +8,7 @@ import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
 import { SectionPElementBase } from "../../../../elements/base/section-pelement.js";
 
 class SectionTitle extends SectionPElementBase {
-  render() {
+  renderDefault() {
     return html`
      ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 

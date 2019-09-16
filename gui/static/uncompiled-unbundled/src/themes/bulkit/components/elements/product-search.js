@@ -4,7 +4,7 @@ import { SHOP_STYLES } from "../../styles/shop-styles.js";
 import { ProductSearchBase } from "../../../../elements/base/product-search.js";
 
 class ProductSearch extends ProductSearchBase {
-  render() {
+  renderDefault() {
     return html`
         ${SHOP_STYLES}
         ${SharedStyles}

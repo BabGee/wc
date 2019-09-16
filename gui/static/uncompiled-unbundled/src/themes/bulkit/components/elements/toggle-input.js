@@ -4,7 +4,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { ToggleInputBase } from "../../../../elements/base/toggle-input.js";
 
 class ToggleInput extends ToggleInputBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
 <style>
