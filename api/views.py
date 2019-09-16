@@ -109,7 +109,9 @@ class Interface(Wrapper):
 			if request.method == 'POST' and len(request.FILES.keys())>0:
 				#ip_address = request.META.get('REMOTE_ADDR')
 				#ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
-				ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR')))
+				#ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR')))
+				ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('HTTP_X_REAL_IP', request.META.get('REMOTE_ADDR'))))
+
 				filename = None 
 				#timestamp = datetime.now().isoformat()
 				timestamp = int(time.time()*1000)
@@ -127,12 +129,19 @@ class Interface(Wrapper):
 					lgr.info('Extension: %s' % str(extension))
 
 					chars = string.ascii_letters + string.punctuation + string.digits
+					lgr.info('Got Here')
 					rnd = random.SystemRandom()
+
+					lgr.info('Got Here')
 					rnd_name = ''.join(rnd.choice(chars) for i in range(4))
 
+					lgr.info('Got Here: %s' % rnd_name)
 					filename = "%s_%s_%s" % (timestamp,rnd_name,extension_chunks[0][:50])
-					filename = "%s.%s" % (base64.urlsafe_b64encode(filename), extension)
 
+					lgr.info('Got Here: %s' % filename)
+					filename = "%s.%s" % (base64.urlsafe_b64encode(filename.encode()).decode('utf-8'), extension)
+
+					lgr.info('Got Here: %s' % filename)
 					obj = str(file_object.content_type).split("/")[0]
 					lgr.info('Object is: %s' % obj)
 					if  (int(file_object.size) > 12000000 and obj in ['image','text']) or \
