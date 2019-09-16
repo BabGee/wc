@@ -5,7 +5,7 @@ import { StaticProductsScrollBase } from "../../../../elements/base/static-produ
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class StaticProductsScroll extends StaticProductsScrollBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
         /* The Modal (background) */

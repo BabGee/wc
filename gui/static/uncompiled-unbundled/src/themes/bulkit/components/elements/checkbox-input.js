@@ -4,7 +4,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { CheckboxInputBase } from "../../../../elements/base/checkbox-input.js";
 
 class CheckboxInput extends CheckboxInputBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
 <style>

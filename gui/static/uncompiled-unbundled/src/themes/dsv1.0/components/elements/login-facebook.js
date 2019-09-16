@@ -5,7 +5,7 @@ import { LoginFacebookBase } from "../../../../elements/base/login-facebook.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class LoginFacebook extends LoginFacebookBase {
-  render() {
+  renderDefault() {
     return html`
 
         <style>

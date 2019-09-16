@@ -6,7 +6,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { MsisdnInputBase } from "../../../../elements/base/msisdn-input.js";
 
 class MsisdnInput extends MsisdnInputBase {
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}
         <style>
@@ -96,6 +96,39 @@ class MsisdnInput extends MsisdnInputBase {
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
+    this.checkKindValue();
+  }
+
+  checkKindValue() {
+    const kindValue = this.e.kind;
+    const numberInput = this.shadowRoot.querySelector('#input');
+
+    if (kindValue != null) {
+      /*Number with the country code can be in the following formats
+      1. Country code with only one digit eg '+1' number -> +1726640997 -> length = 11
+      2. Country code with only two digits eg '+11' number -> +11726640997 -> length = 12
+      3. Country code with only three digits eg '+111' number -> +111726640997 -> length = 13
+      */
+      switch (kindValue.length) {
+        case 11:
+          numberInput.value = kindValue.slice(2);
+          break;
+
+        case 12:
+          numberInput.value = kindValue.slice(3);
+          break;
+
+        case 13:
+          numberInput.value = kindValue.slice(4);
+          break;
+
+        default:
+          numberInput.value = '';
+          break;
+      }
+    } else {
+      numberInput.value = '';
+    }
   }
 
   init(pElement, loader) {

@@ -4,7 +4,7 @@ import { BulkUploadBase } from "../../../../elements/base/bulk-upload.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class BulkUpload extends BulkUploadBase {
-  render() {
+  renderDefault() {
     return html`
  <style>
  .inputfile {

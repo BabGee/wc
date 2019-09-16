@@ -4,7 +4,7 @@ import { ReportsSummaryBase } from "../../../../elements/base/reports-summary.js
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class ReportsSummary extends ReportsSummaryBase {
-  render() {
+  renderDefault() {
     return html`
         <style include="flex-grid">
             .text-center {

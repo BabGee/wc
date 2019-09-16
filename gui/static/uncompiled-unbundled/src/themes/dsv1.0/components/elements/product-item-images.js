@@ -7,7 +7,7 @@ class ProductItemImages extends ProductItemImagesBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         <style>
 

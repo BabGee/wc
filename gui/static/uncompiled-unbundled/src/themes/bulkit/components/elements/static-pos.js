@@ -7,7 +7,7 @@ import { SHOP_STYLES } from "../../styles/shop-styles.js";
 import { StaticPosBase } from "../../../../elements/base/static-pos.js";
 
 class StaticPos extends StaticPosBase {
-  render() {
+  renderDefault() {
     return html`
         ${SHOP_STYLES}
         ${shopProductsSectionTheme}

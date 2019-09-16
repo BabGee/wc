@@ -5,7 +5,7 @@ import { BarcodeScannerBase } from "../../../../elements/base/barcode-scanner.js
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class BarcodeScanner extends BarcodeScannerBase {
-  render() {
+  renderDefault() {
     return html`
 
  <style>

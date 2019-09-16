@@ -7,7 +7,7 @@ class PosProducts extends PosProductsBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         <style>
         .container{

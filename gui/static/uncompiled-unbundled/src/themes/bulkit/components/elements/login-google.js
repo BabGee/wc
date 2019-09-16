@@ -7,7 +7,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { LoginGoogleBase } from "../../../../elements/base/login-google.js";
 
 class LoginGoogle extends LoginGoogleBase {
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}
         <style>

@@ -2,7 +2,7 @@ import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { spacerElementBase } from "../../../../elements/base/spacer-element.js";
 
 class SpacerElement extends spacerElementBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
             .spacer{

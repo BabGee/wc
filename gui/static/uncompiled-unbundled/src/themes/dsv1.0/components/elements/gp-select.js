@@ -7,7 +7,7 @@ class GpSelect extends GpSelectBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         TODO!!
         `;

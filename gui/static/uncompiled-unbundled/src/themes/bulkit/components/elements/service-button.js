@@ -4,7 +4,7 @@ import '../../icons/my-icons.js';
 import { ServiceButtonBase } from "../../../../elements/base/service-button.js";
 
 class ServiceButton extends ServiceButtonBase {
-  render() {
+  renderDefault() {
     return html`
                 <style include="flex-grid">
             .ccc {

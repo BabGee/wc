@@ -1,4 +1,5 @@
 import { SerializableElement } from "../core/serializable-element.js";
+import { html } from "../../node_modules/lit-element/lit-element.js";
 
 class FingerprintElement extends SerializableElement {
   static get is() {
@@ -9,6 +10,10 @@ class FingerprintElement extends SerializableElement {
     return {
       result: String
     };
+  }
+
+  render() {
+    return html``;
   }
 
   getValue() {

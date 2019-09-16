@@ -6,7 +6,7 @@ import { FileInputBase } from "../../../../elements/base/file-input.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class FileInput extends FileInputBase {
-  render() {
+  renderDefault() {
     return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 

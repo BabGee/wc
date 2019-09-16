@@ -4,7 +4,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { StaticProductsListBase } from "../../../../elements/base/static-products-list.js";
 
 class StaticProductsList extends StaticProductsListBase {
-  render() {
+  renderDefault() {
     return html`
         ${SHOP_STYLES}
         ${SharedStyles}

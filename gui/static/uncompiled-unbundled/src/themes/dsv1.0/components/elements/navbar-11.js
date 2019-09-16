@@ -3,7 +3,7 @@ import { NavbarBase } from "../../../../elements/base/navbar-base.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class Navbar11 extends NavbarBase {
-  render() {
+  renderDefault() {
     return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>

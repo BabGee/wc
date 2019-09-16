@@ -2,7 +2,7 @@ import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { CountdownElementBase } from "../../../../elements/base/countdown-element.js";
 
 class CountdownElement extends CountdownElementBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
             :host {

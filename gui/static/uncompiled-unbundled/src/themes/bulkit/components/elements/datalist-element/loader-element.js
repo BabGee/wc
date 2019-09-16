@@ -20,6 +20,12 @@ class LoaderElement extends LitElement {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .center{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         </style>
         <div class="loader-wrapper center">
             <div id="loader"></div>

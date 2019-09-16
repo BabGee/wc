@@ -2,7 +2,7 @@ import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { PaymentFooterBase } from "../../../../elements/base/payment-footer.js";
 
 class PaymentFooter extends PaymentFooterBase {
-  render() {
+  renderDefault() {
     return html`
     <style>
       .tab-right-bottom{

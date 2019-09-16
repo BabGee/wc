@@ -6,7 +6,7 @@ import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
 import { BankInstructionsBase } from "../../../../elements/base/bank-instructions.js";
 
 class BankInstructions extends BankInstructionsBase {
-  render() {
+  renderDefault() {
     return html`${BULMA_STYLES}
 ${DASHBOARD_STYLES} 
 ${LANDING_STYLES}

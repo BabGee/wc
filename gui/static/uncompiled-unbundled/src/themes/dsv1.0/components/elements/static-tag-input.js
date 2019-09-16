@@ -7,7 +7,7 @@ import { StaticTagInputBase } from "../../../../elements/base/static-tag-input.j
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class StaticTagInput extends StaticTagInputBase {
-  render() {
+  renderDefault() {
     return html`
         <style>
             :host {

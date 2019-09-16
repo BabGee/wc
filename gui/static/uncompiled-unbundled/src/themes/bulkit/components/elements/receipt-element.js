@@ -7,7 +7,7 @@ class ReceiptElement extends ReceiptElementBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         <style>
         :host {

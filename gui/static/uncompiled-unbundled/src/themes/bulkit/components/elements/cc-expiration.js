@@ -5,7 +5,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { CcExpirationBase } from "../../../../elements/base/cc-expiration.js";
 
 class CcExpiration extends CcExpirationBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
  <div class="column">

@@ -10,7 +10,7 @@ class DataListElement extends DataListElementBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
 <h4>${this.title}</h4>
                  <div>

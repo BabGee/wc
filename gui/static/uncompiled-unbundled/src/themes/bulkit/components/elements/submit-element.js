@@ -4,9 +4,10 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
 import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { SubmitElementBase } from "../../../../elements/base/submit-element.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SubmitElement extends SubmitElementBase {
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}
         <style>

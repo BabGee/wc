@@ -3,7 +3,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { SubdomainInputBase } from "../../../../elements/base/subdomain-input.js";
 
 class SubdomainInput extends SubdomainInputBase {
-  render() {
+  renderDefault() {
     return html`
 
         <style>

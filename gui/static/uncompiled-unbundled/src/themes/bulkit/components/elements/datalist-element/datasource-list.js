@@ -1069,6 +1069,7 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
                                  id="q"></paper-input>
 
                     <button type="submit" @click="${this._search}">Search</button>
+                    <button type="button" @click="${this._searchReset}">Clear</button>
 
                 </div>
             </div>        
@@ -1435,6 +1436,8 @@ ${this.paginate ? html`
     // todo this.fire('selection-changed', eventData);
 
   }
+
+  _searchReset(evt) {}
 
   _search(evt) {
     const self = this;

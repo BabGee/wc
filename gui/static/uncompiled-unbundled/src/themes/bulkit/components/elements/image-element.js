@@ -4,7 +4,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { ImageElementBase } from "../../../../elements/base/image-element.js";
 
 class ImageElement extends ImageElementBase {
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}
         <figure class="image is-128x128">

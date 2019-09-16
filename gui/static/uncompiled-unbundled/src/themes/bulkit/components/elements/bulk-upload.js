@@ -5,7 +5,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { BulkUploadBase } from "../../../../elements/base/bulk-upload.js";
 
 class BulkUpload extends BulkUploadBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
  <style>

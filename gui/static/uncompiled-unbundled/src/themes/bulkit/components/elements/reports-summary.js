@@ -3,7 +3,7 @@ import "../../../../../node_modules/@polymer/paper-button/paper-button.js";
 import { ReportsSummaryBase } from "../../../../elements/base/reports-summary.js";
 
 class ReportsSummary extends ReportsSummaryBase {
-  render() {
+  renderDefault() {
     return html`
         <style include="flex-grid">
             .text-center {

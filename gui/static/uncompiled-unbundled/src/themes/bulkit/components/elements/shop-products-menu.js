@@ -5,7 +5,7 @@ import { ShopProductsMenuTheme } from "../../styles/shared-styles.js";
 import { ShopProductsMenuBase } from "../../../../elements/base/shop-products-menu.js";
 
 class ShopProductsMenu extends ShopProductsMenuBase {
-  render() {
+  renderDefault() {
     return html`   
         ${ShopProductsMenuTheme}
 

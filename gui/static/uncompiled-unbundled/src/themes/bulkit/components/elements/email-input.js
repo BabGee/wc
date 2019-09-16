@@ -6,7 +6,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { EmailInputBase } from "../../../../elements/base/email-input.js";
 
 class EmailInput extends EmailInputBase {
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}     
          <div class="column " >

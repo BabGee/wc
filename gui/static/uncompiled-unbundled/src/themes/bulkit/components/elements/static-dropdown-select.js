@@ -4,7 +4,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { StaticDropdownSelectBase } from "../../../../elements/base/static-dropdown-select.js";
 
 class StaticDropdownSelect extends StaticDropdownSelectBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
   <style>

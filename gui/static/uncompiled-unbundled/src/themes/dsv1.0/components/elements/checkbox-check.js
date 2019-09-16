@@ -7,7 +7,7 @@ class CheckboxCheck extends CheckboxCheckBase {
     return this;
   }
 
-  render() {
+  renderDefault() {
     return html`
 <style>
 .switch {

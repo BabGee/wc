@@ -3,7 +3,7 @@ import { DropdownSelectBase } from "../../../../elements/base/dropdown-select.js
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class DropdownSelect extends DropdownSelectBase {
-  render() {
+  renderDefault() {
     return html`
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <style>

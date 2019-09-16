@@ -3,7 +3,7 @@ import { HeaderViewBase } from "../../../../elements/base/header-view.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class HeaderView extends HeaderViewBase {
-  render() {
+  renderDefault() {
     return html`
       <style>
         .field {

@@ -3,7 +3,7 @@ import { ImageElementBase } from "../../../../elements/base/image-element.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class ImageElement extends ImageElementBase {
-  render() {
+  renderDefault() {
     return html`
         
         <figure class="image is-128x128">

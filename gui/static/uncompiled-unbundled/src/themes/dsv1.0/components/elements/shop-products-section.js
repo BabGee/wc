@@ -3,7 +3,7 @@ import { ShopProductsSectionBase } from "../../../../elements/base/shop-products
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class ShopProductsSection extends ShopProductsSectionBase {
-  render() {
+  renderDefault() {
     return html`
 
         <div class="title_section">

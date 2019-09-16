@@ -5,7 +5,7 @@ import { SectionPElementBase } from "../../../../elements/base/section-pelement.
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SectionTitle extends SectionPElementBase {
-  render() {
+  renderDefault() {
     return html`
      <style>
 </style>

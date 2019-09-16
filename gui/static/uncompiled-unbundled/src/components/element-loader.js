@@ -6,11 +6,61 @@ class ElementLoader extends LitElement {
   constructor() {
     super();
     this.renderInstance = 0;
+    this.loading = true;
   }
 
   render() {
-    // track why it keeps changing all the time
-    return html`<div id="content"></div>`;
+    if (this.loading) {
+      return html`
+<style>
+   .loading {
+    text-align: center;
+   }
+   .loading-bar {
+     display: inline-block;
+     width: 4px;
+     height: 18px;
+     border-radius: 4px;
+     animation: loading 1s ease-in-out infinite;
+   }
+   .loading-bar:nth-child(1) {
+     background-color: var(--app-default-color);
+     animation-delay: 0s;
+   }
+   .loading-bar:nth-child(2) {
+     background-color: var(--app-default-color);
+     animation-delay: 0.09s;
+   }
+   .loading-bar:nth-child(3) {
+     background-color: var(--app-default-color);
+     animation-delay: .18s;
+   }
+   .loading-bar:nth-child(4) {
+     background-color: var(--app-default-color);
+     animation-delay: .27s;
+   }
+   
+   @keyframes loading {
+     0% {
+       transform: scale(1);
+     }
+     20% {
+       transform: scale(1, 2.2);
+     }
+     40% {
+       transform: scale(1);
+     }
+   }
+</style>
+<div class="loading">
+<div class="loading-bar"></div>
+<div class="loading-bar"></div>
+<div class="loading-bar"></div>
+<div class="loading-bar"></div>
+</div>`;
+    } else {
+      return html`<div id="content"></div>`;
+    }
   }
 
   static get styles() {
@@ -52,7 +102,8 @@ class ElementLoader extends LitElement {
       params: {
         type: Object,
         value: {}
-      }
+      },
+      loading: true
     };
   }
 
@@ -85,11 +136,13 @@ class ElementLoader extends LitElement {
   }
 
   load() {
-    const self = this;
-    let el = this._element;
-    self.renderInstance += 1; // New Element Naming Convention for Auto-Picking
+    let el = this._element; // render count
+    // this is incremented on each _element update
+    // it is used to cancel out outdated callbacks
 
+    this.renderInstance += 1;
     /*
+    *  Element Naming Convention for Auto-Picking
     * source files for elements names loaded from switch should end in  *-element.js
     * the name of the element should be same as the file name
     *
@@ -100,88 +153,27 @@ class ElementLoader extends LitElement {
     *
     * */
 
-    let elementProps = this.elementPath();
-    let content = self.querySelector('#content'); // Clear Previous Content
+    let elementProps = this.elementPath(); // Display loading indicator
 
-    if (content) {
-      content.innerHTML = `<style>
-            .loading {
-                text-align: center;
-               }
-               .loading-bar {
-                 display: inline-block;
-                 width: 4px;
-                 height: 18px;
-                 border-radius: 4px;
-                 animation: loading 1s ease-in-out infinite;
-               }
-               .loading-bar:nth-child(1) {
-                 background-color: var(--app-default-color);
-                 animation-delay: 0s;
-               }
-               .loading-bar:nth-child(2) {
-                 background-color: var(--app-default-color);
-                 animation-delay: 0.09s;
-               }
-               .loading-bar:nth-child(3) {
-                 background-color: var(--app-default-color);
-                 animation-delay: .18s;
-               }
-               .loading-bar:nth-child(4) {
-                 background-color: var(--app-default-color);
-                 animation-delay: .27s;
-               }
-               
-               @keyframes loading {
-                 0% {
-                   transform: scale(1);
-                 }
-                 20% {
-                   transform: scale(1, 2.2);
-                 }
-                 40% {
-                   transform: scale(1);
-                 }
-               }
-            </style>
-            <div class="loading">
-            <div class="loading-bar"></div>
-            <div class="loading-bar"></div>
-            <div class="loading-bar"></div>
-            <div class="loading-bar"></div>
-          </div>`;
-    } else {
-      // no previous content, initial render
-      Logger.i.info(`initial element-loader render ${elementProps.name}`);
-    }
+    this.loading = true;
+    this.loadDynamic(elementProps, this.renderInstance, (newElement, rI, hl) => {
+      // check if callback is outdated,
+      // only the highest renderInstance is valid
+      if (rI < this.renderInstance) {
+        Logger.i.info('skipped redundant render: ', rI, this.renderInstance, newElement);
+      } else {
+        try {
+          this.el = newElement;
+          newElement.init(el, this);
+          Logger.i.debug('this.load done', newElement, rI); // TODO ignored promise
 
-    self.loadDynamic(elementProps, self.renderInstance, async function (newElement, rI, hl) {
-      //console.log(newElement);
-      try {
-        self.el = newElement;
-        newElement.init(el, self);
-        Logger.i.debug('this.load done', newElement, rI);
-
-        if (rI < self.renderInstance) {
-          Logger.i.info('skipped redundant render: ', rI, self.renderInstance, newElement);
-        } else {
-          // initial render
-          if (!content) {
-            // we have to wait for dom existence to query select
-            await self.updateComplete;
-            content = self.querySelector('#content');
-          } // todo [OPTIMIZATION POINT] self.replaceWith(newElement);
-          // todo [OPTIMIZATION POINT] find a way to no re-create element if the previous was of the same type
-          // todo [CONT] this could be further extended into form wide element re-use
-
-
-          content.firstChild ? content.firstChild.replaceWith(newElement) : content.appendChild(newElement);
-        }
-      } catch (e) {
-        if (e.message === 'newElement.init is not a function') {
-          Logger.i.error('Custom Element Doesn\'t implement init: ' + elementProps.path);
-        } else {
-          Logger.i.error(e);
+          this.replaceWith(newElement);
+        } catch (e) {
+          if (e.message === 'newElement.init is not a function') {
+            Logger.i.error(`Custom Element Doesn't implement init:${elementProps.path}`);
+          } else {
+            Logger.i.error(e);
+          }
         }
       }
     });
@@ -215,12 +207,27 @@ class ElementLoader extends LitElement {
       const missingElementPath = '../elements/missing-element.js';
       const missingElementName = 'missing-element';
       self.importAndInit(missingElementPath, missingElementName, renderInstance, (newElement, hl) => {
-        const content = this.querySelector('#content');
-        newElement.msg = elementName; //todo self.replaceWith(newElement);
+        newElement.msg = elementName; // TODO ignored promise
 
-        content.firstChild ? content.firstChild.replaceWith(newElement) : content.appendChild(newElement);
+        this.replaceWith(newElement);
       });
     });
+  }
+
+  async replaceWith(newElement) {
+    // Clear Previous Content and remove loading indicator
+    this.loading = false; // we have to wait for dom existence to query select
+
+    await this.updateComplete;
+    const content = this.querySelector('#content'); // todo [OPTIMIZATION POINT] this.replaceWith(newElement);
+    // todo [OPTIMIZATION POINT] find a way to no re-create element if the previous was of the same type
+    // todo [CONT] this could be further extended into form wide element re-use
+
+    if (content.firstChild) {
+      content.firstChild.replaceWith(newElement);
+    } else {
+      content.appendChild(newElement);
+    }
   }
   /**
    * Checks element module existence in auto-load configs

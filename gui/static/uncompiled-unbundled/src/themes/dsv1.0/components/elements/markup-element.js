@@ -3,7 +3,7 @@ import { MarkupElementBase } from "../../../../elements/base/markup-element.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class MarkupElement extends MarkupElementBase {
-  render() {
+  renderDefault() {
     return html`
      <style>
      .resize_icon {

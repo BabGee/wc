@@ -3,7 +3,7 @@ import { JumbotronBase } from "../../../../elements/base/jumbotron-base.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class Jumbotron1 extends JumbotronBase {
-  render() {
+  renderDefault() {
     return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>

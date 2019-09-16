@@ -11,18 +11,19 @@ export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
 export const GET_PAYLOAD = 'GET_PAYLOAD';
 import { Response } from '../core/parsers/response.js';
-export const getPayload = payloadjson => (dispatch, getState) => {
-  // Here you would normally get the data from the server. We're simulating
-  // that by dispatching an async action (that you would dispatch when you
-  // successfully got the data back)
-  // TODO [OPTIMIZATION] sequential loading
-  // perform loading of the initial interface payload
+export const getPayload = (payloadjson, template) => (dispatch, getState) => {
+  // Parse initial interface payload.
   let response = new Response(payloadjson);
-  response.parseAll({});
+  response.parseAll({}); // TODO [OPTIMIZATION] sequential loading
+  // perform loading of the initial interface payload
+
   dispatch({
     type: GET_PAYLOAD,
     payload: response
-  });
+  }); // TODO should do on each template change
+  // initial load is unnecessary because of the pre-loading in index.html
+  // there is need to load the 404 template even for index.html pre-loads
+  // dispatch(loadTemplate(template));
 };
 export const navigate = path => dispatch => {
   // console.log(path);

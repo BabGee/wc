@@ -6,7 +6,7 @@ class NavbarDefault extends NavbarDefaultBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`${this.menuGroups.map((menuGroup, menuGroupIndex) => html`
       <a href="/${this.basePath}/${menuGroup.route}/" @click=${this.shopping}>${menuGroup.title}</a><br>`)}`;
   }

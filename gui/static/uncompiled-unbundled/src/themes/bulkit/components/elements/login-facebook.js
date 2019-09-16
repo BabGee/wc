@@ -7,7 +7,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { LoginFacebookBase } from "../../../../elements/base/login-facebook.js";
 
 class LoginFacebook extends LoginFacebookBase {
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}
         <style>

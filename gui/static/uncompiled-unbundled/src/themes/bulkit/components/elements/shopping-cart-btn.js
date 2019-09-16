@@ -4,7 +4,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { ShoppingCartBtnBase } from "../../../../elements/base/shopping-cart-btn.js"; // TODO IMPLEMENT OWN LOCAL STORAGE
 
 class ShoppingCartBtn extends ShoppingCartBtnBase {
-  render() {
+  renderDefault() {
     return html`
              ${SharedStyles}
              <style>

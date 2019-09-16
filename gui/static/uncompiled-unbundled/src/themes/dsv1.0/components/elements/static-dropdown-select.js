@@ -3,7 +3,7 @@ import { StaticDropdownSelectBase } from "../../../../elements/base/static-dropd
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class StaticDropdownSelect extends StaticDropdownSelectBase {
-  render() {
+  renderDefault() {
     return html`
  
   <style>

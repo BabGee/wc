@@ -13,7 +13,7 @@ import { Logger } from '../core/logger.js'; // This element is connected to the 
 
 import { store } from '../store.js'; // These are the actions needed by this element.
 
-import { navigate, updateOffline, getPayload, loadTemplate } from '../actions/app.js';
+import { navigate, updateOffline, getPayload } from '../actions/app.js';
 import { COMMAND_GET_SECTION } from "../core/parsers/response.js";
 /**
  * Does Template Selection and Loading
@@ -21,8 +21,8 @@ import { COMMAND_GET_SECTION } from "../core/parsers/response.js";
 
 class AdaptiveUi extends connect(store)(LitElement) {
   render() {
-    // todo add setting up loader before template pages are resolved
-    return html`
+    if (this._payload) {
+      return html`
       <service-page ?active="${this.template === 'service'}"></service-page>
       <landing-page ?active="${this.template === 'landing'}"></landing-page>
       <canvas-page ?active="${this.template === 'canvas'}"></canvas-page>
@@ -34,6 +34,9 @@ class AdaptiveUi extends connect(store)(LitElement) {
       <view-404  
         ?active="${this.template === 'view-404'}"></view-404>
     `;
+    } else {
+      return html`loading ...`;
+    }
   }
 
   createRenderRoot() {
@@ -87,11 +90,12 @@ class AdaptiveUi extends connect(store)(LitElement) {
 
     if (window.NO_NETWORKING) {
       this.payloadjson = JSON.stringify(window.PAYLOAD_JSON);
-    } // parse inital interface payload into the state
+    }
 
+    window.template = this.template; // parse initial interface payload into the state
 
-    store.dispatch(getPayload(this.payloadjson));
-    store.dispatch(loadTemplate(this.template));
+    store.dispatch(getPayload(this.payloadjson, this.template));
+    Logger.i.debug('dispatched getPayload');
     installRouter(location => store.dispatch(navigate(window.decodeURIComponent(location.pathname))));
     installOfflineWatcher(offline => store.dispatch(updateOffline(offline)));
     /* todo complete
@@ -172,8 +176,7 @@ class AdaptiveUi extends connect(store)(LitElement) {
   }
 
   stateChanged(state) {
-    const self = this; // this.template = state.app.template;
-
+    const self = this;
     this._payload = state.app.payload; // todo deperecated, still used in section dialog, update to use selector
 
     /*

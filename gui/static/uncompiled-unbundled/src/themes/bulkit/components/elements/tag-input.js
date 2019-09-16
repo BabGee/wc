@@ -5,7 +5,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class TagInput extends TagInputBase {
-  render() {
+  renderDefault() {
     return html`
 ${SharedStyles}
     <style>

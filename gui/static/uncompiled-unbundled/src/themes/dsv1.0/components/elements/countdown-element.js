@@ -7,7 +7,7 @@ class CountdownElement extends CountdownElementBase {
     return this;
   }
 
-  render() {
+  renderDefault() {
     return html`
         <style>
             :host {

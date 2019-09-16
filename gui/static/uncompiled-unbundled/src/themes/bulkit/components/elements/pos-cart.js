@@ -8,7 +8,7 @@ class PosCart extends PosCartBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         ${posCartTheme}
         <paper-toolbar class="toolbar" id="paper_toolbar">

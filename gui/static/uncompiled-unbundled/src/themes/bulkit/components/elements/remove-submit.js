@@ -8,7 +8,7 @@ class RemoveSubmit extends RemoveSubmitBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}
         <a class="button is-primary is-rounded">

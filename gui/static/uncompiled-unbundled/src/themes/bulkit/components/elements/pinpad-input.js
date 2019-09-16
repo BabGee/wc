@@ -5,7 +5,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { PinPadInputBase } from "../../../../elements/base/pinpad-input.js";
 
 class PinPadInput extends PinPadInputBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
   <div class="column">

@@ -4,7 +4,7 @@ import { DateElementBase } from "../../../../elements/base/date-element.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class DateElement extends DateElementBase {
-  render() {
+  renderDefault() {
     return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 

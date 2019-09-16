@@ -5,7 +5,7 @@ import { PaymentOptionsBase } from "../../../../elements/base/payment-options.js
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class PaymentOptions extends PaymentOptionsBase {
-  render() {
+  renderDefault() {
     return html`
 
 <style>

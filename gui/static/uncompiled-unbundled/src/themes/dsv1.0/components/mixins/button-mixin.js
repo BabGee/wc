@@ -5,7 +5,7 @@ export const ACTION_SERVICE_CALL = '1';
 export const ACTION_LINK_WINDOW = '2';
 export const ACTION_SUBMIT = '3';
 export const buttonMixin = BaseClass => class extends BaseClass {
-  render() {
+  renderDefault() {
     return html`
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <style>       

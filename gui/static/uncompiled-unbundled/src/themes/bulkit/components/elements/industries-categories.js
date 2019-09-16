@@ -7,7 +7,7 @@ import "../../../../../node_modules/@polymer/paper-item/paper-item.js";
 import { IndustriesCategoriesBase } from "../../../../elements/base/industries-categories.js";
 
 class IndustriesCategories extends IndustriesCategoriesBase {
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}
         <style>

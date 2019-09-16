@@ -3,7 +3,7 @@ import { InputStyles } from "../../styles/shared.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 export const inputMixin = BaseClass => class extends BaseClass {
-  render() {
+  renderDefault() {
     return html`
     <style>
       .inp{

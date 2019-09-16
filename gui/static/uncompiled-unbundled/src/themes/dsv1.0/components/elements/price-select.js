@@ -3,7 +3,7 @@ import { PriceSelectBase } from "../../../../elements/base/price-select.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class PriceSelect extends PriceSelectBase {
-  render() {
+  renderDefault() {
     return html`
      <style>
 /* The container */

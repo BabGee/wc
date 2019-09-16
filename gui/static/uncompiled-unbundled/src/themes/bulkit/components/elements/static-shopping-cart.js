@@ -5,7 +5,7 @@ import { BULMA_STYLES } from "../../styles/bulma-styles.js";
 import { StaticShoppingCartBase } from "../../../../elements/base/static-shopping-cart.js";
 
 class StaticShoppingCart extends StaticShoppingCartBase {
-  render() {
+  renderDefault() {
     return html`
         ${SHOP_STYLES}
        ${BULMA_STYLES}    

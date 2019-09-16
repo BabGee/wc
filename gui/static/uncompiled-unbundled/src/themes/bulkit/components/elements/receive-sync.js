@@ -4,7 +4,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { ReceiveSyncBase } from "../../../../elements/base/receive-sync.js";
 
 class ReceiveSync extends ReceiveSyncBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
 <div class="field">

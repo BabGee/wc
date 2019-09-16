@@ -5,7 +5,7 @@ import { StaticCategoriesBase } from "../../../../elements/base/static-categorie
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class StaticCategories extends StaticCategoriesBase {
-  render() {
+  renderDefault() {
     return html`
 					
     <style>

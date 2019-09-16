@@ -7,7 +7,7 @@ import "../../icons/payments-icons.js";
 import { LoginMipayBase } from "../../../../elements/base/login-mipay.js";
 
 class LoginMipay extends LoginMipayBase {
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}
         <style>

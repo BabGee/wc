@@ -2,7 +2,7 @@ import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { SectionPElementDsc } from "../../../../elements/base/section-pelement-dsc.js";
 
 class SectionPrice extends SectionPElementDsc {
-  render() {
+  renderDefault() {
     return html`
         <style>
         .pricing-card-body{

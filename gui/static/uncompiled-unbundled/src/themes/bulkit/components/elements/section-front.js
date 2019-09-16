@@ -3,7 +3,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { SectionPElementBase } from "../../../../elements/base/section-pelement.js";
 
 class SectionFront extends SectionPElementBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
    <style>

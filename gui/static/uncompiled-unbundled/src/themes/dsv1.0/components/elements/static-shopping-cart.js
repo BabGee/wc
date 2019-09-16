@@ -4,7 +4,7 @@ import { StaticShoppingCartBase } from "../../../../elements/base/static-shoppin
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class StaticShoppingCart extends StaticShoppingCartBase {
-  render() {
+  renderDefault() {
     return html`
     
  <div class="shop-wrapper is-mobile-mode">

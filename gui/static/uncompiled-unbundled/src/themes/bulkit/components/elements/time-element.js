@@ -5,7 +5,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import { TimeElementBase } from "../../../../elements/base/time-element.js";
 
 class TimeElement extends TimeElementBase {
-  render() {
+  renderDefault() {
     return html`
  ${SharedStyles}
  <style>

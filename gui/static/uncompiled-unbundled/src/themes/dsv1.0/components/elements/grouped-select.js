@@ -7,7 +7,7 @@ class GroupedSelect extends GroupedSelectBase {
     super();
   }
 
-  render() {
+  renderDefault() {
     return html`
   <div class="field">
 <div class="select is-multiple is-fullwidth">

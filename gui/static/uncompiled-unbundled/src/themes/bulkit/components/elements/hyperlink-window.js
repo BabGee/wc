@@ -5,7 +5,7 @@ import { BULMA_STYLES } from "../../styles/bulma-styles.js";
 import { HyperlinkWindowBase } from "../../../../elements/base/hyperlink-window.js";
 
 class HyperlinkWindow extends HyperlinkWindowBase {
-  render() {
+  renderDefault() {
     return html`
      ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 

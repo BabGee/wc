@@ -6,7 +6,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { SectionPElementBase } from "../../../../elements/base/section-pelement.js";
 
 class SectionRow extends SectionPElementBase {
-  render() {
+  renderDefault() {
     return html`
         ${SharedStyles}
          <style>
