@@ -23,7 +23,7 @@ export const getPayload = (payloadjson, template) => (dispatch, getState) => {
   }); // TODO should do on each template change
   // initial load is unnecessary because of the pre-loading in index.html
   // there is need to load the 404 template even for index.html pre-loads
-  // dispatch(loadTemplate(template));
+  dispatch(loadTemplate(template));
 };
 export const navigate = path => dispatch => {
   // console.log(path);
