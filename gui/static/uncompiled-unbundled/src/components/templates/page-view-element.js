@@ -215,6 +215,7 @@ export class PageViewElement extends connect(store)(utilsMixin(LitElement)) {
     this._snackbarMessage = state.app.snackbarMessage;
     this._offline = state.app.offline;
   } // To scroll to top of window
+  // TODO make static
 
 
   scrollToTop() {

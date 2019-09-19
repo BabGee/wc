@@ -23,6 +23,8 @@ export class BaseElement extends LitElement {
   }
 
   render() {
+    // TODO how-to-prevent-function-overriding-in-es6
+    // https://stackoverflow.com/questions/45558939/how-to-prevent-function-overriding-in-es6
     try {
       return this[this.renderFunction]();
     } catch (e) {
@@ -32,7 +34,7 @@ export class BaseElement extends LitElement {
   }
 
   renderDefault() {
-    Logger.i.incompleteDev(this, 'Must implement renderDefault');
+    Logger.i.incompleteDev(this, 'Must at least implement renderDefault');
     throw new Error('Must implement renderDefault');
   }
   /**

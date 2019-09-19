@@ -70,10 +70,9 @@ class Mqtt {
     return this.client;
   }
 
-  _connect() {
-    const self = this;
-    const client = window.MQTTclient['client'];
-    client.connect(self.options);
+  _connect() {// todo Disable mqtt connection till server ready
+    // const client = window.MQTTclient['client'];
+    // client.connect(this.options);
   }
 
   disconnect() {

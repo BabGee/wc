@@ -48,6 +48,10 @@ export class Logger {
     this.warn('[INCOMPLETE DEV]', ...message);
   }
 
+  deprecated(...message) {
+    this.warn('[DEPRECATED API USAGE] ', ...message);
+  }
+
   switchConfiguration(...message) {
     // use warning
     this.info('[SWITCH CONFIGURATION]', ...message);

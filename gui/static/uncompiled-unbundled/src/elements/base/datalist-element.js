@@ -2,10 +2,11 @@ import { mqttMixin } from "../../core/mixins/mqtt-mixin.js";
 import { dataSourceMixin } from "../../core/mixins/datasource-mixin.js";
 import { utilsMixin } from "../../core/mixins/utils-mixin.js";
 import { SerializableElement } from "../../core/serializable-element.js";
-import { format, parse } from "../../../node_modules/date-fns/esm/index.js"; // pdf export
+import { format, parseISO } from "../../../node_modules/date-fns/esm/index.js"; // pdf export
 
 import "../../../node_modules/jspdf/dist/jspdf.min.js";
-import "../../../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"; // todo should extend SerializableElement is selectable
+import "../../../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js";
+import { Logger } from "../../core/logger.js"; // todo should extend SerializableElement is selectable
 
 export const DataListElementBase = class extends utilsMixin(dataSourceMixin(mqttMixin(SerializableElement))) {
   static get is() {
@@ -173,15 +174,8 @@ export const DataListElementBase = class extends utilsMixin(dataSourceMixin(mqtt
         let date; // TODO below conditional block is duplicate from data-source-parser
         // requires a global solution
 
-        const date_timezone_parser = 'yyyy-MM-dd HH:mm:ss.SSSSSSx';
-        const date_parser = 'yyyy-MM-dd HH:mm:ssx';
-
         if (col['type'] === 'datetime' || col['type'] === 'date') {
-          try {
-            date = dateString ? format(parse(dateString, date_timezone_parser, new Date()), tokens) : '';
-          } catch (e) {
-            date = dateString ? format(parse(dateString, date_parser, new Date()), tokens) : '';
-          }
+          date = dateString ? format(parseISO(dateString), tokens) : '';
         }
 
         return date;
@@ -225,8 +219,17 @@ export const DataListElementBase = class extends utilsMixin(dataSourceMixin(mqtt
       const rowArray = [];
 
       for (let i = 0; i < self.cols.length; i++) {
-        if (self.cols[i]['type'] != 'href') {
-          rowArray.push(row[i]);
+        const colType = self.cols[i]['type']; // todo convert types to constants
+
+        if (colType !== 'href') {
+          const columnValue = row[i]; // we have to check typeof because number is of type string from switch
+          // TODO switch should have a type number
+
+          if (colType === 'string' && typeof columnValue === 'string') {
+            rowArray.push(columnValue.replace(/[#,]/g, ' '));
+          } else {
+            rowArray.push(columnValue);
+          }
         }
       }
 

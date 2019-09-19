@@ -31,7 +31,13 @@ export const NumberInputBase = class extends utilsMixin(SerializableElement) {
       return new this.Validation(false, this.e.name + ' is Required');
     }
 
-    return new this.Validation(true, 'valid');
+    const inputValueInt = parseInt(this.getValue());
+
+    if (inputValueInt < this.e.min || inputValueInt > this.e.max) {
+      return new this.Validation(false, this.e.name + ' value is invalid.Try again.');
+    } else {
+      return new this.Validation(true, 'valid');
+    }
   }
 
   firstUpdated(changedProperties) {

@@ -1189,11 +1189,12 @@ ${SharedStyles}
 
   getValue() {
     const input = this.qs('#input');
-    const values = JSON.parse(input.value); // console.log(values);
 
-    const value = values.map(item => item['code']).join(','); // console.log(value);
-
-    return value;
+    if (input.value) {
+      const values = JSON.parse(input.value);
+      const value = values.map(item => item['code']).join(',');
+      return value;
+    }
   }
 
   firstUpdated(changedProperties) {

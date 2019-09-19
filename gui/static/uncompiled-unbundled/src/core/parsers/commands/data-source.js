@@ -1,6 +1,7 @@
 import { Command } from "./command.js";
-import { format, parse } from "../../../../node_modules/date-fns/esm/index.js";
+import { format, parseISO } from "../../../../node_modules/date-fns/esm/index.js";
 import { DatalistColumn } from "./dsc/datalist-column.js";
+import { Logger } from "../../logger.js";
 export class DataSource extends Command {
   constructor(dataSourceResponse, config) {
     super(dataSourceResponse, config);
@@ -59,15 +60,12 @@ export class DataSource extends Command {
     if (payload.row_count) {
       self.totalElements = payload.row_count;
     } else {
-      console.warn('[NOT IMPLEMENTED]-datalist response without row_count');
+      Logger.i.switchConfiguration('Datalist response without row_count');
     }
 
     const maxId = payload.max_id; // self.max = max_id;
 
     const minId = payload.min_id; // self.min = min_id;
-
-    const dateTimezoneParser = 'yyyy-MM-dd HH:mm:ss.SSSSSSx';
-    const dateParser = 'yyyy-MM-dd HH:mm:ssx';
 
     if (responseType === Symbol.for('LIST')) {
       self.rows = payload.rows; // generation of data from LIST
@@ -80,32 +78,12 @@ export class DataSource extends Command {
         var itemLinks = [];
 
         for (var j = 0; j < self.cols.length; j++) {
-          let col = self.cols[j];
+          const col = self.cols[j];
 
           if (col['type'] === 'href') {
             if ('links' in col) {
               // NOTE  Old deprecated links parsing
-              console.warn('[DEPRECATED API USAGE] this datalist query should be updated ' + 'to use [Datalist Link Query] instead of [Links and Link params]', this);
-              /*
-                var links = col['links'];
-                for (var link in links) {
-                    var linkObject = links[link];
-                    //console.log(link + " -> " + linkObject);
-                    var linkProcessed = {};
-                    linkProcessed['service'] = linkObject['service'];
-                    linkProcessed['icon'] = linkObject['icon'];
-                    linkProcessed['title'] = link;
-                     linkProcessed['params'] = {};
-                    for (var linkParamKey in linkObject['params']) {
-                        var linkParam = linkObject['params'][linkParamKey];
-                        // get from item, simple hack since links are the always the last
-                        linkProcessed['params'][linkParamKey] = item[linkParam]
-                    }
-                    itemLinks.push(linkProcessed);
-                    //console.log(item);
-                    //console.log(linkProcessed);
-                }
-                */
+              Logger.i.switchConfiguration(`DSC query should be updated to use [Datalist Link Query] instead of [Links and Link params]`, this);
             } else {
               // dynamic links with variable params
               const linkString = self.rows[i][j]; // links that don't match case field and value are empty
@@ -127,19 +105,9 @@ export class DataSource extends Command {
               itemLinks.push(linkProcessed);
             }
           } else if (col['type'] === 'datetime') {
-            try {
-              item[col['label']] = self.rows[i][j] ? format(parse(self.rows[i][j], dateTimezoneParser, new Date()), 'MMM dd yyyy, h:mm:ss a') : '';
-            } catch (e) {
-              console.warn(e);
-              item[col['label']] = self.rows[i][j] ? format(parse(self.rows[i][j], dateParser, new Date()), 'MMM dd yyyy, h:mm:ss a') : '';
-            }
+            item[col['label']] = self.rows[i][j] ? format(parseISO(self.rows[i][j]), 'MMM dd yyyy, h:mm:ss a') : '';
           } else if (col['type'] === 'date') {
-            try {
-              item[col['label']] = self.rows[i][j] ? format(parse(self.rows[i][j], dateTimezoneParser, new Date()), 'MMM dd yyyy') : '';
-            } catch (e) {
-              console.warn(e);
-              item[col['label']] = self.rows[i][j] ? format(parse(self.rows[i][j], dateParser, new Date()), 'MMM dd yyyy') : '';
-            }
+            item[col['label']] = self.rows[i][j] ? format(parseISO(self.rows[i][j]), 'MMM dd yyyy') : '';
           } else {
             item[col['label']] = self.rows[i][j];
           }
@@ -198,7 +166,7 @@ export class DataSource extends Command {
       self.data = payload.data;
       self.groups = payload.groups;
     } else if (responseType === Symbol.for('LINES')) {
-      console.warn('[NOT IMPLEMENTED] data response type LINES ');
+      Logger.i.incompleteDev('Data source response type - LINES ');
     } else {
       throw new DOMException('[Critical Error] unknown dataResponseType ');
     }

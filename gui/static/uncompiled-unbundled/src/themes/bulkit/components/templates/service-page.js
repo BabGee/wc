@@ -74,6 +74,11 @@ nav {
         padding: 0;
     }
 }
+.parent-link.is-active{
+    background-color:var(--app-accent-color);
+    color: #ffffff;
+}
+
 </style>        
             <!-- Main sidebar menu -->
         <nav class="main-menu">
@@ -286,7 +291,7 @@ nav {
                 <ul id="dashboard-menu-${pageGroupIndex}" class="sidebar-menu is-active animated preFadeInRIght fadeInRight">
                     ${pageGroup.pages.map((tab, tabIndex) => html`
                     <li class="">
-                    <a class="parent-link"
+                    <a class="parent-link ${pageGroupIndex == this._pageGroup && tabIndex == this._page ? 'is-active' : ''}"
                         @click="${this._closeChildMenu}"
                         href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${tabIndex}/">
                           <span class="material-icons">

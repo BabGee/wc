@@ -1,5 +1,6 @@
 import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { format, parse } from "../../../../../node_modules/date-fns/esm/index.js";
+import "../../../../../node_modules/fa-icons/index.js";
 import { DateElementBase } from "../../../../elements/base/date-element.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
@@ -9,48 +10,159 @@ class DateElement extends DateElementBase {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
   <style>
- #input{
- text-indent: 20px;
- }
- /* Removes the clear button from date inputs */
- input[type="date"]::-webkit-clear-button {
-     display: none;
- }
- 
- /* Removes the spin button */
- input[type="date"]::-webkit-inner-spin-button { 
-     display: none;
- }
- 
- /* Always display the drop down caret */
- input[type="date"]::-webkit-calendar-picker-indicator {
-     color: #1496ED;
- }
- 
- .control {
-   margin-top: 5px;
- }
+ .calendar-select-header{
+  width: 100%;
+  background: #fff;
+  padding: 10px;
+  position: relative;
+}
+.calendar-select-header p{
+  font-size: 14px;
+  font-weight: 500;
+}
+.calendar-select-body{
+  width: 100%;
+  margin-top: 15px;
+}
+.calendar-select-body .month {
+  padding: 10px 15px;
+  width: 100%;
+  background: #fff;
+}
+
+.calendar-select-body .month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.calendar-select-body .month ul li {
+  color: #013243;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color: #fff;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 12.6%;
+  color: #013243;
+  font-size: 10px;
+  text-align: center;
+}
+.days {
+  padding: 10px 0;
+  background: #fff;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 12.6%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #013243;
+}
+
+.days li .active {
+  padding: 5px;
+  background: #1abc9c;
+  color: white !important;
+  border-radius: 50%;
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+  .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+  .weekdays li, .days li {width: 12.5%;}
+  .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+  .weekdays li, .days li {width: 12.2%;}
+}
 
 </style>
-  <div class="column">
-        <div class="field">
-            <label class="form-label">
-            <span><iron-icon icon=${this.e.icon || 'icons:input'}></iron-icon></span>${this.e.name}
-            </label>
-            <div class="control  has-icons-left">
-                <input class="input is-medium"  
-                    name=${this.e.name} 
-                    id="input"
-                    type="date"   
-                    placeholder=${this.e.name} 
-                    required=${this.required} minlength=${this.e.min}  maxlength=${this.e.max}>
-                <span class="icon is-medium is-left">
-                <iron-icon icon=${this.e.icon || 'icons:date-range'}></iron-icon>                   
-                </span>
-
-            </div>
-        </div>
+ <div class="column">
+  <div class="clalendar-select" style="width:100%;">
+    <div class="calendar-select-header">
+        <p class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; 24 May, 2018 - 26 May, 2018</p>
     </div>
+
+    <div class="calendar-select-body">
+        <div class="month">      
+            <ul>
+              <div class="columns">
+                  <div class="column">
+                      <li class="is-pulled-left">
+                        August
+                      </li>
+                  </div>
+                  <div class="column">
+                      <div class="calendar-scroll is-flex is-pulled-right">
+                          <li class="prev">&#10094;</li>
+                          <li class="next">&#10095;</li>
+                      </div>
+                  </div>
+              </div>
+            </ul>
+          </div>
+          <ul class="weekdays">
+            <li>Mo</li>
+            <li>Tu</li>
+            <li>We</li>
+            <li>Th</li>
+            <li>Fr</li>
+            <li>Sa</li>
+            <li>Su</li>
+          </ul>
+
+          <ul class="days">  
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li><span class="active">10</span></li>
+            <li>11</li>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li>15</li>
+            <li>16</li>
+            <li>17</li>
+            <li>18</li>
+            <li>19</li>
+            <li>20</li>
+            <li>21</li>
+            <li>22</li>
+            <li>23</li>
+            <li>24</li>
+            <li>25</li>
+            <li>26</li>
+            <li>27</li>
+            <li>28</li>
+            <li>29</li>
+            <li>30</li>
+            <li>31</li>
+          </ul>
+    </div>
+  </div>
+</div>
         `;
   }
 

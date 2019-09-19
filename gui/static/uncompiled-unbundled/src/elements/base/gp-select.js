@@ -46,7 +46,7 @@ export const GpSelectBase = class extends utilsMixin(BaseElement) {
   init(pElement, loader) {
     super.init(pElement, loader);
     var self = this;
-    self.title = GpSelect.toTitleCase(pElement.name);
+    self.title = GpSelectBase.toTitleCase(pElement.name);
     self.params = self.pl.params;
   }
 

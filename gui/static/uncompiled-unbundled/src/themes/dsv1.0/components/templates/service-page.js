@@ -46,19 +46,22 @@ class ServicePage extends ServicePageBase {
             }
             .nav-items{
               margin-top: 20px;
+              
+
             }
             .menu-item{
-              width: 100%;
+              
               color: white; 
               font-weight: normal; 
               font-family: lato; font-size: 14px;
               position: relative; 
             }
             .item{
-              padding: 6px 0;
+              padding: 6px 2px;
             }
             .item:hover{
-              background: #e5e5e5;
+              background: #ebebed;
+              
 
             }
             .item.active{
@@ -68,9 +71,7 @@ class ServicePage extends ServicePageBase {
               color: #575bde;
             }
 
-          input#menu{
-            display: none;
-          }
+          
             </style>
 
 ${this.view === VIEW_MODE_DIALOG ? html`
@@ -100,28 +101,55 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
                     ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
                       
-                      <ul class="nav-items">
-                        <li class="item  ${pageGroupIndex == this._pageGroup && pageGroupIndex == this._page ? 'active' : ''}" style="cursor: pointer;" @click = ${() => this.handleClick()} >
-                        <a href="" class="menu-item is-capitalized">
+                      
 
-                        <span class="icon has-text-white" style="margin-left: 20px;">
 
-                          <fa-icon class="fas fa-th-large" color = "#fff" style=" height: 20px; width: 16px;"></fa-icon>
+                      <div class=" ${pageGroupIndex == this._pageGroup && pageGroupIndex == this._page ? 'active' : ''}"
+                      style="z-index: 1; position: relative; background-color: #ebebed; margin-left: 30px; margin-top: 5px; font-size: 14px; padding-left: 35px; padding-top: 7px; padding-bottom: 7px; ">
 
-                        </span>
-
-                        <span style="position: relative; top: -5px;">&nbsp; ${pageGroup.title}<span></p>
                         
-                        <ul class="sub-items  ">
-                            ${pageGroup.pages.map((menu, menuIndex) => html`
-                            <li class="item">
-                              <a href="" class="menu-item" style="padding: 20px 0; margin-left: 53px;">${ServicePage.toTitleCase(menu.title)}</a>
-                            </li>
-                            `)}
-                        </ul>
+
+                        <a href=""style="color:  #575bde; background-color: #ebebed; margin-left: -10px; " class=" is-capitalized" style="cursor: pointer;" @click = ${() => this.handleClick()} >
+
+
+                          <span class="icon has-text-white" style="margin-left: -20px;  position: absolute; top: 5px;">
+
+                            <fa-icon class="fas fa-th-large" color = "#000" style=" height: 20px; width: 16px;"></fa-icon>
+
+                            </span>
+
+                            &nbsp; ${pageGroup.title}
+
                         </a>
-                        </li>
-                      </ul>
+
+                        
+                        <div class="sub-items  " style="margin-top: 20px;">
+
+                            ${pageGroup.pages.map((menu, menuIndex) => html`
+
+              
+
+                            <div class="item">
+                            
+                            <!-- when adding more menu items please incude the <br> to give more styling -->
+
+                            <a style="margin-top: 20px; color: #575bde; background-color: #ebebed;" 
+                                href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/"> ${ServicePage.toTitleCase(menu.title)} </a> 
+                            <br>
+                            </div>
+
+                            
+
+                            `)}
+
+                          </div>
+                        
+                         
+
+      
+                      </div>
+
+                      
                     `)}
             </div>
                   
@@ -203,6 +231,12 @@ ${this.view === VIEW_MODE_DIALOG ? html`
                         
                     </section>
                     
+                    <div class="columns is-multiline">
+                      ${this.page.pageInputGroups.map((feed, feedIndex) => html`        
+                       <div class="column is-12">
+                          <form-render .feed="${feed}" .params=${this.parseParams()}></form-render>
+                      </div>`)}
+                    </div>    
             </div>
                 
         </div>
@@ -231,7 +265,11 @@ ${this.view === VIEW_MODE_DIALOG ? html`
   handleClick() {
     const items = this.qs('.sub-items');
     items.classList.toggle("is-block");
-  }
+  } // handleClick() {
+  //   const items = this.qs('.sub-items');
+  //   items.classList.toggle("is-block")
+  // }
+
 
   static get styles() {
     return [Colors, Fonts, ServiceStyles, css`:host { display: block; }`];

@@ -7,27 +7,58 @@ class DropdownSelect extends DropdownSelectBase {
     return html`
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <style>
-  .inp{
-    border-radius: 6px!important;
-    font-size: 14px!important;
-    padding: 20px!important;
-    line-height: 1;
-    background-color: #fcfcfc!important;
-    border: 1px solid #a3a3a4!important;
-    box-shadow: 0 0 0 transparent!important;
-  }
+  /*Dropdown select*/
+.dropdown-item-select .dropdown-item-header{
+  width: 100%!important;
+  background: #fff;
+  padding: 10px 20px;
+  position: relative;
+  cursor: pointer;
+  /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);*/
+}
+.dropdown-item-select .dropdown-item-header::after{
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid #4a4a4a;
+  border-bottom: 2px solid #4a4a4a;
+  border-right: 2px solid transparent;
+  border-top: 2px solid transparent;
+  position: absolute;
+  transform: rotate(-43deg);
+  top: 14px;
+  right: 14px;
+}
+.dropdown-item-select .dropdown-item-header p{
+  font-size: 14px;
+  font-weight: 500;
+  color: #013243;
+}
+.dropdown-item-body{
+  padding: 0;
+  background: #fff;
+}
+.dropdown-item-body ul li{
+  border-bottom: 1px solid #f5f5f5;
+  padding: 10px 20px;
+  font-weight: lighter;
+  font-size: 14px;
+}
 </style>
-<div class="field">
-  <!-- <label class="label">${this.e.name}</label> -->
-<div class="control">
-  <div class="select is-loading">
-    <select id="input" class="inp">
-    ${this._computeItems(this.rows, this.q).map(data => html`
-      <option value="${data[0]}" ?selected="${this.e.kind === data[0]}">${this._dataJoined(data)}</option>
-    `)}
-    </select>
-  </div>
-</div>
+<div class="dropdown-item-select">
+    <div class="dropdown-item-header">
+        <p>Dropdown item select</p>
+    </div>
+    <div class="dropdown-item-body">
+        <ul>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+        </ul>
+    </div>
 </div>`;
   }
 
