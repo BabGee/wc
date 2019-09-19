@@ -114,11 +114,11 @@ class UI:
 	@method_decorator([csrf_exempt, requires_csrf_token])
 	def pages(self, request, page, subdomain=None, route=None):
 		try:
-			#lgr.info('Request Host: %s' % request.get_host())
+			lgr.info('Request Host: %s' % request.get_host())
 			lgr.info('Sub-domain %s' % subdomain)
 
 			lgr.info('Route %s' % route)
-			#lgr.info('Request META: %s' % request.META)
+			lgr.info('Request META: %s' % request.META)
 			if 'X-SUBDOMAIN' in request.META.keys(): subdomain=request.META['X-SUBDOMAIN']
 
 			if 'X-GATEWAY_HOST' in request.META.keys():
