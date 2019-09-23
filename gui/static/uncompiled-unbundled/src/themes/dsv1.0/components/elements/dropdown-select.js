@@ -8,10 +8,18 @@ class DropdownSelect extends DropdownSelectBase {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <style>
   /*Dropdown select*/
+  .dropdown-item-select{
+    position: relative;
+   -moz-user-select: none; 
+   -webkit-user-select: none; 
+   -ms-user-select:none; 
+   user-select:none;
+   -o-user-select:none;"
+  }
 .dropdown-item-select .dropdown-item-header{
-  width: 100%!important;
   background: #fff;
-  padding: 10px 20px;
+  padding: 10px 20px 10px 10px;
+  display:inline-block;
   position: relative;
   cursor: pointer;
   /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
@@ -29,7 +37,7 @@ class DropdownSelect extends DropdownSelectBase {
   position: absolute;
   transform: rotate(-43deg);
   top: 14px;
-  right: 14px;
+  right:4px;
 }
 .dropdown-item-select .dropdown-item-header p{
   font-size: 14px;
@@ -37,26 +45,37 @@ class DropdownSelect extends DropdownSelectBase {
   color: #013243;
 }
 .dropdown-item-body{
-  padding: 0;
   background: #fff;
+  display: none;
+  width:auto;
+  position:absolute;
+  padding: 10px 20px 10px 10px;
+
 }
 .dropdown-item-body ul li{
+  
   border-bottom: 1px solid #f5f5f5;
   padding: 10px 20px;
   font-weight: lighter;
   font-size: 14px;
 }
+.dropdown-item-body ul li:hover{
+  background-color: #f1f1f1;
+
+}
+.is-active{
+  background-color: #f1f1f1;
+}
 </style>
 <div class="dropdown-item-select">
-    <div class="dropdown-item-header">
-        <p>Dropdown item select</p>
+    <div class="dropdown-item-header" @click='${() => this.dropdown('head')}'>
+        <p>${this.e.name}</p>
     </div>
-    <div class="dropdown-item-body">
+    <div id="dropdown-item-body" class="dropdown-item-body">
         <ul>
-            <li>item</li>
-            <li>item</li>
-            <li>item</li>
-            <li>item</li>
+        ${this._computeItems(this.rows, this.q).map(data => html`
+        <li id="list-${data[0]}" class="" value="${data[0]}" ?selected="${this.e.kind === data[0]}"  @click='${() => this.dropdown(this._dataJoined(data), data[0])}'>${this._dataJoined(data)}</li>
+    `)} 
         </ul>
     </div>
 </div>`;
@@ -91,9 +110,23 @@ class DropdownSelect extends DropdownSelectBase {
     };
   }
 
+  dropdown(link, data) {
+    if (link == 'head') {
+      this.shadowRoot.querySelector('.dropdown-item-body').classList.toggle('is-block');
+    } else {
+      const selected = this.shadowRoot.querySelector('.dropdown-item-header').querySelector('p');
+      selected.innerHTML = link;
+      const allLists = this.shadowRoot.querySelector('#dropdown-item-body').querySelectorAll('li');
+      allLists.forEach(list => list.className = '');
+      const selectedList = this.shadowRoot.querySelector('#list-' + data);
+      selectedList.className = 'is-active';
+      this.shadowRoot.querySelector('.dropdown-item-body').classList.toggle('is-block');
+    }
+  }
+
   getValue() {
-    const select = this.shadowRoot.querySelector('#input');
-    this.dropdownValue = select.value;
+    const select = this.shadowRoot.querySelector('.dropdown-item-header').querySelector('p');
+    this.dropdownValue = select.innerHTML;
     return this.dropdownValue;
   }
 

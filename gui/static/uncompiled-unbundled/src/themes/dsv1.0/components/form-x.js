@@ -12,7 +12,9 @@ class FormX extends FormBase {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
-<div class="card">
+<div class="card" 
+     style="margin-top: 40px; margin-left: 50px; margin-right: 50px; border-radius: 3px; box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03);">
+     
     <header class="card-header">    
         <slot name="header"></slot>
 </header>

@@ -1,10 +1,40 @@
 import { GpSelectBase } from "../../../../elements/base/gp-select.js";
 import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import "../../../bulkit/icons/my-icons.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class GpSelect extends GpSelectBase {
   constructor() {
     super();
+  }
+
+  static get properties() {
+    return {
+      icon: String,
+      dataName: {
+        type: String,
+        value: ''
+      },
+      service: String,
+      title: String,
+      maxlength: Number,
+      pattern: String,
+      q: {
+        type: String,
+        value: ''
+      },
+      dropdownValue: Object,
+      rows: {
+        value: []
+      },
+      params: {
+        type: Object,
+        value: ''
+      },
+      columnSize: {
+        type: Array
+      }
+    };
   }
 
   renderDefault() {
@@ -17,13 +47,28 @@ class GpSelect extends GpSelectBase {
         align-items: center;
       }
       /* Account dropdown select */
+      .account-select{
+        position: relative;
+       -moz-user-select: none; 
+       -webkit-user-select: none; 
+       -ms-user-select:none; 
+       user-select:none;
+       -o-user-select:none;"
+      }
       .account-select .account-header{
         background: #fff;
-        padding: 10px;
+        padding: 10px 20px 10px 10px;
         position: relative;
-        width: 100%;
+        display:inline-block;
+        cursor: pointer;
       }
-      .account-select::after{
+      .account-header p {
+        color: #013243;
+      }
+      .account-header p span{
+        color: #6c7a89;
+      }
+      .account-select .account-header::after{
         content: '';
         width: 8px;
         height: 8px;
@@ -33,8 +78,8 @@ class GpSelect extends GpSelectBase {
         border-top: 2px solid transparent;
         position: absolute;
         transform: rotate(-43deg);
-        top: 19px;
-        right: 14px;
+        top: 23px;
+        right:4px;
       }
       .account-item{
         padding: 7px;
@@ -54,53 +99,71 @@ class GpSelect extends GpSelectBase {
       }
       .account-body{
         background: #fff;
-        margin: 15px 0 0 0;
-        padding: 10px;
+        display: none;
+        position:absolute;
+        padding: 10px 20px 10px 10px;
       }
       .account-body ul li{
+        cursor: default;
         border-bottom: 1px solid #ececec;
+      }
+      .account-body ul li:hover{
+        background-color: #f1f1f1;
+
+      }
+      .list-active{
+        background-color: #f1f1f1;
       }
       .account-body ul li:last-child{
         border-bottom: 0 solid transparent;
       }
       </style>
         <div class="account-select">
-          <div class="account-header">
+          <div class="account-header" @click='${() => this.dropdown()}'>
               <div class="account-item is-flex">
                   <div class="profile-pic center">
-                      <img src="img/bird150.jpg" alt="">
+                  <iron-icon icon=${this.e.icon || 'icons:input'}></iron-icon>
                   </div>
                   <div class="accout-details center">
-                      <p class="is-capitalized">Anwar sadatt &nbsp;<span>Web developer</span></p>
+                      <p class="is-capitalized">${this.e.name}</p>
                   </div>
               </div>
           </div>
           <div class="account-body">
               <ul>
-                  <li>
-                      <div class="account-item is-flex">
-                          <div class="profile-pic center">
-                              <img src="img/bird150.jpg" alt="">
-                          </div>
-                          <div class="accout-details center">
-                              <p class="is-capitalized">Anwar sadatt <span>Web developer</span></p>
-                          </div>
+              ${this._computeItems(this.rows, this.q).map(data => html`
+              <li id="list-${data[0]}" class="" selected="${this.e.kind === data[0]}"  @click='${() => this.dropdown(this._dataJoined(data), data[0])}'>
+                <div class="account-item is-flex">
+                      <div class="profile-pic center">
+                      <iron-icon icon=${this.e.icon || 'icons:input'}></iron-icon>
                       </div>
-                  </li>
-                  <li>
-                      <div class="account-item is-flex">
-                          <div class="profile-pic center">
-                              <img src="img/bird150.jpg" alt="">
-                          </div>
-                          <div class="accout-details center">
-                              <p class="is-capitalized">Anwar sadatt <span>Web developer</span></p>
-                          </div>
+                      <div class="accout-details center">
+                          <p class="is-capitalized">${this._dataJoined(data)}</p>
                       </div>
-                  </li>
+                  </div>
+              </li>
+              `)}
               </ul>
           </div>
       </div>
         `;
+  }
+
+  dropdown(link, id) {
+    if (link == null || link == undefined) {
+      this.shadowRoot.querySelector('.account-body').classList.toggle('is-block');
+    } else {
+      const headTitle = this.shadowRoot.querySelector('.account-header').querySelector('p');
+      const allLists = this.shadowRoot.querySelector('.account-body').querySelectorAll('li');
+      headTitle.innerHTML = `${link}`;
+      allLists.forEach(list => list.className = '');
+      this.shadowRoot.querySelector("#list-" + id).className = "list-active";
+      this.shadowRoot.querySelector('.account-body').classList.toggle('is-block');
+    }
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
   }
 
 }

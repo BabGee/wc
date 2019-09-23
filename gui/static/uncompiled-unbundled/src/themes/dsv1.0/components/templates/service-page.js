@@ -96,57 +96,35 @@ ${this.view === VIEW_MODE_DIALOG ? html`
                         font-family: lato; font-size: 16px;
                         position: relative;">${this.gateway.name}</p>
               </div>     
-                    
-                        
 
                     ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
-                      
-                      
-
 
                       <div class=" ${pageGroupIndex == this._pageGroup && pageGroupIndex == this._page ? 'active' : ''}"
-                      style="z-index: 1; position: relative; background-color: #ebebed; margin-left: 30px; margin-top: 5px; font-size: 14px; padding-left: 35px; padding-top: 7px; padding-bottom: 7px; ">
+                            style="z-index: 1; position: relative; background-color: #ebebed; margin-left: 30px; margin-top: 5px; font-size: 14px; padding-left: 35px; padding-top: 7px; padding-bottom: 7px; ">
 
-                        
-
-                        <a href=""style="color:  #575bde; background-color: #ebebed; margin-left: -10px; " class=" is-capitalized" style="cursor: pointer;" @click = ${() => this.handleClick()} >
-
-
+                        <a href="" 
+                            style="color: #575bde; background-color: #ebebed; margin-left: -10px; " 
+                            class=" is-capitalized" 
+                            style="cursor: pointer;" 
+                            @click = ${this.handleClick}>
                           <span class="icon has-text-white" style="margin-left: -20px;  position: absolute; top: 5px;">
-
                             <fa-icon class="fas fa-th-large" color = "#000" style=" height: 20px; width: 16px;"></fa-icon>
-
-                            </span>
-
-                            &nbsp; ${pageGroup.title}
-
+                          </span>
+                          &nbsp;${pageGroup.title}
                         </a>
-
-                        
-                        <div class="sub-items  " style="margin-top: 20px;">
-
+                        <div class="sub-items" style="margin-top: 20px;">
                             ${pageGroup.pages.map((menu, menuIndex) => html`
-
-              
-
                             <div class="item">
                             
-                            <!-- when adding more menu items please incude the <br> to give more styling -->
-
-                            <a style="margin-top: 20px; color: #575bde; background-color: #ebebed;" 
-                                href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/"> ${ServicePage.toTitleCase(menu.title)} </a> 
-                            <br>
-                            </div>
-
                             
 
+                            <a style="margin-top: 20px; color: #575bde; background-color: #ebebed;" 
+                                href=""> ${ServicePage.toTitleCase(menu.title)} </a> 
+                            <br>
+                            </div>
                             `)}
 
                           </div>
-                        
-                         
-
-      
                       </div>
 
                       
@@ -231,9 +209,9 @@ ${this.view === VIEW_MODE_DIALOG ? html`
                         
                     </section>
                     
-                    <div class="columns is-multiline">
+                    <div class="columns is-multiline" style="margin-top: 40px; margin-left: 50px; max-width: 1225px;">
                       ${this.page.pageInputGroups.map((feed, feedIndex) => html`        
-                       <div class="column is-12">
+                       <div class="column is-12" >
                           <form-render .feed="${feed}" .params=${this.parseParams()}></form-render>
                       </div>`)}
                     </div>    
@@ -262,14 +240,22 @@ ${this.view === VIEW_MODE_DIALOG ? html`
     };
   }
 
-  handleClick() {
-    const items = this.qs('.sub-items');
-    items.classList.toggle("is-block");
-  } // handleClick() {
-  //   const items = this.qs('.sub-items');
-  //   items.classList.toggle("is-block")
-  // }
+  handleClick(evt) {
+    evt.preventDefault();
+    const menuItems = evt.currentTarget.nextElementSibling;
+    const toggleClass = 'is-block';
 
+    if (menuItems.classList.contains(toggleClass)) {
+      menuItems.classList.remove(toggleClass);
+    } else {
+      // collapse all current active
+      this.qsa('.sub-items, .is-block').forEach(function (el) {
+        el.classList.remove(toggleClass);
+      }); // expand related to source of event
+
+      menuItems.classList.add(toggleClass);
+    }
+  }
 
   static get styles() {
     return [Colors, Fonts, ServiceStyles, css`:host { display: block; }`];
