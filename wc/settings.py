@@ -16,12 +16,17 @@ logroot =  os.getenv("LOG_root", cf.get('LOG','root')).strip()
 
 #print cf._sections
 
-dbengine =  os.getenv("DATABASES_default_dbengine", cf.get('DATABASES','default_dbengine'))
-dbname =  os.getenv("DATABASES_default_dbname", cf.get('DATABASES','default_dbname'))
-dbuser =  os.getenv("DATABASES_default_dbuser", cf.get('DATABASES','default_dbuser'))
-dbpassword =  os.getenv("DATABASES_default_dbpassword", cf.get('DATABASES','default_dbpassword'))
-dbhost =  os.getenv("DATABASES_default_dbhost", cf.get('DATABASES','default_dbhost'))
-dbport =  os.getenv("DATABASES_default_dbport", cf.get('DATABASES','default_dbport'))
+default_dbengine =  os.getenv("DATABASES_default_dbengine", cf.get('DATABASES','default_dbengine'))
+default_dbname =  os.getenv("DATABASES_default_dbname", cf.get('DATABASES','default_dbname'))
+default_dbuser =  os.getenv("DATABASES_default_dbuser", cf.get('DATABASES','default_dbuser'))
+default_dbpassword =  os.getenv("DATABASES_default_dbpassword", cf.get('DATABASES','default_dbpassword'))
+default_dbhost =  os.getenv("DATABASES_default_dbhost", cf.get('DATABASES','default_dbhost'))
+default_dbport =  os.getenv("DATABASES_default_dbport", cf.get('DATABASES','default_dbport'))
+
+read_dbengine =  os.getenv("DATABASES_read_dbengine", cf.get('DATABASES','read_dbengine'))
+read_dbname =  os.getenv("DATABASES_read_dbname", cf.get('DATABASES','read_dbname'))
+read_dbuser =  os.getenv("DATABASES_read_dbuser", cf.get('DATABASES','read_dbuser'))
+read_dbpassword =  os.getenv("DATABASES_read_dbpassword", cf.get('DATABASES','read_dbpassword'))
 read_dbhost =  os.getenv("DATABASES_read_dbhost", cf.get('DATABASES','read_dbhost'))
 read_dbport =  os.getenv("DATABASES_read_dbport", cf.get('DATABASES','read_dbport'))
                                   
@@ -157,19 +162,19 @@ WSGI_APPLICATION = 'wc.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': dbengine, # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': dbname,                      # Or path to database file if using sqlite3.
+        'ENGINE': default_dbengine, # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': default_dbname,                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': dbuser,
-        'PASSWORD': dbpassword,
-        'HOST': dbhost,                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': dbport,                      # Set to empty string for default.
+        'USER': default_dbuser,
+        'PASSWORD': default_dbpassword,
+        'HOST': default_dbhost,                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': default_dbport,                      # Set to empty string for default.
     },
     'read': {
-        'ENGINE': dbengine, 
-        'NAME': dbname, 
-        'USER': dbuser,
-        'PASSWORD': dbpassword,
+        'ENGINE': read_dbengine, 
+        'NAME': read_dbname, 
+        'USER': read_dbuser,
+        'PASSWORD': read_dbpassword,
         'HOST': read_dbhost,
         'PORT': read_dbport,
     }
