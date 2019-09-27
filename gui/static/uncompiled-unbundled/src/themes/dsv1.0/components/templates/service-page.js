@@ -30,6 +30,8 @@ class ServicePage extends ServicePageBase {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
             <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
             <style>
+
+
             .center{
               display: flex;
               justify-content: center;
@@ -56,21 +58,390 @@ class ServicePage extends ServicePageBase {
               font-family: lato; font-size: 14px;
               position: relative; 
             }
+
+            #pagegroup-anchor:hover,
+            #pagegroup-anchor:active {
+
+              color: #575bde; 
+            
+              margin-left: -10px;
+             
+              } 
+
+            #pagegroup-anchor {
+
+              color: white; 
+
+              margin-left: -10px;
+
+              } 
+
+              
+
+
+          
+
+
+              #main-menu-item{
+
+                        z-index: 1; 
+                        position: relative; 
+                        /* background-color: var(--app-default-color); */
+                        margin-left: 30px; 
+                        margin-top: 5px; 
+                        font-size: 14px; 
+                        padding-left: 35px; 
+                        padding-top: 7px; 
+                        padding-bottom: 7px;
+                        }
+
+                .selected {
+
+                  background-color: #ebebed; 
+                  color: #575bde;
+                  z-index: 1; 
+                  position: relative; 
+                  
+                  margin-left: 30px; 
+                  margin-top: 5px; 
+                  font-size: 14px; 
+                  padding-left: 35px; 
+                  padding-top: 7px; 
+                  padding-bottom: 7px;
+                }
+
+               
+
+               
+
+
+
+                  #pagegroup-icon{
+                    
+                    color: #ffffff;
+
+                      }
+
+
             .item{
               padding: 6px 2px;
             }
             .item:hover{
-              background: #ebebed;
+              /* background: #ebebed; */
+              background-color: #ebebed;;
+
+            }
+
+           
+
+            .item:active{
+              background-color: #ebebed;
+              color: white;
+            }
+
+           
+            .item, a:active {
+              background-color: #ebebed;
+              Color: white;
+            }
+
+            #sub-items-anchor, a {
+
+              margin-top: 20px; 
+              /* color: #575bde; 
+              background-color: #ebebed; */
+
+            }
+
+            #sub-items-anchor:active {
+
+              /* background-color: var(--app-default-color);
+              color: white; */
+              margin-top: 20px; 
+              color: white ; 
+              background-color: #ebebed;
+              
+            }         
+
+            #side {
+
+              width: 240px; 
+              height: 1476px; 
+              
+              background-color: var(--app-default-color);
+              margin-right: -12px;
+            }
+
+           
+
+
+
+            #top-nav {
+
+              width: 1200px; height: auto; background-color: #ececee;
+            }
+
+            #fomr-x {
+              margin-top: 40px; 
+              margin-left: 50px; 
+              max-width: 1225px;
+            }
+
+            /* For ipad from: 0px to 768*/
+
+            @media only screen and (max-width: 768px ) {
+
+          div#side {
+
+            width: 795px; 
+            height: auto;  
+            
+             
+            margin-right: -12px;
               
 
-            }
-            .item.active{
-              background: #ebebed;
-            }
-            .item.active a{
-              color: #575bde;
-            }
+                }
 
+                div#main-menu-item {
+
+                      margin-left: 2px;
+                }
+
+                div#top-nav {
+
+                  width: 795px; 
+                  height: auto; 
+                  background-color: #ececee;
+                }
+
+                #form-x {
+
+                  margin-top: 40px; 
+                  margin-left: -3.5px; 
+                  max-width: 775px;
+                }
+
+
+                    }
+           
+/* tablets and small laptops  */
+
+            @media only screen and (max-width: 751px ) {
+
+                div#side {
+
+                  width: 766px; 
+                  height: auto;  
+                  
+                  
+                  margin-right: -12px;
+                    
+
+                      }
+
+                div#main-menu-item {
+
+                      margin-left: 2px;
+                }
+
+                div#top-nav {
+
+                  width: 766px; 
+                  height: auto; 
+                  background-color: #ececee;
+                }
+
+                #form-x {
+
+                  margin-top: 40px; 
+                  margin-left: -3.5px; 
+                  max-width: 746px;
+                  }
+
+
+                    }
+
+                    /* small phones to small tablets: from 0px to 386px*/
+              @media only screen and (max-width: 360px ) {
+
+
+                div#side {
+
+                        width: 386px; 
+                        height: auto;  
+                        
+                        
+                        margin-right: -12px;
+                          
+
+                            }
+
+                  div#main-menu-item {
+
+                        margin-left: 2px;
+                        }
+
+                  div#top-nav {
+
+                        width: 386px; 
+                        height: auto; 
+                        background-color: #ececee;
+                        }
+
+                  #form-x {
+
+                        margin-top: 40px; 
+                        margin-left: -3.5px; 
+                        max-width: 366px;
+                        }
+
+                      }
+
+
+                        /* small phones to small tablets: from 0px to 411px*/
+                @media only screen and (max-width: 411px ) {
+
+                  div#side {
+
+                        width: 437px; 
+                        height: auto;  
+
+                        
+                        margin-right: -12px;
+                          
+
+                            }
+
+                  div#main-menu-item {
+
+                          margin-left: 2px;
+                          }
+
+                  div#top-nav {
+
+                          width: 437px; 
+                          height: auto; 
+                          background-color: #ececee;
+                          }
+
+                    #form-x {
+
+                          margin-top: 40px; 
+                          margin-left: -3.5px; 
+                          max-width: 417px;
+                          }
+
+                }
+
+
+/* for small phones: from 0px to 320px  */
+                @media only screen and (max-width: 320px ) {
+
+                    div#side {
+
+                          width: 347px; 
+                          height: auto;  
+
+                          
+                          margin-right: -12px;
+                            
+
+                              }
+
+                    div#main-menu-item {
+
+                            margin-left: 2px;
+                            }
+
+                    div#top-nav {
+
+                            width: 347px; 
+                            height: auto; 
+                            background-color: #ececee;
+                            }
+
+                     #form-x {
+
+                            margin-top: 40px; 
+                            margin-left: -3.5px; 
+                            max-width: 327px;
+                            }
+
+                                    }
+
+                        /* for small phones: from 0px to 414px  */
+                        @media only screen and (max-width: 414px ) {
+
+                        div#side {
+
+                              width: 441px; 
+                              height: auto;  
+
+                               
+                              margin-right: -12px;
+                                
+
+                                  }
+
+                        div#main-menu-item {
+
+                                margin-left: 2px;
+                                }
+
+                        div#top-nav {
+
+                                width: 441px; 
+                                height: auto; 
+                                background-color: #ececee;
+                                }
+
+                          #form-x {
+
+                                margin-top: 40px; 
+                                margin-left: -3.5px; 
+                                max-width: 421px;
+                                }
+
+}
+
+                          /* for small phones from: 0px to 375  */
+
+                          @media only screen and (max-width: 375px ) {
+
+
+                          div#side {
+
+                                  width: 402px; 
+                                  height: auto;  
+                                  
+                                   
+                                  margin-right: -12px;
+                                    
+
+                                      }
+
+                            div#main-menu-item {
+
+                                  margin-left: 2px;
+                                  }
+
+                          div#top-nav {
+
+                                  width: 402px; 
+                                  height: auto; 
+                                  background-color: #ececee;
+                                  }
+                          #form-x {
+
+                                  margin-top: 40px; 
+                                  margin-left: -3.5px; 
+                                  max-width: 382px;
+                                  }
+
+                                }
+
+
+                        
           
             </style>
 
@@ -84,54 +455,71 @@ ${this.view === VIEW_MODE_DIALOG ? html`
     
 <section class="section is-paddingless ">
    
-        <div class="columns  is-mobile">
+        <div class="columns " >
                
-            <div class="column is-three-fifths" style=" width: 240px; height: 100vh; background-image: linear-gradient(165deg, #606cc3, #313fae 98%); margin-right: -12px;">
+            <div id = "side" class="column is-three-fifths ">
+              
               <div class="service-header is-flex">
                 <figure class="image is-rounded is-24x24" 
-                      style="margin-left: 20px;">
+                      style="margin-left: 20px; background-color: #5a6ef2;">
                         <img src="${this._computeLogo(this.gateway)}"> 
                 </figure>
                 <p style="color: #ffffff; font-weight: 900; 
                         font-family: lato; font-size: 16px;
                         position: relative;">${this.gateway.name}</p>
-              </div>     
+              </div>   
+
+
+
+
 
                     ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
 
-                      <div class=" ${pageGroupIndex == this._pageGroup && pageGroupIndex == this._page ? 'active' : ''}"
-                            style="z-index: 1; position: relative; background-color: #ebebed; margin-left: 30px; margin-top: 5px; font-size: 14px; padding-left: 35px; padding-top: 7px; padding-bottom: 7px; ">
 
-                        <a href="" 
-                            style="color: #575bde; background-color: #ebebed; margin-left: -10px; " 
-                            class=" is-capitalized" 
-                            style="cursor: pointer;" 
+
+                      <div id="main-menu-item" class=" ${pageGroupIndex == this._pageGroup ? 'selected active' : ''}  ">
+
+                      <a id = "pagegroup-anchor" href=""
+                            
+                            class=" is-capitalized  " 
+                            style="cursor: pointer; color:${this.mainColor};" 
                             @click = ${this.handleClick}>
-                          <span class="icon has-text-white" style="margin-left: -20px;  position: absolute; top: 5px;">
-                            <fa-icon class="fas fa-th-large" color = "#000" style=" height: 20px; width: 16px;"></fa-icon>
+
+                          <span id="pagegroup-icon" class="icon has-text-white" style="margin-left: -20px;  position: absolute; top: 5px;">
+
+                            <fa-icon class="fas fa-th-large" color = "${this.iconColor}" style=" height: 20px; width: 16px;"></fa-icon>
+
                           </span>
-                          &nbsp;${pageGroup.title}
+
+                          &nbsp;${pageGroup.title}&nbsp;&nbsp;&nbsp;
                         </a>
                         <div class="sub-items" style="margin-top: 20px;">
+
                             ${pageGroup.pages.map((menu, menuIndex) => html`
                             <div class="item">
                             
                             
 
-                            <a style="margin-top: 20px; color: #575bde; background-color: #ebebed;" 
-                                href=""> ${ServicePage.toTitleCase(menu.title)} </a> 
+                            <a id="sub-items-anchor "
+                                href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/"> ${ServicePage.toTitleCase(menu.title)} </a> 
                             <br>
                             </div>
+
+
+
                             `)}
 
                           </div>
+                          
                       </div>
 
                       
                     `)}
             </div>
+
+
                   
-            <div class="column" style=" width: 1200px; height: auto; background-color: #ececee; ">
+            <div id="top-nav" class="column" >
                    
                     <section class="hero" style="background-color: #f6f6f9; height: 64px; margin-left: -10px;">
                        
@@ -209,7 +597,7 @@ ${this.view === VIEW_MODE_DIALOG ? html`
                         
                     </section>
                     
-                    <div class="columns is-multiline" style="margin-top: 40px; margin-left: 50px; max-width: 1225px;">
+                    <div id="form-x" class="columns is-multiline" >
                       ${this.page.pageInputGroups.map((feed, feedIndex) => html`        
                        <div class="column is-12" >
                           <form-render .feed="${feed}" .params=${this.parseParams()}></form-render>
@@ -219,6 +607,8 @@ ${this.view === VIEW_MODE_DIALOG ? html`
                 
         </div>
     
+
+
   </section>
   </div> `}
      `;
@@ -226,6 +616,7 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
   constructor() {
     super();
+    this.iconColor = '#fff';
   }
 
   static get properties() {
@@ -236,7 +627,9 @@ ${this.view === VIEW_MODE_DIALOG ? html`
         type: Object,
         value: ''
       },
-      page: Number
+      page: Number,
+      iconColor: String,
+      mainColor: String
     };
   }
 
@@ -244,6 +637,19 @@ ${this.view === VIEW_MODE_DIALOG ? html`
     evt.preventDefault();
     const menuItems = evt.currentTarget.nextElementSibling;
     const toggleClass = 'is-block';
+    const highLight = 'selected';
+
+    if (this.iconColor == 'black') {
+      this.iconColor = '#fff';
+    } else {
+      this.iconColor = 'black';
+    }
+
+    if (this.mainColor == 'white') {
+      this.mainColor = '#575bde';
+    } else {
+      this.mainColor = 'white';
+    }
 
     if (menuItems.classList.contains(toggleClass)) {
       menuItems.classList.remove(toggleClass);
@@ -254,6 +660,19 @@ ${this.view === VIEW_MODE_DIALOG ? html`
       }); // expand related to source of event
 
       menuItems.classList.add(toggleClass);
+    }
+
+    let isCollapse = false; // collapse all previously expanded except the active
+
+    this.qsa('.selected').forEach(function (el) {
+      if (!el.classList.contains('active')) {
+        if (el === menuItems.parentElement) isCollapse = true;
+        el.classList.remove(highLight);
+      }
+    }); // expand clicked
+
+    if (!isCollapse && !menuItems.parentElement.classList.contains(highLight)) {
+      menuItems.parentElement.classList.add(highLight);
     }
   }
 
