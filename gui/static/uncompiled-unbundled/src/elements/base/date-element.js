@@ -22,7 +22,8 @@ export const DateElementBase = class extends utilsMixin(SerializableElement) {
       },
       columnSize: {
         type: Array
-      }
+      },
+      noPastDate: Boolean
     };
   }
 
@@ -37,9 +38,29 @@ export const DateElementBase = class extends utilsMixin(SerializableElement) {
   validate() {
     if (this.required && !this.getValue()) {
       return new this.Validation(false, 'Invalid date');
-    }
+    } else {
+      this.noPastDate = this.e.details.noPastDate;
 
-    return new this.Validation(true, 'Invalid date');
+      if (this.noPastDate) {
+        if (this.getInput().valueAsDate == null) {
+          return new this.Validation(false, 'Invalid date');
+        } else {
+          const datePicked = this.getInput().valueAsDate;
+          const todaysDate = new Date();
+
+          if (datePicked < todaysDate) {
+            return new this.Validation(false, 'Invalid date');
+          } else {
+            return new this.Validation(true, 'valid date');
+          }
+
+          ;
+        }
+      } //end of this.noPastDate
+
+
+      return new this.Validation(true, 'valid date');
+    }
   }
 
   firstUpdated(changedProperties) {
