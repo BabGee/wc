@@ -10,7 +10,7 @@ class ResponseStatus(models.Model):
         action_description = models.CharField(max_length=50)
         date_modified  = models.DateTimeField(auto_now=True)
         date_created = models.DateTimeField(auto_now_add=True)
-        def __unicode__(self):
+        def __str__(self):
                 return u'%s' % (self.description)
 
 #This expalains the state of a command. Whether to call API, pass or process locally
@@ -19,7 +19,7 @@ class CommandStatus(models.Model):
         description = models.CharField(max_length=100)
         date_modified  = models.DateTimeField(auto_now=True)
         date_created = models.DateTimeField(auto_now_add=True)
-        def __unicode__(self):
+        def __str__(self):
                 return u'%s' % (self.name)
 
 class ServiceCommand(models.Model):
@@ -30,7 +30,7 @@ class ServiceCommand(models.Model):
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)	
 	gateway = models.ForeignKey(Gateway, on_delete=models.CASCADE)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s %s %s' % (self.command_function, self.status.name, self.gateway)
 
 

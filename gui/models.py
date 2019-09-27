@@ -10,7 +10,7 @@ class Modules(models.Model):
 	display = models.NullBooleanField(blank=True)
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.display_name)    
 
 class Template(models.Model):
@@ -19,7 +19,7 @@ class Template(models.Model):
 	name = models.CharField(max_length=45, unique=True)
 	template_file = models.CharField(max_length=45)	
 	description =  models.CharField(max_length=100)		
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.name)
 
 class Pages(models.Model):
@@ -33,7 +33,7 @@ class Pages(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 	template = models.ForeignKey(Template, on_delete=models.CASCADE)
 	service = models.CharField(max_length=200)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.display_name)    
 
 class InitialPageStatus(models.Model):
@@ -41,7 +41,7 @@ class InitialPageStatus(models.Model):
 	description = models.CharField(max_length=100)
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.name)
 
 class InitialPage(models.Model):
@@ -53,7 +53,7 @@ class InitialPage(models.Model):
 	active_session = models.BooleanField(default=False)
 	subdomain = models.BooleanField(default=False)
 	gateway = models.ForeignKey(Gateway, on_delete=models.CASCADE)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.name)  
 
 class PermissionStatus(models.Model):
@@ -61,7 +61,7 @@ class PermissionStatus(models.Model):
 	description = models.CharField(max_length=100)
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.name)
 
 class Permission(models.Model):
@@ -73,7 +73,7 @@ class Permission(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 	xframe_exempted = models.BooleanField(default=False)
 	csrf_exempted = models.BooleanField(default=False)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.name)  
 	def gateway_list(self):
 		return "\n".join([a.name for a in self.gateway.all()])
@@ -87,7 +87,7 @@ class RefererHost(models.Model):
 	description =  models.CharField(max_length=100)	
 	xframe_exempted = models.BooleanField(default=False)
 	csrf_exempted = models.BooleanField(default=False)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.host)
 
 

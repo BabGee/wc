@@ -8,7 +8,7 @@ class Gateway(models.Model):
 	description =  models.CharField(max_length=100)
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.name)
 
 class GatewayHostStatus(models.Model):
@@ -16,7 +16,7 @@ class GatewayHostStatus(models.Model):
 	description = models.CharField(max_length=100)
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.name)
 
 class GatewayHost(models.Model):
@@ -26,7 +26,7 @@ class GatewayHost(models.Model):
 	description =  models.CharField(max_length=100)		
 	date_modified  = models.DateTimeField(auto_now=True)
 	date_created = models.DateTimeField(auto_now_add=True)
-	def __unicode__(self):
+	def __str__(self):
 		return u'%s' % (self.host)
 
 
