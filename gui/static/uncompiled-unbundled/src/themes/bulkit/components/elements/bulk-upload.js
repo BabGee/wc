@@ -157,11 +157,6 @@ class BulkUpload extends BulkUploadBase {
     }
   }
 
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-  }
-
 }
 
 customElements.define(BulkUpload.is, BulkUpload);

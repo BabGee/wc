@@ -10,7 +10,7 @@ import "../../../../../node_modules/@polymer/iron-icons/communication-icons.js";
 import '../snack-bar.js';
 import { BULMA_STYLES } from "../../styles/bulma-styles.js";
 import { LANDING_STYLES } from "../../styles/landing-style.js";
-import "../elements-list.js";
+import '../form-render.js';
 import "./section-page.js"; // todo move into base
 
 import { LandingPageBase } from "../../../../components/templates/landing-page.js";
@@ -64,7 +64,7 @@ class LandingPage extends LandingPageBase {
           display: block;
         }
 
-        elements-list{
+        form-render{
           width:100%;
         }
         .column.is-tablet-landscape-padded{
@@ -149,52 +149,52 @@ class LandingPage extends LandingPageBase {
             <div id="section_${index}" class="is-fullWidth">
               ${page.pageInputGroups.map(feed => html`
               ${feed.styles !== '' && JSON.parse(feed.styles).type !== null && JSON.parse(feed.styles).type === 'register' ? html`
-    <div class="login-wrapper columns is-gapless">
-    <!-- Image section (hidden on mobile) -->
-    <div class="column login-column is-5 hero-banner" style="background: var(--app-default-color);">
-        <div class="hero  is-theme-primary is-relative">
-            <div class="columns has-text-centered">
-                <div class="column">
-                    <h2 class="title is-2 light-text" style="padding-top: 25px">
-                      ${feed.title} 
-                      
-                    </h2>
-                    <h3 class="subtitle is-5 light-text">
-                         ${JSON.parse(feed.styles).detail} 
-                    </h3>
-                     <div class="container" style="margin: 40px;">
-               
-                  </div>
-                </div>
-            </div>
-          <img id="hero-image" style="margin-top: -40px; align-self:  center;width: 200px; margin-bottom: 20px;" 
-            src="${JSON.parse(feed.styles).image || 'https://bulkit.cssninja.io/assets/images/illustrations/drawings/city.svg'}" alt="">
-        </div>
-    </div>
-    <!-- /Image section -->
-    <!-- Form section -->
-    <div class="column is-7">
-        <div class="hero">
-        <div class="columns">
-            <div class="content column is-12">
-                <!-- Dashboard Wrapper -->
-                <div class="dashboard-wrapper" style="padding: 20px; margin-left: 0px;">
-                    <div class="columns">           
-                        <div class="column">
-                            <div id="main-dashboard" class="section-wrapper">                           
-                              <div class="columns is-vcentered">
-                                  <elements-list .params=${this.parseParams()} .top=${this._computeTop()} .feed="${feed}"></elements-list>
-                              </div>
-                             </div>
-                         </div>
+              <div class="login-wrapper columns is-gapless">
+              <!-- Image section (hidden on mobile) -->
+              <div class="column login-column is-5 hero-banner" style="background: var(--app-default-color);">
+                  <div class="hero  is-theme-primary is-relative">
+                      <div class="columns has-text-centered">
+                          <div class="column">
+                              <h2 class="title is-2 light-text" style="padding-top: 25px">
+                                ${feed.title} 
+                                
+                              </h2>
+                              <h3 class="subtitle is-5 light-text">
+                                   ${JSON.parse(feed.styles).detail} 
+                              </h3>
+                               <div class="container" style="margin: 40px;">
+                         
+                            </div>
+                          </div>
                       </div>
-                </div>
-        </div>
-    </div>
-    </div>
-  </div>
-  </div>` : html`<div class="columns is-vcentered">
-                <elements-list .params=${this.parseParams()} .top=${this._computeTop()} .feed="${feed}"></elements-list>
+                    <img id="hero-image" style="margin-top: -40px; align-self:  center;width: 200px; margin-bottom: 20px;" 
+                      src="${JSON.parse(feed.styles).image || 'https://bulkit.cssninja.io/assets/images/illustrations/drawings/city.svg'}" alt="">
+                  </div>
+              </div>
+              <!-- /Image section -->
+              <!-- Form section -->
+              <div class="column is-7">
+                  <div class="hero">
+                  <div class="columns">
+                      <div class="content column is-12">
+                          <!-- Dashboard Wrapper -->
+                          <div class="dashboard-wrapper" style="padding: 20px; margin-left: 0px;">
+                              <div class="columns">           
+                                  <div class="column">
+                                      <div id="main-dashboard" class="section-wrapper">                           
+                                        <div class="columns is-vcentered">
+                                            <form-render .feed="${feed}" .top=${this._computeTop()} .params=${this.parseParams()}></form-render>
+                                        </div>
+                                       </div>
+                                   </div>
+                                </div>
+                          </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+            </div>` : html`<div class="columns is-vcentered">
+                <form-render .feed="${feed}" .top=${this._computeTop()} .params=${this.parseParams()}></form-render>
            </div>`}
            `)}      
         </div>

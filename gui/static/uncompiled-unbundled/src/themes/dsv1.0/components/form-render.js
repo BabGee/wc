@@ -1,5 +1,5 @@
 import { css, html } from "../../../../node_modules/lit-element/lit-element.js";
-import { FormRenderBase, FORM_TYPE_FORM, FORM_TYPE_PAYMENTS_FORM, FORM_TYPE_HIDDEN_FORM } from '../../../components/form-render.js';
+import { FormRenderBase, FORM_TYPE_FORM, FORM_TYPE_PAYMENTS_FORM, FORM_TYPE_LANDING_FORM, FORM_TYPE_HIDDEN_FORM } from '../../../components/form-render.js';
 import { register } from "../register.js";
 import "./content-x.js";
 import './form-x.js';
@@ -34,6 +34,13 @@ class FormRender extends FormRenderBase {
         <p slot="header" class="is-capitalized">${FormRenderBase.toTitleCase(this.feed.title)}</p> 
         <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed, this.pos)} ></e-list>
       </content-x>
+      `;
+    } else if (formType === FORM_TYPE_LANDING_FORM) {
+      form = html`
+       <landing-x id="form">
+        <p slot="header" class="is-capitalized">${FormRenderBase.toTitleCase(this.feed.title)}</p> 
+        <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed, this.pos)} ></e-list>
+      </landing-x>
       `;
     } else if (formType === FORM_TYPE_HIDDEN_FORM) {
       form = html`

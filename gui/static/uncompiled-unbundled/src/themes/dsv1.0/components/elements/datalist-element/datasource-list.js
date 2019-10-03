@@ -399,6 +399,27 @@ ${this.paginate ? html`
         .columns = ${this.columns}></card-type>`;
     } //Add more types here
 
+
+    if (type == 'inbox') {
+      return html`<inbox-type
+      .data = ${this.data}
+      .details = ${this.details}
+      .columns = ${this.columns}></inbox-type>`;
+    }
+
+    if (type == 'staffprofile') {
+      return html`<staffprofile-type
+      .data = ${this.data}
+      .details = ${this.details}
+      .columns = ${this.columns}></staffprofile-type>`;
+    }
+
+    if (type == 'contact') {
+      return html`<contact-type
+    .data = ${this.data}
+    .details = ${this.details}
+    .columns = ${this.columns}></contact-type>`;
+    }
   }
 
   _handleSort(evt) {

@@ -10,9 +10,13 @@ class NumberInput extends NumberInputBase {
         ${SharedStyles}
         <div class="column " >
 <div class="field" style="margin-top: 0px">
- ${this.pageType.template !== 'payments' ? html`
+ ${window.template !== 'payments' ? html`
                     
-        <label class="form-label"><span><iron-icon icon=${this.e.icon || 'icons:input'}></iron-icon></span>${this.e.name}<span id="require" class="icon is-small is-right">*</span></label>
+        <label class="form-label">
+          <span><iron-icon icon=${this.e.icon || 'icons:input'}></iron-icon></span>
+          ${this.e.name}<span id="require" class="icon is-small is-right">*</span>
+        </label>
+    
   <div class="control  has-icons-left has-icons-right">
 
     <input class="input"  
@@ -103,12 +107,6 @@ class NumberInput extends NumberInputBase {
         this.shadowRoot.querySelector('#count').style.color = '#cecece';
       }
     }
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.pageType = loader.pl.app();
-    this.columnSize = loader.pl.getElementColumnSize();
   }
 
 }

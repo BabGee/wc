@@ -39,7 +39,6 @@ class ColorInput extends ColorInputBase {
 
   init(pElement, loader) {
     super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
   }
 
 }

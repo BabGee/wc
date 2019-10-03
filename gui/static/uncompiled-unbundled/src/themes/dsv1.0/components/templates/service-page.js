@@ -30,7 +30,13 @@ class ServicePage extends ServicePageBase {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
             <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
             <style>
+html{
 
+  overflow-y: auto;
+  /* width: 50px; */
+  /* color: red; */
+  overflow-x: hidden;
+}
 
             .center{
               display: flex;
@@ -145,7 +151,7 @@ class ServicePage extends ServicePageBase {
               Color: white;
             }
 
-            #sub-items-anchor, a {
+            .sub-items-anchor, a {
 
               margin-top: 20px; 
               /* color: #575bde; 
@@ -153,7 +159,7 @@ class ServicePage extends ServicePageBase {
 
             }
 
-            #sub-items-anchor:active {
+            .sub-items-anchor:active {
 
               /* background-color: var(--app-default-color);
               color: white; */
@@ -163,10 +169,17 @@ class ServicePage extends ServicePageBase {
               
             }         
 
+            .selected-items>a, selected-items:hover{
+               background-color: var(--app-default-color);
+              color: white;
+              padding: 5px 15px 5px 5px;
+            }
+
+
             #side {
 
               width: 240px; 
-              height: 1476px; 
+              height: 100vh; 
               
               background-color: var(--app-default-color);
               margin-right: -12px;
@@ -178,13 +191,19 @@ class ServicePage extends ServicePageBase {
 
             #top-nav {
 
-              width: 1200px; height: auto; background-color: #ececee;
+              width: 1200px; 
+              height: 100vh; 
+              background-color: #ececee;
+              /* width: 100%; */
             }
+
+            
 
             #fomr-x {
               margin-top: 40px; 
               margin-left: 50px; 
-              max-width: 1225px;
+              width: 1225px;
+              /* width: 1175px; */
             }
 
             /* For ipad from: 0px to 768*/
@@ -439,10 +458,56 @@ class ServicePage extends ServicePageBase {
                                   }
 
                                 }
-
-
-                        
-          
+                                .profile-modal-select{
+                                  position: relative;
+                                }
+                                .profile-select-content::after{
+                                  content: '';
+                                  position: absolute;
+                                  top: -19px;
+                                  z-index: 1000;
+                                  right: 7px;
+                                  border-top: 10px solid transparent;
+                                  border-bottom: 10px solid #fff;
+                                  border-left: 10px solid transparent;
+                                  border-right: 10px solid transparent;
+                                }
+                                .profile-header{
+                                  cursor: pointer;
+                                }
+                                .profile-modal-select .profile-picture img{
+                                  width: 40px;
+                                  height: 40px;
+                                  border-radius: 50%;
+                                }
+                                .profile-select-content{
+                                  width: 288px;
+                                  background: #fff;
+                                  display: none;
+                                  padding: 20px;
+                                  position: absolute;
+                                  top: 53px;
+                                  z-index: 1000;
+                                  right: -19px;
+                                }
+                                .profile-modal-select .profile-name{
+                                  font-size: 14px;
+                                  font-weight: 500;
+                                  color: #013243;
+                                }
+                                .profile-buttons .main-cta a{
+                                  background-color: #2273f0;
+                                  color: #fff;
+                                  padding: 10px 30px;
+                                  font-size: 12px;
+                                  margin: 20px auto;
+                                }
+                                .profile-buttons .btn a{
+                                  font-size: 11px;
+                                  color: #013243;
+                                  background-color: #c2c3c3;
+                                  padding: 5px 20px;
+                                }
             </style>
 
 ${this.view === VIEW_MODE_DIALOG ? html`
@@ -457,7 +522,7 @@ ${this.view === VIEW_MODE_DIALOG ? html`
    
         <div class="columns " >
                
-            <div id = "side" class="column is-three-fifths ">
+            <div id = "side" class="column is-three-fifths " style="overflow: auto;">
               
               <div class="service-header is-flex">
                 <figure class="image is-rounded is-24x24" 
@@ -477,7 +542,7 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
 
 
-                      <div id="main-menu-item" class=" ${pageGroupIndex == this._pageGroup ? 'selected active' : ''}  ">
+                      <div id="main-menu-item" class=" ${pageGroupIndex == this._pageGroup ? 'selected active' : ''}  " style="overflow: auto;">
 
                       <a id = "pagegroup-anchor" href=""
                             
@@ -493,19 +558,21 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
                           &nbsp;${pageGroup.title}&nbsp;&nbsp;&nbsp;
                         </a>
-                        <div class="sub-items" style="margin-top: 20px;">
+
+                        <div id="sub-items-${pageGroupIndex}" class="sub-items" style="margin-top: 20px; ">
 
                             ${pageGroup.pages.map((menu, menuIndex) => html`
-                            <div class="item">
+
+                            <div id="item-${menuIndex}" @click='${() => this.selectedPage(menuIndex)}' class="item">
                             
                             
 
-                            <a id="sub-items-anchor "
+                            <a id="sub-items-anchor-"  class="sub-items-anchor " 
                                 href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/"> ${ServicePage.toTitleCase(menu.title)} </a> 
                             <br>
                             </div>
-
-
+                            
+                            
 
                             `)}
 
@@ -519,7 +586,7 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
 
                   
-            <div id="top-nav" class="column" >
+            <div id="top-nav" class="column " >
                    
                     <section class="hero" style="background-color: #f6f6f9; height: 64px; margin-left: -10px;">
                        
@@ -551,32 +618,34 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
                                 ${this.gateway.profile ? html`
 
-                                <div style="margin-right: 5.4px;" >
+                                <div class="profile-modal-select">
+                                  <div class="profile-header" @click="${this.toggleProfile}">
+                                      <div class="profile-picture is-pulled-right">
+                                          <img src="img/bandmember.jpg" alt="profile picture">
+                                      </div>
+                                  </div>
 
-                                 
-
-                                 <a>   
-                                <figure class="image is-rounded">
-                                       
-                                    <img src="images/user-img.PNG" 
-                                       style="height: 24px; width: 23.6px;">
-                                        
-                                </figure>
-                                    
-                                </div>
-                                
-                              
-
-                                <div> 
-                                
-                                <p style="color: #575bde; font-weight: bold; font-size: 12px; margin-right: 2.1px;">${this.gateway.profile.firstName} &nbsp; ${this.gateway.profile.lastName} </p> 
-
-                                </a>
-                               
-                                
-                                </div>
+                                  <div class="profile-select-content" id="profile-content">
+                                      <div class="profile-content is-flex">
+                                          <div class="profile-picture cta" style="margin-right: 15px">
+                                              <img src="img/bird150.jpg" alt="profile picture">
+                                          </div>
+                                          <div class="prifile-info">
+                                              <p class="profile-name">${this.gateway.profile.firstName}&nbsp;${this.gateway.profile.lastName}</p>
+                                              <p class="profile-email is-size-7">${this.gateway.profile.username}</p>
+                                          </div>
+                                      </div>
+                                      <div class="profile-buttons">
+                                          <div class="main-cta center">
+                                              <a href="/logout" class="button is-rounded is-uppercase">Logout</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
                                 ` : html``}
                                  
+
+
                                 
                                 
                                 <div style="margin-right: 30px;">
@@ -616,7 +685,7 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
   constructor() {
     super();
-    this.iconColor = '#fff';
+    this.iconColor = "#fff";
   }
 
   static get properties() {
@@ -639,16 +708,16 @@ ${this.view === VIEW_MODE_DIALOG ? html`
     const toggleClass = 'is-block';
     const highLight = 'selected';
 
-    if (this.iconColor == 'black') {
-      this.iconColor = '#fff';
+    if (this.iconColor == "black") {
+      this.iconColor = "#fff";
     } else {
-      this.iconColor = 'black';
+      this.iconColor = "black";
     }
 
-    if (this.mainColor == 'white') {
-      this.mainColor = '#575bde';
+    if (this.mainColor == "white") {
+      this.mainColor = "#575bde";
     } else {
-      this.mainColor = 'white';
+      this.mainColor = "white";
     }
 
     if (menuItems.classList.contains(toggleClass)) {
@@ -662,22 +731,32 @@ ${this.view === VIEW_MODE_DIALOG ? html`
       menuItems.classList.add(toggleClass);
     }
 
-    let isCollapse = false; // collapse all previously expanded except the active
-
     this.qsa('.selected').forEach(function (el) {
-      if (!el.classList.contains('active')) {
-        if (el === menuItems.parentElement) isCollapse = true;
-        el.classList.remove(highLight);
-      }
-    }); // expand clicked
+      if (!el.classList.contains('active')) el.classList.remove(highLight); // 
+    });
+    this.qsa('.selected').forEach(function (el) {
+      if (!el.classList.contains('is-block')) el.classList.remove(highLight); // 
+    });
 
-    if (!isCollapse && !menuItems.parentElement.classList.contains(highLight)) {
+    if (menuItems.parentElement.classList.contains(highLight)) {} else {
       menuItems.parentElement.classList.add(highLight);
     }
   }
 
+  selectedPage(index) {
+    const activeItems = document.querySelector('#item-' + index).querySelectorAll('.item');
+    const selectedLink = document.querySelector('#item-' + index);
+    activeItems.forEach(item => item.classList.remove('selected-items'));
+    selectedLink.classList.add('selected-items');
+  }
+
   static get styles() {
     return [Colors, Fonts, ServiceStyles, css`:host { display: block; }`];
+  }
+
+  toggleProfile() {
+    const profileContent = document.getElementById('profile-content');
+    profileContent.classList.toggle('is-block');
   }
   /**
      * Dialogs Back navigation, Pop dialogs' stack

@@ -87,15 +87,6 @@ input:checked + .slider:before {
     return this.getInput().checked;
   }
 
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties); // this.type = "text";
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-  }
-
 }
 
 window.customElements.define(ToggleInput.is, ToggleInput);

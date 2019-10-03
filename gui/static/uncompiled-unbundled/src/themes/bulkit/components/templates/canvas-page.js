@@ -10,7 +10,7 @@ import "../../../../../node_modules/@polymer/iron-icons/communication-icons.js";
 import '../snack-bar.js';
 import { BULMA_STYLES } from "../../styles/bulma-styles.js";
 import { LANDING_STYLES } from "../../styles/landing-style.js";
-import "../elements-list.js";
+import '../form-render.js';
 import "./section-page.js"; // todo move into base
 
 import { CanvasPageBase } from "../../../../components/templates/canvas-page.js";

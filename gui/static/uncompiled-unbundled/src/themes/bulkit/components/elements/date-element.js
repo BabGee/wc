@@ -48,9 +48,6 @@ class DateElement extends DateElementBase {
       datestring: {
         type: String,
         value: ''
-      },
-      columnSize: {
-        type: Array
       }
     };
   }
@@ -91,11 +88,6 @@ class DateElement extends DateElementBase {
 
       this.getInput().valueAsDate = new Date(new Date(date.getTime() + Math.abs(date.getTimezoneOffset() * 60000)));
     }
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
   }
 
 }

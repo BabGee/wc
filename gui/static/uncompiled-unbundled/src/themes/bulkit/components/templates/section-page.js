@@ -3,9 +3,10 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
 import "../../../../../node_modules/@polymer/iron-icons/social-icons.js";
 import "../../../../../node_modules/@polymer/iron-icons/communication-icons.js";
-import "../../../../../node_modules/@polymer/paper-spinner/paper-spinner.js";
-import "../elements-list.js"; // todo this can be dynamically imported as a dynamic-import from the base class
+import "../../../../../node_modules/@polymer/paper-spinner/paper-spinner.js"; // todo this can be dynamically imported as a dynamic-import from the base class
+// import '../elements-list';
 
+import '../form-render.js';
 import '../snack-bar.js';
 import { SectionPageBase } from "../../../../components/templates/section-page.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
@@ -37,17 +38,13 @@ class SectionPage extends SectionPageBase {
             <div class="column ${this._gridClasses(feed)}"> 
             <div class="flex-card light-bordered"> 
                   <div class="card-body is-responsive" style="padding: 0px;">
-                      <elements-list       
-                          id="pl"                                                        
-                          title="${feed.title}"
-                          .params="${this.params}"
-                          .feed="${feed}">
-                      </elements-list>
+                      <form-render 
+                          id="pl"    
+                          .feed="${feed}" 
+                          .params=${this.params}></form-render>
                   </div>
             </div>                                    
             </div> 
-            
-            
             `)}
         </div>
 

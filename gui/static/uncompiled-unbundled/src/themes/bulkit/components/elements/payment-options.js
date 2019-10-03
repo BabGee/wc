@@ -144,16 +144,6 @@ class PaymentOptions extends PaymentOptionsBase {
 
   invalid(validation) {}
 
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-    const self = this;
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-  }
-
 }
 
 customElements.define(PaymentOptions.is, PaymentOptions);

@@ -115,11 +115,6 @@ class ImageInput extends ImageInputBase {
     });
   }
 
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-  }
-
 }
 
 customElements.define(ImageInput.is, ImageInput);

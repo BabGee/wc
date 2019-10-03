@@ -61,7 +61,6 @@ class CcInput extends CcInputBase {
     self.title = CcInput.toTitleCase(pElement.name);
     this.required = pElement.min && pElement.min > 0;
     this.name = pElement.name;
-    this.columnSize = loader.pl.getElementColumnSize();
   }
 
 }

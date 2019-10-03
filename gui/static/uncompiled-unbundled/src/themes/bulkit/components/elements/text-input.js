@@ -18,7 +18,7 @@ ${SharedStyles}
 </style>
  <div class="column">
 <div class="field" style="margin-top: 0px">
- ${this.pageType.template !== 'payments' ? html`
+ ${window.template !== 'payments' ? html`
   <label class="form-label">
     <span><iron-icon icon=${this.e.icon || 'icons:input'}></iron-icon></span>${this.e.name}
     <span id="require" class="icon is-right">*</span>
@@ -65,7 +65,7 @@ ${SharedStyles}
   invalid(validation) {
     let control = '.control';
 
-    if (this.pageType.template === 'payments') {
+    if (window.template === 'payments') {
       control = '.control-material';
     }
 
@@ -81,7 +81,7 @@ ${SharedStyles}
   valid(validation) {
     let control = '.control';
 
-    if (this.pageType.template === 'payments') {
+    if (window.template === 'payments') {
       control = '.control-material';
     }
 
@@ -130,12 +130,6 @@ ${SharedStyles}
         this.shadowRoot.querySelector('#count').style.color = '#cecece';
       }
     }
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-    this.pageType = loader.pl.app();
   }
 
 }

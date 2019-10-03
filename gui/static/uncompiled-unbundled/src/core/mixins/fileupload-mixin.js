@@ -2,8 +2,8 @@ import { httpMixin } from "./http-mixin.js";
 export const fileUploadMixin = BaseClass => class extends httpMixin(BaseClass) {
   constructor() {
     super();
-  } // TODO add events for watching the file reader onload and return the src for previewing
-  // TODO add events for watching the upload progress
+  } // TODO fire events or callbacks for watching the file reader onload and return the src for previewing
+  // TODO fire events or callbacks for watching the upload progress
 
   /**
     * Temp File Uploader

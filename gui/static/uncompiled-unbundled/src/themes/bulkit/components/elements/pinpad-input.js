@@ -104,11 +104,6 @@ class PinPadInput extends PinPadInputBase {
     }
   }
 
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-  }
-
 }
 
 window.customElements.define(PinPadInput.is, PinPadInput);

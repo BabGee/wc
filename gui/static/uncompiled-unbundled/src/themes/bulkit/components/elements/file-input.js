@@ -77,11 +77,6 @@ ${DASHBOARD_STYLES}
     }
   }
 
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-  }
-
 }
 
 window.customElements.define(FileInput.is, FileInput);

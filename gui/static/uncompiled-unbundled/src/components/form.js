@@ -3,6 +3,20 @@ import { SerializableElement, Validation } from "../core/serializable-element.js
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 export const FormBase = class extends LitElement {
+  static get properties() {
+    return {
+      pos: {
+        type: Number,
+        reflect: true
+      },
+      sections: Array,
+      head: {
+        type: String,
+        reflect: true
+      }
+    };
+  }
+
   serialize() {
     // Only elements that have a `name` and are not disabled are submittable.
     var elements = this._findElements();

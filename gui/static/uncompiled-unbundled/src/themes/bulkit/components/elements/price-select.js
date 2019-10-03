@@ -127,11 +127,6 @@ class PriceSelect extends PriceSelectBase {
     }
   }
 
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-  }
-
 }
 
 customElements.define(PriceSelect.is, PriceSelect);

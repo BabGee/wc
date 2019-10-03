@@ -11,7 +11,7 @@ class EmailInput extends EmailInputBase {
         ${SharedStyles}     
          <div class="column " >
 <div class="field" style="margin-top: 0px">
- ${this.pageType.template !== 'payments' ? html`
+ ${window.template !== 'payments' ? html`
         <label class="form-label">
         <span><iron-icon icon="icons:mail"></iron-icon></span>${this.e.name}
         </label>
@@ -61,9 +61,6 @@ class EmailInput extends EmailInputBase {
       pageType: {
         type: Object,
         value: {}
-      },
-      columnSize: {
-        type: Array
       }
     };
   }
@@ -79,7 +76,7 @@ class EmailInput extends EmailInputBase {
   valid(validation) {
     let control = '.control';
 
-    if (this.pageType.template === 'payments') {
+    if (window.template === 'payments') {
       control = '.control-material';
     }
 
@@ -93,7 +90,7 @@ class EmailInput extends EmailInputBase {
   invalid(validation) {
     let control = '.control';
 
-    if (this.pageType.template === 'payments') {
+    if (window.template === 'payments') {
       control = '.control-material';
     }
 
@@ -108,12 +105,6 @@ class EmailInput extends EmailInputBase {
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-    this.pageType = loader.pl.app();
   }
 
 }

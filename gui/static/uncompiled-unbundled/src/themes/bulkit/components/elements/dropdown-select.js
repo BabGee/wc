@@ -35,7 +35,7 @@ class DropdownSelect extends DropdownSelectBase {
             <span><iron-icon icon=${this.e.icon || 'icons:input'}></iron-icon></span>${this.e.name}
         </label>
         <div id="select-section" class="select is-fullwidth">
-            <select id="input"  @click='${() => this.showOptionCount()}'   style="text-indent: 20px;padding: 0px; border-radius: 4px;">
+            <select id="input" @mouseover= '${() => this.mouseOver()}' @click='${() => this.optionCount()}'   style="text-indent: 20px;padding: 0px; border-radius: 4px;">
                 <option data-placeholder="true" value="" disabled hidden ?selected="${!this.e.kind}">${this.e.name}</option>
                 ${this._computeItems(this.rows, this.q).map(data => html`<option value="${data[0]}" ?selected="${this.e.kind === data[0]}">${this._dataJoined(data)}</option>`)}
             </select>
@@ -66,9 +66,6 @@ class DropdownSelect extends DropdownSelectBase {
       params: {
         type: Object,
         value: ''
-      },
-      columnSize: {
-        type: Array
       }
     };
   }
@@ -83,12 +80,18 @@ class DropdownSelect extends DropdownSelectBase {
 
   invalid(validation) {}
 
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-    const self = this;
+  mouseOver() {
+    const normalSelect = this.shadowRoot.querySelector("#input");
+    const options = normalSelect.querySelectorAll('option'); //check first if options is greater than 10 inorder to prevent normal dropdown
+
+    if (options.length > 10) {
+      normalSelect.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+      });
+    }
   }
 
-  showOptionCount() {
+  optionCount() {
     const items = this.shadowRoot.querySelector('#input').querySelectorAll('option');
     items.length > 10 ? this.showFilter() : console.log("items is less than 10");
   }
@@ -102,19 +105,20 @@ class DropdownSelect extends DropdownSelectBase {
       select: this.shadowRoot.querySelector('#input'),
       placeholder: this.e.name,
       allowDeselect: true,
+      showContent: 'down',
       deselectLabel: '<span style="color: #1c5a6b; text-shadow: -0.5px -1px 8px #00c8ff;">x</span>'
     });
-    slim.open();
+    slim.open(); //get slimSelect search input
+
+    let searchInput = this.shadowRoot.querySelector(".ss-search").querySelector("input");
+    searchInput.addEventListener("click", function (event) {
+      event.stopPropagation();
+    });
   }
 
   onLoadData(dsc) {
     Logger.i.info('onLoadData Callback');
     Logger.i.info(this.rows.length);
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
   }
 
 }

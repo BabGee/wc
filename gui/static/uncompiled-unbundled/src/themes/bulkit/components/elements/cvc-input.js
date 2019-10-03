@@ -25,9 +25,6 @@ class CvcInput extends CvcInputBase {
       params: {
         type: Object,
         value: {}
-      },
-      columnSize: {
-        type: Array
       }
     };
   }
@@ -64,7 +61,6 @@ class CvcInput extends CvcInputBase {
 
   init(pElement, loader) {
     super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
   }
 
 }

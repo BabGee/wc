@@ -14,6 +14,7 @@ import { utilsMixin } from "../core/mixins/utils-mixin.js";
 import { serviceCallMixin } from "../core/mixins/servicecall-mixin.js";
 export const FORM_TYPE_FORM = 'FORM';
 export const FORM_TYPE_PAYMENTS_FORM = 'PAYMENTS FORM';
+export const FORM_TYPE_LANDING_FORM = 'LANDING FORM';
 export const FORM_TYPE_HIDDEN_FORM = 'HIDDEN FORM';
 export const FORM_TYPE_WINDOW_EVENT = 'WINDOW EVENT FORM';
 export const FormRenderBase = class extends utilsMixin(serviceCallMixin(LitElement)) {
@@ -116,6 +117,11 @@ export const FormRenderBase = class extends utilsMixin(serviceCallMixin(LitEleme
     const af = self.__computeActiveFeed();
 
     return af.oe;
+  }
+
+  _onPosChange(evt) {
+    Logger.i.debug(evt.detail);
+    this.pos = evt.detail['pos'];
   }
 
   __computeActiveFeed() {
@@ -238,37 +244,7 @@ export const FormRenderBase = class extends utilsMixin(serviceCallMixin(LitEleme
 
     const formType = af.formType();
 
-    if (formType === FORM_TYPE_FORM || formType === FORM_TYPE_HIDDEN_FORM || formType === FORM_TYPE_PAYMENTS_FORM) {
-      this.callServiceParams(af.service, self.mergeParams(self.params, self.stepParams)).then(function (response) {
-        self.loading = false;
-
-        if (response.containsServiceCommand(COMMAND_WINDOW_EVENT)) {
-          // this will be made available by the android web-view implementation
-          if (window.Android) {
-            Android.onWindowEvent(response.stringify());
-          } else {
-            const interval = setInterval(function () {
-              window.addEventListener('message', function (ev) {
-                if (ev.data.message === 'requestResult') {
-                  const origin = ev.origin || ev.originalEvent.origin;
-                  ev.source.postMessage({
-                    message: 'deliverResult',
-                    success: true,
-                    payload: response
-                  }, origin);
-                  clearInterval(interval);
-                }
-              });
-            }, 500);
-          }
-        } // Handle Command Response Actions
-
-
-        self.handleResponse(response);
-      }).catch(function (error) {
-        console.log(error);
-      });
-    } else if (formType === FORM_TYPE_WINDOW_EVENT || af.formMethod === 'GET') {
+    if (formType === FORM_TYPE_WINDOW_EVENT || af.formMethod === 'GET') {
       window.addEventListener('message', function (ev) {
         if (ev.data.message === 'deliverResult') {
           ev.source.close();
@@ -304,6 +280,40 @@ export const FormRenderBase = class extends utilsMixin(serviceCallMixin(LitEleme
 
         console.log('Interval Check');
       }, 500);
+    } else {
+      // FORM_TYPE_FORM
+      // FORM_TYPE_HIDDEN_FORM
+      // FORM_TYPE_PAYMENTS_FORM
+      this.callServiceParams(af.service, self.mergeParams(self.params, self.stepParams)).then(function (response) {
+        self.loading = false;
+
+        if (response.containsServiceCommand(COMMAND_WINDOW_EVENT)) {
+          // this will be made available by the android web-view implementation
+          if (window.Android) {
+            Android.onWindowEvent(response.stringify());
+          } else {
+            const interval = setInterval(function () {
+              window.addEventListener('message', function (ev) {
+                if (ev.data.message === 'requestResult') {
+                  const origin = ev.origin || ev.originalEvent.origin;
+                  ev.source.postMessage({
+                    message: 'deliverResult',
+                    success: true,
+                    payload: response
+                  }, origin);
+                  clearInterval(interval);
+                }
+              });
+            }, 500);
+          }
+        } // Handle Command Response Actions
+
+
+        self.handleResponse(response);
+      }).catch(function (error) {
+        console.log(error);
+        self.loading = false;
+      });
     }
   }
 

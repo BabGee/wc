@@ -4,7 +4,8 @@ import { html } from "../../node_modules/lit-element/lit-element.js";
 class RedirectUrl extends SerializableElement {
   static get is() {
     return 'redirect-url';
-  }
+  } // todo move into super class
+
 
   render() {
     return html``;
@@ -34,12 +35,9 @@ class RedirectUrl extends SerializableElement {
   invalid(validation) {// will never happen
   }
 
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
   init(pElement, loader) {
-    super.init(pElement, loader);
+    super.init(pElement, loader); // TODO remove this re-assignment
+
     var self = this;
     self.name = pElement.elementJson[4];
     self.result = window.location.pathname + window.location.search + window.location.hash;

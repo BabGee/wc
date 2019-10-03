@@ -10,7 +10,8 @@ class FingerprintElement extends SerializableElement {
     return {
       result: String
     };
-  }
+  } // todo move into super class
+
 
   render() {
     return html``;

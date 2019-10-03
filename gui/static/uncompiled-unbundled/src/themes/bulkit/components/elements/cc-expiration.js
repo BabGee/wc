@@ -55,11 +55,6 @@ class CcExpiration extends CcExpirationBase {
     this.shadowRoot.querySelector('.validation-info').textContent = 'Required';
   }
 
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-  }
-
 }
 
 customElements.define(CcExpiration.is, CcExpiration);

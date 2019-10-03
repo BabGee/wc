@@ -15,8 +15,9 @@ import { BULMA_STYLES } from "../../styles/bulma-styles.js";
 import { TooltipStyles } from "../../styles/tooltip-styles.js";
 import '../snack-bar.js';
 import "./section-page.js"; // todo move into base
+// import '../elements-list';
 
-import "../elements-list.js";
+import '../form-render.js';
 import { ServicePageBase } from "../../../../components/templates/service-page.js";
 import { VIEW_MODE_DIALOG, VIEW_MODE_MAIN } from "../../../../components/templates/page-view-element.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
@@ -33,6 +34,23 @@ ${BULMA_STYLES}
 ${DASHBOARD_STYLES}    
 ${TooltipStyles}    
 <style>
+.dashboard-wrapper{
+    padding: 91px 52px 0 53px;
+}
+@media (min-width: 1281px) {
+  
+.dashboard-wrapper{
+    padding: 91px 52px 0 53px;
+}
+  
+}
+@media (max-width: 767px){
+  .dashboard-wrapper {
+      margin-left: 79px;
+      padding: 71px 43px 0 21px;
+  }
+}
+
 nav {
     color: #fff;
 }
@@ -438,21 +456,14 @@ nav {
                                 <div class="columns dashboard-columns is-multiline">
                                     <!-- YOUR CONTENT COLUMNS GO HERE -->
                                     ${this.page.pageInputGroups.map((feed, feedIndex) => html`
-                                    <div class="column ${this._gridClasses(feed)} mobile-fullwidth"> 
-                                    
+                                    <div class="column ${this._gridClasses(feed)} mobile-fullwidth">
                                     <div class="flex-card light-bordered mobile-borderless">
-                                            
-                                            <div class="card-body is-responsive" style="padding: 0px;">
-                                            
-                                            <elements-list 
-                                                .params=${this.parseParams()} 
-                                                .top=${this._computeTop()} 
-                                                title="${feed.title}" 
-                                                .feed="${feed}"></elements-list>
-                                            
-                                            </div>
-                                            </div>                                    
-                                    </div>`)} 
+                                      <div class="card-body is-responsive" style="padding: 0px;">
+                                        <form-render .feed="${feed}" .params=${this.parseParams()}></form-render>
+                                      </div>
+                                    </div>
+                                    </div>
+                                    `)} 
                                             
                                     </div>`}
                                 </div>

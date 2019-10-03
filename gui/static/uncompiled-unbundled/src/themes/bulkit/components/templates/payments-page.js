@@ -4,8 +4,7 @@
 
  */
 import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../elements-list.js"; // import './section-page';
-
+import '../form-render.js';
 import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
 import "../../../../../node_modules/@polymer/iron-icons/social-icons.js";
@@ -166,7 +165,7 @@ class PaymentsPage extends PaymentsPageBase {
                                         <div class="column is-6">
                                             <div>
                                             <h3 style="text-align: center; font-size: 18px">${feed.title}</h3>
-                                             <elements-list .params=${this.parseParams()} .feed="${feed}"></elements-list>
+                                            <form-render .feed="${feed}" .params=${this.parseParams()}></form-render>
                                             </div>
                                         </div>
                                      `)}    

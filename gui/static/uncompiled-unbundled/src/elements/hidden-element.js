@@ -4,7 +4,8 @@ import { html } from "../../node_modules/lit-element/lit-element.js";
 class HiddenElement extends SerializableElement {
   static get is() {
     return 'hidden-element';
-  }
+  } // todo move into super class
+
 
   render() {
     return html``;
@@ -35,14 +36,6 @@ class HiddenElement extends SerializableElement {
   valid(validation) {}
 
   invalid(validation) {// will never happen
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
   }
 
 }

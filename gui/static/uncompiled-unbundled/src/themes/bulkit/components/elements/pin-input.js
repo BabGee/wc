@@ -105,11 +105,6 @@ class PinInput extends PinInputBase {
     }
   }
 
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    this.columnSize = loader.pl.getElementColumnSize();
-  }
-
 }
 
 window.customElements.define(PinInput.is, PinInput);
