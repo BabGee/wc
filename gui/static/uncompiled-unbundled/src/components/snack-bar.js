@@ -4,6 +4,10 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
 
 */
 import { LitElement, html } from "../../node_modules/lit-element/lit-element.js";
+export const SNACKBAR_CONTEXT_INFO = 'INFO';
+export const SNACKBAR_CONTEXT_WARNING = 'WARNING';
+export const SNACKBAR_CONTEXT_DANGER = 'DANGER';
+export const SNACKBAR_CONTEXT_SUCCESS = 'SUCCESS';
 export const SnackBarBase = class extends LitElement {
   render() {
     return html`
@@ -42,7 +46,9 @@ export const SnackBarBase = class extends LitElement {
 
   static get properties() {
     return {
-      active: Boolean
+      active: Boolean,
+      title: String,
+      context: String
     };
   }
 

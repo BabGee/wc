@@ -37,7 +37,8 @@ class CanvasPage extends CanvasPageBase {
     </section>`)}
     `}
     
-    ${html`<snack-bar id="snack-bar" ?active="${this._snackbarOpened}">${this._snackbarMessage}</snack-bar>`}
+    ${html`        <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
+    `}
     
     `;
   }

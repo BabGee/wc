@@ -56,7 +56,7 @@ class DropdownSelect extends DropdownSelectBase {
   width:auto;
   position:absolute;
   padding: 10px 20px 10px 10px;
-
+  z-index: 5000;
 }
 .dropdown-item-body ul li{
   

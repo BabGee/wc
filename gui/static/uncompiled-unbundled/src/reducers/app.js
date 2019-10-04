@@ -3,10 +3,13 @@
 Copyright (c) 2018 InterIntel Technologies. All rights reserved.
  */
 import { UPDATE_NAVIGATION, UPDATE_SERVICE, UPDATE_OFFLINE, OPEN_SNACKBAR, CLOSE_SNACKBAR, GET_PAYLOAD } from '../actions/app.js';
+import { SNACKBAR_CONTEXT_INFO } from "../components/snack-bar.js";
 const INITIAL_STATE = {
   offline: undefined,
   snackbarOpened: false,
-  snackbarMessage: ''
+  snackbarMessage: '',
+  snackbarTitle: 'Info',
+  snackbarContext: SNACKBAR_CONTEXT_INFO
 };
 
 const app = (state = INITIAL_STATE, action) => {
@@ -36,13 +39,17 @@ const app = (state = INITIAL_STATE, action) => {
     case OPEN_SNACKBAR:
       return { ...state,
         snackbarOpened: true,
-        snackbarMessage: action.message
+        snackbarMessage: action.message,
+        snackbarTitle: action.title,
+        snackbarContext: action.context
       };
 
     case CLOSE_SNACKBAR:
       return { ...state,
         snackbarOpened: false,
-        snackbarMessage: ''
+        snackbarMessage: '',
+        snackbarTitle: '',
+        snackbarContext: ''
       };
 
     default:

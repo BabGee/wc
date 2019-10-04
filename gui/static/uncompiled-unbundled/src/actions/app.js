@@ -4,6 +4,7 @@
 
  */
 import { updateView } from "./template.js";
+import { SNACKBAR_CONTEXT_SUCCESS, SNACKBAR_CONTEXT_WARNING } from "../components/snack-bar.js";
 export const UPDATE_NAVIGATION = 'UPDATE_NAVIGATION';
 export const UPDATE_SERVICE = 'UPDATE_SERVICE';
 export const UPDATE_OFFLINE = 'UPDATE_OFFLINE';
@@ -84,7 +85,9 @@ let snackbarTimer;
 export const showSnackbar = message => dispatch => {
   dispatch({
     type: OPEN_SNACKBAR,
-    message: message
+    message: message,
+    title: 'Connection Status',
+    context: 'error'
   });
   clearTimeout(snackbarTimer);
   snackbarTimer = setTimeout(() => dispatch({
@@ -92,9 +95,12 @@ export const showSnackbar = message => dispatch => {
   }), 3000);
 };
 export const updateOffline = offline => (dispatch, getState) => {
-  // Show the snackbar, unless this is the first load of the page.
+  let title, context; // Show the snackbar, unless this is the first load of the page.
+
   if (getState().app.offline !== undefined) {
-    dispatch(showSnackbar("You are now " + offline ? 'offline' : 'online'));
+    title = 'Connectivity';
+    context = offline ? SNACKBAR_CONTEXT_WARNING : SNACKBAR_CONTEXT_SUCCESS;
+    dispatch(showSnackbar("You are now " + offline ? 'offline!!' : 'online', title, context));
   }
 
   dispatch({

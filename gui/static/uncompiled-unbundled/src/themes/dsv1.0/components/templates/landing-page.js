@@ -590,6 +590,8 @@ class LandingPage extends LandingPageBase {
                     </div>
                 </div>
             </footer>
+            <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
+
       </div>
 `;
   }

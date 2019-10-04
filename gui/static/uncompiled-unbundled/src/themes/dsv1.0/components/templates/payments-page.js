@@ -233,7 +233,9 @@ class PaymentsPage extends PaymentsPageBase {
                 </div>
             </div>
         </div>
-    </div>`;
+    </div>
+    <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
+    `;
   }
 
   constructor() {

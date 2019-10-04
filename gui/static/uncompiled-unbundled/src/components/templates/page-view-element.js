@@ -115,6 +115,8 @@ export class PageViewElement extends connect(store)(utilsMixin(LitElement)) {
       _page: Number,
       _snackbarOpened: Boolean,
       _offline: Boolean,
+      _snackbarTitle: String,
+      _snackbarContext: String,
       interface: Command,
       // GetSection || GetInterface
       gateway: Command,
@@ -213,6 +215,8 @@ export class PageViewElement extends connect(store)(utilsMixin(LitElement)) {
 
     this._snackbarOpened = state.app.snackbarOpened;
     this._snackbarMessage = state.app.snackbarMessage;
+    this._snackbarTitle = state.app._snackbarTitle;
+    this._snackbarContext = state.app._snackbarContext;
     this._offline = state.app.offline;
   } // To scroll to top of window
   // TODO make static

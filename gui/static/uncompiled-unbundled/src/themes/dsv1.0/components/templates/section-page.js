@@ -32,10 +32,14 @@ class SectionPage extends SectionPageBase {
         
               `)}
           </div>
+          <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
+
         ` : html`            
             <div style="width: 100px;height: 100px;margin:10px auto;">
                 <paper-spinner style="width: 100%;height: 100%;" active></paper-spinner>
             </div>
+            <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
+
         `}
 `;
   }

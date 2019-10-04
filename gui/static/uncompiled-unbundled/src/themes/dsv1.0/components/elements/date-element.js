@@ -73,7 +73,7 @@ class DateElement extends DateElementBase {
 
 .weekdays li {
   display: inline-block;
-  width: 12.6%;
+  width: 12%;
   color: #013243;
   font-size: 10px;
   text-align: center;
@@ -87,7 +87,7 @@ class DateElement extends DateElementBase {
 .days li {
   list-style-type: none;
   display: inline-block;
-  width: 13%;
+  width: 13.5%;
   text-align: center;
   margin-bottom: 5px;
   font-size:12px;
@@ -202,7 +202,28 @@ class DateElement extends DateElementBase {
   }
 
   getInput() {
-    const picker = this.dateSelected;
+    let picker = this.dateSelected;
+
+    if (picker === undefined) {
+      const inpInput = this.shadowRoot.querySelector('.calendar-select-header');
+      const textDate = inpInput.innerText;
+
+      if (textDate.length === 14) {
+        const dayValue = textDate.substring(3, 4);
+        const monthValue = textDate.substring(5, 8);
+        const yearValue = textDate.substring(10);
+        cell.innerText + '/' + `${month + 1}` + '/' + year;
+        picker = dayValue + '/' + `${this.months.indexOf(monthValue) + 1}` + '/' + yearValue;
+        return picker;
+      } else if (textDate.length === 15) {
+        const dayValue = textDate.substring(3, 5);
+        const monthValue = textDate.substring(6, 9);
+        const yearValue = textDate.substring(11);
+        picker = dayValue + '/' + `${this.months.indexOf(monthValue) + 1}` + '/' + yearValue;
+        return picker;
+      }
+    }
+
     return picker;
   }
 
@@ -277,7 +298,7 @@ class DateElement extends DateElementBase {
               cell.classList.remove('active');
             });
             cell.classList.add("active");
-            const dateClicked = cell.innerText + " " + months[month] + " " + year;
+            const dateClicked = cell.innerText + " " + months[month] + ", " + year;
             this.todayDateNumber = cell.innerText;
             this.dateSelected = cell.innerText + '/' + `${month + 1}` + '/' + year;
             let str = `<p class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${dateClicked}</p>`;
