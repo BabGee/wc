@@ -6,7 +6,7 @@ import { UPDATE_NAVIGATION, UPDATE_SERVICE, UPDATE_OFFLINE, OPEN_SNACKBAR, CLOSE
 import { SNACKBAR_CONTEXT_INFO } from "../components/snack-bar.js";
 const INITIAL_STATE = {
   offline: undefined,
-  snackbarOpened: false,
+  snackbarOpened: true,
   snackbarMessage: '',
   snackbarTitle: 'Info',
   snackbarContext: SNACKBAR_CONTEXT_INFO
@@ -46,7 +46,7 @@ const app = (state = INITIAL_STATE, action) => {
 
     case CLOSE_SNACKBAR:
       return { ...state,
-        snackbarOpened: false,
+        snackbarOpened: true,
         snackbarMessage: '',
         snackbarTitle: '',
         snackbarContext: ''

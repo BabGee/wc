@@ -116,8 +116,20 @@ html{
                 .selected>#pagegroup-anchor{color:#575bde;}
                 .selected>#arrow-menu{ color: white !important;}
 
+                
          
+                .menu-caret-left{
 
+                  margin-left: 20px;
+                  position: absolute; 
+                  top: 8px;
+                  }
+
+                  .selected.active.menu-caret-left-icon{
+                   visibility: hidden;
+                    
+                    color: ##EBEBED !important;
+                    }
 
 
                   #pagegroup-icon{
@@ -527,7 +539,7 @@ html{
                                   padding: 5px 20px;
                                 }
                                 .main-content{
-                                  width: 1092px;
+                                  width: calc(100% - 240px);
                                   /* padding: 20px; */
                                   background-color: #fff;
                                   margin-left: 240px;
@@ -574,6 +586,8 @@ html{
                                   left: 0;
                                   display: none;
                                 }
+
+                                
 
                                 /* FORM STYLING  */
 
@@ -730,10 +744,6 @@ ${this.view === VIEW_MODE_DIALOG ? html`
                         position: relative;">${this.gateway.name}</p>
               </div>   
 
-
-
-
-
                     ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
 
 
@@ -747,11 +757,18 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
                           <span id="pagegroup-icon" class="icon has-text-white" style="margin-left: -20px;  position: absolute; top: 5px;">
 
-                            <fa-icon class="fas fa-th-large" color = "${this.iconColor}" style=" height: 20px; width: 16px; position: relative; top: 1px;"></fa-icon>
+                            <fa-icon class="fas fa-th-large" color = "#fff" style=" height: 20px; width: 16px; position: relative; top: 2.5px;"></fa-icon>
 
                           </span>
 
                           &nbsp;${pageGroup.title}&nbsp;
+
+                          <span id="pagegroup-icon" class="icon has-text-white menu-caret-left" >
+
+                            <fa-icon class="fas fa-caret-left menu-caret-left-icon" color="#EBEBED" style=" height: 16px; width: 16px; position: relative; top: 1px;"></fa-icon>
+
+                          </span>
+
                         </a>
 
                         <div id="sub-items-${pageGroupIndex}" class="sub-items" style="margin-top: 20px; ">
@@ -858,7 +875,6 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
   constructor() {
     super();
-    this.iconColor = "#fff";
   }
 
   static get properties() {
@@ -870,7 +886,6 @@ ${this.view === VIEW_MODE_DIALOG ? html`
         value: ''
       },
       page: Number,
-      iconColor: String,
       mainColor: String
     };
   }
@@ -884,13 +899,6 @@ ${this.view === VIEW_MODE_DIALOG ? html`
     const menuItems = evt.currentTarget.nextElementSibling;
     const toggleClass = 'is-block';
     const highLight = 'selected';
-    const mainWord = document.querySelector('.main-menu-p');
-
-    if (this.iconColor == "black") {
-      this.iconColor = "#fff";
-    } else {
-      this.iconColor = "black";
-    }
 
     if (menuItems.classList.contains(toggleClass)) {
       menuItems.classList.remove(toggleClass);
@@ -904,10 +912,10 @@ ${this.view === VIEW_MODE_DIALOG ? html`
     }
 
     this.qsa('.selected').forEach(function (el) {
-      if (!el.classList.contains('active')) el.classList.remove(highLight); // 
+      if (!el.classList.contains('active')) el.classList.remove(highLight); //
     });
     this.qsa('.selected').forEach(function (el) {
-      if (!el.classList.contains('is-block')) el.classList.remove(highLight); // 
+      if (!el.classList.contains('is-block')) el.classList.remove(highLight); //
     });
 
     if (menuItems.parentElement.classList.contains(highLight)) {} else {

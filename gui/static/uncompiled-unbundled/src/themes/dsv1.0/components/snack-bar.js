@@ -6,11 +6,17 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
 import { html } from "../../../../node_modules/lit-element/lit-element.js";
 import { SnackBarBase } from "../../../components/snack-bar.js";
 import { register } from '../register.js';
+import "../../../../node_modules/fa-icons/index.js";
 
 class SnackBar extends SnackBarBase {
   render() {
+    console.log(this.message);
     return html`
 
+ <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
       <style>
 
@@ -27,7 +33,7 @@ class SnackBar extends SnackBarBase {
       }
 
    
-      :host {
+      /* :host {
         display: block;
         position: fixed;
         bottom: 0;
@@ -58,84 +64,43 @@ class SnackBar extends SnackBarBase {
           height: 60px;
           margin: auto;
         }
-      }
+      } */
+
+      .firstGreen {
+
+font-size: 14px;  
+margin-top: 30px; 
+background-color: #11bf5a;
+color: #fff;
+}
+
+.firstGreen-icon-check{
+
+margin-left: 30px; 
+margin-right: 20px; 
+margin-top: 32px; 
+margin-bottom: 32px;
+}
+.notification-container{
+  width: 370px;
+  margin: 0 auto;
+}
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
  <div class="columns">
-
-<div class="column " >
-
-        <div class="notification has-text-white  is-success " 
-        style=" font-size: 14px;  margin-top: 30px; ">
-
+  <div class="column">
+    <div class="notification-container">
+      <div class="notification has-text-white is-${this.context.toLowerCase()}" style=" font-size: 14px;  margin-top: 30px;">
         <button class="delete"></button>
-
-        <span class="icon  has-text-white  is-pulled-left" 
-              style="margin-left: 30px; margin-right: 20px; margin-top: 32px; margin-bottom: 32px;">
-
-                <i class="fas fa-check-circle" style="height:36px; width: 36px;"></i>
-
-            </span>
-
-              <p style="margin-left: 86px; margin-top: 16px; font-weight: bold; font-size: 18px;"> Well done! </p>  
-
-              <p style="margin-left: 86px; margin-bottom: 22px;">You succesfully read this important alert message.</p> 
-                
-                    
-                
-    </div>
-
+          <span class="icon  has-text-white  is-pulled-left" style="margin-left: 30px; margin-right: 20px; margin-top: 32px; margin-bottom: 32px;">
+              <fa-icon class="fas fa-check-circle" color="#fff" style="height:36px; width: 36px;"></fa-icon>
+          </span>
+          <p style="margin-left: 86px; margin-top: 16px; font-weight: bold; font-size: 18px;"> <slot name="title"></slot></p>  
+          <p style="margin-left: 86px; margin-bottom: 22px;"><slot name="message"></slot></p>              
+      </div>
+    </div>        
+  </div>
 </div>
-
-<div class="column ">
-
-        <div class="notification has-text-white   " 
-        style=" font-size: 14px;  margin-top: 30px; background-color: #11bf5a;">
-
-        <button class="delete"></button>
-
-        <span class="icon  has-text-white  is-pulled-left" 
-              style="margin-left: 30px; margin-right: 20px; margin-top: 32px; margin-bottom: 32px;">
-
-                <i class="fas fa-check-circle" style="height:36px; width: 36px;"></i>
-
-            </span>
-
-              <p style="margin-left: 86px; margin-top: 16px; font-weight: bold; font-size: 18px;"> Well done! </p>  
-
-              <p style="margin-left: 86px; margin-bottom: 22px;">You succesfully read this important alert message.</p>
-                
-                    
-                
-    </div>
-        
-</div>
-
-<div class="column">
-
-        <div class="notification has-text-white   " 
-        style=" font-size: 14px;  margin-top: 30px; background-color: #11bf5a;">
-
-        <button class="delete"></button>
-
-        <span class="icon  has-text-white  is-pulled-left" 
-              style="margin-left: 30px; margin-right: 20px; margin-top: 32px; margin-bottom: 32px;">
-
-                <i class="fas fa-check-circle" style="height:36px; width: 36px;"></i>
-
-            </span>
-
-              <p style="margin-left: 86px; margin-top: 16px; font-weight: bold; font-size: 18px;"> Well done! </p>  
-
-              <p style="margin-left: 86px; margin-bottom: 22px;">You succesfully read this important alert message.</p>
-                
-                    
-                
-    </div>
-        
-</div>
- </div>
-    
-    <slot></slot>
     `;
   }
 
