@@ -3,6 +3,7 @@
  Copyright (c) 2018 InterIntel. All rights reserved.
  */
 import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../form-render.js';
 import "./section-page.js"; // todo move into base
 
 import '../snack-bar.js';
@@ -510,6 +511,23 @@ class LandingPage extends LandingPageBase {
                     </nav>
                 </div>
             </header>
+            
+            
+            ${this.view === VIEW_MODE_DIALOG ? html`
+            <section-page id="dialog" queue=${this.dialogServicesQueue} ></section-page>
+            ` : html`
+            ${this.pageGroup.pages.map((page, index) => html`        
+            <!-- Feature -->
+            <section  class="section is-fullWidth"  style="padding: 0px; background-color: #f4f6fb;">
+                                        
+                <div id="section_${index}" class="is-fullWidth">
+                  ${page.pageInputGroups.map(feed => html`
+                  <form-render .feed="${feed}" .top=${this._computeTop()} .params=${this.parseParams()}></form-render>
+               `)}      
+            </div>
+            </section>`)}
+            `}
+            
             
             <footer class="landing-footer">
 

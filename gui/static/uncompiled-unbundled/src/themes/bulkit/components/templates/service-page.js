@@ -13,9 +13,7 @@ import '../snack-bar.js'; // These are the shared styles needed by this element.
 import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
 import { BULMA_STYLES } from "../../styles/bulma-styles.js";
 import { TooltipStyles } from "../../styles/tooltip-styles.js";
-import '../snack-bar.js';
 import "./section-page.js"; // todo move into base
-// import '../elements-list';
 
 import '../form-render.js';
 import { ServicePageBase } from "../../../../components/templates/service-page.js";

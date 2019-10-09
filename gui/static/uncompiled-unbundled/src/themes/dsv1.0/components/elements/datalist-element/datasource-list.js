@@ -239,23 +239,7 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
 
             
             `}
-${this.paginate ? html`
-<datasource-table-footer resources="${this.resources}"
-                       language="${this.language}"
-                       footer-position="${this.footerPosition}"
-                       .availableSize="${this.availableSize}"
-                       .totalPages="${this.totalPages}"
-                       .totalElements="${this.totalElements}"
-                       .oldPage="${this.oldPage}"
-                       
-                       size="${this.size}"
-                       page="${this.page}"
-                       
-                       @size-change="${this._sizeChanged}"
-                       @p-page="${this._pageChanged}"
-                       @n-page="${this._pageChanged}">
-</datasource-table-footer>
-` : html``}
+
 `;
   }
 
@@ -360,7 +344,8 @@ ${this.paginate ? html`
         type: Array // value: () => [],
         // notify: true,
 
-      }
+      },
+      title: String
     };
   }
 
@@ -389,14 +374,36 @@ ${this.paginate ? html`
       return html`<table-type
         .data = ${this.data}
         .details = ${this.details}
-        .columns = ${this.columns}></table-type>`;
+        .columns = ${this.columns}
+        .paginate = ${this.paginate}
+        .page = ${this.page}
+        .size = ${this.size}
+        .oldpage = ${this.oldPage}
+        .totalElements = ${this.totalElements} 
+        .totalPages = ${this.totalPages}
+        .availableSize = ${this.availableSize}
+        .selectable = ${this.selected} 
+        .selected = ${this.selected}
+        .title=${this.title}
+        ></table-type>`;
     }
 
     if (type == 'card') {
       return html`<card-type
         .data = ${this.data}
         .details = ${this.details}
-        .columns = ${this.columns}></card-type>`;
+        .columns = ${this.columns}
+        .paginate = ${this.paginate}
+        .page = ${this.page}
+        .size = ${this.size}
+        .oldpage = ${this.oldPage}
+        .totalElements = ${this.totalElements} 
+        .totalPages = ${this.totalPages}
+        .availableSize = ${this.availableSize}
+        .selectable = ${this.selected} 
+        .selected = ${this.selected}
+        .title=${this.title}
+        ></card-type>`;
     } //Add more types here
 
 
@@ -404,21 +411,54 @@ ${this.paginate ? html`
       return html`<inbox-type
       .data = ${this.data}
       .details = ${this.details}
-      .columns = ${this.columns}></inbox-type>`;
+      .columns = ${this.columns}
+      .paginate = ${this.paginate}
+      .page = ${this.page}
+      .size = ${this.size}
+      .oldpage = ${this.oldPage}
+      .totalElements = ${this.totalElements} 
+      .totalPages = ${this.totalPages}
+      .availableSize = ${this.availableSize}
+      .selectable = ${this.selected} 
+      .selected = ${this.selected}
+      .title=${this.title}
+      ></inbox-type>`;
     }
 
     if (type == 'staffprofile') {
       return html`<staffprofile-type
       .data = ${this.data}
       .details = ${this.details}
-      .columns = ${this.columns}></staffprofile-type>`;
+      .columns = ${this.columns}
+      .paginate = ${this.paginate}
+      .page = ${this.page}
+      .size = ${this.size}
+      .oldpage = ${this.oldPage}
+      .totalElements = ${this.totalElements} 
+      .totalPages = ${this.totalPages}
+      .availableSize = ${this.availableSize}
+      .selectable = ${this.selected} 
+      .selected = ${this.selected}
+      .title=${this.title}
+      ></staffprofile-type>`;
     }
 
     if (type == 'contact') {
       return html`<contact-type
     .data = ${this.data}
     .details = ${this.details}
-    .columns = ${this.columns}></contact-type>`;
+    .columns = ${this.columns}
+    .paginate = ${this.paginate}
+    .page = ${this.page}
+    .size = ${this.size}
+    .oldpage = ${this.oldPage}
+    .totalElements = ${this.totalElements} 
+    .totalPages = ${this.totalPages}
+    .availableSize = ${this.availableSize}
+    .selectable = ${this.selected} 
+    .selected = ${this.selected}
+    .title=${this.title}
+    ></contact-type>`;
     }
   }
 

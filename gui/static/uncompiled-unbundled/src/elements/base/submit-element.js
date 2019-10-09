@@ -25,7 +25,7 @@ export const SubmitElementBase = class extends BaseElement {
     this.type = 'submit';
   }
   /**
-   * Form Submission 
+   * Form Submission
    * this is intended for children
    */
 

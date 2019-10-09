@@ -12,11 +12,7 @@ class DataListElement extends DataListElementBase {
 
   renderDefault() {
     return html`
-<h4>${this.title}</h4>
-                 <div>
-                <paper-button  @tap="${this.generatePDF}" style=" background: #3498db; color:white;"><iron-icon icon="image:picture-as-pdf"></iron-icon>Export PDF</paper-button>
-                <paper-button @tap="${this.generateCSV}" style=" background: #2ecc71; color:white;"><iron-icon icon="icons:save"></iron-icon>Export CSV</paper-button>
-            </div>
+
 
                 <datasource-list
                         id="dt"
@@ -31,6 +27,7 @@ class DataListElement extends DataListElementBase {
                         .columns="${this.columns}"
                         .cols="${this.cols}"
                         .size="${this.limit}"
+                        .title="${this.title}"
                         toggle-columns="${this.toggleColumns}"
                         
                         @sort="${this._handleSort}"

@@ -1,6 +1,6 @@
 import { css, html, LitElement } from "../../node_modules/lit-element/lit-element.js";
-import { Logger } from "../core/logger.js"; // import {FormRenderBase} from '../../../components/form-render.js';
-
+import { Logger } from "../core/logger.js";
+import "./element-loader.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 export const EListBase = class extends LitElement {

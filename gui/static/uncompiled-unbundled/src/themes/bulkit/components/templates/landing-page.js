@@ -13,6 +13,7 @@ import { LANDING_STYLES } from "../../styles/landing-style.js";
 import '../form-render.js';
 import "./section-page.js"; // todo move into base
 
+import { VIEW_MODE_DIALOG, VIEW_MODE_MAIN } from "../../../../components/templates/page-view-element.js";
 import { LandingPageBase } from "../../../../components/templates/landing-page.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
@@ -93,7 +94,7 @@ class LandingPage extends LandingPageBase {
                                 <a class="nav-item" href="/">
                                     <img src="/media/${this.gateway.logo}" alt="logo">
                                 </a>
-                                ${this.view === 'dialog' ? html`
+                                ${this.view === VIEW_MODE_DIALOG ? html`
                                   <!-- Section Back button -->
                                   <button class="menu-fab" @click="${this._viewList}">
                                     <iron-icon icon="icons:close"></iron-icon>
@@ -139,7 +140,7 @@ class LandingPage extends LandingPageBase {
         </div>
         <!-- /Hero and nav -->
         
-        ${this.view === 'dialog' ? html`
+        ${this.view === VIEW_MODE_DIALOG ? html`
         <section-page id="dialog" queue=${this.dialogServicesQueue} ></section-page>
         ` : html`
         ${this.pageGroup.pages.map((page, index) => html`        

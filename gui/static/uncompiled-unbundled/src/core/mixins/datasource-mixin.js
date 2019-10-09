@@ -6,6 +6,9 @@ import { Logger } from '../logger.js';
 export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseClass) {
   constructor() {
     super();
+    this.loader = undefined;
+    this.loading = true;
+    this.empty = false;
     this.page = 1;
     this.limit = 50;
     this.totalElements = 0;
@@ -49,7 +52,17 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
       },
       q: {
         type: String
-      }
+      },
+
+      /**
+       * is loading
+       */
+      loading: Boolean,
+
+      /**
+       * is empty
+       */
+      empty: Boolean
     };
   }
   /**
@@ -166,6 +179,7 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
   }
 
   async loadData() {
+    this.loading = true;
     Logger.i.debug('load data :' + this.dscDataName()); // todo use element service
 
     const service = 'DATA SOURCE';
@@ -174,6 +188,7 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
         const dataSourceCommand = res.serviceCommands[COMMAND_DATA_SOURCE];
         const dsc = this.parseResponseIntoProperties(dataSourceCommand); // data load callback
 
+        this.loading = false;
         this.onLoadData(dsc);
         resolve(dsc);
       }, function (rejected) {
@@ -189,6 +204,11 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
    */
 
 
-  onLoadData(dsc) {}
+  onLoadData(dsc) {
+    // TODO can just check this.totalElements
+    if (!dsc.rows.length && !dsc.groups.length && !dsc.data.length) {
+      this.empty = true;
+    }
+  }
 
 };

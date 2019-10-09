@@ -11,8 +11,6 @@ import { DataListElementBase } from "../../../../elements/base/datalist-element.
 class DataListElement extends DataListElementBase {
   constructor() {
     super();
-    this.loading = true;
-    this.empty = false;
   }
 
   renderDefault() {
@@ -180,9 +178,7 @@ class DataListElement extends DataListElementBase {
         type: Boolean,
         value: false,
         notify: true
-      },
-      loading: Boolean,
-      emptyState: Boolean
+      }
     };
   }
 
@@ -250,11 +246,7 @@ class DataListElement extends DataListElementBase {
   }
 
   onLoadData(dsc) {
-    this.loading = false;
-
-    if (!dsc.rows.length) {
-      this.empty = true;
-    }
+    super.onLoadData(dsc);
   }
 
   init(pElement, loader) {

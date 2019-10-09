@@ -1,6 +1,6 @@
 import { LitElement } from "../../node_modules/lit-element/lit-element.js";
 import { PageInput } from "./parsers/commands/iic/page-input.js";
-import { ElementsListBase } from "../components/elements-list.js";
+import { EListBase } from "../components/e-list.js";
 import { Logger } from "./logger.js";
 export class BaseElement extends LitElement {
   constructor() {
@@ -18,7 +18,7 @@ export class BaseElement extends LitElement {
       /**
        * The Container ElementList Instance
        */
-      pl: ElementsListBase
+      pl: EListBase
     };
   }
 

@@ -555,6 +555,9 @@ html{
                                 }
                                 .main-content .top-nav-menu .icons .icon{
                                   padding: 0 30px 0 0;
+                                  position: relative;
+                                  left: 4px;
+                                  top: 7px;
                                 }
                                 .main-content .top-nav-menu .icons .icon:last-child{
                                   padding: 0;
@@ -718,6 +721,10 @@ html{
      width: 280px;
      }
 }
+
+.profile-image img{
+  width: 30px;
+}
             </style>
 
 ${this.view === VIEW_MODE_DIALOG ? html`
@@ -804,7 +811,7 @@ ${this.view === VIEW_MODE_DIALOG ? html`
               <div class="top-nav-menu">
                 <div class="profile-content is-pulled-right" style="width: 180px;">
                   <div class="columns is-mobile">
-                     <div class="column">
+                     <div class="column is-one-third">
                        <div class="icons is-flex">
                          <div class="icon icon-left">
                            <span><fa-icon class="fab fa-elementor" color = "#ccced0" style="height: 16px; width: 19.5px;"></fa-icon></span>
@@ -814,7 +821,7 @@ ${this.view === VIEW_MODE_DIALOG ? html`
                          </div>
                        </div>
                      </div>
-                     <div class="column">
+                     <div class="column is-two-thirds">
                      ${this.gateway.profile ? html`
                       <div class="service-profile"> 
                         <div class="profiles is-flex" @click="${this.toggleProfile}">
@@ -822,7 +829,7 @@ ${this.view === VIEW_MODE_DIALOG ? html`
                             <img src="${this.gateway.profile.photo ? '/media/' + this.gateway.profile.photo : 'images/web/user.svg'}" alt="profile image">
                           </div>
                           <div class="profile-name profile">
-                              <p>${this.gateway.profile.firstName} ${this.gateway.profile.lastName}</p>   
+                              <p style="position: relative; top: 8px; left: 14px;">${this.gateway.profile.firstName} ${this.gateway.profile.lastName}</p>   
                           </div>
                         </div>
 

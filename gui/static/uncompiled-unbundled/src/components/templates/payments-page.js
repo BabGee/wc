@@ -3,8 +3,8 @@
  Copyright (c) 2018 InterIntel Technologies. All rights reserved.
 
  */
-import { PageViewElement } from './page-view-element.js';
-import '../elements-list.js';
+import { PageViewElement } from './page-view-element.js'; // import '../elements-list.js';
+
 export const PaymentsPageBase = class extends PageViewElement {
   constructor() {
     super();

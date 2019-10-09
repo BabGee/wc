@@ -49,14 +49,14 @@ export const DropdownSelectBase = class extends utilsMixin(dataSourceMixin(Seria
 
   _dataJoined(data) {
     const self = this;
-    var concat_exclude = [];
+    var concatExclude = [];
 
     if (self.e.details['concat_exclude']) {
-      concat_exclude = self.e.details['concat_exclude'].split(',');
+      concatExclude = self.e.details['concat_exclude'].split(',');
     }
 
     return data.filter(function (item, index) {
-      return !(index === 0 || concat_exclude.includes(String(index)) || // concat_exclude
+      return !(index === 0 || concatExclude.includes(String(index)) || // concat_exclude
       self.cols.length && self.cols[index]['type'] === 'href');
     }).join(' ');
   }
@@ -68,7 +68,7 @@ export const DropdownSelectBase = class extends utilsMixin(dataSourceMixin(Seria
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // console.log(dsc);
       self.q = '';
       self.currentGroups = self.groups;
@@ -123,6 +123,7 @@ export const DropdownSelectBase = class extends utilsMixin(dataSourceMixin(Seria
     self.params = self.pl.paramsCopy(); // self.dropdownValue = Number(pElement.kind);
 
     self.maxlength = pElement.max;
+    self.loader = this.loadData();
   }
 
 };

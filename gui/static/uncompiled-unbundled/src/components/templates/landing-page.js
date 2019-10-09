@@ -2,8 +2,8 @@
  @license
  Copyright (c) 2018 InterIntel. All rights reserved.
  */
-import { PageViewElement } from './page-view-element.js';
-import '../elements-list.js';
+import { PageViewElement } from './page-view-element.js'; // import '../elements-list.js';
+
 export const LandingPageBase = class extends PageViewElement {
   constructor() {
     super();

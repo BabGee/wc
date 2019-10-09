@@ -1,12 +1,13 @@
 /**
-@license
-Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+ @license
+ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
 
-*/
+ */
 import { html } from "../../../../node_modules/lit-element/lit-element.js";
 import { SnackBarBase } from "../../../components/snack-bar.js";
 import { register } from '../register.js';
 import "../../../../node_modules/fa-icons/index.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SnackBar extends SnackBarBase {
   render() {
@@ -29,62 +30,39 @@ class SnackBar extends SnackBarBase {
         /* font-style: medium; */
         font-weight: 300;
         text-rendering: optimizeLegibility;
-
       }
 
-   
-      /* :host {
-        display: block;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 12px;
-        background-color: var(--app-default-color);
-        color: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        will-change: transform;
-        transform: translate3d(0, 100%, 0);
-        transition-property: visibility, transform;
-        transition-duration: 0.2s;
-        visibility: hidden;
-        width: 360px;
-        height: 100px;
-        font-family: 'TTNormsPro';
-        font-size: 14px;
+       :host {
+          will-change: transform;
+          transform: translate3d(0, 100%, 0);
+          transition-property: visibility, transform;
+          transition-duration: 0.2s;
+          visibility: hidden;
       }
+      
       :host([active]) {
         visibility: visible;
         transform: translate3d(0, 0, 0);
       }
-      @media (min-width: 460px) {
-        :host {
-          width: 320px;
-          height: 60px;
-          margin: auto;
-        }
-      } */
+
 
       .firstGreen {
-
-font-size: 14px;  
-margin-top: 30px; 
-background-color: #11bf5a;
-color: #fff;
-}
-
-.firstGreen-icon-check{
-
-margin-left: 30px; 
-margin-right: 20px; 
-margin-top: 32px; 
-margin-bottom: 32px;
-}
-.notification-container{
-  width: 370px;
-  margin: 0 auto;
-}
+        font-size: 14px;  
+        margin-top: 30px; 
+        background-color: #11bf5a;
+        color: #fff;
+      }
+      .firstGreen-icon-check{
+          margin-left: 30px; 
+          margin-right: 20px; 
+          margin-top: 32px; 
+          margin-bottom: 32px;
+      }
+      
+      .notification-container{
+        width: 370px;
+        margin: 0 auto;
+      }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
  <div class="columns">
