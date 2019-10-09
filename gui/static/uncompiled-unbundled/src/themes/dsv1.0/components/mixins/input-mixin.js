@@ -76,7 +76,7 @@ export const inputMixin = BaseClass => class extends BaseClass {
         <!--- Error message is commented at the bottom of this component --->
           <div class="field">
               <div class="control has-icons-right">
-                  <input class="input" type="${this.type}" placeholder="${this.e.name}">
+                  <input class="input" id="input" type="${this.type}" placeholder="${this.e.name}">
                   <span class="icon is-small is-right">
                   <fa-icon class="fas fa-exclamation-triangle icon" size="1em"></fa-icon>
                   </span>

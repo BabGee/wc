@@ -1358,7 +1358,7 @@ ${this.paginate ? html`
     const page = evt.detail.page;
     const oldPage = this.page;
 
-    if (oldPage !== undefined) {
+    if (oldPage !== undefined && oldPage != page) {
       this.dispatchEvent(new CustomEvent('page-change', {
         detail: {
           oldPage: oldPage,
@@ -1372,9 +1372,9 @@ ${this.paginate ? html`
 
   _sizeChanged(evt) {
     const size = evt.detail.size;
-    const oldSize = this.size;
+    const oldSize = this.size; // TODO this event keeps getting dispatched from dsc footer
 
-    if (oldSize !== undefined) {
+    if (oldSize !== undefined && oldSize != size) {
       this.dispatchEvent(new CustomEvent('size-change', {
         detail: {
           oldSize: oldSize,

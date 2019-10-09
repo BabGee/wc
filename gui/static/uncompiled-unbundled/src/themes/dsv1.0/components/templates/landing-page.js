@@ -109,6 +109,10 @@ class LandingPage extends LandingPageBase {
       .landing-header .loading-branding{
           font-weight: bolder;
           font-size: 20px;
+          width: 43px;
+          height: auto;
+          position: relative;
+          top: 5px;
       }
       .landing-header .navbar{
           background-color: transparent;
@@ -439,6 +443,12 @@ class LandingPage extends LandingPageBase {
           padding: 40px 0;
           color: #fff;
           padding: 100px 0 0 0;
+      }
+      footer .loading-branding{
+          width: 125px;
+          height: auto;
+          position: relative;
+          top: 0;
       }
       footer .bottom-footer .branding h1{
           color: inherit;

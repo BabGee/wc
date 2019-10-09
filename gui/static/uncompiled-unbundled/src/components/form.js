@@ -58,6 +58,7 @@ export const FormBase = class extends LitElement {
       const l = loader.loadedElement();
 
       if (l instanceof SerializableElement) {
+        // TODO wrap with try catch so that doesn't block submission
         const validation = l.validate();
 
         if (validation instanceof Validation) {
