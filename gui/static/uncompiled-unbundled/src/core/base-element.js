@@ -28,7 +28,10 @@ export class BaseElement extends LitElement {
     try {
       return this[this.renderFunction]();
     } catch (e) {
-      // TODO log to Sentry if render function exists
+      if (typeof this[this.renderFunction] === 'function') {
+        Logger.i.alert('this[this.renderFunction] Error');
+      }
+
       return this.renderDefault();
     }
   }
@@ -38,15 +41,15 @@ export class BaseElement extends LitElement {
     throw new Error('Must implement renderDefault');
   }
   /**
-     *
-     * @param {PageInput} pElement
-     * @param {ElementLoader} loader
-     */
+   *
+   * @param {PageInput} pElement
+   * @param {ElementLoader} loader
+   */
 
 
   init(pElement, loader) {
     this.e = pElement;
-    this.pl = loader.pl; // todo bind to post-list
+    this.pl = loader.pl;
   }
 
 }

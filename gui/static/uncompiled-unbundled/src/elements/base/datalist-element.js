@@ -63,7 +63,7 @@ export const DataListElementBase = class extends utilsMixin(dataSourceMixin(mqtt
       }
     }
 
-    this.loadData().then(dsc => {// console.log(dsc);
+    this.loader.then(dsc => {// console.log(dsc);
     });
   }
 
@@ -362,6 +362,8 @@ export const DataListElementBase = class extends utilsMixin(dataSourceMixin(mqtt
     if ('selectable' in this.e.details) {
       self.selectable = this.e.details['selectable'];
     }
+
+    self.loader = this.loadData();
   }
 
 };

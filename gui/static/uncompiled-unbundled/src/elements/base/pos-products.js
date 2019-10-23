@@ -27,7 +27,7 @@ export const PosProductsBase = class extends utilsMixin(dataSourceMixin(BaseElem
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     var target = this;
-    this.loadData(function (dsc) {
+    this.loader.then(dsc => {
       /* todo incomplete dev
             let payload = req.response;
              target.cols = payload.response.data_source.cols;
@@ -105,6 +105,7 @@ export const PosProductsBase = class extends utilsMixin(dataSourceMixin(BaseElem
     self.default_value = pElement.elementJson[11];
     self.variable = pElement.elementJson[4];
     self.kind = pElement.elementJson[8];
+    self.loader = this.loadData();
   }
 
   dscDataName() {

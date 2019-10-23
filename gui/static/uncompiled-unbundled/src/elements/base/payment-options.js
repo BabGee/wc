@@ -47,7 +47,7 @@ export const PaymentOptionsBase = class extends utilsMixin(dataSourceMixin(Seria
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       /**
        * Groups datalist rows by the payment method column
        *
@@ -85,6 +85,7 @@ export const PaymentOptionsBase = class extends utilsMixin(dataSourceMixin(Seria
     self.title = PaymentOptionsBase.toTitleCase(pElement.name);
     self.icon = pElement.icon;
     self.params = self.pl.paramsCopy();
+    self.loader = this.loadData();
   }
 
 };

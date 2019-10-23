@@ -128,33 +128,23 @@ a figure img#user-pic {
         <nav class="navbar">
           <div class="navbar-menu">
             <div class="navbar-start">
-              <a class="navbar-item is-active" @click="${() => this.activePage('home')}">
-                Home
-              </a>
-              <a class="navbar-item" @click="${() => this.activePage('about')}">
-                About
-              </a>
-              <a class="navbar-item" @click="${() => this.activePage('portfolio')}">
-                Portfolio
-              </a>
-              <a class="navbar-item" @click="${() => this.activePage('blog')}">
-                Blog
-              </a>
-              <a class="navbar-item" @click="${() => this.activePage('contacts')}">
-                Contacts
-              </a>
+            ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+            <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
+            class="navbar-item ${pageGroupIndex == this._pageGroup ? 'is-active' : ''}" >
+                ${pageGroup.title}
+            </a>`)}
             </div>
           </div>
           <div id="site-name" class="navbar-brand has-text-weight-semibold">
-            <a class="navbar-item" href="https://bulma.io">
-              <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+            <a class="navbar-item" href="#">
+              <img src="/media/${this.gateway.logo}" alt="logo" width="112" height="28">
             </a>
           </div>
           <div class="navbar-menu">
             <div class="navbar-end">
               <div class="navbar-item has-dropdown is-active">
                 <a @click="${() => this.activePage('user')}" class="navbar-item">
-                  Patrick Lawrence
+                ${this.gateway.profile.firstName} ${this.gateway.profile.lastName}
                 </a>
                 <a class="navbar-link">
                   <figure class="image is-32x32">

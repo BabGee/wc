@@ -2,6 +2,7 @@ import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import '../../icons/my-icons.js';
 import { SharedStyles } from "../../styles/shared-styles.js";
 import { MenuServiceButtonBase } from "../../../../elements/base/menu-service-button.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class MenuServiceButton extends MenuServiceButtonBase {
   renderDefault() {

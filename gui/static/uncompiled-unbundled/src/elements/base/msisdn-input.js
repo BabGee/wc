@@ -49,17 +49,17 @@ export const MsisdnInputBase = class extends dataSourceMixin(SerializableElement
     // DSC defaults to paginating at 50
 
     this.limit = 500;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       self.loading = false;
     });
   }
 
   init(pElement, loader) {
     super.init(pElement, loader);
-    const self = this;
     this.required = this.e.required || pElement.min && pElement.min > 0;
-    self.params = self.pl.paramsCopy();
+    this.params = this.pl.paramsCopy();
     this.dataName = pElement.defaultValue;
+    this.loader = this.loadData();
   }
 
 };

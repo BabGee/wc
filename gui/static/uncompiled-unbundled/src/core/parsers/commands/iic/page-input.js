@@ -1,3 +1,4 @@
+import { Util } from "./util.js";
 export class PageInput {
   constructor(elementJson) {
     this._id = '';
@@ -135,7 +136,7 @@ export class PageInput {
   }
 
   get details() {
-    return typeof this.elementJson[14] === 'object' ? this.elementJson[14] : JSON.parse(this.elementJson[14]);
+    return Util.parseJsonOrObject(this.elementJson[14]);
   }
 
   get elementJson() {

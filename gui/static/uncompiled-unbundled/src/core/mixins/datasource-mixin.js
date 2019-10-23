@@ -154,6 +154,11 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
     self.totalPages = Math.ceil(dsp.totalElements / self.limit);
     return dsp;
   }
+  /**
+   * This is a Service Call Mixin Api
+   * @return {*}
+   */
+
 
   serviceCallParams() {
     this.params['data_name'] = this.dscDataName();
@@ -171,6 +176,11 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
     this.params['page'] = this.page;
     return this.params;
   }
+  /**
+   * This is a Service Call Mixin Api
+   * @return {*}
+   */
+
 
   parserConfig() {
     return {
@@ -206,7 +216,8 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
 
   onLoadData(dsc) {
     // TODO can just check this.totalElements
-    if (!dsc.rows.length && !dsc.groups.length && !dsc.data.length) {
+    // TODO or use this.dataResponseType()
+    if (dsc.rows && !dsc.rows.length && dsc.groups && !dsc.groups.length && dsc.data && !dsc.data.length) {
       this.empty = true;
     }
   }

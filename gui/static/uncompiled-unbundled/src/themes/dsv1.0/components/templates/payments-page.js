@@ -32,7 +32,7 @@ class PaymentsPage extends PaymentsPageBase {
       <style>
         :root{
         --is-white: #fff;
-        --bg: ##f5f8fb;
+        --bg: #f5f8fb;
         --title-color: #4c6072;
         --helper-text: #333333;
         --graph-orange: #ff8a65;

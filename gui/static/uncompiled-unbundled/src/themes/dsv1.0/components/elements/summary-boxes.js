@@ -9,7 +9,16 @@ class SummaryBoxes extends SummaryBoxesBase {
     return html`
 
         <style>
-
+        @media screen and (max-width: 775px){
+            .column{
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        .column{
+            width: 236px;
+            max-width: 236px;
+        }
         .summary-wrapper{
             width: 100%;
             background: #fff;
@@ -46,8 +55,15 @@ class SummaryBoxes extends SummaryBoxesBase {
             letter-spacing: normal;
             color: #858997;
         }
+        .chart {
+            background: white;
+            padding: 0px 20px 20px 29px;       
+            position: relative;
+            left: -30px;
+        }
         </style>
-        <div class="columns summary-content">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+        <div class="summary-content">
         
             ${this.loading ? html`
             <loader-element></loader-element>
@@ -60,11 +76,29 @@ class SummaryBoxes extends SummaryBoxesBase {
                     <h1>${group}</h1>
                 </div>
             </div>
+            <div class="columns is-multiline">
             ${this._computeData(groupIndex).map(item => html`
                 <div class="column">
                     <div class="summary-wrapper">
                         <div class="graph">
-                        <!-- <img src="../../../../../images/web/Screenshot.png" alt="profile image"> -->
+                            <svg viewBox="0 0 230 100" class="chart">
+                                <polyline
+                                    fill="none"
+                                    stroke="#23d160"
+                                    stroke-width="5"
+                                    points="
+                                    00,90
+                                    60,70
+                                    90,90
+                                    140,10
+                                    160,80
+                                    180,60
+                                    200,100
+                                    "
+                                />
+                                
+                            </svg>
+
                         </div>
                         <div class="summary-details">
                             <p class="currency is-text-7 has-text-justified has-text-uppercase">KES</p>
@@ -78,6 +112,7 @@ class SummaryBoxes extends SummaryBoxesBase {
                 </div>
             
             `)}
+            </div>
              
              `)}
             ` : html`

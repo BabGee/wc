@@ -71,7 +71,7 @@ export const GpSelectBase = class extends utilsMixin(dataSourceMixin(Serializabl
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // console.log(dsc);
       self.q = '';
       self.currentGroups = self.groups;
@@ -125,6 +125,7 @@ export const GpSelectBase = class extends utilsMixin(dataSourceMixin(Serializabl
     self.icon = pElement.icon;
     self.params = self.pl.paramsCopy();
     self.maxlength = pElement.max;
+    self.loader = this.loadData();
   }
 
 };

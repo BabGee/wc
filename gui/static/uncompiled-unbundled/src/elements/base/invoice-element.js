@@ -38,7 +38,7 @@ export const InvoiceElementBase = class extends utilsMixin(dataSourceMixin(BaseE
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // console.log(dsc);
       var sums = {};
       var data = [];
@@ -305,6 +305,7 @@ export const InvoiceElementBase = class extends utilsMixin(dataSourceMixin(BaseE
     }
 
     self.reference = pElement.kind || '';
+    self.loader = this.loadData();
   }
 
 };

@@ -2,7 +2,8 @@ import { BaseElement } from "../../core/base-element.js";
 import { serviceCallMixin } from "../../core/mixins/servicecall-mixin.js"; // import {IicParser} from '../../core/payload-parser';
 
 import { utilsMixin } from "../../core/mixins/utils-mixin.js";
-export const NavbarDefaultBase = class extends utilsMixin(serviceCallMixin(BaseElement)) {
+import { adaptiveUiMixin } from "../../core/mixins/adaptiveui-mixin.js";
+export const NavbarDefaultBase = class extends adaptiveUiMixin(utilsMixin(serviceCallMixin(BaseElement))) {
   static get is() {
     return 'navbar-default';
   }

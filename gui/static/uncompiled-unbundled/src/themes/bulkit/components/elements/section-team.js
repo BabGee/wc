@@ -3,6 +3,7 @@ import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
 import { BULMA_STYLES } from "../../styles/bulma-styles.js";
 import { LANDING_STYLES } from "../../styles/landing-style.js";
 import { SectionPElementDsc } from "../../../../elements/base/section-pelement-dsc.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SectionTeam extends SectionPElementDsc {
   renderDefault() {

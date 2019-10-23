@@ -5,6 +5,7 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
 import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { LoginFacebookBase } from "../../../../elements/base/login-facebook.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class LoginFacebook extends LoginFacebookBase {
   renderDefault() {

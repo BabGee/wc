@@ -24,7 +24,7 @@ export const ShopProductsSectionBase = class extends utilsMixin(BaseElement) {
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-    this.loadData().then(dsc => {});
+    this.loader.then(dsc => {});
   }
 
   computeParams(link) {
@@ -36,7 +36,8 @@ export const ShopProductsSectionBase = class extends utilsMixin(BaseElement) {
     const self = this;
 
     self.pl._dialog(evt.currentTarget.dataService, JSON.parse(evt.currentTarget.dataParams));
-  }
+  } // todo duplicate, is supposed to be moved into http-mixin
+
 
   mergeParams(obj1, obj2) {
     var obj3 = {};
@@ -54,7 +55,7 @@ export const ShopProductsSectionBase = class extends utilsMixin(BaseElement) {
 
   init(pElement, loader) {
     super.init(pElement, loader);
-    var self = this;
+    const self = this;
 
     if (pElement.min && pElement.min > 0) {
       self.required = true;
@@ -66,6 +67,7 @@ export const ShopProductsSectionBase = class extends utilsMixin(BaseElement) {
     self.service = pElement.service;
     self.variable = pElement.defaultValue;
     self.kind = pElement.kind;
+    self.loader = this.loadData();
   }
 
 };

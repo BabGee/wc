@@ -94,7 +94,7 @@ class NavbarDefault extends NavbarDefaultBase {
           </div>
           <div id="site-name" class="navbar-brand has-text-weight-semibold">
             <a class="navbar-item" href="#">
-              <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+              <img src="${this.gateway.logo}" width="112" height="28">
             </a>
           </div>
           <div class="navbar-menu">

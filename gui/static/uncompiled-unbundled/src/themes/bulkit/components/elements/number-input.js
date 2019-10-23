@@ -3,8 +3,10 @@ import '../../icons/my-icons.js';
 import { SharedStyles } from "../../styles/shared-styles.js";
 import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { NumberInputBase } from "../../../../elements/base/number-input.js";
+import { enterSubmitMixin } from "../../../../components/mixins/enter-submit-mixin.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
-class NumberInput extends NumberInputBase {
+class NumberInput extends enterSubmitMixin(NumberInputBase) {
   renderDefault() {
     return html`
         ${SharedStyles}

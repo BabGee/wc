@@ -46,53 +46,22 @@ nav {
     <div id="section1" class="bind-box">
         <nav class="navbar">
           <div id="site-name" class="navbar-brand has-text-weight-semibold">
-            <a class="navbar-item" href="https://bulma.io">
-              <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+            <a class="navbar-item" href="#">
+              <img src="/media/${this.gateway.logo}" alt="logo" width="112" height="28">
             </a>
           </div>
           <div class="navbar-menu">
             <div class="navbar-end">
-              <a class="navbar-item is-active" @click="${() => this.activePage('home')}">
-                Home
-              </a>
-              <a class="navbar-item" @click="${() => this.activePage('about')}">
-                About
-              </a>
-              <a class="navbar-item" @click="${() => this.activePage('portfolio')}">
-                Portfolio
-              </a>
-              <a class="navbar-item" @click="${() => this.activePage('blog')}">
-                Blog
-              </a>
-              <a class="navbar-item" @click="${() => this.activePage('contacts')}">
-                Contacts
-              </a>
+            ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+            <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
+            class="navbar-item ${pageGroupIndex == this._pageGroup ? 'is-active' : ''}" >
+                ${pageGroup.title}
+            </a>`)}
             </div>
           </div>
         </nav>
       </div>
      `;
-  }
-
-  activePage(mainNavLink) {
-    const links = this.shadowRoot.querySelector('.navbar-menu').querySelectorAll('a');
-
-    if (mainNavLink === 'home') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[0].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'about') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[1].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'portfolio') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[2].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'blog') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[3].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'contacts') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[4].className = 'navbar-item is-active';
-    }
   }
 
   static get is() {

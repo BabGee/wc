@@ -3,6 +3,7 @@ import { BULMA_STYLES } from "../../styles/bulma-styles.js";
 import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
 import { LANDING_STYLES } from "../../styles/landing-style.js";
 import { SectionPElementBase } from "../../../../elements/base/section-pelement.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SectionHero extends SectionPElementBase {
   renderDefault() {

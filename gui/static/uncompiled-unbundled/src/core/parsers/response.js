@@ -162,13 +162,13 @@ export class Response {
     //     }
     // }
 
-    if (!this.isSuccessful()) {
-      message = this.response['overall_status'];
-    } else {}
-
     const lP = this.response['last_response'];
     message = typeof lP === 'object' ? JSON.stringify(lP) : lP;
     return message;
+  }
+
+  summaryTitle() {
+    return !this.isSuccessful() ? this.response['overall_status'] : 'Response';
   }
 
 }

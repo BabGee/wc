@@ -494,7 +494,9 @@ nav {
             </footer>
             <!-- /Footer -->
             
-          <snack-bar id="snack-bar" ?active="${this._snackbarOpened}">${this._snackbarMessage}</snack-bar>`;
+          <snack-bar id="snack-bar" ?active="${this._snackbarOpened}">
+${this._snackbarTitle} ${this._snackbarMessage}
+</snack-bar>`;
   }
 
   constructor() {

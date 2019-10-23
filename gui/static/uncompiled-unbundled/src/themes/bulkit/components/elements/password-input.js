@@ -3,8 +3,9 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
 import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { PasswordInputBase } from "../../../../elements/base/password-input.js";
+import { enterSubmitMixin } from "../../../../components/mixins/enter-submit-mixin.js";
 
-class PasswordInput extends PasswordInputBase {
+class PasswordInput extends enterSubmitMixin(PasswordInputBase) {
   renderDefault() {
     return html`
  ${SharedStyles}

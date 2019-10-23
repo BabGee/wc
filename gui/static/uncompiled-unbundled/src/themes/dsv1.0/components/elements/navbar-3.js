@@ -35,27 +35,17 @@ nav {
     <div class="bind-box has-background-dark">
           <div class="block">
             <nav class="level has-text-white">
-                <p class="level-item has-text-centered">
-                  <a class="link is-info">Home</a>
-                </p>
-                <p class="level-item has-text-centered">
-                  <a class="link is-info">About</a>
-                </p>
-                <p class="level-item has-text-centered">
-                  <a class="link is-info">Portfolio</a>
-                </p>
-                <p id="site-name" class="level-item has-text-centered has-text-weight-semibold">
-                  <a class="link">BULMA SITE</a>
-                </p>
-                <p class="level-item has-text-centered">
-                  <a class="link is-info">Services</a>
-                </p>
-                <p class="level-item has-text-centered">
-                  <a class="link is-info">News</a>
-                </p>
-                <p class="level-item has-text-centered">
-                  <a class="link is-info">Contacts</a>
-                </p>
+            <p id="site-name" class="level-item has-text-centered has-text-weight-semibold">
+              <a class="link">${this.gateway.name}</a>
+            </p>
+            ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+            <p class="level-item has-text-centered">
+            <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
+            class="link is-info ${pageGroupIndex == this._pageGroup ? 'is-active' : ''}" >
+                ${pageGroup.title}
+            </a>
+            </p>
+            `)}
           </nav>
         </div>
       </div>

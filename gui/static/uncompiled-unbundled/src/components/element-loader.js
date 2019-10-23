@@ -106,10 +106,16 @@ class ElementLoader extends LitElement {
       loading: true
     };
   }
+  /**
+   * Used to access the active loaded element instance
+   *
+   * @return {*}
+   */
+
 
   loadedElement() {
     if (!this.el) {
-      Logger.i.warn('[EARLY ELEMENT ACCESS] ' + this._element.name + ' not loaded');
+      Logger.i.alert('[EARLY ELEMENT ACCESS] ' + this._element.name + ' not loaded');
     }
 
     return this.el;

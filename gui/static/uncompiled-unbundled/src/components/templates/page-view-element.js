@@ -2,10 +2,8 @@
 @license
 Copyright (c) 2019 InterIntel Technologies. All rights reserved.
 */
-import { LitElement } from "../../../node_modules/lit-element/lit-element.js"; // import {IicParser} from '../../core/payload-parser';
-
-import { utilsMixin } from "../../core/mixins/utils-mixin.js";
-import { connect } from "../../../node_modules/pwa-helpers/connect-mixin.js"; // This element is connected to the Redux store.
+import { LitElement } from "../../../node_modules/lit-element/lit-element.js";
+import { utilsMixin } from "../../core/mixins/utils-mixin.js"; // This element is connected to the Redux store.
 
 import { store } from '../../store.js'; // These are the actions needed by this element.
 
@@ -15,24 +13,28 @@ import template from '../../reducers/template.js';
 store.addReducers({
   template
 });
-import { gatewaySelector, interfaceSelector, currentPageGroupSelector, currentPageSelector } from "../../reducers/template.js";
-import { Command } from "../../core/parsers/commands/command.js";
 import { GetSection } from "../../core/parsers/commands/get-section.js";
 import { Logger } from "../../core/logger.js";
+import { adaptiveUiMixin } from "../../core/mixins/adaptiveui-mixin.js";
 export const VIEW_MODE_MAIN = 'main';
 export const VIEW_MODE_DIALOG = 'dialog';
 /**
  * Does Page Selection and Loading
  */
+// TODO rename into TemplateViewElement
 
-export class PageViewElement extends connect(store)(utilsMixin(LitElement)) {
+export class PageViewElement extends adaptiveUiMixin(utilsMixin(LitElement)) {
   constructor() {
     super();
     this._snackbarOpened = false;
     this.dialogServicesQueue = [];
     this.dialogsStack = [];
     this.count = 1;
-  } // Only render this page if it's actually visible.
+  }
+  /**
+   * Only render this page if it's actually visible.
+   * @return {*}
+   */
 
 
   shouldUpdate() {
@@ -109,18 +111,6 @@ export class PageViewElement extends connect(store)(utilsMixin(LitElement)) {
       active: {
         type: Boolean
       },
-      view: String,
-      // main|dialog
-      _pageGroup: Number,
-      _page: Number,
-      _snackbarOpened: Boolean,
-      _offline: Boolean,
-      _snackbarTitle: String,
-      _snackbarContext: String,
-      interface: Command,
-      // GetSection || GetInterface
-      gateway: Command,
-      // GetGatewayDetails || GetInstitutionDetails
       dialogServicesQueue: Array,
       dialogsStack: Array,
       pages: Array,
@@ -200,24 +190,6 @@ export class PageViewElement extends connect(store)(utilsMixin(LitElement)) {
     }
 
     return el.sectionSize;
-  } // This is called every time something is updated in the store.
-
-
-  stateChanged(state) {
-    this._pageGroup = state.app.pageGroup;
-    this._page = state.app.page;
-    this.view = state.template.view;
-    this.interface = interfaceSelector(state);
-    this.gateway = gatewaySelector(state);
-    this.pageGroup = currentPageGroupSelector(state);
-    this.page = currentPageSelector(state); // console.log(this.interface, this.page);
-    // console.log(this.interface.pageGroups);
-
-    this._snackbarOpened = state.app.snackbarOpened;
-    this._snackbarMessage = state.app.snackbarMessage;
-    this._snackbarTitle = state.app.snackbarTitle;
-    this._snackbarContext = state.app.snackbarContext;
-    this._offline = state.app.offline;
   } // To scroll to top of window
   // TODO make static
 

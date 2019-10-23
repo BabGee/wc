@@ -36,7 +36,7 @@ export const ProductItemImagesBase = class extends utilsMixin(dataSourceMixin(Ba
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       /*
              let payload = req.response;
              target.cols = payload.response.data_source.cols;
@@ -91,11 +91,12 @@ export const ProductItemImagesBase = class extends utilsMixin(dataSourceMixin(Ba
     var self = this;
     self.s = pElement.elementJson[1];
     self.icon = pElement.icon;
-    self.title = ProductItemImages.toTitleCase(pElement.name);
+    self.title = ProductItemImagesBase.toTitleCase(pElement.name);
     self.service = pElement.service;
     self.main = pElement.defaultValue;
     self.data_name = pElement.defaultValue;
-    self.params = loader.pl.params;
+    self.params = loader.pl.paramsCopy();
+    self.loader = this.loadData();
   }
 
 };

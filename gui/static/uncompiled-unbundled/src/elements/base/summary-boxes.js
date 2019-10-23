@@ -27,7 +27,7 @@ export const SummaryBoxesBase = class extends utilsMixin(dataSourceMixin(BaseEle
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // self.cols = dsc.cols;
       // self.rows = dsc.rows;
       // self.groups = dsc.groups;
@@ -58,6 +58,7 @@ export const SummaryBoxesBase = class extends utilsMixin(dataSourceMixin(BaseEle
     self.service = pElement.service;
     self.params = loader.pl.paramsCopy();
     self.maxlength = pElement.max;
+    self.loader = this.loadData();
   }
 
 };

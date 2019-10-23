@@ -33,8 +33,8 @@ nav {
           <div class="block">
               <nav class="navbar has-background-dark">
                 <div class="navbar-brand">
-                  <a class="navbar-item" href="https://bulma.io">
-                    <img src="https://bulma.io/images/bulma-logo-white.png" width="112" height="28">
+                  <a class="navbar-item" href="#">
+                    <img src="/media/${this.gateway.logo}" alt="logo" width="112" height="28">
                   </a>
                   <a role="button" class="navbar-burger is-active flexthis" aria-label="menu" aria-expanded="false" >
                       <span aria-hidden="true"></span>
@@ -44,21 +44,11 @@ nav {
                 </div>
                 <div class="navbar-menu is-active">
                   <div class="navbar-end">
-                    <a class="navbar-item is-purple">
-                      Home
-                    </a>
-                    <a class="navbar-item">
-                      About
-                    </a>
-                    <a class="navbar-item">
-                      Portfolio
-                    </a>
-                    <a class="navbar-item">
-                      Blog
-                    </a>
-                    <a class="navbar-item">
-                      Contacts
-                    </a>
+                  ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+                  <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
+                  class="navbar-item ${pageGroupIndex == this._pageGroup ? 'is-purple' : ''}" >
+                      ${pageGroup.title}
+                  </a>`)}
                   </div>
                 </div>
               </nav>

@@ -4,8 +4,9 @@ import { SharedStyles } from "../../styles/shared-styles.js";
 import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
 import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { EmailInputBase } from "../../../../elements/base/email-input.js";
+import { enterSubmitMixin } from "../../../../components/mixins/enter-submit-mixin.js";
 
-class EmailInput extends EmailInputBase {
+class EmailInput extends enterSubmitMixin(EmailInputBase) {
   renderDefault() {
     return html`
         ${SharedStyles}     

@@ -24,7 +24,7 @@ export const ShopProductsMenuBase = class extends utilsMixin(dataSourceMixin(Bas
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       const objs = {};
 
       for (var d = 0; d < dsc.data.length; d++) {
@@ -77,6 +77,7 @@ export const ShopProductsMenuBase = class extends utilsMixin(dataSourceMixin(Bas
     self.title = ShopProductsMenuBase.toTitleCase(pElement.name);
     self.kind = pElement.kind;
     self.params = loader.pl.paramsCopy();
+    self.loader = this.loadData();
   }
 
 };

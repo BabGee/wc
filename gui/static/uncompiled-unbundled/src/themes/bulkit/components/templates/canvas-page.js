@@ -13,6 +13,7 @@ import { LANDING_STYLES } from "../../styles/landing-style.js";
 import '../form-render.js';
 import "./section-page.js"; // todo move into base
 
+import { VIEW_MODE_DIALOG, VIEW_MODE_MAIN } from "../../../../components/templates/page-view-element.js";
 import { CanvasPageBase } from "../../../../components/templates/canvas-page.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
@@ -65,95 +66,19 @@ class CanvasPage extends CanvasPageBase {
     
 </style>                
 
- ${this.view === 'dialog' ? html`
+ ${this.view === VIEW_MODE_DIALOG ? html`
                         <!-- Section Back button -->
                        <button class="menu-fab" @click="${this._viewList}"><iron-icon icon="icons:close"></iron-icon></button>
                     <!-- /Section Back button -->
                     ` : html``}
 
         
-        ${this.view === 'dialog' ? html`
+        ${this.view === VIEW_MODE_DIALOG ? html`
                                 <section-page id="dialog" queue=${this.dialogServicesQueue} ></section-page>
                             ` : html`
         
         ${this.pageGroup.pages.map((page, index) => html`        
-        <!-- Feature -->
-        <section  class="section is-fullWidth"  style="padding: 0px; background-color: #f4f6fb;">
-                                    
-            <div id="section_${index}" class="is-fullWidth">
-              ${page.pageInputGroups.map(feed => html`
-     
-                 ${feed.styles !== '' && JSON.parse(feed.styles).type !== null && JSON.parse(feed.styles).type === 'register' ? html`
-                            <!-- Wrapper -->
-<div class="login-wrapper columns is-gapless">
-    <!-- Image section (hidden on mobile) -->
-    <div class="column login-column is-5 hero-banner" style="background: var(--app-default-color);">
-        <div class="hero  is-theme-primary is-relative">
-            <div class="columns has-text-centered">
-                <div class="column">
-                    <h2 class="title is-2 light-text" style="padding-top: 25px">
-                      ${feed.title} 
-                      
-                    </h2>
-                    <h3 class="subtitle is-5 light-text">
-                         ${JSON.parse(feed.styles).detail} 
-                    </h3>
-                     <div class="container" style="margin: 40px;">
-               
-    </div>
-                </div>
-            </div>
-         <img   style="margin-top: -40px; align-self:  center;width: 200px; margin-bottom: 20px;" src="${JSON.parse(feed.styles).image || 'https://bulkit.cssninja.io/assets/images/illustrations/drawings/city.svg'}" alt="">
-        </div>
-    </div>
-    <!-- /Image section -->
-    <!-- Form section -->
-    <div class="column is-7">
-        <div class="hero">
-        <div class="columns">
-
-            <div class="content column is-12">
-                
-                <!-- Dashboard Wrapper -->
-                <div class="dashboard-wrapper" style="padding: 20px; margin-left: 0px;">
-
-                    <div class="columns">           
-                        <div class="column">
-                            <!-- Main content -->
-                            <div id="main-dashboard" class="section-wrapper">
-                           
-                <div class="columns is-vcentered">
-                   
-                    <elements-list .params=${this.parseParams()} .top=${this._computeTop()} .feed="${feed}"></elements-list>
-                </div>
-        
-                                </div>
-                                <!-- /Main content -->
-                            </div>
-                            <!-- /Main view -->
-                        </div>
-                    </div>
-                    <!-- /Dashboard Wrapper -->
-        </div>
-    </div>
-    <!-- /Form section -->
-    
-
-</div>
-</div>
-</div>
-<!-- /Wrapper -->   
-                    ` : html`
-                          <div class="columns is-vcentered">
-                   
-                    <elements-list .params=${this.parseParams()} .top=${this._computeTop()} .feed="${feed}"></elements-list>
-                </div>  
-                     `}      
- 
-   `)}      
-        </div>
-        </section>
-        <!-- /Feature -->
+${page.pageInputGroups.map(feed => html`<form-render .params=${this.parseParams()} .top=${this._computeTop()} .feed="${feed}"></form-render>`)}
 
 `)} 
 `}<snack-bar id="snack-bar" ?active="${this._snackbarOpened}">${this._snackbarMessage}</snack-bar>`;

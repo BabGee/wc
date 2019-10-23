@@ -6,6 +6,7 @@ import { html, css } from "../../../../../node_modules/lit-element/lit-element.j
 import "./section-page.js"; // todo move into base
 
 import '../snack-bar.js';
+import '../form-render.js';
 import { CanvasStyles } from '../../styles/canvas.js';
 import { Reset, Colors, Fonts } from '../../styles/shared.js';
 import { CanvasPageBase } from "../../../../components/templates/canvas-page.js";
@@ -33,7 +34,7 @@ class CanvasPage extends CanvasPageBase {
     ${this.view === 'dialog' ? html`<section-page id="dialog" queue=${this.dialogServicesQueue} ></section-page>` : html`
     ${this.pageGroup.pages.map((page, index) => html`
     <section>
-    ${page.pageInputGroups.map(feed => html`<elements-list .params=${this.parseParams()} .top=${this._computeTop()} .feed="${feed}"></elements-list>`)}
+    ${page.pageInputGroups.map(feed => html`<form-render .params=${this.parseParams()} .top=${this._computeTop()} .feed="${feed}"></form-render>`)}
     </section>`)}
     `}
     

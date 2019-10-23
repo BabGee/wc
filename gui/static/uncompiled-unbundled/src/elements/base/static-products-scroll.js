@@ -51,7 +51,7 @@ export const StaticProductsScrollBase = class extends utilsMixin(dataSourceMixin
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // console.log(dsc);
       self.currentGroups = self.groups;
       self.productItems = dsc.data;
@@ -189,6 +189,7 @@ export const StaticProductsScrollBase = class extends utilsMixin(dataSourceMixin
     self.service = pElement.service;
     self.variable = pElement.defaultValue;
     self.kind = pElement.kind;
+    self.loader = this.loadData();
   }
 
 };

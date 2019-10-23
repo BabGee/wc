@@ -38,7 +38,7 @@ export const ReceiptElementBase = class extends utilsMixin(dataSourceMixin(BaseE
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // console.log(dsc);
       var sums = {};
       var data = [];
@@ -296,8 +296,8 @@ export const ReceiptElementBase = class extends utilsMixin(dataSourceMixin(BaseE
   init(pElement, loader) {
     super.init(pElement, loader);
     var self = this;
-    self.service = pElement.service;
     self.params = loader.pl.paramsCopy();
+    self.service = pElement.service;
 
     if (pElement.defaultValue) {
       const defaultValueAr = pElement.defaultValue.split('=');
@@ -305,6 +305,7 @@ export const ReceiptElementBase = class extends utilsMixin(dataSourceMixin(BaseE
     }
 
     self.reference = pElement.kind || '';
+    self.loader = this.loadData();
   }
 
 };

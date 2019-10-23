@@ -77,7 +77,7 @@ export const PriceSelectBase = class extends utilsMixin(dataSourceMixin(Serializ
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // console.log(dsc);
       self.cols = dsc.cols;
       self.rows = dsc.rows;
@@ -106,6 +106,7 @@ export const PriceSelectBase = class extends utilsMixin(dataSourceMixin(Serializ
     self.icon = pElement.icon;
     self.params = self.pl.paramsCopy();
     self.dropdownValue = Number(pElement.kind);
+    self.loader = this.loadData();
     self.colorType = ['success', 'secondary', 'warning', 'danger', 'primary'];
   }
 

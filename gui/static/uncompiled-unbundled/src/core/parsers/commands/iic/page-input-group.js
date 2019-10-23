@@ -1,4 +1,5 @@
 import { PageInput } from "./page-input.js";
+import { Util } from "./util.js";
 export class PageInputGroup {
   constructor(tab, feedJson, feedIndex) {
     this._id = tab.id + '-' + String(feedIndex);
@@ -135,6 +136,11 @@ export class PageInputGroup {
     }
 
     return '24|24|24';
+  }
+
+  get details() {
+    // todo optimize, parse once in constructor
+    return Util.parseJsonOrObject(this.getInputVar()[10]);
   }
 
   set index(index) {

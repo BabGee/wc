@@ -30,7 +30,7 @@ class Navbar8 extends NavbarBase {
                   </p>
                 </div>
               <p class="level-item has-text-centered">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                <img src="/media/${this.gateway.logo}" alt="logo" width="112" height="28">
               </p>
               <p class="level-item has-text-centered">
                 <a role="button" class="navbar-burger flexthis" aria-label="menu" aria-expanded="false" >
@@ -97,7 +97,7 @@ nav {
                   </p>
                 </div>
               <p class="level-item has-text-centered">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                <img src="/media/${this.gateway.logo}" alt="logo" width="112" height="28">
               </p>
               <p class="level-item has-text-centered">
                 <a role="button" class="navbar-burger flexthis" aria-label="menu" aria-expanded="false" >

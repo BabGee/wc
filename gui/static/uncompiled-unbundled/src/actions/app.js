@@ -82,12 +82,12 @@ export const loadTemplate = template => dispatch => {
 
 };
 let snackbarTimer;
-export const showSnackbar = message => dispatch => {
+export const showSnackbar = (message, title, context) => dispatch => {
   dispatch({
     type: OPEN_SNACKBAR,
     message: message,
-    title: 'Connection Status',
-    context: 'error'
+    title: title,
+    context: context ? context : SNACKBAR_CONTEXT_SUCCESS
   });
   clearTimeout(snackbarTimer);
   snackbarTimer = setTimeout(() => dispatch({
@@ -100,7 +100,7 @@ export const updateOffline = offline => (dispatch, getState) => {
   if (getState().app.offline !== undefined) {
     title = 'Connectivity';
     context = offline ? SNACKBAR_CONTEXT_WARNING : SNACKBAR_CONTEXT_SUCCESS;
-    dispatch(showSnackbar("You are now " + offline ? 'offline!!' : 'online', title, context));
+    dispatch(showSnackbar('You are now ' + offline ? 'offline!!' : 'online', title, context));
   }
 
   dispatch({

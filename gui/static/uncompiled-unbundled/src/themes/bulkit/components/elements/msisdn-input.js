@@ -6,6 +6,7 @@ import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { MsisdnInputBase } from "../../../../elements/base/msisdn-input.js";
 import "../../../../../node_modules/fa-icons/index.js";
 import "../../../../../node_modules/slim-select/dist/slimselect.min.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class MsisdnInput extends MsisdnInputBase {
   renderDefault() {

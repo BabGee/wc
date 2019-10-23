@@ -7,13 +7,14 @@ export const SectionPElementDsc = class extends dataSourceMixin(SectionPElementB
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-    this.loadData().then(dsc => {});
+    this.loader.then(dsc => {});
   }
 
   init(pElement, loader) {
     super.init(pElement, loader);
     var self = this;
     self.params = self.pl.paramsCopy();
+    this.loader = this.loadData();
   }
 
 };

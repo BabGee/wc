@@ -3,10 +3,13 @@ import { Logger } from "../core/logger.js";
 import "./element-loader.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
+export const RENDER_M_DEFAULT = 0;
+export const RENDER_M_SIDE_BY_SIDE = 1;
 export const EListBase = class extends LitElement {
   constructor() {
     super();
     this.oe = [];
+    this.renderMode = RENDER_M_DEFAULT;
   }
 
   static get is() {
@@ -15,7 +18,8 @@ export const EListBase = class extends LitElement {
 
   static get properties() {
     return {
-      oe: Array
+      oe: Array,
+      renderMode: Number
     };
   }
 

@@ -12,6 +12,8 @@ import { Logger } from "../core/logger.js";
 import { showSnackbar } from '../actions/app.js';
 import { utilsMixin } from "../core/mixins/utils-mixin.js";
 import { serviceCallMixin } from "../core/mixins/servicecall-mixin.js";
+import { SNACKBAR_CONTEXT_DANGER, SNACKBAR_CONTEXT_SUCCESS } from "./snack-bar.js";
+import { RENDER_M_DEFAULT, RENDER_M_SIDE_BY_SIDE } from "./e-list.js";
 export const FORM_TYPE_FORM = 'FORM';
 export const FORM_TYPE_PAYMENTS_FORM = 'PAYMENTS FORM';
 export const FORM_TYPE_LANDING_FORM = 'LANDING FORM';
@@ -23,6 +25,7 @@ export const FormRenderBase = class extends utilsMixin(serviceCallMixin(LitEleme
     this.sections = [];
     this.loading = false;
     this.pos = 0;
+    this.renderMode = RENDER_M_DEFAULT;
   }
 
   set feed(val) {
@@ -35,7 +38,12 @@ export const FormRenderBase = class extends utilsMixin(serviceCallMixin(LitEleme
     this._feed = val;
     this.sections = [this._feed];
     this.pos = 0;
-    this.stepParams = this.params ? this.mergeParams({}, this.params) : {}; // this.load();
+    this.stepParams = this.params ? this.mergeParams({}, this.params) : {}; // todo document the render mode api
+
+    if ('render' in this._feed.details) {
+      this.renderMode = Number(this._feed.details['render']['mode']);
+    } // this.load();
+
 
     this.requestUpdate('feed', oldVal);
   }
@@ -94,12 +102,40 @@ export const FormRenderBase = class extends utilsMixin(serviceCallMixin(LitEleme
        *
        * Cache/Storage of all section sections
        */
-      sections: Array
+      sections: Array,
+
+      /**
+       * Render Mode
+       */
+      renderMode: Number
     };
   }
 
   render() {
     throw new DOMException('extending must implement render');
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  updated(changedProperties) {
+    changedProperties.forEach((oldValue, propName) => {
+      // console.log(`${propName} changed. oldValue: ${oldValue}`);
+      if (propName === 'pos') {
+        this.updateComplete.then(() => {
+          this.feedChange();
+        });
+      }
+    });
+  }
+
+  feedChange() {
+    const feed = this.__computeActiveFeed();
+
+    if (feed.autoSubmits) {
+      this.submitForm();
+    }
   }
   /**
    * @return {Object} A copy of stepParams merged into params
@@ -217,7 +253,7 @@ export const FormRenderBase = class extends utilsMixin(serviceCallMixin(LitEleme
     } // TOAST (Show response summary)
 
 
-    store.dispatch(showSnackbar(response.summary()));
+    store.dispatch(showSnackbar(response.summary(), response.summaryTitle(), response.isSuccessful() ? SNACKBAR_CONTEXT_SUCCESS : SNACKBAR_CONTEXT_DANGER));
   }
 
   submitForm() {

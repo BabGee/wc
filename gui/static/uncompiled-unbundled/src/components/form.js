@@ -1,5 +1,6 @@
 import { LitElement } from "../../node_modules/lit-element/lit-element.js";
 import { SerializableElement, Validation } from "../core/serializable-element.js";
+import { Logger } from "../core/logger.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 export const FormBase = class extends LitElement {
@@ -25,7 +26,10 @@ export const FormBase = class extends LitElement {
 
     for (var i = 0; i < elements.length; i++) {
       const loader = elements[i];
-      const l = loader.loadedElement();
+      const l = loader.loadedElement(); // todo #204
+      // implement a method SerializableElement.isSerializable()
+      // can be used to override is Serializable status
+      // i.e datalist being Serializable is set from details['selectable']
 
       if (l instanceof SerializableElement) {
         const value = l.getValue(); // If value is an object, iterate the key value pairs
@@ -58,62 +62,41 @@ export const FormBase = class extends LitElement {
       const l = loader.loadedElement();
 
       if (l instanceof SerializableElement) {
-        // TODO wrap with try catch so that doesn't block submission
-        const validation = l.validate();
+        // wrap with try catch so that doesn't block form submission
+        try {
+          const validation = l.validate();
 
-        if (validation instanceof Validation) {
-          if (!validation.isValid) {
-            // prefer elements invalid() implementation
-            // over general class addition to loader
-            try {
-              l.invalid(validation);
-            } catch (e) {
-              console.error(e);
-              loader.classList.add('invalid-e-l');
+          if (validation instanceof Validation) {
+            if (!validation.isValid) {
+              // prefer elements invalid() implementation
+              // over general class addition to loader
+              try {
+                l.invalid(validation);
+              } catch (e) {
+                Logger.i.error(e);
+                loader.classList.add('invalid-e-l');
+              }
+
+              Logger.i.error(loader, l);
+              l.scrollIntoView({
+                behavior: 'smooth',
+                block: 'end'
+              });
+              return false;
+            } else {
+              try {
+                l.valid(validation);
+              } catch (e) {
+                Logger.i.error(e);
+                loader.classList.remove('invalid-e-l');
+              }
             }
-
-            console.error(loader, l);
-            l.scrollIntoView({
-              behavior: 'smooth',
-              block: 'end'
-            });
-            return false;
           } else {
-            try {
-              l.valid(validation);
-            } catch (e) {
-              console.error(e);
-              loader.classList.remove('invalid-e-l');
-            }
+            Logger.i.alert(`[.validate] must return Validation - ${l.e.name} `);
           }
-        } else {
-          // todo backward compatibility
-          console.warn('[DEPRECATED API USAGE] the element [' + l.e.name + '] is still on legacy code .validate');
-
-          if (!validation) {
-            // prefer elements invalid()
-            // implementation over general class addition to loader
-            try {
-              l.invalid();
-            } catch (e) {
-              console.error(e);
-              loader.classList.add('invalid-e-l');
-            }
-
-            l.scrollIntoView({
-              behavior: 'smooth',
-              block: 'end'
-            });
-            console.error(loader, l);
-            return false;
-          } else {
-            try {
-              l.valid();
-            } catch (e) {
-              console.error(e);
-              loader.classList.remove('invalid-e-l');
-            }
-          }
+        } catch (e) {
+          Logger.i.error(e);
+          Logger.i.alert(e);
         }
       }
     }

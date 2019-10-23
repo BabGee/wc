@@ -1,8 +1,8 @@
-import { css, html } from "../../../../node_modules/lit-element/lit-element.js";
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
 import { FormRenderBase, FORM_TYPE_FORM, FORM_TYPE_PAYMENTS_FORM, FORM_TYPE_HIDDEN_FORM } from '../../../components/form-render.js';
 import { register } from "../register.js";
-import './form-x.js';
-import './form-y.js';
+import './forms/form-x.js';
+import './forms/form-y.js';
 import './e-list.js';
 import { Logger } from "../../../core/logger.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/

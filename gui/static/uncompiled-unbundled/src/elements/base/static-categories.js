@@ -28,7 +28,7 @@ export const StaticCategoriesBase = class extends utilsMixin(dataSourceMixin(Bas
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       var objs = {};
 
       for (var d = 0; d < dsc.data.length; d++) {
@@ -87,6 +87,7 @@ export const StaticCategoriesBase = class extends utilsMixin(dataSourceMixin(Bas
     self.title = StaticCategoriesBase.toTitleCase(pElement.name);
     self.params = loader.pl.paramsCopy();
     self.menu_open = false;
+    this.loader = this.loadData();
   }
 
 };

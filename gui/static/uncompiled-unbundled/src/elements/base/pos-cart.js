@@ -98,7 +98,7 @@ export const PosCartBase = class extends utilsMixin(mqttMixin(dataSourceMixin(Ba
     super.firstUpdated(changedProperties);
     var target = this;
     const self = this;
-    this.loadData(function (dsc) {
+    this.loader.then(dsc => {
       /* todo incomplete dev
              let payload = req.response;
              target.cols = payload.response.data_source.cols;
@@ -266,7 +266,6 @@ export const PosCartBase = class extends utilsMixin(mqttMixin(dataSourceMixin(Ba
   init(pElement, loader) {
     super.init(pElement, loader);
     var self = this; // this reference is required when appending inline-forms
-    // self._postl = target;
 
     self.title = PosCartBase.toTitleCase(pElement.name);
     self.icon = pElement.icon;
@@ -274,6 +273,7 @@ export const PosCartBase = class extends utilsMixin(mqttMixin(dataSourceMixin(Ba
     self.params = loader.pl.params;
     self.data_name = pElement.defaultValue;
     self.maxlength = pElement.max;
+    self.loader = this.loadData();
   }
 
 };

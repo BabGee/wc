@@ -3,6 +3,7 @@ import '../../icons/my-icons.js';
 import "./location-picker/map-marker.js";
 import { SharedStyles } from "../../styles/shared-styles.js";
 import { LocationPickerBase } from "../../../../elements/base/location-picker.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class LocationPicker extends LocationPickerBase {
   renderDefault() {

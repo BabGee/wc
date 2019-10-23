@@ -58,7 +58,7 @@ export const StaticPosBase = class extends utilsMixin(dataSourceMixin(BaseElemen
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // console.log(dsc);
       self.cols = dsc.cols;
       self.rows = dsc.rows;
@@ -203,6 +203,7 @@ export const StaticPosBase = class extends utilsMixin(dataSourceMixin(BaseElemen
     self.title = StaticPosBase.toTitleCase(pElement.name);
     self.icon = pElement.icon;
     self.params = self.pl.paramsCopy();
+    self.loader = this.loadData();
   }
 
 };

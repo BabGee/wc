@@ -51,7 +51,7 @@ export const StaticProductsListBase = class extends utilsMixin(dataSourceMixin(B
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // console.log(dsc);
       self.currentGroups = self.groups;
       self.productItems = dsc.data;
@@ -168,6 +168,7 @@ export const StaticProductsListBase = class extends utilsMixin(dataSourceMixin(B
     self.service = pElement.service;
     self.variable = pElement.defaultValue;
     self.kind = pElement.kind;
+    self.loader = this.loadData();
   }
 
 };

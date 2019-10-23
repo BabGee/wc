@@ -60,7 +60,7 @@ export const IndustriesCategoriesBase = class extends dataSourceMixin(utilsMixin
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       self.currentGroups = self.groups;
       self.currentData = self.data;
       self.loading = false; // self.requestUpdate();
@@ -210,6 +210,7 @@ export const IndustriesCategoriesBase = class extends dataSourceMixin(utilsMixin
     self.icon = pElement.icon;
     self.params = self.pl.paramsCopy();
     self.data_name = pElement.defaultValue;
+    self.loader = this.loadData();
   }
 
 };

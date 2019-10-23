@@ -98,7 +98,8 @@ class LandingPage extends LandingPageBase {
       }
       .landing-header{
           color: #fff;
-          background-color: var(--header-color);
+          background-color: var(--app-default-color);
+          /* background-color: var(--header-color); */
           /* height: 100vh; */
       }
       @media screen and (max-width: 400px){
@@ -118,7 +119,7 @@ class LandingPage extends LandingPageBase {
           background-color: transparent;
       }
       .landing-header .navbar .navbar-brand .navbar-burger span{
-          backgroud-color: #fff!important;
+         background-color: #fff!important;
       }
       .landing-header .navbar .nav-center{
           display: flex;
@@ -128,6 +129,26 @@ class LandingPage extends LandingPageBase {
       .landing-header .navbar .navbar-item{
           color: inherit;
           font-weight: 600;
+      }
+      .landing-header .navbar .navbar-item:hover,       
+      .landing-header .navbar .navbar-item.nav-active{
+          color: #fff;
+          background-color: transparent;
+          position: relative;
+      }
+      a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active {
+        background-color: transparent!important;
+        color: #fff!important;
+    }
+      .landing-header .navbar .navbar-item:hover::after,
+      .landing-header .navbar .navbar-item.nav-active:after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 5px;
+        background: #fff;
+        top: 47px;
+        left: 0;
       }
       .hero .landing-subtitle{
           padding: 30px 0 0 0;
@@ -490,6 +511,28 @@ class LandingPage extends LandingPageBase {
           text-align: right;
           opacity: 1!important;
       }
+      .mob-nav{
+          background: transparent;
+          display: flex;
+          justify-content: flex-start;
+          align-content: flex-start;
+      }
+
+      @media screen and (max-width: 1023px){
+        .mob-nav{
+          background: transparent;
+          display: flex!important;
+          justify-content: flex-start;
+          align-content: flex-start;
+        }
+        .navbar-menu{
+            background-color: transparent!important;
+        }
+      }
+      a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active {
+            background-color: transparent!important;
+            color: #fff!important;
+      }
     
 </style>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
@@ -509,7 +552,7 @@ class LandingPage extends LandingPageBase {
                           </a>
                         </div>
                       
-                        <div id="navbarBasicExample" class="navbar-menu">
+                        <div id="navbarBasicExample" class="navbar-menu" id="nav-bar-menu">
                           <div class="navbar-end nav-center">
                           ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
                           <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
@@ -551,7 +594,7 @@ class LandingPage extends LandingPageBase {
                                 </a>
                             </div>
 
-                            <div class="column">
+                            <div class="column" id="column">
                                 <div class="columns">
                                     <div class="column">
                                         <div class="footer-links-content">
@@ -657,19 +700,8 @@ class LandingPage extends LandingPageBase {
   }
 
   toggleNav() {
-    if (this.toggle) {
-      this.qs('.navbar-wrapper').classList.remove('navbar-light');
-      this.qs('.navbar-wrapper').classList.remove('mobile-menu-dark');
-      this.qs('.nav-toggle').classList.remove('is-active');
-      this.qs('.nav-right').classList.remove('is-active');
-      this.toggle = false;
-    } else {
-      this.qs('.navbar-wrapper').classList.add('navbar-light');
-      this.qs('.navbar-wrapper').classList.add('mobile-menu-dark');
-      this.qs('.nav-toggle').classList.add('is-active');
-      this.qs('.nav-right').classList.add('is-active');
-      this.toggle = true;
-    }
+    let nav = document.getElementsByClassName('navbar-menu');
+    nav[0].classList.toggle('mob-nav');
   }
 
   stateChanged(state) {

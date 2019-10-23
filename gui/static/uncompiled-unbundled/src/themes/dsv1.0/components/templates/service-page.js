@@ -50,7 +50,10 @@ html{
 
                      
             .service-header{
-              padding: 29px 2px
+              padding: 29px 2px;
+              display:flex;
+              align-items:center;
+              height:64px;
             }
             .nav-items{
               margin-top: 20px;
@@ -218,7 +221,7 @@ html{
               .mobile-menu{
                 position: absolute!important;
                 top: 43px!important;
-                left: 438px!important;
+                left: 703px!important;
                 display: block!important;
                 cursor: pointer;
                                 }
@@ -243,6 +246,7 @@ html{
                 div#main-menu-item {
 
                       margin-left: 2px;
+                      width: 100%;
                 }
 
                 div#top-nav {
@@ -263,7 +267,7 @@ html{
               .mobile-menu{
                 position: absolute!important;
                 top: 43px!important;
-                left: 438px!important;
+                left: 408px!important;
                 display: block!important;
                 cursor: pointer;
                                 }
@@ -421,7 +425,7 @@ html{
                           .mobile-menu{
                 position: absolute!important;
                 top: 43px!important;
-                left: 438px!important;
+                left: 360px!important;
                 display: block!important;
                 cursor: pointer;
                                 }
@@ -459,7 +463,7 @@ html{
               .mobile-menu{
                 position: absolute!important;
                 top: 43px!important;
-                left: 438px!important;
+                left: 325px!important;
                 display: block!important;
                 cursor: pointer;
                                 }
@@ -727,10 +731,6 @@ html{
 }
             </style>
 
-${this.view === VIEW_MODE_DIALOG ? html`
-                <iron-icon icon="icons:arrow-back"style="color: white" @click="${this._viewList}"></iron-icon>
-                <section-page id="dialog" queue=${this.dialogServicesQueue}></section-page>
-            ` : html`
 
  <div class="main">
 
@@ -742,20 +742,17 @@ ${this.view === VIEW_MODE_DIALOG ? html`
             <div id = "side" class="column is-three-fifths " style="overflow: auto;">
               
               <div class="service-header is-flex">
-                <figure class="image is-rounded is-24x24" 
-                      style="margin-left: 20px;">
+                <figure class="image is-rounded" 
+                      style="margin-left: 12px;">
                         <img src="${this._computeLogo(this.gateway)}"> 
                 </figure>
-                <p style="color: #ffffff; font-weight: 900; 
-                        font-family: lato; font-size: 16px;
-                        position: relative;">${this.gateway.name}</p>
               </div>   
 
                     ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
 
 
 
-                      <div id="main-menu-item" class=" ${pageGroupIndex == this._pageGroup ? 'selected  active' : ''}  " style="overflow: auto;">
+                      <div id="main-menu-item" class="${pageGroupIndex == this._pageGroup ? 'selected  active' : ''}" style="overflow: auto;">
 
                       <a id = "pagegroup-anchor" href=""
                             class=" is-capitalized  main-menu-p " 
@@ -782,10 +779,7 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
                             ${pageGroup.pages.map((menu, menuIndex) => html`
 
-                            <div id="item-${menuIndex}" @click='${() => this.selectedPage(menuIndex)}' class="item">
-                            
-                            
-
+                            <div id="item-${menuIndex}" class="item ${pageGroupIndex == this._pageGroup && menuIndex == this._page ? 'selected-items' : ''}">
                             <a id="sub-items-anchor-"  class="sub-items-anchor " 
                                 href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/"> ${ServicePage.toTitleCase(menu.title)} </a> 
                             <br>
@@ -875,8 +869,30 @@ ${this.view === VIEW_MODE_DIALOG ? html`
 
 
   </section>
-  </div> `}
-  <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
+  </div>                
+  
+  <div class="modal ${this.view === VIEW_MODE_DIALOG ? 'is-active' : ''}">
+
+    <div class="modal-background"></div>
+    <div class="modal-content " 
+         style="background-color: #ececee; font-family: Montserrat; width: 688px;">
+         
+         
+         <section-page id="dialog" queue=${this.dialogServicesQueue}></section-page>
+
+    </div>
+
+    <button class="modal-close is-large " aria-label="close" @click="${this._viewList}></button>
+
+</div>
+  
+  
+  
+  
+  <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> 
+<span slot="title">${this._snackbarTitle}</span> 
+<span>${this._snackbarMessage}</span>
+</snack-bar>
      `;
   }
 
@@ -928,13 +944,6 @@ ${this.view === VIEW_MODE_DIALOG ? html`
     if (menuItems.parentElement.classList.contains(highLight)) {} else {
       menuItems.parentElement.classList.add(highLight);
     }
-  }
-
-  selectedPage(index) {
-    const activeItems = document.querySelector('#item-' + index).querySelectorAll('.item');
-    const selectedLink = document.querySelector('#item-' + index);
-    activeItems.forEach(item => item.classList.remove('selected-items'));
-    selectedLink.classList.add('selected-items');
   }
 
   static get styles() {

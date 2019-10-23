@@ -15,7 +15,7 @@ class FileInput extends FileInputBase {
         clear: both;
         margin: 0 auto;
         width: 100%;
-        max-width: 350px;
+        max-width: 100%;
         box-shadow: 0 0 3px #EFEFEF;
       }
 

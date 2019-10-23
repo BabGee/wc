@@ -1,17 +1,42 @@
 import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { InputStyles } from "../../styles/shared.js";
+import { RENDER_M_DEFAULT, RENDER_M_SIDE_BY_SIDE } from "../../../../components/e-list.js";
+import { enterSubmitMixin } from "../../../../components/mixins/enter-submit-mixin.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
-export const inputMixin = BaseClass => class extends BaseClass {
+export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass) {
   renderService() {
-    return html`
+    if (this.renderMode === RENDER_M_SIDE_BY_SIDE) {
+      return html`
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+                <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">From</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control is-expanded has-icons-left">
+                <input class="input" type="text" placeholder="Name">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </p>
+            </div>
+            
+          </div>
+        </div>
+        
+        `;
+    } else {
+      // RENDER_M_DEFAULT
+      return html`
     <style>
     .row{
         width: 100%;
     }
     .row .inp-right{
         /* width: 5%; */
-        height: 100px;
+        /*height: 100px;*/
     }
     .row .inp-right input{
         border-radius: 6px;
@@ -71,6 +96,7 @@ export const inputMixin = BaseClass => class extends BaseClass {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="column row">
       <div class="inp-right">
+        <label class="label">${this.e.name}</label>
         <!-- For success message use 'success' whithin the 'field' class-->
         <!-- For error message use 'error' whithin the 'field' element and add is-danger whithin the input tag-->
         <!--- Error message is commented at the bottom of this component --->
@@ -86,6 +112,7 @@ export const inputMixin = BaseClass => class extends BaseClass {
       </div>
     </div>
           `;
+    }
   }
 
   renderDefault() {
@@ -103,7 +130,7 @@ export const inputMixin = BaseClass => class extends BaseClass {
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="field is-8">
-      <!-- <label class="label">${this.e.name}</label> -->
+      <label class="label">${this.e.name}</label>
       <div class="control">
         <input class="input inp" id="input" type="${this.type}" placeholder="${this.e.name}">
       </div>
@@ -177,6 +204,10 @@ export const inputMixin = BaseClass => class extends BaseClass {
       .querySelector('#validationIcon')
       .style.visibility = 'hidden';
      */
+  }
+
+  get renderMode() {
+    return this.pl.renderMode;
   }
 
   get type() {

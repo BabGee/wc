@@ -43,8 +43,20 @@ export const interfaceSelector = createSelector(payloadSelector, payload => {
   return payload.serviceCommands['get_interface'] || payload.serviceCommands['get_section'];
 });
 export const currentPageGroupSelector = createSelector(interfaceSelector, pageGroupSelector, (i, pageGroup) => {
-  return i.pageGroups[Number(pageGroup)];
+  let index = Number(pageGroup); // return first pageGroup if index out of bounds
+
+  if (index >= i.pageGroups.length) {
+    index = 0;
+  }
+
+  return i.pageGroups[index];
 });
 export const currentPageSelector = createSelector(currentPageGroupSelector, pageSelector, (pageGroup, page) => {
-  return pageGroup.pages[Number(page)];
+  let index = Number(page); // return first page if index out of bounds
+
+  if (index >= pageGroup.pages.length) {
+    index = 0;
+  }
+
+  return pageGroup.pages[index];
 });

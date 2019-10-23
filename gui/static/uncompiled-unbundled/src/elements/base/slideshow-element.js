@@ -56,7 +56,7 @@ export const SlideshowElementBase = class extends utilsMixin(dataSourceMixin(Bas
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // console.log(dsc);
       self.cols = dsc.cols;
       self.rows = dsc.rows;
@@ -80,9 +80,10 @@ export const SlideshowElementBase = class extends utilsMixin(dataSourceMixin(Bas
     self.title = SlideshowElementBase.toTitleCase(pElement.name);
     self.icon = pElement.icon;
     self.service = pElement.service;
-    self.params = self.pl.params;
+    self.params = self.pl.paramsCopy();
     self.dataName = pElement.defaultValue;
     self.maxlength = pElement.max;
+    self.loader = this.loadData();
   }
 
 };

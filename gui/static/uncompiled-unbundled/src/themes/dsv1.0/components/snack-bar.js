@@ -11,28 +11,29 @@ import "../../../../node_modules/fa-icons/index.js";
 
 class SnackBar extends SnackBarBase {
   render() {
-    console.log(this.message);
-    return html`
-
- <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-   
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-
+    return html`   
+    
       <style>
 
-@font-face {
-        font-family: 'TT Norms';
-        src:  url('fonts/tt_norms_pro/tt_norms_pro_light-webfont.eot');/* IE9 Compat Modes */
-        src:  url('fonts/tt_norms_pro/tt_norms_pro_light-webfont.woff') format('woff'), /* Modern Browsers */
-              url('fonts/tt_norms_pro/tt_norms_pro_light-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
-              url('fonts/tt_norms_pro/tt_norms_pro_light-webfont.svg#TT Norms-300') format('svg');/* Legacy iOS */
-        /* font-style: medium; */
-        font-weight: 300;
-        text-rendering: optimizeLegibility;
-      }
+        @font-face {
+          font-family: 'TT Norms';
+          src:  url('fonts/tt_norms_pro/tt_norms_pro_light-webfont.eot');/* IE9 Compat Modes */
+          src:  url('fonts/tt_norms_pro/tt_norms_pro_light-webfont.woff') format('woff'), /* Modern Browsers */
+                url('fonts/tt_norms_pro/tt_norms_pro_light-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+                url('fonts/tt_norms_pro/tt_norms_pro_light-webfont.svg#TT Norms-300') format('svg');/* Legacy iOS */
+          /* font-style: medium; */
+          font-weight: 300;
+          text-rendering: optimizeLegibility;
+        }
 
        :host {
+          display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+       
+       
           will-change: transform;
           transform: translate3d(0, 100%, 0);
           transition-property: visibility, transform;
@@ -74,7 +75,7 @@ class SnackBar extends SnackBarBase {
               <fa-icon class="fas fa-check-circle" color="#fff" style="height:36px; width: 36px;"></fa-icon>
           </span>
           <p style="margin-left: 86px; margin-top: 16px; font-weight: bold; font-size: 18px;"> <slot name="title"></slot></p>  
-          <p style="margin-left: 86px; margin-bottom: 22px;"><slot name="message"></slot></p>              
+          <p style="margin-left: 86px; margin-bottom: 22px;"><slot></slot></p>              
       </div>
     </div>        
   </div>

@@ -10,82 +10,66 @@ class CheckboxInput extends CheckboxInputBase {
   renderDefault() {
     return html`
 <style>
-/* The container */
-.checkcontent {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-
-/* Hide the browser's default checkbox */
-.checkcontent input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
-
-/* Create a custom checkbox */
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 16px;
-    width: 16px;
-    background-color: #fff;
-    border-radius: 4px;
-     border: 1px solid #a9abac;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+  border: 3px solid #4a4a4a
 }
-
-/* On mouse-over, add a grey background color */
-.checkcontent:hover input ~ .checkmark {
-    background-color: #ccc;
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
 }
-
-/* When the checkbox is checked, add a blue background */
-.checkcontent input:checked ~ .checkmark {
-    background-color: #299ed8;
+.container input:checked ~ .checkmark {
+  background-color: #fff;
 }
-
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
+  content: "";
+  position: absolute;
+  display: none;
 }
-
-/* Show the checkmark when checked */
-.checkcontent input:checked ~ .checkmark:after {
-    display: block;
+.container input:checked ~ .checkmark::after {
+  display: block;
 }
-/* Style the checkmark/indicator */
-.checkcontent .checkmark:after {
-  left: 6px;
-  top: 1px;
-  width: 2px;
-  height: 8px;
-  border: solid white;
+.container .checkmark::after {
+  left: 7px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid #4a4a4a;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 </style>
- <div class="column is-5 is-offset-4">
-<div class="field">
-
-  <label class="checkcontent">${this.name}
-  <input type="checkbox" id="input">
-  <span class="checkmark" style = "${this.rounded ? `border-radius:10px;` : ''}"></span>
-</label>
-  </div>
-  </div>
+<div class="collumn">
+  <label class="container"> <p class="is-size-6">${this.name}</p>
+    <input type="checkbox" >
+    <span class="checkmark"></span>
+  </label>
+</div>
 `;
   }
 

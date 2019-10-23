@@ -79,7 +79,7 @@ export const ReportsSummaryBase = class extends dataSourceMixin(BaseElement) {
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {
+    this.loader.then(dsc => {
       // console.log(payload);
       for (let i = 0; i < self.groups.length; i++) {
         const groupName = self.groups[i];
@@ -248,6 +248,7 @@ export const ReportsSummaryBase = class extends dataSourceMixin(BaseElement) {
     self.service = pElement.service;
     self.params = self.pl.paramsCopy();
     self.buyer = pElement.details['report_type'] === 'buyer';
+    self.loader = this.loadData();
   }
 
 };

@@ -41,7 +41,7 @@ export const ProductSearchBase = class extends utilsMixin(dataSourceMixin(BaseEl
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.loadData().then(dsc => {});
+    this.loader.then(dsc => {});
   }
 
   _action(evt) {
@@ -59,6 +59,7 @@ export const ProductSearchBase = class extends utilsMixin(dataSourceMixin(BaseEl
     self.service = pElement.service;
     self.params = self.pl.params;
     self.colorType = ['success', 'secondary', 'warning', 'danger', 'primary'];
+    self.loader = this.loadData();
   }
 
 };

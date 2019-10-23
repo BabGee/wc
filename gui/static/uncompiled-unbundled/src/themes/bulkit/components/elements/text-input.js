@@ -4,8 +4,9 @@ import '../../icons/my-icons.js';
 import { SharedStyles } from "../../styles/shared-styles.js";
 import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
 import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import { enterSubmitMixin } from "../../../../components/mixins/enter-submit-mixin.js";
 
-class TextInput extends TextInputBase {
+class TextInput extends enterSubmitMixin(TextInputBase) {
   renderDefault() {
     return html`
 ${SharedStyles}

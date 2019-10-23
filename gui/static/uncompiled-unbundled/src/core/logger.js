@@ -1,3 +1,4 @@
+import * as Sentry from "../../node_modules/@sentry/browser/esm/index.js";
 let instance = null;
 export class Logger {
   constructor() {
@@ -42,6 +43,10 @@ export class Logger {
     if (window.process['env']['NODE_ENV'] === 'development') {
       this.info(...message);
     }
+  }
+
+  alert(...message) {
+    Sentry.captureException(new Error(message));
   }
 
   incompleteDev(...message) {

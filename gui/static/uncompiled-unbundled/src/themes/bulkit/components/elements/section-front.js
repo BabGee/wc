@@ -1,6 +1,7 @@
 import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { SharedStyles } from "../../styles/shared-styles.js";
 import { SectionPElementBase } from "../../../../elements/base/section-pelement.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SectionFront extends SectionPElementBase {
   renderDefault() {

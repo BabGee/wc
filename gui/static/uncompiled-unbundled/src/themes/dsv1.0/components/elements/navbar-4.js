@@ -87,29 +87,16 @@ nav {
               <hr class="navbar-divider" clear="all">
             <nav class="navbar has-background-dark has-text-white">
               <div id="site-name" class="navbar-brand has-text-weight-semibold">
-                <a class="navbar-item" href="https://bulma.io">
-                  <img src="https://bulma.io/images/bulma-logo-white.png" width="112" height="28">
+                <a class="navbar-item" href="#">
+                  <img src="/media/${this.gateway.logo}" alt="logo" width="112" height="28">
                 </a>
               </div>
               <div class="navbar-menu is-spaced is-active">
-                <a class="navbar-item is-active has-text-link" @click="${() => this.activePage('home')}">
-                  Home
-                </a>
-                <a class="navbar-item" @click="${() => this.activePage('about')}">
-                  About
-                </a>
-                <a class="navbar-item" @click="${() => this.activePage('portfolio')}">
-                  Portfolio
-                </a>
-                <a class="navbar-item" @click="${() => this.activePage('services')}">
-                  Services
-                </a>
-                <a class="navbar-item" @click="${() => this.activePage('news')}">
-                  News
-                </a>
-                <a class="navbar-item" @click="${() => this.activePage('contacts')}">
-                  Contacts
-                </a>
+              ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+              <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
+              class="navbar-item ${pageGroupIndex == this._pageGroup ? 'is-active has-text-link' : ''}" >
+                  ${pageGroup.title}
+              </a>`)}
               </div>
               <div class="navbar-menu">
                 <div class="navbar-end">
@@ -126,30 +113,6 @@ nav {
         </div>
 
      `;
-  }
-
-  activePage(mainNavLink) {
-    const links = this.shadowRoot.querySelector('.navbar-menu').querySelectorAll('a');
-
-    if (mainNavLink === 'home') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[0].className = 'navbar-item is-active has-text-link';
-    } else if (mainNavLink === 'about') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[1].className = 'navbar-item is-active has-text-link';
-    } else if (mainNavLink === 'portfolio') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[2].className = 'navbar-item is-active has-text-link';
-    } else if (mainNavLink === 'services') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[3].className = 'navbar-item is-active has-text-link';
-    } else if (mainNavLink === 'news') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[4].className = 'navbar-item is-active has-text-link';
-    } else if (mainNavLink === 'contacts') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[5].className = 'navbar-item is-active has-text-link';
-    }
   }
 
   static get is() {

@@ -21,6 +21,7 @@ export class DataSource extends Command {
   /**
    * Retrieves the values of the params of a link into an object
    * TODO update documentation
+   * TODO make private
    * @param paramsConfig
    * @param item
    */

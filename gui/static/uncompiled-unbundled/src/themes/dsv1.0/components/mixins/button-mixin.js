@@ -13,7 +13,7 @@ export const buttonMixin = BaseClass => class extends BaseClass {
 </style>       
 <div class="field">
   <div class="control">
-    <button class="button is-link">${this.name}</button>
+    <button class="button is-link" style="width: 100%;">${this.name}</button>
   </div>
 
 </div>
