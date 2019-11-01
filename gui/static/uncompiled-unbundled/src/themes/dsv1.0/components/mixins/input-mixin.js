@@ -9,23 +9,41 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
     if (this.renderMode === RENDER_M_SIDE_BY_SIDE) {
       return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-                <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">From</label>
+        <style>
+          div.input-item label{
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.17;
+            letter-spacing: normal;
+            color: #202124;
+          }
+          div.input-item input{
+            width: 100%;
+            height: 40px;
+            border-radius: 6px;
+            border: solid 1px #ededed;
+            background-color: #f6f6f6;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1;
+            color: #202124;
+            padding: 16px 13.5px;
+          }
+        </style>
+        <div class="columns input-item">
+          <div class="column is-one-quarter" style="display: flex; align-items: center;">
+            <label class="label is-uppercase">Email Address</label>
           </div>
-          <div class="field-body">
+          <div class="column">
             <div class="field">
-              <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" placeholder="Name">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-user"></i>
-                </span>
-              </p>
+              <div class="control">
+                <input class="input" type="text" placeholder="Email Address">
+              </div>
             </div>
-            
           </div>
         </div>
-        
         `;
     } else {
       // RENDER_M_DEFAULT

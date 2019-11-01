@@ -33,8 +33,8 @@ const template = (state = INITIAL_STATE, action) => {
 };
 
 export default template;
-export const pageGroupSelector = state => state.app.pageGroup;
-export const pageSelector = state => state.app.page;
+export const pageGroupSelector = state => state.template.pageGroup;
+export const pageSelector = state => state.template.page;
 export const payloadSelector = state => state.app.payload;
 export const gatewaySelector = createSelector(payloadSelector, payload => {
   return payload.serviceCommands['get_gateway_details'] || payload.serviceCommands['get_institution_details'];
@@ -43,20 +43,12 @@ export const interfaceSelector = createSelector(payloadSelector, payload => {
   return payload.serviceCommands['get_interface'] || payload.serviceCommands['get_section'];
 });
 export const currentPageGroupSelector = createSelector(interfaceSelector, pageGroupSelector, (i, pageGroup) => {
-  let index = Number(pageGroup); // return first pageGroup if index out of bounds
-
-  if (index >= i.pageGroups.length) {
-    index = 0;
-  }
-
+  const index = Number(pageGroup);
+  if (index >= i.pageGroups.length) return null;
   return i.pageGroups[index];
 });
 export const currentPageSelector = createSelector(currentPageGroupSelector, pageSelector, (pageGroup, page) => {
-  let index = Number(page); // return first page if index out of bounds
-
-  if (index >= pageGroup.pages.length) {
-    index = 0;
-  }
-
+  const index = Number(page);
+  if (pageGroup === null || index >= pageGroup.pages.length) return null;
   return pageGroup.pages[index];
 });

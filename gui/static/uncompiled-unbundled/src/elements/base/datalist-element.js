@@ -102,7 +102,12 @@ export const DataListElementBase = class extends utilsMixin(dataSourceMixin(mqtt
     // var divLocal = document.createElement('div');
     var filter = event.detail.value;
     var column = event.detail.path;
-    this.updateParams(column, filter);
+
+    if (filter) {
+      // todo this shouldn't happen
+      // called when data changes and a re-render happens
+      this.updateParams(column, filter);
+    }
   }
   /**
      * General and per column search event handler
@@ -142,13 +147,13 @@ export const DataListElementBase = class extends utilsMixin(dataSourceMixin(mqtt
     }
   }
   /**
-     * Processes a custom export filename template with dynamic data from DSC
-     * This includes date formatting
-     *
-     * @param literal
-     * @return {string}
-     * @private
-     */
+   * Processes a custom export filename template with dynamic data from DSC
+   * This includes date formatting
+   *
+   * @param literal
+   * @return {string}
+   * @private
+   */
 
 
   _processTemplateLiteral(literal) {
@@ -264,12 +269,12 @@ export const DataListElementBase = class extends utilsMixin(dataSourceMixin(mqtt
     return 'type' in x ? x['type'].toLowerCase() : 'table';
   }
   /**
-     * Sets the default page_limits if passed value is null or invalid
-     *
-     * @param x
-     * @return {string}
-     * @private
-     */
+   * Sets the default page_limits if passed value is null or invalid
+   *
+   * @param x
+   * @return {string}
+   * @private
+   */
 
 
   _validatePageLimits(x) {

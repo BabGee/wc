@@ -5,6 +5,7 @@ import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
 import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
 import { FileInputBase } from "../../../../elements/base/file-input.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class FileInput extends FileInputBase {
   renderDefault() {
@@ -41,40 +42,25 @@ ${DASHBOARD_STYLES}
   getValue() {
     return this.value;
   }
+  /**
+   * from FileInputBase
+   * @override
+   */
 
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
+
+  updateUploadMessage(message) {
+    const display = this.shadowRoot.querySelector('#display');
+    display.textContent = message;
   }
+  /**
+   * File Selection Change handler
+   * @param evt
+   */
 
-  handleFile() {
-    const self = this;
-    /* TODO
-        var progress = this.$.paper_progress;
-        progress.value = 0;
-        progress.style['display'] = 'block';
-        */
 
-    var display = this.shadowRoot.querySelector('#display');
+  handleFile(evt) {
     const fileInput = this.shadowRoot.querySelector('#input');
-    var file = fileInput.files[0];
-
-    if (!file) {
-      // no file selected
-      return;
-    }
-
-    if (self._validFileExtensions && self._hasExtension(file.name, self._validFileExtensions)) {
-      self.uploadTempFile(file, 'image', null).then(upload => {
-        self.value = upload['response']; // Bind Image Path
-
-        display.textContent = 'File successfully uploaded. Please Proceed!';
-      }).catch(reason => {
-        // TODO add better error handling
-        console.warn('[INCOMPLETE DEV] Better error handling.', reason);
-      });
-    } else {
-      display.textContent = 'File type' + file.type + ' not supported!';
-    }
+    this.uploadFile(fileInput);
   }
 
 }

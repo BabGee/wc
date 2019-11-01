@@ -8,6 +8,7 @@ import { Colors, Fonts, Reset } from "../../styles/shared.js";
 
 class SectionPage extends SectionPageBase {
   render() {
+    // TODO render 404
     return html`
      <style>
      

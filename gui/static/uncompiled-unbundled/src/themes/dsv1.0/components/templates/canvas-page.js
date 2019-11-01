@@ -17,6 +17,11 @@ class CanvasPage extends CanvasPageBase {
     // todo implement 404 tab to all pages
     if (!this.interface) {
       return html`<div>Cannot render an UNDEFINED tab.</div>`;
+    } else if (!this.pageGroup || !this.page) {
+      return html`
+      <h3> this is a missing page </h3>
+      <a href="/#/0/0/">Go Home</a>
+      `;
     }
 
     return html`

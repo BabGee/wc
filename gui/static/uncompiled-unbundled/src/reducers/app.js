@@ -2,7 +2,7 @@
 @license
 Copyright (c) 2018 InterIntel Technologies. All rights reserved.
  */
-import { UPDATE_NAVIGATION, UPDATE_SERVICE, UPDATE_OFFLINE, OPEN_SNACKBAR, CLOSE_SNACKBAR, GET_PAYLOAD } from '../actions/app.js';
+import { UPDATE_SERVICE, UPDATE_OFFLINE, OPEN_SNACKBAR, CLOSE_SNACKBAR, GET_PAYLOAD } from '../actions/app.js';
 import { SNACKBAR_CONTEXT_INFO } from "../components/snack-bar.js";
 const INITIAL_STATE = {
   offline: undefined,
@@ -17,12 +17,6 @@ const app = (state = INITIAL_STATE, action) => {
     case GET_PAYLOAD:
       return { ...state,
         payload: action.payload
-      };
-
-    case UPDATE_NAVIGATION:
-      return { ...state,
-        page: action.page,
-        pageGroup: action.pageGroup
       };
 
     case UPDATE_SERVICE:
@@ -57,10 +51,4 @@ const app = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default app; //
-// export const feedSelector = createSelector(
-//     pageSelector,
-//     tabSelector,
-//     payloadSelector,
-//     (payloadSelector,pageSeletor, tabSelector) => (payloadSelector.tab(pageSeletor,tabSelector))
-// );
+export default app;

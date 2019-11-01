@@ -200,33 +200,82 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
         <style>
             
 
+        .topnav {
+          overflow: hidden;
+          /*background-color: #ffffff;*/
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+  
+      }
+  
+      .topnav .search-container {
+          display: inline-block;
+      }
+  
+      .topnav input[type=text] {
+          padding: 12px;
+          margin-top: 8px;
+          margin-bottom: 8px;
+          background-color: #f5f5f5;
+          color: #606060;
+          font-size: 14px;
+          border: none;
+          width: 600px;
+      }
+  
+      .topnav .search-container button {
+          padding: 12px;
+          margin-top: 8px;
+          margin-bottom: 8px;
+          color: #FFFFFF;
+          background-color: var(--app-default-color);
+          font-size: 14px;
+          border: none;
+          cursor: pointer;
+  
+      }
+  
+      .topnav .search-container button:hover {
+          background: #ccc;
+      }
+  
+      @media screen and (max-width: 790px) {
+          .topnav {
+              overflow: hidden;
+              background-color: #ffffff;
+              width: 100%;
+              display: contents;
+              justify-content: normal;
+              align-items: normal;
+  
+          }
+  
+          .topnav .search-container {
+              display: inline-block;
+          }
+  
+          .topnav .search-container {
+              display: contents;
+              width: 100%;
+              float: none;
+          }
+  
+          .topnav a, .topnav input[type=text], .topnav .search-container button {
+              float: none;
+              display: block;
+              text-align: left;
+              width: 100%;
+              margin: 0;
+              padding: 14px;
+          }
+  
+          .topnav input[type=text] {
+              border: 1px solid #ccc;
+          }
+  
         </style>
-        ${this._searchFieldsExist(this.columns) ? html`
-        
-            <div class="topnav">
-                <div class="search-container">
-
-                    <paper-dropdown-menu label="Search In">
-                        <paper-listbox slot="dropdown-content"
-                                       id="qIn"
-                                       fallback-selection="q"
-                                       attr-for-selected="param">
-                            <paper-item param="q">All</paper-item>
-                            ${this.searchFields(this.columns).map(item => html`<paper-item param="${item.propertyPath}">${item.header}</paper-item>`)}
-                        </paper-listbox>
-                    </paper-dropdown-menu>
-
-                    <paper-input style="display: inline-block"
-                                 placeholder="Search ..."
-                                 name="search"
-                                 id="q"></paper-input>
-
-                    <button type="submit" @click="${this._search}">Search</button>
-
-                </div>
-            </div>        
-            ` : html``}
-
             <!-- view starts here -->
             
             ${this._viewType(this.type) ? this.createCustomElement(this.type) : html`
@@ -351,6 +400,10 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
 
   firstUpdated(changedProperties) {}
 
+  _searchReset(evt) {
+    this.shadowRoot.querySelector('#q').value = "";
+  }
+
   _viewType(type) {
     const table = './table-type.js';
 
@@ -382,9 +435,16 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
         .totalElements = ${this.totalElements} 
         .totalPages = ${this.totalPages}
         .availableSize = ${this.availableSize}
-        .selectable = ${this.selected} 
+        .selectable = ${this.selectable} 
         .selected = ${this.selected}
         .title=${this.title}
+        .pl=${this.pl}
+        .q=${this.q}
+        @search="${this._search}"
+        @page-change="${this._pageChanged}"
+        @export="${this._exportType}"
+        @size-change="${this._sizeChanged}"
+        @dropdown-filter="${this._handleInputChange}"
         ></table-type>`;
     }
 
@@ -400,9 +460,10 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
         .totalElements = ${this.totalElements} 
         .totalPages = ${this.totalPages}
         .availableSize = ${this.availableSize}
-        .selectable = ${this.selected} 
+        .selectable = ${this.selectable} 
         .selected = ${this.selected}
         .title=${this.title}
+        .pl=${this.pl}
         ></card-type>`;
     } //Add more types here
 
@@ -419,7 +480,7 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
       .totalElements = ${this.totalElements} 
       .totalPages = ${this.totalPages}
       .availableSize = ${this.availableSize}
-      .selectable = ${this.selected} 
+      .selectable = ${this.selectable} 
       .selected = ${this.selected}
       .title=${this.title}
       ></inbox-type>`;
@@ -437,7 +498,7 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
       .totalElements = ${this.totalElements} 
       .totalPages = ${this.totalPages}
       .availableSize = ${this.availableSize}
-      .selectable = ${this.selected} 
+      .selectable = ${this.selectable} 
       .selected = ${this.selected}
       .title=${this.title}
       ></staffprofile-type>`;
@@ -455,11 +516,17 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
     .totalElements = ${this.totalElements} 
     .totalPages = ${this.totalPages}
     .availableSize = ${this.availableSize}
-    .selectable = ${this.selected} 
+    .selectable = ${this.selectable} 
     .selected = ${this.selected}
     .title=${this.title}
     ></contact-type>`;
     }
+  }
+
+  searchFields(columns) {
+    return columns.filter(function (item) {
+      return item.filter;
+    });
   }
 
   _handleSort(evt) {
@@ -470,16 +537,10 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
     // console.log(evt);
     this.dispatchEvent(new CustomEvent('dropdown-filter', {
       detail: {
-        path: evt.detail.column.propertyPath,
+        path: evt.detail.path,
         value: evt.detail.value
       }
     }));
-  }
-
-  searchFields(columns) {
-    return columns.filter(function (item) {
-      return item.filter;
-    });
   }
 
   _searchFieldsExist(columns) {
@@ -494,9 +555,18 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
     this.pl._dialog(dataAction.service, dataAction.params);
   }
 
+  _exportType(evt) {
+    const type = evt.detail.type;
+    this.dispatchEvent(new CustomEvent('export', {
+      detail: {
+        type: type
+      }
+    }));
+  }
+
   _pageChanged(evt) {
     const page = evt.detail.page;
-    const oldPage = this.page;
+    const oldPage = evt.detail.oldPage;
 
     if (oldPage !== undefined) {
       this.dispatchEvent(new CustomEvent('page-change', {
@@ -512,7 +582,7 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
 
   _sizeChanged(evt) {
     const size = evt.detail.size;
-    const oldSize = this.size;
+    const oldSize = evt.detail.size;
 
     if (oldSize !== undefined) {
       this.dispatchEvent(new CustomEvent('size-change', {
@@ -578,24 +648,16 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
   }
 
   _search(evt) {
-    const self = this;
-    const q = self.shadowRoot.querySelector('#q').value;
-    const qIn = self.shadowRoot.querySelector('#qIn').selected; // console.log(q);
-
-    if (q) {
-      // console.log(self.qIn);
-      // self.q = q;
-      // console.log(evt);
-      this.dispatchEvent(new CustomEvent('search', {
-        detail: {
-          column: qIn,
-          searchFields: self.searchFields(self.columns).map(function (field) {
-            return field.propertyPath;
-          }),
-          value: q
-        }
-      }));
-    }
+    var filter = evt.detail.value;
+    var column = evt.detail.column;
+    var columns = evt.detail.searchFields;
+    this.dispatchEvent(new CustomEvent('search', {
+      detail: {
+        column: column,
+        searchFields: columns,
+        value: filter
+      }
+    }));
   }
 
 }

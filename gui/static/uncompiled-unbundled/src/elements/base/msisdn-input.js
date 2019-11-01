@@ -45,10 +45,7 @@ export const MsisdnInputBase = class extends dataSourceMixin(SerializableElement
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-    const self = this; // Return all country codes
-    // DSC defaults to paginating at 50
-
-    this.limit = 500;
+    const self = this;
     this.loader.then(dsc => {
       self.loading = false;
     });
@@ -58,7 +55,10 @@ export const MsisdnInputBase = class extends dataSourceMixin(SerializableElement
     super.init(pElement, loader);
     this.required = this.e.required || pElement.min && pElement.min > 0;
     this.params = this.pl.paramsCopy();
-    this.dataName = pElement.defaultValue;
+    this.dataName = pElement.defaultValue; // Return all country codes
+    // DSC defaults to paginating at 50
+
+    this.limit = 500;
     this.loader = this.loadData();
   }
 

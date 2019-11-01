@@ -1,113 +1,246 @@
 import { html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { DropdownSelectBase } from "../../../../elements/base/dropdown-select.js";
 import "../../../../../node_modules/slim-select/dist/slimselect.min.js";
+import { RENDER_M_DEFAULT, RENDER_M_SIDE_BY_SIDE } from "../../../../components/e-list.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class DropdownSelect extends DropdownSelectBase {
   renderDefault() {
-    return html`
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet"/>
+    if (this.renderMode === RENDER_M_SIDE_BY_SIDE) {
+      return html`
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet"/>
+        <style>
+          /*Dropdown select*/
+          .dropdown-item-select{
+            position: relative;
+          -moz-user-select: none; 
+          -webkit-user-select: none; 
+          -ms-user-select:none; 
+          user-select:none;
+          -o-user-select:none;
+          }
+        .dropdown-item-select .dropdown-item-header{
+          background: #fff;
+          padding: 10px 20px 10px 10px;
+          display:inline-block;
+          position: relative;
+          cursor: pointer;
+          /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
+          -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
+          box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);*/
+        }
+        .arrow{
+          position: relative;
+        }
+        .arrow::after{
+          content: '';
+          width: 8px;
+          height: 8px;
+          border-left: 2px solid #4a4a4a;
+          border-bottom: 2px solid #4a4a4a;
+          border-right: 2px solid transparent;
+          border-top: 2px solid transparent;
+          position: absolute;
+          transform: rotate(-43deg);
+          top: -17px;
+          right: -15px;
+        }
+        .dropdown-item-select .dropdown-item-header p{
+          font-size: 14px;
+          font-weight: 500;
+          color: #013243;
+        }
+        .dropdown-item-body{
+          background: #fff;
+          display: none;
+          width:auto;
+          position:absolute;
+          padding: 10px 20px 10px 10px;
+          z-index: 5000;
+        }
+        .dropdown-item-body ul li{
+          
+          border-bottom: 1px solid #f5f5f5;
+          padding: 10px 20px;
+          font-weight: lighter;
+          font-size: 14px;
+        }
+        .dropdown-item-body ul li:hover{
+          background-color: #f1f1f1;
 
-<style>
-  /*Dropdown select*/
-  .dropdown-item-select{
-    position: relative;
-   -moz-user-select: none; 
-   -webkit-user-select: none; 
-   -ms-user-select:none; 
-   user-select:none;
-   -o-user-select:none;"
-  }
-.dropdown-item-select .dropdown-item-header{
-  background: #fff;
-  padding: 10px 20px 10px 10px;
-  display:inline-block;
-  position: relative;
-  cursor: pointer;
-  /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);*/
-}
-.arrow{
-  position: relative;
-}
-.arrow::after{
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-left: 2px solid #4a4a4a;
-  border-bottom: 2px solid #4a4a4a;
-  border-right: 2px solid transparent;
-  border-top: 2px solid transparent;
-  position: absolute;
-  transform: rotate(-43deg);
-  top: -17px;
-  right: -15px;
-}
-.dropdown-item-select .dropdown-item-header p{
-  font-size: 14px;
-  font-weight: 500;
-  color: #013243;
-}
-.dropdown-item-body{
-  background: #fff;
-  display: none;
-  width:auto;
-  position:absolute;
-  padding: 10px 20px 10px 10px;
-  z-index: 5000;
-}
-.dropdown-item-body ul li{
-  
-  border-bottom: 1px solid #f5f5f5;
-  padding: 10px 20px;
-  font-weight: lighter;
-  font-size: 14px;
-}
-.dropdown-item-body ul li:hover{
-  background-color: #f1f1f1;
+        }
+        .is-active{
+          background-color: #f1f1f1;
+        }
+        .active-list{
+          background-color: red;
 
-}
-.is-active{
-  background-color: #f1f1f1;
-}
-.active-list{
-  background-color: red;
+        }
+        .is-hidden{
+          display: none;
+        }
+        .is-visible{
+          display:block;
+        }
+        .custom-width{
+          width: 342px;
+        }
+          div.select-item label{
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.17;
+            letter-spacing: normal;
+            color: #202124;
+          }
+          /* div.select select{
+            width: 317px;
+            font-size: 14px;
+            height: 40px;
+            padding: 0 13.9px;
+            display: inline-block;
+            color: #202124;
+            line-height: 1;
+            background-color: #f6f6f6;
+            border: 1px solid #ededed;
+          } */
+        </style>
+        <div class="columns select-item">
+          <div class="column is-one-quarter" style="display: flex; align-items: center;">
+            <label class="label is-uppercase">Select role</label>
+          </div>
+          <div class="column">
+          <div class="dropdown-item-select">
+              <div class="dropdown-item-header" @click='${() => this.dropdown('head')}'>
+                  <p>${this.e.name}</p>
+                  <div id='select-div' class="select is-hidden">
+                      <select id="select">
+                        <option data-placeholder="true" value="" disabled hidden ?selected="${!this.e.kind}">${this.e.name}</option>
+                        ${this._computeItems(this.rows, this.q).map(data => html`
+                        <option id="option-${data[0]}" class="" value="${data[0]}" ?selected="${this.e.kind === data[0]}"  @click='${() => this.dropdown(this._dataJoined(data), data[0])}'>${this._dataJoined(data)}</option>
+                            `)} 
+                      </select>
+              </div>
+              <div id='arrow' class="arrow"></div>
+              </div>
+              <div id="dropdown-item-body" class="dropdown-item-body">
+                  <ul>
+                  ${this._computeItems(this.rows, this.q).map(data => html`
+                  <li id="list-${data[0]}"  value="${data[0]}" ?selected="${this.e.kind === data[0]}"  @click='${() => this.dropdown(this._dataJoined(data), data[0])}'>${this._dataJoined(data)}</li>
+              `)} 
+                  </ul>
+              </div>
+          </div>
 
-}
-.is-hidden{
-  display: none;
-}
-.is-visible{
-  display:block;
-}
-.custom-width{
-  width: 342px;
-}
+          </div>
+        </div>
+      `;
+    } else {
+      return html`
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet"/>
+      <style>
+        /*Dropdown select*/
+        .dropdown-item-select{
+          position: relative;
+        -moz-user-select: none; 
+        -webkit-user-select: none; 
+        -ms-user-select:none; 
+        user-select:none;
+        -o-user-select:none;
+        }
+      .dropdown-item-select .dropdown-item-header{
+        background: #fff;
+        padding: 10px 20px 10px 10px;
+        display:inline-block;
+        position: relative;
+        cursor: pointer;
+        /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);*/
+      }
+      .arrow{
+        position: relative;
+      }
+      .arrow::after{
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-left: 2px solid #4a4a4a;
+        border-bottom: 2px solid #4a4a4a;
+        border-right: 2px solid transparent;
+        border-top: 2px solid transparent;
+        position: absolute;
+        transform: rotate(-43deg);
+        top: -17px;
+        right: -15px;
+      }
+      .dropdown-item-select .dropdown-item-header p{
+        font-size: 14px;
+        font-weight: 500;
+        color: #013243;
+      }
+      .dropdown-item-body{
+        background: #fff;
+        display: none;
+        width:auto;
+        position:absolute;
+        padding: 10px 20px 10px 10px;
+        z-index: 5000;
+      }
+      .dropdown-item-body ul li{
+        
+        border-bottom: 1px solid #f5f5f5;
+        padding: 10px 20px;
+        font-weight: lighter;
+        font-size: 14px;
+      }
+      .dropdown-item-body ul li:hover{
+        background-color: #f1f1f1;
 
-</style>
-<div class="dropdown-item-select">
-    <div class="dropdown-item-header" @click='${() => this.dropdown('head')}'>
-        <p>${this.e.name}</p>
-        <div id='select-div' class="select is-hidden">
-            <select id="select">
-              <option data-placeholder="true" value="" disabled hidden ?selected="${!this.e.kind}">${this.e.name}</option>
+      }
+      .is-active{
+        background-color: #f1f1f1;
+      }
+      .active-list{
+        background-color: red;
+
+      }
+      .is-hidden{
+        display: none;
+      }
+      .is-visible{
+        display:block;
+      }
+      .custom-width{
+        width: 342px;
+      }
+
+      </style>
+      <div class="dropdown-item-select">
+          <div class="dropdown-item-header" @click='${() => this.dropdown('head')}'>
+              <p>${this.e.name}</p>
+              <div id='select-div' class="select is-hidden">
+                  <select id="select">
+                    <option data-placeholder="true" value="" disabled hidden ?selected="${!this.e.kind}">${this.e.name}</option>
+                    ${this._computeItems(this.rows, this.q).map(data => html`
+                    <option id="option-${data[0]}" class="" value="${data[0]}" ?selected="${this.e.kind === data[0]}"  @click='${() => this.dropdown(this._dataJoined(data), data[0])}'>${this._dataJoined(data)}</option>
+                        `)} 
+                  </select>
+          </div>
+          <div id='arrow' class="arrow"></div>
+          </div>
+          <div id="dropdown-item-body" class="dropdown-item-body">
+              <ul>
               ${this._computeItems(this.rows, this.q).map(data => html`
-              <option id="option-${data[0]}" class="" value="${data[0]}" ?selected="${this.e.kind === data[0]}"  @click='${() => this.dropdown(this._dataJoined(data), data[0])}'>${this._dataJoined(data)}</option>
-                   `)} 
-            </select>
-    </div>
-    <div id='arrow' class="arrow"></div>
-    </div>
-    <div id="dropdown-item-body" class="dropdown-item-body">
-        <ul>
-        ${this._computeItems(this.rows, this.q).map(data => html`
-        <li id="list-${data[0]}"  value="${data[0]}" ?selected="${this.e.kind === data[0]}"  @click='${() => this.dropdown(this._dataJoined(data), data[0])}'>${this._dataJoined(data)}</li>
-    `)} 
-        </ul>
-    </div>
-</div>`;
+              <li id="list-${data[0]}"  value="${data[0]}" ?selected="${this.e.kind === data[0]}"  @click='${() => this.dropdown(this._dataJoined(data), data[0])}'>${this._dataJoined(data)}</li>
+          `)} 
+              </ul>
+          </div>
+      </div>`;
+    }
   }
 
   static get properties() {

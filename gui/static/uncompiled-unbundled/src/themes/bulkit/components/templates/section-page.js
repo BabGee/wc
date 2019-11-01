@@ -13,6 +13,7 @@ import { SectionPageBase } from "../../../../components/templates/section-page.j
 
 class SectionPage extends SectionPageBase {
   render() {
+    // TODO render 404
     return html`
      <style>
      .flex-card {

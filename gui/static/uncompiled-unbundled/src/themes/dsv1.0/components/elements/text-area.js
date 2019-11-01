@@ -60,7 +60,7 @@ class TextArea extends TextAreaBase {
 <div class="text-area">
   <div class="field">
       <div class="control">
-          <textarea class="textarea" placeholder=${this.e.name}>${this.value}</textarea>
+          <textarea id="input" class="textarea" placeholder=${this.e.name}>${this.value}</textarea>
       </div>
   </div>
 </div>

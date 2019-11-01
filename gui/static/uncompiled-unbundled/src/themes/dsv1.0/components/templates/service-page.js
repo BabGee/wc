@@ -24,871 +24,450 @@ class ServicePage extends ServicePageBase {
   render() {
     if (!this.interface) {
       return html`<div>Cannot render an UNDEFINED tab!!.</div>`;
+    } else if (!this.pageGroup || !this.page) {
+      return html`
+      <h3> this is a missing page </h3>
+      <a href="/#/0/0/">Go Home</a>
+      `;
     }
 
     return html`
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-            <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-            <style>
-html{
-
-  overflow-y: auto;
-  /* width: 50px; */
-  /* color: red; */
-  overflow-x: hidden;
-}
-
-            .center{
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            }
-            .sub-items{
-              display:none;
-              background: #ebebed;  
-            }
-
-                     
-            .service-header{
-              padding: 29px 2px;
-              display:flex;
-              align-items:center;
-              height:64px;
-            }
-            .nav-items{
-              margin-top: 20px;
-              
-
-            }
-            .menu-item{
-              
-              color: white; 
-              font-weight: normal; 
-              font-family: lato; font-size: 14px;
-              position: relative; 
-            }
-
-            #pagegroup-anchor:hover,
-            #pagegroup-anchor:active {
-
-              color: #575bde; 
-            
-              margin-left: -10px;
-             
-              } 
-
-            #pagegroup-anchor {
-
-              color: white; 
-
-              margin-left: -10px;
-
-              } 
-
-              
-
-
-          
-
-
-                        #main-menu-item{
-                          width: 198px;
-                          z-index: 1; 
-                          position: relative; 
-                          /* background-color: var(--app-default-color); */
-                          margin-left: 30px; 
-                          margin-top: 5px; 
-                          font-size: 14px; 
-                          padding: 11px 3px 11px 35px;
-                        }
-
-                .selected {
-
-                  background-color: #ebebed; 
-                  color: #575bde;
-                  z-index: 1; 
-                  position: relative; 
-                  
-                  margin-left: 30px; 
-                  margin-top: 5px; 
-                  font-size: 14px; 
-                  padding-left: 22px; 
-                  padding-top: 7px; 
-                  padding-bottom: 7px;
-                }
-                .selected>#pagegroup-anchor{color:#575bde;}
-                .selected>#arrow-menu{ color: white !important;}
-
-                
-         
-                .menu-caret-left{
-
-                  margin-left: 20px;
-                  position: absolute; 
-                  top: 8px;
-                  }
-
-                  .selected.active.menu-caret-left-icon{
-                   visibility: hidden;
-                    
-                    color: ##EBEBED !important;
-                    }
-
-
-                  #pagegroup-icon{
-                    
-                    color: #ffffff;
-
-                      }
-
-
-            .item{
-              padding: 6px 2px;
-            }
-            .item:hover{
-              /* background: #ebebed; */
-              background-color: #ebebed;;
-
-            }
-
-           
-
-            .item:active{
-              background-color: #ebebed;
-              color: white;
-            }
-
-           
-            .item, a:active {
-              background-color: #ebebed;
-              Color: white;
-            }
-
-            .sub-items-anchor, a {
-
-              margin-top: 20px; 
-              /* color: #575bde; 
-              background-color: #ebebed; */
-
-            }
-
-            .sub-items-anchor:active {
-
-              /* background-color: var(--app-default-color);
-              color: white; */
-              margin-top: 20px; 
-              color: white ; 
-              background-color: #ebebed;
-              
-            }         
-
-            .selected-items>a, selected-items:hover{
-               background-color: var(--app-default-color);
-              color: white;
-              padding: 5px 15px 5px 5px;
-            }
-
-
-            #side {
-
-              width: 240px; 
-              height: 103vh; 
-              position: fixed;
-              z-index: 1000;
-              background-color: var(--app-default-color);
-              margin-right: -12px;
-            }
-
-           
-
-
-
-            #top-nav {
-
-              width: 1200px; 
-              /* height: 100vh;  */
-              background-color: #ececee;
-              /* width: 100%; */
-            }
-
-            
-
-           
-
-            /* For ipad from: 0px to 768*/
-
-            @media only screen and (max-width: 768px ) {
-              .mobile-menu{
-                position: absolute!important;
-                top: 43px!important;
-                left: 703px!important;
-                display: block!important;
-                cursor: pointer;
-                                }
-              .main-content{
-                width: 100%!important;
-                margin-left: 0!important;
-                position: relative;
-                top: 146px;
-              }
-
-          div#side {
-
-            width: 795px; 
-            height: auto;  
-            
-             
-            margin-right: -12px;
-              
-
-                }
-
-                div#main-menu-item {
-
-                      margin-left: 2px;
-                      width: 100%;
-                }
-
-                div#top-nav {
-
-                  width: 795px; 
-                  height: auto; 
-                  background-color: #ececee;
-                }
-
-              
-
-
-                    }
-           
-/* tablets and small laptops  */
-
-            @media only screen and (max-width: 751px ) {
-              .mobile-menu{
-                position: absolute!important;
-                top: 43px!important;
-                left: 408px!important;
-                display: block!important;
-                cursor: pointer;
-                                }
-                div#side {
-
-                  width: 766px; 
-                  height: auto;  
-                  
-                  
-                  margin-right: -12px;
-                    
-
-                      }
-
-                div#main-menu-item {
-                      display: none;
-                      margin-left: 2px;
-                      width: 100%;
-                }
-
-                div#top-nav {
-
-                  width: 766px; 
-                  height: auto; 
-                  background-color: #ececee;
-                }
-
-                
-
-
-                    }
-
-                    /* small phones to small tablets: from 0px to 386px*/
-              @media only screen and (max-width: 360px ) {
-                .mobile-menu{
-                position: absolute!important;
-                top: 43px!important;
-                left: 438px!important;
-                display: block!important;
-                cursor: pointer;
-                                }
-
-                div#side {
-
-                        width: 386px; 
-                        height: auto;  
-                        
-                        
-                        margin-right: -12px;
-                          
-
-                            }
-
-                  div#main-menu-item {
-
-                        margin-left: 2px;
-                        }
-
-                  div#top-nav {
-
-                        width: 386px; 
-                        height: auto; 
-                        background-color: #ececee;
-                        }
-
-                 
-
-                      }
-
-
-                        /* small phones to small tablets: from 0px to 411px*/
-                @media only screen and (max-width: 411px ) {
-                  .mobile-menu{
-                position: absolute!important;
-                top: 43px!important;
-                left: 438px!important;
-                display: block!important;
-                cursor: pointer;
-                                }
-
-                  div#side {
-
-                        width: 437px; 
-                        height: auto;  
-
-                        
-                        margin-right: -12px;
-                          
-
-                            }
-
-                  div#main-menu-item {
-
-                          margin-left: 2px;
-                          }
-
-                  div#top-nav {
-
-                          width: 437px; 
-                          height: auto; 
-                          background-color: #ececee;
-                          }
-
-                    
-                    
-
-                }
-
-
-/* for small phones: from 0px to 320px  */
-                @media only screen and (max-width: 320px ) {
-                  .mobile-menu{
-                position: absolute!important;
-                top: 43px!important;
-                left: 438px!important;
-                display: block!important;
-                cursor: pointer;
-                                }
-                  .mobile-menu{
-                                  position: absolute;
-                                  top: 0px;
-                                  left: 0;
-                                  display: block;
-                                }
-
-                    div#side {
-
-                          width: 347px; 
-                          height: auto;  
-                          
-                          
-                          margin-right: -12px;
-                            
-
-                              }
-
-                    div#main-menu-item {
-
-                            margin-left: 2px;
-                            }
-
-                    div#top-nav {
-
-                            width: 347px; 
-                            height: auto; 
-                            background-color: #ececee;
-                            }
-
-                    
-
-                                    }
-
-                        /* for small phones: from 0px to 414px  */
-                        @media only screen and (max-width: 414px ) {
-                          .mobile-menu{
-                position: absolute!important;
-                top: 43px!important;
-                left: 360px!important;
-                display: block!important;
-                cursor: pointer;
-                                }
-
-                        div#side {
-
-                              width: 441px; 
-                              height: auto;  
-
-                               
-                              margin-right: -12px;
-                                
-
-                                  }
-
-                        div#main-menu-item {
-
-                                margin-left: 2px;
-                                }
-
-                        div#top-nav {
-
-                                width: 441px; 
-                                height: auto; 
-                                background-color: #ececee;
-                                }
-
-                         
-}
-
-                          /* for small phones from: 0px to 375  */
-
-                          @media only screen and (max-width: 375px ) {
-
-              .mobile-menu{
-                position: absolute!important;
-                top: 43px!important;
-                left: 325px!important;
-                display: block!important;
-                cursor: pointer;
-                                }
-                          div#side {
-
-                                  width: 402px; 
-                                  height: auto;  
-                                  
-                                   
-                                  margin-right: -12px;
-                                    
-
-                                      }
-
-                            div#main-menu-item {
-
-                                  margin-left: 2px;
-                                  }
-
-                          div#top-nav {
-
-                                  width: 402px; 
-                                  height: auto; 
-                                  background-color: #ececee;
-                                  }
-                        
-
-                                }
-                                .profile-modal-select{
-                                  position: relative;
-                                }
-                                .profile-select-content::after{
-                                  content: '';
-                                  position: absolute;
-                                  top: -19px;
-                                  z-index: 1000;
-                                  right: 7px;
-                                  border-top: 10px solid transparent;
-                                  border-bottom: 10px solid #fff;
-                                  border-left: 10px solid transparent;
-                                  border-right: 10px solid transparent;
-                                }
-                                .profile-header{
-                                  cursor: pointer;
-                                }
-                                .profile-modal-select .profile-picture img{
-                                  width: 40px;
-                                  height: 40px;
-                                  border-radius: 50%;
-                                }
-                                .profile-select-content{
-                                  width: 288px;
-                                  background: #fff;
-                                  display: none;
-                                  padding: 20px;
-                                  position: absolute;
-                                  top: 73px;
-                                  z-index: 1000;
-                                  right: 39px;
-                                }
-                                .profile-modal-select .profile-name{
-                                  font-size: 14px;
-                                  font-weight: 500;
-                                  color: #013243;
-                                }
-                                .profile-buttons .main-cta a{
-                                  background-color: #2273f0;
-                                  color: #fff;
-                                  padding: 10px 30px;
-                                  font-size: 12px;
-                                  margin: 20px auto;
-                                }
-                                .profile-buttons .btn a{
-                                  font-size: 11px;
-                                  color: #013243;
-                                  background-color: #c2c3c3;
-                                  padding: 5px 20px;
-                                }
-                                .main-content{
-                                  width: calc(100% - 240px);
-                                  /* padding: 20px; */
-                                  background-color: #fff;
-                                  margin-left: 240px;
-                                }
-                                .main-content .top-nav-menu{
-                                  background-color: #f6f6f9;
-                                  display: flex;
-                                  align-items: center;
-                                  height: 64px;
-                                  margin-top: 12px;
-                                  padding: 0 50px;
-                                  justify-content: flex-end;
-                                }
-                                .main-content .top-nav-menu .icons .icon{
-                                  padding: 0 30px 0 0;
-                                  position: relative;
-                                  left: 4px;
-                                  top: 7px;
-                                }
-                                .main-content .top-nav-menu .icons .icon:last-child{
-                                  padding: 0;
-                                }
-                                .profiles{
-                                  cursor: pointer;
-                                }
-                                .profies .profile-image img{
-                                  width: 40px;
-                                  height: 40px;
-                                  border-radius: 50%;
-                                }
-                                .profiles .profile-name p{
-                                  font-size: 12px;
-                                  font-weight: bold;
-                                  font-style: normal;
-                                  font-stretch: normal;
-                                  line-height: 1.33;
-                                  letter-spacing: normal;
-                                  color: #575bde;
-                                }
-                                .content-area{
-                                  background-color: #ececee;
-                                  padding: 10px;
-                                }
-                                .mobile-menu{
-                                  position: absolute;
-                                  top: 0px;
-                                  left: 0;
-                                  display: none;
-                                }
-
-                                
-
-                                /* FORM STYLING  */
-
-                                .form-styles{
-
-                          margin-top: 40px;
-                          margin-left: 50px;
-                          margin-right: 50px;
-                          
-                          }
-
-/* small phones to ipad pro: from 0px to 1024px */
-@media only screen and (max-width: 1024px ) {
- 
- .form-styles{
-
-     margin-top: 40px;
-     margin-left: 20px;
-     margin-right: 20px;
-     width: 745px;
-     }
-}
-
-
-/* small phones to ipad: from 0px to 768px */
-@media only screen and (max-width: 768px ) {
- 
- .form-styles{
-
-     margin-top: 40px;
-     margin-left: 20px;
-     margin-right: 20px;
-     width: 725px;
-     }
-}
-
-
-/* : from 0px to 751px */
-@media only screen and (max-width: 751px ) {
- 
- .form-styles{
-
-     margin-top: 20px;
-     margin-left: 20px;
-     margin-right: 20px;
-     width: 710px;
-     }
-}
-
-
-/* small phones to iphone 6/7/8 PLUS: from 0px to 414PX */
-@media only screen and (max-width: 414px ) {
- 
- .form-styles{
-
-     margin-top: 20px;
-     margin-left: 20px;
-     margin-right: 20px;
-     width: 370px;
-     }
-}
-
-/* small phones to Pixel 2 and pixel 2XL: from 0px to 411px*/
-@media only screen and (max-width: 411px ) {
- 
- .form-styles{
-
-     margin-top: 20px;
-     margin-left: 20px;
-     margin-right: 20px;
-     width: 370px;
-     }
-}
-
-/* small phones to iphone 6/7/8: from 0px to 375px*/
-@media only screen and (max-width: 375px ) {
- 
- .form-styles{
-
-     margin-top: 20px;
-     margin-left: 20px;
-     margin-right: 20px;
-     width: 330px;
-     }
-}
-
-
-/* small phones to iphone X: from 0px to 375px */
-@media only screen and (max-width: 375px ) {
- 
- .form-styles{
-
-     margin-top: 20px;
-     margin-left: 20px;
-     margin-right: 20px;
-     width: 330px;
-     }
-}
-
-
-    /* small phones to small Galaxy s5: from 0px to 360px*/
-
-@media only screen and (max-width: 360px ) {
- 
-  .form-styles{
-
-      margin-top: 20px;
-      margin-left: 20px;
-      margin-right: 20px;
-      width: 320px;
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+      <style>
+      header.header{
+          height: 64px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
       }
-}
+      div.modal-container{
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, .4);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+      }
+      div.modal-container div.modal-base {
+        opacity: 1;
+        width: 688px;
+        border-radius: 5px;
+        background-color: #ececee;
+        margin: 0 auto;
+        padding: 0 25px;
+        position: relative;
+      }
+      div.modal-container div.modal-base .modal-header{
+        padding: 25px 0 16px 0;
+        border-bottom: solid 1px rgba(71, 71, 71, 0.2);
+      }
+      div.modal-container div.modal-base .modal-header h1 {
+        font-size: 24px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #1f2552;
+      }
+      div.modal-container div.modal-base .modal-body{
+        padding: 90px calc(68px - 25px) 68px calc(68px - 25px);
+      }
+      div.modal-container div.modal-base .modal-body label{
+        font-size: 12px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.17;
+        letter-spacing: normal;
+        color: #202124;
+      }
+      div.modal-container div.modal-base .modal-body select{
+        width: 317px;
+        font-size: 14px;
+        height: 40px;
+        padding: 0 13.9px;
+        display: inline-block;
+        color: #202124;
+        line-height: 1;
+        background-color: #f6f6f6;
+        border: 1px solid #ededed;
+      }
+      div.modal-container div.modal-base .modal-body input{
+        width: 100%;
+        height: 40px;
+        border-radius: 6px;
+        border: solid 1px #ededed;
+        background-color: #f6f6f6;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1;
+        color: #202124;
+        padding: 16px 13.5px;
+      }
+      div.modal-container div.modal-base .modal-cta{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+      div.modal-container div.modal-base .modal-cta button{
+        width: 211px;
+        height: 49px;
+        border-radius: 4px;
+        background-color: #157cf8;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+      }
+
+      aside.aside div.aside-menu ul li a:hover, 
+      aside.aside div.aside-menu ul li a.active, 
+      aside.aside div.aside-menu ul li a.selected{
+          background-color: #ececee;
+          border-radius: 0;
+          color: var(--app-default-color);;
+          opacity: 1;
+      }
+      aside.aside div.aside-menu ul li a:hover aside.aside div.aside-menu ul li a p .icon{
+          color: #ccced0;
+      }
+      aside.aside div.aside-menu ul{
+          border-left: transparent solid 1px;
+          margin: 0;
+      }
+      aside.aside{
+          background-color: var(--app-default-color);
+          height: 100vh;
+          position:fixed;
+          top:0px;
+          bottom:0px;
+          left:0px;  
+          overflow-y: auto; 
+          overflow-x: hidden; 
+          width:21%; 
+      }
+      aside.aside .aside-header,
+      aside.aside div.aside-menu{
+          margin-left: 18px;
+      }
+      aside.aside .aside-header #mobile-menu{
+          display: none;
+      }
+      aside.aside div.aside-menu ul li a{
+          font-size: 14px;
+          padding-top: 5px;
+          padding-bottom: 10px;
+          color: #fff;
+          opacity: .9;
+      }
+      aside.aside div.aside-menu ul li a p .icon{
+          position: relative;
+          right: 0;
+          top: 5px;
+      }
+
+      aside.aside div.aside-menu ul li .sub-menu{
+          width: 100%;
+          background-color: #ececee;
+          display: none;
+      }
+      aside.aside div.aside-menu ul li .sub-menu ul li a.nav-item{
+          padding-top: 9px;
+          padding-bottom: 9px;
+          color: var(--app-default-color);;
+          margin-left: 16px;
+      }
+      aside.aside div.aside-menu ul li .sub-menu ul li a.nav-item:hover{
+          color: #4a4a4a;
+      }
+      main.main-section{
+          background-color: #ececee;
+          width: 79%;
+          margin-left: 20.55%;
+          /* height: 100vh; */
+      }
+      main.main-section .main-header{
+          background-color: #f6f6f9;
+          margin-top: 13px;
+          margin-bottom: 40px;
+
+          display: flex;
+          justify-content: flex-end;
+      }
 
 
+      main.main-section .main-header .profile-header-container{
+          width: 279px;
+      }
+      main.main-section .main-header .profile-header-container .icons{
+          width: 30px;
+      }
+      main.main-section .main-header .profile-header-container .icon{
+          color: #ccced0;
+      }
+      main.main-section .main-header .profile-header-container .profile .profile-image img{
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 3px solid var(--app-default-color);
+      }
+      main.main-section .main-header .profile-header-container .profile .profile-name{
+          font-size: 12px;
+          line-height: 1.33;
+          font-weight: bold;
+          margin-left: 5.4px;
+          position: relative;
+          top: 6px;
+      }
+      main.main-section .main-content{
+          position: relative;
+          margin: 95px 50px;
+      }
+      .profile-modal-select{
+        position: relative;
+      }
+      .profile-select-content::after{
+        content: '';
+        position: absolute;
+        top: -19px;
+        z-index: 1000;
+        right: 7px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid #fff;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+      }
+      .profile-header{
+        cursor: pointer;
+      }
+      .profile-modal-select .profile-picture img{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+      .profile-select-content{
+        width: 288px;
+        background: #fff;
+        display: none;
+        padding: 20px;
+        position: absolute;
+        top: 73px;
+        z-index: 1000;
+        right: 39px;
+      }
+      .profile-modal-select .profile-name{
+        font-size: 14px;
+        font-weight: 500;
+        color: #013243;
+      }
+      .profile-buttons .main-cta a{
+        background-color: #2273f0;
+        color: #fff;
+        padding: 10px 30px;
+        font-size: 12px;
+        margin: 20px auto;
+      }
+      .profile-buttons .btn a{
+        font-size: 11px;
+        color: #013243;
+        background-color: #c2c3c3;
+        padding: 5px 20px;
+      }
 
-
-
-
-
-/* small phones to iphone5/SE: from 0px to 320px*/
-@media only screen and (max-width: 320px ) {
- 
- .form-styles{
-
-     margin-top: 20px;
-     margin-left: 20px;
-     margin-right: 20px;
-     width: 280px;
-     }
-}
-
-.profile-image img{
-  width: 30px;
-}
-            </style>
-
-
- <div class="main">
-
-    
-<section class="section is-paddingless ">
-   
-        <div class="columns " >
-               
-            <div id = "side" class="column is-three-fifths " style="overflow: auto;">
-              
-              <div class="service-header is-flex">
-                <figure class="image is-rounded" 
-                      style="margin-left: 12px;">
-                        <img src="${this._computeLogo(this.gateway)}"> 
-                </figure>
-              </div>   
-
-                    ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
-
-
-
-                      <div id="main-menu-item" class="${pageGroupIndex == this._pageGroup ? 'selected  active' : ''}" style="overflow: auto;">
-
-                      <a id = "pagegroup-anchor" href=""
-                            class=" is-capitalized  main-menu-p " 
-                            style="cursor: pointer; color:${this.mainColor};" 
-                            @click = ${this.handleClick}>
-
-                          <span id="pagegroup-icon" class="icon has-text-white" style="margin-left: -20px;  position: absolute; top: 5px;">
-
-                            <fa-icon class="fas fa-th-large" color = "#fff" style=" height: 20px; width: 16px; position: relative; top: 2.5px;"></fa-icon>
-
-                          </span>
-
-                          &nbsp;${pageGroup.title}&nbsp;
-
-                          <span id="pagegroup-icon" class="icon has-text-white menu-caret-left" >
-
-                            <fa-icon class="fas fa-caret-left menu-caret-left-icon" color="#EBEBED" style=" height: 16px; width: 16px; position: relative; top: 1px;"></fa-icon>
-
-                          </span>
-
-                        </a>
-
-                        <div id="sub-items-${pageGroupIndex}" class="sub-items" style="margin-top: 20px; ">
-
-                            ${pageGroup.pages.map((menu, menuIndex) => html`
-
-                            <div id="item-${menuIndex}" class="item ${pageGroupIndex == this._pageGroup && menuIndex == this._page ? 'selected-items' : ''}">
-                            <a id="sub-items-anchor-"  class="sub-items-anchor " 
-                                href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/"> ${ServicePage.toTitleCase(menu.title)} </a> 
-                            <br>
-                            </div>
-                            
-                            
-
-                            `)}
-
-                          </div>
-                          
-                      </div>
-
-                      
-                    `)}
-
-                    <div class="mobile-menu" @click="${this.menuClick}">
-                      <span><fa-icon class="fas fa-bars" color = "#ccced0" style="height: 16px; width: 19.5px;"></fa-icon></span>
-                    </div>
-            </div>
-
-            <div class="main-content">
-              <div class="top-nav-menu">
-                <div class="profile-content is-pulled-right" style="width: 180px;">
-                  <div class="columns is-mobile">
-                     <div class="column is-one-third">
-                       <div class="icons is-flex">
-                         <div class="icon icon-left">
-                           <span><fa-icon class="fab fa-elementor" color = "#ccced0" style="height: 16px; width: 19.5px;"></fa-icon></span>
-                         </div>
-                         <div class="icon icon-left">
-                           <span><fa-icon class="fas fa-bell" color = "#ccced0" style="height: 16px; width: 19.5px;"></fa-icon></span>
-                         </div>
-                       </div>
-                     </div>
-                     <div class="column is-two-thirds">
-                     ${this.gateway.profile ? html`
-                      <div class="service-profile"> 
-                        <div class="profiles is-flex" @click="${this.toggleProfile}">
-                          <div class="profile-image profile">
-                            <img src="${this.gateway.profile.photo ? '/media/' + this.gateway.profile.photo : 'images/web/user.svg'}" alt="profile image">
-                          </div>
-                          <div class="profile-name profile">
-                              <p style="position: relative; top: 8px; left: 14px;">${this.gateway.profile.firstName} ${this.gateway.profile.lastName}</p>   
-                          </div>
-                        </div>
-
-                        <div class="profile-select-content" id="profile-content">
-                            <div class="profile-content is-flex">
-                                <div class="profile-picture cta" style="margin-right: 15px">
-                                <img src="${this.gateway.profile.photo ? '/media/' + this.gateway.profile.photo : 'images/web/user.svg'}" alt="profile image">
-                                </div>
-                                <div class="prifile-info">
-                                    <p class="profile-name">${this.gateway.profile.firstName}&nbsp;${this.gateway.profile.lastName}</p>
-                                    <p class="profile-email is-size-7">${this.gateway.profile.username}</p>
-                                </div>
-                            </div>
-                            <div class="profile-buttons">
-                                <div class="main-cta center">
-                                    <a href="/logout" class="button is-rounded is-uppercase">Logout</a>
-                                </div>
-                            </div>
-                        </div>
-                      </div>
-                     
-                     ` : html``}
-                     </div>
-                  </div>
-                </div>
+      @media screen and (max-width: 768px){
+          div.main-wrapper{
+              width: 100%;
+          }
+          main.main-section,
+          aside.aside{
+              width: 100%;
+              height: auto;
+              display: block;
+              position: relative;
+              margin: 0;
+          }
+          aside.aside .aside-header{
+              margin: 11px 20px 0 20px;
+          }
+          aside.aside .aside-header, 
+          main.main-section .main-header{
+              z-index: 100;
+          }
+          aside.aside div.aside-menu{
+              display: none;
+          }
+          aside.aside .aside-header .mobile-menu{
+              display: block;
+          }
+          aside.aside .aside-header #mobile-menu{
+              display: flex;
+              justify-content: flex-end;
+              cursor: pointer;
+              position: relative;
+              right: 5%;
+          }
+          aside.aside .aside-header #mobile-menu .icon{
+              color: #fff;
+          }
+          main.main-section .main-header, aside.aside div.aside-menu{
+              margin: 0;
+          }
+          aside.aside div.aside-menu ul li a {
+              padding-left: 20px;
+          }
+          main.main-section .main-content{
+              margin: 0 15px;
+              padding-top: 80px;
+              z-index: 1;
+          }
+      }
+      /* @media screen and (max-width: 1024px){
+          main.main-section{
+              margin-left: 187px;
+          }
+      } */
+      </style>
+      <div class="main-wrapper">
+        
+        ${this.view === VIEW_MODE_DIALOG ? html`
+        <div class="modal-container">
+          <div class="modal-base">
+            <div class="modal-header">
+              <div class="heading">
+                <h1 class="title">${this.page.title}</h1>
               </div>
+            </div>
+            <div class="modal-body">
+            <button @click=${this._viewList}>Back</button>
+            
+            <section-page id="dialog" queue=${this.dialogServicesQueue}></section-page>
+            </div>
+          </div>
+        </div>
+        ` : html`
+        
+        `}
+        
+        <div class="columns">
+            <aside class="column aside is-paddingless">
+                <header class="header aside-header">
+                    <a href="">
+                        <figure class="image is-32x32">
+                            <img src="${this._computeLogo(this.gateway)}">
+                        </figure>
+                    </a>
 
-              <div class="content-area">
-                <div id="form-x" class="columns is-multiline form-styles" >
+                    <a href="" id="mobile-menu" class="is-pulled-right">
+                        <span class="icon is-pulled-right">
+                          <fa-icon class="fas fa-bars" color="#fff"></fa-icon>
+                        </span>
+                    </a>
+                </header>
+                <div class="aside-menu">
+                    <nav class="menu">
+                        <ul class="menu-list">
+                          ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+                          <li>
+                                <a class="nav-active ${pageGroupIndex == this._pageGroup ? 'selected  active' : ''}" @click='${this.handleClick}'>
+                                    <p>
+                                        <span class="icon">
+                                          <fa-icon class="fas fa-th-large" color="#fff"></fa-icon>
+                                        </span>
+                                        ${ServicePage.toTitleCase(pageGroup.title)}&nbsp;
+                                        <span class="icon is-pulled-right">
+                                          <fa-icon class="fas fa-caret-down" color="#fff"></fa-icon>
+                                        </span>
+                                    </p>
+                                </a>
+
+                                <div class="sub-menu" id="sub-items-${pageGroupIndex}">
+                                    <ul>
+                                      ${pageGroup.pages.map((menu, menuIndex) => html`
+                                      <li><a class="nav-item" href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/">${ServicePage.toTitleCase(menu.title)}</a></li>
+                                      `)}
+                                    </ul>
+                                </div>
+                            </li>
+                          `)}
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+          
+            <main class="main-section column is-paddingless">
+                <header class="header main-header  is-pulled-right">
+                    <div class="columns is-mobile profile-header-container">
+                        <div class="column is-2">
+                            <a href="">
+                                <span class="icon" style="margin: 4px 0 0 0;">
+                                  <fa-icon class="fab fa-elementor" color="#ccced0"></fa-icon>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="column is-2">
+                            <a href="">
+                                <span class="icon" style="margin: 4px 0 0 0;">
+                                  <fa-icon class="fas fa-bell" color="#ccced0"></fa-icon>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="column profile">
+                            <div class="profile-info">
+                              ${this.gateway.profile ? html`
+                              <a href="" class="is-flex"  @click="${this.toggleProfile}">
+                                    <div class="profile-image">
+                                        <figure class="image">
+                                            <img src="${this.gateway.profile.photo ? '/media/' + this.gateway.profile.photo : 'images/web/user.svg'}" alt="profile-image">
+                                        </figure>
+                                    </div>
+                                    <div class="profile-name">
+                                        <p>
+                                        ${this.gateway.profile.firstName} ${this.gateway.profile.lastName}
+                                            <span class="icon is-pulled-right">
+                                              <fa-icon class="fas fa-caret-down" color="#fff"></fa-icon>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </a>  
+                                <div class="profile-select-content" id="profile-content">
+                                      <div class="profile-content is-flex">
+                                          <div class="profile-picture cta" style="margin-right: 15px">
+                                          <img src="${this.gateway.profile.photo ? '/media/' + this.gateway.profile.photo : 'images/web/user.svg'}" $
+                                          </div>
+                                          <div class="prifile-info">
+                                              <p class="profile-name">${this.gateway.profile.firstName}&nbsp;${this.gateway.profile.lastName}</p>
+                                              <p class="profile-email is-size-7">${this.gateway.profile.username}</p>
+                                          </div>
+                                      </div>
+                                      <div class="profile-buttons">
+                                          <div class="main-cta center">
+                                              <a href="/logout" class="button is-rounded is-uppercase">Logout</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>                            
+                              ` : html``}
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="main-content">
                   ${this.page.pageInputGroups.map((feed, feedIndex) => html`        
                     <div class="column is-12" >
                       <form-render .feed="${feed}" .params=${this.parseParams()}></form-render>
                   </div>`)}
-                </div> 
-              </div>
-            </div> 
-                        
-              </section> 
-            </div>
-                
+                </div>
+            </main>
         </div>
-    
-
-
-  </section>
-  </div>                
-  
-  <div class="modal ${this.view === VIEW_MODE_DIALOG ? 'is-active' : ''}">
-
-    <div class="modal-background"></div>
-    <div class="modal-content " 
-         style="background-color: #ececee; font-family: Montserrat; width: 688px;">
-         
-         
-         <section-page id="dialog" queue=${this.dialogServicesQueue}></section-page>
-
     </div>
-
-    <button class="modal-close is-large " aria-label="close" @click="${this._viewList}></button>
-
-</div>
-  
-  
-  
-  
   <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> 
 <span slot="title">${this._snackbarTitle}</span> 
 <span>${this._snackbarMessage}</span>
@@ -911,10 +490,6 @@ html{
       page: Number,
       mainColor: String
     };
-  }
-
-  menuClick() {
-    document.querySelector('#main-menu-item').classList.toggle('is-block');
   }
 
   handleClick(evt) {

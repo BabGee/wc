@@ -5,7 +5,8 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
 import { createStore, compose, applyMiddleware, combineReducers } from "../node_modules/redux/es/redux.js";
 import thunk from "../node_modules/redux-thunk/es/index.js";
 import { lazyReducerEnhancer } from "../node_modules/pwa-helpers/lazy-reducer-enhancer.js";
-import app from './reducers/app.js'; // Sets up a Chrome extension for time travel debugging.
+import app from './reducers/app.js'; // import template from './reducers/template.js';
+// Sets up a Chrome extension for time travel debugging.
 // See https://github.com/zalmoxisus/redux-devtools-extension for more information.
 
 const devCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // Initializes the Redux store with a lazyReducerEnhancer (so that you can
@@ -17,5 +18,6 @@ const devCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // In
 export const store = createStore(state => state, devCompose(lazyReducerEnhancer(combineReducers), applyMiddleware(thunk))); // Initially loaded reducers.
 
 store.addReducers({
-  app
+  app // template,
+
 });

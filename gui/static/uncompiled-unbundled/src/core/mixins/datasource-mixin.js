@@ -79,10 +79,19 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
   dataResponseType() {
     return Symbol.for('LIST');
   }
+  /**
+   * Force a Reload
+   */
+
 
   refresh() {
     this.loadData().then(dsc => {});
-  } // todo move up into http mixin
+  }
+  /**
+   * Trigger Reload by updating params
+   * @param key
+   * @param value
+   */
 
 
   mergeParams(obj1) {
@@ -91,7 +100,12 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
     }
 
     this.loadData().then(dsc => {});
-  } // todo move up into http mixin
+  }
+  /**
+   * Trigger Reload by updating a param
+   * @param key
+   * @param value
+   */
 
 
   updateParams(key, value) {
@@ -108,7 +122,12 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
     if (reload) {
       this.loadData().then(dsc => {});
     }
-  } // todo move up into http mixin
+  }
+  /**
+   * Trigger Reload by removing a param
+   * @param key
+   * @param value
+   */
 
 
   deleteParamKeys(keys, refresh) {
@@ -128,6 +147,10 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
       this.loadData().then(dsc => {});
     }
   }
+  /**
+   * Datasource dataname
+   */
+
 
   dscDataName() {
     throw new DOMException('using "dataSourceMixin" must override "dscDataName"', this);

@@ -213,22 +213,22 @@ class DateElement extends DateElementBase {
         const monthValue = textDate.substring(5, 8);
         const yearValue = textDate.substring(10);
         cell.innerText + '/' + `${month + 1}` + '/' + year;
-        picker = dayValue + '/' + `${this.months.indexOf(monthValue) + 1}` + '/' + yearValue;
+        picker = `${this.months.indexOf(monthValue) + 1}` + '/' + dayValue + '/' + yearValue;
         return picker;
       } else if (textDate.length === 15) {
         const dayValue = textDate.substring(3, 5);
         const monthValue = textDate.substring(6, 9);
         const yearValue = textDate.substring(11);
-        picker = dayValue + '/' + `${this.months.indexOf(monthValue) + 1}` + '/' + yearValue;
+        picker = `${this.months.indexOf(monthValue) + 1}` + '/' + dayValue + '/' + yearValue;
         return picker;
       }
+    } else {
+      return picker;
     }
-
-    return picker;
   }
 
   getValue() {
-    const pickerDate = this.getInput().valueAsDate;
+    const pickerDate = new Date(this.getInput());
 
     if (pickerDate) {
       const outputTokens = this.e.details['output_format'] || this.e.kind;

@@ -60,7 +60,7 @@ class MsisdnInput extends MsisdnInputBase {
                 <input class="input inp"  
                         id="input"
                         name="${this.e.name}" 
-                        type="tel" 
+                        type="number" 
                         placeholder="${this.e.name}" 
                         required="${this.required}" 
                         minlength="${this.e.min}"  

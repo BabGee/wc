@@ -23,8 +23,9 @@ export const fileUploadMixin = BaseClass => class extends httpMixin(BaseClass) {
         reject(new Error('File not supported!'));
       }
 
-      if (file.size > 12000000) {
-        // size is in bytes
+      const maxAllowedFileSize = 12000000; // size in bytes
+
+      if (file.size > maxAllowedFileSize) {
         // todo is this the 2MB? make this an api from a mixin
         reject(new Error('File Size is Above allowed Limit of 2MB!'));
       }

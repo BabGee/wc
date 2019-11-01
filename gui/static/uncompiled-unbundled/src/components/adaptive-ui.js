@@ -177,7 +177,7 @@ class AdaptiveUi extends connect(store)(LitElement) {
 
   stateChanged(state) {
     const self = this;
-    this._payload = state.app.payload; // todo deperecated, still used in section dialog, update to use selector
+    this._payload = state.app.payload; // todo deprecated, still used in section dialog, update to use selector
 
     /*
         // TODO Theme Colors Verifier

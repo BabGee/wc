@@ -7,7 +7,9 @@ import { utilsMixin } from "../../core/mixins/utils-mixin.js"; // This element i
 
 import { store } from '../../store.js'; // These are the actions needed by this element.
 
-import { updatePageGroup, updatePage, updateView } from '../../actions/template.js'; // We are lazy loading its reducer.
+import { // updatePageGroup,
+// updatePage,
+updateView } from '../../actions/template.js'; // We are lazy loading its reducer.
 
 import template from '../../reducers/template.js';
 store.addReducers({

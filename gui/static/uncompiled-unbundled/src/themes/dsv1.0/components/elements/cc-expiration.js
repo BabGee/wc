@@ -21,7 +21,7 @@ class CcExpiration extends CcExpirationBase {
     <div class="column is-paddingless">
       <div class="field">
             <div class="control">
-                <input class="input inp" type="month" placeholder="Primary input">
+                <input id='input' class="input inp" type="month" placeholder="Primary input">
             </div>
         </div>
     </div>

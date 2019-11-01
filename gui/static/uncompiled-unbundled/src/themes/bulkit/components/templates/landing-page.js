@@ -52,6 +52,11 @@ class LandingPage extends LandingPageBase {
         </div>
       </div>
 `;
+    } else if (!this.pageGroup || !this.page) {
+      return html`
+      <h3> this is a missing page </h3>
+      <a href="/#/0/0/">Go Home</a>
+      `;
     }
 
     return html`

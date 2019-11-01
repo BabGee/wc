@@ -158,7 +158,7 @@ class ImageInput extends ImageInputBase {
     <label for="file-upload" id="file-drag">
       <div class="file-header is-flex">
         <p class="header is-pulled-left">Upload ${this.e.name}</p>
-      <div class="header cancel is-pulled-right">x</div>
+      <div class="header cancel is-pulled-right" @click=${this.cancelUpload}>x</div>
       </div>	
       <img id="file-image" src="#" alt="Preview" class="hidden">
       <div id="start">
@@ -172,74 +172,73 @@ class ImageInput extends ImageInputBase {
       <span id="file-upload-btn" class="btn btn-primary"><iron-icon icon="icons:perm-media" style="width: 20px;"></iron-icon> Upload ${this.e.name}</span>
     </label>
   </form>
+  <span id="display"></span>
+  <span id="validation"></span>
 </div>`;
   }
 
   getValue() {
     return this.value;
   }
+  /**
+   * from SerializableElement
+   * @override
+   */
+
 
   valid(validation) {
-    this.shadowRoot.querySelector('.validation-info').style.display = 'none'; // Revert general text content
-
-    this.shadowRoot.querySelector('.validation-info').textContent = 'Required';
+    const validationDisplay = this.shadowRoot.querySelector('#validation');
+    validationDisplay.style.display = 'none';
+    validationDisplay.textContent = 'Required';
   }
+  /**
+   * from SerializableElement
+   * @override
+   */
+
 
   invalid(validation) {
-    this.shadowRoot.querySelector('.validation-info').style.display = 'flex';
+    const validationDisplay = this.shadowRoot.querySelector('#validation');
+    validationDisplay.style.display = 'flex';
 
     if (validation) {
-      this.shadowRoot.querySelector('.validation-info').textContent = validation;
+      validationDisplay.textContent = validation;
     }
   }
+  /**
+   * from ImageInputBase
+   * @override
+   */
 
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties); // TODO this.$.paper_progress.style['display'] = 'none';
 
-    if (this.e.defaultValue) {
-      this.qs('#display').src = '/media/' + this.e.defaultValue;
-    }
+  updatePreview(src) {
+    var display = this.qs('#preview');
+    display.src = src;
+  }
+  /**
+   * Override to display a message to user
+   * @param message
+   */
+
+
+  updateUploadMessage(message) {
+    const display = this.shadowRoot.querySelector('#display');
+    display.textContent = message;
+  }
+  /**
+   * Cancel Last Upload
+   * @param evt
+   */
+
+
+  cancelUpload(evt) {
+    this.resetUpload();
+    this.updateUploadMessage('');
   }
 
   handleFile() {
-    // todo check file input
-    // previewing the image
-    const previewImage = event => {
-      let output = this.qs('#preview');
-      output.src = URL.createObjectURL(event.target.files[0]);
-    };
-
-    var self = this;
-    /* TODO
-        var progress = this.$.paper_progress;
-        progress.value = 0;
-        progress.style['display'] = 'block';
-        */
-
-    var self = this;
-    var display = this.qs('#display');
-    const fileInput = this.qs('#input');
-    var file = fileInput.files[0];
-    var paper_input = fileInput;
-    var imageType = /image.*/;
-
-    if (!file) {
-      // no file selected
-      return;
-    }
-
-    self.uploadTempFile(file, 'image', imageType).then(upload => {
-      paper_input.label = 'Image successfully uploaded. Please Proceed!';
-      paper_input.placeholder = 'Image successfully uploaded. Please Proceed!';
-      self.value = upload['response']; // Bind Image Path
-
-      self.fileName = upload['name'];
-      display.style['background-color'] = 'lightgray';
-      display.src = upload['result'];
-    }).catch(reason => {
-      // TODO add better error handling
-      console.warn('[INCOMPLETE DEV] Better error handling.', reason);
-    });
+    const fileInput = this.qs('#file-upload');
+    this.uploadImage(fileInput);
   }
 
 }

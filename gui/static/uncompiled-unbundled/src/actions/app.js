@@ -3,9 +3,8 @@
  Copyright (c) 2018 InterIntel Technologies. All rights reserved.
 
  */
-import { updateView } from "./template.js";
+import { updateView, updatePage, updatePageGroup } from "./template.js";
 import { SNACKBAR_CONTEXT_SUCCESS, SNACKBAR_CONTEXT_WARNING } from "../components/snack-bar.js";
-export const UPDATE_NAVIGATION = 'UPDATE_NAVIGATION';
 export const UPDATE_SERVICE = 'UPDATE_SERVICE';
 export const UPDATE_OFFLINE = 'UPDATE_OFFLINE';
 export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
@@ -45,13 +44,11 @@ export const navigate = path => dispatch => {
   // you can do here
   // navigate to hash paths
 
-  dispatch({
-    type: UPDATE_NAVIGATION,
-    page,
-    pageGroup
-  });
+  dispatch(updatePageGroup(pageGroup));
+  dispatch(updatePage(page));
 
   if (paths.length > 1) {
+    // todo is this required?
     let view = 'dialog';
     dispatch(updateView(view));
   }

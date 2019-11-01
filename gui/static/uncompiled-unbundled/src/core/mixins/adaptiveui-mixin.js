@@ -46,8 +46,8 @@ export const adaptiveUiMixin = BaseClass => class extends connect(store)(BaseCla
 
 
   stateChanged(state) {
-    this._pageGroup = state.app.pageGroup;
-    this._page = state.app.page;
+    this._pageGroup = state.template.pageGroup;
+    this._page = state.template.page;
     this.view = state.template.view;
     this.interface = interfaceSelector(state);
     this.gateway = gatewaySelector(state);

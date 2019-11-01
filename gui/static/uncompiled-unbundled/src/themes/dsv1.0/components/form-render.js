@@ -18,7 +18,6 @@ class FormRender extends FormRenderBase {
 
     const af = this.__computeActiveFeed();
 
-    Logger.i.debug(af);
     const formType = af.element;
 
     if (formType === FORM_TYPE_FORM) {

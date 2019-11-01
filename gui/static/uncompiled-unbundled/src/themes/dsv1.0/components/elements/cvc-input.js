@@ -77,7 +77,7 @@ class CvcInput extends CvcInputBase {
         <!--- Error message is commented at the bottom of this component --->
           <div class="field">
               <div class="control has-icons-right">
-                  <input class="input" type="tel" placeholder="${this.e.name}">
+                  <input id="input" class="input" type="tel" placeholder="${this.e.name}">
                   <span class="icon is-small is-right">
                   <!-- <fa-icon class="fas fa-exclamation-triangle icon" size="1em"></fa-icon> -->
                   </span>
@@ -106,7 +106,7 @@ class CvcInput extends CvcInputBase {
     <div class="column is-paddingless">
       <div class="field">
             <div class="control">
-                <input class="input inp" type="tell" placeholder="Primary input">
+                <input id="input" class="input inp" type="tell" placeholder="Primary input">
             </div>
         </div>
     </div>

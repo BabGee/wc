@@ -3,72 +3,78 @@ import { CheckboxInputBase } from "../../../../elements/base/checkbox-input.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class CheckboxInput extends CheckboxInputBase {
-  createRenderRoot() {
-    return this;
-  }
-
+  // createRenderRoot() {return this;}
   renderDefault() {
     return html`
 <style>
-.container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.checkbox input[type="checkbox"] {
+    opacity: 0;
 }
-.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+
+.checkbox label {
+    position: relative;
+    display: inline-block;
+    
+    /*16px width of fake checkbox + 6px distance between fake checkbox and text*/
+    padding-left: 22px;
 }
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: transparent;
-  border: 3px solid #4a4a4a
+
+.checkbox label::before,
+.checkbox label::after {
+    position: absolute;
+    content: "";
+    
+    /*Needed for the line-height to take effect*/
+    display: inline-block;
 }
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
+
+/*Outer box of the fake checkbox*/
+.checkbox label::before{
+    height: 16px;
+    width: 16px;
+    
+    border: 1px solid;
+    left: 0px;
+    
+    /*(24px line-height - 16px height of fake checkbox) / 2 - 1px for the border
+     *to vertically center it.
+     */
+    top: 3px;
 }
-.container input:checked ~ .checkmark {
-  background-color: #fff;
+
+/*Checkmark of the fake checkbox*/
+.checkbox label::after {
+    height: 5px;
+    width: 9px;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    
+    transform: rotate(-45deg);
+    
+    left: 4px;
+    top: 7px;
 }
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
+
+/*Hide the checkmark by default*/
+.checkbox input[type="checkbox"] + label::after {
+    content: none;
 }
-.container input:checked ~ .checkmark::after {
-  display: block;
+
+/*Unhide on the checked state*/
+.checkbox input[type="checkbox"]:checked + label::after {
+    content: "";
 }
-.container .checkmark::after {
-  left: 7px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid #4a4a4a;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+
+/*Adding focus styles on the outer-box of the fake checkbox*/
+.checkbox input[type="checkbox"]:focus + label::before {
+    outline: rgb(59, 153, 252) auto 5px;
 }
 </style>
-<div class="collumn">
-  <label class="container"> <p class="is-size-6">${this.name}</p>
-    <input type="checkbox" >
-    <span class="checkmark"></span>
-  </label>
+<div class="column">
+  <div class="checkbox">
+      <input type="checkbox" id="checkbox_1">
+      <label for="checkbox_1">${this.name}</label>
+  </div>
 </div>
 `;
   }
@@ -89,7 +95,7 @@ class CheckboxInput extends CheckboxInputBase {
   }
 
   getValue() {
-    return this.shadowRoot.querySelector('#input').checked ? 'on' : 'off';
+    return this.qs('#checkbox_1').checked ? 'on' : 'off';
   }
 
   valid(validation) {}
@@ -97,7 +103,7 @@ class CheckboxInput extends CheckboxInputBase {
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     this.rounded = this.e.details['rounded'] || false;
-    this.shadowRoot.querySelector('#input').checked = this.checked;
+    this.shadowRoot.querySelector('#checkbox_1').checked = this.checked;
   }
 
   init(pElement, loader) {

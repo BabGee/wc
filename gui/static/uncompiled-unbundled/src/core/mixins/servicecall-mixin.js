@@ -37,6 +37,7 @@ export const serviceCallMixin = BaseClass => class extends httpMixin(BaseClass) 
       }).catch(reason => {
         // TODO handle network errors
         console.log(reason);
+        reject(reason);
       });
     });
   }

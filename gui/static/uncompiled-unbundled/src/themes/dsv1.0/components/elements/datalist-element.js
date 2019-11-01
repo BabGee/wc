@@ -39,6 +39,7 @@ class DataListElement extends DataListElementBase {
                         @selection-changed="${this._handleSelectionChanged}"
                         @page-change="${this._handlePageChanged}"
                         @size-change="${this._handleLimitChanged}"
+                        @export="${this._handleExport}"
                         
                         selected-rows=${this.selectedRows}
                         .totalElements="${this.totalElements}"
@@ -81,11 +82,6 @@ class DataListElement extends DataListElementBase {
     super.firstUpdated(changedProperties);
   }
 
-  _hideColumn(event) {
-    var property = event.currentTarget.columnProperty;
-    this.$.dt.toggleColumn(property);
-  }
-
   _switchView(event) {
     const sel = event.currentTarget.selected;
 
@@ -104,12 +100,12 @@ class DataListElement extends DataListElementBase {
     }
   }
   /**
-     * General and per column search event handler
-     *
-     *
-     * @param event
-     * @private
-     */
+   * General and per column search event handler
+   *
+   *
+   * @param event
+   * @private
+   */
 
 
   _handleSearch(event) {
@@ -138,6 +134,10 @@ class DataListElement extends DataListElementBase {
       // event.detail.deselected
       this.showActions = false;
     }
+  }
+
+  _handleExport(event) {
+    event.detail.type == 'pdf' ? this.generatePDF() : this.generateCSV();
   }
 
 }
