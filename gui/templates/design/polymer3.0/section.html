@@ -240,7 +240,7 @@ subscribe();
 
 <!-- Sentry Exception Tracking -->
 <script type="module">
-  import * as Sentry from '@sentry/browser';
+  import * as Sentry from './node_modules/@sentry/browser/esm/index.js';
   if (window.process['env']['NODE_ENV'] === 'production') {
     Sentry.init({dsn: 'https://c1d4eca95ac7417eaa4a09a16b4b2cf9@sentry.io/1272205'});
   }
