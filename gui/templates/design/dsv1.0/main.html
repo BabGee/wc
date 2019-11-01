@@ -138,265 +138,183 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
       Placeholder content improves perceived render time and makes sure
       users with JavaScript disabled will see something helpful.
     -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+
     <style>
-                      
-        .timeline-wrapper {
-            background-color: #e9eaed;
-            color: #141823;
-            /* padding: 20px; */
-            /* border: 1px solid #ccc; */
-            margin: 0; /* auto 1em;*/ 
-        }
-
-
-        /* A Wrapper */
-        .timeline-item {
-            background: #fff;
-            border: 1px solid;
-            border-color: #e5e6e9 #dfe0e4 #d0d1d5;
-            border-radius: 10px;
-            padding: 12px;
-
-            margin: 0 auto;
-            max-width: 70vw;
-            min-height: 30vh;
-        }
-
-        /* A Fancy Animated Background */
-        @keyframes placeHolderShimmer{
-            0%{
-                background-position: -468px 0
-            }
-            100%{
-                background-position: 468px 0
-            }
-        }
-
-        .animated-background {
-            animation-duration: 1s;
-            animation-fill-mode: forwards;
-            animation-iteration-count: infinite;
-            animation-name: placeHolderShimmer;
-            animation-timing-function: linear;
-            background: #f6f7f8;
-            background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-            background-size: 800px 104px;
-            height: 200px;
-            position: relative;
-        }
-
-
-        .aside-animated-background {
-            animation-duration: 2s;
-            animation-fill-mode: forwards;
-            animation-iteration-count: infinite;
-            animation-name: placeHolderShimmer;
-            animation-timing-function: linear;
-            background: #f6f7f8;
-            background: linear-gradient(to right, var(--app-default-color) 8%, var(--app-accent-color) 18%, var(--app-default-color) 33%);
-            background-size: 800px 104px;
-            height: 96px;
-            position: relative;
-        }
-
-
-
-        /* Plenty of Tiny Masking Blocks */
-        .background-masker {
-            background: #fff;
-            position: absolute;
-        }
-
-        /* Every thing below this is just positioning */
-
-        .background-masker.header-top,
-        .background-masker.header-bottom,
-        .background-masker.subheader-bottom {
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 10px;
-        }
-
-        .background-masker.header-left,
-        .background-masker.subheader-left,
-        .background-masker.header-right,
-        .background-masker.subheader-right {
-            top: 0;
-            left: 0;
-            height: 30px;
-            width: 20vw;
-        }
-
-        .background-masker.element1 {
-            top: 30px;
-            height: 20px;
-        }
-
-        .background-masker.element2 {
-            top: 110px;
-            height: 20px;
-        }
-
-        .background-masker.subheader-left,
-        .background-masker.subheader-right {
-            top: 24px;
-            height: 6px;
-        }
-
-
-        .background-masker.header-right,
-        .background-masker.subheader-right {
-            width: auto;
-            left: 50vw;
-            right: 0;
-        }
-
-        .background-masker.subheader-right {
-            left: 230px;
-        }
-
-        .background-masker.subheader-bottom {
-            top: 30px;
-            height: 10px;
-        }
-
-        .background-masker.content-top,
-        .background-masker.content-second-line,
-        .background-masker.content-third-line,
-        .background-masker.content-second-end,
-        .background-masker.content-third-end,
-        .background-masker.content-first-end {
-            top: 40px;
-            left: 0;
-            right: 0;
-            height: 6px;
-        }
-
-        .background-masker.content-top {
-            height:20px;
-        }
-
-        .background-masker.content-first-end,
-        .background-masker.content-second-end,
-        .background-masker.content-third-end{
-            width: auto;
-            left: 380px;
-            right: 0;
-            top: 60px;
-            height: 8px;
-        }
-
-        .background-masker.content-second-line  {
-            top: 68px;
-        }
-
-        .background-masker.content-second-end {
-            left: 420px;
-            top: 74px;
-        }
-
-        .background-masker.content-third-line {
-            top: 82px;
-        }
-
-        .background-masker.content-third-end {
-            left: 300px;
-            top: 88px;
-        }
-    </style>
-                      
-    <style type="text/css">
-        .nav-left {
-            display: -webkit-box;
-            display: -ms-flexbox;
+        header.header{
+            height: 64px;
+            width: 100%;
             display: flex;
-            -webkit-box-pack: start;
-            -ms-flex-pack: start;
-            justify-content: flex-start;
-            overflow: hidden;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        
-        .nav-left, .nav-right {
-            -webkit-box-align: stretch;
-            -ms-flex-align: stretch;
-            align-items: stretch;
-            -ms-flex-preferred-size: 0;
-            flex-basis: 0;
-            -webkit-box-flex: 1;
-            -ms-flex-positive: 1;
-            flex-grow: 1;
-            -ms-flex-negative: 0;
-            flex-shrink: 0;
-        }
-        
-        .nav-item {
-            -webkit-box-align: center;
-            -ms-flex-align: center;
             align-items: center;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-flex: 0;
-            -ms-flex-positive: 0;
-            flex-grow: 0;
-            -ms-flex-negative: 0;
-            flex-shrink: 0;
-            font-size: 1rem;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            padding: .5rem .75rem;
+            margin-bottom: 15px;
         }
-        
-        .brand-name {
-            font-size: 1.2rem;
-            font-weight: 500;
-            padding: 0 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+    aside.aside{
+        background-image: linear-gradient(165deg, #606cc3, #313fae 96%);
+        height: 100vh;
+        position:fixed;
+        top:0px;
+        bottom:0px;
+        left:0px;   
+        /* width:21%;  */
+    }
+    main.main-section{
+        background-color: #ececee;
+        width: 79%;
+        margin-left: 230px;
+        height: 100vh;
+    }
+    main.main-section .main-header{
+        background-color: #f6f6f9;
+        margin-top: 13px;
+        margin-bottom: 40px;
+
+        display: flex;
+        justify-content: flex-end;
+    }
+    .nav-loader-container{
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #444444;
+        background: linear-gradient(to right, #656565 8%, #444444 18%, #656565 33%);
+        background-size: 1000px 104px;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+    }
+    .content-loader-container{
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #444444;
+        background: linear-gradient(to right, #d2d2d2 8%, #444444 18%, #d2d2d2 33%);
+        background-size: 1000px 104px;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+    }
+    .brand{
+        width: 36px;
+        height: 36px;
+        margin: 15px;
+        border-radius: 4px;
+    }
+    .aside-menu ul.menu-list{
+        margin-top: 30px;
+    }
+    .aside-menu ul.menu-list li{
+        margin-bottom: 15px;
+    }
+    .aside-menu ul.menu-list li ul{
+        border: 1px solid transparent;
+        margin: 0
+    }
+    .link {
+        width: 60%;
+        height: 6px;
+        border-radius: 15px;
+        margin: 15px;
+    }
+    main.main-section .main-content{
+        position: relative;
+        margin: 124px 50px;
+    }
+    .main-card{
+        width: 100%;
+        background: #fff;
+        border-radius: 5px;
+        padding: 15px;
+    }
+    @keyframes placeHolderShimmer{
+        0%{
+            background-position: -468px 0
         }
-        
-        
-        
+        100%{
+            background-position: 468px 0
+        }
+    }
     </style>
 
-    <div class="timeline-wrapper" style="display: flex;">
 
-        <aside style="width: 79px;height:100vh;background-color: var(--app-default-color);">
-            <div class="aside-animated-background"
-                style="width:80%;height:60vh;margin-top:70px;margin-left: auto;margin-right: auto;">
-            </div>
-        </aside>
-        
-        <main style="flex-grow: 1">
-            <header style="height: 65px; background-color: var(--app-default-color);">
-                <div class="nav-left">        
-                    <div class="nav-item">
-                        <div style="margin-top:10px">
-                            <span class="brand-name" style="color: #fff;">
-                                {{params.response.get_gateway_details.name}}
-                            </span>
+        <div class="main-wrapper">
+        <div class="columns">
+            <aside class="column aside is-2 is-paddingless">
+                <header class="header aside-header">
+                    <div class="brand nav-loader-container">
+                    </div>
+                </header>
+                <div class="aside-menu">
+                        <ul class="menu-list">
+                            <li>
+                                <div class="link nav-loader-container"></div>
+                                <ul>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="link nav-loader-container"></div>
+                                <ul>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="link nav-loader-container"></div>
+                                <ul>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                    <li><div class="link nav-loader-container"></div></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="link nav-loader-container"></div>
+                            </li>
+                        </ul>
+                </div>
+            </aside>
+          
+            <main class="main-section column is-paddingless">
+                <header class="header main-header  is-pulled-right">
+                    <div class="link content-loader-container" style="width: 70px"></div>
+                </header>
+                <div class="main-content">
+                    <div class="main-card">
+                        <div class="main-card-header">
+                            <div class="link content-loader-container" style="width: 70px"></div>
                         </div>
-                    </div>        
+                        <div class="main-card-body">
+                            <div class="link content-loader-container"></div>
+                            <div class="link content-loader-container" style="width: 65%"></div>
+                            <div class="link content-loader-container" style="width: 60%"></div>
+                            <div class="link content-loader-container" style="width: 55%"></div>
+                        </div>
+                    </div>
                 </div>
-            </header>
-            <div class="timeline-item" style="margin-top: 10px;">
-                <div class="animated-background">
-        
-                    <div class="background-masker header-left"></div>
-                    <div class="background-masker header-right"></div>
-                    <div class="background-masker header-bottom element1"></div>
-                    <div class="background-masker header-bottom element2"></div>
-        
-                </div>
-            </div>
-            
-        </main>
-
+            </main>
+        </div>
     </div>
+
+    <noscript>
+      <p>Please enable JavaScript to view this website.</p>
+    </noscript>
+
+    </adaptive-ui>
     <script type="text/javascript">
       window.THEME =
         //'bare';
@@ -405,11 +323,6 @@ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
 	'dsv1.0';
     </script>
 
-    <noscript>
-      <p>Please enable JavaScript to view this website.</p>
-    </noscript>
-
-    </adaptive-ui>
     <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
     <!-- /static/adaptive-ui-web/ -->
     <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
