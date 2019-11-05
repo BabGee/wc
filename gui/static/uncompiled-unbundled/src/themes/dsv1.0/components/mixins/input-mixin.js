@@ -110,22 +110,36 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
         font-weight: normal;
         font-size: 12px;
     }
+    #danger-icon{
+     visibility:hidden;
+    }
+   
+    #check-icon{
+      visibility:hidden;
+    }
+    #warning-text{
+      display:none;
+
+    }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="column row">
       <div class="inp-right">
         <label class="label">${this.e.name}</label>
-        <!-- For success message use 'success' whithin the 'field' class-->
-        <!-- For error message use 'error' whithin the 'field' element and add is-danger whithin the input tag-->
+        <!-- For success message use 'is-success' within the 'input' element and add is-danger whithin the input tag-->
+        <!-- For error message use 'is-danger' within the 'input' element and add is-danger whithin the input tag-->
         <!--- Error message is commented at the bottom of this component --->
           <div class="field">
               <div class="control has-icons-right">
                   <input class="input" id="input" type="${this.type}" placeholder="${this.e.name}">
-                  <span class="icon is-small is-right">
-                  <fa-icon class="fas fa-exclamation-triangle icon" size="1em"></fa-icon>
+                  <span id="danger-icon" class="icon is-small is-right">
+                  <fa-icon class="fas fa-exclamation-triangle icon" size="1em" color="#ff3860"></fa-icon>
+                  </span>
+                  <span id="check-icon" class="icon is-small is-right">
+                  <fa-icon class="fas fa-check" size="1em" color="#23d160"></fa-icon>
                   </span>
               </div>
-              <p style="display: none;">Username or password is incorrect</p>
+              <p id="warning-text" style="color:#ff3860;">Username or password is incorrect</p>
           </div>
       </div>
     </div>
@@ -145,63 +159,55 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
         border: 1px solid #a3a3a4!important;
         box-shadow: 0 0 0 transparent!important;
       }
+      #danger-icon{
+        visibility:hidden;
+       }
+      
+       #check-icon{
+         visibility:hidden;
+       }
+       #warning-text{
+         display:none;
+   
+       }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="field is-8">
       <label class="label">${this.e.name}</label>
-      <div class="control">
+      <div class="control has-icons-right">
         <input class="input inp" id="input" type="${this.type}" placeholder="${this.e.name}">
+          <span id="danger-icon" class="icon is-small is-right">
+            <fa-icon class="fas fa-exclamation-triangle icon" size="1em" color="#ff3860"></fa-icon>
+          </span>
+          <span id="check-icon" class="icon is-small is-right">
+            <fa-icon class="fas fa-check" size="1em" color="#23d160"></fa-icon>
+          </span>
       </div>
+      <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
     </div>
           `;
   }
 
   invalid(validation) {
-    /*
-    this.shadowRoot
-      .querySelector('#validationIcon')
-      .style.visibility = 'visible';
-     this.shadowRoot
-      .querySelector('#inputGroup')
-      .className = '';
-     this.shadowRoot
-      .querySelector('#inputGroup')
-      .classList.add('error-4px');
-     this.shadowRoot
-      .querySelector('#validationIcon')
-      .setAttribute('src', 'src/themes/dsv1.0/img/warning.svg');
-    if (validation) {
-      this.shadowRoot
-        .querySelector('#validationMessage')
-        .style.display = 'block';
-      this.shadowRoot
-        .querySelector('#validationMessage')
-        .textContent = validation;
-    }
-    */
+    const input = this.shadowRoot.querySelector("#input");
+    const dangerIcon = this.shadowRoot.querySelector("#danger-icon");
+    const checkIcon = this.shadowRoot.querySelector("#check-icon");
+    const warningText = this.shadowRoot.querySelector("#warning-text");
+    input.className = "input is-danger";
+    warningText.style.display = "block";
+    dangerIcon.style.visibility = "visible";
+    checkIcon.style.visibility = "hidden";
   }
 
   valid(validation) {
-    /*
-    this.shadowRoot
-      .querySelector('#validationIcon')
-      .style.visibility = 'visible';
-     // success-2px
-    this.shadowRoot
-      .querySelector('#inputGroup')
-      .className = '';
-     this.shadowRoot
-      .querySelector('#inputGroup')
-      .classList.add('success-2px');
-     this.shadowRoot
-      .querySelector('#validationIcon')
-      .setAttribute('src', 'src/themes/dsv1.0/img/complete.svg');
-    if (validation) {
-      this.shadowRoot
-        .querySelector('#validationMessage')
-        .style.display = 'none';
-    }
-    */
+    const input = this.shadowRoot.querySelector("#input");
+    const dangerIcon = this.shadowRoot.querySelector("#danger-icon");
+    const checkIcon = this.shadowRoot.querySelector("#check-icon");
+    const warningText = this.shadowRoot.querySelector("#warning-text");
+    input.className = "input is-success";
+    warningText.style.display = "none";
+    dangerIcon.style.visibility = "hidden";
+    checkIcon.style.visibility = "visible";
   }
 
   getInput() {
@@ -214,14 +220,6 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-    /*
-    this.shadowRoot
-      .querySelector('#validationMessage')
-      .style.display = 'none';
-     this.shadowRoot
-      .querySelector('#validationIcon')
-      .style.visibility = 'hidden';
-     */
   }
 
   get renderMode() {

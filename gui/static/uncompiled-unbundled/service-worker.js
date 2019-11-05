@@ -14,7 +14,7 @@ var precacheConfig = [// ['path', 'hash' ]
   // todo how does the build tool generate hash for non exisiting paths .e,g
   // ['/', '77741e916f1f87bfbe0e4ad0a2a1e592'],
 ];
-var version = '5';
+var version = '6';
 var cacheName = 'sw-precache-v3-4-' + (self.registration ? self.registration.scope : '');
 
 var cleanResponse = function (originalResponse) {

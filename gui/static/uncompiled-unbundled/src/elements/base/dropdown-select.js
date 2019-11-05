@@ -25,7 +25,7 @@ export const DropdownSelectBase = class extends utilsMixin(dataSourceMixin(Seria
   }
 
   validate() {
-    if (this.e.required && !this.getValue()) {
+    if (this.e.required && !this.getValue() || this.getValue() === undefined) {
       return new this.Validation(false, 'invalid');
     }
 

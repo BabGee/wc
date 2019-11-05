@@ -8,21 +8,16 @@ class SectionTitle extends SectionPElementBase {
   renderDefault() {
     return html`
      <style>
+     .section-title{
+       width: 100%;
+     }
 </style>
-      <section class="section is-small" style="padding: 0px;">
-      <div class="container">
-                <div class="section-title-wrapper">
-                    <h2 class="title section-title has-text-centered dark-text"> ${SectionTitle.toTitleCase(this.e.elementJson[4])}</h2>
-                    <div class="title-divider" style="margin: auto ;width: 80px;height: 5px; background: #4FC1EA;"></div>
-                    <div class="subtitle has-text-centered is-tablet-padded">
-                        ${this.e.defaultValue}
-                    </div>
-                </div>
-                </div>
-                </section>
-                
-                
-        `;
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+  <div class="section-title">
+     <h1 style="margin-bottom: 15px;" class="has-text-centered title is-size-5 is-capitalized">${SectionTitle.toTitleCase(this.e.elementJson[4])}</div>
+    <div class="title-divider" style="margin: auto ;width: 80px;height: 5px; background: #4FC1EA;"></div>     
+    <div class="subtitle has-text-centered is-tablet-padded">${this.e.defaultValue}</div>
+  </div>`;
   }
 
   static get is() {

@@ -268,7 +268,8 @@ class DropdownSelect extends DropdownSelectBase {
       },
       columnSize: {
         type: Array
-      }
+      },
+      selectedIndex: Number
     };
   }
 
@@ -279,6 +280,7 @@ class DropdownSelect extends DropdownSelectBase {
     const allLists = this.shadowRoot.querySelector('#dropdown-item-body').querySelectorAll('li');
     const arrow = this.shadowRoot.querySelector('#arrow');
     const selected = this.shadowRoot.querySelector('.dropdown-item-header').querySelector('p');
+    const self = this;
 
     if (allLists.length > 10) {
       body.classList.add('is-hidden');
@@ -299,6 +301,7 @@ class DropdownSelect extends DropdownSelectBase {
           arrow.classList.remove('is-hidden');
           selected.className = '';
           selected.innerHTML = select.options[select.selectedIndex].text;
+          this.selectedIndex = data;
         }
       });
       slim.open(); //slim select search input from closing dropdown
@@ -307,12 +310,21 @@ class DropdownSelect extends DropdownSelectBase {
       searchInput.addEventListener("click", function (event) {
         event.stopPropagation();
       });
+      searchInput.addEventListener("keyup", function (event) {
+        let searchText = searchInput.value;
+        let column = "q"; // this.deleteParamKeys(columns.concat(['q']), false);
+
+        self.deleteParamKeys(column, false); // update new search query param
+
+        self.updateParams(column, searchText);
+      });
     } else {
       if (link == 'head') {
         this.shadowRoot.querySelector('.dropdown-item-body').classList.toggle('is-block');
       } else {
         const selected = this.shadowRoot.querySelector('.dropdown-item-header').querySelector('p');
         selected.innerHTML = link;
+        this.selectedIndex = data;
         const allLists = this.shadowRoot.querySelector('#dropdown-item-body').querySelectorAll('li');
         allLists.forEach(list => list.className = '');
         const selectedList = this.shadowRoot.querySelector('#list-' + data);
@@ -323,8 +335,7 @@ class DropdownSelect extends DropdownSelectBase {
   }
 
   getValue() {
-    const select = this.shadowRoot.querySelector('.dropdown-item-header').querySelector('p');
-    this.dropdownValue = select.innerHTML;
+    this.dropdownValue = this.selectedIndex;
     return this.dropdownValue;
   }
 
