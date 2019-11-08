@@ -18,6 +18,8 @@ import "../../../../../node_modules/@polymer/iron-icons/editor-icons.js";
 import "../../../../../node_modules/@polymer/iron-icons/communication-icons.js";
 import "../../../../../node_modules/@polymer/iron-icons/notification-icons.js";
 import "../../../../../node_modules/fa-icons/index.js";
+import './missing-page.js';
+import "../../../../components/adaptive-ui-icon.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class ServicePage extends ServicePageBase {
@@ -26,8 +28,7 @@ class ServicePage extends ServicePageBase {
       return html`<div>Cannot render an UNDEFINED tab!!.</div>`;
     } else if (!this.pageGroup || !this.page) {
       return html`
-      <h3> this is a missing page </h3>
-      <a href="/#/0/0/">Go Home</a>
+      <missing-page></missing-page>
       `;
     }
 
@@ -77,9 +78,9 @@ class ServicePage extends ServicePageBase {
         letter-spacing: normal;
         color: #1f2552;
       }
-      div.modal-container div.modal-base .modal-body{
-        padding: 90px calc(68px - 25px) 68px calc(68px - 25px);
-      }
+      /*div.modal-container div.modal-base .modal-body{*/
+        /*padding: 90px calc(68px - 25px) 68px calc(68px - 25px);*/
+      /*}*/
       div.modal-container div.modal-base .modal-body label{
         font-size: 12px;
         font-weight: bold;
@@ -170,7 +171,7 @@ class ServicePage extends ServicePageBase {
       aside.aside div.aside-menu ul li a p .icon{
           position: relative;
           right: 0;
-          top: 5px;
+          top: 3px;
       }
 
       aside.aside div.aside-menu ul li .sub-menu{
@@ -339,15 +340,14 @@ class ServicePage extends ServicePageBase {
         
         ${this.view === VIEW_MODE_DIALOG ? html`
         <div class="modal-container">
-          <div class="modal-base">
+          <div class="modal-base" style="max-height: 90vh;">
             <div class="modal-header">
               <div class="heading">
-                <h1 class="title">${this.page.title}</h1>
+                <h1 class="title" style="width: 80%; display: inline-block;">${this.page.title}</h1>
+                <button style="display: inline-block;float: right;" @click=${this._viewList}>Back</button>
               </div>
             </div>
-            <div class="modal-body">
-            <button @click=${this._viewList}>Back</button>
-            
+            <div class="modal-body">            
             <section-page id="dialog" queue=${this.dialogServicesQueue}></section-page>
             </div>
           </div>
@@ -379,11 +379,14 @@ class ServicePage extends ServicePageBase {
                                 <a class="nav-active ${pageGroupIndex == this._pageGroup ? 'selected  active' : ''}" @click='${this.handleClick}'>
                                     <p>
                                         <span class="icon">
-                                          <fa-icon class="fas fa-th-large" color="#fff"></fa-icon>
-                                        </span>
+                                        
+                                          <adaptive-ui-icon style="width: 19px;height: 19px;" icon="${pageGroup.icon || 'icons:info'}"></adaptive-ui-icon>
+                                          <!--<fa-icon class="fas fa-th-large" size="1rem" color="#fff"></fa-icon>                                        -->
+                                         
+                                         </span>
                                         ${ServicePage.toTitleCase(pageGroup.title)}&nbsp;
                                         <span class="icon is-pulled-right">
-                                          <fa-icon class="fas fa-caret-down" color="#fff"></fa-icon>
+                                          <fa-icon class="fas fa-caret-down" size="1rem" color="#fff"></fa-icon>
                                         </span>
                                     </p>
                                 </a>
@@ -408,21 +411,21 @@ class ServicePage extends ServicePageBase {
                         <div class="column is-2">
                             <a href="">
                                 <span class="icon" style="margin: 4px 0 0 0;">
-                                  <fa-icon class="fab fa-elementor" color="#ccced0"></fa-icon>
+                                  <fa-icon class="fab fa-elementor" size="1rem" color="#ccced0"></fa-icon>
                                 </span>
                             </a>
                         </div>
                         <div class="column is-2">
                             <a href="">
                                 <span class="icon" style="margin: 4px 0 0 0;">
-                                  <fa-icon class="fas fa-bell" color="#ccced0"></fa-icon>
+                                  <fa-icon class="fas fa-bell" size="1rem" color="#ccced0"></fa-icon>
                                 </span>
                             </a>
                         </div>
                         <div class="column profile">
                             <div class="profile-info">
                               ${this.gateway.profile ? html`
-                              <a href="" class="is-flex"  @click="${this.toggleProfile}">
+                              <a href="#" class="is-flex"  @click="${this.toggleProfile}">
                                     <div class="profile-image">
                                         <figure class="image">
                                             <img src="${this.gateway.profile.photo ? '/media/' + this.gateway.profile.photo : 'images/web/user.svg'}" alt="profile-image">
@@ -432,7 +435,7 @@ class ServicePage extends ServicePageBase {
                                         <p>
                                         ${this.gateway.profile.firstName} ${this.gateway.profile.lastName}
                                             <span class="icon is-pulled-right">
-                                              <fa-icon class="fas fa-caret-down" color="#fff"></fa-icon>
+                                              <fa-icon class="fas fa-caret-down" size="1rem" color="#fff"></fa-icon>
                                             </span>
                                         </p>
                                     </div>
@@ -525,7 +528,8 @@ class ServicePage extends ServicePageBase {
     return [Colors, Fonts, ServiceStyles, css`:host { display: block; }`];
   }
 
-  toggleProfile() {
+  toggleProfile(evt) {
+    evt.preventDefault();
     const profileContent = document.getElementById('profile-content');
     profileContent.classList.toggle('is-block');
   }

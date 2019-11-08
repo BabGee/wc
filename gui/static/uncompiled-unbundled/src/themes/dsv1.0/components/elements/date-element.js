@@ -212,7 +212,6 @@ class DateElement extends DateElementBase {
         const dayValue = textDate.substring(3, 4);
         const monthValue = textDate.substring(5, 8);
         const yearValue = textDate.substring(10);
-        cell.innerText + '/' + `${month + 1}` + '/' + year;
         picker = `${this.months.indexOf(monthValue) + 1}` + '/' + dayValue + '/' + yearValue;
         return picker;
       } else if (textDate.length === 15) {

@@ -98,6 +98,7 @@ class DropdownSelect extends DropdownSelectBase {
 
   showFilter() {
     console.log("showing filter");
+    const self = this;
     const selectSection = this.shadowRoot.querySelector('#select-section');
     selectSection.classList.remove('select'); //to remove bulma dropdown arrow
 
@@ -113,7 +114,20 @@ class DropdownSelect extends DropdownSelectBase {
     let searchInput = this.shadowRoot.querySelector(".ss-search").querySelector("input");
     searchInput.addEventListener("click", function (event) {
       event.stopPropagation();
-    });
+    }); //check whether options are > 50 to search backend
+
+    const items = this.shadowRoot.querySelector('#input').querySelectorAll('option');
+
+    if (items.length >= 50) {
+      searchInput.addEventListener("keyup", function (event) {
+        let searchText = searchInput.value;
+        let column = "q"; // this.deleteParamKeys(columns.concat(['q']), false);
+
+        self.deleteParamKeys(column, false); // update new search query param
+
+        self.updateParams(column, searchText);
+      });
+    }
   }
 
   onLoadData(dsc) {

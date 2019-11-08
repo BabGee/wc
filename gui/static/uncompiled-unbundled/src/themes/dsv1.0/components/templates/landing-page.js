@@ -9,6 +9,7 @@ import "./section-page.js"; // todo move into base
 import '../snack-bar.js';
 import { LandingPageBase } from "../../../../components/templates/landing-page.js";
 import { VIEW_MODE_DIALOG } from "../../../../components/templates/page-view-element.js";
+import './missing-page.js';
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class LandingPage extends LandingPageBase {
@@ -46,8 +47,7 @@ class LandingPage extends LandingPageBase {
 `;
     } else if (!this.pageGroup || !this.page) {
       return html`
-      <h3> this is a missing page </h3>
-      <a href="/#/0/0/">Go Home</a>
+      <missing-page></missing-page>
       `;
     }
 

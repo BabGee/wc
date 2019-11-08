@@ -29,7 +29,7 @@ class SnackBar extends SnackBarBase {
        :host {
           display: block;
         position: fixed;
-        bottom: 0;
+        bottom: 10px;
         left: 0;
         right: 0;
        
@@ -66,20 +66,20 @@ class SnackBar extends SnackBarBase {
       }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
- <div class="columns">
-  <div class="column">
-    <div class="notification-container">
-      <div class="notification has-text-white is-${this.context.toLowerCase()}" style=" font-size: 14px;  margin-top: 30px;">
-        <button class="delete"></button>
-          <span class="icon  has-text-white  is-pulled-left" style="margin-left: 30px; margin-right: 20px; margin-top: 32px; margin-bottom: 32px;">
-              <fa-icon class="fas fa-check-circle" color="#fff" style="height:36px; width: 36px;"></fa-icon>
-          </span>
-          <p style="margin-left: 86px; margin-top: 16px; font-weight: bold; font-size: 18px;"> <slot name="title"></slot></p>  
-          <p style="margin-left: 86px; margin-bottom: 22px;"><slot></slot></p>              
-      </div>
-    </div>        
+   <div class="columns">
+    <div class="column">
+      <div class="notification-container">
+        <div class="notification has-text-white is-${this.context.toLowerCase()}" style=" font-size: 14px;  margin-top: 30px;">
+          <button class="delete"></button>
+            <span class="icon  has-text-white  is-pulled-left" style="margin-left: 30px; margin-right: 20px; margin-top: 32px; margin-bottom: 32px;">
+                <fa-icon class="fas fa-check-circle" color="#fff" style="height:36px; width: 36px;"></fa-icon>
+            </span>
+            <p style="margin-left: 86px; margin-top: 16px; font-weight: bold; font-size: 18px;"> <slot name="title"></slot></p>  
+            <p style="margin-left: 86px; margin-bottom: 22px;"><slot></slot></p>              
+        </div>
+      </div>        
+    </div>
   </div>
-</div>
     `;
   }
 

@@ -10,6 +10,7 @@ import '../form-render.js';
 import { CanvasStyles } from '../../styles/canvas.js';
 import { Reset, Colors, Fonts } from '../../styles/shared.js';
 import { CanvasPageBase } from "../../../../components/templates/canvas-page.js";
+import './missing-page.js';
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class CanvasPage extends CanvasPageBase {
@@ -19,8 +20,7 @@ class CanvasPage extends CanvasPageBase {
       return html`<div>Cannot render an UNDEFINED tab.</div>`;
     } else if (!this.pageGroup || !this.page) {
       return html`
-      <h3> this is a missing page </h3>
-      <a href="/#/0/0/">Go Home</a>
+      <missing-page></missing-page>
       `;
     }
 

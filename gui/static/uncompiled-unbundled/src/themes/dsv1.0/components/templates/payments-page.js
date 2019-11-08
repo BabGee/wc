@@ -1,13 +1,3 @@
-/* eslint-disable indent */
-
-/* eslint-disable no-unused-vars */
-
-/* eslint-disable one-var */
-
-/* eslint-disable no-undef */
-
-/* eslint-disable prefer-const */
-
 /**
  @license
  Copyright (c) 2018 InterIntel Technologies. All rights reserved.
@@ -17,6 +7,7 @@ import { html } from "../../../../../node_modules/lit-element/lit-element.js"; /
 
 import '../snack-bar.js';
 import "../form-render.js";
+import './missing-page.js';
 import { PaymentsPageBase } from "../../../../components/templates/payments-page.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
@@ -26,8 +17,7 @@ class PaymentsPage extends PaymentsPageBase {
       return html`<div>Cannot render an UNDEFINED tab!!.</div>`;
     } else if (!this.pageGroup || !this.page) {
       return html`
-      <h3> this is a missing page </h3>
-      <a href="/#/0/0/">Go Home</a>
+      <missing-page></missing-page>
       `;
     }
 

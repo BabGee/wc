@@ -3,6 +3,7 @@ import "../../../../../node_modules/@polymer/paper-button/paper-button.js";
 import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
 import "./datalist-element/datasource-list.js";
 import { DataListElementBase } from "../../../../elements/base/datalist-element.js";
+import "./datalist-element/loader-element.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class DataListElement extends DataListElementBase {
@@ -12,9 +13,8 @@ class DataListElement extends DataListElementBase {
 
   renderDefault() {
     return html`
-
-
-                <datasource-list
+    ${this.loading ? html`<loader-element></loader-element>` : html`
+    <datasource-list
                         id="dt"
                         paginate
                         .selectable="${this.selectable}"
@@ -46,7 +46,9 @@ class DataListElement extends DataListElementBase {
                         .type="${this._validateType(this.e.details)}"
                         .availableSize="${this._validatePageLimits(this.e.details)}"
                         .totalPages="${this.totalPages}">
-                </datasource-list>`;
+                </datasource-list>
+    `}
+                `;
   }
 
   static get properties() {

@@ -171,12 +171,12 @@ visibility: hidden;
 
 </style>
 <div class="slider-wrapper">
-	
-	<input class ="checkbox" type="radio" id="i0" name="images" checked />
-	<input class ="checkbox" type="radio" id="i1" name="images" />
-	<input class ="checkbox" type="radio" id="i2" name="images" />
-	<input class ="checkbox" type="radio" id="i3" name="images" />
-	<input class ="checkbox" type="radio" id="i4" name="images" />	
+
+	${this.rows.map((slide, index) => html` 
+	<input class ="checkbox" type="radio" id="i${index}" name="images" ?checked=${index === 0} />
+
+	`)}  
+
 	    ${this.rows.map((slide, index) => html`   
 	<div class="slide_img" id="slide_${index}">			
 			
@@ -212,8 +212,11 @@ visibility: hidden;
     var self = this;
 
     function Move() {
-      if (i > self.rows.length) {
+      if (i === self.rows.length - 1) {
+        // means we have reached the end
         i = 0;
+        self.shadowRoot.querySelector('#i' + i).checked = true;
+        return;
       }
 
       i = i % self.rows.length + 1;

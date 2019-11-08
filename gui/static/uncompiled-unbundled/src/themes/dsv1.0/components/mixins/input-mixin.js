@@ -34,12 +34,12 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
         </style>
         <div class="columns input-item">
           <div class="column is-one-quarter" style="display: flex; align-items: center;">
-            <label class="label is-uppercase">Email Address</label>
+            <label class="label is-uppercase">${this.e.name}</label>
           </div>
           <div class="column">
             <div class="field">
               <div class="control">
-                <input class="input" type="text" placeholder="Email Address">
+                <input class="input" id="input" type="${this.type}" placeholder="${this.e.name}">
               </div>
             </div>
           </div>
@@ -139,7 +139,7 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
                   <fa-icon class="fas fa-check" size="1em" color="#23d160"></fa-icon>
                   </span>
               </div>
-              <p id="warning-text" style="color:#ff3860;">Username or password is incorrect</p>
+              <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
           </div>
       </div>
     </div>

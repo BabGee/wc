@@ -7,12 +7,25 @@ import { LitElement, html } from "../../../../../../node_modules/lit-element/lit
 export class TableTypeHeader extends LitElement {
   render() {
     return html`
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <style>
+      .table-header-buttons{
+          width: 100%;
+          height: auto;
+          position: relative;
+      }
 
-        <h4>${this.title}</h4>
-        <div>
-       <paper-button  @tap="${this.generatePDF}" style=" background: #3498db; color:white;"><iron-icon icon="image:picture-as-pdf"></iron-icon>Export PDF</paper-button>
-       <paper-button @tap="${this.generateCSV}" style=" background: #2ecc71; color:white;"><iron-icon icon="icons:save"></iron-icon>Export CSV</paper-button>
-   </div>
+      .table-header-buttons h1{
+        margin-bottom: 15px;
+      }
+    </style>
+    <div class="table-header-buttons" style="margin-bottom: 15px;">
+      <div class="heading">
+        <h1 class="title is-size-6">${this.title}</h1>
+      </div>
+      <button @tap="${this.generatePDF}" class="button is-info is-size-7 is-rounded">Export PDF</button>
+      <button @tap="${this.generateCSV}" class="button is-success is-size-7 is-rounded">Export CSV</button>
+    </div>
 `;
   }
 
