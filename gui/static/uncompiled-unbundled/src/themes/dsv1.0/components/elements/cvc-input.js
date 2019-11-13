@@ -140,20 +140,13 @@ class CvcInput extends CvcInputBase {
 
   invalid(validation) {
     this.qs('.control').classList.add('required');
-    this.qs('.control').classList.add('has-error');
-    this.qs('.validation-info').style.display = 'flex';
-
-    if (validation) {
-      this.qs('.validation-info').textContent = validation;
-    }
+    this.qs('.control').classList.add('has-error'); // if (validation)
+    // {this.qs('.validation-info').textContent= validation;}
   }
 
   valid(validation) {
     this.qs('.control').classList.remove('required');
-    this.qs('.control').classList.remove('has-error');
-    this.qs('.validation-info').style.display = 'none'; // Revert general text content
-
-    this.qs('.validation-info').textContent = 'Required';
+    this.qs('.control').classList.remove('has-error'); // Revert general text content
   }
 
 }

@@ -42,8 +42,17 @@ class CcExpiration extends CcExpirationBase {
   }
 
   getValue() {
-    console.log('Expire ', this.getInput().value);
-    return this.getInput().value;
+    let newValue = "";
+
+    if (this.getInput().value) {
+      let oldValue = this.getInput().value;
+      let year = oldValue.substring(0, 4);
+      let month = oldValue.substring(5);
+      newValue = month + "-" + year;
+    }
+
+    console.log('Expire ', newValue);
+    return newValue;
   }
 
   invalid(validation) {

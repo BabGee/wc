@@ -51,7 +51,7 @@ class MsisdnInput extends MsisdnInputBase {
 </style>
 ${this.loading ? html`
 <loader-element></loader-element>` : html`
-<div class="column is-8 is-block is-paddingless">
+<div class="column is-12 is-block is-paddingless">
         <div class="field">
           <div class="select-country">
            <select id="code"  @change="${this.codeSelected}">

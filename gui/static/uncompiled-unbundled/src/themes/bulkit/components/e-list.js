@@ -1,5 +1,6 @@
 import { css, html } from "../../../../node_modules/lit-element/lit-element.js";
 import { EListBase } from "../../../components/e-list.js";
+import { register } from "../register.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class EList extends EListBase {
@@ -56,6 +57,7 @@ class EList extends EListBase {
     }
   }
 
-}
+} // window.customElements.define(EList.is, EList);
 
-window.customElements.define(EList.is, EList);
+
+register(EList);

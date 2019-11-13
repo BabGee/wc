@@ -11,91 +11,56 @@ export class DatasourceTableFooter extends LitElement {
     return html`
         <style>
             :host {
-                display: block;
+              display: block;
             }
-
-            .foot  {
-                font-size: 12px;
-                font-weight: normal;
-                height: 55px;
-                border-top: 1px solid;
-                border-color: rgba(0, 0, 0, var(--dark-divider-opacity));
-                padding: 0 14px 0 0;
-                color: rgba(0, 0, 0, var(--dark-secondary-opacity));
+            .size{
+              margin-right: 15px;
             }
-
-            .foot .left  {
-                padding: 0 0 0 14px;
+            .btn{
+              position: relative;
+              cursor: pointer;
+              top: 4px;
+              left: 20px;
             }
-
-            .foot paper-icon-button {
-                width: 24px;
-                height: 24px;
-                padding: 0;
-                margin-left: 24px;
+            .right-btn::after, .left-btn::after{
+              content: '';
+              position: absolute;
+              width: 5px;
+              height: 5px;
+              border-left: 2px solid #3a3a3a;
+              border-bottom: 2px solid #3a3a3a;
             }
-
-            .foot .status {
-                margin: 0 8px 0 32px;
+            .right-btn{
+              position: relative;
             }
-
-            .foot .size {
-                width: 64px;
-                text-align: right;
+            .left-btn::after{
+              transform: rotate(45deg);
             }
-
-            .size paper-dropdown-menu {
-                --paper-input-container-underline: {
-                    display: none;
-                };
-                --paper-input-container-input: {
-                    text-align: right;
-                    font-size: 12px;
-                    font-weight: 500;
-                    color: var(--app-default-color, rgba(0, 0, 0, .54));
-                };
-                --paper-dropdown-menu-icon: {
-                    color: var(--app-default-color, rgba(0, 0, 0, .54));
-                };
+            .right-btn::after{
+              left: 15px;
+              transform: rotate(-135deg);
             }
         </style>
-        <div class$="layout horizontal center foot [[_computePosition(footerPosition)]]">
-            <div class$="[[footerPosition]]">
-                <div class="layout horizontal end-justified center">
-                    <div class="layout horizontal center" style="display: inline-block;">
-                        <div style="text-align: right;">
-                            Per Page
-                        </div>
-                        <div class="size">
-                          ${this.availableSize.length ? html`
-                                <paper-dropdown-menu no-label-float vertical-align="bottom">
-                                    <paper-listbox attr-for-selected="size"
-                                                   @iron-select="${this._newSizeIsSelected}"
-                                                   selected="${this.size}"
-                                                   slot="dropdown-content">
-                                        ${this.availableSize.map(size => html`<paper-item size="${size}">${size}</paper-item>`)}
-                                    </paper-listbox>
-                                </paper-dropdown-menu>
-                          ` : html`
-                                <span>50</span>
-                          `}                            
-                        </div>
-                    </div>
-
-                    <div class="status" style="display: inline-block;">
-                        ${this._computeCurrentSize(this.page, this.size)} - ${this._computeCurrentMaxSize(this.page, this.size, this.totalElements)} of ${this.totalElements}
-                    </div>
-                    
-                    <paper-icon-button icon="chevron-left" 
-                                       ?disabled="${!this._prevButtonEnabled(this.page)}" 
-                                       @click="${this._prevPage}"></paper-icon-button>
-                                       
-                    <paper-icon-button icon="chevron-right" 
-                                       ?disabled="${!this._nextButtonEnabled(this.page, this.totalPages)}" 
-                                       @click="${this._nextPage}"></paper-icon-button>
-                
-                </div>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+        <div class="wrapper is-flex" style="margin-top: 20px;">
+          <div class="size">
+            ${this.availableSize.length ? html`
+            <p class="is-capitalized is-size-7" selected="${this.size}" slot="dropdown-content" @iron-select="${this._newSizeIsSelected}"> Per Page <span>${this.availableSize.map(size => html`${size}`)}</span></p>
+            ` : html`
+            <p class="is-capitalized is-size-7">Per Page <span>60</span></p>
+            `}
+          </div>
+          <div class="range">
+            <div class="is-flex">
+              <div class="pagination-range">
+                <p class="is-size-7">${this._computeCurrentSize(this.page, this.size)} - ${this._computeCurrentMaxSize(this.page, this.size, this.totalElements)} of ${this.totalElements}</p>
+              </div>
+              <div class="is-flex pagination-buttons">
+                <div class="left-btn btn" @click="${this._prevPage}" ?disabled="${!this._prevButtonEnabled(this.page)}"></div>
+                <div class="right-btn btn" @click="${this._nextPage}" ?disabled="${!this._nextButtonEnabled(this.page, this.totalPages)}"></div>
+              </div>
             </div>
+          </div>
         </div>`;
   }
 

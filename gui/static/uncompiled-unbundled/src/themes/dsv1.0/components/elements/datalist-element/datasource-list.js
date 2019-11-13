@@ -394,7 +394,8 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
         // notify: true,
 
       },
-      title: String
+      title: String,
+      searchText: String
     };
   }
 
@@ -440,6 +441,7 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
         .title=${this.title}
         .pl=${this.pl}
         .q=${this.q}
+        .searchText=${this.searchText}
         @search="${this._search}"
         @page-change="${this._pageChanged}"
         @export="${this._exportType}"

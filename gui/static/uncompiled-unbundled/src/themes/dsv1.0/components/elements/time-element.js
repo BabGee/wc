@@ -6,13 +6,33 @@ import { TimeElementBase } from "../../../../elements/base/time-element.js";
 class TimeElement extends TimeElementBase {
   static get properties() {
     return {
-      dropDownMenuHidden: Boolean
+      dropDownMenuHidden: Boolean,
+      today: String,
+      todayHourTime: String,
+      todayMinTime: String,
+      amOrPm: String
     };
   }
 
   constructor() {
     super();
     this.dropDownMenuHidden = true;
+    this.today = new Date();
+    this.todayHourTime = this._getHour(this.today);
+    this.todayMinTime = this.today.getMinutes().toString();
+    this.amOrPm = this._getAMOrPM(this.today);
+  }
+
+  _getHour(today) {
+    let H = today.getHours();
+    let h = H % 12 || 12;
+    return h.toString();
+  }
+
+  _getAMOrPM(today) {
+    let H = today.getHours();
+    var ampm = H < 12 || H === 24 ? "AM" : "PM";
+    return ampm.toString();
   }
 
   renderDefault() {
@@ -77,7 +97,7 @@ class TimeElement extends TimeElementBase {
 <div class="timer-container">
  <div class="timer-element" @click="${() => this._dropdown()}">
   <p class="has-text-centered has-text-weight-bold is-size-4">
-    <a class="hour" id="hrs">12</a>&nbsp; : &nbsp;<a class="minutes" id="min">00</a> <a class="tod" id="tod">AM</a></p>
+    <a class="hour" id="hrs">${this.todayHourTime}</a>&nbsp; : &nbsp;<a class="minutes" id="min">${this.todayMinTime}</a> <a class="tod" id="tod">${this.amOrPm}</a></p>
  </div>
  <div id="timer-dropdown" class="timer-dropdown is-hidden">
   <div class="inner-container columns">
@@ -154,7 +174,7 @@ class TimeElement extends TimeElementBase {
     const hourText = this.shadowRoot.querySelector("#hrs");
     const minText = this.shadowRoot.querySelector("#min");
     const timeofDay = this.shadowRoot.querySelector("#tod");
-    const actualTime = hourText.innerHTML + ":" + minText.innerHTML + " " + timeofDay.innerHTML;
+    const actualTime = hourText.innerText + ":" + minText.innerText + " " + timeofDay.innerText;
     const picker = actualTime;
     return picker;
   }
@@ -167,18 +187,14 @@ class TimeElement extends TimeElementBase {
     // }
   }
 
-  valid(Validation) {
-    this.shadowRoot.querySelector('.validation-info').style.display = 'none'; // Revert general text content
-
-    this.shadowRoot.querySelector('.validation-info').textContent = 'Required';
+  valid(Validation) {//this.shadowRoot.querySelector('.validation-info').style.display='none';
+    // Revert general text content
+    //this.shadowRoot.querySelector('.validation-info').textContent= 'Required';
   }
 
-  invalid(validation) {
-    this.shadowRoot.querySelector('.validation-info').style.display = 'block';
-
-    if (validation) {
-      this.shadowRoot.querySelector('.validation-info').textContent = validation;
-    }
+  invalid(validation) {// this.shadowRoot.querySelector('.validation-info').style.display='block';
+    // if (validation)
+    // {this.shadowRoot.querySelector('.validation-info').textContent= validation;}
   }
 
   firstUpdated(changedProperties) {

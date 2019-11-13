@@ -6,7 +6,8 @@ import { Logger } from '../logger.js';
 export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseClass) {
   constructor() {
     super();
-    this.loader = undefined;
+    this.loader = undefined; // todo move into serviceCallMixin
+
     this.loading = true;
     this.empty = false;
     this.page = 1;

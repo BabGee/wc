@@ -15,7 +15,8 @@ export const COMMAND_GET_SECTION = 'get_section';
 export const COMMAND_GET_INTERFACE = 'get_interface';
 export const COMMAND_GET_GATEWAY_DETAILS = 'get_gateway_details';
 export const COMMAND_GET_INSTITUTION_DETAILS = 'get_institution_details';
-export const COMMAND_DATA_SOURCE = 'data_source'; // Action Commands
+export const COMMAND_DATA_SOURCE = 'data_source';
+export const COMMAND_VCS_MENU = 'vcs_menu'; // Action Commands
 
 export const COMMAND_SESSION = 'session';
 export const COMMAND_WINDOW_EVENT = 'window_event';

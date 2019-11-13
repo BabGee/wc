@@ -56,12 +56,16 @@ class TextArea extends TextAreaBase {
     content: '\f00c';
     position: absolute;
 }
+#warning-text{
+  display:none;
+}
 </style>
 <div class="text-area">
   <div class="field">
       <div class="control">
           <textarea id="input" class="textarea" placeholder=${this.e.name}>${this.value}</textarea>
       </div>
+      <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
   </div>
 </div>
  `;
@@ -76,12 +80,14 @@ class TextArea extends TextAreaBase {
   }
 
   valid(validation) {
+    this.qs('#warning-text').style.display === 'block' ? this.qs('#warning-text').style.display = 'none' : this.qs('#warning-text').style.display = 'block';
     Logger.i.debug(validation);
 
     if (validation) {}
   }
 
   invalid(validation) {
+    this.qs('#warning-text').style.display = 'block';
     Logger.i.debug(validation);
   }
 

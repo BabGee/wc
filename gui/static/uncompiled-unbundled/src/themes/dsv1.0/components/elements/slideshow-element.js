@@ -203,7 +203,9 @@ visibility: hidden;
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties); // todo should wait for after data loaded
+  }
 
+  onLoadData(dsc) {
     this.showSlidesAuto();
   }
 

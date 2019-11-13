@@ -9,6 +9,7 @@ import "./datalist-element/loader-element.js";
 class DataListElement extends DataListElementBase {
   constructor() {
     super();
+    this.searchText = '';
   }
 
   renderDefault() {
@@ -29,6 +30,7 @@ class DataListElement extends DataListElementBase {
                         .size="${this.limit}"
                         .title="${this.title}"
                         toggle-columns="${this.toggleColumns}"
+                        .searchText = "${this.searchText}"
                         
                         @sort="${this._handleSort}"
                         @filter="${this._handleFilter}"
@@ -76,7 +78,8 @@ class DataListElement extends DataListElementBase {
         type: Boolean,
         value: false,
         notify: true
-      }
+      },
+      searchText: String
     };
   }
 
@@ -113,7 +116,8 @@ class DataListElement extends DataListElementBase {
   _handleSearch(event) {
     var filter = event.detail.value;
     var column = event.detail.column;
-    var columns = event.detail.searchFields; // console.log(columns);
+    var columns = event.detail.searchFields;
+    this.searchText = filter; // console.log(columns);
     // delete any previous column and general search query
 
     this.deleteParamKeys(columns.concat(['q']), false); // update new search query param

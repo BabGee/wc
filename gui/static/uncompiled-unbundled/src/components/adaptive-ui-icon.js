@@ -104,7 +104,7 @@ class AdaptiveUiIcon extends LitElement {
           }
         } else if (this._iconsetName) {
           // load iconset
-          const moduleSpecifier = `../themes/${window.THEME}/icons/${this._iconsetName}.mjs`;
+          const moduleSpecifier = `../themes/${window.THEME}/icons/${this._iconsetName}.js`;
           console.log('loading module:' + moduleSpecifier);
           import(moduleSpecifier).then(module => {
             // module.default();

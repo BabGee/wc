@@ -8,6 +8,11 @@ export class Command {
     // default action is to assume the command response is a string
     this._response = this.commandResponse; // console.log('command parse');
   }
+  /**
+   * Command Response Getter
+   * @return {*}
+   */
+
 
   get response() {
     return this._response;

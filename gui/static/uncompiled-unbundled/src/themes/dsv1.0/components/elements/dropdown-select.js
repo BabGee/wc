@@ -26,6 +26,7 @@ class DropdownSelect extends DropdownSelectBase {
           display:inline-block;
           position: relative;
           cursor: pointer;
+          width: 100%;
           /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
           -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
           box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);*/
@@ -157,6 +158,7 @@ class DropdownSelect extends DropdownSelectBase {
         display:inline-block;
         position: relative;
         cursor: pointer;
+        width: 100%;
         /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);*/

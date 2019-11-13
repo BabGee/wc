@@ -815,6 +815,7 @@ export class TableType extends LitElement {
               <paper-input style="display: inline-block"
                            placeholder="Search ..."
                            name="search"
+                           value="${this.searchText}"
                            id="q"></paper-input>
 
               <button type="submit" @click="${this._search}">Search</button>
@@ -1017,7 +1018,8 @@ ${this.paginate ? html`
       selected: {
         type: Array
       },
-      title: String
+      title: String,
+      searchText: String
     };
   }
 
@@ -1149,6 +1151,8 @@ ${this.paginate ? html`
     const self = this;
     const q = self.shadowRoot.querySelector('#q').value;
     const qIn = self.shadowRoot.querySelector('#qIn').selected; // console.log(q);
+
+    this.searchText = q;
 
     if (q) {
       // console.log(self.qIn);
