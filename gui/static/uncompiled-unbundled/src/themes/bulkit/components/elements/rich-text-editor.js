@@ -1,7 +1,7 @@
 import { css, html } from "../../../../../node_modules/lit-element/lit-element.js";
 import { RichTextEditorBase } from "../../../../elements/base/rich-text-editor.js";
 import { SharedStyles } from "../../styles/shared-styles.js";
-import pell from "../../../../../node_modules/pell/dist/pell.min.js";
+import pell from "../../../../../node_modules/pell/src/pell.js";
 
 class RichTextEditor extends RichTextEditorBase {
   constructor() {

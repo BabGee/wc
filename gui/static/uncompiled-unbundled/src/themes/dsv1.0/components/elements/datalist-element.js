@@ -35,6 +35,7 @@ class DataListElement extends DataListElementBase {
                         @sort="${this._handleSort}"
                         @filter="${this._handleFilter}"
                         @search="${this._handleSearch}"
+                        @clear-search="${this._handleClearSearch}"
                         @dropdown-filter="${this._handleDFilter}"
                         @filter-th-content="${this._handleFilterTh}"
                         @filter-date-range="${this._handleDateRangeChange}"
@@ -123,6 +124,13 @@ class DataListElement extends DataListElementBase {
     this.deleteParamKeys(columns.concat(['q']), false); // update new search query param
 
     this.updateParams(column, filter);
+  }
+
+  _handleClearSearch(event) {
+    this.searchText = "";
+    var columns = event.detail.searchFields; // delete any previous column and general search query
+
+    this.deleteParamKeys(columns.concat(['q']), true);
   }
 
   _handleDateRangeChange(event) {

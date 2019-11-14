@@ -41,7 +41,7 @@ export class Logger {
 
   debug(...message) {
     if (window.process['env']['NODE_ENV'] === 'development') {
-      this.info(...message);
+      console.debug(...message);
     }
   }
 

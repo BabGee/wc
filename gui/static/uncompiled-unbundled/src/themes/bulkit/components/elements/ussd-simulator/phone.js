@@ -790,7 +790,7 @@ class Nexus4 extends LitElement {
     var params = {
       'MSISDN': this.msisdn,
       'service_code': this.serviceCode,
-      'session_id': this.session,
+      'sessionid': this.session,
       'ussd_string': this.ussdString
     };
     this.isLoading = true;

@@ -5,7 +5,8 @@ import { Command } from "./commands/command.js";
 import { GetGatewayDetails } from "./commands/get-gateway-details.js";
 import { GetInstitutionDetails } from "./commands/get-institution-details.js";
 import { GetInterface } from "./commands/get-interface.js";
-import { DataSource } from "./commands/data-source.js"; // Response Status
+import { DataSource } from "./commands/data-source.js";
+import { Logger } from "../logger.js"; // Response Status
 
 const STATUS_SUCCESS = '00';
 const STATUS_FAILED = '96'; // service command definations
@@ -134,9 +135,13 @@ export class Response {
     for (const serviceCommand in this.response['response']) {
       // 3. call parse with each of the commands
       const commandResponse = this.parse(serviceCommand, config, true);
-      this.serviceCommands[serviceCommand] = commandResponse; // TODO warn [SWITCH CONFIGURATION] if get_interface and get_section responses exist from the same service
-      // 4.  cache of the response for performance optimization
+      this.serviceCommands[serviceCommand] = commandResponse; // 4.  cache of the response for performance optimization
       // and also to have them in a single container to return
+    } // Warn if get_interface and get_section responses exist from the same service
+
+
+    if (this.containsServiceCommand(COMMAND_GET_SECTION) && this.containsServiceCommand(COMMAND_GET_SECTION)) {
+      Logger.i.switchConfiguration('get_interface and get_section usage on the same service');
     }
   }
 

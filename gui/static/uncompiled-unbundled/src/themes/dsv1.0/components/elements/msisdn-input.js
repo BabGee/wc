@@ -49,13 +49,11 @@ class MsisdnInput extends MsisdnInputBase {
         color:#4a4a4a;
         }
 </style>
-${this.loading ? html`
-<loader-element></loader-element>` : html`
-<div class="column is-12 is-block is-paddingless">
+<div class="column is-8 is-block is-paddingless">
         <div class="field">
           <div class="select-country">
            <select id="code"  @change="${this.codeSelected}">
-            ${this.rows.map(row => html`<option ?selected="${row[0] === '254'}" value="${row[0]}">${row[1]} +${row[0]}</option>`)}
+           ${this.loading ? html`<loader-element></loader-element>` : html`${this.rows.map(row => html`<option ?selected="${row[0] === '254'}" value="${row[0]}">${row[1]} +${row[0]}</option>`)}`} 
             </select>
               </div>
           <div class="control  has-icons-left">
@@ -76,7 +74,6 @@ ${this.loading ? html`
           </div>
         </div>
         </div>
-`}
         `;
   }
 

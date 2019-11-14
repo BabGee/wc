@@ -443,6 +443,7 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
         .q=${this.q}
         .searchText=${this.searchText}
         @search="${this._search}"
+        @clear-search="${this._clearSearch}"
         @page-change="${this._pageChanged}"
         @export="${this._exportType}"
         @size-change="${this._sizeChanged}"
@@ -658,6 +659,14 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
         column: column,
         searchFields: columns,
         value: filter
+      }
+    }));
+  }
+
+  _clearSearch(event) {
+    this.dispatchEvent(new CustomEvent('clear-search', {
+      detail: {
+        searchFields: event.detail.searchFields
       }
     }));
   }

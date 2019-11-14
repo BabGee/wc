@@ -4,10 +4,7 @@ import { CcInputBase } from "../../../../elements/base/cc-input.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class CcInput extends CcInputBase {
-  createRenderRoot() {
-    return this;
-  }
-
+  // createRenderRoot() {return this;}
   renderDefault() {
     return html`
  <div class="column">
@@ -15,7 +12,7 @@ class CcInput extends CcInputBase {
   <div class="control  has-icons-left has-icons-right">
 
      <gold-cc-input id="input" placeholder="${this.name}" required label="${this.name}" auto-validate></gold-cc-input>
-          <small class="validation-info error" style="display: none;">Required</small>
+          <small class="validation-info error" style="display: none; color: red;">Required</small>
 
   </div>
 </div>

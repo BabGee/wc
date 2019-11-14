@@ -303,7 +303,7 @@ class DropdownSelect extends DropdownSelectBase {
           arrow.classList.remove('is-hidden');
           selected.className = '';
           selected.innerHTML = select.options[select.selectedIndex].text;
-          this.selectedIndex = data;
+          this.selectedIndex = select.value;
         }
       });
       slim.open(); //slim select search input from closing dropdown

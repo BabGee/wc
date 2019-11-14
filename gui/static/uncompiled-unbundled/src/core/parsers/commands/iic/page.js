@@ -29,13 +29,10 @@ export class Page {
 
     for (var feedKIndex in keys) {
       var feedK = keys[feedKIndex];
-      var toPass = this.tabJson[this.title][feedK]; // if (Object.keys(toPass)[0]=='Profile'){ //todo
-      //    console.log('Profile Feed');
-      // }else{
-
+      var toPass = this.tabJson[this.title][feedK];
       var feed = new PageInputGroup(this, toPass, feedIndex);
       toReturn.push(feed);
-      feedIndex++; // }
+      feedIndex++;
     }
 
     return toReturn;

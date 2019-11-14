@@ -822,7 +822,7 @@ export class TableType extends LitElement {
               <button type="button" @click="${this._searchReset}">Clear</button>
 
           </div>
-      </div>    
+      </div>
       ` : html``}
       <!-- Responsive table starts here -->
 <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
@@ -1144,7 +1144,7 @@ ${this.paginate ? html`
   }
 
   _searchReset(evt) {
-    this.shadowRoot.querySelector('#q').value = "";
+    this._clearSearch();
   }
 
   _search(evt) {
@@ -1168,6 +1168,17 @@ ${this.paginate ? html`
         }
       }));
     }
+  }
+
+  _clearSearch(event) {
+    const self = this;
+    this.dispatchEvent(new CustomEvent('clear-search', {
+      detail: {
+        searchFields: self.searchFields(self.columns).map(function (field) {
+          return field.propertyPath;
+        })
+      }
+    }));
   }
 
 }

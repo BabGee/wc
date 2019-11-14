@@ -210,8 +210,13 @@ class ElementLoader extends LitElement {
     }).catch(error => {
       Logger.i.info(`${elementName} Couldn't be loaded`);
       Logger.i.error(error);
+      const missingElementName = 'missing-element'; // avoid recursive loop, return if it's missing-element
+
+      if (elementName === missingElementName) {
+        return;
+      }
+
       const missingElementPath = '../elements/missing-element.js';
-      const missingElementName = 'missing-element';
       self.importAndInit(missingElementPath, missingElementName, renderInstance, (newElement, hl) => {
         newElement.msg = elementName; // TODO ignored promise
 
