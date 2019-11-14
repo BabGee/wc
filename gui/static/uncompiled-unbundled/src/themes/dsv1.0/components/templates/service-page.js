@@ -410,16 +410,16 @@ class ServicePage extends ServicePageBase {
                     <div class="columns is-mobile profile-header-container">
                         <div class="column is-2">
                             <a href="">
-                                <span class="icon" style="margin: 4px 0 0 0;">
+                                <!-- <span class="icon" style="margin: 4px 0 0 0;">
                                   <fa-icon class="fab fa-elementor" size="1rem" color="#ccced0"></fa-icon>
-                                </span>
+                                </span> -->
                             </a>
                         </div>
                         <div class="column is-2">
                             <a href="">
-                                <span class="icon" style="margin: 4px 0 0 0;">
+                                <!-- <span class="icon" style="margin: 4px 0 0 0;">
                                   <fa-icon class="fas fa-bell" size="1rem" color="#ccced0"></fa-icon>
-                                </span>
+                                </span> -->
                             </a>
                         </div>
                         <div class="column profile">

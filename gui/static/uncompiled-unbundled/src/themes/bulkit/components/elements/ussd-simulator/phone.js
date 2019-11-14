@@ -789,7 +789,7 @@ class Nexus4 extends LitElement {
   makeRequest() {
     var params = {
       'MSISDN': this.msisdn,
-      'service_code': this.serviceCode,
+      'accesspoint': this.serviceCode,
       'sessionid': this.session,
       'ussd_string': this.ussdString
     };
