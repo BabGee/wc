@@ -1,0 +1,1 @@
+import{HyperlinkElementBase,ACTION_SERVICE_CALL,buttonMixin}from"../../../../components/adaptive-ui.js";class HyperlinkElement extends buttonMixin(HyperlinkElementBase){static get properties(){return{name:String,params:{type:Object,value:{}}}}get action(){return ACTION_SERVICE_CALL}}customElements.define(HyperlinkElement.is,HyperlinkElement);

@@ -1,0 +1,1 @@
+import{TextInputBase,inputMixin}from"../../../../components/adaptive-ui.js";class TextInput extends inputMixin(TextInputBase){}window.customElements.define(TextInput.is,TextInput);

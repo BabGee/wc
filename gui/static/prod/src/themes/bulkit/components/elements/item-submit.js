@@ -1,0 +1,1 @@
+import{ItemSubmitBase,html}from"../../../../components/adaptive-ui.js";class ItemSubmit extends ItemSubmitBase{constructor(){super()}renderDefault(){return html``}}customElements.define(ItemSubmit.is,ItemSubmit);
