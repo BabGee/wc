@@ -842,8 +842,7 @@ class Nexus4 extends LitElement {
     } // Logger.i.debug(string);
 
 
-    const message = string.substring(3);
-    this.updatePreview(message);
+    this.updatePreview(string);
   }
   /*	Current Tab 	*/
 
