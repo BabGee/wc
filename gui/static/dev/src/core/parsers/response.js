@@ -8,8 +8,8 @@ import { GetInterface } from "./commands/get-interface.js";
 import { DataSource } from "./commands/data-source.js";
 import { Logger } from "../logger.js"; // Response Status
 
-const STATUS_SUCCESS = '00';
-const STATUS_FAILED = '96'; // service command definations
+export const STATUS_SUCCESS = '00';
+export const STATUS_FAILED = '96'; // service command definations
 
 export const COMMAND_REDIRECT = 'redirect';
 export const COMMAND_GET_SECTION = 'get_section';

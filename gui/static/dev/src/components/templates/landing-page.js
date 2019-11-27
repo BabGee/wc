@@ -23,7 +23,7 @@ export const LandingPageBase = class extends PageViewElement {
     };
   }
   /*
-  TODO deprecated, this + import dependencies left for reference
+  TODO #268 deprecated, this + import dependencies left for reference
   stateChanged(state) {
     this.defaultColor = state.app.payload.defaultColor;
     updateStyles({'--app-default-color': this.defaultColor});

@@ -1,9 +1,11 @@
 import { httpMixin } from "./http-mixin.js";
+import { Logger } from "../logger.js";
+import { STATUS_SUCCESS } from "../parsers/response.js";
 export const fileUploadMixin = BaseClass => class extends httpMixin(BaseClass) {
   constructor() {
     super();
-  } // TODO fire events or callbacks for watching the file reader onload and return the src for previewing
-  // TODO fire events or callbacks for watching the upload progress
+  } // TODO #271 fire events or callbacks for watching the file reader onload and return the src for previewing
+  // TODO #271 fire events or callbacks for watching the upload progress
 
   /**
     * Temp File Uploader
@@ -19,7 +21,7 @@ export const fileUploadMixin = BaseClass => class extends httpMixin(BaseClass) {
     const self = this;
     return new Promise(function (resolve, reject) {
       if (types && !file.type.match(types)) {
-        console.warn('[ INCOMPLETE DEV ] File type not supported!');
+        Logger.i.incompleteDev('File type not supported!');
         reject(new Error('File not supported!'));
       }
 
@@ -47,12 +49,11 @@ export const fileUploadMixin = BaseClass => class extends httpMixin(BaseClass) {
           // TODO perform temp file response parsing
           const response = req.response;
 
-          if ('response_status' in response && response['response_status'] === '00') {
+          if ('response_status' in response && response['response_status'] === STATUS_SUCCESS) {
             resolve({
               'name': file.name,
               'response': response.response,
-              'result': e.target.result // TODO is it possible to preview from /media/tmp/uploads/?
-
+              'result': e.target.result
             });
           } else {
             if ('response' in response) {

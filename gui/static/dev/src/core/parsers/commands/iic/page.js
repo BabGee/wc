@@ -58,7 +58,7 @@ export class Page {
 
   get title() {
     return this._title;
-  } // todo not DRY
+  } // todo not DRY, delete one
 
 
   getTitle() {

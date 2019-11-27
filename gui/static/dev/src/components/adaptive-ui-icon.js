@@ -1,13 +1,14 @@
 import { LitElement, html } from "../../node_modules/lit-element/lit-element.js";
 import { directive } from "../../node_modules/lit-html/lit-html.js";
+import { Logger } from "../core/logger.js";
 const _DEFAULT_ICONSET = 'icons'; // this directive waits for a promise to resolve then
 // updates the part with the content
-// todo this can be re-used so here might not be the best location
+// TODO #262 this can be re-used so here might not be the best location
 
 const resolvePromise = directive(promise => part => {
   // This first setValue call is synchronous, so
   // doesn't need the commit
-  // todo part.setValue("Waiting for promise to resolve.");
+  // TODO #263 part.setValue("Waiting for promise to resolve.");
   Promise.resolve(promise).then(resolvedValue => {
     part.setValue(resolvedValue);
     part.commit();
@@ -98,15 +99,17 @@ class AdaptiveUiIcon extends LitElement {
     return new Promise((resolve, reject) => {
       if (this._usesIconset()) {
         if (this._iconName === '') {
-          // todo remove icon
+          // todo #264 remove icon
+          // When the icon attribute is updated to undefined or empty value,
+          // the current displayed icon should be removed
           if (this._iconset) {
             this._iconset.removeIcon(this);
           }
         } else if (this._iconsetName) {
           // load iconset
-          // todo if es6-bundled, the icons path is relative to the templates directory
+          // todo #265 if es6-bundled, the icons path is relative to the templates directory
           const moduleSpecifier = `../themes/${window.THEME}/icons/${this._iconsetName}.js`;
-          console.log('loading module:' + moduleSpecifier);
+          Logger.i.debug('loading module:' + moduleSpecifier);
           import(moduleSpecifier).then(module => {
             // module.default();
             // console.log('loaded module:' + moduleSpecifier);

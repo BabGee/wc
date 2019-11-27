@@ -11,10 +11,10 @@
 'use strict';
 
 var precacheConfig = [// ['path', 'hash' ]
-  // todo how does the build tool generate hash for non exisiting paths .e,g
+  // TODO #253 how does the build tool generate hash for non exisiting paths .e,g
   // ['/', '77741e916f1f87bfbe0e4ad0a2a1e592'],
 ];
-var version = '11';
+var version = '12';
 var dist; // create an instance of a db object for us to store the IDB data in
 
 var db;
@@ -30,7 +30,7 @@ function loadDist() {
     if (cursor) {
       // create a list item to put each data item inside when displaying it
       if (cursor.value.name === 'dist') {
-        dist = cursor.value.value; // todo should break cursor here
+        dist = cursor.value.value; // TODO #254  should break cursor here
       } // continue on to the next item in the cursor
 
 
@@ -284,12 +284,12 @@ self.addEventListener('fetch', function (event) {
             return response;
           });
         }).catch(error => {
-          // TODO 6 - Respond with custom offline page
+          // TODO #255 Respond with custom offline page
           console.log('service worker error');
           console.log(error);
         });
       }));
     }
-  } else if (event.request.method === 'POST') {// todo
+  } else if (event.request.method === 'POST') {// TODO #256 Caching to IndexedDB
   }
 });

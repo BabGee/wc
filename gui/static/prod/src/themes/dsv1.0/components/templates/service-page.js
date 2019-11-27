@@ -1,4 +1,4 @@
-import{html$1 as html,LitElement,html as html$1,css,directive,ServicePageBase,Colors,Fonts,VIEW_MODE_DIALOG}from"../../../../components/adaptive-ui.js";import"./section-page.js";const template=html`<iron-iconset-svg name="editor" size="24">
+import{html$1 as html,LitElement,html as html$1,css,directive,Logger,ServicePageBase,Colors,Fonts,VIEW_MODE_DIALOG}from"../../../../components/adaptive-ui.js";import"./section-page.js";const template=html`<iron-iconset-svg name="editor" size="24">
 <svg><defs>
 <g id="attach-file"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"></path></g>
 <g id="attach-money"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"></path></g>
@@ -154,7 +154,7 @@ import{html$1 as html,LitElement,html as html$1,css,directive,ServicePageBase,Co
         display: none;
       }
     </style>
-    `}static get properties(){return{icon:{type:String},theme:{type:String},src:{type:String}}}firstUpdated(){this._iconChanged(this.icon)}_iconChanged(icon){var parts=(icon||"").split(":");this._iconName=parts.pop();this._iconsetName=parts.pop()||_DEFAULT_ICONSET;return this._updateIcon()}_usesIconset(){return this.icon||!this.src}_updateIcon(){return new Promise(resolve=>{if(this._usesIconset()){if(""===this._iconName){if(this._iconset){this._iconset.removeIcon(this)}}else if(this._iconsetName){const moduleSpecifier=`../themes/${window.THEME}/icons/${this._iconsetName}.js`;console.log("loading module:"+moduleSpecifier);import(moduleSpecifier).then(module=>{if(this._iconName)resolve(module.icons[this._iconName])})}}})}}customElements.define("adaptive-ui-icon",AdaptiveUiIcon);const ServiceStyles=css`
+    `}static get properties(){return{icon:{type:String},theme:{type:String},src:{type:String}}}firstUpdated(){this._iconChanged(this.icon)}_iconChanged(icon){var parts=(icon||"").split(":");this._iconName=parts.pop();this._iconsetName=parts.pop()||_DEFAULT_ICONSET;return this._updateIcon()}_usesIconset(){return this.icon||!this.src}_updateIcon(){return new Promise(resolve=>{if(this._usesIconset()){if(""===this._iconName){if(this._iconset){this._iconset.removeIcon(this)}}else if(this._iconsetName){const moduleSpecifier=`../themes/${window.THEME}/icons/${this._iconsetName}.js`;Logger.i.debug("loading module:"+moduleSpecifier);import(moduleSpecifier).then(module=>{if(this._iconName)resolve(module.icons[this._iconName])})}}})}}customElements.define("adaptive-ui-icon",AdaptiveUiIcon);const ServiceStyles=css`
     
     @font-face {
         font-family: 'TT Norms';
@@ -508,7 +508,12 @@ import{html$1 as html,LitElement,html as html$1,css,directive,ServicePageBase,Co
             <div class="modal-header">
               <div class="heading">
                 <h1 class="title" style="width: 80%; display: inline-block;">${this.page.title}</h1>
-                <button style="display: inline-block;float: right;" @click=${this._viewList}>Back</button>
+
+ 
+                <a style="display: inline-block;float: right; color: black;
+                border: 1px solid black; padding: 0.1rem 1rem; 
+                border-radius: 25px 1px 1px 25px; box-shadow: 1px 1px 1px 0px black; " @click=${this._viewList}>Back</a>
+
               </div>
             </div>
             <div class="modal-body">            
@@ -616,7 +621,7 @@ import{html$1 as html,LitElement,html as html$1,css,directive,ServicePageBase,Co
                                       </div>
                                       <div class="profile-buttons">
                                           <div class="main-cta center">
-                                              <a href="/logout" class="button is-rounded is-uppercase">Logout</a>
+                                              <a @click="${this.logout}" class="button is-rounded is-uppercase">Logout</a>
                                           </div>
                                       </div>
                                   </div>

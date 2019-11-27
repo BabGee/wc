@@ -344,7 +344,12 @@ class ServicePage extends ServicePageBase {
             <div class="modal-header">
               <div class="heading">
                 <h1 class="title" style="width: 80%; display: inline-block;">${this.page.title}</h1>
-                <button style="display: inline-block;float: right;" @click=${this._viewList}>Back</button>
+
+ 
+                <a style="display: inline-block;float: right; color: black;
+                border: 1px solid black; padding: 0.1rem 1rem; 
+                border-radius: 25px 1px 1px 25px; box-shadow: 1px 1px 1px 0px black; " @click=${this._viewList}>Back</a>
+
               </div>
             </div>
             <div class="modal-body">            
@@ -452,7 +457,7 @@ class ServicePage extends ServicePageBase {
                                       </div>
                                       <div class="profile-buttons">
                                           <div class="main-cta center">
-                                              <a href="/logout" class="button is-rounded is-uppercase">Logout</a>
+                                              <a @click="${this.logout}" class="button is-rounded is-uppercase">Logout</a>
                                           </div>
                                       </div>
                                   </div>

@@ -58,11 +58,10 @@ class AdaptiveUi extends connect(store)(LitElement) {
       _page: Number,
       _tab: Number,
       _payload: Object,
-      // todo used in section dialog, update to use selector
+      // TODO #266 Only used in section dialog, update to use selector
       payloadjson: String,
       params: String,
       csrftoken: String,
-      service: String,
       activeTab: Object,
       activePageGroup: Object
     };
@@ -98,7 +97,7 @@ class AdaptiveUi extends connect(store)(LitElement) {
     Logger.i.debug('dispatched getPayload');
     installRouter(location => store.dispatch(navigate(window.decodeURIComponent(location.pathname))));
     installOfflineWatcher(offline => store.dispatch(updateOffline(offline)));
-    /* todo complete
+    /* todo #267 complete
       installMediaQueryWatcher(`(min-width: 460px)`, (matches) => store.dispatch(updateLayout(matches)));
     */
 
@@ -180,7 +179,7 @@ class AdaptiveUi extends connect(store)(LitElement) {
     this._payload = state.app.payload; // todo deprecated, still used in section dialog, update to use selector
 
     /*
-        // TODO Theme Colors Verifier
+        // TODO #270 Theme Colors Verifier
         // verifies the themes colors if can work i.e do not make elements invisible
         // if can't works updates with default working colors
          let defaultColor = state.app.payload.defaultColor;
@@ -194,30 +193,6 @@ class AdaptiveUi extends connect(store)(LitElement) {
             '--app-accent-color': accentColor
         });
         */
-
-    if (state.app.service && state.app.service !== this.service) {
-      const service = state.app.service;
-      this.service = service;
-      const paramsEncoded = state.app.params;
-      console.log(service, paramsEncoded);
-
-      if (paramsEncoded) {
-        const params = this.paramsToObject(new URLSearchParams(decodeURIComponent(paramsEncoded)).entries());
-        console.log(params); // parse params to object
-
-        setTimeout(function () {
-          self.dialogView.apply(self, [service, params]);
-        }, 3000);
-      } else {
-        // todo Critical optimization point
-        // the dialog view should be invoked after the template page resolves
-        // but always seems to take a while
-        //
-        setTimeout(function () {
-          self.dialogView.apply(self, [service, {}]);
-        }, 3000);
-      }
-    }
   }
 
 }

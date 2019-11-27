@@ -14,17 +14,22 @@ import { Response } from '../core/parsers/response.js';
 export const getPayload = (payloadjson, template) => (dispatch, getState) => {
   // Parse initial interface payload.
   let response = new Response(payloadjson);
-  response.parseAll({}); // TODO [OPTIMIZATION] sequential loading
-  // perform loading of the initial interface payload
+  response.parseAll({}); // TODO #257 [OPTIMIZATION] sequential loading
+  // make API call to load initial interface payload
+  // making an API call to load the initial interface payload,
+  // this would remove the need of passing the payload as a string through adaptive-ui-web component attribute
+  // templating the payload using django template by the
 
   dispatch({
     type: GET_PAYLOAD,
     payload: response
-  }); // TODO should do on each template change
+  }); // TODO #258 Template Switching Without Reload
+  // this can enhance the user experience as template changes currently require a full reload
+  // this is achievable through what dispatching `loadTemplate(template)` does
   // initial load is unnecessary because of the pre-loading in index.html
   // there is need to load the 404 template even for index.html pre-loads
 
-  dispatch(loadTemplate(template)); // TODO above is uncomment for backward compatibility but it's optional when pre-loading
+  dispatch(loadTemplate(template)); // TODO #259 above is uncomment for backward compatibility but it's optional when pre-loading is in effect
 };
 export const navigate = path => dispatch => {
   // console.log(path);
@@ -48,7 +53,7 @@ export const navigate = path => dispatch => {
   dispatch(updatePage(page));
 
   if (paths.length > 1) {
-    // todo is this required?
+    // TODO #260 is this required?
     let view = 'dialog';
     dispatch(updateView(view));
   }
@@ -63,7 +68,7 @@ export const loadTemplate = template => dispatch => {
       import(`../themes/${window.THEME}/components/templates/${template}-page.js`).then(module => {// Put code in here that you want to run every time when
         // navigating to view1 after my-view1.js is loaded.
       }).catch(error => {
-        // todo source of exceptions caught here might be untraceable,
+        // TODO #261 source of exceptions caught here might be untraceable
         // removing this catch block is a dirty hack
         console.error(error);
       });

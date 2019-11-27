@@ -219,7 +219,9 @@ class DropdownSelect extends DropdownSelectBase {
       .custom-width{
         width: 342px;
       }
-
+      #warning-text{
+        display:none;
+      }
       </style>
       <div class="dropdown-item-select">
           <div class="dropdown-item-header" @click='${() => this.dropdown('head')}'>
@@ -241,6 +243,7 @@ class DropdownSelect extends DropdownSelectBase {
           `)} 
               </ul>
           </div>
+          <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
       </div>`;
     }
   }
@@ -341,9 +344,15 @@ class DropdownSelect extends DropdownSelectBase {
     return this.dropdownValue;
   }
 
-  valid(validation) {}
+  valid(validation) {
+    const warningText = this.shadowRoot.querySelector("#warning-text");
+    warningText.style.display = "none";
+  }
 
-  invalid(validation) {}
+  invalid(validation) {
+    const warningText = this.shadowRoot.querySelector("#warning-text");
+    warningText.style.display = "block";
+  }
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);

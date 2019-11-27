@@ -1,6 +1,6 @@
 export const enterSubmitMixin = BaseClass => class extends BaseClass {
   constructor() {
-    super(); // TODO provide an api to make this trigger customizeable by the element
+    super(); // TODO #204 provide an api to make this trigger customizeable by the element
     // this is useful on elements with say more than 1 input
     // and 1 should never cause the submission
 

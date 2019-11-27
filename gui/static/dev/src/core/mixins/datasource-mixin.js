@@ -6,7 +6,7 @@ import { Logger } from '../logger.js';
 export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseClass) {
   constructor() {
     super();
-    this.loader = undefined; // todo move into serviceCallMixin
+    this.loader = undefined; // todo #272 move into serviceCallMixin
 
     this.loading = true;
     this.empty = false;
@@ -214,7 +214,7 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
 
   async loadData() {
     this.loading = true;
-    Logger.i.debug('load data :' + this.dscDataName()); // todo use element service
+    Logger.i.debug('load data :' + this.dscDataName()); // todo #273 use element's service instead of this hard coding
 
     const service = 'DATA SOURCE';
     return new Promise((resolve, reject) => {
@@ -239,8 +239,8 @@ export const dataSourceMixin = BaseClass => class extends serviceCallMixin(BaseC
 
 
   onLoadData(dsc) {
-    // TODO can just check this.totalElements
-    // TODO or use this.dataResponseType()
+    // TODO #274 can just check this.totalElements
+    // or use this.dataResponseType()
     if (dsc.rows && !dsc.rows.length && dsc.groups && !dsc.groups.length && dsc.data && !dsc.data.length) {
       this.empty = true;
     }

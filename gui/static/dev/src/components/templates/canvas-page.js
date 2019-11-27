@@ -16,7 +16,7 @@ export const CanvasPageBase = class extends PageViewElement {
 
     return page.tabs;
   }
-  /* TODO deprecated, left for reference
+  /* TODO #268 deprecated, left for reference
   static get properties() {
     return {
       title: String,

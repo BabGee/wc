@@ -8,7 +8,7 @@ import { PageViewElement } from './page-view-element.js'; // import '../elements
 export const PaymentsPageBase = class extends PageViewElement {
   constructor() {
     super();
-  } // TODO deprecated, left for reference
+  } // TODO #268 deprecated, left for reference
   // static get properties() {
   //   return {
   //     title: String,
@@ -26,7 +26,7 @@ export const PaymentsPageBase = class extends PageViewElement {
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
   }
-  /* TODO deprecated, left for reference
+  /* TODO #268 deprecated, left for reference
   stateChanged(state) {
     this.title = state.app.payload.name;
     this.tagline = state.app.payload.tagLine;

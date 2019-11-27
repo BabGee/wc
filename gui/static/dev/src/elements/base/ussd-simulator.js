@@ -9,6 +9,7 @@ export const UssdSimulatorBase = class extends utilsMixin(serviceCallMixin(BaseE
   }
 
   makeRequest(params) {
+    params['chid'] = 4;
     return new Promise((resolve, reject) => {
       this.callServiceParams(this.service, params).then(res => {
         Logger.i.info(res);
