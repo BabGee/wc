@@ -784,7 +784,7 @@ class Nexus4 extends LitElement {
       this.state = 2;
       this.dialed = true;
       return this.updateComplete.then(() => {
-        this.displayMenu(preview);
+        this.displayMenu(preview['PAGE_STRING'], preview['MNO_RESPONSE_SESSION_STATE']);
       });
     });
   }
@@ -811,7 +811,7 @@ class Nexus4 extends LitElement {
     }
 
     this.makeRequest().then(preview => {
-      this.displayMenu(preview);
+      this.displayMenu(preview['PAGE_STRING'], preview['MNO_RESPONSE_SESSION_STATE']);
     });
   }
 
@@ -826,16 +826,16 @@ class Nexus4 extends LitElement {
     prvw.updateDisplay(message);
   }
 
-  displayMenu(string) {
+  displayMenu(string, sessionState) {
     this.isLoading = false;
 
-    if (string.startsWith(CONNECTION_END)) {
+    if (sessionState == CONNECTION_END) {
       const prvw = this.shadowRoot.querySelector('#preview');
       this.sessionState = CONNECTION_END;
       prvw.setState(this.sessionState);
-    } else if (string.startsWith(CONNECTION_BEG)) {
+    } else if (sessionState == CONNECTION_BEG) {
       this.sessionState = CONNECTION_BEG;
-    } else if (string.startsWith(CONNECTION_CON)) {
+    } else if (sessionState == CONNECTION_CON) {
       this.sessionState = CONNECTION_CON;
     } else {
       Logger.i.warn('Unknown USSD startsWith');

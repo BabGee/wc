@@ -59,7 +59,7 @@ export const httpMixin = BaseClass => class extends BaseClass {
           url: self.baseUrl() + '/GOTO/' + service + '/',
           body: params,
           method: 'POST',
-          handleAs: parseResponse ? 'json' : 'text',
+          handleAs: 'json',
           headers: headers,
           withCredentials: true
         }).then(function (req) {
