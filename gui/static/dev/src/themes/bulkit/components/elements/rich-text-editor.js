@@ -50,7 +50,7 @@ class RichTextEditor extends RichTextEditorBase {
      * Render template in light DOM. Note that shadow DOM features like
      * encapsulated CSS are unavailable.
      */
-    return this;
+    return this; // return document.querySelector('body');
   }
 
   firstUpdated() {

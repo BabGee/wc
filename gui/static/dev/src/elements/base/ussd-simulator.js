@@ -1,20 +1,17 @@
 import { utilsMixin } from "../../core/mixins/utils-mixin.js";
-import { serviceCallMixin } from "../../core/mixins/servicecall-mixin.js";
 import { BaseElement } from "../../core/base-element.js";
-import { COMMAND_VCS_MENU } from "../../core/parsers/response.js";
 import { Logger } from "../../core/logger.js";
-export const UssdSimulatorBase = class extends utilsMixin(serviceCallMixin(BaseElement)) {
+import { httpMixin } from "../../core/mixins/http-mixin.js";
+export const UssdSimulatorBase = class extends utilsMixin(httpMixin(BaseElement)) {
   static get is() {
     return 'ussd-simulator';
   }
 
   makeRequest(params) {
-    params['chid'] = 4;
     return new Promise((resolve, reject) => {
-      this.callServiceParams(this.service, params).then(res => {
+      this.call(this.service, params, false).then(res => {
         Logger.i.info(res);
-        const vcsMenuCommand = res.serviceCommands[COMMAND_VCS_MENU];
-        resolve(vcsMenuCommand.response);
+        resolve(res);
       }, function (rejected) {
         reject(rejected);
       }).catch(function (exception) {

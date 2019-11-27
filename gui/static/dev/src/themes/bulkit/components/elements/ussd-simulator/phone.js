@@ -1,6 +1,7 @@
 import { LitElement, html } from "../../../../../../node_modules/lit-element/lit-element.js";
 import "./simulator-preview.js";
-import { CONNECTION_END } from "./simulator-preview.js";
+import { CONNECTION_END, CONNECTION_BEG, CONNECTION_CON } from "./simulator-preview.js";
+import { Logger } from "../../../../../core/logger.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class Nexus4 extends LitElement {
@@ -11,6 +12,7 @@ class Nexus4 extends LitElement {
     this.ussdString = ''; // generate a random string of X chars
 
     this.session = '';
+    this.sessionState = CONNECTION_BEG;
   }
 
   static get properties() {
@@ -19,6 +21,7 @@ class Nexus4 extends LitElement {
       msisdn: String,
       serviceCode: String,
       ussdString: String,
+      sessionState: String,
       isLoading: Boolean,
       dialed: Boolean
     };
@@ -763,16 +766,16 @@ class Nexus4 extends LitElement {
 
   _callCode() {
     var code = this.shadowRoot.querySelector('#code');
-    var codeV = code.textContent; // remove * at begining
-
-    if (codeV.startsWith('*')) {
-      codeV = codeV.slice(0, 0) + codeV.slice(1, codeV.length);
-    } // remove # at end
-
-
-    if (codeV.endsWith('#')) {
-      codeV = codeV.slice(0, codeV.length - 1) + codeV.slice(codeV.length, codeV.length);
-    }
+    const codeV = code.textContent; // remove * at begining
+    // TODO deprecated, left for reference
+    // if (codeV.startsWith('*'))
+    // {codeV = codeV.slice(0, 0) + codeV.slice(1, codeV.length);}
+    // remove # at end
+    // TODO deprecated, left for reference
+    // if (codeV.endsWith('#')) {
+    //   codeV = codeV.slice(0, codeV.length - 1)
+    //     + codeV.slice(codeV.length, codeV.length);
+    // }
 
     this.serviceCode = codeV; // generate session id
 
@@ -789,9 +792,10 @@ class Nexus4 extends LitElement {
   makeRequest() {
     var params = {
       'MSISDN': this.msisdn,
-      'accesspoint': this.serviceCode,
-      'sessionid': this.session,
-      'ussd_string': this.ussdString
+      'accessPoint': this.serviceCode,
+      'sessionID': this.session,
+      'input': this.ussdString,
+      'sessionState': this.sessionState
     };
     this.isLoading = true;
     return this.el.makeRequest(params);
@@ -823,12 +827,18 @@ class Nexus4 extends LitElement {
   }
 
   displayMenu(string) {
-    this.isLoading = false; // string.startsWith('BEG');
-    // string.startsWith('CON');
+    this.isLoading = false;
 
-    if (string.startsWith('END')) {
+    if (string.startsWith(CONNECTION_END)) {
       const prvw = this.shadowRoot.querySelector('#preview');
-      prvw.setState(CONNECTION_END);
+      this.sessionState = CONNECTION_END;
+      prvw.setState(this.sessionState);
+    } else if (string.startsWith(CONNECTION_BEG)) {
+      this.sessionState = CONNECTION_BEG;
+    } else if (string.startsWith(CONNECTION_CON)) {
+      this.sessionState = CONNECTION_CON;
+    } else {
+      Logger.i.warn('Unknown USSD startsWith');
     } // Logger.i.debug(string);
 
 

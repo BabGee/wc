@@ -180,7 +180,7 @@ class DateElement extends DateElementBase {
       columnSize: {
         type: Array
       },
-      dateRange: Array,
+      // dateRange: Array,
       currentMonth: Number,
       currentYear: Number,
       today: String,
@@ -197,7 +197,7 @@ class DateElement extends DateElementBase {
     this.currentMonth = this.today.getMonth();
     this.currentYear = this.today.getFullYear();
     this.todayDateNumber = this.today.getDate();
-    this.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     this.wasDateSelected = false;
   }
 
@@ -227,11 +227,11 @@ class DateElement extends DateElementBase {
   }
 
   getValue() {
-    let substring = "Date";
-    let date = this.getInput();
+    const substring = 'Date';
+    const date = this.getInput();
 
     if (date.includes(substring)) {
-      //no date was selected, form to validate to invalid 
+      // no date was selected, form to validate to invalid
       return;
     }
 
@@ -267,31 +267,31 @@ class DateElement extends DateElementBase {
   showCalendar(month, year) {
     const date = new Date();
     const inpInput = this.shadowRoot.querySelector('.calendar-select-header');
-    let firstDay = new Date(year, month).getDay(),
-        dateRange = []; // const len = dateRange.length = Math.max(dateRange.length, 2)
+    const firstDay = new Date(year, month).getDay(); // const dateRange = [];
+    // const len = dateRange.length = Math.max(dateRange.length, 2)
+    // const today = date.getDate();
 
-    const today = date.getDate();
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let monthAndYear = this.shadowRoot.getElementById("monthAndYear");
-    monthAndYear.innerHTML = months[month] + "," + year;
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthAndYear = this.shadowRoot.getElementById('monthAndYear');
+    monthAndYear.innerHTML = months[month] + ',' + year;
     let renderNum = 1;
     const bdy = this.shadowRoot.getElementById('days');
-    bdy.innerHTML = "";
+    bdy.innerHTML = '';
 
     for (let i = 0; i < 6; i++) {
-      let row = document.createElement('ul');
+      const row = document.createElement('ul');
 
       for (let j = 0; j < 7; j++) {
         if (i === 0 && j < firstDay) {
-          let cell = document.createElement("li");
-          let cellText = document.createTextNode("");
+          const cell = document.createElement('li');
+          const cellText = document.createTextNode('');
           cell.appendChild(cellText);
           row.appendChild(cell);
         } else if (renderNum > this.daysInMonth(month, year)) {
           break;
         } else {
-          let cell = document.createElement("li");
-          let cellText = document.createTextNode(renderNum);
+          const cell = document.createElement('li');
+          const cellText = document.createTextNode(renderNum);
 
           if (renderNum === date.getDate() && year === date.getFullYear() && month === date.getMonth()) {// cell.classList.add("active");
           }
@@ -300,15 +300,15 @@ class DateElement extends DateElementBase {
           row.appendChild(cell);
           renderNum++;
           cell.addEventListener('click', () => {
-            let allCells = this.shadowRoot.querySelector('#days').querySelectorAll('li');
+            const allCells = this.shadowRoot.querySelector('#days').querySelectorAll('li');
             allCells.forEach(cell => {
               cell.classList.remove('active');
             });
-            cell.classList.add("active");
-            const dateClicked = cell.innerText + " " + months[month] + ", " + year;
+            cell.classList.add('active');
+            const dateClicked = cell.innerText + ' ' + months[month] + ', ' + year;
             this.todayDateNumber = cell.innerText;
             this.dateSelected = `${month + 1}` + '/' + cell.innerText + '/' + year;
-            let str = `<p class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${dateClicked}</p>`;
+            const str = `<p class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${dateClicked}</p>`;
             inpInput.innerHTML = str; // //IMPLEMENTATION OF DATE RANGE FOR FUTURE PURPOSES
             // dateRange.push(...[cell.innerText + " " + months[month] + " " + year]);
             // dateRange.shift();
@@ -344,7 +344,7 @@ class DateElement extends DateElementBase {
       bdy.appendChild(row);
 
       if (this.wasDateSelected == true) {} else {
-        let dates = this.shadowRoot.querySelector('#days').querySelectorAll('li');
+        const dates = this.shadowRoot.querySelector('#days').querySelectorAll('li');
         dates.forEach(date => {
           if (date.innerText == this.todayDateNumber) {
             date.classList.add('active');
@@ -357,7 +357,7 @@ class DateElement extends DateElementBase {
 
   next() {
     if (this.wasDateSelected == true) {
-      let dates = this.shadowRoot.querySelector('#days').querySelectorAll('li');
+      const dates = this.shadowRoot.querySelector('#days').querySelectorAll('li');
       dates.forEach(date => {
         date.classList.remove('active');
       });
@@ -376,7 +376,7 @@ class DateElement extends DateElementBase {
 
   previous() {
     if (this.wasDateSelected == true) {
-      let dates = this.shadowRoot.querySelector('#days').querySelectorAll('li');
+      const dates = this.shadowRoot.querySelector('#days').querySelectorAll('li');
       dates.forEach(date => {
         date.classList.remove('active');
       });
@@ -401,20 +401,20 @@ class DateElement extends DateElementBase {
     super.firstUpdated(changedProperties);
     const inpInput = this.shadowRoot.querySelector('.calendar-select-header');
 
-    if (this.e.required && !this.e.defaultValue) {//show todays date by default in html
+    if (this.e.required && !this.e.defaultValue) {// show todays date by default in html
     }
 
     if (!this.e.required && !this.e.defaultValue) {
-      //shows empty date based on docs
-      const selectDateText = "Select Date";
-      let str = `<p class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${selectDateText}</p>`;
+      // shows empty date based on docs
+      const selectDateText = 'Select Date';
+      const str = `<p class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${selectDateText}</p>`;
       inpInput.innerHTML = str;
     }
 
     if (this.e.defaultValue) {
-      //show default value date
+      // show default value date
       const date = parse(this.e.defaultValue, this.e.details['input_format'], new Date());
-      let defaultDate = new Date(new Date(date.getTime() + Math.abs(date.getTimezoneOffset() * 60000)));
+      const defaultDate = new Date(new Date(date.getTime() + Math.abs(date.getTimezoneOffset() * 60000)));
       this.currentMonth = defaultDate.getMonth();
       this.currentYear = defaultDate.getFullYear();
       this.todayDateNumber = defaultDate.getDate();

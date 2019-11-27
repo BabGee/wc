@@ -539,11 +539,11 @@ class ServicePage extends ServicePageBase {
     profileContent.classList.toggle('is-block');
   }
   /**
-     * Dialogs Back navigation, Pop dialogs' stack
-     *
-     * @param evt
-     * @private
-     */
+   * Dialogs Back navigation, Pop dialogs' stack
+   *
+   * @param evt
+   * @private
+   */
 
 
   _viewList(evt) {

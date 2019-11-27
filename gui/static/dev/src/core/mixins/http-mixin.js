@@ -28,9 +28,18 @@ export const httpMixin = BaseClass => class extends BaseClass {
 
     return fullHost;
   }
+  /**
+   * Make an ajax request and optionally parse the response
+   * @param service
+   * @param params
+   * @param parseResponse whether to parse the response, default to true
+   * @return {Promise<any>}
+   */
 
-  async call(service, params) {
+
+  async call(service, params, parseResponse) {
     const self = this;
+    if (parseResponse === undefined) parseResponse = true;
     const headers = {
       'X-CSRFToken': window.csrfToken,
       'X-Requested-With': 'XMLHttpRequest',
@@ -50,31 +59,36 @@ export const httpMixin = BaseClass => class extends BaseClass {
           url: self.baseUrl() + '/GOTO/' + service + '/',
           body: params,
           method: 'POST',
-          handleAs: 'json',
+          handleAs: parseResponse ? 'json' : 'text',
           headers: headers,
           withCredentials: true
         }).then(function (req) {
-          const requestResponse = req.response; // this is the end of life of raw responses
+          const requestResponse = req.response;
 
-          const response = new Response(requestResponse);
+          if (parseResponse) {
+            // this is the end of life of raw responses
+            const response = new Response(requestResponse);
 
-          if (response.containsServiceCommand(COMMAND_REDIRECT)) {
-            const redirect = response.parse(COMMAND_REDIRECT, false);
-            const redirectTo = redirect.url;
-            var l = document.createElement('a');
-            l.href = redirectTo;
+            if (response.containsServiceCommand(COMMAND_REDIRECT)) {
+              const redirect = response.parse(COMMAND_REDIRECT, false);
+              const redirectTo = redirect.url;
+              var l = document.createElement('a');
+              l.href = redirectTo;
 
-            if (l.pathname === window.location.pathname && l.search === window.location.search) {
-              // update hash
-              window.location.hash = l.hash;
-              window.location.reload();
-            } else {
-              window.location.href = redirectTo;
-            } // TODO Should resolve ? the window is reloading
+              if (l.pathname === window.location.pathname && l.search === window.location.search) {
+                // update hash
+                window.location.hash = l.hash;
+                window.location.reload();
+              } else {
+                window.location.href = redirectTo;
+              } // TODO Should resolve ? the window is reloading
 
+            }
+
+            resolve(response);
+          } else {
+            resolve(requestResponse);
           }
-
-          resolve(response);
         }).catch(function (rejected) {
           // TODO handle network errors
           reject(rejected);
