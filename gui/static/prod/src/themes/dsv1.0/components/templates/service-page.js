@@ -126,7 +126,13 @@ import{html$1 as html,LitElement,html as html$1,css,directive,Logger,ServicePage
 <g id="wc"><path d="M5.5 22v-7.5H4V9c0-1.1.9-2 2-2h3c1.1 0 2 .9 2 2v5.5H9.5V22h-4zM18 22v-6h3l-2.54-7.63C18.18 7.55 17.42 7 16.56 7h-.12c-.86 0-1.63.55-1.9 1.37L12 16h3v6h3zM7.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm9 0c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2z"></path></g>
 <g id="wifi"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"></path></g>
 </defs></svg>
-</iron-iconset-svg>`;document.head.appendChild(template$1.content);const _DEFAULT_ICONSET="icons",resolvePromise=directive(promise=>part=>{Promise.resolve(promise).then(resolvedValue=>{part.setValue(resolvedValue);part.commit()})});class AdaptiveUiIcon extends LitElement{render(){return html$1`
+</iron-iconset-svg>`;document.head.appendChild(template$1.content);const _DEFAULT_ICONSET="icons",resolvePromise=directive(promise=>part=>{// This first setValue call is synchronous, so
+// doesn't need the commit
+// TODO #263 part.setValue("Waiting for promise to resolve.");
+Promise.resolve(promise).then(resolvedValue=>{part.setValue(resolvedValue);part.commit()})});// this directive waits for a promise to resolve then
+// updates the part with the content
+// TODO #262 this can be re-used so here might not be the best location
+/** Icons Loader and Renderer  */class AdaptiveUiIcon extends LitElement{render(){return html$1`
         <svg viewBox="0 0 24 24" 
              preserveAspectRatio="xMidYMid meet" 
              focusable="false" 
@@ -154,7 +160,27 @@ import{html$1 as html,LitElement,html as html$1,css,directive,Logger,ServicePage
         display: none;
       }
     </style>
-    `}static get properties(){return{icon:{type:String},theme:{type:String},src:{type:String}}}firstUpdated(){this._iconChanged(this.icon)}_iconChanged(icon){var parts=(icon||"").split(":");this._iconName=parts.pop();this._iconsetName=parts.pop()||_DEFAULT_ICONSET;return this._updateIcon()}_usesIconset(){return this.icon||!this.src}_updateIcon(){return new Promise(resolve=>{if(this._usesIconset()){if(""===this._iconName){if(this._iconset){this._iconset.removeIcon(this)}}else if(this._iconsetName){const moduleSpecifier=`../themes/${window.THEME}/icons/${this._iconsetName}.js`;Logger.i.debug("loading module:"+moduleSpecifier);import(moduleSpecifier).then(module=>{if(this._iconName)resolve(module.icons[this._iconName])})}}})}}customElements.define("adaptive-ui-icon",AdaptiveUiIcon);const ServiceStyles=css`
+    `}static get properties(){return{/**
+       * The name of the icon to use. The name should be of the form:
+       * `iconset_name:icon_name`.
+       */icon:{type:String},/**
+       * The name of the theme to used, if one is specified by the
+       * iconset.
+       */theme:{type:String},/**
+       * If using iron-icon without an iconset, you can set the src to be
+       * the URL of an individual icon image file. Note that this will take
+       * precedence over a given icon attribute.
+       */src:{type:String}}}firstUpdated(){this._iconChanged(this.icon)}_iconChanged(icon){var parts=(icon||"").split(":");this._iconName=parts.pop();this._iconsetName=parts.pop()||_DEFAULT_ICONSET;return this._updateIcon()}_usesIconset(){return this.icon||!this.src}/** @suppress {visibility} */_updateIcon(){return new Promise((resolve,reject)=>{if(this._usesIconset()){if(""===this._iconName){// todo #264 remove icon
+// When the icon attribute is updated to undefined or empty value,
+// the current displayed icon should be removed
+if(this._iconset){this._iconset.removeIcon(this)}}else if(this._iconsetName){// load iconset
+// todo #265 if es6-bundled, the icons path is relative to the templates directory
+const moduleSpecifier=`../themes/${window.THEME}/icons/${this._iconsetName}.js`;Logger.i.debug("loading module:"+moduleSpecifier);import(moduleSpecifier).then(module=>{// module.default();
+// console.log('loaded module:' + moduleSpecifier);
+// console.log(module);
+// console.log(module.icons[this._iconName]);
+if(this._iconName)resolve(module.icons[this._iconName]);// this.requestUpdate('loadedIcon');
+})}}})}}customElements.define("adaptive-ui-icon",AdaptiveUiIcon);const ServiceStyles=css`
     
     @font-face {
         font-family: 'TT Norms';
@@ -318,9 +344,13 @@ import{html$1 as html,LitElement,html as html$1,css,directive,Logger,ServicePage
           overflow-x: hidden; 
           width:21%; 
       }
+      aside.aside .aside-header{
+        display: flex;
+        justify-content: center;
+      }
       aside.aside .aside-header,
       aside.aside div.aside-menu{
-          margin-left: 18px;
+        padding-left: 18px;
       }
       aside.aside .aside-header #mobile-menu{
           display: none;
@@ -448,7 +478,22 @@ import{html$1 as html,LitElement,html as html$1,css,directive,Logger,ServicePage
       }
 
       @media screen and (max-width: 768px){
-          div.main-wrapper{
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -350px;
+          top: -10px;
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+        }
+
+
+        div.main-wrapper{
               width: 100%;
           }
           main.main-section,
@@ -481,6 +526,8 @@ import{html$1 as html,LitElement,html as html$1,css,directive,Logger,ServicePage
           }
           aside.aside .aside-header #mobile-menu .icon{
               color: #fff;
+              position: absolute;
+              right: -350px
           }
           main.main-section .main-header, aside.aside div.aside-menu{
               margin: 0;
@@ -494,6 +541,149 @@ import{html$1 as html,LitElement,html as html$1,css,directive,Logger,ServicePage
               z-index: 1;
           }
       }
+
+      @media screen and (max-width: 650px){
+
+      aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -247px;
+      }
+    }
+
+    @media screen and (max-width: 520px){
+
+      aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -200px;
+      }
+    }
+
+      @media screen and (max-width: 414px){
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -170px;
+          top: -10px;
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+          
+        }
+
+        aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -160px;
+      }
+
+      }
+
+      @media screen and (max-width: 411px){
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -170px;
+          top: -10px;
+          
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+          
+        }
+
+        aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -155px;
+      }
+
+      }
+
+      @media screen and (max-width: 375px){
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -150px;
+          top: -10px;
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+          
+        }
+
+        aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -150px;
+      }
+
+      }
+
+      @media screen and (max-width: 360px){
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -150px;
+          top: -10px;
+          
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+          
+        }
+
+        aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -140px;
+      }
+
+      }
+
+
+      @media screen and (max-width: 320px){
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -110px;
+          top: -10px;
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+          
+        }
+
+        aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -120px;
+      }
+
+      }
+
+
       /* @media screen and (max-width: 1024px){
           main.main-section{
               margin-left: 187px;
@@ -528,14 +718,14 @@ import{html$1 as html,LitElement,html as html$1,css,directive,Logger,ServicePage
         <div class="columns">
             <aside class="column aside is-paddingless">
                 <header class="header aside-header">
-                    <a href="">
-                        <figure class="image is-32x32">
-                            <img src="${this._computeLogo(this.gateway)}">
-                        </figure>
-                    </a>
+                <a href="" >
+                <figure class="logo-image ">
+                    <img src="${this._computeLogo(this.gateway)}" height="64px" width="128px">
+                </figure>
+            </a>
 
                     <a href="" id="mobile-menu" class="is-pulled-right">
-                        <span class="icon is-pulled-right">
+                        <span class="icon is-pulled-right-icon">
                           <fa-icon class="fas fa-bars" color="#fff"></fa-icon>
                         </span>
                     </a>
@@ -632,7 +822,7 @@ import{html$1 as html,LitElement,html as html$1,css,directive,Logger,ServicePage
                     </div>
                 </header>
                 <div class="main-content">
-                  ${this.page.pageInputGroups.map(feed=>html$1`        
+                  ${this.page.pageInputGroups.map((feed,feedIndex)=>html$1`        
                     <div class="column is-12" >
                       <form-render .feed="${feed}" .params=${this.parseParams()}></form-render>
                   </div>`)}
@@ -644,4 +834,13 @@ import{html$1 as html,LitElement,html as html$1,css,directive,Logger,ServicePage
 <span slot="title">${this._snackbarTitle}</span> 
 <span>${this._snackbarMessage}</span>
 </snack-bar>
-     `}constructor(){super()}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".sub-items, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.parentElement.classList.contains(highLight)){menuItems.parentElement.classList.add(highLight)}}static get styles(){return[Colors,Fonts,ServiceStyles,css`:host { display: block; }`]}toggleProfile(evt){evt.preventDefault();const profileContent=document.getElementById("profile-content");profileContent.classList.toggle("is-block")}_viewList(){this.mainNavigation()}firstUpdated(){}}window.customElements.define("service-page",ServicePage);export{service as $service,ServiceStyles};
+     `}constructor(){super()}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{// collapse all current active
+this.qsa(".sub-items, .is-block").forEach(function(el){el.classList.remove(toggleClass)});// expand related to source of event
+menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight);//
+});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight);//
+});if(menuItems.parentElement.classList.contains(highLight)){}else{menuItems.parentElement.classList.add(highLight)}}static get styles(){return[Colors,Fonts,ServiceStyles,css`:host { display: block; }`]}toggleProfile(evt){evt.preventDefault();const profileContent=document.getElementById("profile-content");profileContent.classList.toggle("is-block")}/**
+     * Dialogs Back navigation, Pop dialogs' stack
+     *
+     * @param evt
+     * @private
+     */_viewList(evt){this.mainNavigation()}firstUpdated(changedProperties){}}window.customElements.define("service-page",ServicePage);export{service as $service,ServiceStyles};

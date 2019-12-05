@@ -164,4 +164,19 @@ import{html,FileInputBase}from"../../../../components/adaptive-ui.js";class File
         <span id="errorDisplay" style="color: red;display: none;"></span>
       </form>
     </div>
-        `}constructor(){super()}getValue(){return this.value}valid(){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="none"}invalid(validation){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="block";errorDisplay.textContent=validation}updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}cancelUpload(){this.resetUpload();this.updateUploadMessage("")}handleFile(){const fileInput=this.shadowRoot.querySelector("#file-upload");this.uploadFile(fileInput)}}window.customElements.define(FileInput.is,FileInput);
+        `}constructor(){super()}getValue(){return this.value}/**
+     * from SerializableElement
+     * @override
+     */valid(validation){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="none"}/**
+     * from SerializableElement
+     * @override
+     */invalid(validation){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="block";errorDisplay.textContent=validation}/**
+     * from FileInputBase
+     * @override
+     */updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}/**
+     * Cancel Last Upload
+     * @param evt
+     */cancelUpload(evt){this.resetUpload();this.updateUploadMessage("")}/**
+     * File Selection Change handler
+     * @param evt
+     */handleFile(evt){const fileInput=this.shadowRoot.querySelector("#file-upload");this.uploadFile(fileInput)}}window.customElements.define(FileInput.is,FileInput);

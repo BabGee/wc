@@ -129,7 +129,7 @@ class BulkUpload extends BulkUploadBase {
             fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
         else
             fileName = e.target.value.split( '\\' ).pop();
-         if( fileName )
+          if( fileName )
             label.querySelector( 'span' ).innerHTML = fileName;
         else
             label.innerHTML = labelVal;

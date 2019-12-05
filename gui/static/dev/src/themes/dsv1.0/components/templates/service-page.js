@@ -154,9 +154,13 @@ class ServicePage extends ServicePageBase {
           overflow-x: hidden; 
           width:21%; 
       }
+      aside.aside .aside-header{
+        display: flex;
+        justify-content: center;
+      }
       aside.aside .aside-header,
       aside.aside div.aside-menu{
-          margin-left: 18px;
+        padding-left: 18px;
       }
       aside.aside .aside-header #mobile-menu{
           display: none;
@@ -284,7 +288,22 @@ class ServicePage extends ServicePageBase {
       }
 
       @media screen and (max-width: 768px){
-          div.main-wrapper{
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -350px;
+          top: -10px;
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+        }
+
+
+        div.main-wrapper{
               width: 100%;
           }
           main.main-section,
@@ -317,6 +336,8 @@ class ServicePage extends ServicePageBase {
           }
           aside.aside .aside-header #mobile-menu .icon{
               color: #fff;
+              position: absolute;
+              right: -350px
           }
           main.main-section .main-header, aside.aside div.aside-menu{
               margin: 0;
@@ -330,6 +351,149 @@ class ServicePage extends ServicePageBase {
               z-index: 1;
           }
       }
+
+      @media screen and (max-width: 650px){
+
+      aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -247px;
+      }
+    }
+
+    @media screen and (max-width: 520px){
+
+      aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -200px;
+      }
+    }
+
+      @media screen and (max-width: 414px){
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -170px;
+          top: -10px;
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+          
+        }
+
+        aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -160px;
+      }
+
+      }
+
+      @media screen and (max-width: 411px){
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -170px;
+          top: -10px;
+          
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+          
+        }
+
+        aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -155px;
+      }
+
+      }
+
+      @media screen and (max-width: 375px){
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -150px;
+          top: -10px;
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+          
+        }
+
+        aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -150px;
+      }
+
+      }
+
+      @media screen and (max-width: 360px){
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -150px;
+          top: -10px;
+          
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+          
+        }
+
+        aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -140px;
+      }
+
+      }
+
+
+      @media screen and (max-width: 320px){
+          
+        .is-pulled-right-icon{
+          position: absolute;
+          right: -110px;
+          top: -10px;
+        }
+
+        .logo-image{
+
+          position: absolute;
+          left: 30px;
+          bottom: 20px;
+          
+        }
+
+        aside.aside .aside-header #mobile-menu .icon {
+          color: #fff;
+          position: absolute;
+          right: -120px;
+      }
+
+      }
+
+
       /* @media screen and (max-width: 1024px){
           main.main-section{
               margin-left: 187px;
@@ -364,14 +528,14 @@ class ServicePage extends ServicePageBase {
         <div class="columns">
             <aside class="column aside is-paddingless">
                 <header class="header aside-header">
-                    <a href="">
-                        <figure class="image is-32x32">
-                            <img src="${this._computeLogo(this.gateway)}">
-                        </figure>
-                    </a>
+                <a href="" >
+                <figure class="logo-image ">
+                    <img src="${this._computeLogo(this.gateway)}" height="64px" width="128px">
+                </figure>
+            </a>
 
                     <a href="" id="mobile-menu" class="is-pulled-right">
-                        <span class="icon is-pulled-right">
+                        <span class="icon is-pulled-right-icon">
                           <fa-icon class="fas fa-bars" color="#fff"></fa-icon>
                         </span>
                     </a>

@@ -97,9 +97,9 @@ export class Dropzone extends Emitter {
     this.prototype.Emitter = Emitter;
     /*
      This is a list of all available events you can register on a dropzone object.
-        You can register an event handler like this:
-        dropzone.on("dragEnter", function() { });
-        */
+         You can register an event handler like this:
+         dropzone.on("dragEnter", function() { });
+         */
 
     this.prototype.events = ["drop", "dragstart", "dragend", "dragenter", "dragover", "dragleave", "addedfile", "addedfiles", "removedfile", "thumbnail", "error", "errormultiple", "processing", "processingmultiple", "uploadprogress", "totaluploadprogress", "sending", "sendingmultiple", "success", "successmultiple", "canceled", "canceledmultiple", "complete", "completemultiple", "reset", "maxfilesexceeded", "maxfilesreached", "queuecomplete"];
     this.prototype.defaultOptions = {

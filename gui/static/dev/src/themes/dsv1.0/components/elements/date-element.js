@@ -10,12 +10,18 @@ class DateElement extends DateElementBase {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
   <style>
+  .calendar-select{
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    position: relative;
+  }
  .calendar-select-header{
   width: 100%;
   background: #fff;
   padding: 10px;
   position: relative;
   cursor: pointer;
+  border-radius: 6px;
 }
 .arrow{
   position: relative;
@@ -42,11 +48,25 @@ class DateElement extends DateElementBase {
 .calendar-select-body{
   width: 100%;
   margin-top: 15px;
+  border-radius: 6px;
   display: none;
+  z-index: 9999;
+  border: 1px solid #e5e5e5;
+  position: absolute;
 }
+/* .calendar-select-body::before{
+  content: '';
+  position: absolute;
+  border: 1px solid #fff;
+  border-bottom: 10px solid #fff;
+  border-left: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-right: 10px solid transparent;
+} */
 .calendar-select-body.cal-active{
   display: block;
 }
+
 .calendar-select-body .month {
   padding: 10px 15px;
   width: 100%;
@@ -73,7 +93,7 @@ class DateElement extends DateElementBase {
 
 .weekdays li {
   display: inline-block;
-  width: 12%;
+  width: 13%;
   color: #013243;
   font-size: 10px;
   text-align: center;
@@ -84,7 +104,7 @@ class DateElement extends DateElementBase {
   margin: 0;
 }
 
-.days li {
+.days li, .weekdays li {
   list-style-type: none;
   display: inline-block;
   width: 13.5%;
@@ -107,7 +127,14 @@ class DateElement extends DateElementBase {
 
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {
-  .weekdays li, .days li {width: 13.1%;}
+  .weekdays li, .days li {width: 12.1%;}
+}
+
+@media screen and (max-width:522px) {
+  .weekdays li, .days li {width: 11.1%;}
+}
+@media screen and (max-width:522px){
+  .days li{width: 12.1%;}
 }
 
 @media screen and (max-width: 420px) {
@@ -121,9 +148,9 @@ class DateElement extends DateElementBase {
 
 </style>
  <div class="column">
-  <div class="clalendar-select" style="width:100%;">
+  <div class="calendar-select" style="width:100%;">
     <div class="calendar-select-header" @click="${this.dateToggle}">
-        <p class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${this.todayDateNumber + ` ` + this.months[this.currentMonth] + `, ` + this.currentYear}</p>
+        <p id="dateSelected" class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${this.todayDateNumber + ` ` + this.months[this.currentMonth] + `, ` + this.currentYear}</p>
     </div>
 
     <div class="calendar-select-body" id="cal-bdy">
@@ -293,7 +320,10 @@ class DateElement extends DateElementBase {
           const cell = document.createElement('li');
           const cellText = document.createTextNode(renderNum);
 
-          if (renderNum === date.getDate() && year === date.getFullYear() && month === date.getMonth()) {// cell.classList.add("active");
+          if (renderNum === date.getDate() && year === date.getFullYear() && month === date.getMonth()) {
+            if (!this.wasDateSelected) {
+              cell.classList.add("active");
+            }
           }
 
           cell.appendChild(cellText);
@@ -308,7 +338,8 @@ class DateElement extends DateElementBase {
             const dateClicked = cell.innerText + ' ' + months[month] + ', ' + year;
             this.todayDateNumber = cell.innerText;
             this.dateSelected = `${month + 1}` + '/' + cell.innerText + '/' + year;
-            const str = `<p class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${dateClicked}</p>`;
+            this.wasDateSelected = true;
+            let str = `<p id="dateSelected" class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${dateClicked}</p>`;
             inpInput.innerHTML = str; // //IMPLEMENTATION OF DATE RANGE FOR FUTURE PURPOSES
             // dateRange.push(...[cell.innerText + " " + months[month] + " " + year]);
             // dateRange.shift();
@@ -342,28 +373,54 @@ class DateElement extends DateElementBase {
       }
 
       bdy.appendChild(row);
+      let dates = this.shadowRoot.querySelector('#days').querySelectorAll('li');
 
-      if (this.wasDateSelected == true) {} else {
-        const dates = this.shadowRoot.querySelector('#days').querySelectorAll('li');
-        dates.forEach(date => {
-          if (date.innerText == this.todayDateNumber) {
-            date.classList.add('active');
-            this.wasDateSelected = true;
+      if (this.wasDateSelected) {
+        let monthAndYear = this.shadowRoot.getElementById("monthAndYear").innerHTML;
+        let actualtDateText = this.shadowRoot.querySelector("#dateSelected").innerText.trim();
+        let month = monthAndYear.slice(0, 3);
+        let year = monthAndYear.slice(4);
+        let actualMonth;
+        let actualYear;
+
+        if (actualtDateText.length == 11) {
+          actualMonth = actualtDateText.slice(1, 5).trim();
+          actualYear = actualtDateText.slice(6).trim(); //check wheather actualMonth and actualYear match month and year
+
+          if (actualMonth == month && actualYear == year) {
+            //set active date color
+            dates.forEach(date => {
+              if (date.innerText == this.todayDateNumber) {
+                date.classList.add('active');
+              }
+            });
           }
-        });
-      }
-    }
-  }
+        } else {
+          actualMonth = actualtDateText.slice(2, 6).trim();
+          actualYear = actualtDateText.slice(7).trim(); //check wheather actualMonth and actualYear match month and year
+
+          if (actualMonth == month && actualYear == year) {
+            //set active date color
+            dates.forEach(date => {
+              if (date.innerText == this.todayDateNumber) {
+                date.classList.add('active');
+              }
+            });
+          }
+        }
+      } //end of this.wasDateSelected
+
+    } //end of for loop
+
+  } //end of showCalender
+
 
   next() {
-    if (this.wasDateSelected == true) {
-      const dates = this.shadowRoot.querySelector('#days').querySelectorAll('li');
-      dates.forEach(date => {
-        date.classList.remove('active');
-      });
-      this.wasDateSelected == false;
-    }
-
+    //Remove active color by default
+    let allCells = this.shadowRoot.querySelector('#days').querySelectorAll('li');
+    allCells.forEach(cell => {
+      cell.classList.remove('active');
+    });
     this.currentMonth++;
 
     if (this.currentMonth > 11) {
@@ -375,14 +432,10 @@ class DateElement extends DateElementBase {
   }
 
   previous() {
-    if (this.wasDateSelected == true) {
-      const dates = this.shadowRoot.querySelector('#days').querySelectorAll('li');
-      dates.forEach(date => {
-        date.classList.remove('active');
-      });
-      this.wasDateSelected == false;
-    }
-
+    let allCells = this.shadowRoot.querySelector('#days').querySelectorAll('li');
+    allCells.forEach(cell => {
+      cell.classList.remove('active');
+    });
     this.currentMonth--;
 
     if (this.currentMonth < 0) {
@@ -407,7 +460,7 @@ class DateElement extends DateElementBase {
     if (!this.e.required && !this.e.defaultValue) {
       // shows empty date based on docs
       const selectDateText = 'Select Date';
-      const str = `<p class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${selectDateText}</p>`;
+      let str = `<p id="dateSelected" class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${selectDateText}</p>`;
       inpInput.innerHTML = str;
     }
 

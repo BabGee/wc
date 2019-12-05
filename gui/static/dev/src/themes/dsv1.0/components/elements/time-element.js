@@ -99,6 +99,227 @@ class TimeElement extends TimeElementBase {
  .drp ul li:hover {
   background: #e5e5e5;
  }
+
+
+ @media screen and (max-width: 768px){
+
+  #timer-lineup li{
+
+    margin-right: 320px ;
+     margin-left:  60px;
+     overflow: auto;
+     font-size: 150%;
+     
+   }
+ 
+   ul#timer-lineup{
+ 
+     height: 37px;
+     
+       
+     
+   }
+ 
+   #timer-linuep-minutes li{
+ 
+     margin-right: 315px ;
+     margin-left:  60px;
+     overflow: auto;
+     font-size: 130%;
+     
+   }
+ 
+   #timer-linuep-minutes{
+     height: 37px;
+     
+   }
+ 
+   .timer-radio {
+ 
+     margin-right: 269px;
+     font-size: 130%;
+     
+   }
+
+ }
+
+
+ @media screen and (max-width: 414px){
+
+  #timer-lineup li{
+
+    margin-right:140px ;
+     margin-left:  60px;
+     overflow: auto;
+     font-size: 150%;
+     
+   }
+ 
+   ul#timer-lineup{
+ 
+     height: 37px;
+     
+       
+     
+   }
+ 
+   #timer-linuep-minutes li{
+ 
+     margin-right:135px ;
+     margin-left:  60px;
+     overflow: auto;
+     font-size: 130%;
+     
+   }
+ 
+   #timer-linuep-minutes{
+     height: 37px;
+     
+   }
+ 
+   .timer-radio {
+ 
+     margin-right: 95px;
+     font-size: 130%;
+     
+   }
+
+ }
+
+
+ @media screen and (max-width: 375px){
+
+  #timer-lineup li{
+
+    margin-right: 120px ;
+     margin-left:  60px;
+     overflow: auto;
+     font-size: 150%;
+     
+   }
+ 
+   ul#timer-lineup{
+ 
+     height: 37px;
+     
+       
+     
+   }
+ 
+   #timer-linuep-minutes li{
+ 
+     margin-right: 115px ;
+     margin-left:  60px;
+     overflow: auto;
+     font-size: 130%;
+     
+   }
+ 
+   #timer-linuep-minutes{
+     height: 37px;
+     
+   }
+ 
+   .timer-radio {
+ 
+     margin-right: 75px;
+     font-size: 130%;
+     
+   }
+
+ }
+
+ @media screen and (max-width: 360px){
+          
+  #timer-lineup li{
+
+   margin-right:110px ;
+    margin-left:  60px;
+    overflow: auto;
+    font-size: 150%;
+    
+  }
+
+  ul#timer-lineup{
+
+    height: 37px;
+    
+      
+    
+  }
+
+  #timer-linuep-minutes li{
+
+    margin-right:105px ;
+    margin-left:  60px;
+    overflow: auto;
+    font-size: 130%;
+    
+  }
+
+  #timer-linuep-minutes{
+    height: 37px;
+    
+  }
+
+  .timer-radio {
+
+    margin-right: 75px;
+    
+  }
+
+
+}
+
+@media screen and (max-width: 320px){
+          
+  #timer-lineup li{
+
+   margin-right:95px ;
+    margin-left:  60px;
+    overflow: auto;
+    font-size: 150%;
+    
+  }
+
+  ul#timer-lineup{
+
+    height: 37px;
+    
+      
+    
+  }
+
+  #timer-linuep-minutes li{
+
+    margin-right:90px ;
+    margin-left:  60px;
+    overflow: auto;
+    font-size: 130%;
+    
+  }
+
+  #timer-linuep-minutes{
+    height: 37px;
+    
+  }
+
+  .timer-radio {
+
+    margin-right: 47px;
+    
+  }
+
+
+}
+
+
+
+
+
+
+
+
 </style>
 <div class="timer-container">
  <div class="timer-element" @click="${() => this._dropdown()}">
@@ -111,17 +332,22 @@ class TimeElement extends TimeElementBase {
       <div class="heading">
         <p class="has-text-weight-bold is-size-5 has-text-centered">Hours</p>
       </div>
-      <ul>
+
+    
+      <ul id="timer-lineup">
       ${this.range(1, 12).map(data => html`
            <li @click='${() => this.addHour(data)}'><a href="#">${data}</a></li>
       `)}
       </ul>
+
+
+
     </div>
     <div class="column drp">
     <div class="heading">
         <p class="has-text-weight-bold is-size-5 has-text-centered">Minutes</p>
       </div>
-      <ul>
+      <ul id="timer-linuep-minutes">
       ${this.range(0, 59).map(data => html`
       <li @click='${() => this.addMin(data)}'><a href="#">${data < 10 ? '0' + data : data}</a></li>
       `)}
@@ -132,7 +358,7 @@ class TimeElement extends TimeElementBase {
     <div class="heading">
         <p class="has-text-weight-bold is-size-5 has-text-centered">TOD</p>
       </div>
-      <div class="radio">
+      <div class="radio timer-radio">
         <input type="radio" name="tod" value="AM" checked @click='${() => this.addTOD("AM")}'> AM
         <input type="radio" name="tod" value="PM"  @click='${() => this.addTOD("PM")}'> PM
       </div>
