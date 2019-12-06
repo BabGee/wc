@@ -7,101 +7,155 @@ class Navbar9 extends NavbarBase {
     return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
+    .ii__container-main{
+          margin: 0 auto;
+          padding: 0 90px;
+      }
+      /* header */
+      .ii__main-header{
+          background-color: rgba(223,237,244,0.7);
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 999;
+          box-shadow: 0 1px 0 0 #d9d9d9;
+          /* background: #fff; */
+      }
+      .navbar{
+          background: transparent;
+          height: 5.5em;
+      }
+      .nav__item{
+          font-weight: regular;
+          font-size: 16px;
+      }
+      .nav__item:hover{
+          /* font-weight: bolder; */
+          position: relative;
+          color: #fff!important;
+          border-bottom: 4px solid #fff;
+          background: #87C8D7!important;
+      }
+      /* .nav__item:hover::after{
+          content: '';
+          position: absolute;
+          width: 90%;
+          height: 3px;
+          top: 50px;
+          left: 0;
+          background: #409DB5;
+      } */
+      .navbar-item .buttons .button{
+          font-size: 13px;
+          font-weight: inherit;
+          width: 115px;
+          height: 3em;
+      }
+      @media screen and (max-width: 1023px){
+        .ii__container-main{
+          margin: 0 auto;
+          padding: 0 10px;
+      }
+      .top{
+        position: relative;
+        top: 44px;
+      }
+      }
+    </style>
 
-nav {
-	font-size: 16px;
-}
-      .bind-box {
-	margin-bottom: 1.5rem;
-	background-color: white;
-	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-	color: #4a4a4a;
-    display: block;
-    padding: 1.25rem 4.5rem;
-    
-}
-
-
-#site-name {
-	font-size: 25px;
-}
-
-      </style>
-
-<div id="section11" class="bind-box">
-        <nav class="navbar">
-          <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-              <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-            </a>
-          </div>          
-          <div class="navbar-menu has-text-centered">
-            <div id="main-nav"class="navbar is-uppercase is-size-7 pull-center has-text-weight-semibold">
-              <a class="navbar-item is-active" @click='${() => this.activePage('home')}'>
-                Home
+    <div id="section11" class="bind-box">
+      <header class="ii__main-header">
+        <div class="ii__container-main">
+          <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="/" @click=${this.reloadPage}>
+                <img src="${this.e.defaultValue}" width="112" height="28">
               </a>
-
-              <a class="navbar-item" @click='${() => this.activePage('about')}'>
-                About
-              </a>
-
-              <a class="navbar-item" @click='${() => this.activePage('portfolio')}'>
-                Portfolio
-              </a>
-
-              <a class="navbar-item" @click='${() => this.activePage('blog')}'>
-                Blog
-              </a>
-
-              <a class="navbar-item" @click='${() => this.activePage('contacts')}'>
-                Contacts
+                
+              <a role="button" class="navbar-burger burger" @click=${this.addBlock} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
               </a>
             </div>
-          </div>
-          <div class="navbar-menu">
-            <div class="navbar-end">
-              <div class="field">
-                <p class="control">
-                  <span class="icon">
-                    <i class="fas fa-search"></i>
-                  </span>
-                  <span class="icon">
-                    <i class="fas fa-shopping-cart"></i>
-                  </span>
-                </p>
+                
+            <div id="navbarBasicExample" class="navbar-menu">
+              <div class="navbar-end">
+                <!-- ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+                <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
+                    class="navbar-item is-capitalized">
+                    ${pageGroup.title}
+                </a>`)} -->
+
+                ${this.e.details.nav_links.map((link, index) => html`
+                    <a class="navbar-item nav__item is-capitalized" @click="${() => this.scrollToSection(index)}">${link}</a>
+                `)}
+                
               </div>
             </div>
-          </div>
-        </nav>
-        </nav>
-      </div>
+          </nav>
+        </div>
+      </header>
+    </div>
 
      `;
   }
 
-  activePage(mainNavLink) {
-    const links = this.shadowRoot.querySelector('#main-nav').querySelectorAll('a');
+  reloadPage() {
+    window.location.reload();
+  }
 
-    if (mainNavLink === 'home') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[0].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'about') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[1].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'portfolio') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[2].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'blog') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[3].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'contacts') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[4].className = 'navbar-item is-active';
+  addBlock() {
+    let nav = this.shadowRoot.querySelector('.navbar-menu');
+    nav.classList.toggle('is-block'); // if(nav.classList == 'top'){
+    //   nav.classList.remove('top')
+    // }else{
+    //   nav.classList.add('top')
+    // }
+  }
+
+  scrollToSection(index) {
+    //MAXIMUM OF 6 ONLY
+    if (index == 0) {
+      window.scroll({
+        top: 0,
+        behavior: 'smooth'
+      });
+    } else if (index == 1) {
+      window.scroll({
+        top: 800,
+        behavior: 'smooth'
+      });
+    } else if (index == 2) {
+      window.scroll({
+        top: 1600,
+        behavior: 'smooth'
+      });
+    } else if (index == 3) {
+      window.scroll({
+        top: 2400,
+        behavior: 'smooth'
+      });
+    } else if (index == 4) {
+      window.scroll({
+        top: 3200,
+        behavior: 'smooth'
+      });
+    } else if (index == 5) {
+      window.scroll({
+        top: 4000,
+        behavior: 'smooth'
+      });
     }
   }
 
   static get is() {
     return 'navbar-9';
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
   }
 
 }

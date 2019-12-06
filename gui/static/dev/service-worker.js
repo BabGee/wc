@@ -14,7 +14,7 @@ var precacheConfig = [// ['path', 'hash' ]
   // TODO #253 how does the build tool generate hash for non exisiting paths .e,g
   // ['/', '77741e916f1f87bfbe0e4ad0a2a1e592'],
 ];
-var version = '14';
+var version = '11';
 var dist; // create an instance of a db object for us to store the IDB data in
 
 var db;

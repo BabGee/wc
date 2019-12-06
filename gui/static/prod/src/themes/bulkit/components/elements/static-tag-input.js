@@ -179,4 +179,29 @@ import{html,StaticTagInputBase}from"../../../../components/adaptive-ui.js";class
                        ${this.data.map(item=>html`<paper-item id="${item.id}" data-name="${item.name}">${item.name}</paper-item>`)}
         </paper-listbox>
         <!--</template>-->
-`}invalid(){}valid(){return!0}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this}_onFocus(){if(this.qs("#filter").focused){this.focused=!0}}_debug1(){const self=this;self.focused=!1}getValue(){if(!this.tags){return""}return this.tags.join(",")}_computeLabel(tagId,dataFromApi){if(tagId===void 0||dataFromApi===void 0){return}const tag=dataFromApi.filter(function(item){return item.id==tagId})[0];if(tag){return tag.name}}select(evt){const institutionItem=evt.currentTarget,itemId=institutionItem.getAttribute("id");this.add(institutionItem.dataName)}remove(tag){if(null===this.tags){return}var tagIndex=this.tags.indexOf(tag);if(-1<tagIndex){this.tags.splice(tagIndex,1);this.qs("#suggestions").selectedValues=[]}}_onTagRemoveTapped(e){e.preventDefault();this.remove(e.currentTarget.tag)}_onInput(){this.filter(this.$.filter.value)}}window.customElements.define(StaticTagInput.is,StaticTagInput);
+`}invalid(validation){}valid(validation){return!0}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this}// todo override kept because of qs
+_onFocus(){if(this.qs("#filter").focused){this.focused=!0;// this.requestUpdate()
+}}// todo override kept because it's an event handler
+_debug1(evt){const self=this;// this.$.filter.value = '';
+self.focused=!1;// self.requestUpdate()
+}getValue(){if(!this.tags){return""}return this.tags.join(",")}/**
+       * ui function
+       * @param tagId
+       * @param dataFromApi
+       * @return {*}
+       * @private
+       */_computeLabel(tagId,dataFromApi){if(tagId===void 0||dataFromApi===void 0){return}const tag=dataFromApi.filter(function(item){return item.id==tagId})[0];if(tag){return tag.name}}select(evt){const institutionItem=evt.currentTarget,itemId=institutionItem.getAttribute("id");// console.log(evt.currentTarget.getAttribute('id'));
+// console.log(id);
+this.add(institutionItem.dataName)}// todo override kept because of qs
+remove(tag){if(null===this.tags){return}var tagIndex=this.tags.indexOf(tag);if(-1<tagIndex){this.tags.splice(tagIndex,1);// this.requestUpdate()
+this.qs("#suggestions").selectedValues=[];// console.log()
+}}_onTagRemoveTapped(e){e.preventDefault();this.remove(e.currentTarget.tag)}// todo override kept because of qs
+_onInput(e){// if (e.keyCode === 13) {
+//
+//     this.add(e.target.value.toLowerCase());
+//
+//     e.target.value = '';
+// }else {
+// todo remove enter key dependence
+this.filter(this.$.filter.value);// }
+}}window.customElements.define(StaticTagInput.is,StaticTagInput);

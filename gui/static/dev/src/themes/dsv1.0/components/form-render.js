@@ -1,9 +1,10 @@
 import { html } from "../../../../node_modules/lit-element/lit-element.js";
-import { FormRenderBase, FORM_TYPE_FORM, FORM_TYPE_PAYMENTS_FORM, FORM_TYPE_LANDING_FORM, FORM_TYPE_HIDDEN_FORM } from '../../../components/form-render.js';
+import { FormRenderBase, FORM_TYPE_FORM, FORM_TYPE_PAYMENTS_FORM, FORM_TYPE_LANDING_FORM, FORM_TYPE_HIDDEN_FORM, FORM_TYPE_SECTION_FORM, FORM_TYPE_HERO_FORM } from '../../../components/form-render.js';
 import { register } from "../register.js";
 import "./forms/content-x.js";
 import './forms/form-x.js';
 import './forms/form-y.js';
+import "./forms/section-x.js";
 import './e-list.js';
 import { Logger } from "../../../core/logger.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
@@ -41,9 +42,21 @@ class FormRender extends FormRenderBase {
     } else if (formType === FORM_TYPE_LANDING_FORM) {
       form = html`
        <landing-x id="form">
-        <p slot="header" class="is-capitalized">${FormRenderBase.toTitleCase(this.feed.title)}</p> 
+        <!-- <p slot="header" class="is-capitalized">${FormRenderBase.toTitleCase(this.feed.title)}</p>  -->
         <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed, this.pos)} ></e-list>
       </landing-x>
+      `;
+    } else if (formType === FORM_TYPE_SECTION_FORM) {
+      form = html`
+       <section-x id="form">
+        <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed, this.pos)} ></e-list>
+      </section-x>
+      `;
+    } else if (formType === FORM_TYPE_HERO_FORM) {
+      form = html`
+       <hero-x id="form">
+        <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed, this.pos)} ></e-list>
+      </hero-x>
       `;
     } else if (formType === FORM_TYPE_HIDDEN_FORM) {
       form = html`

@@ -17,6 +17,8 @@ import { RENDER_M_DEFAULT, RENDER_M_SIDE_BY_SIDE } from "./e-list.js";
 export const FORM_TYPE_FORM = 'FORM';
 export const FORM_TYPE_PAYMENTS_FORM = 'PAYMENTS FORM';
 export const FORM_TYPE_LANDING_FORM = 'LANDING FORM';
+export const FORM_TYPE_SECTION_FORM = 'SECTION FORM';
+export const FORM_TYPE_HERO_FORM = 'HERO FORM';
 export const FORM_TYPE_HIDDEN_FORM = 'HIDDEN FORM';
 export const FORM_TYPE_WINDOW_EVENT = 'WINDOW EVENT FORM';
 export const FormRenderBase = class extends utilsMixin(serviceCallMixin(LitElement)) {

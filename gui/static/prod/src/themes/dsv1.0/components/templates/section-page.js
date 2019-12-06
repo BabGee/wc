@@ -1,4 +1,5 @@
-import{css,html,SectionPageBase,Colors,Fonts,Reset}from"../../../../components/adaptive-ui.js";class SectionPage extends SectionPageBase{render(){return html`
+import{html,css,SectionPageBase,Reset,Colors,Fonts}from"../../../../components/adaptive-ui.js";class SectionPage extends SectionPageBase{render(){// TODO render 404
+return html`
      <style>
      
 </style>

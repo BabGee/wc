@@ -480,7 +480,7 @@ nav {
                                 <!-- Dashboard content -->
                                 <div class="columns dashboard-columns is-multiline">
                                     <!-- YOUR CONTENT COLUMNS GO HERE -->
-                                    ${this.page.pageInputGroups.map(feed=>html`
+                                    ${this.page.pageInputGroups.map((feed,feedIndex)=>html`
                                     <div class="column ${this._gridClasses(feed)} mobile-fullwidth">
                                     <div class="flex-card light-bordered mobile-borderless">
                                       <div class="card-body is-responsive" style="padding: 0px;">
@@ -523,4 +523,36 @@ nav {
             
           <snack-bar id="snack-bar" ?active="${this._snackbarOpened}">
 ${this._snackbarTitle} ${this._snackbarMessage}
-</snack-bar>`}constructor(){super()}static get properties(){return{view:String,pages:Array,tab:Object,profile:{type:Object,value:""},page:Object}}_profileTriggerClick(){this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){this.qs(".menu-wrapper .icon-box-toggle").classList.add("active");this.qs(".child-menu").classList.add("is-sidebar-translated");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});this.qs(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}_closeChildMenu(e){this.scrollToTop();if(this.view!==VIEW_MODE_MAIN){this.viewMain()}this._menuWrapperClick(e)}_viewList(){this.mainNavigation()}_menuWrapperClick(){this.qs(".child-menu").classList.remove("is-sidebar-translated");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.remove("is-pushed")});this.qs(".reader-switch label").classList.remove("is-disabled")}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget.dataset.childMenu,menuTitle=e.currentTarget.dataset.title;this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{tooltipStyles as $tooltipStyles,TooltipStyles};
+</snack-bar>`}constructor(){super()}static get properties(){return{view:String,pages:Array,tab:Object,profile:{type:Object,value:""},page:Object}}_profileTriggerClick(e){const self=this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");// wait 700ms before adding the fixed class to the body to prevent unpleasant effects
+setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){/*
+    // make previous menu not selected
+    // though a loop might not be needed as only one item will be previously active
+    this.qsa('.side-icon.is-active').forEach(function (item) {
+        item.classList.remove('is-active');
+    });
+      // make clicked to show selected
+    e.currentTarget.classList.add('is-active');
+    */this.qs(".menu-wrapper .icon-box-toggle").classList.add("active");this.qs(".child-menu").classList.add("is-sidebar-translated");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});// disable reader mode switch when sidebar is opened
+this.qs(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}/**
+       * Close child menu on page menu item click
+       * Activates main view mode if there is a page change
+       *
+       * @param e
+       * @private
+       */_closeChildMenu(e){// activate main view mode, page might have changed
+this.scrollToTop();if(this.view!==VIEW_MODE_MAIN){this.viewMain()}/*
+      // UN-OPTIMIZED VERSION OF ABOVE
+      let app = document.querySelector('adaptive-ui');
+        let hashPaths = e.currentTarget.hash.split('/');
+      let currentPage = hashPaths[1];
+      let currentTab = hashPaths[2];
+        if (currentPage!==app._page && currentTab !== app._tab){
+          this.view = 'main';
+      }
+        */this._menuWrapperClick(e)}/**
+     * Dialogs Back navigation, Pop dialogs' stack
+     *
+     * @param {Event} evt
+     * @private
+     */_viewList(evt){this.mainNavigation()}_menuWrapperClick(e){this.qs(".child-menu").classList.remove("is-sidebar-translated");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.remove("is-pushed")});// enable reader mode switch when sidebar is closed
+this.qs(".reader-switch label").classList.remove("is-disabled")}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget.dataset.childMenu,menuTitle=e.currentTarget.dataset.title;this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{tooltipStyles as $tooltipStyles,TooltipStyles};

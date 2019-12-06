@@ -225,4 +225,9 @@ background-color: #ffffff;
 </div>
         <!-- /Main wrapper --  
     
-        `}constructor(){super()}_productDialog(product){this.selectedProduct=product;this.shadowRoot.querySelector("#productModal").style.display="block"}_productDialogClose(){this.shadowRoot.querySelector("#productModal").style.display="none"}_findProductItem(productId){var results=this.productItems.filter(function(item){return item.id===parseInt(productId)});return results[0]}_productDetails(evt){const productId=evt.currentTarget["product-id"],product=this._findProductItem(productId);this.currentProduct=product;this._addCartItem(evt)}}customElements.define(StaticProductsList.is,StaticProductsList);
+        `}constructor(){super()}_productDialog(product){this.selectedProduct=product;this.shadowRoot.querySelector("#productModal").style.display="block"}_productDialogClose(){this.shadowRoot.querySelector("#productModal").style.display="none"}_findProductItem(productId){var results=this.productItems.filter(function(item){// console.log(item);
+return item.id===parseInt(productId)});return results[0]}_productDetails(evt){// console.log(evt.currentTarget.dataset);
+const productId=evt.currentTarget["product-id"],product=this._findProductItem(productId);// console.log(cartItem);
+this.currentProduct=product;// todo Update to show product item details in a dialog with quantity input field
+// then remove below
+this._addCartItem(evt);return;this.$.quantity.value=1;this.$.dialog.open()}}customElements.define(StaticProductsList.is,StaticProductsList);

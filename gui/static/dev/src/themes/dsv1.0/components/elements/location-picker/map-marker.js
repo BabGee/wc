@@ -278,7 +278,7 @@ class MapMarker extends LitElement {
       // todo marker.setVisible(true);
 
       /* // todo
-             var address = '';
+              var address = '';
             if (place.address_components) {
                 address = [
                     (place.address_components[0] && place.address_components[0].short_name || ''),
@@ -286,7 +286,7 @@ class MapMarker extends LitElement {
                     (place.address_components[2] && place.address_components[2].short_name || '')
                 ].join(' ');
             }
-             infowindowContent.children['place-icon'].src = place.icon;
+              infowindowContent.children['place-icon'].src = place.icon;
             infowindowContent.children['place-name'].textContent = place.name;
             infowindowContent.children['place-address'].textContent = address;
             infowindow.open(map, marker);

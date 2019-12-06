@@ -50,7 +50,7 @@ import{html,LANDING_STYLES,BULMA_STYLES,DASHBOARD_STYLES,StaticCategoriesBase}fr
 
                 <div>
                     <div class="wrapper is-vcentered has-text-centered">
-                              ${this.currentData.map(item=>html` 
+                              ${this.currentData.map((item,index)=>html` 
 						 
                         <!-- Icon box -->
                         <div class="column is-3">

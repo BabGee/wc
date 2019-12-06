@@ -36,8 +36,8 @@ export const ItemSubmitBase = class extends BaseElement {
          // TODO finish
          let product_config = pElement.elementJson[5];
          let product_config_ar = product_config.split('|');
-          let dynamicEl = this.$.input;
-          dynamicEl.setAttribute("min", product_config_ar[0]);
+           let dynamicEl = this.$.input;
+           dynamicEl.setAttribute("min", product_config_ar[0]);
          if (product_config_ar[1] && product_config_ar[1] > 0) {
              dynamicEl.setAttribute("value", product_config_ar[1])
          }

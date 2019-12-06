@@ -167,4 +167,19 @@ import{html,ImageInputBase}from"../../../../components/adaptive-ui.js";class Ima
   </form>
   <span id="display"></span>
   <span id="validation"></span>
-</div>`}getValue(){return this.value}valid(){const validationDisplay=this.shadowRoot.querySelector("#validation");validationDisplay.style.display="none";validationDisplay.textContent="Required"}invalid(validation){const validationDisplay=this.shadowRoot.querySelector("#validation");validationDisplay.style.display="flex";if(validation){validationDisplay.textContent=validation}}updatePreview(src){var display=this.qs("#preview");display.src=src}updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}cancelUpload(){this.resetUpload();this.updateUploadMessage("")}handleFile(){const fileInput=this.qs("#file-upload");this.uploadImage(fileInput)}}customElements.define(ImageInput.is,ImageInput);
+</div>`}getValue(){return this.value}/**
+     * from SerializableElement
+     * @override
+     */valid(validation){const validationDisplay=this.shadowRoot.querySelector("#validation");validationDisplay.style.display="none";validationDisplay.textContent="Required"}/**
+     * from SerializableElement
+     * @override
+     */invalid(validation){const validationDisplay=this.shadowRoot.querySelector("#validation");validationDisplay.style.display="flex";if(validation){validationDisplay.textContent=validation}}/**
+     * from ImageInputBase
+     * @override
+     */updatePreview(src){var display=this.qs("#preview");display.src=src}/**
+     * Override to display a message to user
+     * @param message
+     */updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}/**
+     * Cancel Last Upload
+     * @param evt
+     */cancelUpload(evt){this.resetUpload();this.updateUploadMessage("")}handleFile(){const fileInput=this.qs("#file-upload");this.uploadImage(fileInput)}}customElements.define(ImageInput.is,ImageInput);
