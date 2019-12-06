@@ -18211,7 +18211,7 @@ fullHost=URL.substr(0,URL.length-1)}return fullHost}/**
      * @param params
      * @param parseResponse whether to parse the response, default to true
      * @return {Promise<any>}
-     */async call(service,params,parseResponse){const self=this;if(parseResponse===void 0)parseResponse=!0;const headers={"X-CSRFToken":window.csrfToken,"X-Requested-With":"XMLHttpRequest","Content-Type":"application/json"};return new Promise(function(resolve,reject){if(window.NO_NETWORKING){console.warn("window.NO_NETWORKING=true");console.log(service,params);// TODO variable response per service
+     */async call(service,params,parseResponse){const self=this;if(parseResponse===void 0)parseResponse=!0;const headers={"X-CSRFToken":window.csrfToken,"X-Requested-With":"XMLHttpRequest","Content-Type":"application/json"};return new Promise(function(resolve,reject){if(window.NO_NETWORKING){console.warn("window.NO_NETWORKING=true");// TODO variable response per service
 const requestResponse=window.TEST_PAYLOAD,response=new Response$1(requestResponse);// console.log(requestResponse);
 resolve(response)}else{self.send({url:self.baseUrl()+"/GOTO/"+service+"/",body:params,method:"POST",handleAs:"json",headers:headers,withCredentials:!0}).then(function(req){const requestResponse=req.response;if(parseResponse){// this is the end of life of raw responses
 const response=new Response$1(requestResponse);if(response.containsServiceCommand(COMMAND_REDIRECT)){const redirect=response.parse(COMMAND_REDIRECT,!1),redirectTo=redirect.url;var l=document.createElement("a");l.href=redirectTo;if(l.pathname===window.location.pathname&&l.search===window.location.search){// update hash
