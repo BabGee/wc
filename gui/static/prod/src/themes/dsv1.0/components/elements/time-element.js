@@ -4,7 +4,7 @@ import{html,TimeElementBase}from"../../../../components/adaptive-ui.js";class Ti
  .timer-container{
    width: 100%;
  }
- .timer-container .timer-element{
+ .timer-container{
   width: 100%;
   border: 1px solid #b9b9b9;
   padding: 10px;
@@ -15,6 +15,81 @@ import{html,TimeElementBase}from"../../../../components/adaptive-ui.js";class Ti
   justify-content: center;
   position: relative;
  }
+ .calendar-select{
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  position: relative;
+}
+.calendar-select-header{
+width: 100%;
+background: #fff;
+padding: 10px;
+position: relative;
+cursor: pointer;
+border-radius: 6px;
+}
+.arrow{
+position: relative;
+}
+.calendar-select-header::after{
+content: '';
+width: 8px;
+height: 8px;
+border-left: 2px solid #4a4a4a;
+border-bottom: 2px solid #4a4a4a;
+border-right: 2px solid transparent;
+border-top: 2px solid transparent;
+position: absolute;
+transform: rotate(-43deg);
+top: 13px;
+right: 23px;
+}
+
+
+.calendar-select-header p{
+font-size: 14px;
+font-weight: 500;
+}
+
+.time-font-title {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.heading{
+  padding-top: 10px;
+}
+
+a {
+  color: #4A4A4A;
+}
+
+.calendar-select-body{
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 6px;
+  display: none;
+  z-index: 9999;
+  border: 1px solid #e5e5e5;
+  position: absolute;
+}
+
+.timer-radio{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.time-active {
+  background-color:#1ABC9C;
+  color:#fff;
+}
+.time-active:hover  {
+  background-color:#1ABC9C;
+  color:#fff;
+}
+
  .timer-container .timer-element::after{
     content: '';
     width: 7px;
@@ -36,10 +111,13 @@ import{html,TimeElementBase}from"../../../../components/adaptive-ui.js";class Ti
   border-radius: 4px;
  }
  .timer-dropdown{
-  margin: 10px 0;
-  border: 1px solid #b9b9b9;
-  padding: 20px;
-  border-radius: 4px;
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 6px;
+  z-index: 9999;
+  border: 1px solid #e5e5e5;
+  position: absolute;
+  background-color:white;
 
  }
  .drp{
@@ -54,6 +132,7 @@ import{html,TimeElementBase}from"../../../../components/adaptive-ui.js";class Ti
  }
  .drp ul li:hover {
   background: #e5e5e5;
+  cursor: pointer;
  }
 
 
@@ -269,60 +348,63 @@ import{html,TimeElementBase}from"../../../../components/adaptive-ui.js";class Ti
 
 }
 
-
-
-
-
-
-
-
 </style>
-<div class="timer-container">
- <div class="timer-element" @click="${()=>this._dropdown()}">
-  <p class="has-text-centered has-text-weight-bold is-size-4">
-    <a class="hour" id="hrs">${this.todayHourTime}</a>&nbsp; : &nbsp;<a class="minutes" id="min">${this.todayMinTime}</a> <a class="tod" id="tod">${this.amOrPm}</a></p>
- </div>
- <div id="timer-dropdown" class="timer-dropdown is-hidden">
-  <div class="inner-container columns">
-    <div class="column hrs-drp drp">
-      <div class="heading">
-        <p class="has-text-weight-bold is-size-5 has-text-centered">Hours</p>
-      </div>
 
-    
-      <ul id="timer-lineup">
-      ${this.range(1,12).map(data=>html`
-           <li @click='${()=>this.addHour(data)}'><a href="#">${data}</a></li>
-      `)}
-      </ul>
-
-
-
+<div class="column">
+  <div class="calendar-select" style="width:100%;">
+    <div class="calendar-select-header" @click="${()=>this._dropdown()}">
+      <p id="dateSelected" class="has-text-center">
+        <fa-icon class="fas fa-clock" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; <a class="hour" id="hrs">${this.todayHourTime}</a>&nbsp;:&nbsp;<a class="minutes" id="min">${this.todayMinTime}</a> <a class="tod" id="tod">${this.amOrPm}</a></p>
     </div>
-    <div class="column drp">
-    <div class="heading">
-        <p class="has-text-weight-bold is-size-5 has-text-centered">Minutes</p>
-      </div>
-      <ul id="timer-linuep-minutes">
-      ${this.range(0,59).map(data=>html`
-      <li @click='${()=>this.addMin(data)}'><a href="#">${10>data?"0"+data:data}</a></li>
-      `)}
-       
-      </ul>
-    </div>
-    <div class="column drp">
-    <div class="heading">
-        <p class="has-text-weight-bold is-size-5 has-text-centered">TOD</p>
-      </div>
-      <div class="radio timer-radio">
-        <input type="radio" name="tod" value="AM" checked @click='${()=>this.addTOD("AM")}'> AM
-        <input type="radio" name="tod" value="PM"  @click='${()=>this.addTOD("PM")}'> PM
-      </div>
-    </div>
-  </div>
-  </div>
+
+   <div class="timer-dropdown is-hidden" id="timer-dropdown">
+
+            <div class="inner-container columns">
+            <div class="column hrs-drp drp">
+              <div class="heading">
+                <p class="time-font-title has-text-centered">Hours</p>
+              </div>
+
+            
+              <ul id="timer-lineup">
+              ${this.range(1,12).map(data=>html`
+                    <li id="hour-${data}" class="" @click='${()=>this.addHour(data)}'>${data}</li>
+              `)}
+              </ul>
+
+
+
+            </div>
+            <div class="column drp">
+            <div class="heading">
+                <p class="time-font-title has-text-centered">Minutes</p>
+              </div>
+              <ul id="timer-lineup-minutes">
+              ${this.range(0,59).map(data=>html`
+              <li id="min-${data}" class="" @click='${()=>this.addMin(data)}'>${10>data?"0"+data:data}</li>
+              `)}
+                
+              </ul>
+            </div>
+            <div class="column drp">
+            <div class="heading">
+                <p class="time-font-title has-text-centered">TOD</p>
+              </div>
+              <div class="radio timer-radio">
+                <div class ="radio-div"><input type="radio" name="tod" value="AM" checked @click='${()=>this.addTOD("AM")}'> AM</div>
+                <div class ="radio-div"><input type="radio" name="tod" value="PM"  @click='${()=>this.addTOD("PM")}'> PM </div>
+              </div>
+            </div>
+          </div>
+
+
+    </div> <!-- end of calender body -->
+
+  </div> <!-- end of calender select -->
+
+
 </div>
-`}_dropdown(){const dropdown=this.shadowRoot.querySelector("#timer-dropdown");if(!0===this.dropDownMenuHidden){dropdown.classList.remove("is-hidden");this.dropDownMenuHidden=!1}else{dropdown.classList.add("is-hidden");this.dropDownMenuHidden=!0}}addHour(time){const hourText=this.shadowRoot.querySelector("#hrs");hourText.innerHTML=time}addMin(time){let min=time;10>min?min="0"+time:min=time;const minText=this.shadowRoot.querySelector("#min");minText.innerHTML=min}addTOD(tod){const timeofDay=this.shadowRoot.querySelector("#tod");timeofDay.innerHTML=tod}range(start,end){return Array(end-start+1).fill().map((_,idx)=>start+idx)}getInput(){const hourText=this.shadowRoot.querySelector("#hrs"),minText=this.shadowRoot.querySelector("#min"),timeofDay=this.shadowRoot.querySelector("#tod"),actualTime=hourText.innerText+":"+minText.innerText+" "+timeofDay.innerText,picker=actualTime;return picker}getValue(){const pickerDate=this.getInput();// AsDate;//.getUTCDate();
+`}_dropdown(){const dropdown=this.shadowRoot.querySelector("#timer-dropdown");if(!0===this.dropDownMenuHidden){dropdown.classList.remove("is-hidden");this.dropDownMenuHidden=!1}else{dropdown.classList.add("is-hidden");this.dropDownMenuHidden=!0}}addHour(time){const hourText=this.shadowRoot.querySelector("#hrs");hourText.innerHTML=time;const allHourTime=this.shadowRoot.querySelector("#timer-lineup").querySelectorAll("li"),selectedHour=this.shadowRoot.querySelector("#hour-"+time);allHourTime.forEach(li=>{li.classList.remove("time-active")});selectedHour.classList.add("time-active")}addMin(time){let min=time;10>min?min="0"+time:min=time;const minText=this.shadowRoot.querySelector("#min");minText.innerHTML=min;const allMinTime=this.shadowRoot.querySelector("#timer-lineup-minutes").querySelectorAll("li"),selectedMin=this.shadowRoot.querySelector("#min-"+time);allMinTime.forEach(li=>{li.classList.remove("time-active")});selectedMin.classList.add("time-active")}addTOD(tod){const timeofDay=this.shadowRoot.querySelector("#tod");timeofDay.innerHTML=tod}range(start,end){return Array(end-start+1).fill().map((_,idx)=>start+idx)}getInput(){const hourText=this.shadowRoot.querySelector("#hrs"),minText=this.shadowRoot.querySelector("#min"),timeofDay=this.shadowRoot.querySelector("#tod"),actualTime=hourText.innerText+":"+minText.innerText+" "+timeofDay.innerText,picker=actualTime;return picker}getValue(){const pickerDate=this.getInput();// AsDate;//.getUTCDate();
 return pickerDate;// if (pickerDate) {
 //   return this.convertTime24to12(pickerDate);
 // }

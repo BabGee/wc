@@ -93,7 +93,7 @@ class DateElement extends DateElementBase {
 
 .weekdays li {
   display: inline-block;
-  width: 13%;
+  width: 13%!important;
   color: #013243;
   font-size: 10px;
   text-align: center;
@@ -124,6 +124,38 @@ class DateElement extends DateElementBase {
 .next, .prev{
   cursor: pointer;
 }
+.monthAndYear {
+  cursor: pointer;
+
+}
+
+.month-calender {
+  padding: 10px 0;
+  background: #fff;
+  margin: 0;
+  display:none;
+}
+
+.month-calender li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13.5%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #013243;
+  cursor: pointer;
+}
+
+.month-calender li.active {
+  padding: 5px;
+  background: #1abc9c;
+  color: white !important;
+  /* border-radius: 50%; */
+}
+
+
+
 
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {
@@ -138,8 +170,17 @@ class DateElement extends DateElementBase {
 }
 
 @media screen and (max-width: 420px) {
-  .weekdays li, .days li {width: 12.5%;}
+  .weekdays li{width: 10.5%!important;}
+  .days li {width: 12.5%;}
   .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 320px) {
+  .weekdays li{width: 10%!important;}
+}
+
+@media screen and (max-width: 360px) {
+  .weekdays li{width: 10.4%!important;}
 }
 
 @media screen and (max-width: 290px) {
@@ -157,8 +198,8 @@ class DateElement extends DateElementBase {
         <div class="month">      
             <ul>
               <div class="columns">
-                  <div class="column">
-                      <li class="is-pulled-left" id="monthAndYear">
+                  <div class="column" @click="${this.monthToggle}">
+                      <li class="is-pulled-left monthAndYear" id="monthAndYear">
                         August
                       </li>
                   </div>
@@ -171,7 +212,7 @@ class DateElement extends DateElementBase {
               </div>
             </ul>
           </div>
-          <ul class="weekdays">
+          <ul class="weekdays" id="weekdays">
             <li>Su</li>
             <li>Mo</li>
             <li>Tu</li>
@@ -183,6 +224,14 @@ class DateElement extends DateElementBase {
 
           <div class="days" id="days">  
           
+          </div>
+          <div class="month-calender" id="months-calender">
+            <ul id="months" class="months">
+
+            ${this.months.map(month => html`                
+                <li @click = "${() => this.selectMonth(month)}"class ="monthN">${month}</li>
+            `)} 
+            </ul>
           </div>
     </div>
   </div>
@@ -214,7 +263,9 @@ class DateElement extends DateElementBase {
       months: Array,
       todayDateNumber: Number,
       dateSelected: String,
-      wasDateSelected: Boolean
+      wasDateSelected: Boolean,
+      monthYearCalenderVisibile: Boolean,
+      monthCalenderValue: String
     };
   }
 
@@ -226,6 +277,7 @@ class DateElement extends DateElementBase {
     this.todayDateNumber = this.today.getDate();
     this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     this.wasDateSelected = false;
+    this.monthYearCalenderVisibile = false;
   }
 
   getInput() {
@@ -288,6 +340,56 @@ class DateElement extends DateElementBase {
     // console.log("MONTH>>>>>"+currentMonth);
     // const currentYear = today.getFullYear();
 
+    this.showCalendar(this.currentMonth, this.currentYear);
+  }
+
+  monthToggle() {
+    const monthBody = this.shadowRoot.getElementById('months-calender');
+    const days = this.shadowRoot.getElementById('days');
+    const weekdays = this.shadowRoot.getElementById('weekdays');
+    const monthYearView = this.shadowRoot.getElementById('monthAndYear');
+    const allMonthsInCalender = this.shadowRoot.querySelectorAll(".monthN");
+
+    if (!this.monthYearCalenderVisibile) {
+      monthBody.style.display = "block";
+      days.style.display = "none";
+      weekdays.style.display = "none";
+      allMonthsInCalender.forEach(month => {
+        if (month.innerText == this.months[this.currentMonth]) {
+          month.classList.add("active");
+        }
+      }); //show current year
+
+      monthYearView.innerText = this.currentYear;
+      this.monthYearCalenderVisibile = true;
+    } else {
+      monthBody.style.display = "none";
+      days.style.display = "block";
+      weekdays.style.display = "block"; //show current year
+
+      this.monthYearCalenderVisibile = false;
+      this.showCalendar(this.currentMonth, this.currentYear);
+    }
+  }
+
+  selectMonth(monthText) {
+    const allMonthsInCalender = this.shadowRoot.querySelectorAll(".monthN");
+    const monthBody = this.shadowRoot.getElementById('months-calender');
+    const days = this.shadowRoot.getElementById('days');
+    const weekdays = this.shadowRoot.getElementById('weekdays');
+    allMonthsInCalender.forEach(month => {
+      month.classList.remove("active");
+    });
+    allMonthsInCalender.forEach(month => {
+      if (month.innerText == monthText) {
+        month.classList.add("active");
+      }
+    });
+    this.currentMonth = this.months.indexOf(monthText);
+    monthBody.style.display = "none";
+    days.style.display = "block";
+    weekdays.style.display = "block";
+    this.monthYearCalenderVisibile = false;
     this.showCalendar(this.currentMonth, this.currentYear);
   }
 
@@ -416,34 +518,46 @@ class DateElement extends DateElementBase {
 
 
   next() {
-    //Remove active color by default
-    let allCells = this.shadowRoot.querySelector('#days').querySelectorAll('li');
-    allCells.forEach(cell => {
-      cell.classList.remove('active');
-    });
-    this.currentMonth++;
-
-    if (this.currentMonth > 11) {
+    if (this.monthYearCalenderVisibile) {
+      const monthYearView = this.shadowRoot.getElementById('monthAndYear');
       this.currentYear++;
-      this.currentMonth = 0;
-    }
+      monthYearView.innerText = this.currentYear;
+    } else {
+      //Remove active color by default
+      let allCells = this.shadowRoot.querySelector('#days').querySelectorAll('li');
+      allCells.forEach(cell => {
+        cell.classList.remove('active');
+      });
+      this.currentMonth++;
 
-    this.showCalendar(this.currentMonth, this.currentYear);
+      if (this.currentMonth > 11) {
+        this.currentYear++;
+        this.currentMonth = 0;
+      }
+
+      this.showCalendar(this.currentMonth, this.currentYear);
+    }
   }
 
   previous() {
-    let allCells = this.shadowRoot.querySelector('#days').querySelectorAll('li');
-    allCells.forEach(cell => {
-      cell.classList.remove('active');
-    });
-    this.currentMonth--;
-
-    if (this.currentMonth < 0) {
-      this.currentMonth = 11;
+    if (this.monthYearCalenderVisibile) {
+      const monthYearView = this.shadowRoot.getElementById('monthAndYear');
       this.currentYear--;
-    }
+      monthYearView.innerText = this.currentYear;
+    } else {
+      let allCells = this.shadowRoot.querySelector('#days').querySelectorAll('li');
+      allCells.forEach(cell => {
+        cell.classList.remove('active');
+      });
+      this.currentMonth--;
 
-    this.showCalendar(this.currentMonth, this.currentYear);
+      if (this.currentMonth < 0) {
+        this.currentMonth = 11;
+        this.currentYear--;
+      }
+
+      this.showCalendar(this.currentMonth, this.currentYear);
+    }
   }
 
   daysInMonth(iMonth, iYear) {

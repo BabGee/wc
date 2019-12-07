@@ -909,10 +909,17 @@ ${this.paginate ? html`
       try {
         // todo possible optimization point, should probably be a column type
         // test using jsPerf
-        const dJson = JSON.parse(valueFromRowData); // skip boolean and number columns
+        let columnValue = valueFromRowData;
+        var dJson; // = JSON.parse(columnValue);
 
-        if (typeof dJson != 'object') {
-          throw 'Not Object JSON';
+        if (typeof columnValue == 'object') {
+          dJson = columnValue;
+        } else {
+          dJson = JSON.parse(columnValue); // skip boolean and number columns
+
+          if (typeof dJson != 'object') {
+            throw 'Not Object JSON';
+          }
         }
 
         const vs = [];
