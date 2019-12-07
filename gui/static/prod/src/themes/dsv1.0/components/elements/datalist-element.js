@@ -269,15 +269,60 @@ _action(evt){const dataAction=evt.currentTarget.dataAction;this.pl._dialog.apply
               left: 15px;
               transform: rotate(-135deg);
             }
+            .perpage-dropdown .p-display{
+              position: relative;
+              cursor: pointer;
+              margin: 0 15px 0 0;
+            }
+            .perpage-dropdown .p-display::after{
+              content: '';
+              position: absolute;
+              right: -15px;
+              top: 4px;
+              width: 5px;
+              height: 5px;
+              border-left: 2px solid #3a3a3a;
+              border-bottom: 2px solid #3a3a3a;
+              transform: rotate(-45deg);
+            }
+            .perpage-dropdown .p-dropdown{
+              width: 100%;
+              background: #fff;
+              border: 1px solid #e5e5e5;
+              padding: 0 8px;
+              display: none;
+            }
+            .perpage-dropdown .p-dropdown li a{
+              text-align: right;
+              display: inline-block;
+              width: 100%;
+              color: #4a4a4a;
+            }
+            .perpage-dropdown .p-dropdown li a:hover{
+              background: #e5e5e5;
+            }
         </style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <div class="wrapper is-flex" style="margin-top: 20px;">
           <div class="size">
-            ${this.availableSize.length?html`
-            <p class="is-capitalized is-size-7" selected="${this.size}" slot="dropdown-content" @iron-select="${this._newSizeIsSelected}"> Per Page <span>${this.availableSize.map(size=>html`${size}`)}</span></p>
-            `:html`
-            <p class="is-capitalized is-size-7">Per Page <span>60</span></p>
-            `}
+          
+            <div class="perpage-dropdown">
+              <div class="p-display" @click=${this._dropdownReveal}>
+                ${this.availableSize.length?html`
+                <p class="is-capitalized is-size-7">Per Page ${this.availableSize.map(size=>html`${size}`)}</p>
+                `:html`<p class="is-capitalized is-size-7">Per Page 0</p>`}
+              </div>
+              <div class="p-dropdown">
+              <ul>
+                ${this.availableSize.map(size=>html`<li><a href="$1" class="is-size-7">${size}</a></li>`)}
+                
+                <li><a href="$1" class="is-size-7">2</a></li>
+                <li><a href="$1" class="is-size-7">3</a></li>
+                <li><a href="$1" class="is-size-7">4</a></li>
+                <li><a href="$1" class="is-size-7">5</a></li>
+              </ul>
+              </div>
+            </div>
           </div>
           <div class="range">
             <div class="is-flex">
@@ -290,7 +335,7 @@ _action(evt){const dataAction=evt.currentTarget.dataAction;this.pl._dialog.apply
               </div>
             </div>
           </div>
-        </div>`}constructor(){super();this.availableSize=[];this.size=50}static get is(){return"datasource-table-footer"}static get properties(){return{footerPosition:String,size:{type:Number},page:{type:Number},totalElements:{type:Number},totalPages:{type:Number},availableSize:Array}}_computeCurrentSize(page,size){return(page-1)*size+1}_computeCurrentMaxSize(page,size,totalElements){const maxSize=size*page;return maxSize>totalElements?totalElements:maxSize}_nextPage(){if(this.page<this.totalPages){this.page=this.page+1}this.dispatchEvent(new CustomEvent("n-page",{detail:{page:this.page}}))}_prevPage(){if(0<this.page-1){this.page=this.page-1}this.dispatchEvent(new CustomEvent("p-page",{detail:{page:this.page}}))}_nextButtonEnabled(page,totalPages){return page<totalPages}_prevButtonEnabled(page){return 1<page}_newSizeIsSelected(){const newSize=this.shadowRoot.querySelector("paper-listbox").selected;if(newSize){if(null!==this.oldPage&&this.oldPage!==void 0){this.page=1}this.size=newSize;this.dispatchEvent(new CustomEvent("size-change",{detail:{size:newSize}}))}}_computePosition(position){if("right"===position){return"end-justified"}return""}}customElements.define(DatasourceTableFooter.is,DatasourceTableFooter);var datasourceTableFooter={DatasourceTableFooter:DatasourceTableFooter};class DataSourceList extends dataSourceMixin(LitElement){static get styles(){return css`
+        </div>`}constructor(){super();this.availableSize=[];this.size=50}static get is(){return"datasource-table-footer"}static get properties(){return{footerPosition:String,size:{type:Number},page:{type:Number},totalElements:{type:Number},totalPages:{type:Number},availableSize:Array}}_dropdownReveal(){const drp=this.shadowRoot.querySelector(".p-dropdown");switch(drp.style.display){case"block":drp.style.display="none";break;default:drp.style.display="block";break;}}_computeCurrentSize(page,size){return(page-1)*size+1}_computeCurrentMaxSize(page,size,totalElements){const maxSize=size*page;return maxSize>totalElements?totalElements:maxSize}_nextPage(){if(this.page<this.totalPages){this.page=this.page+1}this.dispatchEvent(new CustomEvent("n-page",{detail:{page:this.page}}))}_prevPage(){if(0<this.page-1){this.page=this.page-1}this.dispatchEvent(new CustomEvent("p-page",{detail:{page:this.page}}))}_nextButtonEnabled(page,totalPages){return page<totalPages}_prevButtonEnabled(page){return 1<page}_newSizeIsSelected(){const newSize=this.shadowRoot.querySelector("paper-listbox").selected;if(newSize){if(null!==this.oldPage&&this.oldPage!==void 0){this.page=1}this.size=newSize;this.dispatchEvent(new CustomEvent("size-change",{detail:{size:newSize}}))}}_computePosition(position){if("right"===position){return"end-justified"}return""}}customElements.define(DatasourceTableFooter.is,DatasourceTableFooter);var datasourceTableFooter={DatasourceTableFooter:DatasourceTableFooter};class DataSourceList extends dataSourceMixin(LitElement){static get styles(){return css`
     :host {
                 display: block;
             }

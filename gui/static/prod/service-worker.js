@@ -4,7 +4,7 @@
  */ /* eslint-env worker, serviceworker */ /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks */ /* eslint-disable space-before-function-paren, quotes, comma-spacing */'use strict';var precacheConfig=[// ['path', 'hash' ]
 // TODO #253 how does the build tool generate hash for non exisiting paths .e,g
 // ['/', '77741e916f1f87bfbe0e4ad0a2a1e592'],
-],version="12",dist,db,cacheName="sw-precache-v3-4-"+(self.registration?self.registration.scope:"");function loadDist(){// Open our object store and then get a cursor list of all the different data items in the IDB to iterate through
+],version="11",dist,db,cacheName="sw-precache-v3-4-"+(self.registration?self.registration.scope:"");function loadDist(){// Open our object store and then get a cursor list of all the different data items in the IDB to iterate through
 var objectStore=db.transaction("settings").objectStore("settings");objectStore.openCursor().onsuccess=function(event){var cursor=event.target.result;// if there is still another cursor to go, keep runing this code
 if(cursor){// create a list item to put each data item inside when displaying it
 if("dist"===cursor.value.name){dist=cursor.value.value;// TODO #254  should break cursor here

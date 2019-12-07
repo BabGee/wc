@@ -724,11 +724,11 @@ if(this._iconName)resolve(module.icons[this._iconName]);// this.requestUpdate('l
                 </figure>
             </a>
 
-                    <a href="" id="mobile-menu" class="is-pulled-right">
+                    <div id="mobile-menu" class="is-pulled-right">
                         <span class="icon is-pulled-right-icon">
                           <fa-icon class="fas fa-bars" color="#fff"></fa-icon>
                         </span>
-                    </a>
+                    </div>
                 </header>
                 <div class="aside-menu">
                     <nav class="menu">

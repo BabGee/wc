@@ -872,8 +872,9 @@ ${this.paginate?html`
         ></paper-checkbox>
         `}else{try{// todo possible optimization point, should probably be a column type
 // test using jsPerf
-const dJson=JSON.parse(valueFromRowData);// skip boolean and number columns
-if("object"!=typeof dJson){throw"Not Object JSON"}const vs=[];for(var property in dJson){// if (dJson.hasOwnProperty(property)) {
+let columnValue=valueFromRowData;var dJson;// = JSON.parse(columnValue);
+if("object"==typeof columnValue){dJson=columnValue}else{dJson=JSON.parse(columnValue);// skip boolean and number columns
+if("object"!=typeof dJson){throw"Not Object JSON"}}const vs=[];for(var property in dJson){// if (dJson.hasOwnProperty(property)) {
 vs.push("<strong>"+property+"</strong>: <span>"+dJson[property]+"</span>");// }
 }return html`
           ${vs.map(v=>html` ${v}<br>`)}`}catch(e){switch(paperDatatableApiColumn.type){case"boolean":return html`
