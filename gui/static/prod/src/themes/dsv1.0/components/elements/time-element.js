@@ -82,11 +82,11 @@ a {
 }
 
 .time-active {
-  background-color:#1ABC9C;
+  background-color:var(--app-accent-color);
   color:#fff;
 }
 .time-active:hover  {
-  background-color:#1ABC9C;
+  background-color:var(--app-accent-color);
   color:#fff;
 }
 

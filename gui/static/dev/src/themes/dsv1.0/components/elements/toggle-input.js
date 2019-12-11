@@ -40,11 +40,11 @@ class ToggleInput extends ToggleInputBase {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color:var(--app-default-color);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1pxvar(--app-default-color);
 }
 
 input:checked + .slider:before {

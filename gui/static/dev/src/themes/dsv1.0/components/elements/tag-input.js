@@ -422,6 +422,14 @@ class TagInput extends TagInputBase {
     margin-right: 12px;
 }
 
+.tagify.countries{
+
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #E5E5E5;
+  
+}
+
 .tagify.countries .tagify__input{ min-width:175px; }
 
 .tagify.countries tag{ white-space:nowrap; }
@@ -431,6 +439,9 @@ class TagInput extends TagInputBase {
     height: 16px;
     margin-right: 3px;
     border-radius: 2px;
+}
+.control{
+  padding:16px;
 }
 </style>
     

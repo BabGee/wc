@@ -117,7 +117,7 @@ class DateElement extends DateElementBase {
 
 .days li.active {
   padding: 5px;
-  background: #1abc9c;
+  background: var(--app-accent-color);
   color: white !important;
   /* border-radius: 50%; */
 }
@@ -149,7 +149,7 @@ class DateElement extends DateElementBase {
 
 .month-calender li.active {
   padding: 5px;
-  background: #1abc9c;
+  background:var(--app-accent-color);
   color: white !important;
   /* border-radius: 50%; */
 }

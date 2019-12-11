@@ -888,6 +888,8 @@ ${this.paginate ? html`
   }
 
   renderColumn(paperDatatableApiColumn, valueFromRowData, p, rowData, rowIndex) {
+    console.log("RENDER COLUMN");
+
     if (paperDatatableApiColumn.actions) {
       return html`
         
@@ -926,7 +928,7 @@ ${this.paginate ? html`
 
         for (var property in dJson) {
           // if (dJson.hasOwnProperty(property)) {
-          vs.push('<strong>' + property + '</strong>: <span>' + dJson[property] + '</span>'); // }
+          vs.push(html`<div style="margin-top:0.1px;"><strong>${property}: </strong><span>${dJson[property]}</span></div>`); // }
         }
 
         return html`

@@ -43,6 +43,13 @@ class ServicePage extends ServicePageBase {
           align-items: center;
           margin-bottom: 15px;
       }
+
+
+      div.heading{
+
+        margin-bottom: -30px;
+       } 
+
       div.modal-container{
         width: 100%;
         height: 100vh;
@@ -128,527 +135,388 @@ class ServicePage extends ServicePageBase {
         color: #fff;
       }
 
-      aside.aside div.aside-menu ul li a:hover, 
-      aside.aside div.aside-menu ul li a.active, 
-      aside.aside div.aside-menu ul li a.selected{
-          background-color: #ececee;
-          border-radius: 0;
-          color: var(--app-default-color);;
-          opacity: 1;
-      }
-      aside.aside div.aside-menu ul li a:hover aside.aside div.aside-menu ul li a p .icon{
-          color: #ccced0;
-      }
-      aside.aside div.aside-menu ul{
-          border-left: transparent solid 1px;
-          margin: 0;
-      }
-      aside.aside{
-          background-color: var(--app-default-color);
-          height: 100vh;
-          position:fixed;
-          top:0px;
-          bottom:0px;
-          left:0px;  
-          overflow-y: auto; 
-          overflow-x: hidden; 
-          width:21%; 
-      }
-      aside.aside .aside-header{
-        display: flex;
-        justify-content: center;
-      }
-      aside.aside .aside-header,
-      aside.aside div.aside-menu{
-        padding-left: 18px;
-      }
-      aside.aside .aside-header #mobile-menu{
-          display: none;
-      }
-      aside.aside div.aside-menu ul li a{
+      body {
+          background-color: #fff;
+          color: #172B4D;
+          font-family: 'Work Sans', sans-serif;
           font-size: 14px;
-          padding-top: 5px;
-          padding-bottom: 10px;
-          color: #fff;
-          opacity: .9;
-      }
-      aside.aside div.aside-menu ul li a p .icon{
-          position: relative;
-          right: 0;
-          top: 3px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1.42857142857143;
+          -ms-overflow-style: -ms-autohiding-scrollbar;
+          text-decoration-skip-ink: auto;
       }
 
-      aside.aside div.aside-menu ul li .sub-menu{
-          width: 100%;
-          background-color: #ececee;
-          display: none;
-      }
-      aside.aside div.aside-menu ul li .sub-menu ul li a.nav-item{
-          padding-top: 9px;
-          padding-bottom: 9px;
-          color: var(--app-default-color);;
-          margin-left: 16px;
-      }
-      aside.aside div.aside-menu ul li .sub-menu ul li a.nav-item:hover{
-          color: #4a4a4a;
-      }
-      main.main-section{
-          background-color: #ececee;
-          width: 79%;
-          margin-left: 20.55%;
-          /* height: 100vh; */
-      }
-      main.main-section .main-header{
-          background-color: #f6f6f9;
-          margin-top: 13px;
-          margin-bottom: 40px;
-
+      .column-wrap {
           display: flex;
-          justify-content: flex-end;
+          flex-direction: row;
+          height: calc(100vh - 0px);
+          margin-top: 0px;
       }
 
+      .mipay-aside {
+          bottom: 0px;
+          left: 0px;
+          position: fixed;
+          top: 0px;
+          z-index: 200;
+          width: 304px;
+      }
+      .mipay-aside.left{
+          left: 0;
+      }
 
-      main.main-section .main-header .profile-header-container{
-          width: 279px;
+      .aside {
+          height: 100%;
+          overflow: hidden;
+          /* background-color: rgb(7, 71, 166); */
+          background-color: var(--app-default-color);
+          color: #fff;
+          /* padding: 10px; */
       }
-      main.main-section .main-header .profile-header-container .icons{
-          width: 30px;
+
+      .aside-header{
+          width: 100%;
+          position: relative;
+          /* box-sizing: border-box; */
+          padding-left: 16px;
+          padding-right: 16px;
+          padding-top: 50px;
+          margin: 0 0 55px 0;
       }
-      main.main-section .main-header .profile-header-container .icon{
-          color: #ccced0;
+      .aside-header img{
+          margin: 0 0 0 60px;
       }
-      main.main-section .main-header .profile-header-container .profile .profile-image img{
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 3px solid var(--app-default-color);
+
+      .aside-body a{
+          color: #fff!important;
+          font-weight: normal;
+          padding: 17px 0!important;
       }
-      main.main-section .main-header .profile-header-container .profile .profile-name{
-          font-size: 12px;
-          line-height: 1.33;
-          font-weight: bold;
-          margin-left: 5.4px;
+
+      .menu-list a:hover{
+          background: rgba(4, 105, 255, 0.5)!important; 
+          border-left: 3px solid var(--app-accent-color);   
+      }
+      .menu-list li ul{
+          display: none;
+          transition: display 300ms cubic-bezier(0.2, 0, 0, 1) 0s;
+          margin-right: 0;
+          padding-left: 0;
+      }
+      .menu-list ul li a{
+          padding-left: 20px!important;
+      }
+      .menu-list ul li a:hover, .menu-list ul li a.active{
+          border-left: 0 solid transparent!important;
+      }
+
+      .aside-icons{
+          margin-right: 15px;
+          margin-left: 30px;
           position: relative;
           top: 6px;
       }
-      main.main-section .main-content{
-          position: relative;
-          margin: 95px 50px;
+      .aside-icons svg{
+        fill: #fff;
       }
-      .profile-modal-select{
-        position: relative;
+
+      .aside-sub-menu{
+          margin-left: 68px!important;
+          display: block;
       }
-      .profile-select-content::after{
+
+      .is-active, 
+      .menu-list a.active{
+          background: rgba(4, 105, 255, 0.5)!important; 
+          border-left: 3px solid var(--app-accent-color);
+      }
+
+
+
+      /* The main content section */
+      .main-content{
+          margin-left: 64px;
+          margin-top: 0px;
+          width: 0px;
+          background-color: #EDEDEE;
+          flex: 1 1 auto;
+      }
+      .main-section{
+          min-width: 0px;
+          min-height: 100%;
+          flex: 1 1 0px;
+      }
+      .section-header{
+          width: 100%;
+          background-color: #fff;
+          height: 64px;
+          box-shadow: 0 1px 5px 0 #E5E5E5;
+      }
+      /* .navbar-burger >span.span-white */
+      .navbar-burger {
+          color: #4a4a4a;
+          cursor: pointer;
+          display: block;
+          height: 3.25rem;
+          position: absolute!important;
+          width: 3.25rem;
+          margin-left: auto;
+          top: 7px;
+          left: 5px;
+          transition: left 300ms cubic-bezier(0.2, 0, 0, 1) 0s;
+      }
+      .navbar-burger span {
+          background-color: currentColor;
+          display: block;
+          height: 1px;
+          left: calc(50% - 8px);
+          position: absolute;
+          transform-origin: center;
+          transition-duration: 86ms;
+          transition-property: background-color,opacity,transform;
+          transition-timing-function: ease-out;
+          width: 16px;
+      }
+      .navbar-burger span:nth-child(1) {
+          top: calc(50% - 6px);
+      }
+      .section-user{
+          margin-right: 40px;
+          cursor: pointer;
+      }
+      .profile-image{
+          border: 3px solid blue;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          margin-right: 15px;
+      }
+      .profile{
+          height: 64px;
+          align-items: center;
+      }
+      .profile p  {
+          font-weight: 600;
+      }
+      .dash-content{
+          margin-top: 30px;
+          padding: 0 45px;
+      }
+
+      .profile-select{
+        position: absolute;
+        right: 44px;
+        top: 89px;
+        width: 300px;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 3px 8px 5px #e5e5e5;
+        z-index: 9999;
+        border-radius: 4px;
+        display: none;
+      }
+      .profile-select::after{
         content: '';
         position: absolute;
-        top: -19px;
-        z-index: 1000;
-        right: 7px;
         border-top: 10px solid transparent;
-        border-bottom: 10px solid #fff;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
+        border-bottom: 10px solid #fff;
+        top: -20px;
+        right: 20px;
       }
-      .profile-header{
-        cursor: pointer;
+      .profile-select .profile-image{
+        width: 70px;
+        height: 70px;
+        margin-left: 20px;
       }
-      .profile-modal-select .profile-picture img{
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-      }
-      .profile-select-content{
-        width: 288px;
-        background: #fff;
-        display: none;
-        padding: 20px;
-        position: absolute;
-        top: 73px;
-        z-index: 1000;
-        right: 39px;
-      }
-      .profile-modal-select .profile-name{
-        font-size: 14px;
-        font-weight: 500;
-        color: #013243;
-      }
-      .profile-buttons .main-cta a{
-        background-color: #2273f0;
-        color: #fff;
-        padding: 10px 30px;
-        font-size: 12px;
-        margin: 20px auto;
-      }
-      .profile-buttons .btn a{
-        font-size: 11px;
-        color: #013243;
-        background-color: #c2c3c3;
-        padding: 5px 20px;
+      .profile-out a{
+        background-color: var(--app-default-color);
+        color: white;
+        padding: 10px 25px;
+        margin: 20px 0 0 0;
+        position: relative;
+        top: 19px;
+        border-radius: 6px;
       }
 
-      @media screen and (max-width: 768px){
-          
-        .is-pulled-right-icon{
-          position: absolute;
-          right: -350px;
-          top: -10px;
-        }
-
-        .logo-image{
-
-          position: absolute;
-          left: 30px;
-          bottom: 20px;
-        }
-
-
-        div.main-wrapper{
-              width: 100%;
-          }
-          main.main-section,
-          aside.aside{
-              width: 100%;
-              height: auto;
-              display: block;
-              position: relative;
-              margin: 0;
-          }
-          aside.aside .aside-header{
-              margin: 11px 20px 0 20px;
-          }
-          aside.aside .aside-header, 
-          main.main-section .main-header{
-              z-index: 100;
-          }
-          aside.aside div.aside-menu{
+      /* Mobile responsive */
+      @media screen and (min-width: 1024px){
+          .navbar-burger {
               display: none;
           }
-          aside.aside .aside-header .mobile-menu{
-              display: block;
+      }
+      @media screen and (max-width: 768px) {
+          .mipay-aside{
+              /* position: absolute; */
+              left: -304px;
+              transition: left 300ms cubic-bezier(0.2, 0, 0, 1) 0s;
           }
-          aside.aside .aside-header #mobile-menu{
-              display: flex;
-              justify-content: flex-end;
-              cursor: pointer;
-              position: relative;
-              right: 5%;
-          }
-          aside.aside .aside-header #mobile-menu .icon{
-              color: #fff;
-              position: absolute;
-              right: -350px
-          }
-          main.main-section .main-header, aside.aside div.aside-menu{
+          .main-content{
+              padding: 0!important;
               margin: 0;
           }
-          aside.aside div.aside-menu ul li a {
-              padding-left: 20px;
-          }
-          main.main-section .main-content{
-              margin: 0 15px;
-              padding-top: 80px;
-              z-index: 1;
+          .section-header{
+              margin: 0 0 0 0;
           }
       }
-
-      @media screen and (max-width: 650px){
-
-      aside.aside .aside-header #mobile-menu .icon {
-          color: #fff;
-          position: absolute;
-          right: -247px;
-      }
-    }
-
-    @media screen and (max-width: 520px){
-
-      aside.aside .aside-header #mobile-menu .icon {
-          color: #fff;
-          position: absolute;
-          right: -200px;
-      }
-    }
-
-      @media screen and (max-width: 414px){
-          
-        .is-pulled-right-icon{
-          position: absolute;
-          right: -170px;
-          top: -10px;
-        }
-
-        .logo-image{
-
-          position: absolute;
-          left: 30px;
-          bottom: 20px;
-          
-        }
-
-        aside.aside .aside-header #mobile-menu .icon {
-          color: #fff;
-          position: absolute;
-          right: -160px;
-      }
-
-      }
-
-      @media screen and (max-width: 411px){
-          
-        .is-pulled-right-icon{
-          position: absolute;
-          right: -170px;
-          top: -10px;
-          
-        }
-
-        .logo-image{
-
-          position: absolute;
-          left: 30px;
-          bottom: 20px;
-          
-        }
-
-        aside.aside .aside-header #mobile-menu .icon {
-          color: #fff;
-          position: absolute;
-          right: -155px;
-      }
-
-      }
-
-      @media screen and (max-width: 375px){
-          
-        .is-pulled-right-icon{
-          position: absolute;
-          right: -150px;
-          top: -10px;
-        }
-
-        .logo-image{
-
-          position: absolute;
-          left: 30px;
-          bottom: 20px;
-          
-        }
-
-        aside.aside .aside-header #mobile-menu .icon {
-          color: #fff;
-          position: absolute;
-          right: -150px;
-      }
-
-      }
-
-      @media screen and (max-width: 360px){
-          
-        .is-pulled-right-icon{
-          position: absolute;
-          right: -150px;
-          top: -10px;
-          
-        }
-
-        .logo-image{
-
-          position: absolute;
-          left: 30px;
-          bottom: 20px;
-          
-        }
-
-        aside.aside .aside-header #mobile-menu .icon {
-          color: #fff;
-          position: absolute;
-          right: -140px;
-      }
-
-      }
-
-
-      @media screen and (max-width: 320px){
-          
-        .is-pulled-right-icon{
-          position: absolute;
-          right: -110px;
-          top: -10px;
-        }
-
-        .logo-image{
-
-          position: absolute;
-          left: 30px;
-          bottom: 20px;
-          
-        }
-
-        aside.aside .aside-header #mobile-menu .icon {
-          color: #fff;
-          position: absolute;
-          right: -120px;
-      }
-
-      }
-
-
-      /* @media screen and (max-width: 1024px){
-          main.main-section{
-              margin-left: 187px;
-          }
-      } */
       </style>
       <div class="main-wrapper">
         
         ${this.view === VIEW_MODE_DIALOG ? html`
         <div class="modal-container">
-          <div class="modal-base" style="max-height: 90vh;">
-            <div class="modal-header">
-              <div class="heading">
-                <h1 class="title" style="width: 80%; display: inline-block;">${this.page.title}</h1>
+        <div class="modal-base " style="max-height: 100vh; padding: 7px; overflow: auto; width: 100vw;">
+          <div class="modal-header" >
+            <div class="heading" >
+              <h1 class="title has-text-black-bis" style="width: 80%; display: inline-block; ">${this.page.title}</h1>
 
- 
-                <a style="display: inline-block;float: right; color: black;
-                border: 1px solid black; padding: 0.1rem 1rem; 
-                border-radius: 25px 1px 1px 25px; box-shadow: 1px 1px 1px 0px black; " @click=${this._viewList}>Back</a>
 
-              </div>
-            </div>
-            <div class="modal-body">            
-            <section-page id="dialog" queue=${this.dialogServicesQueue}></section-page>
+              <a style="display: inline-block;float: right; color: black;
+              border: 1px solid black; padding: 0.1rem 1rem; 
+              border-radius: 25px 1px 1px 25px; box-shadow: 1px 1px 1px 0px black; " @click=${this._viewList}>Back</a>
+
             </div>
           </div>
+
+        
+
+          <div id="d-styling" class="modal-body">            
+          <section-page id="dialog" queue=${this.dialogServicesQueue} ></section-page>
+          </div>
+
+         
+
         </div>
+      </div>
         ` : html`
         
         `}
         
-        <div class="columns">
-            <aside class="column aside is-paddingless">
-                <header class="header aside-header">
-                <a href="" >
-                <figure class="logo-image ">
-                    <img src="${this._computeLogo(this.gateway)}" height="64px" width="128px">
-                </figure>
-            </a>
-
-                    <div id="mobile-menu" class="is-pulled-right">
-                        <span class="icon is-pulled-right-icon">
-                          <fa-icon class="fas fa-bars" color="#fff"></fa-icon>
-                        </span>
-                    </div>
-                </header>
-                <div class="aside-menu">
-                    <nav class="menu">
-                        <ul class="menu-list">
-                          ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
-                          <li>
-                                <a class="nav-active ${pageGroupIndex == this._pageGroup ? 'selected  active' : ''}" @click='${this.handleClick}'>
-                                    <p>
-                                        <span class="icon">
-                                        
-                                          <adaptive-ui-icon style="width: 19px;height: 19px;" icon="${pageGroup.icon || 'icons:info'}"></adaptive-ui-icon>
-                                          <!--<fa-icon class="fas fa-th-large" size="1rem" color="#fff"></fa-icon>                                        -->
-                                         
-                                         </span>
-                                        ${ServicePage.toTitleCase(pageGroup.title)}&nbsp;
-                                        <span class="icon is-pulled-right">
-                                          <fa-icon class="fas fa-caret-down" size="1rem" color="#fff"></fa-icon>
-                                        </span>
-                                    </p>
-                                </a>
-
-                                <div class="sub-menu" id="sub-items-${pageGroupIndex}">
-                                    <ul>
-                                      ${pageGroup.pages.map((menu, menuIndex) => html`
-                                      <li><a class="nav-item" href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/">${ServicePage.toTitleCase(menu.title)}</a></li>
-                                      `)}
-                                    </ul>
-                                </div>
-                            </li>
-                          `)}
-                        </ul>
-                    </nav>
-                </div>
+        <div class="columns column-wrap">
+          <div class="column is-paddingless mipay-aside">
+            <aside class="aside">
+              <div class="aside-header">
+                <img src=${this._computeLogo(this.gateway)} alt="branding" />
+              </div>
+              <div class="aside-body">
+                <nav class="manu">
+                  <ul class="menu-list">
+                    ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+                        <li id="list_${pageGroupIndex}">
+                          <a
+                            href="#"
+                            class="${pageGroupIndex == this._pageGroup ? "selected  active" : ""}"
+                            @click="${this.handleClick}"
+                          >
+                            <span class="icon is-small aside-icons"><adaptive-ui-icon style="width: 19px;height: 19px;fill: #fff;" icon="${pageGroup.icon || 'icons:info'}"></adaptive-ui-icon></span>
+                            ${ServicePage.toTitleCase(pageGroup.title)}&nbsp;
+                            <span class="icon is-small aside-icons"><fa-icon ></fa-icon></span>
+                          </a>
+                          <ul class="aside-sub-menu">
+                            ${pageGroup.pages.map((menu, menuIndex) => html`
+                                <li @click="${this.toggleMenu}">
+                                  <a
+                                    class="nav-item ${pageGroupIndex == this._pageGroup && menuIndex == this._page ? "selected  active" : ""}"
+                                    href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/"
+                                    >${ServicePage.toTitleCase(menu.title)}</a
+                                  >
+                                </li>
+                              `)}
+                          </ul>
+                        </li>
+                      `)}
+                  </ul>
+                </nav>
+              </div>
             </aside>
-          
-            <main class="main-section column is-paddingless">
-                <header class="header main-header  is-pulled-right">
-                    <div class="columns is-mobile profile-header-container">
-                        <div class="column is-2">
-                            <a href="">
-                                <!-- <span class="icon" style="margin: 4px 0 0 0;">
-                                  <fa-icon class="fab fa-elementor" size="1rem" color="#ccced0"></fa-icon>
-                                </span> -->
-                            </a>
-                        </div>
-                        <div class="column is-2">
-                            <a href="">
-                                <!-- <span class="icon" style="margin: 4px 0 0 0;">
-                                  <fa-icon class="fas fa-bell" size="1rem" color="#ccced0"></fa-icon>
-                                </span> -->
-                            </a>
-                        </div>
-                        <div class="column profile">
-                            <div class="profile-info">
-                              ${this.gateway.profile ? html`
-                              <a href="#" class="is-flex"  @click="${this.toggleProfile}">
-                                    <div class="profile-image">
-                                        <figure class="image">
-                                            <img src="${this.gateway.profile.photo ? '/media/' + this.gateway.profile.photo : 'images/web/user.svg'}" alt="profile-image">
-                                        </figure>
-                                    </div>
-                                    <div class="profile-name">
-                                        <p>
-                                        ${this.gateway.profile.firstName} ${this.gateway.profile.lastName}
-                                            <span class="icon is-pulled-right">
-                                              <fa-icon class="fas fa-caret-down" size="1rem" color="#fff"></fa-icon>
-                                            </span>
-                                        </p>
-                                    </div>
-                                </a>  
-                                <div class="profile-select-content" id="profile-content">
-                                      <div class="profile-content is-flex">
-                                          <div class="profile-picture cta" style="margin-right: 15px">
-                                          <img src="${this.gateway.profile.photo ? '/media/' + this.gateway.profile.photo : 'images/web/user.svg'}" $
-                                          </div>
-                                          <div class="prifile-info">
-                                              <p class="profile-name">${this.gateway.profile.firstName}&nbsp;${this.gateway.profile.lastName}</p>
-                                              <p class="profile-email is-size-7">${this.gateway.profile.username}</p>
-                                          </div>
-                                      </div>
-                                      <div class="profile-buttons">
-                                          <div class="main-cta center">
-                                              <a @click="${this.logout}" class="button is-rounded is-uppercase">Logout</a>
-                                          </div>
-                                      </div>
-                                  </div>
-                                </div>                            
-                              ` : html``}
+          </div>
+          <div
+            class="column main-content"
+            style="will-change: padding-left; padding-top: 0; padding-left: 253px; transition: padding-left 300ms cubic-bezier(0.2, 0, 0, 1) 0s;"
+          >
+            <div class="is-flex">
+              <div class="main-section">
+                <div class="section-header">
+                  <div
+                    id="navbarBurger"
+                    @click=${this.toggleMenu}
+                    class="navbar-burger burger"
+                    data-target="navMenuIndex"
+                  >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="section-user is-pulled-right is-flex" @click=${this.ShowProfile}>
+                    <div class="icon is-small"></div>
+                    ${this.gateway.profile ? html`
+                    <div class="profile is-flex">
+                      <div class="profile-image">
+                        <img src="${this.gateway.profile.photo ? "/media/" + this.gateway.profile.photo : "images/web/user.svg"}" alt="" />
+                      </div>
+                      <p>${this.gateway.profile.firstName} ${this.gateway.profile.lastName}</p>
+                    </div>
+
+                    <div class="profile-select" id="profile">
+                        <div class="columns is-mobile">
+                          <div class="column is-5">
+                            <div class="profile-image">
+                              <img src="${this.gateway.profile.photo ? "/media/" + this.gateway.profile.photo : "images/web/user.svg"}" alt="" />
                             </div>
+                          </div>
+
+                          <div class="column">
+                            <div class="profile-name">
+                              <p>${this.gateway.profile.firstName} ${this.gateway.profile.lastName}</p>
+                            </div>
+
+                            <div class="profile-out">
+                              <a href="$1">Logout</a>
+                            </div>
+                          </div>
                         </div>
                     </div>
-                </header>
-                <div class="main-content">
-                  ${this.page.pageInputGroups.map((feed, feedIndex) => html`        
-                    <div class="column is-12" >
-                      <form-render .feed="${feed}" .params=${this.parseParams()}></form-render>
-                  </div>`)}
+
+                    ` : html``}
+                  </div>
                 </div>
-            </main>
+                <div class="dash-content">
+                  <!-- <div class="dash-title" style="margin-bottom: 20px;">
+
+                  </div> -->
+                  <div class="dash-body">
+                    ${this.page.pageInputGroups.map((feed, feedIndex) => html`
+                        <div class="column is-12 is-paddingless">
+                          <form-render
+                            .feed="${feed}"
+                            .params=${this.parseParams()}
+                          ></form-render>
+                        </div>
+                      `)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-  <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> 
-<span slot="title">${this._snackbarTitle}</span> 
-<span>${this._snackbarMessage}</span>
-</snack-bar>
+      </div>
+      <snack-bar
+        id="snack-bar"
+        ?active="${this._snackbarOpened}"
+        context="${this._snackbarContext}"
+      >
+        <span slot="title">${this._snackbarTitle}</span>
+        <span>${this._snackbarMessage}</span>
+      </snack-bar>
      `;
   }
 
   constructor() {
     super();
+    this.isSideMenuVisible = false;
+    this.isProfileVisible = false;
+    this.shouldDocumentClick = false;
   }
 
   static get properties() {
@@ -657,50 +525,88 @@ class ServicePage extends ServicePageBase {
       tab: Object,
       profile: {
         type: Object,
-        value: ''
+        value: ""
       },
       page: Number,
-      mainColor: String
+      mainColor: String,
+      isSideMenuVisible: Boolean,
+      isProfileVisible: Boolean,
+      shouldDocumentClick: Boolean
     };
   }
 
   handleClick(evt) {
     evt.preventDefault();
     const menuItems = evt.currentTarget.nextElementSibling;
-    const toggleClass = 'is-block';
-    const highLight = 'selected';
+    const toggleClass = "is-block";
+    const highLight = "selected";
 
     if (menuItems.classList.contains(toggleClass)) {
       menuItems.classList.remove(toggleClass);
     } else {
       // collapse all current active
-      this.qsa('.sub-items, .is-block').forEach(function (el) {
+      this.qsa(".aside-sub-menu, .is-block").forEach(function (el) {
         el.classList.remove(toggleClass);
       }); // expand related to source of event
 
       menuItems.classList.add(toggleClass);
     }
 
-    this.qsa('.selected').forEach(function (el) {
-      if (!el.classList.contains('active')) el.classList.remove(highLight); //
+    this.qsa(".selected").forEach(function (el) {
+      if (!el.classList.contains("active")) el.classList.remove(highLight); //
     });
-    this.qsa('.selected').forEach(function (el) {
-      if (!el.classList.contains('is-block')) el.classList.remove(highLight); //
+    this.qsa(".selected").forEach(function (el) {
+      if (!el.classList.contains("is-block")) el.classList.remove(highLight); //
     });
 
-    if (menuItems.parentElement.classList.contains(highLight)) {} else {
-      menuItems.parentElement.classList.add(highLight);
+    if (menuItems.classList.contains(highLight)) {} else {
+      menuItems.classList.add(highLight);
     }
   }
 
   static get styles() {
-    return [Colors, Fonts, ServiceStyles, css`:host { display: block; }`];
+    return [Colors, Fonts, ServiceStyles, css`
+        :host {
+          display: block;
+        }
+      `];
   }
 
   toggleProfile(evt) {
     evt.preventDefault();
-    const profileContent = document.getElementById('profile-content');
-    profileContent.classList.toggle('is-block');
+    const profileContent = document.getElementById("profile-content");
+    profileContent.classList.toggle("is-block");
+  }
+
+  toggleMenu(e) {
+    const menu = document.querySelector('.mipay-aside');
+    const bars = document.querySelector('#navbarBurger');
+
+    if (this.isSideMenuVisible) {
+      menu.classList.remove('left');
+      bars.style.left = '0';
+      this.isSideMenuVisible = false;
+    } else {
+      bars.style.left = '314px';
+      menu.classList.add('left');
+      bars.style.background = "white";
+      this.isSideMenuVisible = true;
+    }
+  }
+
+  ShowProfile(e) {
+    const prof = document.querySelector('.profile-select');
+    console.log("show profile"); // prof.style.display == 'block' ? prof.style.display = 'none' : prof.style.display = 'block';
+
+    if (this.isProfileVisible == false) {
+      prof.style.display = 'block';
+      this.isProfileVisible = true;
+      this.shouldDocumentClick = true;
+    } else {
+      prof.style.display = 'none';
+      this.shouldDocumentClick = false;
+      this.isProfileVisible = false;
+    }
   }
   /**
    * Dialogs Back navigation, Pop dialogs' stack
@@ -714,7 +620,30 @@ class ServicePage extends ServicePageBase {
     this.mainNavigation();
   }
 
-  firstUpdated(changedProperties) {}
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    const prof = document.querySelector('.profile-select');
+    const cont = document.querySelector('.main-content'); // cont.onclick = function(e){
+    //   if(e.target.id !== 'profile'){
+    //     console.log(true)
+    //   }else{
+    //     console.log(false)
+    //   }
+    // };
+
+    if (this.shouldDocumentClick && this.isProfileVisible) {
+      document.addEventListener("click", () => {
+        console.log("clcik");
+
+        if (this.shouldDocumentClick && this.isProfileVisible) {
+          console.log("clcik 2");
+          prof.style.display == 'none';
+          this.shouldDocumentClick = false;
+          this.isProfileVisible = false;
+        }
+      });
+    }
+  }
 
 }
 

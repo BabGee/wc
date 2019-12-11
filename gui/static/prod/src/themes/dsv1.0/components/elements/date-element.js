@@ -109,7 +109,7 @@ import{html,format,parse,DateElementBase}from"../../../../components/adaptive-ui
 
 .days li.active {
   padding: 5px;
-  background: #1abc9c;
+  background: var(--app-accent-color);
   color: white !important;
   /* border-radius: 50%; */
 }
@@ -141,7 +141,7 @@ import{html,format,parse,DateElementBase}from"../../../../components/adaptive-ui
 
 .month-calender li.active {
   padding: 5px;
-  background: #1abc9c;
+  background:var(--app-accent-color);
   color: white !important;
   /* border-radius: 50%; */
 }

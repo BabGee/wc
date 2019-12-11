@@ -1299,7 +1299,7 @@ _action(evt){const dataAction=evt.currentTarget.dataAction;this.pl._dialog.apply
 let columnValue=valueFromRowData;var dJson;// = JSON.parse(columnValue);
 if("object"==typeof columnValue){dJson=columnValue}else{dJson=JSON.parse(columnValue);// skip boolean and number columns
 if("object"!=typeof dJson){throw"Not Object JSON"}}const vs=[];for(var property in dJson){// if (dJson.hasOwnProperty(property)) {
-vs.push("<strong>"+property+"</strong>: <span>"+dJson[property]+"</span>");// }
+vs.push(html`<div style="margin-top:0.1px;"><strong>${property}: </strong><span>${dJson[property]}</span></div>`);// }
 }return html`
           ${vs.map(v=>html` ${v}<br>`)}`}catch(e){switch(paperDatatableApiColumn.type){case"boolean":return html`
               ${"false"==(valueFromRowData+"").toLowerCase()?html`

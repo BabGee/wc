@@ -1,5 +1,6 @@
 import{html,ImageInputBase}from"../../../../components/adaptive-ui.js";class ImageInput extends ImageInputBase{renderDefault(){return html`
     <style>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
       .drop-area{
         width: 100%;
       }
@@ -42,12 +43,15 @@ import{html,ImageInputBase}from"../../../../components/adaptive-ui.js";class Ima
         color: white;
       }
       .ii-file-input .label {
-        color: #333;
         white-space: nowrap;
-        opacity: .3;
+        opacity: .9;
         position: relative;
         margin-left: 20px;
         top: 6px;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #4A4A4A
       }
       .ii-file-input.-chosen .label {
         opacity: 1;
@@ -71,7 +75,7 @@ import{html,ImageInputBase}from"../../../../components/adaptive-ui.js";class Ima
             @change="${this.handleFile}"
             multiple accept='image/*|audio/*|video/*'
             >
-          <div class="is-flex" style="background-color: #e5e5e5;border-radius: 6px;">
+          <div class="is-flex"style="background-color: #fff;border-radius: 6px;  border: 1px solid #e5e5e5;">
             <span class='file-btn file-cta'>Choose file</span>
             <span class='label' data-js-label>Choose file here</label>
           </div>
