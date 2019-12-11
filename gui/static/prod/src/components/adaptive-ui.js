@@ -18211,8 +18211,8 @@ fullHost=URL.substr(0,URL.length-1)}return fullHost}/**
      * @param params
      * @param parseResponse whether to parse the response, default to true
      * @return {Promise<any>}
-     */async call(service,params,parseResponse){const self=this;if(parseResponse===void 0)parseResponse=!0;const headers={"X-CSRFToken":window.csrfToken,"X-Requested-With":"XMLHttpRequest","Content-Type":"application/json"};return new Promise(function(resolve,reject){if(window.NO_NETWORKING){console.warn("window.NO_NETWORKING=true");// TODO variable response per service
-const requestResponse=window.TEST_PAYLOAD,response=new Response$1(requestResponse);// console.log(requestResponse);
+     */async call(service,params,parseResponse){const self=this;if(parseResponse===void 0)parseResponse=!0;const headers={"X-CSRFToken":window.csrfToken,"X-Requested-With":"XMLHttpRequest","Content-Type":"application/json"};return new Promise(function(resolve,reject){if(window.NO_NETWORKING){console.warn("window.NO_NETWORKING=true");console.log(service,params);// TODO variable response per service
+const requestResponse=window.SECTION_SERVICE_PAYLOAD,response=new Response$1(requestResponse);// console.log(requestResponse);
 resolve(response)}else{self.send({url:self.baseUrl()+"/GOTO/"+service+"/",body:params,method:"POST",handleAs:"json",headers:headers,withCredentials:!0}).then(function(req){const requestResponse=req.response;if(parseResponse){// this is the end of life of raw responses
 const response=new Response$1(requestResponse);if(response.containsServiceCommand(COMMAND_REDIRECT)){const redirect=response.parse(COMMAND_REDIRECT,!1),redirectTo=redirect.url;var l=document.createElement("a");l.href=redirectTo;if(l.pathname===window.location.pathname&&l.search===window.location.search){// update hash
 window.location.hash=l.hash;window.location.reload()}else{window.location.href=redirectTo}// TODO Should resolve ? the window is reloading
@@ -68547,7 +68547,12 @@ register$4(EList$1);class LoaderElement$1 extends LitElement{render(){return htm
      ${form}
      `}}register$4(FormRender$1);const ACTION_SERVICE_CALL="1",ACTION_LINK_WINDOW="2",ACTION_SUBMIT="3",buttonMixin=BaseClass=>class extends BaseClass{renderDefault(){return html$1`
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-        <style>       
+        <style>
+        .button.is-link {
+          background-color: var(--app-default-color);
+          border-color: transparent;
+          color: #fff;
+        }       
  
 </style>       
 <div class="field">
@@ -71571,15 +71576,18 @@ header {
 </style>
 `;var shared={Reset:Reset,InputStyles:InputStyles,Fonts:Fonts,Colors:Colors,Grid:Grid,TooltipStyles:TooltipStyles};const inputMixin=BaseClass=>class extends enterSubmitMixin(BaseClass){renderService(){if(this.renderMode===RENDER_M_SIDE_BY_SIDE){return html$1`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
         <style>
           div.input-item label{
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Work Sans', sans-serif;
             font-stretch: normal;
             font-style: normal;
             line-height: 1.17;
             letter-spacing: normal;
-            color: #202124;
+            color: #4a4a4a;
           }
           div.input-item input{
             width: 100%;
@@ -71587,11 +71595,14 @@ header {
             border-radius: 6px;
             border: solid 1px #ededed;
             background-color: #f6f6f6;
+            font-family: 'Work Sans', sans-serif;
             font-size: 14px;
             font-weight: 500;
             line-height: 1;
-            color: #202124;
+            color: #4a4a4a;
             padding: 16px 13.5px;
+            border: 1px solid #e5e5e5;
+            box-shadow: none;
           }
         </style>
         <div class="columns input-item">
@@ -71608,6 +71619,8 @@ header {
         </div>
         `}else{// RENDER_M_DEFAULT
 return html$1`
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
     <style>
     .row{
         width: 100%;
@@ -71620,33 +71633,40 @@ return html$1`
         border-radius: 6px;
         font-size: 14px;
         font-weight: 500;
+        font-family: 'Work Sans', sans-serif;
         line-height: 1.43;
-        color: #013243;
+        color: #4a4a4a;
         padding: 18px calc(.625em - 1px) 18px 20px;
+        border: 1px solid #e5e5e5;
+        box-shadow: none;
     }
     .row .inp-right input::-webkit-input-placeholder { /* Edge */
         font-size: 14px;
         font-weight: 500;
+        font-family: 'Work Sans', sans-serif;
         line-height: 1.43;
-        color: #013243;
+        color: #4a4a4a;
     }
     .row .inp-right input :-ms-input-placeholder { /* Internet Explorer 10-11 */
         font-size: 14px;
         font-weight: 500;
+        font-family: 'Work Sans', sans-serif;
         line-height: 1.43;
-        color: #013243;
+        color: #4a4a4a;
     }
     .row .inp-right input ::placeholder {
         font-size: 14px;
         font-weight: 500;
+        font-family: 'Work Sans', sans-serif;
         line-height: 1.43;
-        color: #013243;
+        color: #4a4a4a;
     }
     .row .inp-right .field .label{
         font-size: 14px;
         font-weight: 500;
+        font-family: 'Work Sans', sans-serif;
         line-height: 1.43;
-        color: #013243;
+        color: #4a4a4a;
     }
 
     .row .inp-right .field.error, 
@@ -71658,6 +71678,8 @@ return html$1`
     .row .inp-right .field.error{
         font-weight: normal;
         font-size: 12px;
+        font-family: 'Work Sans', sans-serif;
+
     }
 
     .row .inp-right .field.success, 

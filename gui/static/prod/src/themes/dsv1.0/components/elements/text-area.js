@@ -1,49 +1,60 @@
 import{html,TextAreaBase,Logger}from"../../../../components/adaptive-ui.js";class TextArea extends TextAreaBase{renderDefault(){return html`
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 <style>
+.text-area {
+  padding: 16px;
+ 
+}
+
 .text-area .field.success{
     position: relative;
 }
 .text-area textarea{
     height: 200px;
     position: relative;
-    font-size: 16px!important;
-    font-weight: normal;
+    font-size: 14px!important;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
     font-style: normal;
     font-stretch: normal;
     line-height: 1.5;
     letter-spacing: normal;
-    color: #013243;
+    color: #4A4A4A;
     padding: 25px;
     border-radius: 6px;
-    border: solid 1px #b7b5b5;
+    border: 1px solid #e5e5e5;
+    box-shadow: none;
 }
 .text-area textarea::-webkit-input-placeholder { /* Edge */
-    font-size: 16px;
-    font-weight: normal;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Work Sans', sans-serif;
     font-style: normal;
     font-stretch: normal;
     line-height: 1.5;
     letter-spacing: normal;
-    color: #013243!important;
+    color: #4A4A4A!important;
 }
 .text-area textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    font-size: 16px;
-    font-weight: normal;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Work Sans', sans-serif;
     font-style: normal;
     font-stretch: normal;
     line-height: 1.5;
     letter-spacing: normal;
-    color: #013243!important;
+    color: #4A4A4A!important;
 }
 .text-area textarea::placeholder{
-    font-size: 16px;
-    font-weight: normal;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Work Sans', sans-serif;
     font-style: normal;
     font-stretch: normal;
     line-height: 1.5;
     letter-spacing: normal;
-    color: #013243!important;
+    color: #4A4A4A!important;
 }
 .text-area .field.success::before{
     content: '\f00c';

@@ -8,7 +8,12 @@ export const buttonMixin = BaseClass => class extends BaseClass {
   renderDefault() {
     return html`
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-        <style>       
+        <style>
+        .button.is-link {
+          background-color: var(--app-default-color);
+          border-color: transparent;
+          color: #fff;
+        }       
  
 </style>       
 <div class="field">

@@ -8,6 +8,7 @@ import { FileInputBase } from "../../../../elements/base/file-input.js";
 class FileInput extends FileInputBase {
   renderDefault() {
     return html`
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <style>
       .drop-area{
         width: 100%;
@@ -49,12 +50,16 @@ class FileInput extends FileInputBase {
         color: white;
       }
       .ii-file-input .label {
-        color: #333;
+        
         white-space: nowrap;
-        opacity: .3;
+        opacity: .9;
         position: relative;
         margin-left: 20px;
         top: 6px;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #4A4A4A
       }
       .ii-file-input.-chosen .label {
         opacity: 1;
@@ -78,7 +83,7 @@ class FileInput extends FileInputBase {
             @change="${this.handleFile}"
             multiple accept='text/*|pdf/*|word/*/|excel/*|powerpoint/*|zip/*'
             >
-          <div class="is-flex" style="background-color: #e5e5e5;border-radius: 6px;">
+          <div class="is-flex" style="background-color: #fff;border-radius: 6px;  border: 1px solid #e5e5e5;">
             <span class='file-btn file-cta'>Choose file</span>
             <span class='label' data-js-label>Choose file here</label>
           </div>

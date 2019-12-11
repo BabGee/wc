@@ -1021,7 +1021,7 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
 
         for (var property in dJson) {
           // if (dJson.hasOwnProperty(property)) {
-          vs.push('<strong>' + property + '</strong>: <span>' + dJson[property] + '</span>'); // }
+          vs.push(html`<div style="margin-top:0.1px;"><strong>${property}: </strong><span>${dJson[property]}</span></div>`); // }
         }
 
         return html`

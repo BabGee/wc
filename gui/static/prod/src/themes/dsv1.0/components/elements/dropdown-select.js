@@ -5,6 +5,7 @@ import{html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components
           /*Dropdown select*/
           .dropdown-item-select{
             position: relative;
+            padding:11px;
           -moz-user-select: none; 
           -webkit-user-select: none; 
           -ms-user-select:none; 
@@ -13,11 +14,13 @@ import{html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components
           }
         .dropdown-item-select .dropdown-item-header{
           background: #fff;
-          padding: 10px 20px 10px 10px;
+          padding: 16px;
           display:inline-block;
           position: relative;
           cursor: pointer;
           width: 100%;
+          border-radius: 6px;
+          border: 1px solid #e5e5e5;
           /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
           -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
           box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);*/
@@ -36,26 +39,30 @@ import{html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components
           position: absolute;
           transform: rotate(-43deg);
           top: -17px;
-          right: -15px;
+          right: 9px;
         }
         .dropdown-item-select .dropdown-item-header p{
           font-size: 14px;
           font-weight: 500;
-          color: #013243;
+          color: #4A4A4A;
         }
         .dropdown-item-body{
           background: #fff;
           display: none;
-          width:auto;
+          width:98%;
           position:absolute;
-          padding: 10px 20px 10px 10px;
+          padding: 16px;
           z-index: 5000;
+          padding-right:33px;
+          border-radius: 6px;
+          border: 1px solid #e5e5e5;
+          margin-top:8px;
         }
         .dropdown-item-body ul li{
           
           border-bottom: 1px solid #f5f5f5;
           padding: 10px 20px;
-          font-weight: lighter;
+          font-weight: 500;
           font-size: 14px;
         }
         .dropdown-item-body ul li:hover{
@@ -85,7 +92,7 @@ import{html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components
             font-style: normal;
             line-height: 1.17;
             letter-spacing: normal;
-            color: #202124;
+            color: #4A4A4A;
           }
           /* div.select select{
             width: 317px;
@@ -135,6 +142,7 @@ import{html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components
         /*Dropdown select*/
         .dropdown-item-select{
           position: relative;
+          padding:11px;
         -moz-user-select: none; 
         -webkit-user-select: none; 
         -ms-user-select:none; 
@@ -143,11 +151,13 @@ import{html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components
         }
       .dropdown-item-select .dropdown-item-header{
         background: #fff;
-        padding: 10px 20px 10px 10px;
+        padding: 16px;
         display:inline-block;
         position: relative;
         cursor: pointer;
         width: 100%;
+        border-radius: 6px;
+        border: 1px solid #e5e5e5;
         /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);*/
@@ -166,26 +176,30 @@ import{html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components
         position: absolute;
         transform: rotate(-43deg);
         top: -17px;
-        right: -15px;
+        right: 9px;
       }
       .dropdown-item-select .dropdown-item-header p{
         font-size: 14px;
         font-weight: 500;
-        color: #013243;
+        color: #4A4A4A;
       }
       .dropdown-item-body{
         background: #fff;
         display: none;
-        width:auto;
+        width:98%;
         position:absolute;
-        padding: 10px 20px 10px 10px;
+        padding: 16px;
         z-index: 5000;
+        padding-right:33px;
+        border-radius: 6px;
+        border: 1px solid #e5e5e5;
+        margin-top:8px;
       }
       .dropdown-item-body ul li{
         
         border-bottom: 1px solid #f5f5f5;
         padding: 10px 20px;
-        font-weight: lighter;
+        font-weight: 500;
         font-size: 14px;
       }
       .dropdown-item-body ul li:hover{
