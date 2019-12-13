@@ -857,7 +857,7 @@ ${this.paginate?html`
       `:html``}
 
 
-  `}static get is(){return"table-type"}renderColumn(paperDatatableApiColumn,valueFromRowData,p,rowData,rowIndex){console.log("RENDER COLUMN");if(paperDatatableApiColumn.actions){return html`
+  `}static get is(){return"table-type"}renderColumn(paperDatatableApiColumn,valueFromRowData,p,rowData,rowIndex){if(paperDatatableApiColumn.actions){return html`
         
         <datasource-table-actions
         .cols=${this.cols}

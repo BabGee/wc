@@ -13,7 +13,7 @@ class Navbar9 extends NavbarBase {
       }
       /* header */
       .ii__main-header{
-          background-color: rgba(223,237,244,0.7);
+          background-color: var(--app-primary-color);
           position: fixed;
           top: 0;
           left: 0;
@@ -25,6 +25,7 @@ class Navbar9 extends NavbarBase {
       .navbar{
           background: transparent;
           height: 5.5em;
+          background-color: var(--app-primary-color);
       }
       .nav__item{
           font-weight: regular;
@@ -35,7 +36,7 @@ class Navbar9 extends NavbarBase {
           position: relative;
           color: #fff!important;
           border-bottom: 4px solid #fff;
-          background: #87C8D7!important;
+          background: var(--app-accent-color)!important;
       }
       /* .nav__item:hover::after{
           content: '';

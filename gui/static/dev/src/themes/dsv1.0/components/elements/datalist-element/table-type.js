@@ -888,8 +888,6 @@ ${this.paginate ? html`
   }
 
   renderColumn(paperDatatableApiColumn, valueFromRowData, p, rowData, rowIndex) {
-    console.log("RENDER COLUMN");
-
     if (paperDatatableApiColumn.actions) {
       return html`
         

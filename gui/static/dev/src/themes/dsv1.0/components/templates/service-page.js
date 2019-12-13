@@ -53,7 +53,7 @@ class ServicePage extends ServicePageBase {
       div.modal-container{
         width: 100%;
         height: 100vh;
-        background: rgba(0, 0, 0, .4);
+        background: rgba(226, 226, 226, .9);
         position: absolute;
         top: 0;
         left: 0;
@@ -62,19 +62,20 @@ class ServicePage extends ServicePageBase {
         z-index: 9999;
         display: flex;
         align-items: center;
+        padding: 45px;
       }
       div.modal-container div.modal-base {
         opacity: 1;
         width: 688px;
         border-radius: 5px;
-        background-color: #ececee;
+        background-color: #fff;
         margin: 0 auto;
         padding: 0 25px;
         position: relative;
       }
       div.modal-container div.modal-base .modal-header{
-        padding: 25px 0 16px 0;
-        border-bottom: solid 1px rgba(71, 71, 71, 0.2);
+        padding: 25px 0 25px 35px;
+        /* border-bottom: solid 1px rgba(71, 71, 71, 0.2); */
       }
       div.modal-container div.modal-base .modal-header h1 {
         font-size: 24px;
@@ -186,6 +187,7 @@ class ServicePage extends ServicePageBase {
       }
       .aside-header img{
           margin: 0 0 0 60px;
+         
       }
 
       .aside-body a{
@@ -286,7 +288,7 @@ class ServicePage extends ServicePageBase {
           cursor: pointer;
       }
       .profile-image{
-          border: 3px solid blue;
+          border: 3px solid var(--app-default-color);
           border-radius: 50%;
           width: 40px;
           height: 40px;
@@ -340,6 +342,8 @@ class ServicePage extends ServicePageBase {
         top: 19px;
         border-radius: 6px;
       }
+
+
 
       /* Mobile responsive */
       @media screen and (min-width: 1024px){
@@ -395,9 +399,9 @@ class ServicePage extends ServicePageBase {
         
         <div class="columns column-wrap">
           <div class="column is-paddingless mipay-aside">
-            <aside class="aside">
+            <aside class="aside"  @click="${this.closeProfile}">
               <div class="aside-header">
-                <img src=${this._computeLogo(this.gateway)} alt="branding" />
+              <img src="${this._computeLogo(this.gateway)}" height="128px" width="128px"alt="branding" />
               </div>
               <div class="aside-body">
                 <nav class="manu">
@@ -472,7 +476,7 @@ class ServicePage extends ServicePageBase {
                             </div>
 
                             <div class="profile-out">
-                              <a href="$1">Logout</a>
+                              <a  @click="${this.logout}"href="#">Logout</a>
                             </div>
                           </div>
                         </div>
@@ -481,7 +485,7 @@ class ServicePage extends ServicePageBase {
                     ` : html``}
                   </div>
                 </div>
-                <div class="dash-content">
+                <div class="dash-content"  @click="${this.closeProfile}">
                   <!-- <div class="dash-title" style="margin-bottom: 20px;">
 
                   </div> -->
@@ -596,13 +600,22 @@ class ServicePage extends ServicePageBase {
 
   ShowProfile(e) {
     const prof = document.querySelector('.profile-select');
-    console.log("show profile"); // prof.style.display == 'block' ? prof.style.display = 'none' : prof.style.display = 'block';
 
     if (this.isProfileVisible == false) {
       prof.style.display = 'block';
       this.isProfileVisible = true;
       this.shouldDocumentClick = true;
     } else {
+      prof.style.display = 'none';
+      this.shouldDocumentClick = false;
+      this.isProfileVisible = false;
+    }
+  }
+
+  closeProfile() {
+    const prof = document.querySelector('.profile-select');
+
+    if (this.isProfileVisible == true) {
       prof.style.display = 'none';
       this.shouldDocumentClick = false;
       this.isProfileVisible = false;
@@ -622,27 +635,6 @@ class ServicePage extends ServicePageBase {
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-    const prof = document.querySelector('.profile-select');
-    const cont = document.querySelector('.main-content'); // cont.onclick = function(e){
-    //   if(e.target.id !== 'profile'){
-    //     console.log(true)
-    //   }else{
-    //     console.log(false)
-    //   }
-    // };
-
-    if (this.shouldDocumentClick && this.isProfileVisible) {
-      document.addEventListener("click", () => {
-        console.log("clcik");
-
-        if (this.shouldDocumentClick && this.isProfileVisible) {
-          console.log("clcik 2");
-          prof.style.display == 'none';
-          this.shouldDocumentClick = false;
-          this.isProfileVisible = false;
-        }
-      });
-    }
   }
 
 }

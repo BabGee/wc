@@ -243,7 +243,7 @@ if(this._iconName)resolve(module.icons[this._iconName]);// this.requestUpdate('l
       div.modal-container{
         width: 100%;
         height: 100vh;
-        background: rgba(0, 0, 0, .4);
+        background: rgba(226, 226, 226, .9);
         position: absolute;
         top: 0;
         left: 0;
@@ -252,19 +252,20 @@ if(this._iconName)resolve(module.icons[this._iconName]);// this.requestUpdate('l
         z-index: 9999;
         display: flex;
         align-items: center;
+        padding: 45px;
       }
       div.modal-container div.modal-base {
         opacity: 1;
         width: 688px;
         border-radius: 5px;
-        background-color: #ececee;
+        background-color: #fff;
         margin: 0 auto;
         padding: 0 25px;
         position: relative;
       }
       div.modal-container div.modal-base .modal-header{
-        padding: 25px 0 16px 0;
-        border-bottom: solid 1px rgba(71, 71, 71, 0.2);
+        padding: 25px 0 25px 35px;
+        /* border-bottom: solid 1px rgba(71, 71, 71, 0.2); */
       }
       div.modal-container div.modal-base .modal-header h1 {
         font-size: 24px;
@@ -376,6 +377,7 @@ if(this._iconName)resolve(module.icons[this._iconName]);// this.requestUpdate('l
       }
       .aside-header img{
           margin: 0 0 0 60px;
+         
       }
 
       .aside-body a{
@@ -476,7 +478,7 @@ if(this._iconName)resolve(module.icons[this._iconName]);// this.requestUpdate('l
           cursor: pointer;
       }
       .profile-image{
-          border: 3px solid blue;
+          border: 3px solid var(--app-default-color);
           border-radius: 50%;
           width: 40px;
           height: 40px;
@@ -530,6 +532,8 @@ if(this._iconName)resolve(module.icons[this._iconName]);// this.requestUpdate('l
         top: 19px;
         border-radius: 6px;
       }
+
+
 
       /* Mobile responsive */
       @media screen and (min-width: 1024px){
@@ -585,9 +589,9 @@ if(this._iconName)resolve(module.icons[this._iconName]);// this.requestUpdate('l
         
         <div class="columns column-wrap">
           <div class="column is-paddingless mipay-aside">
-            <aside class="aside">
+            <aside class="aside"  @click="${this.closeProfile}">
               <div class="aside-header">
-                <img src=${this._computeLogo(this.gateway)} alt="branding" />
+              <img src="${this._computeLogo(this.gateway)}" height="128px" width="128px"alt="branding" />
               </div>
               <div class="aside-body">
                 <nav class="manu">
@@ -662,7 +666,7 @@ if(this._iconName)resolve(module.icons[this._iconName]);// this.requestUpdate('l
                             </div>
 
                             <div class="profile-out">
-                              <a href="$1">Logout</a>
+                              <a  @click="${this.logout}"href="#">Logout</a>
                             </div>
                           </div>
                         </div>
@@ -671,7 +675,7 @@ if(this._iconName)resolve(module.icons[this._iconName]);// this.requestUpdate('l
                     `:html$1``}
                   </div>
                 </div>
-                <div class="dash-content">
+                <div class="dash-content"  @click="${this.closeProfile}">
                   <!-- <div class="dash-title" style="margin-bottom: 20px;">
 
                   </div> -->
@@ -707,17 +711,9 @@ menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){
         :host {
           display: block;
         }
-      `]}toggleProfile(evt){evt.preventDefault();const profileContent=document.getElementById("profile-content");profileContent.classList.toggle("is-block")}toggleMenu(e){const menu=document.querySelector(".mipay-aside"),bars=document.querySelector("#navbarBurger");if(this.isSideMenuVisible){menu.classList.remove("left");bars.style.left="0";this.isSideMenuVisible=!1}else{bars.style.left="314px";menu.classList.add("left");bars.style.background="white";this.isSideMenuVisible=!0}}ShowProfile(e){const prof=document.querySelector(".profile-select");console.log("show profile");// prof.style.display == 'block' ? prof.style.display = 'none' : prof.style.display = 'block';
-if(!1==this.isProfileVisible){prof.style.display="block";this.isProfileVisible=!0;this.shouldDocumentClick=!0}else{prof.style.display="none";this.shouldDocumentClick=!1;this.isProfileVisible=!1}}/**
+      `]}toggleProfile(evt){evt.preventDefault();const profileContent=document.getElementById("profile-content");profileContent.classList.toggle("is-block")}toggleMenu(e){const menu=document.querySelector(".mipay-aside"),bars=document.querySelector("#navbarBurger");if(this.isSideMenuVisible){menu.classList.remove("left");bars.style.left="0";this.isSideMenuVisible=!1}else{bars.style.left="314px";menu.classList.add("left");bars.style.background="white";this.isSideMenuVisible=!0}}ShowProfile(e){const prof=document.querySelector(".profile-select");if(!1==this.isProfileVisible){prof.style.display="block";this.isProfileVisible=!0;this.shouldDocumentClick=!0}else{prof.style.display="none";this.shouldDocumentClick=!1;this.isProfileVisible=!1}}closeProfile(){const prof=document.querySelector(".profile-select");if(!0==this.isProfileVisible){prof.style.display="none";this.shouldDocumentClick=!1;this.isProfileVisible=!1}}/**
      * Dialogs Back navigation, Pop dialogs' stack
      *
      * @param evt
      * @private
-     */_viewList(evt){this.mainNavigation()}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const prof=document.querySelector(".profile-select"),cont=document.querySelector(".main-content");// cont.onclick = function(e){
-//   if(e.target.id !== 'profile'){
-//     console.log(true)
-//   }else{
-//     console.log(false)
-//   }
-// };
-if(this.shouldDocumentClick&&this.isProfileVisible){document.addEventListener("click",()=>{console.log("clcik");if(this.shouldDocumentClick&&this.isProfileVisible){console.log("clcik 2");"none"==prof.style.display;this.shouldDocumentClick=!1;this.isProfileVisible=!1}})}}}window.customElements.define("service-page",ServicePage);export{service as $service,ServiceStyles};
+     */_viewList(evt){this.mainNavigation()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}window.customElements.define("service-page",ServicePage);export{service as $service,ServiceStyles};

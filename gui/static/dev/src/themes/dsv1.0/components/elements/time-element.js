@@ -95,6 +95,9 @@ font-size: 14px;
 font-weight: 500;
 }
 
+.calendar-select-header p a{
+  color: #4a4a4a
+}
 .time-font-title {
   font-size: 14px;
   font-weight: 600;
@@ -184,8 +187,8 @@ a {
 
   #timer-lineup li{
 
-    margin-right: 320px ;
-     margin-left:  60px;
+    /* margin-right: 320px ;
+     margin-left:  60px; */
      overflow: auto;
      font-size: 150%;
      
@@ -215,7 +218,7 @@ a {
  
    .timer-radio {
  
-     margin-right: 269px;
+     /* margin-right: 269px; */
      font-size: 130%;
      
    }
@@ -227,8 +230,8 @@ a {
 
   #timer-lineup li{
 
-    margin-right:140px ;
-     margin-left:  60px;
+    /* margin-right:140px ;
+     margin-left:  60px; */
      overflow: auto;
      font-size: 150%;
      
@@ -258,7 +261,7 @@ a {
  
    .timer-radio {
  
-     margin-right: 95px;
+     /* margin-right: 95px; */
      font-size: 130%;
      
    }
@@ -270,8 +273,8 @@ a {
 
   #timer-lineup li{
 
-    margin-right: 120px ;
-     margin-left:  60px;
+    /* margin-right: 120px ;
+     margin-left:  60px; */
      overflow: auto;
      font-size: 150%;
      
@@ -301,7 +304,7 @@ a {
  
    .timer-radio {
  
-     margin-right: 75px;
+     /* margin-right: 75px; */
      font-size: 130%;
      
    }
@@ -312,8 +315,8 @@ a {
           
   #timer-lineup li{
 
-   margin-right:110px ;
-    margin-left:  60px;
+   /* margin-right:110px ;
+    margin-left:  60px; */
     overflow: auto;
     font-size: 150%;
     
@@ -343,7 +346,7 @@ a {
 
   .timer-radio {
 
-    margin-right: 75px;
+    /* margin-right: 75px; */
     
   }
 
@@ -354,8 +357,8 @@ a {
           
   #timer-lineup li{
 
-   margin-right:95px ;
-    margin-left:  60px;
+   /* margin-right:95px ;
+    margin-left:  60px; */
     overflow: auto;
     font-size: 150%;
     
@@ -385,7 +388,7 @@ a {
 
   .timer-radio {
 
-    margin-right: 47px;
+    /* margin-right: 47px; */
     
   }
 
@@ -402,44 +405,43 @@ a {
     </div>
 
    <div class="timer-dropdown is-hidden" id="timer-dropdown">
-
-            <div class="inner-container columns">
-            <div class="column hrs-drp drp">
-              <div class="heading">
-                <p class="time-font-title has-text-centered">Hours</p>
-              </div>
-
-            
-              <ul id="timer-lineup">
-              ${this.range(1, 12).map(data => html`
-                    <li id="hour-${data}" class="" @click='${() => this.addHour(data)}'>${data}</li>
-              `)}
-              </ul>
-
-
-
-            </div>
-            <div class="column drp">
-            <div class="heading">
-                <p class="time-font-title has-text-centered">Minutes</p>
-              </div>
-              <ul id="timer-lineup-minutes">
-              ${this.range(0, 59).map(data => html`
-              <li id="min-${data}" class="" @click='${() => this.addMin(data)}'>${data < 10 ? '0' + data : data}</li>
-              `)}
-                
-              </ul>
-            </div>
-            <div class="column drp">
-            <div class="heading">
-                <p class="time-font-title has-text-centered">TOD</p>
-              </div>
-              <div class="radio timer-radio">
-                <div class ="radio-div"><input type="radio" name="tod" value="AM" checked @click='${() => this.addTOD("AM")}'> AM</div>
-                <div class ="radio-div"><input type="radio" name="tod" value="PM"  @click='${() => this.addTOD("PM")}'> PM </div>
-              </div>
-            </div>
+    <div class="columns is-mobile"style="padding: 10px;">
+      <div class="column">
+        <div class="drop hrs-drop">
+          <div class="heading">
+            <p class="time-font-title has-text-centered">Hrs</p>
           </div>
+          <ul id="timer-lineup" class="is-marginless" style="overflow: scroll;height: 100px;overflow-x: hidden;">
+          ${this.range(1, 12).map(data => html`
+            <li id="hour-${data}" class="has-text-centered" @click='${() => this.addHour(data)}'>${data}</li>
+          `)}
+          </ul>
+        </div>
+      </div>
+      <div class="column">
+        <div class="drop min-drop">
+          <div class="heading">
+            <p class="time-font-title has-text-centered">Mins</p>
+          </div>
+          <ul id="timer-lineup-minutes" style="overflow: scroll;height:100px;overflow-x: hidden;">
+          ${this.range(0, 59).map(data => html`
+            <li id="min-${data}" class="has-text-centered" @click='${() => this.addMin(data)}'>${data < 10 ? '0' + data : data}</li>
+          `)}
+          </ul>
+        </div>
+      </div>
+      <div class="column">
+        <div class="drop tod-drop">
+          <div class="heading">
+            <p class="time-font-title has-text-centered">TOD</p>
+          </div>
+          <div class="radio timer-radio">
+            <div class ="radio-div"><input type="radio" name="tod" value="AM" checked @click='${() => this.addTOD("AM")}'> AM</div>
+            <div class ="radio-div"><input type="radio" name="tod" value="PM"  @click='${() => this.addTOD("PM")}'> PM </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
     </div> <!-- end of calender body -->
