@@ -33,7 +33,7 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
     ${this.rows.map(slide=>html` 
      
     <div class="column">
-        <a href="#">
+        <a href="${slide[4]}" target="_blank">
           <div class="ii__product">
             <div class="ii__product-logo">
               <img src="${slide[3]}" alt="products logo">

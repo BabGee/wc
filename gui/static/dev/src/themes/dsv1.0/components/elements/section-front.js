@@ -29,7 +29,7 @@ export class SectionFront extends BaseElement {
         }
         .section-box{
             width: 100%;
-            background-color: rgba(64, 157, 182, .5);
+            background-color: var(--app-primary-color);
         }
         .box{
             background: #fff;

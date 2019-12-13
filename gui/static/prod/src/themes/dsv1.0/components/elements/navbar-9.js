@@ -7,7 +7,7 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
       }
       /* header */
       .ii__main-header{
-          background-color: rgba(223,237,244,0.7);
+          background-color: var(--app-primary-color);
           position: fixed;
           top: 0;
           left: 0;
@@ -19,6 +19,7 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
       .navbar{
           background: transparent;
           height: 5.5em;
+          background-color: var(--app-primary-color);
       }
       .nav__item{
           font-weight: regular;
@@ -29,7 +30,7 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
           position: relative;
           color: #fff!important;
           border-bottom: 4px solid #fff;
-          background: #87C8D7!important;
+          background: var(--app-accent-color)!important;
       }
       /* .nav__item:hover::after{
           content: '';

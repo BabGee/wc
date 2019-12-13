@@ -91,7 +91,7 @@ class FooterElement extends BaseElement {
             flex: 0 auto;
         }
         .ii__footer-col-title {
-            color: #409db5;
+            color: var(--app-primary-color);
             font-size: 12px;
             line-height: 16px;
             font-weight: 600;

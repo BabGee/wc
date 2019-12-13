@@ -186,6 +186,27 @@ class DateElement extends DateElementBase {
 @media screen and (max-width: 290px) {
   .weekdays li, .days li {width: 12.2%;}
 }
+@media screen and (min-width: 426px){
+  .weekdays li{
+    width: 11.1%!important;
+  }
+}
+
+@media screen and (min-width: 722px){
+  .weekdays li{
+    width: 12.5%!important;
+  }
+}
+/* @media screen and (min-width: 770px){
+  .weekdays li{
+    width: 11.5%!important;
+  }
+} */
+@media screen and (min-width: 1025px){
+  .weekdays li{
+    width: 13%!important;
+  }
+}
 
 </style>
  <div class="column">

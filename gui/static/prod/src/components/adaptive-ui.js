@@ -68472,7 +68472,7 @@ register$4(EList$1);class LoaderElement$1 extends LitElement{render(){return htm
 
 
 
-<div class="card form-y-card" style="box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03); " >
+<div class="card form-y-card is-flex" style="box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03); " >
   <div class="card-content">
       <slot name="body"></slot>
 </div>  
