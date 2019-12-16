@@ -38,42 +38,42 @@ export const ProductItemImagesBase = class extends utilsMixin(dataSourceMixin(Ba
     super.firstUpdated(changedProperties);
     this.loader.then(dsc => {
       /*
-              let payload = req.response;
-              target.cols = payload.response.data_source.cols;
+             let payload = req.response;
+             target.cols = payload.response.data_source.cols;
             target.rows = payload.response.data_source.rows;
             var items = [];
-                for(var i=0;i<target.rows.length;i++){
+              for(var i=0;i<target.rows.length;i++){
                 var item = {};
                 var itemLinks = [];
                 for(var j=0;j<target.cols.length;j++){
-                        if(target.cols[j]['type'] == 'href'){
+                      if(target.cols[j]['type'] == 'href'){
                         // target.cols[j]['type']
                         var links = target.cols[j]['links'];
-                          for (var link in links){
+                         for (var link in links){
                             var linkObject = links[link];
                             //console.log(link + " -> " + linkObject);
-                              var linkProcessed = {};
+                             var linkProcessed = {};
                             linkProcessed['service'] = linkObject['service'];
                             linkProcessed['icon'] = linkObject['icon'];
-                              linkProcessed['params'] = {};
+                             linkProcessed['params'] = {};
                             for (var linkParamKey in linkObject['params']){
                                 var linkParam = linkObject['params'][linkParamKey];
                                 // get from item, simple hack since links are the always the last
                                 linkProcessed['params'][linkParamKey] = item[linkParam]
                             }
-                              itemLinks.push(linkProcessed);
+                             itemLinks.push(linkProcessed);
                             //console.log(item);
                             //console.log(linkProcessed);
-                          }
-                      }
+                         }
+                     }
                     else {
                         item[target.cols[j]['label']] = target.rows[i][j]
                     }
-                    }
-                  item['inline'] = itemLinks;
+                  }
+                 item['inline'] = itemLinks;
                 items.push(item);
-                  if (i>2){break}
-              }
+                 if (i>2){break}
+             }
             target.currentData = items;
             */
     });
@@ -83,8 +83,7 @@ export const ProductItemImagesBase = class extends utilsMixin(dataSourceMixin(Ba
     return this.data_name;
   }
   /*
-  
-     */
+       */
 
 
   init(pElement, loader) {

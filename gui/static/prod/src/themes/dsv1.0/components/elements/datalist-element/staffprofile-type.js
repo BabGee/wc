@@ -188,21 +188,4 @@ tr {
 
 </section>
 
-        `}static get is(){return"staffprofile-type"}static get properties(){return{/**
-       * Contains the data which will be displayed in the table.
-       */data:{type:Array,notify:!0},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},/**
-       * The number of the previous page
-       */oldPage:{type:Number,notify:!0},/**
-       * The total of elements have to be provided in case of pagination, it is mandatory.
-       */totalElements:Number,/**
-       * The total of pages have to be provided in case of pagination, it is mandatory.
-       * It is used to compute the footer.
-       */totalPages:Number,/**
-       * The available size in case of pagination.
-       */availableSize:Array,/**
-       * If true, the rows may be selectable.
-       */selectable:{type:Boolean,value:!1},/**
-       * Contains the positions of selected columns.
-       * Can contain a specific data if selectableDataKey is setted.
-       */selected:{type:Array},title:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const allsideActions=this.shadowRoot.querySelectorAll(".side-action"),allDropdowns=this.shadowRoot.querySelectorAll(".arrow-down");allsideActions.forEach(icon=>{icon.classList.add("hidden")});allDropdowns.forEach(dropdown=>{dropdown.classList.add("hidden")});const statuses=this.shadowRoot.querySelectorAll("a[class~=\"button\"]");statuses.forEach(status=>{if("Active"!==status.innerHTML){// do nothing since by default is active
-}else{status.classList.replace("active","suspended")}})}checkRow(index){const row=this.shadowRoot.querySelector("#tr-"+index),checkbox=this.shadowRoot.querySelector("#checkbox-"+index);if(!0==checkbox.checked){row.classList.add("active-row")}else{row.classList.remove("active-row")}}}customElements.define(StaffProfileType.is,StaffProfileType);
+        `}static get is(){return"staffprofile-type"}static get properties(){return{data:{type:Array,notify:!0},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const allsideActions=this.shadowRoot.querySelectorAll(".side-action"),allDropdowns=this.shadowRoot.querySelectorAll(".arrow-down");allsideActions.forEach(icon=>{icon.classList.add("hidden")});allDropdowns.forEach(dropdown=>{dropdown.classList.add("hidden")});const statuses=this.shadowRoot.querySelectorAll("a[class~=\"button\"]");statuses.forEach(status=>{if(!("Active"!==status.innerHTML)){status.classList.replace("active","suspended")}})}checkRow(index){const row=this.shadowRoot.querySelector("#tr-"+index),checkbox=this.shadowRoot.querySelector("#checkbox-"+index);if(!0==checkbox.checked){row.classList.add("active-row")}else{row.classList.remove("active-row")}}}customElements.define(StaffProfileType.is,StaffProfileType);

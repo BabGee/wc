@@ -1,221 +1,193 @@
-import{html,PaymentsPageBase}from"../../../../components/adaptive-ui.js";class PaymentsPage extends PaymentsPageBase{render(){if(!this.interface){return html`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html`
-      <missing-page></missing-page>
+import{html,PaymentsPageBase}from"../../../../components/adaptive-ui.js";class PaymentsPage extends PaymentsPageBase{render(){if(!this.interface){return html`
+        <div>Cannot render an UNDEFINED tab!!.</div>
+      `}else if(!this.pageGroup||!this.page){return html`
+        <missing-page></missing-page>
       `}return html`
-      <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
+      <link
+        href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css"
+        type="text/css"
+      />
       <style>
-        :root{
-        --is-white: #fff;
-        --bg: #f5f8fb;
-        --title-color: #4c6072;
-        --helper-text: #333333;
-        --graph-orange: #ff8a65;
-        --graph-blue: #b2e4fa;
-        --graph-grey: #dfeec0;
-        --base-card-color: #f6f6f6;
-        --is-info: #2f75ec;
+        body {
+          font-family: "Montserrat", sans-serif !important;
+          font-size: 14px;
+          font-style: normal;
         }
-        .pay-frame{
-            margin: 30px 0;
+        .main-wrapper {
+          height: auto;
+          width: 100%;
+          height: 100vh;
+          background-color: #e9e9eb;
         }
-        div.info{
-            margin-top: 25px;
-            margin-left: 4px;
+        header.main-header {
+          position: relative;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 51px;
+          z-index: 999;
+          background: #fff;
+          margin-bottom: 30px;
         }
-        div.base-card{
-            width: 100%;
-            /* height: 595px; */
-            border-radius: 6px!important;
-            box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.03);
-            border: solid 1px #e5e5e5;
-            background: var(--base-card-color)!important;
+        header > .mipay-brand {
+          width: 22%;
+          padding: 10px;
+          background: var(--app-default-color);
         }
-        .frame-bg{
-            color: #8db7ff!important;
-            background: #2f75ec;
-            padding: 15px 0!important;
-            position: relative;
-            font-size: 15px;
+        header > .mipay-user {
+          width: 78%;
+          padding: 10px;
+          background: #f6f6f9;
         }
-        .frame-bg, .tabs.is-boxed a{
-            border-radius: 0px!important;
-        }
-        .tabs.is-boxed a:hover, .tabs.is-boxed a:active{
-            background-color: whitesmoke!important;
-            color: #2f75ec!important;
-        }
-        .frame-bg.is-active{
-          background-color: whitesmoke!important;
-          color: #2f75ec!important;
-        }
-        .frame-bg::after{
-            content: '';
-            position: absolute;
-            width: 1px;
-            height: 35px;    
-            background: #e4e0e6;
-            left: 0px;
-        }
-        .frame-bg a:hover:active{
-            content: '';
-            position: absolute;
-            width: 1px;
-            height: 35px;
-            background: transparent;
-            left: 0px;
-        }
-        .frame-bg:nth-child(6)::after{
-            background: transparent!important;
-        }
-        .tabs ul{
-            border-bottom: 0 solid transparent!important;
-        }
-        .column.column-right{
-            border-left: 1px solid #dcd0ff;
-        }
-        .column .column-title{
-            border-bottom: 1px solid #dcd0ff;
-            padding-bottom: 8.5px; 
-            font-size: 15px;
-            font-weight: 500;
-            margin-bottom: 30px;
-        }
-        .pay-input{
-            width: 449px!important;
-            border-radius: 6px!important;
-            box-shadow: 0 0 0 transparent!important;
-            padding: 18px!important;
-        }
-        .tab-brand{
-            margin-bottom: 41px;
-        }
-        .tab-width{
-            width: 50%;
-        }
-        .tab-right .tab-link, .tab-content-left .ref{
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .tab-right-bottom{
-            width: 72%;
-            position: absolute;
-            bottom: 0;
-            /* padding: 30px; */
-            margin-top: 100px;
-        }
-        .btn{
-            width: 140px;
-            height: 45px;
-            letter-spacing: 2.5px;
-            font-weight: 500;
-            border: none;
-            transition: all 0.3s ease 0s;
-            cursor: pointer;
-            outline: none;
-            /* margin-left: 20px; */
-            border-radius: 5px!important;
-            border: 0 solid transparent!important;
-            font-size: 13px!important;
-            /* padding: .5em 1.5em!important */
-        }
-        .btn:focus{
-            outline: none!important;
-        }
-        .trans{
-            background: transparent!important;
-        }
-        .submit{
-            background-color: #2f75ec!important;
-            color: #fff!important;
-        }
-
-
-        /* Helper classes */
-        .center, .center-column, .top, .right, .bottom, .left {
-          display: flex;
-          justify-content: center;
+        .user-profile {
+          width: 200px;
           align-items: center;
         }
-        ul{
-          list-style: none!important;
+        .profile-image img {
+          width: 32px !important;
+          height: 32px !important;
+          border-radius: 50%;
+          object-fit: cover;
+          /* border: 3px solid var(--app-default-color); */
         }
-        .center-column {
-            flex-direction: column;
+        .profile-name p {
+          font-size: 12px;
+          line-height: 1.33;
+          font-weight: bold;
+          margin-left: 5.4px;
+          position: relative;
+          top: 6px;
         }
-        .card-padding{
-          padding: 0 15px;
-        }
-        .top    { align-items:     flex-start; }
-        .right  { justify-content: flex-end;   }
-        .bottom { align-items:     flex-end;   }
-        .left   { justify-content: flex-start; }
 
-        .single-spaced, .single-spaced * {
-            line-height: 1;
+        .pay-frame {
+          width: 100%;
+          background: #fff;
+          border-radius: 6px;
+          padding: 20px 30px;
+          box-shadow: 1px 1px 11px 0 hsla(0, 0%, 79.2%, 0.5);
         }
-        .is-regular{
-          font-size: 14px;
+        .payment-header {
+          border-bottom: 2px solid #e9e9eb !important;
+          padding: 0 0 15px 0;
+          color: #212890;
+          font-weight: bold;
+          margin-bottom: 10px;
         }
-        .is-regular-4{
-          font-size: 13px!important;
+        .ii__tab a {
+          font-size: 13px;
+          justify-content: flex-start !important;
+          padding-left: 10px !important;
+          padding-right: 0;
+          padding-bottom: 18px !important;
         }
-        .input-text{
-          font-size: 14px!important;
-          padding: 15px!important;
+        .is-active,
+        .ii_tab a:hover,
+        .tabs.is-boxed a:hover {
+          border-bottom: 2px solid var(--app-primary-color) !important;
+          background: transparent !important;
         }
-        .is-borderless{
-          border: 0 solid transparent!important;
+        .content {
+          width: 95%;
+          margin: 0 auto;
+          padding: 2rem 0 0 0;
         }
-        .cols .column:last-child{
-          border-left: 1px solid #dcd0ff;
-        }
-        
       </style>
-
-    <div class="main-wrapper">
-        <div class="container">                            
-            <div id="pay" class="base-card pay-frame">
-              <header class="header card-head is-marginless">
-                  <nav class="tabs is-boxed is-fullwidth" style="overflow: auto; overflow-y:hidden;">
-                      <div class="container">
-                          <ul>
-                          ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
-                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
-                              ${pageGroup.pages.map((tab,tabIndex)=>html`     
-                              <li id="tab_${tabIndex}"  class="tab is-marginless has-text-weight-bold">
-                                  <a 
-                                style="background-color: #2f75ec; border: 0;" 
-                                href="${this._changeLink(pageGroupIndex,tabIndex)}" 
-                                class="frame-bg ${pageGroupIndex==this._pageGroup&&tabIndex==this._page?"is-active":""}">${tab.title}</a>
-                              </li>
-                              `)}
-                          `)}
-                          </ul>
-                      </div>
-                  </nav>
-              </header>
-                <div class="content section">
-                  <div class="content-tab">
-                  <div class="columns is-multiline cols">
-                  ${this.page.pageInputGroups.map((feed,feedIndex)=>html`
-                    <div class="column ${this._gridClasses(feed)}" >
-                      <form-render .feed="${feed}" .params=${this.parseParams()}></form-render>
-                  `)}
-                  </div> 
+      <link
+        href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+        rel="stylesheet"
+      />
+      <div class="main-wrapper">
+        <!-- <GatewayHeader></GatewayHeader> -->
+        <header id="section11" class="main-header is-flex">
+          <div class="mipay-brand"></div>
+          <div class="mipay-user">
+            <div class="columns is-mobile">
+              <div class="column">
+                <div class="is-pulled-right user-profile">
+                  <div class="user-icon"></div>
+                  <div class="user-info is-flex">
+                    <div class="profile-image">
+                      <figure class="image">
+                        <img
+                          src="# : 'images/web/user.svg'}"
+                          alt="profile-image"
+                        />
+                      </figure>
+                    </div>
+                    <div class="profile-name">
+                      <p>Anwar Magara</p>
+                    </div>
                   </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </header>
+        <div class="container">
+          <div id="pay" class="base-card pay-frame">
+            <div class="payment-header">
+              <p class="is-capitalized">Payments</p>
+            </div>
+            <header class="header card-head is-marginless">
+              <nav
+                class="tabs is-boxed is-fullwidth"
+                style="overflow: auto; overflow-y:hidden; width: 95%; margin: 0 auto"
+              >
+                <div class="container">
+                  <ul>
+                    ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+                        <link
+                          rel="stylesheet"
+                          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css"
+                          type="text/css"
+                        />
+                        ${pageGroup.pages.map((tab,tabIndex)=>html`
+                            <li
+                              id="tab_${tabIndex}"
+                              class="tab is-marginless ii__tab"
+                            >
+                              <a
+                                href="${this._changeLink(pageGroupIndex,tabIndex)}"
+                                @click=${this.addActive}
+                                class="frame-bg  ${pageGroupIndex==this._pageGroup&&tabIndex==this._page?"is-active":""}"
+                                >${PaymentsPage.toTitleCase(tab.title)}</a
+                              >
+                            </li>
+                          `)}
+                      `)}
+                  </ul>
+                </div>
+              </nav>
+            </header>
+            <div class="content">
+              <div class="content-tab">
+                <div class="columns is-multiline cols is-paddingless">
+                  ${this.page.pageInputGroups.map(feed=>html`
+                      <div
+                        class="column is-paddingless w__cols ${this._gridClasses(feed)}"
+                      >
+                        <form-render
+                          .feed="${feed}"
+                          .params=${this.parseParams()}
+                        ></form-render>
+                      </div>
+                    `)}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
-    `}constructor(){super();// this.title = [1]._title;
-// console.log(this.page.pageInputGroups);
-}static get properties(){return{title:String,tagline:String,logo:String,pages:Array,tab:Object,oe:Array,profile:{type:Object,value:""}}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_profileTriggerClick(e){const self=this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");// wait 700ms before adding the fixed class to the body to prevent unpleasant effects
-setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){this.shadowRoot.querySelector(".tab-icon.is-active").classList.remove("is-active");e.currentTarget.classList.add("is-active");this.shadowRoot.querySelector(".menu-wrapper .icon-box-toggle").classList.add("active");// this.shadowRoot.querySelector('.child-menu').classList.add('is-sidebar-translated');
-this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});// disable reader mode switch when sidebar is opened
-this.shadowRoot.querySelector(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}_viewList(evt){this.shadowRoot.querySelector("#hero").style.display="block";this.shadowRoot.querySelector("#pay").style.display="none";this.shadowRoot.querySelector("#pay").classList.add("is-hidden-mobile")}_gridClasses(pageInputGroup){const grid=super._gridClasses(pageInputGroup),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget["data-child-menu"],menuTitle=e.currentTarget["data-title"];this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}stateChanged(state){super.stateChanged(state)}_changeLink(pageGroupIndex,tabIndex){var url=window.location.pathname+window.location.search+"#/"+pageGroupIndex+"/"+tabIndex+"/";//   console.log('Link '+url);
-// console.log('param '+this.getParams(window.location.search.substr(1)));
-// this.qs('.has-text-centered').classList.remove('is-active');
-//     e.currentTarget.classList.add('is-active');
-return url}}window.customElements.define("payments-page",PaymentsPage);
+      </div>
+      <snack-bar
+        id="snack-bar"
+        ?active="${this._snackbarOpened}"
+        context="${this._snackbarContext}"
+      >
+        ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar
+      >
+    `}constructor(){super()}static get properties(){return{title:String,tagline:String,logo:String,pages:Array,tab:Object,oe:Array,profile:{type:Object,value:""}}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_profileTriggerClick(){this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){this.shadowRoot.querySelector(".tab-icon.is-active").classList.remove("is-active");e.currentTarget.classList.add("is-active");this.shadowRoot.querySelector(".menu-wrapper .icon-box-toggle").classList.add("active");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});this.shadowRoot.querySelector(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}_viewList(){this.shadowRoot.querySelector("#hero").style.display="block";this.shadowRoot.querySelector("#pay").style.display="none";this.shadowRoot.querySelector("#pay").classList.add("is-hidden-mobile")}_gridClasses(pageInputGroup){const grid=super._gridClasses(pageInputGroup),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget["data-child-menu"],menuTitle=e.currentTarget["data-title"];this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}addActive(){let current=document.getElementsByClassName("active");if(0<current.length){current[0].className=current[0].className.replace(" active","")}this.className+=" active"}stateChanged(state){super.stateChanged(state)}_changeLink(pageGroupIndex,tabIndex){var url=window.location.pathname+window.location.search+"#/"+pageGroupIndex+"/"+tabIndex+"/";return url}}window.customElements.define("payments-page",PaymentsPage);

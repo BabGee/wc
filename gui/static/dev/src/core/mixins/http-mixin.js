@@ -50,7 +50,7 @@ export const httpMixin = BaseClass => class extends BaseClass {
         console.warn('window.NO_NETWORKING=true');
         console.log(service, params); // TODO variable response per service
 
-        const requestResponse = window.SECTION_SERVICE_PAYLOAD; // console.log(requestResponse);
+        const requestResponse = window.TEST_PAYLOAD; // console.log(requestResponse);
 
         const response = new Response(requestResponse);
         resolve(response);

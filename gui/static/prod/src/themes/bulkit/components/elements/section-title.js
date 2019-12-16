@@ -17,5 +17,4 @@ import{html,BULMA_STYLES,LANDING_STYLES,DASHBOARD_STYLES,SectionPElementBase}fro
                 </section>
                 
                 
-        `}static get is(){return"section-title"}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;// TODO update to use customEvent
-self.addEventListener("click",function(evt){evt.preventDefault();self.pl._dialog(self.e.service,self.params)})}init(pElement,loader){super.init(pElement,loader);this.params=loader.pl.paramsCopy()}}customElements.define(SectionTitle.is,SectionTitle);
+        `}static get is(){return"section-title"}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;self.addEventListener("click",function(evt){evt.preventDefault();self.pl._dialog(self.e.service,self.params)})}init(pElement,loader){super.init(pElement,loader);this.params=loader.pl.paramsCopy()}}customElements.define(SectionTitle.is,SectionTitle);

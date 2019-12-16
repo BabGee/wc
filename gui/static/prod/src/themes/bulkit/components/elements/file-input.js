@@ -21,10 +21,4 @@ ${DASHBOARD_STYLES}
 </div>
 
 
-        `}constructor(){super()}getValue(){return this.value}/**
-     * from FileInputBase
-     * @override
-     */updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}/**
-     * File Selection Change handler
-     * @param evt
-     */handleFile(evt){const fileInput=this.shadowRoot.querySelector("#input");this.uploadFile(fileInput)}}window.customElements.define(FileInput.is,FileInput);
+        `}constructor(){super()}getValue(){return this.value}updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}handleFile(){const fileInput=this.shadowRoot.querySelector("#input");this.uploadFile(fileInput)}}window.customElements.define(FileInput.is,FileInput);

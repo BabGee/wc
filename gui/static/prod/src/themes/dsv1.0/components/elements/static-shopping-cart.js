@@ -25,7 +25,7 @@ import{html,StaticShoppingCartBase}from"../../../../components/adaptive-ui.js";c
         
                             <!-- Cart Layout -->
                             <div class="columns is-account-grid is-multiline">
-                                            ${this.cartItems.map((cartItem,idx)=>html`
+                                            ${this.cartItems.map(cartItem=>html`
                                 <!-- Product list -->
                                 <div class="column is-12">
                                     <!-- Product -->
@@ -79,13 +79,4 @@ import{html,StaticShoppingCartBase}from"../../../../components/adaptive-ui.js";c
             
 </div>
         
-    `}// TODO IMPLEMENT OWN LOCAL STORAGE
-constructor(){super()}valid(validation){}invalid(validation){}// todo override kept because of qs
-_changeQuantity(productId){const value=this.shadowRoot.querySelector("#chart_item_"+productId).value,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);this.cartItems[index].quantity=value;this.cartItems=[...this.cartItems];// this.cartItems[index] = cartItem['quantity'] + 1;
-// this.set('cartItems.' + index + '.quantity', cartItem['quantity'] + 1);
-localStorage.setItem("shop-cart",JSON.stringify(this.cartItems));this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}// todo override kept because of qs
-_incrementQuantity(evt){console.log("_incrementQuantity");const productId=evt.currentTarget.dataset.product,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);this.cartItems[index].quantity=cartItem.quantity+1;this.cartItems=[...this.cartItems];// this.cartItems[index] = cartItem['quantity'] + 1;
-// this.set('cartItems.' + index + '.quantity', cartItem['quantity'] + 1);
-localStorage.setItem("shop-cart",JSON.stringify(this.cartItems));this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}// todo override kept because of qs
-_decrementQuantity(evt){console.log("_decrementQuantity");const productId=evt.currentTarget.dataset.product,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);if(1<cartItem.quantity){this.cartItems[index].quantity=cartItem.quantity-1;this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems))}this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}// todo override kept because of qs
-_removeCartItem(evt){const product_id=evt.currentTarget.cartItem,cartItem=this._findCartItem(product_id);var index=this.cartItems.indexOf(cartItem);if(-1<index){this.cartItems.splice(index,1);this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems))}this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}}customElements.define(StaticShoppingCart.is,StaticShoppingCart);
+    `}constructor(){super()}valid(){}invalid(){}_changeQuantity(productId){const value=this.shadowRoot.querySelector("#chart_item_"+productId).value,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);this.cartItems[index].quantity=value;this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems));this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}_incrementQuantity(evt){console.log("_incrementQuantity");const productId=evt.currentTarget.dataset.product,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);this.cartItems[index].quantity=cartItem.quantity+1;this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems));this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}_decrementQuantity(evt){console.log("_decrementQuantity");const productId=evt.currentTarget.dataset.product,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);if(1<cartItem.quantity){this.cartItems[index].quantity=cartItem.quantity-1;this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems))}this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}_removeCartItem(evt){const product_id=evt.currentTarget.cartItem,cartItem=this._findCartItem(product_id);var index=this.cartItems.indexOf(cartItem);if(-1<index){this.cartItems.splice(index,1);this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems))}this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}}customElements.define(StaticShoppingCart.is,StaticShoppingCart);

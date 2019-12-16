@@ -28,7 +28,7 @@ export const LandingPageBase = class extends PageViewElement {
     this.defaultColor = state.app.payload.defaultColor;
     updateStyles({'--app-default-color': this.defaultColor});
   }
-    */
+   */
 
   /**
      * Dialogs Back navigation, Pop dialogs' stack

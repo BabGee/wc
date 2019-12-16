@@ -10,9 +10,9 @@ class MarkupElement extends MarkupElementBase {
          width: 100%;
         height: 80px;
     }
-    #content{
+    /* {
         padding-top: 10px;
-    }
+    } */
     </style>
         <div id="content"></div>
         `;

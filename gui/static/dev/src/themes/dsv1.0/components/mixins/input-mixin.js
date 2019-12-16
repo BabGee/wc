@@ -49,7 +49,6 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
               </div>
             </div>
           </div>
-        </div>
         `;
     } else {
       // RENDER_M_DEFAULT
@@ -117,92 +116,128 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
 
     }
 
-    .row .inp-right .field.success, 
-    .row .inp-right .field.success input, 
-    .row .inp-right .field.success svg{
-        color: #23d160;
-        fill: #23d160;
-    }
-    .row .inp-right .field.success{
-        font-weight: normal;
-        font-size: 12px;
-    }
-    #danger-icon{
-     visibility:hidden;
-    }
-   
-    #check-icon{
-      visibility:hidden;
-    }
-    #warning-text{
-      display:none;
+            .row .inp-right .field.success,
+            .row .inp-right .field.success input,
+            .row .inp-right .field.success svg {
+              color: #23d160;
+              fill: #23d160;
+            }
+            .row .inp-right .field.success {
+              font-weight: normal;
+              font-size: 12px;
+            }
+            #danger-icon {
+              visibility: hidden;
+            }
 
-    }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-    <div class="column row">
-      <div class="inp-right">
-        <label class="label">${this.e.name}</label>
-        <!-- For success message use 'is-success' within the 'input' element and add is-danger whithin the input tag-->
-        <!-- For error message use 'is-danger' within the 'input' element and add is-danger whithin the input tag-->
-        <!--- Error message is commented at the bottom of this component --->
-          <div class="field">
-              <div class="control has-icons-right">
-                  <input class="input" id="input" type="${this.type}" placeholder="${this.e.name}">
+            #check-icon {
+              visibility: hidden;
+            }
+            #warning-text {
+              display: none;
+            }
+          </style>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+          />
+          <div class="column row">
+            <div class="inp-right">
+              <label class="label">${this.e.name}</label>
+              <!-- For success message use 'is-success' within the 'input' element and add is-danger whithin the input tag-->
+              <!-- For error message use 'is-danger' within the 'input' element and add is-danger whithin the input tag-->
+              <!--- Error message is commented at the bottom of this component --->
+              <div class="field">
+                <div class="control has-icons-right">
+                  <input
+                    class="input"
+                    id="input"
+                    type="${this.type}"
+                    placeholder="${this.e.name}"
+                  />
                   <span id="danger-icon" class="icon is-small is-right">
-                  <fa-icon class="fas fa-exclamation-triangle icon" size="1em" color="#ff3860"></fa-icon>
+                    <fa-icon
+                      class="fas fa-exclamation-triangle icon"
+                      size="1em"
+                      color="#ff3860"
+                    ></fa-icon>
                   </span>
                   <span id="check-icon" class="icon is-small is-right">
-                  <fa-icon class="fas fa-check" size="1em" color="#23d160"></fa-icon>
+                    <fa-icon
+                      class="fas fa-check"
+                      size="1em"
+                      color="#23d160"
+                    ></fa-icon>
                   </span>
+                </div>
+                <p id="warning-text" style="color:#ff3860;">
+                  ${this.e.name} required
+                </p>
               </div>
-              <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
+            </div>
           </div>
-      </div>
-    </div>
-          `;
+        `;
     }
   }
 
   renderDefault() {
     return html`
-    <style>
-      .inp{
-        border-radius: 6px!important;
-        font-size: 14px!important;
-        padding: 20px!important;
-        line-height: 1;
-        background-color: #fcfcfc!important;
-        border: 1px solid #a3a3a4!important;
-        box-shadow: 0 0 0 transparent!important;
-      }
-      #danger-icon{
-        visibility:hidden;
-       }
-      
-       #check-icon{
-         visibility:hidden;
-       }
-       #warning-text{
-         display:none;
-   
-       }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-    <div class="field is-8">
-      <label class="label">${this.e.name}</label>
-      <div class="control has-icons-right">
-        <input class="input inp" id="input" type="${this.type}" placeholder="${this.e.name}">
-          <span id="danger-icon" class="icon is-small is-right">
-            <fa-icon class="fas fa-exclamation-triangle icon" size="1em" color="#ff3860"></fa-icon>
-          </span>
-          <span id="check-icon" class="icon is-small is-right">
-            <fa-icon class="fas fa-check" size="1em" color="#23d160"></fa-icon>
-          </span>
-      </div>
-      <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
-    </div>
-          `;
+        <style>
+          .inp {
+            width: 100%;
+            border-radius: 6px !important;
+            font-size: 14px !important;
+            padding: 20px !important;
+            line-height: 1;
+            background-color: #fff !important;
+            border: 1px solid #e5e5e5 !important;
+            box-shadow: 0 0 0 transparent !important;
+            color: #5d5d5e;
+          }
+          #danger-icon {
+            visibility: hidden;
+          }
+
+          #check-icon {
+            visibility: hidden;
+          }
+          #warning-text {
+            display: none;
+          }
+        </style>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+        />
+        <div class="field is-12">
+          <label class="label" style="font-size: 12px">${this.e.name}</label>
+          <div class="control has-icons-right">
+            <input
+              class="input inp"
+              id="input"
+              type="${this.type}"
+              placeholder="${this.e.name}"
+            />
+            <span id="danger-icon" class="icon is-small is-right">
+              <fa-icon
+                class="fas fa-exclamation-triangle icon"
+                size="1em"
+                color="#ff3860"
+              ></fa-icon>
+            </span>
+            <span id="check-icon" class="icon is-small is-right">
+              <fa-icon
+                class="fas fa-check"
+                size="1em"
+                color="#23d160"
+              ></fa-icon>
+            </span>
+          </div>
+          <p id="warning-text" style="color:#ff3860;">
+            ${this.e.name} required
+          </p>
+        </div>
+      `;
   }
 
   invalid(validation) {
@@ -228,7 +263,7 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
   }
 
   getInput() {
-    return this.shadowRoot.querySelector('#input');
+    return this.shadowRoot.querySelector("#input");
   }
 
   getValue() {
@@ -244,7 +279,7 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
   }
 
   get type() {
-    return 'text';
+    return "text";
   }
 
 };

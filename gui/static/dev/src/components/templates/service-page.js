@@ -20,8 +20,7 @@ export const ServicePageBase = class extends PageViewElement {
       tab: Object,
       profile: {type: Object, value: ''},
       page: Number,
-  
-    };
+      };
   }
   */
 

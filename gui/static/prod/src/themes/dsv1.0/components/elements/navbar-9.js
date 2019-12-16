@@ -94,10 +94,4 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
       </header>
     </div>
 
-     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block");// if(nav.classList == 'top'){
-//   nav.classList.remove('top')
-// }else{
-//   nav.classList.add('top')
-// }
-}scrollToSection(index){//MAXIMUM OF 6 ONLY
-if(0==index){window.scroll({top:0,behavior:"smooth"})}else if(1==index){window.scroll({top:800,behavior:"smooth"})}else if(2==index){window.scroll({top:1600,behavior:"smooth"})}else if(3==index){window.scroll({top:2400,behavior:"smooth"})}else if(4==index){window.scroll({top:3200,behavior:"smooth"})}else if(5==index){window.scroll({top:4e3,behavior:"smooth"})}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);
+     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(index){if(0==index){window.scroll({top:0,behavior:"smooth"})}else if(1==index){window.scroll({top:800,behavior:"smooth"})}else if(2==index){window.scroll({top:1600,behavior:"smooth"})}else if(3==index){window.scroll({top:2400,behavior:"smooth"})}else if(4==index){window.scroll({top:3200,behavior:"smooth"})}else if(5==index){window.scroll({top:4e3,behavior:"smooth"})}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);

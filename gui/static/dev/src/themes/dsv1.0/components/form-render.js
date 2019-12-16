@@ -34,8 +34,15 @@ class FormRender extends FormRenderBase {
       `;
     } else if (formType === FORM_TYPE_PAYMENTS_FORM) {
       form = html`
+      <style>
+        .ii__title{
+          margin-bottom: 15px;
+          font-size: 14px;
+          font-weight: bolder;
+        }
+      </style>
        <content-x id="form">
-        <p slot="header" class="is-capitalized">${FormRenderBase.toTitleCase(this.feed.title)}</p> 
+        <p slot="header" class="is-capitalized has-text-weight-bold ii__title">${FormRenderBase.toTitleCase(this.feed.title)}</p> 
         <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed, this.pos)} ></e-list>
       </content-x>
       `;

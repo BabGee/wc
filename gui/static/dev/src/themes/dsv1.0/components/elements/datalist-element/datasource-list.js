@@ -406,10 +406,11 @@ export class DataSourceList extends dataSourceMixin(LitElement) {
   }
 
   _viewType(type) {
-    const table = './table-type.js';
+    // const table =  './table-type.js'; // TODO local
+    const table = './datalist-element/table-type.js'; // bundled
 
     if (!(type == null) || !(type == undefined) || !(type == '')) {
-      import(`./${type}-type.js`).then(module => {}).catch(err => {
+      import(`./datalist-element/${type}-type.js`).then(module => {}).catch(err => {
         //TO_DO incase import fail import table and display
         console.warn("ERROR IS.." + err);
       });

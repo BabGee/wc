@@ -182,11 +182,11 @@ class AdaptiveUi extends connect(store)(LitElement) {
         // TODO #270 Theme Colors Verifier
         // verifies the themes colors if can work i.e do not make elements invisible
         // if can't works updates with default working colors
-          let defaultColor = state.app.payload.defaultColor;
+         let defaultColor = state.app.payload.defaultColor;
         let primaryColor = state.app.payload.primaryColor;
         let secondaryColor = state.app.payload.secondaryColor;
         let accentColor = state.app.payload.accentColor;
-          updateStyles({
+         updateStyles({
             '--app-default-color': defaultColor,
             '--app-primary-color': '#2885c0', // #2885c0
             '--app-secondary-color': secondaryColor,

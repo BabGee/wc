@@ -108,7 +108,9 @@ class AdaptiveUiIcon extends LitElement {
         } else if (this._iconsetName) {
           // load iconset
           // todo #265 if es6-bundled, the icons path is relative to the templates directory
-          const moduleSpecifier = `../themes/${window.THEME}/icons/${this._iconsetName}.js`;
+          // const moduleSpecifier = `../themes/${window.THEME}/icons/${this._iconsetName}.js`; // TODO local
+          const moduleSpecifier = `../../icons/${this._iconsetName}.js`; // bundled
+
           Logger.i.debug('loading module:' + moduleSpecifier);
           import(moduleSpecifier).then(module => {
             // module.default();

@@ -164,13 +164,4 @@ import{html,LandingPageBase,VIEW_MODE_DIALOG}from"../../../../components/adaptiv
             <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
 
       </div>
-`}constructor(){super()}scrollPage(evt){const index=evt.currentTarget.pageIndex;// var elementToFocus = document.getElementById(window.location.hash.slice(1));
-//   var elementToFocus = document.getElementById("#section_1");
-var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){//  elementToFocus.scrollIntoView(true);
-elementToFocus.scrollIntoView({block:"start",behavior:"smooth"});//   console.log("Scroll");
-}}static get properties(){return{title:String,name:String,logo:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){let nav=document.getElementsByClassName("navbar-menu");nav[0].classList.toggle("mob-nav")}stateChanged(state){super.stateChanged(state)}/**
-       * Dialogs Back navigation, Pop dialogs' stack
-       *
-       * @param {ClickEvent} evt
-       * @private
-       */_viewList(evt){this.mainNavigation()}}window.customElements.define("landing-page",LandingPage);
+`}constructor(){super()}scrollPage(evt){const index=evt.currentTarget.pageIndex;var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get properties(){return{title:String,name:String,logo:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){let nav=document.getElementsByClassName("navbar-menu");nav[0].classList.toggle("mob-nav")}stateChanged(state){super.stateChanged(state)}_viewList(){this.mainNavigation()}}window.customElements.define("landing-page",LandingPage);

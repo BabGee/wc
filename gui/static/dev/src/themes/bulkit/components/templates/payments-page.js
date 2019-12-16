@@ -282,9 +282,9 @@ class PaymentsPage extends PaymentsPageBase {
         this.qsa('.dashboard-nav, #dashboard-wrapper').forEach(function (el) {
             el.classList.toggle('is-pushed');
         });
-          //enable reader mode switch when sidebar is closed
+         //enable reader mode switch when sidebar is closed
         this.qs('.reader-switch label').classList.remove('is-disabled');
-          */
+         */
   }
 
   _iconBoxToggle(e) {
