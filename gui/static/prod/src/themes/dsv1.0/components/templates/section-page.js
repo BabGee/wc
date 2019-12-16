@@ -95,7 +95,7 @@ ${this.payload?html`
         <h1 class="title has-text-black-bis" style="width: 80%; display: inline-block; ">${this._computePage(this.payload).title}</h1>
         <a style="display: inline-block; color: black;
         border: 1px solid black; padding: 0.1rem 1rem; 
-        border-radius: 25px 1px 1px 25px; box-shadow: 1px 1px 1px 0px black; " class="is-pulled-right" @click=${this._viewList}>Back</a>
+        border-radius: 25px 1px 1px 25px; box-shadow: 1px 1px 1px 0px black; " class="is-pulled-right" @click=${this._triggerViewList}>Back</a>
       </div>
     </div>
 
@@ -132,4 +132,4 @@ ${this.payload?html`
               <span slot="title">${this._snackbarTitle}</span>
               ${this._snackbarMessage}</snack-bar>
 
-`}constructor(){super()}_computePage(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;return pageGroup.getTab(0)}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}static get styles(){return[Reset,Colors,Fonts,css`:host { display: block; }`]}}customElements.define(SectionPage.is,SectionPage);
+`}constructor(){super()}_computePage(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;return pageGroup.getTab(0)}_triggerViewList(){this.dispatchEvent(new CustomEvent("view-list",{bubbles:!0,composed:!0,detail:{}}))}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}static get styles(){return[Reset,Colors,Fonts,css`:host { display: block; }`]}}customElements.define(SectionPage.is,SectionPage);

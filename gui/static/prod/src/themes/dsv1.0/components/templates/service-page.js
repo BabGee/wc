@@ -249,7 +249,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
       <div class="main-wrapper">
         
         ${this.view===VIEW_MODE_DIALOG?html`
-          <section-page id="dialog" queue=${this.dialogServicesQueue} ></section-page>
+          <section-page id="dialog" @view-list=${this._viewList} queue=${this.dialogServicesQueue} ></section-page>
         `:html`
         
         `}
