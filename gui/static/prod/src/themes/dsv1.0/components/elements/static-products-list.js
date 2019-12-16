@@ -1,4 +1,4 @@
-import{html,StaticProductsListBase}from"../../../../components/adaptive-ui.js";class StaticProductsList extends StaticProductsListBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{StaticProductsListBase}from"../../../../elements/base/static-products-list.js";class StaticProductsList extends StaticProductsListBase{renderDefault(){return html`
         <style>
         /* The Modal (background) */
 .product-modal {

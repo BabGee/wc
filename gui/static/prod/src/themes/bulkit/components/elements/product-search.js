@@ -1,4 +1,4 @@
-import{html,SharedStyles,SHOP_STYLES,ProductSearchBase}from"../../../../components/adaptive-ui.js";class ProductSearch extends ProductSearchBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SharedStyles}from"../../styles/shared-styles.js";import{SHOP_STYLES}from"../../styles/shop-styles.js";import{ProductSearchBase}from"../../../../elements/base/product-search.js";class ProductSearch extends ProductSearchBase{renderDefault(){return html`
         ${SHOP_STYLES}
         ${SharedStyles}
         <style>

@@ -1,4 +1,4 @@
-import{html,SharedStyles,CcInputBase}from"../../../../components/adaptive-ui.js";class CcInput extends CcInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/gold-cc-input/gold-cc-input.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import{CcInputBase}from"../../../../elements/base/cc-input.js";class CcInput extends CcInputBase{renderDefault(){return html`
  ${SharedStyles}
  <div class="column">
 <div class="field">

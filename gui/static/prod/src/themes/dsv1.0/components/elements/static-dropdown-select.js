@@ -1,4 +1,4 @@
-import{html,StaticDropdownSelectBase}from"../../../../components/adaptive-ui.js";class StaticDropdownSelect extends StaticDropdownSelectBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{StaticDropdownSelectBase}from"../../../../elements/base/static-dropdown-select.js";class StaticDropdownSelect extends StaticDropdownSelectBase{renderDefault(){return html`
  
   <style>
  option{

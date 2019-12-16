@@ -1,4 +1,4 @@
-import{html,MarkupElementBase}from"../../../../components/adaptive-ui.js";class MarkupElement extends MarkupElementBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{MarkupElementBase}from"../../../../elements/base/markup-element.js";class MarkupElement extends MarkupElementBase{renderDefault(){return html`
      <style>
   
     #content{

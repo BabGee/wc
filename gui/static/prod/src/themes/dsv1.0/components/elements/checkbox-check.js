@@ -1,4 +1,4 @@
-import{html,CheckboxCheckBase}from"../../../../components/adaptive-ui.js";class CheckboxCheck extends CheckboxCheckBase{createRenderRoot(){return this}renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{CheckboxCheckBase}from"../../../../elements/base/checkbox-check.js";class CheckboxCheck extends CheckboxCheckBase{createRenderRoot(){return this}renderDefault(){return html`
 <style>
 .switch {
   position: relative;

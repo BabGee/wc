@@ -1,4 +1,4 @@
-import{html,StaticPosBase}from"../../../../components/adaptive-ui.js";class StaticPos extends StaticPosBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{StaticPosBase}from"../../../../elements/base/static-pos.js";class StaticPos extends StaticPosBase{renderDefault(){return html`
         <style>
         html {
   box-sizing: border-box;

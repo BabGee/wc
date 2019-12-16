@@ -1,0 +1,1 @@
+export const register=function(ComponentClass){if(window.THEME==="dsv1.0"){window.customElements.define(ComponentClass.is,ComponentClass)}};

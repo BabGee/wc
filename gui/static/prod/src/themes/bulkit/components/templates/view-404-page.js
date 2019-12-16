@@ -1,4 +1,4 @@
-import{html,View404Base,SharedStyles}from"../../../../components/adaptive-ui.js";class View404Page extends View404Base{render(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{View404Base}from"../../../../components/templates/view-404.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../snack-bar.js";class View404Page extends View404Base{render(){return html`
       ${SharedStyles}
       <section>
         <h2>Oops! You hit a 404</h2>

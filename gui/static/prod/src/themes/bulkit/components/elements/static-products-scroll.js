@@ -1,4 +1,4 @@
-import{html,SHOP_STYLES,SharedStyles,LANDING_STYLES,StaticProductsScrollBase}from"../../../../components/adaptive-ui.js";class StaticProductsScroll extends StaticProductsScrollBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{SHOP_STYLES}from"../../styles/shop-styles.js";import{SharedStyles}from"../../styles/shared-styles.js";import{LANDING_STYLES}from"../../styles/landing-style.js";import{StaticProductsScrollBase}from"../../../../elements/base/static-products-scroll.js";class StaticProductsScroll extends StaticProductsScrollBase{renderDefault(){return html`
         ${SHOP_STYLES}
         ${SharedStyles}
          

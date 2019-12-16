@@ -1,4 +1,4 @@
-import{html,PinInputBase}from"../../../../components/adaptive-ui.js";class PinInput extends PinInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{PinInputBase}from"../../../../elements/base/pin-input.js";class PinInput extends PinInputBase{renderDefault(){return html`
   <div class="column">
 <div class="field">
  <label class="form-label"><span><iron-icon icon="icons:lock"></iron-icon></span>${this.e.name}</label>

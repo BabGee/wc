@@ -1,4 +1,4 @@
-import{html,ProductSearchBase}from"../../../../components/adaptive-ui.js";class ProductSearch extends ProductSearchBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{ProductSearchBase}from"../../../../elements/base/product-search.js";class ProductSearch extends ProductSearchBase{renderDefault(){return html`
         <style>
         .search-wrapper{
         height:60px;

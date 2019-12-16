@@ -1,4 +1,4 @@
-import{TextInputBase,html,SharedStyles,enterSubmitMixin}from"../../../../components/adaptive-ui.js";class TextInput extends enterSubmitMixin(TextInputBase){renderDefault(){return html`
+import{TextInputBase}from"../../../../elements/base/text-input.js";import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{enterSubmitMixin}from"../../../../components/mixins/enter-submit-mixin.js";class TextInput extends enterSubmitMixin(TextInputBase){renderDefault(){return html`
 ${SharedStyles}
  <style>
  .input-counter{

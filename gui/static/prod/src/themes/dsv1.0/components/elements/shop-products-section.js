@@ -1,4 +1,4 @@
-import{html,ShopProductsSectionBase}from"../../../../components/adaptive-ui.js";class ShopProductsSection extends ShopProductsSectionBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{ShopProductsSectionBase}from"../../../../elements/base/shop-products-section.js";class ShopProductsSection extends ShopProductsSectionBase{renderDefault(){return html`
 
         <div class="title_section">
             <div class="wrapper">

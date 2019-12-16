@@ -1,4 +1,4 @@
-import{html,StaticTagInputBase}from"../../../../components/adaptive-ui.js";class StaticTagInput extends StaticTagInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-input/paper-input.js";import"../../../../../node_modules/@polymer/paper-listbox/paper-listbox.js";import"../../../../../node_modules/@polymer/paper-item/paper-item.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{StaticTagInputBase}from"../../../../elements/base/static-tag-input.js";class StaticTagInput extends StaticTagInputBase{renderDefault(){return html`
         <style>
             :host {
                 display: block;

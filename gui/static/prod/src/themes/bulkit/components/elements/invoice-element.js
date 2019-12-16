@@ -1,4 +1,4 @@
-import{html,InvoiceElementBase}from"../../../../components/adaptive-ui.js";class InvoiceElement extends InvoiceElementBase{constructor(){super()}renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-button/paper-button.js";import{InvoiceElementBase}from"../../../../elements/base/invoice-element.js";class InvoiceElement extends InvoiceElementBase{constructor(){super()}renderDefault(){return html`
         <style>
         :host {
             display: block;

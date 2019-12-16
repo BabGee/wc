@@ -1,0 +1,1 @@
+import{PageViewElement}from"./page-view-element.js";export const PaymentsPageBase=class extends PageViewElement{constructor(){super()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}async _activateLoadSectionInterface(...args){self.params=params;this.dialogServicesQueue.push([service,params]);self.view="dialog"}};

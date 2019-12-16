@@ -1,4 +1,4 @@
-import{html,SharedStyles,SectionPElementBase}from"../../../../components/adaptive-ui.js";class SectionFront extends SectionPElementBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SharedStyles}from"../../styles/shared-styles.js";import{SectionPElementBase}from"../../../../elements/base/section-pelement.js";class SectionFront extends SectionPElementBase{renderDefault(){return html`
  ${SharedStyles}
    <style>
 

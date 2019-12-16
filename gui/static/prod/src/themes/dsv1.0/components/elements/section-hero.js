@@ -1,4 +1,4 @@
-import{html,SectionPElementBase}from"../../../../components/adaptive-ui.js";class SectionHero extends SectionPElementBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SectionPElementBase}from"../../../../elements/base/section-pelement.js";class SectionHero extends SectionPElementBase{renderDefault(){return html`
     <style>
 .lead {
     font-size: 18px;

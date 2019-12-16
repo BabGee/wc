@@ -1,4 +1,4 @@
-import{RemoveSubmitBase,html}from"../../../../components/adaptive-ui.js";class RemoveSubmit extends RemoveSubmitBase{constructor(){super()}renderDefault(){return html`
+import{RemoveSubmitBase}from"../../../../elements/base/remove-submit.js";import{html}from"../../../../../node_modules/lit-element/lit-element.js";class RemoveSubmit extends RemoveSubmitBase{constructor(){super()}renderDefault(){return html`
         <a class="button is-primary is-rounded">
             <span class="icon">
             <!--<i class="fab fa-github"></i>-->

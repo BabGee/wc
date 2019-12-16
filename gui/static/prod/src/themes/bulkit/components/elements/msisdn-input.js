@@ -1,4 +1,4 @@
-import{html,SharedStyles,MsisdnInputBase}from"../../../../components/adaptive-ui.js";class MsisdnInput extends MsisdnInputBase{render(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{MsisdnInputBase}from"../../../../elements/base/msisdn-input.js";class MsisdnInput extends MsisdnInputBase{render(){return html`
         ${SharedStyles}
         <style>
        

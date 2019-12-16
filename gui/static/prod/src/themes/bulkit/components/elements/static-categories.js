@@ -1,4 +1,4 @@
-import{html,LANDING_STYLES,BULMA_STYLES,DASHBOARD_STYLES,StaticCategoriesBase}from"../../../../components/adaptive-ui.js";class StaticCategories extends StaticCategoriesBase{renderDefault(){return html`   
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{LANDING_STYLES}from"../../styles/landing-style.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{DASHBOARD_STYLES}from"../../styles/dashboard-styles.js";import{StaticCategoriesBase}from"../../../../elements/base/static-categories.js";class StaticCategories extends StaticCategoriesBase{renderDefault(){return html`   
         ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 
      ${LANDING_STYLES}

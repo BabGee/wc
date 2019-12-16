@@ -1,4 +1,4 @@
-import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class SectionTeam extends SectionPElementDsc{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SectionPElementDsc}from"../../../../elements/base/section-pelement-dsc.js";class SectionTeam extends SectionPElementDsc{renderDefault(){return html`
         
         <section class="section is-small">
             <div class="container">

@@ -1,4 +1,4 @@
-import{html,SHOP_STYLES,BULMA_STYLES,StaticShoppingCartBase}from"../../../../components/adaptive-ui.js";class StaticShoppingCart extends StaticShoppingCartBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";import{SHOP_STYLES}from"../../styles/shop-styles.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{StaticShoppingCartBase}from"../../../../elements/base/static-shopping-cart.js";class StaticShoppingCart extends StaticShoppingCartBase{renderDefault(){return html`
         ${SHOP_STYLES}
        ${BULMA_STYLES}    
  <div class="shop-wrapper is-mobile-mode">

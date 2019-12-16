@@ -1,4 +1,4 @@
-import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class SectionPrice extends SectionPElementDsc{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SectionPElementDsc}from"../../../../elements/base/section-pelement-dsc.js";class SectionPrice extends SectionPElementDsc{renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
     <style>
     header.header{

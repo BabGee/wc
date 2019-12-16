@@ -1,4 +1,4 @@
-import{html,BaseElement}from"../../../../components/adaptive-ui.js";class TitleElement extends BaseElement{constructor(){super()}render(){return html`
+import{LitElement,html}from"../../../../../node_modules/lit-element/lit-element.js";import{BaseElement}from"../../../../core/base-element.js";export class TitleElement extends BaseElement{constructor(){super()}render(){return html`
       <style>
       .c-title-container {
           max-width: 630px;
@@ -38,4 +38,4 @@ import{html,BaseElement}from"../../../../components/adaptive-ui.js";class TitleE
             <p class="ii__paragraph" style="color: #7b7b7b">${this.e.defaultValue}</p> 
                    
         </div>
-        `}static get is(){return"title-element"}static get properties(){return{}}}customElements.define(TitleElement.is,TitleElement);var titleElement={TitleElement:TitleElement};export{titleElement as $titleElement,TitleElement};
+        `}static get is(){return"title-element"}static get properties(){return{}}}customElements.define(TitleElement.is,TitleElement);

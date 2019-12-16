@@ -1,4 +1,4 @@
-import{html,ReportsSummaryBase}from"../../../../components/adaptive-ui.js";class ReportsSummary extends ReportsSummaryBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-button/paper-button.js";import{ReportsSummaryBase}from"../../../../elements/base/reports-summary.js";class ReportsSummary extends ReportsSummaryBase{renderDefault(){return html`
         <style include="flex-grid">
             .text-center {
                 text-align: center;

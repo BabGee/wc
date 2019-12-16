@@ -1,4 +1,4 @@
-import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar2 extends NavbarBase{static get properties(){return{newProductsMenuHidden:Boolean}}constructor(){super();this.newProductsMenuHidden=!0}renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{NavbarBase}from"../../../../elements/base/navbar-base.js";import"../../../../../node_modules/fa-icons/index.js";class Navbar2 extends NavbarBase{static get properties(){return{newProductsMenuHidden:Boolean}}constructor(){super();this.newProductsMenuHidden=!0}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
     <style>

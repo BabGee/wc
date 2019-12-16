@@ -1,4 +1,4 @@
-import{PosCartBase,html}from"../../../../components/adaptive-ui.js";class PosCart extends PosCartBase{constructor(){super()}renderDefault(){return html`
+import{PosCartBase}from"../../../../elements/base/pos-cart.js";import{html}from"../../../../../node_modules/lit-element/lit-element.js";class PosCart extends PosCartBase{constructor(){super()}renderDefault(){return html`
         ${posCartTheme}
         <paper-toolbar class="toolbar" id="paper_toolbar">
             <paper-item class="flex">

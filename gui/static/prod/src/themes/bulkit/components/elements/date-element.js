@@ -1,4 +1,4 @@
-import{html,format,parse,SharedStyles,DateElementBase}from"../../../../components/adaptive-ui.js";class DateElement extends DateElementBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{format,parse}from"../../../../../node_modules/date-fns/esm/index.js";import{SharedStyles}from"../../styles/shared-styles.js";import{DateElementBase}from"../../../../elements/base/date-element.js";class DateElement extends DateElementBase{renderDefault(){return html`
  ${SharedStyles}
   <style>
  #input{

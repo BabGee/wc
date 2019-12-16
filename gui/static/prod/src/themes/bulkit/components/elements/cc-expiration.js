@@ -1,4 +1,4 @@
-import{html,SharedStyles,CcExpirationBase}from"../../../../components/adaptive-ui.js";class CcExpiration extends CcExpirationBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/gold-cc-expiration-input/gold-cc-expiration-input.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import{CcExpirationBase}from"../../../../elements/base/cc-expiration.js";class CcExpiration extends CcExpirationBase{renderDefault(){return html`
  ${SharedStyles}
  <div class="column">
 <div class="field">

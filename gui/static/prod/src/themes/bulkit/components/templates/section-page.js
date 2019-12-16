@@ -1,4 +1,4 @@
-import{html,SectionPageBase}from"../../../../components/adaptive-ui.js";class SectionPage extends SectionPageBase{render(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icons/social-icons.js";import"../../../../../node_modules/@polymer/iron-icons/communication-icons.js";import"../../../../../node_modules/@polymer/paper-spinner/paper-spinner.js";import"../form-render.js";import"../snack-bar.js";import{SectionPageBase}from"../../../../components/templates/section-page.js";class SectionPage extends SectionPageBase{render(){return html`
      <style>
      .flex-card {
     position: relative;

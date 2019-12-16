@@ -1,4 +1,4 @@
-import{html,SummaryBoxesBase}from"../../../../components/adaptive-ui.js";class SummaryBoxes extends SummaryBoxesBase{constructor(){super();this.loading=!0}static get properties(){return{loading:Boolean}}renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SummaryBoxesBase}from"../../../../elements/base/summary-boxes.js";import"../../../../../node_modules/@polymer/paper-card/paper-card.js";import"../../icons/my-icons.js";import"./datalist-element/loader-element.js";class SummaryBoxes extends SummaryBoxesBase{constructor(){super();this.loading=!0}static get properties(){return{loading:Boolean}}renderDefault(){return html`
 
         <style>
 

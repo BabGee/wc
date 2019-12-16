@@ -1,4 +1,4 @@
-import{html,ToggleInputBase}from"../../../../components/adaptive-ui.js";class ToggleInput extends ToggleInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{ToggleInputBase}from"../../../../elements/base/toggle-input.js";class ToggleInput extends ToggleInputBase{renderDefault(){return html`
 <style>
 .switch {
   position: relative;

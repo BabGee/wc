@@ -1,4 +1,4 @@
-import{html,format,SharedStyles,TimeElementBase}from"../../../../components/adaptive-ui.js";class TimeElement extends TimeElementBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{format}from"../../../../../node_modules/date-fns/esm/index.js";import{SharedStyles}from"../../styles/shared-styles.js";import{TimeElementBase}from"../../../../elements/base/time-element.js";class TimeElement extends TimeElementBase{renderDefault(){return html`
  ${SharedStyles}
  <style>
  #input{

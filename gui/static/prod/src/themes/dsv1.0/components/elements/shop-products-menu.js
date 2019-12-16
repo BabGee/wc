@@ -1,4 +1,4 @@
-import{html,ShopProductsMenuBase}from"../../../../components/adaptive-ui.js";class ShopProductsMenu extends ShopProductsMenuBase{renderDefault(){return html`   
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{ShopProductsMenuBase}from"../../../../elements/base/shop-products-menu.js";class ShopProductsMenu extends ShopProductsMenuBase{renderDefault(){return html`   
         
 
         <div class="section">

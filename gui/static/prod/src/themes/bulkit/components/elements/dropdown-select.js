@@ -1,4 +1,4 @@
-import{html,SharedStyles,DropdownSelectBase,Logger}from"../../../../components/adaptive-ui.js";class DropdownSelect extends DropdownSelectBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import{DropdownSelectBase}from"../../../../elements/base/dropdown-select.js";import"../../../../../node_modules/slim-select/dist/slimselect.min.js";import{Logger}from"../../../../core/logger.js";class DropdownSelect extends DropdownSelectBase{renderDefault(){return html`
  ${SharedStyles}
  <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet"/>
   <style>

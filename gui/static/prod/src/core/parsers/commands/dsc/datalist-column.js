@@ -1,0 +1,1 @@
+export class DatalistColumn{constructor(){this.type=null;this.actions=!1;this.header="";this.property="";this.propertyPath="";this.otherProperties=[];this.sortable=!1;this.draggableColumn=!1;this.hidden=!1;this.sortDirection=!1;this.sorted=!1;this.filter=!1;this.date=!1;this.hideable=!0;this.position=!1;this.activeFilter=!1;this.choices=!1}toString(){return this.header}}

@@ -1,4 +1,4 @@
-import{html,SharedStyles,BulkUploadBase}from"../../../../components/adaptive-ui.js";class BulkUpload extends BulkUploadBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{BulkUploadBase}from"../../../../elements/base/bulk-upload.js";class BulkUpload extends BulkUploadBase{renderDefault(){return html`
  ${SharedStyles}
  <style>
  .inputfile {

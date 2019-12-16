@@ -1,4 +1,4 @@
-import{html,SummaryBoxesBase}from"../../../../components/adaptive-ui.js";class SummaryBoxes extends SummaryBoxesBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-card/paper-card.js";import"./datalist-element/loader-element.js";import{SummaryBoxesBase}from"../../../../elements/base/summary-boxes.js";class SummaryBoxes extends SummaryBoxesBase{renderDefault(){return html`
 
         <style>
         @media screen and (max-width: 775px){

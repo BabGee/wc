@@ -1,4 +1,4 @@
-import{html,ReceiptElementBase}from"../../../../components/adaptive-ui.js";class ReceiptElement extends ReceiptElementBase{constructor(){super()}renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-button/paper-button.js";import{ReceiptElementBase}from"../../../../elements/base/receipt-element.js";class ReceiptElement extends ReceiptElementBase{constructor(){super()}renderDefault(){return html`
         <style>
         :host {
             display: block;

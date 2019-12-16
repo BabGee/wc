@@ -1,4 +1,4 @@
-import{html,SHOP_STYLES,SharedStyles,StaticProductsListBase}from"../../../../components/adaptive-ui.js";class StaticProductsList extends StaticProductsListBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SHOP_STYLES}from"../../styles/shop-styles.js";import{SharedStyles}from"../../styles/shared-styles.js";import{StaticProductsListBase}from"../../../../elements/base/static-products-list.js";class StaticProductsList extends StaticProductsListBase{renderDefault(){return html`
         ${SHOP_STYLES}
         ${SharedStyles}
         <style>

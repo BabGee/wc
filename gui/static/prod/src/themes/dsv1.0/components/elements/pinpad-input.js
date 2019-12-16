@@ -1,4 +1,4 @@
-import{html,PinPadInputBase}from"../../../../components/adaptive-ui.js";class PinPadInput extends PinPadInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{PinPadInputBase}from"../../../../elements/base/pinpad-input.js";class PinPadInput extends PinPadInputBase{renderDefault(){return html`
  
   <div class="column">
 <div class="field">

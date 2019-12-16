@@ -1,4 +1,4 @@
-import{InputSubmitBase,html}from"../../../../components/adaptive-ui.js";class InputSubmit extends InputSubmitBase{constructor(){super()}renderDefault(){return html`
+import{InputSubmitBase}from"../../../../elements/base/input-submit.js";import{html}from"../../../../../node_modules/lit-element/lit-element.js";class InputSubmit extends InputSubmitBase{constructor(){super()}renderDefault(){return html`
         
         <div class="field">
           <div class="control  has-icons-left has-icons-right">

@@ -1,4 +1,4 @@
-import{html,SharedStyles,ToggleInputBase}from"../../../../components/adaptive-ui.js";class ToggleInput extends ToggleInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import{ToggleInputBase}from"../../../../elements/base/toggle-input.js";class ToggleInput extends ToggleInputBase{renderDefault(){return html`
  ${SharedStyles}
 <style>
 .switch {

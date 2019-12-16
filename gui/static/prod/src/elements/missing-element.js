@@ -1,4 +1,4 @@
-import{LitElement,html}from"../components/adaptive-ui.js";class MissingElement extends LitElement{render(){return html`
+import{LitElement,html}from"../../node_modules/lit-element/lit-element.js";class MissingElement extends LitElement{render(){return html`
         <style>
             /* CSS rules for your element */
             #content{

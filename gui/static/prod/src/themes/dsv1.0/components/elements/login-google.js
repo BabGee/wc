@@ -1,4 +1,4 @@
-import{html,LoginGoogleBase}from"../../../../components/adaptive-ui.js";class LoginGoogle extends LoginGoogleBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{LoginGoogleBase}from"../../../../elements/base/login-google.js";class LoginGoogle extends LoginGoogleBase{renderDefault(){return html`
         
         <style>
         .icon:hover{

@@ -1,0 +1,1 @@
+export const register=function(ComponentClass){if(window.THEME==="bulkit"){window.customElements.define(ComponentClass.is,ComponentClass)}};

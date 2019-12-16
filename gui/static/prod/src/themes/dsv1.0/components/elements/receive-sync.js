@@ -1,4 +1,4 @@
-import{html,ReceiveSyncBase}from"../../../../components/adaptive-ui.js";class ReceiveSync extends ReceiveSyncBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{ReceiveSyncBase}from"../../../../elements/base/receive-sync.js";class ReceiveSync extends ReceiveSyncBase{renderDefault(){return html`
  
 <div class="field">
 <article class="message is-primary">

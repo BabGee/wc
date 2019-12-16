@@ -1,4 +1,4 @@
-import{html,shopProductsSectionTheme,shopProductItemTheme,ShopProductsSectionBase}from"../../../../components/adaptive-ui.js";class ShopProductsSection extends ShopProductsSectionBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{shopProductsSectionTheme}from"../../styles/shared-styles.js";import{shopProductItemTheme}from"../../styles/shop-product-item-styles.js";import{ShopProductsSectionBase}from"../../../../elements/base/shop-products-section.js";class ShopProductsSection extends ShopProductsSectionBase{renderDefault(){return html`
         ${shopProductsSectionTheme}
         ${shopProductItemTheme}
 

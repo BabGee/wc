@@ -1,0 +1,1 @@
+import{PageViewElement}from"./page-view-element.js";export const View404Base=class extends PageViewElement{static get is(){return"view-404"}};

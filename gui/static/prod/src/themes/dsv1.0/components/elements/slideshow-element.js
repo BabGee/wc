@@ -1,4 +1,4 @@
-import{html,SlideshowElementBase}from"../../../../components/adaptive-ui.js";class SlideshowElement extends SlideshowElementBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SlideshowElementBase}from"../../../../elements/base/slideshow-element.js";class SlideshowElement extends SlideshowElementBase{renderDefault(){return html`
   <style>
 
 body, html{

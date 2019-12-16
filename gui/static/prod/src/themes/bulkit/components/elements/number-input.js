@@ -1,4 +1,4 @@
-import{html,SharedStyles,NumberInputBase,enterSubmitMixin}from"../../../../components/adaptive-ui.js";class NumberInput extends enterSubmitMixin(NumberInputBase){renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{NumberInputBase}from"../../../../elements/base/number-input.js";import{enterSubmitMixin}from"../../../../components/mixins/enter-submit-mixin.js";class NumberInput extends enterSubmitMixin(NumberInputBase){renderDefault(){return html`
         ${SharedStyles}
         <div class="column " >
 <div class="field" style="margin-top: 0px">

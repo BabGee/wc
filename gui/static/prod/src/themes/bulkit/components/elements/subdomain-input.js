@@ -1,4 +1,4 @@
-import{html,SubdomainInputBase}from"../../../../components/adaptive-ui.js";class SubdomainInput extends SubdomainInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{SubdomainInputBase}from"../../../../elements/base/subdomain-input.js";class SubdomainInput extends SubdomainInputBase{renderDefault(){return html`
 
         <style>
         .message{

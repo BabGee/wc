@@ -1,4 +1,4 @@
-import{html,MsisdnInputBase}from"../../../../components/adaptive-ui.js";class MsisdnInput extends MsisdnInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{MsisdnInputBase}from"../../../../elements/base/msisdn-input.js";import"./datalist-element/loader-element.js";class MsisdnInput extends MsisdnInputBase{renderDefault(){return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
         <style>
        .inp{
@@ -40,7 +40,7 @@ import{html,MsisdnInputBase}from"../../../../components/adaptive-ui.js";class Ms
         color:#4a4a4a;
         }
 </style>
-<div class="column is-8 is-block is-paddingless">
+<div class="column is-12 is-block is-paddingless is-marginless">
         <div class="field">
           <div class="select-country">
            <select id="code"  @change="${this.codeSelected}">

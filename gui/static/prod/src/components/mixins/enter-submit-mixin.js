@@ -1,0 +1,1 @@
+export const enterSubmitMixin=BaseClass=>class extends BaseClass{constructor(){super();this.addEventListener("keydown",this.handleSubmit)}handleSubmit(e){if(e&&13===e.keyCode){this.pl.submitForm()}}};

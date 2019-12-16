@@ -1,4 +1,4 @@
-import{html,ColorInputBase}from"../../../../components/adaptive-ui.js";class ColorInput extends ColorInputBase{createRenderRoot(){return this}renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-swatch-picker/paper-swatch-picker.js";import{ColorInputBase}from"../../../../elements/base/color-input.js";class ColorInput extends ColorInputBase{createRenderRoot(){return this}renderDefault(){return html`
            
            <div class="column">
  <div class="field">

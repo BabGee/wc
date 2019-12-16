@@ -1,4 +1,4 @@
-import{html,PriceSelectBase}from"../../../../components/adaptive-ui.js";class PriceSelect extends PriceSelectBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{PriceSelectBase}from"../../../../elements/base/price-select.js";class PriceSelect extends PriceSelectBase{renderDefault(){return html`
      <style>
 /* The container */
 .container {

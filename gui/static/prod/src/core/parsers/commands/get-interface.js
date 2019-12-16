@@ -1,0 +1,1 @@
+import{GetSection}from"./get-section.js";export class GetInterface extends GetSection{constructor(getInterfaceResponse,config){super(getInterfaceResponse,config)}parse(config={}){super.parse(config)}get routes(){return this._routes}static get id(){return"get_interface"}parseRoutes(){for(var route in this.commandResponse.all_pages){this._routes.push(route)}}}

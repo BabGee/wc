@@ -1,4 +1,4 @@
-import{html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components/adaptive-ui.js";class DropdownSelect extends DropdownSelectBase{renderDefault(){if(this.renderMode===RENDER_M_SIDE_BY_SIDE){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{DropdownSelectBase}from"../../../../elements/base/dropdown-select.js";import"../../../../../node_modules/slim-select/dist/slimselect.min.js";import{RENDER_M_DEFAULT,RENDER_M_SIDE_BY_SIDE}from"../../../../components/e-list.js";class DropdownSelect extends DropdownSelectBase{renderDefault(){if(this.renderMode===RENDER_M_SIDE_BY_SIDE){return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet"/>
         <style>

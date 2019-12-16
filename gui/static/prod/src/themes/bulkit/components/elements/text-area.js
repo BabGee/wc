@@ -1,4 +1,4 @@
-import{TextAreaBase,html,SharedStyles,DASHBOARD_STYLES}from"../../../../components/adaptive-ui.js";class TextArea extends TextAreaBase{renderDefault(){return html`
+import{TextAreaBase}from"../../../../elements/base/text-area.js";import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import{DASHBOARD_STYLES}from"../../styles/dashboard-styles.js";class TextArea extends TextAreaBase{renderDefault(){return html`
  ${SharedStyles}       
 ${DASHBOARD_STYLES} 
  <div class="column"> 

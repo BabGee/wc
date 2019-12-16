@@ -1,4 +1,4 @@
-import{html,FileInputBase}from"../../../../components/adaptive-ui.js";class FileInput extends FileInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../../node_modules/fa-icons/index.js";import{FileInputBase}from"../../../../elements/base/file-input.js";class FileInput extends FileInputBase{renderDefault(){return html`
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <style>
       .drop-area{

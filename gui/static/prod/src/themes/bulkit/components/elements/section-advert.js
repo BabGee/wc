@@ -1,4 +1,4 @@
-import{html,BULMA_STYLES,DASHBOARD_STYLES,LANDING_STYLES,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class SectionAdvert extends SectionPElementDsc{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{DASHBOARD_STYLES}from"../../styles/dashboard-styles.js";import{LANDING_STYLES}from"../../styles/landing-style.js";import{SectionPElementDsc}from"../../../../elements/base/section-pelement-dsc.js";class SectionAdvert extends SectionPElementDsc{renderDefault(){return html`
      ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 
      ${LANDING_STYLES}

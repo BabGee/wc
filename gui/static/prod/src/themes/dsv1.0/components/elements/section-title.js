@@ -1,4 +1,4 @@
-import{html,SectionPElementBase}from"../../../../components/adaptive-ui.js";class SectionTitle extends SectionPElementBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{SectionPElementBase}from"../../../../elements/base/section-pelement.js";class SectionTitle extends SectionPElementBase{renderDefault(){return html`
      <style>
      .section-title{
        width: 100%;

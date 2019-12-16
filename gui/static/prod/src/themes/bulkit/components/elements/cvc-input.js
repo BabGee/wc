@@ -1,4 +1,4 @@
-import{html,SharedStyles,CvcInputBase}from"../../../../components/adaptive-ui.js";class CvcInput extends CvcInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/gold-cc-cvc-input/gold-cc-cvc-input.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import{CvcInputBase}from"../../../../elements/base/cvc-input.js";class CvcInput extends CvcInputBase{renderDefault(){return html`
  ${SharedStyles}
  <div class="column">
 <div class="field">

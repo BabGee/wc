@@ -1,0 +1,1 @@
+export class Command{constructor(commandResponse,config){this.commandResponse=commandResponse;this.parse(config)}parse(config={}){this._response=this.commandResponse}get response(){return this._response}}

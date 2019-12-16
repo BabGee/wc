@@ -1,56 +1,4 @@
-import{html,DASHBOARD_STYLES,BULMA_STYLES,ServicePageBase,VIEW_MODE_DIALOG,VIEW_MODE_MAIN}from"../../../../components/adaptive-ui.js";import"./section-page.js";const TooltipStyles=html`
-<style>
-    /* copied from https://www.w3schools.com/howto/howto_css_tooltip.asp */
-  /* TODO application of shared styles, what happens to :host*/ 
-  :host {
-    
-  }
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  /* Position the tooltip text */
-  position: absolute;
-  z-index: 1;
-  bottom: 80%;
-  left: 50%;
-  margin-left: -60px;
-
-  /* Fade in tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-/* Tooltip arrow */
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-  
-}
-  
-  
-  
-</style>
-`;var tooltipStyles={TooltipStyles:TooltipStyles};class ServicePage extends ServicePageBase{render(){if(!this.interface){return html`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icons/social-icons.js";import"../../../../../node_modules/@polymer/iron-icons/communication-icons.js";import"../snack-bar.js";import{DASHBOARD_STYLES}from"../../styles/dashboard-styles.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{TooltipStyles}from"../../styles/tooltip-styles.js";import"./section-page.js";import"../form-render.js";import{ServicePageBase}from"../../../../components/templates/service-page.js";import{VIEW_MODE_DIALOG,VIEW_MODE_MAIN}from"../../../../components/templates/page-view-element.js";class ServicePage extends ServicePageBase{render(){if(!this.interface){return html`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html`
       <h3> this is a missing page </h3>
       <a href="/#/0/0/">Go Home</a>
       `}return html`
@@ -523,4 +471,4 @@ nav {
             
           <snack-bar id="snack-bar" ?active="${this._snackbarOpened}">
 ${this._snackbarTitle} ${this._snackbarMessage}
-</snack-bar>`}constructor(){super()}static get properties(){return{view:String,pages:Array,tab:Object,profile:{type:Object,value:""},page:Object}}_profileTriggerClick(){this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){this.qs(".menu-wrapper .icon-box-toggle").classList.add("active");this.qs(".child-menu").classList.add("is-sidebar-translated");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});this.qs(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}_closeChildMenu(e){this.scrollToTop();if(this.view!==VIEW_MODE_MAIN){this.viewMain()}this._menuWrapperClick(e)}_viewList(){this.mainNavigation()}_menuWrapperClick(){this.qs(".child-menu").classList.remove("is-sidebar-translated");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.remove("is-pushed")});this.qs(".reader-switch label").classList.remove("is-disabled")}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget.dataset.childMenu,menuTitle=e.currentTarget.dataset.title;this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{tooltipStyles as $tooltipStyles,TooltipStyles};
+</snack-bar>`}constructor(){super()}static get properties(){return{view:String,pages:Array,tab:Object,profile:{type:Object,value:""},page:Object}}_profileTriggerClick(){this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){this.qs(".menu-wrapper .icon-box-toggle").classList.add("active");this.qs(".child-menu").classList.add("is-sidebar-translated");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});this.qs(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}_closeChildMenu(e){this.scrollToTop();if(this.view!==VIEW_MODE_MAIN){this.viewMain()}this._menuWrapperClick(e)}_viewList(){this.mainNavigation()}_menuWrapperClick(){this.qs(".child-menu").classList.remove("is-sidebar-translated");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.remove("is-pushed")});this.qs(".reader-switch label").classList.remove("is-disabled")}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget.dataset.childMenu,menuTitle=e.currentTarget.dataset.title;this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);

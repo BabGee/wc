@@ -1,4 +1,4 @@
-import{html,LandingPageBase,VIEW_MODE_DIALOG}from"../../../../components/adaptive-ui.js";import"./section-page.js";import"../elements/navbar-9.js";import"../elements/hero-element.js";class LandingPage extends LandingPageBase{render(){if(!this.interface){return html`        
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/fa-icons/index.js";import"../form-render.js";import"./section-page.js";import"../snack-bar.js";import{LandingPageBase}from"../../../../components/templates/landing-page.js";import{VIEW_MODE_DIALOG}from"../../../../components/templates/page-view-element.js";import"./missing-page.js";import"../elements/navbar-9.js";import"../elements/hero-element.js";class LandingPage extends LandingPageBase{render(){if(!this.interface){return html`        
       <div class="Wallop Wallop--fade">
         <div class="Wallop-list">
           <div class="Wallop-item  has-background-image" >

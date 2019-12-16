@@ -1,4 +1,4 @@
-import{html,StaticCategoriesBase}from"../../../../components/adaptive-ui.js";class StaticCategories extends StaticCategoriesBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{StaticCategoriesBase}from"../../../../elements/base/static-categories.js";class StaticCategories extends StaticCategoriesBase{renderDefault(){return html`
 					
     <style>
         .wrapper{

@@ -1,4 +1,4 @@
-import{html,BankInstructionsBase}from"../../../../components/adaptive-ui.js";class BankInstructions extends BankInstructionsBase{createRenderRoot(){return this}renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{BankInstructionsBase}from"../../../../elements/base/bank-instructions.js";class BankInstructions extends BankInstructionsBase{createRenderRoot(){return this}renderDefault(){return html`
     <style>
     .inp{
       border-radius: 6px!important;

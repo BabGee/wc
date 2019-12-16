@@ -1,4 +1,4 @@
-import{html,CountdownElementBase}from"../../../../components/adaptive-ui.js";class CountdownElement extends CountdownElementBase{createRenderRoot(){return this}renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{CountdownElementBase}from"../../../../elements/base/countdown-element.js";class CountdownElement extends CountdownElementBase{createRenderRoot(){return this}renderDefault(){return html`
         <style>
             :host {
                 display: block;

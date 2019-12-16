@@ -1,4 +1,4 @@
-import{html,CvcInputBase}from"../../../../components/adaptive-ui.js";class CvcInput extends CvcInputBase{renderService(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/gold-cc-cvc-input/gold-cc-cvc-input.js";import{CvcInputBase}from"../../../../elements/base/cvc-input.js";class CvcInput extends CvcInputBase{renderService(){return html`
     <style>
     .row{
         width: 100%;

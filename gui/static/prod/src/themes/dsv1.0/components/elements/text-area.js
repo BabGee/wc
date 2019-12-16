@@ -1,4 +1,4 @@
-import{html,TextAreaBase,Logger}from"../../../../components/adaptive-ui.js";class TextArea extends TextAreaBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{TextAreaBase}from"../../../../elements/base/text-area.js";import{Logger}from"../../../../core/logger.js";class TextArea extends TextAreaBase{renderDefault(){return html`
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 <style>

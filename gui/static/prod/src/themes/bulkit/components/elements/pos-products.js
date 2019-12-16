@@ -1,4 +1,4 @@
-import{PosProductsBase,html}from"../../../../components/adaptive-ui.js";class PosProducts extends PosProductsBase{constructor(){super()}renderDefault(){return html`
+import{PosProductsBase}from"../../../../elements/base/pos-products.js";import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";class PosProducts extends PosProductsBase{constructor(){super()}renderDefault(){return html`
         <style>
         .container{
             width: 90%;

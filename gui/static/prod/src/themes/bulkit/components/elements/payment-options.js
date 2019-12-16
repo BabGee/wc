@@ -1,4 +1,4 @@
-import{html,SharedStyles,PaymentOptionsBase}from"../../../../components/adaptive-ui.js";class PaymentOptions extends PaymentOptionsBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../icons/payments-icons.js";import{PaymentOptionsBase}from"../../../../elements/base/payment-options.js";class PaymentOptions extends PaymentOptionsBase{renderDefault(){return html`
  ${SharedStyles}
 <style>
 /* The container */

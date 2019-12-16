@@ -1,4 +1,4 @@
-import{html,SharedStyles,CheckboxInputBase}from"../../../../components/adaptive-ui.js";class CheckboxInput extends CheckboxInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import{CheckboxInputBase}from"../../../../elements/base/checkbox-input.js";class CheckboxInput extends CheckboxInputBase{renderDefault(){return html`
  ${SharedStyles}
 <style>
 /* The container */

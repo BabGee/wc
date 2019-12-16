@@ -1,4 +1,4 @@
-import{html,CheckboxInputBase}from"../../../../components/adaptive-ui.js";class CheckboxInput extends CheckboxInputBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{CheckboxInputBase}from"../../../../elements/base/checkbox-input.js";class CheckboxInput extends CheckboxInputBase{renderDefault(){return html`
 <style>
 .checkbox input[type="checkbox"] {
     opacity: 0;

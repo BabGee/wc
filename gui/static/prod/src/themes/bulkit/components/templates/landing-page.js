@@ -1,4 +1,4 @@
-import{html,BULMA_STYLES,LANDING_STYLES,VIEW_MODE_DIALOG,LandingPageBase}from"../../../../components/adaptive-ui.js";import"./section-page.js";class LandingPage extends LandingPageBase{render(){if(!this.interface){return html`        
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icons/social-icons.js";import"../../../../../node_modules/@polymer/iron-icons/communication-icons.js";import"../snack-bar.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{LANDING_STYLES}from"../../styles/landing-style.js";import"../form-render.js";import"./section-page.js";import{VIEW_MODE_DIALOG,VIEW_MODE_MAIN}from"../../../../components/templates/page-view-element.js";import{LandingPageBase}from"../../../../components/templates/landing-page.js";class LandingPage extends LandingPageBase{render(){if(!this.interface){return html`        
       ${BULMA_STYLES}            
       ${LANDING_STYLES}         
       <div class="Wallop Wallop--fade">

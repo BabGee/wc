@@ -1,4 +1,4 @@
-import{html,BULMA_STYLES,LANDING_STYLES,DASHBOARD_STYLES,BankInstructionsBase}from"../../../../components/adaptive-ui.js";class BankInstructions extends BankInstructionsBase{renderDefault(){return html`${BULMA_STYLES}
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{LANDING_STYLES}from"../../styles/landing-style.js";import{DASHBOARD_STYLES}from"../../styles/dashboard-styles.js";import{BankInstructionsBase}from"../../../../elements/base/bank-instructions.js";class BankInstructions extends BankInstructionsBase{renderDefault(){return html`${BULMA_STYLES}
 ${DASHBOARD_STYLES} 
 ${LANDING_STYLES}
      

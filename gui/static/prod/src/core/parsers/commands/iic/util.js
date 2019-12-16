@@ -1,0 +1,1 @@
+export class Util{static parseJsonOrObject(stringOrObject){if("object"===typeof stringOrObject){return stringOrObject}else if(stringOrObject){return JSON.parse(stringOrObject)}return{}}}

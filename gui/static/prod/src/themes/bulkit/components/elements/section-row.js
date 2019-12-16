@@ -1,4 +1,4 @@
-import{html,SharedStyles,SectionPElementBase}from"../../../../components/adaptive-ui.js";class SectionRow extends SectionPElementBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{SectionPElementBase}from"../../../../elements/base/section-pelement.js";class SectionRow extends SectionPElementBase{renderDefault(){return html`
         ${SharedStyles}
          <style>
             img {

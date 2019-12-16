@@ -1,0 +1,1 @@
+import{PageViewElement}from"./page-view-element.js";export const ServicePageBase=class extends PageViewElement{constructor(){super()}async _computeTop(){await this.updateComplete;return this.qs("#top")}static get is(){return"service-page"}};

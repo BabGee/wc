@@ -1,4 +1,4 @@
-import{html,format,parse,DateElementBase}from"../../../../components/adaptive-ui.js";class DateElement extends DateElementBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{format,parse}from"../../../../../node_modules/date-fns/esm/index.js";import"../../../../../node_modules/fa-icons/index.js";import{DateElementBase}from"../../../../elements/base/date-element.js";class DateElement extends DateElementBase{renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
   <style>

@@ -1,4 +1,4 @@
-import{html,PaymentsPageBase}from"../../../../components/adaptive-ui.js";class PaymentsPage extends PaymentsPageBase{render(){if(!this.interface){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/fa-icons/index.js";import"../snack-bar.js";import"../form-render.js";import"./missing-page.js";import{PaymentsPageBase}from"../../../../components/templates/payments-page.js";class PaymentsPage extends PaymentsPageBase{render(){if(!this.interface){return html`
         <div>Cannot render an UNDEFINED tab!!.</div>
       `}else if(!this.pageGroup||!this.page){return html`
         <missing-page></missing-page>

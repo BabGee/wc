@@ -1,4 +1,4 @@
-import{html,IndustriesCategoriesBase}from"../../../../components/adaptive-ui.js";class IndustriesCategories extends IndustriesCategoriesBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-dropdown-menu/paper-dropdown-menu.js";import"../../../../../node_modules/@polymer/paper-card/paper-card.js";import"../../../../../node_modules/@polymer/paper-listbox/paper-listbox.js";import"../../../../../node_modules/@polymer/paper-item/paper-item.js";import{IndustriesCategoriesBase}from"../../../../elements/base/industries-categories.js";class IndustriesCategories extends IndustriesCategoriesBase{renderDefault(){return html`
   
         <style>
             [hidden] {

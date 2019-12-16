@@ -1,4 +1,4 @@
-import{utilsMixin,BaseElement,html}from"../../../../components/adaptive-ui.js";const PaymentFooterBase=class extends utilsMixin(BaseElement){static get is(){return"payment-footer"}};var paymentFooter={PaymentFooterBase:PaymentFooterBase};class PaymentFooter extends PaymentFooterBase{renderDefault(){return html`
+import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{PaymentFooterBase}from"../../../../elements/base/payment-footer.js";class PaymentFooter extends PaymentFooterBase{renderDefault(){return html`
     <style>
       .tab-right-bottom{
         margin-top: 20px;
@@ -18,4 +18,4 @@ import{utilsMixin,BaseElement,html}from"../../../../components/adaptive-ui.js";c
         </div>
       </div>
     </div>
-        `}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(PaymentFooter.is,PaymentFooter);export{paymentFooter as $paymentFooter,PaymentFooterBase};
+        `}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(PaymentFooter.is,PaymentFooter);

@@ -1,4 +1,4 @@
-import{css,html,SectionPageBase,Colors,Fonts,Reset}from"../../../../components/adaptive-ui.js";class SectionPage extends SectionPageBase{render(){return html`
+import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-spinner/paper-spinner.js";import"../snack-bar.js";import"../form-render.js";import{SectionPageBase}from"../../../../components/templates/section-page.js";import{Colors,Fonts,Reset}from"../../styles/shared.js";class SectionPage extends SectionPageBase{render(){return html`
      <style>
      
 </style>
