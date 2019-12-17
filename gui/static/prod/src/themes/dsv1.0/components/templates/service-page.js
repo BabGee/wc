@@ -167,6 +167,11 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
           margin-right: 40px;
           cursor: pointer;
       }
+      
+      .section-user:hover .profile-select {
+          display: block;
+      }
+      
       .profile-image{
           border: 3px solid var(--app-default-color);
           border-radius: 50%;
@@ -188,8 +193,8 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
 
       .profile-select{
         position: absolute;
-        right: 44px;
-        top: 89px;
+        right: 26px;
+        top: 65px;
         width: 300px;
         background: #fff;
         padding: 20px;
@@ -299,6 +304,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
             <div class="is-flex">
               <div class="main-section">
                 <div class="section-header">
+                
                   <div
                     id="navbarBurger"
                     @click=${this.toggleMenu}
@@ -309,10 +315,9 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
                     <span></span>
                     <span></span>
                   </div>
-                  <div class="section-user is-pulled-right is-flex" @click=${this.ShowProfile}>
-                    <div class="icon is-small"></div>
+                  <div class="section-user is-pulled-right is-flex">
                     ${this.gateway.profile?html`
-                    <div class="profile is-flex">
+                    <div class="profile is-flex ">
                       <div class="profile-image">
                         <img src="${this.gateway.profile.photo?"/media/"+this.gateway.profile.photo:"images/web/user.svg"}" alt="" />
                       </div>
@@ -342,7 +347,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
                     `:html``}
                   </div>
                 </div>
-                <div class="dash-content"  @click="${this.closeProfile}">
+                <div class="dash-content">
                   <!-- <div class="dash-title" style="margin-bottom: 20px;">
 
                   </div> -->
@@ -370,8 +375,8 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-     `}constructor(){super();this.isSideMenuVisible=!1;this.isProfileVisible=!1;this.shouldDocumentClick=!1}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isProfileVisible:Boolean,shouldDocumentClick:Boolean}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
+     `}constructor(){super();this.isSideMenuVisible=!1}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
         :host {
           display: block;
         }
-      `]}toggleProfile(evt){evt.preventDefault();const profileContent=document.getElementById("profile-content");profileContent.classList.toggle("is-block")}toggleMenu(){const menu=document.querySelector(".mipay-aside"),bars=document.querySelector("#navbarBurger");if(this.isSideMenuVisible){menu.classList.remove("left");bars.style.left="0";this.isSideMenuVisible=!1}else{bars.style.left="314px";menu.classList.add("left");bars.style.background="white";this.isSideMenuVisible=!0}}ShowProfile(){const prof=document.querySelector(".profile-select");if(!1==this.isProfileVisible){prof.style.display="block";this.isProfileVisible=!0;this.shouldDocumentClick=!0}else{prof.style.display="none";this.shouldDocumentClick=!1;this.isProfileVisible=!1}}closeProfile(){const prof=document.querySelector(".profile-select");if(!0==this.isProfileVisible){prof.style.display="none";this.shouldDocumentClick=!1;this.isProfileVisible=!1}}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);
+      `]}toggleMenu(){const menu=document.querySelector(".mipay-aside"),bars=document.querySelector("#navbarBurger");if(this.isSideMenuVisible){menu.classList.remove("left");bars.style.left="0";this.isSideMenuVisible=!1}else{bars.style.left="314px";menu.classList.add("left");bars.style.background="white";this.isSideMenuVisible=!0}}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);

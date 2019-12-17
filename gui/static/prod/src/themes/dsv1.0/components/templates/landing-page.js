@@ -162,7 +162,6 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
           </section>
 `)}
         `}
-            
         <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
 
       </div>
