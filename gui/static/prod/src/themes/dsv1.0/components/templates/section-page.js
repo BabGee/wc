@@ -22,6 +22,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
         margin: 0 auto;
         padding: 0 25px;
         position: relative;
+        overflow-x: hidden!important;
       }
       div.modal-container div.modal-base .modal-header{
         padding: 25px 0 25px 35px;
@@ -89,7 +90,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
 </style>
 ${this.payload?html`
 <div class="modal-container">
-  <div class="modal-base " style="max-height: 100vh; padding: 7px; overflow: auto; width: 100vw;">
+  <div class="modal-base " style="max-height: 92vh; padding: 7px; overflow: auto; width: 100vw;">
     <div class="modal-header" >
       <div class="heading" >
         <h1 class="title has-text-black-bis" style="width: 80%; display: inline-block; ">${this._computePage(this.payload).title}</h1>
@@ -98,9 +99,6 @@ ${this.payload?html`
         border-radius: 25px 1px 1px 25px; box-shadow: 1px 1px 1px 0px black; " class="is-pulled-right" @click=${this._triggerViewList}>Back</a>
       </div>
     </div>
-
-  
-
     <div id="d-styling" class="modal-body">            
       <!-- Column Container -->
       <div class="columns is-multiline">
@@ -115,15 +113,15 @@ ${this.payload?html`
   </div>
 </div>        
          
-        `:html`
-          <div class="modal-spinner">
-            <div style="position: relative; width: 100px;height: 100px;margin:10px auto;" >
-                <paper-spinner style="width: 100%;height: 100%;" active ></paper-spinner>
-            </div>
-          </div>            
-          
+`:html`
+  <div class="modal-spinner">
+    <div style="position: relative; width: 100px;height: 100px;margin:10px auto;" >
+        <paper-spinner style="width: 100%;height: 100%;" active ></paper-spinner>
+    </div>
+  </div>            
+  
 
-        `}
+`}
         <!--TODO this is repeated-->
         <snack-bar 
             id="snack-bar" 

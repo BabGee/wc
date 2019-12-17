@@ -124,25 +124,108 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
             #warning-text {
               display: none;
             }
+
+            /* NEW IMPLEMENTATION */
+
+            .form{
+              font-size: 16px;
+              width: 50%;
+              position: relative;
+              height: 50px;
+              overflow: hidden;
+          }
+          .form input{
+              width: 100%;
+              height: 100%;
+              color: #595f6e;
+              padding-top: 20px;
+              border: none;
+          }
+          .form input:focus{
+              outline: none;
+          }
+          .form label{
+              position: absolute;
+              bottom: 0px;
+              left: 0;
+              height: 100%;
+              width: 100%;
+              pointer-events: none;
+              
+          }
+          .form label::after{
+              content: '';
+              position: absolute;
+              left: 0px;
+              bottom: -1px;
+              height: 100%;
+              width: 100%;
+              border-bottom: #595f6e;
+              transform: translateX(-100%);
+              transition: transform .3s ease;
+          }
+          .content-name{
+              position: absolute;
+              bottom: 14px;
+              left: 10px;
+              transition: all .3s ease;
+          }
+          .form input:focus + .label-name .content-name, .form input:valid + .label-name .content-name{
+              transform: translateY(-10px);
+              color: blue;
+              margin-left: 0px;
+              margin-bottom: 5px;
+            font-size: 70%;
+              
+          }
+          .form input:focus + .label-name::after, .form input:valid + .label-name::after{
+              transform: translateX(0%);
+              margin-left: 0px;
+              
+          }
+  .form{
+  
+      /* border:solid 1px #cecece; */
+      padding: 0px;
+      border-radius: 2%;
+  }
+  
+  
+  .form:focus-within {
+      
+      animation-duration: 0.2s;
+      transition-delay: 0.2s;
+      border: solid 1px var(--app-default-color);
+      border-radius: 6px;
+  }
+  
+  
+
           </style>
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
           />
+
           <div class="column row">
-            <div class="inp-right">
-              <label class="label">${this.e.name}</label>
-              <!-- For success message use 'is-success' within the 'input' element and add is-danger whithin the input tag-->
-              <!-- For error message use 'is-danger' within the 'input' element and add is-danger whithin the input tag-->
-              <!--- Error message is commented at the bottom of this component --->
+          <div class="inp-right">
+            <!-- <label class="label">${this.e.name}</label> -->
+            <!-- For success message use 'is-success' within the 'input' element and add is-danger whithin the input tag-->
+            <!-- For error message use 'is-danger' within the 'input' element and add is-danger whithin the input tag-->
+            <!--- Error message is commented at the bottom of this component --->
+  
+
               <div class="field">
                 <div class="control has-icons-right">
-                  <input
-                    class="input"
-                    id="input"
-                    type="${this.type}"
-                    placeholder="${this.e.name}"
-                  />
+                 
+      <div class="main-wrapper">
+      <div class="animait">
+          <div class="form has-icons-right">
+              <input type="${this.type}" name="name" autocomplete="off" style="padding: 10px; padding-top: 15px;" required/>
+              <label for="name" class="label-name"><span class="content-name">${this.e.name}</span></label>
+          </div>
+      </div>
+  </div>
                   <span id="danger-icon" class="icon is-small is-right">
                     <fa-icon
                       class="fas fa-exclamation-triangle icon"

@@ -773,6 +773,9 @@ import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-eleme
       .table-container table.dt-table tr:hover{
           background: #f4f6f9;
       }
+      td:nth-child(5){
+        word-break: break-all;
+      }
       </style>
       ${this._searchFieldsExist(this.columns)?html`
 

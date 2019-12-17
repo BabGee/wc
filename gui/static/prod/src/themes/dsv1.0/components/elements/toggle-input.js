@@ -46,6 +46,11 @@ input:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
+.lbl{
+    position: relative;
+    top: -12px;
+    font-weight: bold;
+}
 
 /* Rounded sliders */
 .slider.round {
@@ -62,6 +67,6 @@ input:checked + .slider:before {
   <input type="checkbox" id="input" required=${this.required}>
   <span class="slider round"></span>
 </label>
- <label for="switch">${this.name}</label>
+ <label for="switch" class="lbl">${this.name}</label>
   </div>
   </div>`}static get is(){return"toggle-input"}getInput(){return this.qs("#input")}getValue(){return this.getInput().checked}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}window.customElements.define(ToggleInput.is,ToggleInput);

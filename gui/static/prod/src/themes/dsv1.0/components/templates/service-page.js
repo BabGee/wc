@@ -17,7 +17,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
       } 
 
       body {
-          background-color: #fff;
+          background-color: #EDEDEE;
           color: #172B4D;
           font-family: 'Work Sans', sans-serif;
           font-size: 14px;
@@ -128,6 +128,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
           min-width: 0px;
           min-height: 100%;
           flex: 1 1 0px;
+          background-color: #EDEDEE;
       }
       .section-header{
           width: 100%;
@@ -347,10 +348,11 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
                     `:html``}
                   </div>
                 </div>
-                <div class="dash-content">
-                  <!-- <div class="dash-title" style="margin-bottom: 20px;">
 
-                  </div> -->
+                <div class="dash-content">
+                  <div class="dash-title" style="margin-bottom: 20px;">
+                    <h1 class="title is-capitalized">${ServicePage.toTitleCase(this.page.title)}</h1>
+                  </div>
                   <div class="dash-body">
                     ${this.page.pageInputGroups.map(feed=>html`
                         <div class="column ${this._gridClasses(feed)} is-paddingless">

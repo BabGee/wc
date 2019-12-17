@@ -2,10 +2,10 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 <style>
-.text-area {
+/* .text-area {
   padding: 16px;
  
-}
+} */
 
 .text-area .field.success{
     position: relative;
