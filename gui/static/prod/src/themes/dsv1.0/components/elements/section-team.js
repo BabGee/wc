@@ -1,5 +1,25 @@
 import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SectionPElementDsc}from"../../../../elements/base/section-pelement-dsc.js";class SectionTeam extends SectionPElementDsc{renderDefault(){return html`
-        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+            
+            <style>
+            .featured-svg {
+    max-width: 450px;
+}
+
+.section .title-divider {
+    margin: 10px 0;
+    width: 80px;
+    height: 5px;
+    background: var(--app-default-color);
+}
+.section-subtitle, .title.feature-title {
+    font-weight: 500 !important;
+    font-size: 2rem !important;
+    margin-bottom: 0 !important;
+    padding: 5px 0 !important;
+}
+</style>
+
         <section class="section is-small">
             <div class="container">
                 <div class="content-wrapper">

@@ -144,24 +144,26 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
     </style>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
       <div class="main-wrapper">
-      
-            
+                  
         ${this.view===VIEW_MODE_DIALOG?html`
         <section-page id="dialog" queue=${this.dialogServicesQueue} ></section-page>
         `:html`
-        ${this.pageGroup.pages.map((page,index)=>html`        
-        <!-- Feature -->
-        <section  class="section is-fullWidth"  style="padding: 0px; background-color: #f4f6fb;">
+        ${this.pageGroup.pages.map(page=>html`        
+          <!-- Feature -->
+          <section  class="section is-fullWidth"  style="padding: 0px; background-color: #f4f6fb;" id=${page.id}>
                                     
-            <div id="section_${index}" class="is-fullWidth">
-                ${page.pageInputGroups.map(feed=>html`
-                <form-render .feed="${feed}" .top=${this._computeTop()} .params=${this.parseParams()}></form-render>
-            `)}      
-        </div>
-        </section>`)}
+            <div class="is-fullWidth columns is-centered is-multiline">
+                  ${page.pageInputGroups.map(feed=>html`
+                  <div class="column ${this._gridClasses(feed)} is-paddingless">
+                    <form-render .feed="${feed}" .top=${this._computeTop()} .params=${this.parseParams()}></form-render>
+                  </div>
+                  `)}
+            </div>
+          </section>
+`)}
         `}
             
-            <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
+        <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
 
       </div>
-`}constructor(){super()}scrollPage(evt){const index=evt.currentTarget.pageIndex;var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get properties(){return{title:String,name:String,logo:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){let nav=document.getElementsByClassName("navbar-menu");nav[0].classList.toggle("mob-nav")}stateChanged(state){super.stateChanged(state)}_viewList(){this.mainNavigation()}}window.customElements.define("landing-page",LandingPage);
+`}constructor(){super()}scrollPage(evt){const index=evt.currentTarget.pageIndex;var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get properties(){return{title:String,name:String,logo:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){let nav=document.getElementsByClassName("navbar-menu");nav[0].classList.toggle("mob-nav")}stateChanged(state){super.stateChanged(state)}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("landing-page",LandingPage);

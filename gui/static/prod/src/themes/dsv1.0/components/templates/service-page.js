@@ -272,7 +272,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
                           >
                             <span class="icon is-small aside-icons"><adaptive-ui-icon style="width: 19px;height: 19px;fill: #fff;" icon="${pageGroup.icon||"icons:info"}"></adaptive-ui-icon></span>
                             ${ServicePage.toTitleCase(pageGroup.title)}&nbsp;
-                            <span class="icon is-small aside-icons"><fa-icon ></fa-icon></span>
+                            <span class="icon is-small aside-icons" style="float: right;"><fa-icon class="fa fa-caret-down" color="white"></fa-icon></span>
                           </a>
                           <ul class="aside-sub-menu">
                             ${pageGroup.pages.map((menu,menuIndex)=>html`
@@ -348,7 +348,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
                   </div> -->
                   <div class="dash-body">
                     ${this.page.pageInputGroups.map(feed=>html`
-                        <div class="column is-12 is-paddingless">
+                        <div class="column ${this._gridClasses(feed)} is-paddingless">
                           <form-render
                             .feed="${feed}"
                             .params=${this.parseParams()}
@@ -374,4 +374,4 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
         :host {
           display: block;
         }
-      `]}toggleProfile(evt){evt.preventDefault();const profileContent=document.getElementById("profile-content");profileContent.classList.toggle("is-block")}toggleMenu(){const menu=document.querySelector(".mipay-aside"),bars=document.querySelector("#navbarBurger");if(this.isSideMenuVisible){menu.classList.remove("left");bars.style.left="0";this.isSideMenuVisible=!1}else{bars.style.left="314px";menu.classList.add("left");bars.style.background="white";this.isSideMenuVisible=!0}}ShowProfile(){const prof=document.querySelector(".profile-select");if(!1==this.isProfileVisible){prof.style.display="block";this.isProfileVisible=!0;this.shouldDocumentClick=!0}else{prof.style.display="none";this.shouldDocumentClick=!1;this.isProfileVisible=!1}}closeProfile(){const prof=document.querySelector(".profile-select");if(!0==this.isProfileVisible){prof.style.display="none";this.shouldDocumentClick=!1;this.isProfileVisible=!1}}_viewList(){this.mainNavigation()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}window.customElements.define("service-page",ServicePage);
+      `]}toggleProfile(evt){evt.preventDefault();const profileContent=document.getElementById("profile-content");profileContent.classList.toggle("is-block")}toggleMenu(){const menu=document.querySelector(".mipay-aside"),bars=document.querySelector("#navbarBurger");if(this.isSideMenuVisible){menu.classList.remove("left");bars.style.left="0";this.isSideMenuVisible=!1}else{bars.style.left="314px";menu.classList.add("left");bars.style.background="white";this.isSideMenuVisible=!0}}ShowProfile(){const prof=document.querySelector(".profile-select");if(!1==this.isProfileVisible){prof.style.display="block";this.isProfileVisible=!0;this.shouldDocumentClick=!0}else{prof.style.display="none";this.shouldDocumentClick=!1;this.isProfileVisible=!1}}closeProfile(){const prof=document.querySelector(".profile-select");if(!0==this.isProfileVisible){prof.style.display="none";this.shouldDocumentClick=!1;this.isProfileVisible=!1}}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);
