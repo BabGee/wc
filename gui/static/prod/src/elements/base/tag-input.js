@@ -132,7 +132,6 @@ export const TagInputBase = class extends utilsMixin(dataSourceMixin(Serializabl
     this.params = loader.pl.paramsCopy();
     self.title = TagInputBase.toTitleCase(pElement.name);
     this.required = this.e.required || pElement.min && pElement.min > 0;
-    this.params['limit'] = 1000;
 
     if (pElement.kind) {
       const preselection = pElement.kind.split(',');
