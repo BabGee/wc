@@ -1200,7 +1200,7 @@ ${SharedStyles}
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
-    this.params['limit'] = 1000;
+    this.limit = 1000;
     this.loadData().then(dsc => {
       const wl = this.rows.map(item => {
         return {
