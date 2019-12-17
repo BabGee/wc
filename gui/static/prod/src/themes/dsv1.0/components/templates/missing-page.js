@@ -1,4 +1,14 @@
-import{html,LitElement}from"../../../../../node_modules/lit-element/lit-element.js";class MissingPage extends LitElement{render(){return html`
+/**
+ @license
+ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+
+ */
+import { html, LitElement } from "../../../../../node_modules/lit-element/lit-element.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class MissingPage extends LitElement {
+  render() {
+    return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
 
@@ -68,4 +78,9 @@ import{html,LitElement}from"../../../../../node_modules/lit-element/lit-element.
     
     </div>
 
-    `}}window.customElements.define("missing-page",MissingPage);
+    `;
+  }
+
+}
+
+window.customElements.define('missing-page', MissingPage);

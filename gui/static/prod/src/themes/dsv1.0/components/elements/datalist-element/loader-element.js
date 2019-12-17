@@ -1,4 +1,10 @@
-import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-element.js";import{register}from"../../../register.js";class LoaderElement extends LitElement{render(){return html`
+import { LitElement, html } from "../../../../../../node_modules/lit-element/lit-element.js";
+import { register } from "../../../register.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class LoaderElement extends LitElement {
+  render() {
+    return html`
         <style>
         .loader-wrapper{
             width: 100%;
@@ -26,4 +32,13 @@ import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-eleme
         <div class="loader-wrapper center">
             <div id="loader"></div>
         </div>
-        `}static get is(){return"loader-element"}}register(LoaderElement);
+        `;
+  }
+
+  static get is() {
+    return 'loader-element';
+  }
+
+}
+
+register(LoaderElement);

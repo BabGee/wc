@@ -1,4 +1,13 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{DASHBOARD_STYLES}from"../../styles/dashboard-styles.js";import{LANDING_STYLES}from"../../styles/landing-style.js";import{SectionPElementBase}from"../../../../elements/base/section-pelement.js";class SectionHero extends SectionPElementBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { BULMA_STYLES } from "../../styles/bulma-styles.js";
+import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
+import { LANDING_STYLES } from "../../styles/landing-style.js";
+import { SectionPElementBase } from "../../../../elements/base/section-pelement.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class SectionHero extends SectionPElementBase {
+  renderDefault() {
+    return html`
      ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 
      ${LANDING_STYLES}
@@ -29,4 +38,21 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
                     </div>
                 </div>
             </div>
-        `}static get is(){return"section-hero"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(SectionHero.is,SectionHero);
+        `;
+  }
+
+  static get is() {
+    return 'section-hero';
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+}
+
+customElements.define(SectionHero.is, SectionHero);

@@ -1,4 +1,8 @@
-import"../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../node_modules/@polymer/iron-iconset-svg/iron-iconset-svg.js";import{html}from"../../../../node_modules/lit-element/lit-element.js";const template=html`
+import "../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "../../../../node_modules/@polymer/iron-iconset-svg/iron-iconset-svg.js";
+import { html } from "../../../../node_modules/lit-element/lit-element.js"; // TODO is this used? it's in a different format
+
+const template = html`
 <iron-iconset-svg name="maps" size="24">
 <svg><defs>
 <g id="add-location"><path d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm4 8h-3v3h-2v-3H8V8h3V5h2v3h3v2z"/></g>
@@ -107,4 +111,4 @@ import"../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../..
 </defs></svg>
 </iron-iconset-svg>
 
-    `;
+    `; // document.head.appendChild(template.content);

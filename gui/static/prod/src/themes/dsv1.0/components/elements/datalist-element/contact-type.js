@@ -1,4 +1,19 @@
-import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-element.js";import"../../../../../../node_modules/fa-icons/index.js";import"../../../../../../node_modules/@polymer/paper-listbox/paper-listbox.js";import"../../../../../../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js";import"../../../../../../node_modules/@polymer/paper-item/paper-item.js";import"../../../../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";import"../../../../../../node_modules/@polymer/paper-dropdown-menu/paper-dropdown-menu.js";import"./contact-type-footer.js";import"./contact-type-header.js";export class ContactType extends LitElement{constructor(){super()}render(){return html`
+import { LitElement, html } from "../../../../../../node_modules/lit-element/lit-element.js";
+import "../../../../../../node_modules/fa-icons/index.js";
+import "../../../../../../node_modules/@polymer/paper-listbox/paper-listbox.js";
+import "../../../../../../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js";
+import "../../../../../../node_modules/@polymer/paper-item/paper-item.js";
+import "../../../../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";
+import "../../../../../../node_modules/@polymer/paper-dropdown-menu/paper-dropdown-menu.js";
+import "./contact-type-footer.js";
+import "./contact-type-header.js";
+export class ContactType extends LitElement {
+  constructor() {
+    super();
+  }
+
+  render() {
+    return html`
 
       <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -356,7 +371,7 @@ margin-left: -200px;
               
                 <tbody>
 
-                ${this.data.map((item,itemIndex)=>html`
+                ${this.data.map((item, itemIndex) => html`
                 
                 <tr id="tr-${itemIndex}" class="normal-tr">
 
@@ -364,7 +379,7 @@ margin-left: -200px;
 
                   <label class="checkbox">
 
-                  <input id="checkbox-${itemIndex}" @click="${()=>this.checkRow(itemIndex)}" type="checkbox">
+                  <input id="checkbox-${itemIndex}" @click="${() => this.checkRow(itemIndex)}" type="checkbox">
                   
                   </label>
 
@@ -396,7 +411,7 @@ margin-left: -200px;
                   <td style="padding-top: 24px; padding-bottom: 21px;">
 
                   <p style=" font-size: 12px; font-family: Montserrat;  
-                  color: #757575; font-weight: 500px; ">${item["Contact Count"]}</p>
+                  color: #757575; font-weight: 500px; ">${item['Contact Count']}</p>
                   </td>
 
 
@@ -502,7 +517,7 @@ margin-left: -200px;
                 </tbody>
               </table>
 
-              ${this.paginate?html`
+              ${this.paginate ? html`
 <contact-type-footer resources="${this.resources}"
                        language="${this.language}"
                        footer-position="${this.footerPosition}"
@@ -518,7 +533,122 @@ margin-left: -200px;
                        @p-page="${this._pageChanged}"
                        @n-page="${this._pageChanged}">
 </contact-type-footer>
-`:html``}
+` : html``}
 
   </section>
-        `}static get is(){return"contact-type"}static get properties(){return{data:{type:Array,notify:!0},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String}}checkRow(index){const row=this.shadowRoot.querySelector("#tr-"+index),checkbox=this.shadowRoot.querySelector("#checkbox-"+index);if(!0==checkbox.checked){row.classList.add("active-row")}else{row.classList.remove("active-row")}}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}}customElements.define(ContactType.is,ContactType);
+        `;
+  }
+
+  static get is() {
+    return 'contact-type';
+  }
+
+  static get properties() {
+    return {
+      /**
+       * Contains the data which will be displayed in the table.
+       */
+      data: {
+        type: Array,
+        notify: true
+      },
+      details: Object,
+      paginate: {
+        type: Boolean,
+        value: false
+      },
+      page: {
+        type: Number
+      },
+      size: {
+        type: Number
+      },
+
+      /**
+       * The number of the previous page
+       */
+      oldPage: {
+        type: Number,
+        notify: true
+      },
+
+      /**
+       * The total of elements have to be provided in case of pagination, it is mandatory.
+       */
+      totalElements: Number,
+
+      /**
+       * The total of pages have to be provided in case of pagination, it is mandatory.
+       * It is used to compute the footer.
+       */
+      totalPages: Number,
+
+      /**
+       * The available size in case of pagination.
+       */
+      availableSize: Array,
+
+      /**
+       * If true, the rows may be selectable.
+       */
+      selectable: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Contains the positions of selected columns.
+       * Can contain a specific data if selectableDataKey is setted.
+       */
+      selected: {
+        type: Array
+      },
+      title: String
+    };
+  }
+
+  checkRow(index) {
+    const row = this.shadowRoot.querySelector('#tr-' + index);
+    const checkbox = this.shadowRoot.querySelector('#checkbox-' + index);
+
+    if (checkbox.checked == true) {
+      row.classList.add('active-row');
+    } else {
+      row.classList.remove('active-row');
+    }
+  }
+
+  _pageChanged(evt) {
+    const page = evt.detail.page;
+    const oldPage = this.page;
+
+    if (oldPage !== undefined) {
+      this.dispatchEvent(new CustomEvent('page-change', {
+        detail: {
+          oldPage: oldPage,
+          page: page
+        }
+      }));
+    }
+
+    this.page = page;
+  }
+
+  _sizeChanged(evt) {
+    const size = evt.detail.size;
+    const oldSize = this.size;
+
+    if (oldSize !== undefined) {
+      this.dispatchEvent(new CustomEvent('size-change', {
+        detail: {
+          oldSize: oldSize,
+          size: size
+        }
+      }));
+    }
+
+    this.size = size;
+  }
+
+}
+customElements.define(ContactType.is, ContactType);

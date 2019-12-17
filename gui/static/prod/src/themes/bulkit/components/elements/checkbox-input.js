@@ -1,4 +1,11 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import{CheckboxInputBase}from"../../../../elements/base/checkbox-input.js";class CheckboxInput extends CheckboxInputBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../../icons/my-icons.js';
+import { SharedStyles } from "../../styles/shared-styles.js";
+import { CheckboxInputBase } from "../../../../elements/base/checkbox-input.js";
+
+class CheckboxInput extends CheckboxInputBase {
+  renderDefault() {
+    return html`
  ${SharedStyles}
 <style>
 /* The container */
@@ -77,4 +84,32 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
 </label>
   </div>
   </div>
-`}constructor(){super()}getInput(){return this.qs("input")}getValue(){return this.shadowRoot.querySelector("#input").checked?"on":"off"}valid(){}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.shadowRoot.querySelector("#input").checked=this.checked}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(CheckboxInput.is,CheckboxInput);
+`;
+  }
+
+  constructor() {
+    super();
+  }
+
+  getInput() {
+    return this.qs('input');
+  }
+
+  getValue() {
+    return this.shadowRoot.querySelector('#input').checked ? 'on' : 'off';
+  }
+
+  valid(validation) {}
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    this.shadowRoot.querySelector('#input').checked = this.checked;
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+}
+
+window.customElements.define(CheckboxInput.is, CheckboxInput);

@@ -1,4 +1,9 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{TextFieldBase}from"../../../../elements/base/text-field.js";class TextField extends TextFieldBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { TextFieldBase } from "../../../../elements/base/text-field.js";
+
+class TextField extends TextFieldBase {
+  renderDefault() {
+    return html`
         <style>
             .input-field{
                 display:flex;
@@ -92,4 +97,51 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
 
         </div>
 
-        `}invalid(validation){this.shadowRoot.querySelector("#validationIcon").style.visibility="visible";this.shadowRoot.querySelector("#inputGroup").className="";this.shadowRoot.querySelector("#inputGroup").classList.add("error-4px");this.shadowRoot.querySelector("#validationIcon").setAttribute("src","src/themes/dsv1.0/img/warning.svg");if(validation){this.shadowRoot.querySelector("#validationMessage").style.display="block";this.shadowRoot.querySelector("#input").placeholder=validation}}valid(validation){this.shadowRoot.querySelector("#validationIcon").style.visibility="visible";this.shadowRoot.querySelector("#inputGroup").className="";this.shadowRoot.querySelector("#inputGroup").classList.add("success-2px");this.shadowRoot.querySelector("#validationIcon").setAttribute("src","src/themes/dsv1.0/img/complete.svg");if(validation){this.shadowRoot.querySelector("#validationMessage").style.display="none"}}getInput(){return this.qs("#input")}getValue(){return this.getInput().value}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.shadowRoot.querySelector("#validationMessage").style.display="none";this.shadowRoot.querySelector("#validationIcon").style.visibility="hidden"}get type(){return"text"}}window.customElements.define(TextField.is,TextField);
+        `;
+  }
+
+  invalid(validation) {
+    this.shadowRoot.querySelector('#validationIcon').style.visibility = 'visible';
+    this.shadowRoot.querySelector('#inputGroup').className = '';
+    this.shadowRoot.querySelector('#inputGroup').classList.add('error-4px');
+    this.shadowRoot.querySelector('#validationIcon').setAttribute('src', 'src/themes/dsv1.0/img/warning.svg');
+
+    if (validation) {
+      this.shadowRoot.querySelector('#validationMessage').style.display = 'block';
+      this.shadowRoot.querySelector('#input').placeholder = validation;
+    }
+  }
+
+  valid(validation) {
+    this.shadowRoot.querySelector('#validationIcon').style.visibility = 'visible'; // success-2px
+
+    this.shadowRoot.querySelector('#inputGroup').className = '';
+    this.shadowRoot.querySelector('#inputGroup').classList.add('success-2px');
+    this.shadowRoot.querySelector('#validationIcon').setAttribute('src', 'src/themes/dsv1.0/img/complete.svg');
+
+    if (validation) {
+      this.shadowRoot.querySelector('#validationMessage').style.display = 'none';
+    }
+  }
+
+  getInput() {
+    return this.qs('#input');
+  }
+
+  getValue() {
+    return this.getInput().value;
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    this.shadowRoot.querySelector('#validationMessage').style.display = 'none';
+    this.shadowRoot.querySelector('#validationIcon').style.visibility = 'hidden';
+  }
+
+  get type() {
+    return 'text';
+  }
+
+}
+
+window.customElements.define(TextField.is, TextField);

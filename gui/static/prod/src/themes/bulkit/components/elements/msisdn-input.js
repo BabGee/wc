@@ -1,4 +1,13 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{MsisdnInputBase}from"../../../../elements/base/msisdn-input.js";class MsisdnInput extends MsisdnInputBase{render(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../../icons/my-icons.js';
+import { SharedStyles } from "../../styles/shared-styles.js";
+import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import { MsisdnInputBase } from "../../../../elements/base/msisdn-input.js";
+
+class MsisdnInput extends MsisdnInputBase {
+  render() {
+    return html`
         ${SharedStyles}
         <style>
        
@@ -29,7 +38,7 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
         <div class="field">
           <div class="select-country">
            <select id="code"  @change="${this.codeSelected}">
-            ${this.rows.map(row=>html`<option ?selected="${"254"===row[0]}" value="${row[0]}">${row[1]} +${row[0]}</option>`)}
+            ${this.rows.map(row => html`<option ?selected="${row[0] === '254'}" value="${row[0]}">${row[1]} +${row[0]}</option>`)}
             </select>
               </div>
           <div class="control  has-icons-left">
@@ -50,4 +59,78 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
           </div>
         </div>
         </div>
-        `}constructor(){super()}getValue(){const codeSelect=this.shadowRoot.querySelector("#code"),numberInput=this.shadowRoot.querySelector("#input");if(numberInput.value){return"+"+codeSelect.value+numberInput.value}}codeSelected(){const codeSelect=this.shadowRoot.querySelector("#code").value;this.shadowRoot.querySelector("#country-code").textContent="+"+codeSelect}valid(){this.shadowRoot.querySelector(".info-error").style.display="none";this.shadowRoot.querySelector(".info-error").textContent="Required"}invalid(validation){this.shadowRoot.querySelector(".info-error").style.display="block";if(validation){this.shadowRoot.querySelector(".info-error").textContent=validation}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.checkKindValue()}checkKindValue(){const kindValue=this.e.kind,numberInput=this.shadowRoot.querySelector("#input");if(null!=kindValue){switch(kindValue.length){case 11:numberInput.value=kindValue.slice(2);break;case 12:numberInput.value=kindValue.slice(3);break;case 13:numberInput.value=kindValue.slice(4);break;default:numberInput.value="";break;}}else{numberInput.value=""}}}customElements.define(MsisdnInput.is,MsisdnInput);
+        `;
+  }
+
+  constructor() {
+    super();
+  }
+
+  getValue() {
+    const codeSelect = this.shadowRoot.querySelector('#code');
+    const numberInput = this.shadowRoot.querySelector('#input');
+
+    if (numberInput.value) {
+      return '+' + codeSelect.value + numberInput.value;
+    }
+  }
+
+  codeSelected() {
+    const codeSelect = this.shadowRoot.querySelector('#code').value;
+    this.shadowRoot.querySelector('#country-code').textContent = '+' + codeSelect;
+  }
+
+  valid(Validation) {
+    this.shadowRoot.querySelector('.info-error').style.display = 'none'; // Revert general text content
+
+    this.shadowRoot.querySelector('.info-error').textContent = 'Required';
+  }
+
+  invalid(validation) {
+    this.shadowRoot.querySelector('.info-error').style.display = 'block';
+
+    if (validation) {
+      this.shadowRoot.querySelector('.info-error').textContent = validation;
+    }
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    this.checkKindValue();
+  }
+
+  checkKindValue() {
+    const kindValue = this.e.kind;
+    const numberInput = this.shadowRoot.querySelector('#input');
+
+    if (kindValue != null) {
+      /* Number with the country code can be in the following formats
+      1. Country code with only one digit eg '+1' number -> +1726640997 -> length = 11
+      2. Country code with only two digits eg '+11' number -> +11726640997 -> length = 12
+      3. Country code with only three digits eg '+111' number -> +111726640997 -> length = 13
+      */
+      switch (kindValue.length) {
+        case 11:
+          numberInput.value = kindValue.slice(2);
+          break;
+
+        case 12:
+          numberInput.value = kindValue.slice(3);
+          break;
+
+        case 13:
+          numberInput.value = kindValue.slice(4);
+          break;
+
+        default:
+          numberInput.value = '';
+          break;
+      }
+    } else {
+      numberInput.value = '';
+    }
+  }
+
+}
+
+customElements.define(MsisdnInput.is, MsisdnInput);

@@ -1,4 +1,15 @@
-import{PosCartBase}from"../../../../elements/base/pos-cart.js";import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{posCartTheme}from"../../styles/pos-cart-styles.js";class PosCart extends PosCartBase{constructor(){super()}renderDefault(){return html`
+import { PosCartBase } from "../../../../elements/base/pos-cart.js";
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../../icons/my-icons.js';
+import { posCartTheme } from "../../styles/pos-cart-styles.js";
+
+class PosCart extends PosCartBase {
+  constructor() {
+    super();
+  }
+
+  renderDefault() {
+    return html`
         ${posCartTheme}
         <paper-toolbar class="toolbar" id="paper_toolbar">
             <paper-item class="flex">
@@ -81,4 +92,9 @@ import{PosCartBase}from"../../../../elements/base/pos-cart.js";import{html}from"
         </div>
 
         
-        `}}customElements.define(PosCart.is,PosCart);
+        `;
+  }
+
+}
+
+customElements.define(PosCart.is, PosCart);

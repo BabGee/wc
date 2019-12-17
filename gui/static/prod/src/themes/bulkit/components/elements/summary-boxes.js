@@ -1,4 +1,24 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SummaryBoxesBase}from"../../../../elements/base/summary-boxes.js";import"../../../../../node_modules/@polymer/paper-card/paper-card.js";import"../../icons/my-icons.js";import"./datalist-element/loader-element.js";class SummaryBoxes extends SummaryBoxesBase{constructor(){super();this.loading=!0}static get properties(){return{loading:Boolean}}renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { SummaryBoxesBase } from "../../../../elements/base/summary-boxes.js";
+import "../../../../../node_modules/@polymer/paper-card/paper-card.js";
+import '../../icons/my-icons.js';
+import "./datalist-element/loader-element.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class SummaryBoxes extends SummaryBoxesBase {
+  constructor() {
+    super();
+    this.loading = true;
+  }
+
+  static get properties() {
+    return {
+      loading: Boolean
+    };
+  }
+
+  renderDefault() {
+    return html`
 
         <style>
 
@@ -334,18 +354,18 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
              <div class="margin_div">
             <div class="summary-coontent">
             
-            ${this.loading?html`
+            ${this.loading ? html`
             <loader-element></loader-element>
-            `:html`
-            ${!this._rowsOrColumns(this.rows)?html`
-            ${this.groups.map((group,groupIndex)=>html`
+            ` : html`
+            ${!this._rowsOrColumns(this.rows) ? html`
+            ${this.groups.map((group, groupIndex) => html`
             <div class="row">
                 <div class="col-md-12 group-summary">
                     <h1>${group}</h1>
                 </div>
             </div>
             <div class="row">
-                ${this._computeData(groupIndex).map(item=>html`
+                ${this._computeData(groupIndex).map(item => html`
                  <div class="col-md-4 card_length">
                     <paper-card class="card_one">
                         <div class="card-content card_count">
@@ -370,14 +390,14 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
 
             </div>
             `)}
-            `:html`
+            ` : html`
             <div class="row">
                     <div class="col-md-12">
                         <h1 style="text-align: center;">${this.title}</h1>
                     </div>
                 </div>
                 <div class="row">
-                    ${this.rows.map(item=>html`
+                    ${this.rows.map(item => html`
                         <div class="col-md-4 card_length">
                             <paper-card class="card_one">
                                 <div class="card-content card_count">${item.count}</div>
@@ -394,4 +414,25 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
             </div>
 
         </div>
-        `}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}onLoadData(){this.loading=!1}}customElements.define(SummaryBoxes.is,SummaryBoxes);
+        `;
+  }
+
+  _computeData(index) {
+    return this.data[index];
+  }
+
+  _rowsOrColumns(cData) {
+    if (cData === undefined) {
+      return;
+    }
+
+    return cData.length;
+  }
+
+  onLoadData(dsc) {
+    this.loading = false;
+  }
+
+}
+
+customElements.define(SummaryBoxes.is, SummaryBoxes);

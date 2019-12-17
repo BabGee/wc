@@ -1,4 +1,10 @@
-import{html}from"../../../../node_modules/lit-element/lit-element.js";export const shopProductItemTheme=html`
+/**
+ @license
+ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+
+ */
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+export const shopProductItemTheme = html`
 <style>
    
             .badge {

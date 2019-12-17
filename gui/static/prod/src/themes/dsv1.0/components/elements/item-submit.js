@@ -1,1 +1,16 @@
-import{ItemSubmitBase}from"../../../../elements/base/item-submit.js";import{html}from"../../../../../node_modules/lit-element/lit-element.js";class ItemSubmit extends ItemSubmitBase{constructor(){super()}renderDefault(){return html``}}customElements.define(ItemSubmit.is,ItemSubmit);
+import { ItemSubmitBase } from "../../../../elements/base/item-submit.js";
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class ItemSubmit extends ItemSubmitBase {
+  constructor() {
+    super();
+  }
+
+  renderDefault() {
+    return html``;
+  }
+
+}
+
+customElements.define(ItemSubmit.is, ItemSubmit);

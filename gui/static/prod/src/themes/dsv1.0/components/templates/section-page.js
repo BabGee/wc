@@ -1,4 +1,15 @@
-import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-spinner/paper-spinner.js";import"../snack-bar.js";import"../form-render.js";import{SectionPageBase}from"../../../../components/templates/section-page.js";import{Colors,Fonts,Reset}from"../../styles/shared.js";class SectionPage extends SectionPageBase{render(){return html`
+import { css, html } from "../../../../../node_modules/lit-element/lit-element.js";
+import "../../../../../node_modules/@polymer/paper-spinner/paper-spinner.js";
+import '../snack-bar.js';
+import '../form-render.js';
+import { SectionPageBase } from "../../../../components/templates/section-page.js";
+import { Colors, Fonts, Reset } from "../../styles/shared.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class SectionPage extends SectionPageBase {
+  render() {
+    // TODO render 404
+    return html`
      <style>
       div.modal-container, .modal-spinner{
         width: 100%;
@@ -88,7 +99,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
       }
      
 </style>
-${this.payload?html`
+${this.payload ? html`
 <div class="modal-container">
   <div class="modal-base " style="max-height: 92vh; padding: 7px; overflow: auto; width: 100vw;">
     <div class="modal-header" >
@@ -102,7 +113,7 @@ ${this.payload?html`
     <div id="d-styling" class="modal-body">            
       <!-- Column Container -->
       <div class="columns is-multiline">
-        ${this._computeFeed(this.payload).map(feed=>html`
+        ${this._computeFeed(this.payload).map(feed => html`
         <!-- a single column -->      
         <div class="column ${this._gridClasses(feed)}" >
           <form-render .feed="${feed}" .params=${this.params} ></form-render>
@@ -113,7 +124,7 @@ ${this.payload?html`
   </div>
 </div>        
          
-`:html`
+` : html`
   <div class="modal-spinner">
     <div style="position: relative; width: 100px;height: 100px;margin:10px auto;" >
         <paper-spinner style="width: 100%;height: 100%;" active ></paper-spinner>
@@ -130,4 +141,51 @@ ${this.payload?html`
               <span slot="title">${this._snackbarTitle}</span>
               ${this._snackbarMessage}</snack-bar>
 
-`}constructor(){super()}_computePage(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;return pageGroup.getTab(0)}_triggerViewList(){this.dispatchEvent(new CustomEvent("view-list",{bubbles:!0,composed:!0,detail:{}}))}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}static get styles(){return[Reset,Colors,Fonts,css`:host { display: block; }`]}}customElements.define(SectionPage.is,SectionPage);
+`;
+  }
+
+  constructor() {
+    super();
+  }
+
+  _computePage(getSection) {
+    var self = this;
+    var pageGroup = getSection.pageGroups[0];
+    self.title = pageGroup.title;
+    return pageGroup.getTab(0);
+  }
+
+  _triggerViewList(evt) {
+    this.dispatchEvent(new CustomEvent('view-list', {
+      bubbles: true,
+      composed: true,
+      detail: {}
+    }));
+  }
+  /**
+   * TODO #301 duplicated function
+   * @param feed
+   * @returns {string}
+   * @private
+   */
+
+
+  _gridClasses(feed) {
+    const grid = super._gridClasses(feed);
+
+    const grids = grid.split('|');
+
+    try {
+      return `is-${Math.floor(Number(grids[0] / 2))}`;
+    } catch (e) {
+      return 'is-12';
+    }
+  }
+
+  static get styles() {
+    return [Reset, Colors, Fonts, css`:host { display: block; }`];
+  }
+
+}
+
+customElements.define(SectionPage.is, SectionPage);

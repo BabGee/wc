@@ -1,4 +1,13 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../../node_modules/fa-icons/index.js";import{FileInputBase}from"../../../../elements/base/file-input.js";class FileInput extends FileInputBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "../../../../../node_modules/fa-icons/index.js";
+import { FileInputBase } from "../../../../elements/base/file-input.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class FileInput extends FileInputBase {
+  renderDefault() {
+    return html`
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <style>
       .drop-area{
@@ -84,4 +93,68 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
         </div>
       </form>
     </div>
-        `}constructor(){super()}getValue(){return this.value}valid(){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="none"}invalid(validation){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="block";errorDisplay.textContent=validation}updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}cancelUpload(){this.resetUpload();this.updateUploadMessage("")}handleFile(){const fileInput=this.shadowRoot.querySelector("#input");this.uploadFile(fileInput)}}window.customElements.define(FileInput.is,FileInput);
+        `;
+  }
+
+  constructor() {
+    super();
+  }
+
+  getValue() {
+    return this.value;
+  }
+  /**
+   * from SerializableElement
+   * @override
+   */
+
+
+  valid(validation) {
+    const errorDisplay = this.shadowRoot.querySelector('#errorDisplay');
+    errorDisplay.style.display = 'none';
+  }
+  /**
+   * from SerializableElement
+   * @override
+   */
+
+
+  invalid(validation) {
+    const errorDisplay = this.shadowRoot.querySelector('#errorDisplay');
+    errorDisplay.style.display = 'block';
+    errorDisplay.textContent = validation;
+  }
+  /**
+   * from FileInputBase
+   * @override
+   */
+
+
+  updateUploadMessage(message) {
+    const display = this.shadowRoot.querySelector('#display');
+    display.textContent = message;
+  }
+  /**
+   * Cancel Last Upload
+   * @param evt
+   */
+
+
+  cancelUpload(evt) {
+    this.resetUpload();
+    this.updateUploadMessage('');
+  }
+  /**
+   * File Selection Change handler
+   * @param evt
+   */
+
+
+  handleFile(evt) {
+    const fileInput = this.shadowRoot.querySelector('#input');
+    this.uploadFile(fileInput);
+  }
+
+}
+
+window.customElements.define(FileInput.is, FileInput);

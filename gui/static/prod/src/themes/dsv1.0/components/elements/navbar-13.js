@@ -1,4 +1,10 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{NavbarBase}from"../../../../elements/base/navbar-base.js";class Navbar13 extends NavbarBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { NavbarBase } from "../../../../elements/base/navbar-base.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class Navbar13 extends NavbarBase {
+  renderDefault() {
+    return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
 
@@ -78,4 +84,13 @@ nav {
           </nav>
         </div>
 
-     `}static get is(){return"navbar-13"}}customElements.define(Navbar13.is,Navbar13);
+     `;
+  }
+
+  static get is() {
+    return 'navbar-13';
+  }
+
+}
+
+customElements.define(Navbar13.is, Navbar13);

@@ -1,4 +1,10 @@
-import{html}from"../../../../node_modules/lit-element/lit-element.js";export const posCartTheme=html`
+/**
+ @license
+ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+
+ */
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+export const posCartTheme = html`
 <style>
             /*
             * TODO These styles are copied from list select, they are deprecated but not tested

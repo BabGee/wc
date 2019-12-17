@@ -1,4 +1,10 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{ProductSearchBase}from"../../../../elements/base/product-search.js";class ProductSearch extends ProductSearchBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { ProductSearchBase } from "../../../../elements/base/product-search.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class ProductSearch extends ProductSearchBase {
+  renderDefault() {
+    return html`
         <style>
         .search-wrapper{
         height:60px;
@@ -20,4 +26,17 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
                              
                             </div>
 
-        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(ProductSearch.is,ProductSearch);
+        `;
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+}
+
+customElements.define(ProductSearch.is, ProductSearch);

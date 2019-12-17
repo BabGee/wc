@@ -1,4 +1,5 @@
-import{html}from"../../../../node_modules/lit-element/lit-element.js";export const SHOP_STYLES=html`
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+export const SHOP_STYLES = html`
 <style>
 /*! core.scss | Nephos | CSS Ninja */
 

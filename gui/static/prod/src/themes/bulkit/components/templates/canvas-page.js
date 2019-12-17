@@ -1,4 +1,27 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icons/social-icons.js";import"../../../../../node_modules/@polymer/iron-icons/communication-icons.js";import"../snack-bar.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{LANDING_STYLES}from"../../styles/landing-style.js";import"../form-render.js";import"./section-page.js";import{VIEW_MODE_DIALOG,VIEW_MODE_MAIN}from"../../../../components/templates/page-view-element.js";import{CanvasPageBase}from"../../../../components/templates/canvas-page.js";class CanvasPage extends CanvasPageBase{render(){if(!this.interface){return html`
+/**
+ @license
+ Copyright (c) 2018 InterIntel. All rights reserved.
+ */
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
+import "../../../../../node_modules/@polymer/iron-icons/social-icons.js";
+import "../../../../../node_modules/@polymer/iron-icons/communication-icons.js";
+import '../snack-bar.js';
+import { BULMA_STYLES } from "../../styles/bulma-styles.js";
+import { LANDING_STYLES } from "../../styles/landing-style.js";
+import '../form-render.js';
+import "./section-page.js"; // todo move into base
+
+import { VIEW_MODE_DIALOG, VIEW_MODE_MAIN } from "../../../../components/templates/page-view-element.js";
+import { CanvasPageBase } from "../../../../components/templates/canvas-page.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class CanvasPage extends CanvasPageBase {
+  render() {
+    // todo implement 404 tab to all pages
+    if (!this.interface) {
+      return html`
       ${BULMA_STYLES}            
         ${LANDING_STYLES} 
         <div class="Wallop Wallop--fade">
@@ -29,10 +52,15 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
                     </div>
                 </div>
             </div>
-`}else if(!this.pageGroup||!this.page){return html`
+`;
+    } else if (!this.pageGroup || !this.page) {
+      return html`
       <h3> this is a missing page </h3>
       <a href="/#/0/0/">Go Home</a>
-      `}return html`
+      `;
+    }
+
+    return html`
         ${BULMA_STYLES}            
         ${LANDING_STYLES} 
         
@@ -43,19 +71,99 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
     
 </style>                
 
- ${this.view===VIEW_MODE_DIALOG?html`
+ ${this.view === VIEW_MODE_DIALOG ? html`
                         <!-- Section Back button -->
                        <button class="menu-fab" @click="${this._viewList}"><iron-icon icon="icons:close"></iron-icon></button>
                     <!-- /Section Back button -->
-                    `:html``}
+                    ` : html``}
 
         
-        ${this.view===VIEW_MODE_DIALOG?html`
+        ${this.view === VIEW_MODE_DIALOG ? html`
                                 <section-page id="dialog" queue=${this.dialogServicesQueue} ></section-page>
-                            `:html`
+                            ` : html`
         
-        ${this.pageGroup.pages.map(page=>html`        
-${page.pageInputGroups.map(feed=>html`<form-render .params=${this.parseParams()} .top=${this._computeTop()} .feed="${feed}"></form-render>`)}
+        ${this.pageGroup.pages.map((page, index) => html`        
+${page.pageInputGroups.map(feed => html`<form-render .params=${this.parseParams()} .top=${this._computeTop()} .feed="${feed}"></form-render>`)}
 
 `)} 
-`}<snack-bar id="snack-bar" ?active="${this._snackbarOpened}">${this._snackbarMessage}</snack-bar>`}constructor(){super()}scrollPage(evt){const index=evt.currentTarget.pageIndex;var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get properties(){return{title:String,name:String,logo:String,view:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){if(this.toggle){this.qs(".navbar-wrapper").classList.remove("navbar-light");this.qs(".navbar-wrapper").classList.remove("mobile-menu-dark");this.qs(".nav-toggle").classList.remove("is-active");this.qs(".nav-right").classList.remove("is-active");this.toggle=!1}else{this.qs(".navbar-wrapper").classList.add("navbar-light");this.qs(".navbar-wrapper").classList.add("mobile-menu-dark");this.qs(".nav-toggle").classList.add("is-active");this.qs(".nav-right").classList.add("is-active");this.toggle=!0}}stateChanged(state){super.stateChanged(state)}_viewList(){if(!this.dialogsStack.length){this.view="list";this.updateLocationHash()}else{const args=this.dialogsStack.pop();console.log(args);const dialog=this.qs("#dialog");dialog.payload=args[0];dialog.params=args[1];dialog.loading=!1}}}window.customElements.define("canvas-page",CanvasPage);
+`}<snack-bar id="snack-bar" ?active="${this._snackbarOpened}">${this._snackbarMessage}</snack-bar>`;
+  }
+
+  constructor() {
+    super();
+  }
+
+  scrollPage(evt) {
+    const index = evt.currentTarget.pageIndex; // var elementToFocus = document.getElementById(window.location.hash.slice(1));
+    //   var elementToFocus = document.getElementById("#section_1");
+
+    var elementToFocus = this.shadowRoot.querySelector('#section_' + index);
+
+    if (elementToFocus) {
+      //  elementToFocus.scrollIntoView(true);
+      elementToFocus.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth'
+      }); //   console.log("Scroll");
+    }
+  } // todo deperecated, left for reference
+
+
+  static get properties() {
+    return {
+      title: String,
+      name: String,
+      logo: String,
+      view: String,
+      defaultColor: String,
+      pages: Array,
+      tab: Object,
+      group: Object,
+      toggle: Boolean
+    };
+  }
+
+  toggleNav() {
+    if (this.toggle) {
+      this.qs('.navbar-wrapper').classList.remove('navbar-light');
+      this.qs('.navbar-wrapper').classList.remove('mobile-menu-dark');
+      this.qs('.nav-toggle').classList.remove('is-active');
+      this.qs('.nav-right').classList.remove('is-active');
+      this.toggle = false;
+    } else {
+      this.qs('.navbar-wrapper').classList.add('navbar-light');
+      this.qs('.navbar-wrapper').classList.add('mobile-menu-dark');
+      this.qs('.nav-toggle').classList.add('is-active');
+      this.qs('.nav-right').classList.add('is-active');
+      this.toggle = true;
+    }
+  }
+
+  stateChanged(state) {
+    super.stateChanged(state);
+  }
+  /**
+     * Dialogs Back navigation, Pop dialogs' stack
+     *
+     * @param evt
+     * @private
+     */
+
+
+  _viewList(evt) {
+    if (!this.dialogsStack.length) {
+      this.view = 'list';
+      this.updateLocationHash();
+    } else {
+      const args = this.dialogsStack.pop();
+      console.log(args);
+      const dialog = this.qs('#dialog');
+      dialog.payload = args[0];
+      dialog.params = args[1];
+      dialog.loading = false;
+    }
+  }
+
+}
+
+window.customElements.define('canvas-page', CanvasPage);

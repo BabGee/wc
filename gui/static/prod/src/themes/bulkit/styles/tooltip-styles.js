@@ -1,4 +1,10 @@
-import{html}from"../../../../node_modules/lit-element/lit-element.js";export const TooltipStyles=html`
+/**
+@license
+Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+
+*/
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+export const TooltipStyles = html`
 <style>
     /* copied from https://www.w3schools.com/howto/howto_css_tooltip.asp */
   /* TODO application of shared styles, what happens to :host*/ 

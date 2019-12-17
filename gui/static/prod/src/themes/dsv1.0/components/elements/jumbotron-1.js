@@ -1,4 +1,10 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{JumbotronBase}from"../../../../elements/base/jumbotron-base.js";class Jumbotron1 extends JumbotronBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { JumbotronBase } from "../../../../elements/base/jumbotron-base.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class Jumbotron1 extends JumbotronBase {
+  renderDefault() {
+    return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
     
@@ -29,4 +35,13 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
         <div id="page-title">System-wide elements, Navigation<br /> &amp; Step-Menus</div>
       </div>
     </section>
-     `}static get is(){return"jumbotron-1"}}customElements.define(Jumbotron1.is,Jumbotron1);
+     `;
+  }
+
+  static get is() {
+    return 'jumbotron-1';
+  }
+
+}
+
+customElements.define(Jumbotron1.is, Jumbotron1);

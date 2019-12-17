@@ -1,4 +1,9 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SectionPElementDsc}from"../../../../elements/base/section-pelement-dsc.js";class SectionPrice extends SectionPElementDsc{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { SectionPElementDsc } from "../../../../elements/base/section-pelement-dsc.js";
+
+class SectionPrice extends SectionPElementDsc {
+  renderDefault() {
+    return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
     <style>
     header.header{
@@ -62,7 +67,7 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
         
         <section class="section">
             <div class="columns">
-            ${this.data.map((item,index)=>html`
+            ${this.data.map((item, index) => html`
             <div class="column">
                 <div class="price__item">
                 <div class="price__item-header">
@@ -80,19 +85,19 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
                         <div class="plan-item has-text-centered"><b>${item.storage}MB</b> Storage <b>|</b> <b>${item.bandwidth}MB</b> BANDWITH</div>
                     </div>
                     <ul class="plan__feature-list">
-                        ${item.custom_ads?html`<li class="plan__feature-item"><span class="feature-count-text">Custom Ads</span></li>`:html`<li><span class="feature-count-text">Nikobizz Ads</span></li>`}
-                        ${item.mobile_money_acceptance?html`<li class="plan__feature-item"><span class="feature-count-text">Mobile Money Acceptance</span></li>`:html``}
-                        ${item.ecommerce_support?html`<li class="plan__feature-item"><span class="feature-count-text">Supports Ecommerce</span></li>`:html``}
-                        ${item.card_payment_acceptance?html`<li class="plan__feature-item"><span class="feature-count-text">Card Payment Acceptance (VISA,MasterCard, AMEX, DISCOVER,JCB e.t.c.)</span></li>`:html``}
-                        ${item.free_ssl?html`<li class="plan__feature-item"><span class="feature-count-text">Free SSL Certificate</span></li>`:html``}
-                        ${item.custom_ssl?html`<li class="plan__feature-item"><span class="feature-count-text">Custom SSL Certificate</span></li>`:html``}
-                        ${item.priority_support?html`<li class="plan__feature-item"><span class="feature-count-text">First Priority Support</span></li>`:html``}
-                        ${item.shared_ussd?html`<li class="plan__feature-item"><span class="feature-count-text">Shared USSD</span></li>`:html``}
+                        ${item.custom_ads ? html`<li class="plan__feature-item"><span class="feature-count-text">Custom Ads</span></li>` : html`<li><span class="feature-count-text">Nikobizz Ads</span></li>`}
+                        ${item.mobile_money_acceptance ? html`<li class="plan__feature-item"><span class="feature-count-text">Mobile Money Acceptance</span></li>` : html``}
+                        ${item.ecommerce_support ? html`<li class="plan__feature-item"><span class="feature-count-text">Supports Ecommerce</span></li>` : html``}
+                        ${item.card_payment_acceptance ? html`<li class="plan__feature-item"><span class="feature-count-text">Card Payment Acceptance (VISA,MasterCard, AMEX, DISCOVER,JCB e.t.c.)</span></li>` : html``}
+                        ${item.free_ssl ? html`<li class="plan__feature-item"><span class="feature-count-text">Free SSL Certificate</span></li>` : html``}
+                        ${item.custom_ssl ? html`<li class="plan__feature-item"><span class="feature-count-text">Custom SSL Certificate</span></li>` : html``}
+                        ${item.priority_support ? html`<li class="plan__feature-item"><span class="feature-count-text">First Priority Support</span></li>` : html``}
+                        ${item.shared_ussd ? html`<li class="plan__feature-item"><span class="feature-count-text">Shared USSD</span></li>` : html``}
                     </ul>
                     </div>
                     
                     <div class="plan__cta">
-                    ${item.links.map(items=>html`
+                    ${item.links.map(items => html`
                     <a href="#" class="has-text-centered ${this.colorType[index]}-btn" .dataLink="${items}" @click="${this._action}">${items.title}</a>
                     `)}
                     </div>
@@ -106,4 +111,29 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
         
         </div>
 
-        `}static get is(){return"section-price"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}init(pElement,loader){super.init(pElement,loader);var self=this;self.colorType=["success","secondary","warning","danger","primary"]}}customElements.define(SectionPrice.is,SectionPrice);
+        `;
+  }
+
+  static get is() {
+    return 'section-price';
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  _action(evt) {
+    const dataAction = evt.currentTarget.dataLink;
+
+    this.pl._dialog(dataAction.service, dataAction.params);
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+    var self = this;
+    self.colorType = ['success', 'secondary', 'warning', 'danger', 'primary'];
+  }
+
+}
+
+customElements.define(SectionPrice.is, SectionPrice);

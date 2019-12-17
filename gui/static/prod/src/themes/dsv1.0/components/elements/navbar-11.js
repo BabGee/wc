@@ -1,4 +1,10 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{NavbarBase}from"../../../../elements/base/navbar-base.js";class Navbar11 extends NavbarBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { NavbarBase } from "../../../../elements/base/navbar-base.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class Navbar11 extends NavbarBase {
+  renderDefault() {
+    return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
 
@@ -32,27 +38,27 @@ nav {
                 </div>
                 <div class="navbar-menu">
                   <div class="navbar-end">
-                    <a class="navbar-item is-active" @click="${()=>this.activePage("home")}">
+                    <a class="navbar-item is-active" @click="${() => this.activePage('home')}">
                       Home
                     </a>
-                    <a class="navbar-item" @click="${()=>this.activePage("products")}">
+                    <a class="navbar-item" @click="${() => this.activePage('products')}">
                       Products
                     </a>
-                    <a class="navbar-item" @click="${()=>this.activePage("services")}">
+                    <a class="navbar-item" @click="${() => this.activePage('services')}">
                       Services
                     </a>
-                    <a class="navbar-item" @click="${()=>this.activePage("about-us")}">
+                    <a class="navbar-item" @click="${() => this.activePage('about-us')}">
                       About Us
                     </a>
-                    <a class="navbar-item" @click="${()=>this.activePage("help")}">
+                    <a class="navbar-item" @click="${() => this.activePage('help')}">
                       Help
                     </a>
-                    <a class="navbar-item" @click="${()=>this.activePage("contacts")}">
+                    <a class="navbar-item" @click="${() => this.activePage('contacts')}">
                       Contacts
                     </a>
                     <div class="navbar-item">
                       <div class="buttons">
-                        <a class="button is-small is-rounded is-primary"  @click="${()=>this.activePage("buy-now")}">Buy now</a>
+                        <a class="button is-small is-rounded is-primary"  @click="${() => this.activePage('buy-now')}">Buy now</a>
                       </div>
                     </div>
                   </div>
@@ -61,4 +67,45 @@ nav {
           </div>
         </div>
 
-     `}activePage(mainNavLink){const links=this.shadowRoot.querySelector(".navbar-menu").querySelectorAll("a"),btnClassName="button is-small is-rounded is-primary";if("home"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[0].className="navbar-item is-active";links[6].className=btnClassName}else if("products"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[1].className="navbar-item is-active";links[6].className=btnClassName}else if("services"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[2].className="navbar-item is-active";links[6].className=btnClassName}else if("about-us"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[3].className="navbar-item is-active";links[6].className=btnClassName}else if("help"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[4].className="navbar-item is-active";links[6].className=btnClassName}else if("contacts"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[5].className="navbar-item is-active";links[6].className=btnClassName}else if("buy-now"===mainNavLink){}}static get is(){return"navbar-11"}}customElements.define(Navbar11.is,Navbar11);
+     `;
+  }
+
+  activePage(mainNavLink) {
+    const links = this.shadowRoot.querySelector('.navbar-menu').querySelectorAll('a');
+    const btnClassName = 'button is-small is-rounded is-primary';
+
+    if (mainNavLink === 'home') {
+      links.forEach(link => link.className = 'navbar-item');
+      links[0].className = 'navbar-item is-active';
+      links[6].className = btnClassName;
+    } else if (mainNavLink === 'products') {
+      links.forEach(link => link.className = 'navbar-item');
+      links[1].className = 'navbar-item is-active';
+      links[6].className = btnClassName;
+    } else if (mainNavLink === 'services') {
+      links.forEach(link => link.className = 'navbar-item');
+      links[2].className = 'navbar-item is-active';
+      links[6].className = btnClassName;
+    } else if (mainNavLink === 'about-us') {
+      links.forEach(link => link.className = 'navbar-item');
+      links[3].className = 'navbar-item is-active';
+      links[6].className = btnClassName;
+    } else if (mainNavLink === 'help') {
+      links.forEach(link => link.className = 'navbar-item');
+      links[4].className = 'navbar-item is-active';
+      links[6].className = btnClassName;
+    } else if (mainNavLink === 'contacts') {
+      links.forEach(link => link.className = 'navbar-item');
+      links[5].className = 'navbar-item is-active';
+      links[6].className = btnClassName;
+    } else if (mainNavLink === 'buy-now') {//buy-now code or method here
+    }
+  }
+
+  static get is() {
+    return 'navbar-11';
+  }
+
+}
+
+customElements.define(Navbar11.is, Navbar11);

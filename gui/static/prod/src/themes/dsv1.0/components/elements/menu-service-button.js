@@ -1,4 +1,10 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{MenuServiceButtonBase}from"../../../../elements/base/menu-service-button.js";class MenuServiceButton extends MenuServiceButtonBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { MenuServiceButtonBase } from "../../../../elements/base/menu-service-button.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class MenuServiceButton extends MenuServiceButtonBase {
+  renderDefault() {
+    return html`
 
          <style>
             .ccc {
@@ -61,4 +67,9 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
                 </div>
               </div>
           </div>
-        `}}window.customElements.define(MenuServiceButton.is,MenuServiceButton);
+        `;
+  }
+
+}
+
+window.customElements.define(MenuServiceButton.is, MenuServiceButton);

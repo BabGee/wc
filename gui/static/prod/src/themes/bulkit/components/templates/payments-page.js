@@ -1,7 +1,35 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../form-render.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icons/social-icons.js";import"../../../../../node_modules/@polymer/iron-icons/communication-icons.js";import"../snack-bar.js";import"../../icons/payments-icons.js";import{LANDING_STYLES}from"../../styles/landing-style.js";import{SHOP_STYLES}from"../../styles/shop-styles.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{PaymentsPageBase}from"../../../../components/templates/payments-page.js";class PaymentsPage extends PaymentsPageBase{render(){if(!this.interface){return html`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html`
+/**
+ @license
+ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+
+ */
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../form-render.js';
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
+import "../../../../../node_modules/@polymer/iron-icons/social-icons.js";
+import "../../../../../node_modules/@polymer/iron-icons/communication-icons.js";
+import '../snack-bar.js';
+import '../../icons/payments-icons.js';
+import { LANDING_STYLES } from "../../styles/landing-style.js";
+import { SHOP_STYLES } from "../../styles/shop-styles.js";
+import { BULMA_STYLES } from "../../styles/bulma-styles.js";
+import { PaymentsPageBase } from "../../../../components/templates/payments-page.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class PaymentsPage extends PaymentsPageBase {
+  render() {
+    // console.log(title,pages,tab);
+    if (!this.interface) {
+      return html`<div>Cannot render an UNDEFINED tab!!.</div>`;
+    } else if (!this.pageGroup || !this.page) {
+      return html`
       <h3> this is a missing page </h3>
       <a href="/#/0/0/">Go Home</a>
-      `}return html`
+      `;
+    }
+
+    return html`
         
     ${BULMA_STYLES} 
     ${LANDING_STYLES} 
@@ -98,12 +126,12 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
             <div id="hero" class="column is-12  is-hidden-desktop is-hidden-tablet">
                 <h1 style="margin-left: 15px;">SELECT PAYMENT METHOD</h1>
                 <ul class="user-list">
-                 ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
-                    ${pageGroup.pages.map((tab,tabIndex)=>html`
+                 ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+                    ${pageGroup.pages.map((tab, tabIndex) => html`
                         <li class="card">       
-                            <a class="parent-link"   @click="${this._closeChildMenu}" href="${this._changeLink(pageGroupIndex,tabIndex)}">           
+                            <a class="parent-link"   @click="${this._closeChildMenu}" href="${this._changeLink(pageGroupIndex, tabIndex)}">           
                                 <div class="user-list-avatar">
-                                    <i> <iron-icon icon="${tab.icon||"icons:announcement"}"></iron-icon></i>
+                                    <i> <iron-icon icon="${tab.icon || 'icons:announcement'}"></iron-icon></i>
                                 </div>
                                 <div class="user-list-info">
                                     <div class="name">${tab.title}</div>
@@ -125,11 +153,11 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
                                 <div class="flat-card is-auto is-checkout-form" style="border-radius: 16px;">
                                     <div class="tabs is-centered is-hidden-mobile" style="margin-bottom: 0px;background-color: var(--app-default-color);">
                                         <ul>
-                                        ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
-                                            ${pageGroup.pages.map((tab,tabIndex)=>html`     
+                                        ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+                                            ${pageGroup.pages.map((tab, tabIndex) => html`     
                                                  <li id="tab_${tabIndex}"  class="has-text-centered" style="padding-top:18px">
-                                                     <a href="${this._changeLink(pageGroupIndex,tabIndex)}">
-                                                        <i> <iron-icon icon="${tab.icon||"icons:announcement"}" style="color:#fff"></iron-icon></i>&nbsp;&nbsp;${tab.title}
+                                                     <a href="${this._changeLink(pageGroupIndex, tabIndex)}">
+                                                        <i> <iron-icon icon="${tab.icon || 'icons:announcement'}" style="color:#fff"></iron-icon></i>&nbsp;&nbsp;${tab.title}
                                                      </a>
                                                  </li>
                                            `)}
@@ -137,7 +165,7 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
                                         </ul>
                                     </div>
                                     <div class="columns is-gapless ">
-                                    ${this.page.pageInputGroups.map(feed=>html`
+                                    ${this.page.pageInputGroups.map((feed, feedIndex) => html`
                                         <!-- Order Total -->
                                         <div class="column is-6">
                                             <div>
@@ -174,4 +202,119 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
         </div>
 </div>
 <snack-bar id="snack-bar" ?active="${this._snackbarOpened}">${this._snackbarMessage}</snack-bar>
-`}constructor(){super()}static get properties(){return{title:String,view:String,tagline:String,logo:String,pages:Array,tab:Object,profile:{type:Object},page:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);if(1===this.interface.pageGroups.length){this._closeChildMenu()}}_profileTriggerClick(){this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){document.querySelector(".tab-icon.is-active").classList.remove("is-active");e.currentTarget.classList.add("is-active");document.querySelector(".menu-wrapper .icon-box-toggle").classList.add("active");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});document.querySelector(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}_closeChildMenu(e){document.querySelector("#hero").style.display="none";document.querySelector("#pay").style.display="unset";document.querySelector("#pay").classList.remove("is-hidden-mobile");this._menuWrapperClick(e)}_viewList(){document.querySelector("#hero").style.display="block";document.querySelector("#pay").style.display="none";document.querySelector("#pay").classList.add("is-hidden-mobile")}_menuWrapperClick(){}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget["data-child-menu"],menuTitle=e.currentTarget["data-title"];this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}stateChanged(state){super.stateChanged(state)}_changeLink(pageGroupIndex,tabIndex){var url=window.location.pathname+window.location.search+"#/"+pageGroupIndex+"/"+tabIndex+"/";return url}}window.customElements.define("payments-page",PaymentsPage);
+`;
+  }
+
+  constructor() {
+    super();
+  }
+
+  static get properties() {
+    return {
+      title: String,
+      view: String,
+      tagline: String,
+      logo: String,
+      pages: Array,
+      tab: Object,
+      profile: {
+        type: Object
+      },
+      page: Object
+    };
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties); // if only one page exists, activate it's first tab
+
+    if (this.interface.pageGroups.length === 1) {
+      this._closeChildMenu();
+    }
+  }
+
+  _profileTriggerClick(e) {
+    const self = this;
+    this.qs('.main-menu-avatar, .dot').classList.toggle('vanish');
+
+    if (this.qs('.js-hamburger').classList.contains('is-active')) {
+      this.qs('.js-hamburger').classList.remove('is-active');
+      document.querySelector('body').classList.remove('is-fixed');
+    } else {
+      this.qs('.js-hamburger').classList.add('is-active'); // wait 700ms before adding the fixed class to the body to prevent unpleasant effects
+
+      setTimeout(function () {
+        document.querySelector('body').classList.add('is-fixed');
+      }, 700);
+    }
+  }
+
+  _sideIconClick(e) {
+    document.querySelector('.tab-icon.is-active').classList.remove('is-active');
+    e.currentTarget.classList.add('is-active');
+    document.querySelector('.menu-wrapper .icon-box-toggle').classList.add('active'); // this.shadowRoot.querySelector('.child-menu').classList.add('is-sidebar-translated');
+
+    this.qsa('.dashboard-nav, #dashboard-wrapper').forEach(function (el) {
+      el.classList.add('is-pushed');
+    }); // disable reader mode switch when sidebar is opened
+
+    document.querySelector('.reader-switch label').classList.add('is-disabled');
+
+    this._dataChildMenuSetup(e);
+  }
+
+  _closeChildMenu(e) {
+    document.querySelector('#hero').style.display = 'none';
+    document.querySelector('#pay').style.display = 'unset';
+    document.querySelector('#pay').classList.remove('is-hidden-mobile');
+
+    this._menuWrapperClick(e);
+  }
+
+  _viewList(evt) {
+    document.querySelector('#hero').style.display = 'block';
+    document.querySelector('#pay').style.display = 'none';
+    document.querySelector('#pay').classList.add('is-hidden-mobile');
+  }
+
+  _menuWrapperClick(e) {
+    /*
+        this.qs('.child-menu').classList.toggle('is-sidebar-translated');
+        this.qsa('.dashboard-nav, #dashboard-wrapper').forEach(function (el) {
+            el.classList.toggle('is-pushed');
+        });
+         //enable reader mode switch when sidebar is closed
+        this.qs('.reader-switch label').classList.remove('is-disabled');
+         */
+  }
+
+  _iconBoxToggle(e) {
+    e.currentTarget.classList.toggle('active');
+    e.preventDefault();
+  }
+
+  _dataChildMenuSetup(e) {
+    const menuId = e.currentTarget['data-child-menu'];
+    const menuTitle = e.currentTarget['data-title'];
+    this.qsa('.sidebar-menu.is-active').forEach(function (el) {
+      el.classList.remove('is-active');
+    });
+    this.qs('#' + menuId).classList.add('is-active');
+    this.qs('.sidebar-title').textContent = menuTitle;
+  }
+
+  stateChanged(state) {
+    super.stateChanged(state);
+  }
+
+  _changeLink(pageGroupIndex, tabIndex) {
+    var url = window.location.pathname + window.location.search + '#/' + pageGroupIndex + '/' + tabIndex + '/'; //   console.log('Link '+url);
+    // console.log('param '+this.getParams(window.location.search.substr(1)));
+    // this.qs('.has-text-centered').classList.remove('is-active');
+    //     e.currentTarget.classList.add('is-active');
+
+    return url;
+  }
+
+}
+
+window.customElements.define('payments-page', PaymentsPage);

@@ -1,20 +1,52 @@
-import{html}from"../../../../node_modules/lit-element/lit-element.js";import{FormRenderBase,FORM_TYPE_FORM,FORM_TYPE_PAYMENTS_FORM,FORM_TYPE_HIDDEN_FORM}from"../../../components/form-render.js";import{register}from"../register.js";import"./forms/form-x.js";import"./forms/form-y.js";import"./e-list.js";import{Logger}from"../../../core/logger.js";class FormRender extends FormRenderBase{constructor(){super()}render(){let form;const af=this.__computeActiveFeed();Logger.i.info(af);const formType=af.element;if(formType===FORM_TYPE_FORM){form=html`
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+import { FormRenderBase, FORM_TYPE_FORM, FORM_TYPE_PAYMENTS_FORM, FORM_TYPE_HIDDEN_FORM } from '../../../components/form-render.js';
+import { register } from "../register.js";
+import './forms/form-x.js';
+import './forms/form-y.js';
+import './e-list.js';
+import { Logger } from "../../../core/logger.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class FormRender extends FormRenderBase {
+  constructor() {
+    super();
+  }
+
+  render() {
+    let form;
+
+    const af = this.__computeActiveFeed();
+
+    Logger.i.info(af);
+    const formType = af.element;
+
+    if (formType === FORM_TYPE_FORM) {
+      form = html`
        <form-x id="form" .sections=${this.sections} .pos=${this.pos} @pos-change=${this._onPosChange}>
         <p slot="header" class="card-header-title">${FormRenderBase.toTitleCase(this.feed.title)}</p> 
-        <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed,this.pos)} ></e-list>
+        <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed, this.pos)} ></e-list>
       </form-x>
-      `}else if(formType===FORM_TYPE_PAYMENTS_FORM){form=html`
+      `;
+    } else if (formType === FORM_TYPE_PAYMENTS_FORM) {
+      form = html`
        <content-x id="form">
         <p slot="header" class="is-capitalized">${FormRenderBase.toTitleCase(this.feed.title)}</p> 
-        <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed,this.pos)} ></e-list>
+        <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed, this.pos)} ></e-list>
       </content-x>
-      `}else if(formType===FORM_TYPE_HIDDEN_FORM){form=html`
+      `;
+    } else if (formType === FORM_TYPE_HIDDEN_FORM) {
+      form = html`
       <form-y id="form"> 
-        <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed,this.pos)} ></e-list>
+        <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed, this.pos)} ></e-list>
       </form-y>
-      `}else{form=html`
+      `;
+    } else {
+      form = html`
       <h4>Undefined Form Type  <strong style="color: red;">${formType}</strong> </h4>
-      `}return html`
+      `;
+    }
+
+    return html`
     <style>             
         .column{
             display:block;
@@ -142,4 +174,9 @@ import{html}from"../../../../node_modules/lit-element/lit-element.js";import{For
         }
      </style>
      ${form}
-     `}}register(FormRender);
+     `;
+  }
+
+}
+
+register(FormRender);

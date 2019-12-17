@@ -1,4 +1,21 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import"../../../../../node_modules/@polymer/paper-button/paper-button.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{SharedStyles}from"../../styles/shared-styles.js";import"./datalist-element/datasource-list.js";import"./datalist-element/loader-element.js";import{DataListElementBase}from"../../../../elements/base/datalist-element.js";class DataListElement extends DataListElementBase{constructor(){super()}renderDefault(){const emptyStateSvg=html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../../icons/my-icons.js';
+import "../../../../../node_modules/@polymer/paper-button/paper-button.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import { SharedStyles } from "../../styles/shared-styles.js";
+import "./datalist-element/datasource-list.js";
+import "./datalist-element/loader-element.js";
+import { DataListElementBase } from "../../../../elements/base/datalist-element.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class DataListElement extends DataListElementBase {
+  constructor() {
+    super();
+  }
+
+  renderDefault() {
+    // TODO convert to li-html svg tag
+    const emptyStateSvg = html`
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 415.998 415.998" style="enable-background:new 0 0 415.998 415.998;" xml:space="preserve" width="100px" height="100px"><g><g>
 	<g>
 		<rect x="111.999" y="176" width="192" height="16" data-original="#000000" class="active-path" data-old_color="#000000" fill="#ADADAD"/>
@@ -24,7 +41,8 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
 		<path d="M367.998,95.999c0-17.673-14.326-32-31.999-32h-44.424c-5.926-6.583-13.538-11.62-22.284-14.136    c-7.367-2.118-13.037-7.788-15.156-15.155C248.37,14.664,229.897,0,207.998,0c-21.898,0-40.37,14.663-46.134,34.706    c-2.122,7.376-7.806,13.039-15.182,15.165c-8.736,2.518-16.341,7.55-22.262,14.128H79.999c-17.674,0-32,14.327-32,32v287.999    c0,17.673,14.326,32,32,32c73.466,0,163.758,0,256,0c17.674,0,32-14.327,32-32C367.999,293.119,367.998,206.096,367.998,95.999z     M128,95.741c0.11-14.066,9.614-26.606,23.113-30.496c12.71-3.662,22.477-13.426,26.127-26.116    C181.157,25.51,193.805,16,207.998,16c14.194,0,26.842,9.51,30.758,23.13c3.652,12.698,13.413,22.459,26.111,26.11    c13.618,3.917,23.13,16.566,23.13,30.758v16H128V95.741z M335.999,399.998c-85.455,0-170.77,0-256,0c-8.823,0-16-7.178-16-16    V95.999c0-8.822,7.177-16,16-16h34.742c-1.73,4.892-2.698,10.143-2.74,15.617v32.383h191.998v-32c0-5.615-0.992-10.991-2.764-16    h34.764c8.822,0,15.999,7.178,15.999,16c0,45.743-0.001,260.254,0.002,287.999C351.999,392.82,344.822,399.998,335.999,399.998z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#ADADAD"/>
 	</g>
 </g></g> </svg>
-    `;return html`
+    `;
+    return html`
     ${SharedStyles}
   <style>
   button{
@@ -80,10 +98,10 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
           <iron-icon icon="icons:refresh"></iron-icon>
         </button>
       </div>
-      ${this.loading?html`
+      ${this.loading ? html`
   <loader-element></loader-element>
-`:html`
-        ${this.empty?html`
+` : html`
+        ${this.empty ? html`
     <div class="wrapper">
       <div class="page-container">
         <div class="page-icon center">
@@ -94,7 +112,7 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
         </div>
       </div>
     </div>
-  `:html`
+  ` : html`
       <datasource-list
         id="dt"
         paginate
@@ -132,4 +150,109 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
   </div>
 
 
-`}static get properties(){return{table:{type:Boolean,value:!0},grid:{type:Boolean,value:!1},list:{type:Boolean,value:!1},sortProperty:{type:String},selectedRows:{type:Array,value:[]},showActions:{type:Boolean,value:!1,notify:!0}}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_hideColumn(event){var property=event.currentTarget.columnProperty;this.$.dt.toggleColumn(property)}_switchView(event){const sel=event.currentTarget.selected;if(0===sel){this.table=!0;this.list=!1;this.grid=!1}else if(1===sel){this.table=!1;this.list=!0;this.grid=!1}else if(2===sel){this.table=!1;this.list=!1;this.grid=!0}}_handleSearch(event){var filter=event.detail.value,column=event.detail.column,columns=event.detail.searchFields;this.deleteParamKeys(columns.concat(["q"]),!1);this.updateParams(column,filter)}_handleDateRangeChange(event){var filter=event.detail.range;this.$.datasource.mergeParams(filter)}_handleSelectionChanged(event){if(event.detail.selected){this.actionRow=event.detail.data;this.showActions=!0}else{this.showActions=!1}}onLoadData(dsc){super.onLoadData(dsc)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(DataListElement.is,DataListElement);
+`;
+  }
+
+  static get properties() {
+    return {
+      table: {
+        type: Boolean,
+        value: true
+      },
+      grid: {
+        type: Boolean,
+        value: false
+      },
+      list: {
+        type: Boolean,
+        value: false
+      },
+      sortProperty: {
+        type: String
+      },
+      selectedRows: {
+        type: Array,
+        value: []
+      },
+      showActions: {
+        type: Boolean,
+        value: false,
+        notify: true
+      }
+    };
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  _hideColumn(event) {
+    var property = event.currentTarget.columnProperty;
+    this.$.dt.toggleColumn(property);
+  }
+
+  _switchView(event) {
+    const sel = event.currentTarget.selected;
+
+    if (sel === 0) {
+      this.table = true;
+      this.list = false;
+      this.grid = false;
+    } else if (sel === 1) {
+      this.table = false;
+      this.list = true;
+      this.grid = false;
+    } else if (sel === 2) {
+      this.table = false;
+      this.list = false;
+      this.grid = true;
+    }
+  }
+  /**
+     * General and per column search event handler
+     *
+     *
+     * @param event
+     * @private
+     */
+
+
+  _handleSearch(event) {
+    var filter = event.detail.value;
+    var column = event.detail.column;
+    var columns = event.detail.searchFields; // console.log(columns);
+    // delete any previous column and general search query
+
+    this.deleteParamKeys(columns.concat(['q']), false); // update new search query param
+
+    this.updateParams(column, filter);
+  }
+
+  _handleDateRangeChange(event) {
+    var filter = event.detail.range;
+    this.$.datasource.mergeParams(filter);
+  }
+
+  _handleSelectionChanged(event) {
+    if (event.detail.selected) {
+      // event.detail.selected
+      // event.detail.data
+      this.actionRow = event.detail.data;
+      this.showActions = true;
+    } else {
+      // event.detail.deselected
+      this.showActions = false;
+    }
+  }
+
+  onLoadData(dsc) {
+    super.onLoadData(dsc);
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+}
+
+customElements.define(DataListElement.is, DataListElement);

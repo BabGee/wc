@@ -1,4 +1,17 @@
-import{LitElement,html,css}from"../../node_modules/lit-element/lit-element.js";import{Logger}from"../core/logger.js";import{PageInput}from"../core/parsers/commands/iic/page-input.js";class ElementLoader extends LitElement{constructor(){super();this.renderInstance=0;this.loading=!0}render(){if(this.loading){return html`
+import { LitElement, html, css } from "../../node_modules/lit-element/lit-element.js";
+import { Logger } from "../core/logger.js";
+import { PageInput } from "../core/parsers/commands/iic/page-input.js";
+
+class ElementLoader extends LitElement {
+  constructor() {
+    super();
+    this.renderInstance = 0;
+    this.loading = true;
+  }
+
+  render() {
+    if (this.loading) {
+      return html`
 <style>
    .loading {
     text-align: center;
@@ -44,7 +57,244 @@ import{LitElement,html,css}from"../../node_modules/lit-element/lit-element.js";i
 <div class="loading-bar"></div>
 <div class="loading-bar"></div>
 <div class="loading-bar"></div>
-</div>`}else{return html`<div id="content"></div>`}}static get styles(){return css`
+</div>`;
+    } else {
+      return html`<div id="content"></div>`;
+    }
+  }
+
+  static get styles() {
+    return css`
     :host {
       display: block;
-    }`}createRenderRoot(){return this}set element(val){let oldVal=this._element;this._element=val;if(oldVal!==val){Logger.i.debug("this.load",this,this.renderInstance+1);this.load()}}get element(){return this._element}static get properties(){return{icon:String,_element:PageInput,element:{type:Object},el:Object,pl:Object,params:{type:Object,value:{}},loading:!0}}loadedElement(){if(!this.el){Logger.i.alert("[EARLY ELEMENT ACCESS] "+this._element.name+" not loaded")}return this.el}elementPath(el){if(!el)el=this._element;let switchName=el.variableType.toLocaleLowerCase();if(1===switchName.split(" ").length){Logger.i.switchConfiguration(`Single worded element naming is not recommended -> ${switchName.toUpperCase()}`);switchName+=" element"}let eln=switchName.replace(/ /g,"-"),elp=`../themes/${window.THEME}/components/elements/${eln}.js`;return{path:elp,name:eln,switchName:el.variableType}}load(){let el=this._element;this.renderInstance+=1;let elementProps=this.elementPath();this.loading=!0;this.loadDynamic(elementProps,this.renderInstance,(newElement,rI)=>{if(rI<this.renderInstance){Logger.i.info("skipped redundant render: ",rI,this.renderInstance,newElement)}else{try{this.el=newElement;newElement.init(el,this);Logger.i.debug("this.load done",newElement,rI);this.replaceWith(newElement)}catch(e){if("newElement.init is not a function"===e.message){Logger.i.error(`Custom Element Doesn't implement init:${elementProps.path}`)}else{Logger.i.error(e)}}}})}importAndInit(elementPath,elementName,renderInstance,cb){const self=this;import(elementPath).then(()=>{Logger.i.debug(`Auto-Loaded ${elementName} from ${elementPath}.`);let newElement=document.createElement(elementName);if(newElement.constructor===HTMLElement){throw new DOMException("Custom Element Not Found: "+elementName)}if(cb)return cb(newElement,renderInstance,self)}).catch(error=>{Logger.i.info(`${elementName} Couldn't be loaded`);Logger.i.error(error);const missingElementName="missing-element";if(elementName===missingElementName){return}self.importAndInit("../elements/missing-element.js",missingElementName,renderInstance,newElement=>{newElement.msg=elementName;this.replaceWith(newElement)})})}async replaceWith(newElement){this.loading=!1;await this.updateComplete;const content=this.querySelector("#content");if(content.firstChild){content.firstChild.replaceWith(newElement)}else{content.appendChild(newElement)}}loadDynamic(elementProps,rI,cb){let l=ElementLoader.autoLoad(elementProps.switchName);if(l){this.importAndInit(l.path,l.name,rI,cb)}else{this.importAndInit(elementProps.path,elementProps.name,rI,cb)}}static autoLoad(elementName){switch(elementName){case"HIDDEN":return{path:"../elements/hidden-element.js",name:"hidden-element"};case"FINGERPRINT ELEMENT":return{path:"../elements/fingerprint-element.js",name:"fingerprint-element"};case"REDIRECT URL":return{path:"../elements/redirect-url.js",name:"redirect-url"};default:}}}window.customElements.define("element-loader",ElementLoader);
+    }`;
+  }
+
+  createRenderRoot() {
+    return this;
+  }
+
+  set element(val) {
+    let oldVal = this._element;
+    this._element = val;
+
+    if (oldVal !== val) {
+      Logger.i.debug('this.load', this, this.renderInstance + 1);
+      this.load();
+    } // this.requestUpdate('prop', oldVal);
+
+  }
+
+  get element() {
+    return this._element;
+  }
+
+  static get properties() {
+    return {
+      icon: String,
+      _element: PageInput,
+      // todo is this definition necessary
+      element: {
+        type: Object
+      },
+      el: Object,
+      pl: Object,
+      params: {
+        type: Object,
+        value: {}
+      },
+      loading: true
+    };
+  }
+  /**
+   * Used to access the active loaded element instance
+   *
+   * @return {*}
+   */
+
+
+  loadedElement() {
+    if (!this.el) {
+      Logger.i.alert('[EARLY ELEMENT ACCESS] ' + this._element.name + ' not loaded');
+    }
+
+    return this.el;
+  }
+
+  elementPath(el) {
+    if (!el) el = this._element;
+    let switchName = el.variableType.toLocaleLowerCase(); // if element variable type is 1 worded, warn and append element
+
+    if (switchName.split(' ').length === 1) {
+      Logger.i.switchConfiguration(`Single worded element naming is not recommended -> ${switchName.toUpperCase()}`); // backward compatibility for single element names
+
+      switchName += ' element';
+    } // replace spaces with dashes
+
+
+    let eln = switchName.replace(/ /g, '-');
+    let elp = `../themes/${window.THEME}/components/elements/${eln}.js`;
+    return {
+      'path': elp,
+      'name': eln,
+      'switchName': el.variableType
+    };
+  }
+
+  load() {
+    let el = this._element; // render count
+    // this is incremented on each _element update
+    // it is used to cancel out outdated callbacks
+
+    this.renderInstance += 1;
+    /*
+    *  Element Naming Convention for Auto-Picking
+    * source files for elements names loaded from switch should end in  *-element.js
+    * the name of the element should be same as the file name
+    *
+    * e.g
+    *   element in name from switch     LIST                SHOPPING CART
+    *   element file                    list-element.js   shopping-cart-element.js
+    *   element name in element file    list-element        shopping-cart-element
+    *
+    * */
+
+    let elementProps = this.elementPath(); // Display loading indicator
+
+    this.loading = true;
+    this.loadDynamic(elementProps, this.renderInstance, (newElement, rI, hl) => {
+      // check if callback is outdated,
+      // only the highest renderInstance is valid
+      if (rI < this.renderInstance) {
+        Logger.i.info('skipped redundant render: ', rI, this.renderInstance, newElement);
+      } else {
+        try {
+          this.el = newElement;
+          newElement.init(el, this);
+          Logger.i.debug('this.load done', newElement, rI); // TODO ignored promise
+
+          this.replaceWith(newElement);
+        } catch (e) {
+          if (e.message === 'newElement.init is not a function') {
+            Logger.i.error(`Custom Element Doesn't implement init:${elementProps.path}`);
+          } else {
+            Logger.i.error(e);
+          }
+        }
+      }
+    });
+  }
+  /**
+   * Dynamically imports a module from elementPath,
+   * creates a new node of elementName then passes it to a callback function cb
+   *
+   * @param elementPath {string} Module Path relative to this file
+   * @param elementName {string} Custom Element registration name
+   * @param renderInstance {number}
+   * @param cb {function} Callback Function
+   */
+
+
+  importAndInit(elementPath, elementName, renderInstance, cb) {
+    const self = this;
+    import(elementPath).then(module => {
+      Logger.i.debug(`Auto-Loaded ${elementName} from ${elementPath}.`); // e.target.import is the import document.
+
+      let newElement = document.createElement(elementName);
+
+      if (newElement.constructor === HTMLElement) {
+        throw new DOMException('Custom Element Not Found: ' + elementName);
+      }
+
+      if (cb) return cb(newElement, renderInstance, self);
+    }).catch(error => {
+      Logger.i.info(`${elementName} Couldn't be loaded`);
+      Logger.i.error(error);
+      const missingElementName = 'missing-element'; // avoid recursive loop, return if it's missing-element
+
+      if (elementName === missingElementName) {
+        return;
+      }
+
+      const missingElementPath = '../elements/missing-element.js';
+      self.importAndInit(missingElementPath, missingElementName, renderInstance, (newElement, hl) => {
+        newElement.msg = elementName; // TODO ignored promise
+
+        this.replaceWith(newElement);
+      });
+    });
+  }
+
+  async replaceWith(newElement) {
+    // Clear Previous Content and remove loading indicator
+    this.loading = false; // we have to wait for dom existence to query select
+
+    await this.updateComplete;
+    const content = this.querySelector('#content'); // todo [OPTIMIZATION POINT] this.replaceWith(newElement);
+    // todo [OPTIMIZATION POINT] find a way to no re-create element if the previous was of the same type
+    // todo [CONT] this could be further extended into form wide element re-use
+
+    if (content.firstChild) {
+      content.firstChild.replaceWith(newElement);
+    } else {
+      content.appendChild(newElement);
+    }
+  }
+  /**
+   * Checks element module existence in auto-load configs
+   * then triggers the loading from the right location
+   *
+   * @param elementProps
+   * @param rI
+   * @param cb
+   */
+
+
+  loadDynamic(elementProps, rI, cb) {
+    let l = ElementLoader.autoLoad(elementProps.switchName);
+
+    if (l) {
+      // Load from config
+      this.importAndInit(l.path, l.name, rI, cb);
+    } else {
+      // Load from naming convention
+      this.importAndInit(elementProps.path, elementProps.name, rI, cb);
+    }
+  }
+  /**
+   * Manual Autoload Configs,
+   * this should mainly be used for elements without an interface
+   * Note : We should never get here
+   *
+   * @param {string} elementName
+   */
+
+
+  static autoLoad(elementName) {
+    switch (elementName) {
+      case 'HIDDEN':
+        return {
+          'path': '../elements/hidden-element.js',
+          'name': 'hidden-element'
+        };
+
+      case 'FINGERPRINT ELEMENT':
+        return {
+          'path': '../elements/fingerprint-element.js',
+          'name': 'fingerprint-element'
+        };
+
+      case 'REDIRECT URL':
+        return {
+          'path': '../elements/redirect-url.js',
+          'name': 'redirect-url'
+        };
+
+      default:
+        return undefined;
+    }
+  }
+
+}
+
+window.customElements.define('element-loader', ElementLoader);

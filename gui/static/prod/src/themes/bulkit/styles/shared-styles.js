@@ -1,4 +1,10 @@
-import{html}from"../../../../node_modules/lit-element/lit-element.js";export const shopProductsSectionTheme=html`
+/**
+ @license
+ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+
+ */
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+export const shopProductsSectionTheme = html`
 <style>
 
 
@@ -108,7 +114,8 @@ import{html}from"../../../../node_modules/lit-element/lit-element.js";export con
 }
 
 </style>
-`;export const ShopProductsMenuTheme=html`
+`;
+export const ShopProductsMenuTheme = html`
 <style>
         /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -953,7 +960,8 @@ nav .cd-dropdown-content  li:hover ul{display:block; visibility: visible}
 .cd-dropdown-content  li a:hover {
 color:var(--app-default-color);}
 </style>
-`;export const SharedStyles=html`
+`;
+export const SharedStyles = html`
 <style>
 
 /* todo this is directly copied from bulma-styles.js */

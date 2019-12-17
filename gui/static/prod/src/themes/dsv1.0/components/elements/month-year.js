@@ -1,4 +1,9 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{MonthYearBase}from"../../../../elements/base/month-year.js";class MonthYear extends MonthYearBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { MonthYearBase } from "../../../../elements/base/month-year.js";
+
+class MonthYear extends MonthYearBase {
+  renderDefault() {
+    return html`
         <style>
             .inp{
                 border-radius: 6px!important;
@@ -16,4 +21,9 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
                 <input class="input inp" type="month" placeholder="Primary input">
             </div>
         </div>
-        `}}customElements.define(MonthYear.is,MonthYear);
+        `;
+  }
+
+}
+
+customElements.define(MonthYear.is, MonthYear);

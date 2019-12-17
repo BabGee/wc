@@ -1,4 +1,14 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../icons/payments-icons.js";import{PaymentOptionsBase}from"../../../../elements/base/payment-options.js";class PaymentOptions extends PaymentOptionsBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../../icons/my-icons.js';
+import { SharedStyles } from "../../styles/shared-styles.js";
+import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "../../icons/payments-icons.js";
+import { PaymentOptionsBase } from "../../../../elements/base/payment-options.js";
+
+class PaymentOptions extends PaymentOptionsBase {
+  renderDefault() {
+    return html`
  ${SharedStyles}
 <style>
 /* The container */
@@ -89,7 +99,7 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
  <div class="field" style="margin-top: 10px; margin-bottom: 10px;">
  <div class="control">
  
- ${this.paymentMethods.map((paymentMethod,methodIndex)=>html`
+ ${this.paymentMethods.map((paymentMethod, methodIndex) => html`
 <div class="is-inline">
      <span class="icon">
       <i><iron-icon icon="mipayicon:mipayicon"></iron-icon></i>
@@ -101,7 +111,7 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
       <span>
       <div class="select is-fullwidth">
   <select id="method-${methodIndex}" style="text-indent: 20px;padding: 0px; border-radius: 4px;" >
-    ${paymentMethod.options.map(option=>html`
+    ${paymentMethod.options.map(option => html`
     <option value="${option.id}">${option.record}</option>
     </div>
     `)}
@@ -115,4 +125,25 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
 </div>
 </div>
   </div>
-  </div>`}constructor(){super()}getValue(){const method=this.qs("input[name=\"method\"]:checked").value,select=this.qs("#"+method);return select.value}valid(){}invalid(){}}customElements.define(PaymentOptions.is,PaymentOptions);
+  </div>`;
+  }
+
+  constructor() {
+    super();
+  }
+
+  getValue() {
+    const method = this.qs('input[name="method"]:checked').value;
+    const select = this.qs('#' + method); // find selected payment method
+    // find selection option in the method
+
+    return select.value;
+  }
+
+  valid(validation) {}
+
+  invalid(validation) {}
+
+}
+
+customElements.define(PaymentOptions.is, PaymentOptions);

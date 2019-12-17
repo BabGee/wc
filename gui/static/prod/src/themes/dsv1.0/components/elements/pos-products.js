@@ -1,4 +1,14 @@
-import{PosProductsBase}from"../../../../elements/base/pos-products.js";import{html}from"../../../../../node_modules/lit-element/lit-element.js";class PosProducts extends PosProductsBase{constructor(){super()}renderDefault(){return html`
+import { PosProductsBase } from "../../../../elements/base/pos-products.js";
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class PosProducts extends PosProductsBase {
+  constructor() {
+    super();
+  }
+
+  renderDefault() {
+    return html`
         <style>
         .container{
             width: 90%;
@@ -136,4 +146,9 @@ import{PosProductsBase}from"../../../../elements/base/pos-products.js";import{ht
             </template>
         </div>
     </section>
-        `}}customElements.define(PosProducts.is,PosProducts);
+        `;
+  }
+
+}
+
+customElements.define(PosProducts.is, PosProducts);

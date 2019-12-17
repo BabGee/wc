@@ -1,4 +1,15 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{FormBase}from"../../../../components/form.js";import{register}from"../../register.js";class FormY extends FormBase{static get is(){return"form-y"}render(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { FormBase } from "../../../../components/form.js";
+import { register } from "../../register.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class FormY extends FormBase {
+  static get is() {
+    return 'form-y';
+  }
+
+  render() {
+    return html`
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
@@ -15,4 +26,13 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
 </div>  
 
 </div>
-`}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register(FormY);
+`;
+  }
+
+  getForm() {
+    return this.shadowRoot.querySelector('slot[name=\'body\']').assignedNodes()[0];
+  }
+
+}
+
+register(FormY);

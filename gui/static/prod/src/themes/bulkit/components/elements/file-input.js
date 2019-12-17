@@ -1,4 +1,15 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{DASHBOARD_STYLES}from"../../styles/dashboard-styles.js";import{FileInputBase}from"../../../../elements/base/file-input.js";class FileInput extends FileInputBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../../icons/my-icons.js';
+import { SharedStyles } from "../../styles/shared-styles.js";
+import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
+import { FileInputBase } from "../../../../elements/base/file-input.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class FileInput extends FileInputBase {
+  renderDefault() {
+    return html`
  ${SharedStyles}       
 ${DASHBOARD_STYLES} 
  <div class="column " >
@@ -21,4 +32,37 @@ ${DASHBOARD_STYLES}
 </div>
 
 
-        `}constructor(){super()}getValue(){return this.value}updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}handleFile(){const fileInput=this.shadowRoot.querySelector("#input");this.uploadFile(fileInput)}}window.customElements.define(FileInput.is,FileInput);
+        `;
+  }
+
+  constructor() {
+    super();
+  }
+
+  getValue() {
+    return this.value;
+  }
+  /**
+   * from FileInputBase
+   * @override
+   */
+
+
+  updateUploadMessage(message) {
+    const display = this.shadowRoot.querySelector('#display');
+    display.textContent = message;
+  }
+  /**
+   * File Selection Change handler
+   * @param evt
+   */
+
+
+  handleFile(evt) {
+    const fileInput = this.shadowRoot.querySelector('#input');
+    this.uploadFile(fileInput);
+  }
+
+}
+
+window.customElements.define(FileInput.is, FileInput);

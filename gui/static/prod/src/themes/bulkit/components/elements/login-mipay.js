@@ -1,4 +1,14 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../icons/payments-icons.js";import{LoginMipayBase}from"../../../../elements/base/login-mipay.js";class LoginMipay extends LoginMipayBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../../icons/my-icons.js';
+import { SharedStyles } from "../../styles/shared-styles.js";
+import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "../../icons/payments-icons.js";
+import { LoginMipayBase } from "../../../../elements/base/login-mipay.js";
+
+class LoginMipay extends LoginMipayBase {
+  renderDefault() {
+    return html`
         ${SharedStyles}
         <style>
         .icon:hover{
@@ -18,4 +28,21 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
   </a>
         </div>
         </div>
-        `}constructor(){super()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(LoginMipay.is,LoginMipay);
+        `;
+  }
+
+  constructor() {
+    super();
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+}
+
+customElements.define(LoginMipay.is, LoginMipay);

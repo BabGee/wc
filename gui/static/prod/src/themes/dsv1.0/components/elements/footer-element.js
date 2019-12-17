@@ -1,4 +1,13 @@
-import{html,LitElement}from"../../../../../node_modules/lit-element/lit-element.js";import{BaseElement}from"../../../../core/base-element.js";class FooterElement extends BaseElement{constructor(){super()}render(){return html`
+import { html, LitElement } from "../../../../../node_modules/lit-element/lit-element.js";
+import { BaseElement } from "../../../../core/base-element.js";
+
+class FooterElement extends BaseElement {
+  constructor() {
+    super();
+  }
+
+  render() {
+    return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
         <style>
         body{
@@ -124,10 +133,10 @@ import{html,LitElement}from"../../../../../node_modules/lit-element/lit-element.
                 <div class="column">
                     <div class="ii-footerfexrow">
 
-                    ${this.e.details.links.map(slide=>html`
+                    ${this.e.details.links.map(slide => html`
                         <div class="ii-footer-col">
                                 <h3 class="ii__footer-col-title is-capitalized">${slide.title}</h3>
-                                ${slide.links.map(link=>html`
+                                ${slide.links.map(link => html`
                                 <a href="#" class="ii__footer-col-link">${link}</a>
                                 `)}
                         </div>
@@ -157,4 +166,22 @@ import{html,LitElement}from"../../../../../node_modules/lit-element/lit-element.
             </div>
         </div>
     </footer>
-        `}static get is(){return"footer-element"}init(pElement,loader){super.init(pElement,loader)}firstUpdated(changedProperties){super.firstUpdated(changedProperties);console.log("LINKS..."+JSON.stringify(this.e.details.links))}}customElements.define(FooterElement.is,FooterElement);
+        `;
+  }
+
+  static get is() {
+    return 'footer-element';
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    console.log("LINKS..." + JSON.stringify(this.e.details.links));
+  }
+
+}
+
+customElements.define(FooterElement.is, FooterElement);

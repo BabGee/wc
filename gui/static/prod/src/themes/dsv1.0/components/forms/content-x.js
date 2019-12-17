@@ -1,4 +1,15 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{FormBase}from"../../../../components/form.js";import{register}from"../../register.js";class ContentX extends FormBase{static get is(){return"content-x"}render(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { FormBase } from '../../../../components/form.js';
+import { register } from "../../register.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class ContentX extends FormBase {
+  static get is() {
+    return 'content-x';
+  }
+
+  render() {
+    return html`
 
         <style>
             .column .column-title {
@@ -21,4 +32,13 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
                 <slot name="body"></slot>
             </div>
         </div>
-    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register(ContentX);
+    `;
+  }
+
+  getForm() {
+    return this.shadowRoot.querySelector('slot[name=\'body\']').assignedNodes()[0];
+  }
+
+}
+
+register(ContentX);

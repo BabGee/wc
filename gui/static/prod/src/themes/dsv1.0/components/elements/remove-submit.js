@@ -1,4 +1,14 @@
-import{RemoveSubmitBase}from"../../../../elements/base/remove-submit.js";import{html}from"../../../../../node_modules/lit-element/lit-element.js";class RemoveSubmit extends RemoveSubmitBase{constructor(){super()}renderDefault(){return html`
+import { RemoveSubmitBase } from "../../../../elements/base/remove-submit.js";
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class RemoveSubmit extends RemoveSubmitBase {
+  constructor() {
+    super();
+  }
+
+  renderDefault() {
+    return html`
         <a class="button is-primary is-rounded">
             <span class="icon">
             <!--<i class="fab fa-github"></i>-->
@@ -6,4 +16,9 @@ import{RemoveSubmitBase}from"../../../../elements/base/remove-submit.js";import{
             </span>
             <span>${this.name}</span>
         </a>
-        `}}customElements.define(RemoveSubmit.is,RemoveSubmit);
+        `;
+  }
+
+}
+
+customElements.define(RemoveSubmit.is, RemoveSubmit);

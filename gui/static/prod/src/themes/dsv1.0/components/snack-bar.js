@@ -1,4 +1,17 @@
-import{html}from"../../../../node_modules/lit-element/lit-element.js";import{SnackBarBase}from"../../../components/snack-bar.js";import{register}from"../register.js";import"../../../../node_modules/fa-icons/index.js";class SnackBar extends SnackBarBase{render(){return html`   
+/**
+ @license
+ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+
+ */
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+import { SnackBarBase } from "../../../components/snack-bar.js";
+import { register } from '../register.js';
+import "../../../../node_modules/fa-icons/index.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class SnackBar extends SnackBarBase {
+  render() {
+    return html`   
     
       <style>
 
@@ -67,4 +80,9 @@ import{html}from"../../../../node_modules/lit-element/lit-element.js";import{Sna
       </div>        
     </div>
   </div>
-    `}}register(SnackBar);
+    `;
+  }
+
+}
+
+register(SnackBar);

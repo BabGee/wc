@@ -1,4 +1,5 @@
-import{html}from"../../../../node_modules/lit-element/lit-element.js";export const BULMA_STYLES=html`
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+export const BULMA_STYLES = html`
 <style>
 
 /*! bulma.io v0.3.2 | MIT License | github.com/jgthms/bulma */

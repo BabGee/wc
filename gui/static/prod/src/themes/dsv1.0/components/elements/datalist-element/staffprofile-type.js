@@ -1,4 +1,20 @@
-import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-element.js";import"../../../../../../node_modules/fa-icons/index.js";import"../../../../../../node_modules/@polymer/paper-listbox/paper-listbox.js";import"../../../../../../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js";import"../../../../../../node_modules/@polymer/paper-item/paper-item.js";import"../../../../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";import"../../../../../../node_modules/@polymer/paper-dropdown-menu/paper-dropdown-menu.js";import"./staffprofile-type-footer.js";import"./staffprofile-type-header.js";import"./datasource-staffprofile-head.js";export class StaffProfileType extends LitElement{constructor(){super()}render(){return html`
+import { LitElement, html } from "../../../../../../node_modules/lit-element/lit-element.js";
+import "../../../../../../node_modules/fa-icons/index.js";
+import "../../../../../../node_modules/@polymer/paper-listbox/paper-listbox.js";
+import "../../../../../../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js";
+import "../../../../../../node_modules/@polymer/paper-item/paper-item.js";
+import "../../../../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";
+import "../../../../../../node_modules/@polymer/paper-dropdown-menu/paper-dropdown-menu.js";
+import "./staffprofile-type-footer.js";
+import "./staffprofile-type-header.js";
+import "./datasource-staffprofile-head.js";
+export class StaffProfileType extends LitElement {
+  constructor() {
+    super();
+  }
+
+  render() {
+    return html`
 
         <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -105,7 +121,7 @@ tr {
         <tbody>
 
           <tr id="first-row" >
-          ${this.columns.map(column=>html`
+          ${this.columns.map(column => html`
             <th  style="padding-top: 20px; padding-bottom: 20px; border-bottom: 0px solid #fff;">
                 <datasource-staffprofile-head
                         .column="${column}"
@@ -119,13 +135,13 @@ tr {
             `)}
           </tr>
 
-          ${this.data.map((item,itemIndex)=>html`
+          ${this.data.map((item, itemIndex) => html`
           <tr id="tr-${itemIndex}">
           <th class="index-column" style="padding-top: 20px; padding-bottom: 20px;">
 
-          ${!0!==this.details.selectable?html`<span class= "normal-td" style="color: #6c7a89; font-size: 14px; font-weight: 500; font-family: Montserrat;">${item.index}</span>
-          `:html`<label class="checkbox">
-          <input id="checkbox-${itemIndex}" @click="${()=>this.checkRow(itemIndex)}" type="checkbox">
+          ${this.details.selectable !== true ? html`<span class= "normal-td" style="color: #6c7a89; font-size: 14px; font-weight: 500; font-family: Montserrat;">${item.index}</span>
+          ` : html`<label class="checkbox">
+          <input id="checkbox-${itemIndex}" @click="${() => this.checkRow(itemIndex)}" type="checkbox">
           
         </label>
       
@@ -146,7 +162,7 @@ tr {
 
               <td  style="padding-top: 20px; padding-bottom: 20px;">
                   
-                  <span style="color: #6c7a89; font-size: 14px; font-weight: 500; font-family: Montserrat;" class= "normal-td">${item["Contact Count"]}</span>
+                  <span style="color: #6c7a89; font-size: 14px; font-weight: 500; font-family: Montserrat;" class= "normal-td">${item['Contact Count']}</span>
 
               
               </td>
@@ -168,7 +184,7 @@ tr {
         </tbody>
       </table>
 
-      ${this.paginate?html`
+      ${this.paginate ? html`
       <staffprofile-type-footer resources="${this.resources}"
                              language="${this.language}"
                              footer-position="${this.footerPosition}"
@@ -184,8 +200,110 @@ tr {
                              @p-page="${this._pageChanged}"
                              @n-page="${this._pageChanged}">
       </staffprofile-type-footer>
-      `:html``}
+      ` : html``}
 
 </section>
 
-        `}static get is(){return"staffprofile-type"}static get properties(){return{data:{type:Array,notify:!0},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const allsideActions=this.shadowRoot.querySelectorAll(".side-action"),allDropdowns=this.shadowRoot.querySelectorAll(".arrow-down");allsideActions.forEach(icon=>{icon.classList.add("hidden")});allDropdowns.forEach(dropdown=>{dropdown.classList.add("hidden")});const statuses=this.shadowRoot.querySelectorAll("a[class~=\"button\"]");statuses.forEach(status=>{if(!("Active"!==status.innerHTML)){status.classList.replace("active","suspended")}})}checkRow(index){const row=this.shadowRoot.querySelector("#tr-"+index),checkbox=this.shadowRoot.querySelector("#checkbox-"+index);if(!0==checkbox.checked){row.classList.add("active-row")}else{row.classList.remove("active-row")}}}customElements.define(StaffProfileType.is,StaffProfileType);
+        `;
+  }
+
+  static get is() {
+    return 'staffprofile-type';
+  }
+
+  static get properties() {
+    return {
+      /**
+       * Contains the data which will be displayed in the table.
+       */
+      data: {
+        type: Array,
+        notify: true
+      },
+      details: Object,
+      paginate: {
+        type: Boolean,
+        value: false
+      },
+      page: {
+        type: Number
+      },
+      size: {
+        type: Number
+      },
+
+      /**
+       * The number of the previous page
+       */
+      oldPage: {
+        type: Number,
+        notify: true
+      },
+
+      /**
+       * The total of elements have to be provided in case of pagination, it is mandatory.
+       */
+      totalElements: Number,
+
+      /**
+       * The total of pages have to be provided in case of pagination, it is mandatory.
+       * It is used to compute the footer.
+       */
+      totalPages: Number,
+
+      /**
+       * The available size in case of pagination.
+       */
+      availableSize: Array,
+
+      /**
+       * If true, the rows may be selectable.
+       */
+      selectable: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Contains the positions of selected columns.
+       * Can contain a specific data if selectableDataKey is setted.
+       */
+      selected: {
+        type: Array
+      },
+      title: String
+    };
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    const allsideActions = this.shadowRoot.querySelectorAll('.side-action');
+    const allDropdowns = this.shadowRoot.querySelectorAll('.arrow-down');
+    allsideActions.forEach(icon => {
+      icon.classList.add("hidden");
+    });
+    allDropdowns.forEach(dropdown => {
+      dropdown.classList.add("hidden");
+    });
+    const statuses = this.shadowRoot.querySelectorAll('a[class~="button"]');
+    statuses.forEach(status => {
+      if (status.innerHTML !== 'Active') {// do nothing since by default is active
+      } else {
+        status.classList.replace('active', 'suspended');
+      }
+    });
+  }
+
+  checkRow(index) {
+    const row = this.shadowRoot.querySelector('#tr-' + index);
+    const checkbox = this.shadowRoot.querySelector('#checkbox-' + index);
+
+    if (checkbox.checked == true) {
+      row.classList.add('active-row');
+    } else {
+      row.classList.remove('active-row');
+    }
+  }
+
+}
+customElements.define(StaffProfileType.is, StaffProfileType);

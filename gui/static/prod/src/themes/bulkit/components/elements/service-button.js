@@ -1,4 +1,11 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../icons/my-icons.js";import{ServiceButtonBase}from"../../../../elements/base/service-button.js";class ServiceButton extends ServiceButtonBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import '../../icons/my-icons.js';
+import { ServiceButtonBase } from "../../../../elements/base/service-button.js";
+
+class ServiceButton extends ServiceButtonBase {
+  renderDefault() {
+    return html`
                 <style include="flex-grid">
             .ccc {
                 width : 100%;
@@ -27,7 +34,7 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
                 padding: 32px;
                 border-radius: 100%;
                 text-align: center;
-                background: ${this.e.kind||"var(--app-default-color)"};
+                background: ${this.e.kind || 'var(--app-default-color)'};
                 color: #ffffff;
                 box-shadow: inset 0 0 0 5px #f2f2f2;
                 -webkit-box-shadow: inset 0 0 0 5px #f2f2f2;
@@ -67,4 +74,9 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
             </div>
         </div>
         
-        `}}customElements.define(ServiceButton.is,ServiceButton);
+        `;
+  }
+
+}
+
+customElements.define(ServiceButton.is, ServiceButton);

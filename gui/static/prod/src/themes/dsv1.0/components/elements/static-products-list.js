@@ -1,4 +1,10 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{StaticProductsListBase}from"../../../../elements/base/static-products-list.js";class StaticProductsList extends StaticProductsListBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { StaticProductsListBase } from "../../../../elements/base/static-products-list.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class StaticProductsList extends StaticProductsListBase {
+  renderDefault() {
+    return html`
         <style>
         /* The Modal (background) */
 .product-modal {
@@ -120,14 +126,14 @@ background-color: #ffffff;
                             <!-- Product grid -->
                             <div class="column is-12 is-tablet-landscape-padded">
                             <div class="columns is-product-grid is-multiline is-centered">
-                              ${this.productItems.map(product=>html`
+                              ${this.productItems.map(product => html`
                                 <!-- Product -->
                                  
                                  <div class="column is-2">
-                                    <div class="flat-card" @click =${()=>this._productDialog(product)}>
+                                    <div class="flat-card" @click =${() => this._productDialog(product)}>
                                     <!-- Product zoomable image -->
                                 <div class="image">
-                                    <img src="/media/${product.image||"crm_productitem_imagepath/NO_Image_sMI9Ypk.jpg"}" alt="">
+                                    <img src="/media/${product.image || 'crm_productitem_imagepath/NO_Image_sMI9Ypk.jpg'}" alt="">
                                     </div>
                                     <!-- Product meta -->
                                     <div class="product-info has-text-centered">
@@ -178,11 +184,11 @@ background-color: #ffffff;
                                              <div class="column is-12">
                                               <div class="box has-ribbon-left" style="margin: 5px">  
                                               <div class="ribbon is-success">ON OFFER</div>
-                                              <div class="close-modal"  @click =${()=>this._productDialogClose()} >X</div>
+                                              <div class="close-modal"  @click =${() => this._productDialogClose()} >X</div>
         
                 <!-- Product image -->
                 <div id="product-view" class="detail-image translateLeft">
-                    <img data-action="zoom" alt="" src="/media/${this.selectedProduct.image||"crm_productitem_imagepath/NO_Image_sMI9Ypk.jpg"}">
+                    <img data-action="zoom" alt="" src="/media/${this.selectedProduct.image || 'crm_productitem_imagepath/NO_Image_sMI9Ypk.jpg'}">
                 </div>
         
                                              </div> </div>
@@ -223,4 +229,47 @@ background-color: #ffffff;
 </div>
         <!-- /Main wrapper --  
     
-        `}constructor(){super()}_productDialog(product){this.selectedProduct=product;this.shadowRoot.querySelector("#productModal").style.display="block"}_productDialogClose(){this.shadowRoot.querySelector("#productModal").style.display="none"}_findProductItem(productId){var results=this.productItems.filter(function(item){return item.id===parseInt(productId)});return results[0]}_productDetails(evt){const productId=evt.currentTarget["product-id"],product=this._findProductItem(productId);this.currentProduct=product;this._addCartItem(evt)}}customElements.define(StaticProductsList.is,StaticProductsList);
+        `;
+  }
+
+  constructor() {
+    super();
+  }
+
+  _productDialog(product) {
+    this.selectedProduct = product;
+    this.shadowRoot.querySelector('#productModal').style.display = 'block';
+  }
+
+  _productDialogClose() {
+    this.shadowRoot.querySelector('#productModal').style.display = 'none';
+  }
+
+  _findProductItem(productId) {
+    var results = this.productItems.filter(function (item) {
+      // console.log(item);
+      return item['id'] === parseInt(productId);
+    });
+    return results[0];
+  }
+
+  _productDetails(evt) {
+    // console.log(evt.currentTarget.dataset);
+    const productId = evt.currentTarget['product-id'];
+
+    const product = this._findProductItem(productId); // console.log(cartItem);
+
+
+    this.currentProduct = product; // todo Update to show product item details in a dialog with quantity input field
+    // then remove below
+
+    this._addCartItem(evt);
+
+    return;
+    this.$.quantity.value = 1;
+    this.$.dialog.open();
+  }
+
+}
+
+customElements.define(StaticProductsList.is, StaticProductsList);

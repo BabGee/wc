@@ -1,4 +1,9 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{PaymentFooterBase}from"../../../../elements/base/payment-footer.js";class PaymentFooter extends PaymentFooterBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { PaymentFooterBase } from "../../../../elements/base/payment-footer.js";
+
+class PaymentFooter extends PaymentFooterBase {
+  renderDefault() {
+    return html`
     <style>
       .tab-right-bottom{
         margin-top: 20px;
@@ -18,4 +23,13 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
         </div>
       </div>
     </div>
-        `}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(PaymentFooter.is,PaymentFooter);
+        `;
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+}
+
+window.customElements.define(PaymentFooter.is, PaymentFooter);

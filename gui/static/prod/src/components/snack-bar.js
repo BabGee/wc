@@ -1,4 +1,16 @@
-import{LitElement,html}from"../../node_modules/lit-element/lit-element.js";export const SNACKBAR_CONTEXT_INFO="INFO";export const SNACKBAR_CONTEXT_WARNING="WARNING";export const SNACKBAR_CONTEXT_DANGER="DANGER";export const SNACKBAR_CONTEXT_SUCCESS="SUCCESS";export const SnackBarBase=class extends LitElement{render(){return html`
+/**
+@license
+Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+
+*/
+import { LitElement, html } from "../../node_modules/lit-element/lit-element.js";
+export const SNACKBAR_CONTEXT_INFO = 'INFO';
+export const SNACKBAR_CONTEXT_WARNING = 'WARNING';
+export const SNACKBAR_CONTEXT_DANGER = 'DANGER';
+export const SNACKBAR_CONTEXT_SUCCESS = 'SUCCESS';
+export const SnackBarBase = class extends LitElement {
+  render() {
+    return html`
       <style>
       :host {
         display: block;
@@ -29,4 +41,19 @@ import{LitElement,html}from"../../node_modules/lit-element/lit-element.js";expor
       }
     </style>
     <slot></slot>
-    `}static get properties(){return{active:Boolean,title:String,context:String}}static get is(){return"snack-bar"}};
+    `;
+  }
+
+  static get properties() {
+    return {
+      active: Boolean,
+      title: String,
+      context: String
+    };
+  }
+
+  static get is() {
+    return 'snack-bar';
+  }
+
+};

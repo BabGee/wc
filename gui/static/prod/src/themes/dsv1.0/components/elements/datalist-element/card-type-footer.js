@@ -1,4 +1,14 @@
-import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-element.js";import"../../../../../../node_modules/@polymer/paper-listbox/paper-listbox.js";import"../../../../../../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js";import"../../../../../../node_modules/@polymer/paper-item/paper-item.js";import"../../../../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";import"../../../../../../node_modules/@polymer/paper-dropdown-menu/paper-dropdown-menu.js";export class CardTypeFooter extends LitElement{render(){return html`
+import { LitElement, html } from "../../../../../../node_modules/lit-element/lit-element.js";
+import "../../../../../../node_modules/@polymer/paper-listbox/paper-listbox.js";
+import "../../../../../../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js";
+import "../../../../../../node_modules/@polymer/paper-item/paper-item.js";
+import "../../../../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";
+import "../../../../../../node_modules/@polymer/paper-dropdown-menu/paper-dropdown-menu.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+export class CardTypeFooter extends LitElement {
+  render() {
+    return html`
         <style>
             :host {
                 display: block;
@@ -57,23 +67,23 @@ import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-eleme
                             Per Page
                         </div>
                         <div class="size">
-                          ${this.availableSize.length?html`
+                          ${this.availableSize.length ? html`
                                 <paper-dropdown-menu no-label-float vertical-align="bottom">
                                     <paper-listbox attr-for-selected="size"
                                                    @iron-select="${this._newSizeIsSelected}"
                                                    selected="${this.size}"
                                                    slot="dropdown-content">
-                                        ${this.availableSize.map(size=>html`<paper-item size="${size}">${size}</paper-item>`)}
+                                        ${this.availableSize.map(size => html`<paper-item size="${size}">${size}</paper-item>`)}
                                     </paper-listbox>
                                 </paper-dropdown-menu>
-                          `:html`
+                          ` : html`
                                 <span>50</span>
                           `}                            
                         </div>
                     </div>
 
                     <div class="status" style="display: inline-block;">
-                        ${this._computeCurrentSize(this.page,this.size)} - ${this._computeCurrentMaxSize(this.page,this.size,this.totalElements)} of ${this.totalElements}
+                        ${this._computeCurrentSize(this.page, this.size)} - ${this._computeCurrentMaxSize(this.page, this.size, this.totalElements)} of ${this.totalElements}
                     </div>
                     
                     <paper-icon-button icon="chevron-left" 
@@ -81,9 +91,108 @@ import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-eleme
                                        @click="${this._prevPage}"></paper-icon-button>
                                        
                     <paper-icon-button icon="chevron-right" 
-                                       ?disabled="${!this._nextButtonEnabled(this.page,this.totalPages)}" 
+                                       ?disabled="${!this._nextButtonEnabled(this.page, this.totalPages)}" 
                                        @click="${this._nextPage}"></paper-icon-button>
                 
                 </div>
             </div>
-        </div>`}constructor(){super();this.availableSize=[];this.size=50}static get is(){return"card-type-footer"}static get properties(){return{footerPosition:String,size:{type:Number},page:{type:Number},totalElements:{type:Number},totalPages:{type:Number},availableSize:Array}}_computeCurrentSize(page,size){return(page-1)*size+1}_computeCurrentMaxSize(page,size,totalElements){const maxSize=size*page;return maxSize>totalElements?totalElements:maxSize}_nextPage(){if(this.page<this.totalPages){this.page=this.page+1}this.dispatchEvent(new CustomEvent("n-page",{detail:{page:this.page}}))}_prevPage(){if(0<this.page-1){this.page=this.page-1}this.dispatchEvent(new CustomEvent("p-page",{detail:{page:this.page}}))}_nextButtonEnabled(page,totalPages){return page<totalPages}_prevButtonEnabled(page){return 1<page}_newSizeIsSelected(){const newSize=this.shadowRoot.querySelector("paper-listbox").selected;if(newSize){if(null!==this.oldPage&&this.oldPage!==void 0){this.page=1}this.size=newSize;this.dispatchEvent(new CustomEvent("size-change",{detail:{size:newSize}}))}}_computePosition(position){if("right"===position){return"end-justified"}return""}}customElements.define(CardTypeFooter.is,CardTypeFooter);
+        </div>`;
+  }
+
+  constructor() {
+    super();
+    this.availableSize = [];
+    this.size = 50;
+  }
+
+  static get is() {
+    return 'card-type-footer';
+  }
+
+  static get properties() {
+    return {
+      footerPosition: String,
+      size: {
+        type: Number
+      },
+      page: {
+        type: Number
+      },
+      totalElements: {
+        type: Number
+      },
+      totalPages: {
+        type: Number
+      },
+      availableSize: Array
+    };
+  }
+
+  _computeCurrentSize(page, size) {
+    return (page - 1) * size + 1;
+  }
+
+  _computeCurrentMaxSize(page, size, totalElements) {
+    const maxSize = size * page;
+    return maxSize > totalElements ? totalElements : maxSize;
+  }
+
+  _nextPage() {
+    if (this.page < this.totalPages) {
+      this.page = this.page + 1;
+    }
+
+    this.dispatchEvent(new CustomEvent('n-page', {
+      detail: {
+        page: this.page
+      }
+    }));
+  }
+
+  _prevPage() {
+    if (this.page - 1 > 0) {
+      this.page = this.page - 1;
+    }
+
+    this.dispatchEvent(new CustomEvent('p-page', {
+      detail: {
+        page: this.page
+      }
+    }));
+  }
+
+  _nextButtonEnabled(page, totalPages) {
+    return page < totalPages;
+  }
+
+  _prevButtonEnabled(page) {
+    return page > 1;
+  }
+
+  _newSizeIsSelected() {
+    const newSize = this.shadowRoot.querySelector('paper-listbox').selected;
+
+    if (newSize) {
+      if (this.oldPage !== null && this.oldPage !== undefined) {
+        this.page = 1;
+      }
+
+      this.size = newSize;
+      this.dispatchEvent(new CustomEvent('size-change', {
+        detail: {
+          size: newSize
+        }
+      }));
+    }
+  }
+
+  _computePosition(position) {
+    if (position === 'right') {
+      return 'end-justified';
+    }
+
+    return '';
+  }
+
+}
+customElements.define(CardTypeFooter.is, CardTypeFooter);

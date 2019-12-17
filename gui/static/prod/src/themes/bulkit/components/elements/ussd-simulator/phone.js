@@ -1,4 +1,34 @@
-import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-element.js";import"./simulator-preview.js";import{CONNECTION_END,CONNECTION_BEG,CONNECTION_CON}from"./simulator-preview.js";import{Logger}from"../../../../../core/logger.js";class Nexus4 extends LitElement{constructor(props){super(props);this.isLoading=!1;this.state=0;this.ussdString="";this.session="";this.sessionState=CONNECTION_BEG}static get properties(){return{session:String,msisdn:String,serviceCode:String,ussdString:String,sessionState:String,isLoading:Boolean,dialed:Boolean}}render(){return html`
+import { LitElement, html } from "../../../../../../node_modules/lit-element/lit-element.js";
+import "./simulator-preview.js";
+import { CONNECTION_END, CONNECTION_BEG, CONNECTION_CON } from "./simulator-preview.js";
+import { Logger } from "../../../../../core/logger.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class Nexus4 extends LitElement {
+  constructor(props) {
+    super(props);
+    this.isLoading = false;
+    this.state = 0;
+    this.ussdString = ''; // generate a random string of X chars
+
+    this.session = '';
+    this.sessionState = CONNECTION_BEG;
+  }
+
+  static get properties() {
+    return {
+      session: String,
+      msisdn: String,
+      serviceCode: String,
+      ussdString: String,
+      sessionState: String,
+      isLoading: Boolean,
+      dialed: Boolean
+    };
+  }
+
+  render() {
+    return html`
     <style>
         * {
             margin: 0;
@@ -628,7 +658,7 @@ import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-eleme
 
 
     </style>
-    <div> ${this.isLoading?html`Loading ...`:html``} </div>
+    <div> ${this.isLoading ? html`Loading ...` : html``} </div>
 
         <div class="nexus">
 	<div class="speaker"></div>
@@ -702,4 +732,149 @@ import{LitElement,html}from"../../../../../../node_modules/lit-element/lit-eleme
 	</div>
         
 </div>
-    `}pusher(evt){var num=evt.currentTarget.dataset.v;const display=this.shadowRoot.querySelector(".number-area .numbers");display.innerHTML+=""+num+""}delete(){const display=this.shadowRoot.querySelector(".number-area .numbers");var numbers=display.textContent,numbers2=numbers.length;display.innerHTML=numbers.substr(0,numbers2-1)}makeid(length){for(var result="",characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",charactersLength=characters.length,i=0;i<length;i++){result+=characters.charAt(Math.floor(Math.random()*charactersLength))}return result}_callCode(){var code=this.shadowRoot.querySelector("#code");const codeV=code.textContent;this.serviceCode=codeV;this.session=`EM${this.makeid(8)}`;this.makeRequest().then(preview=>{this.state=2;this.dialed=!0;return this.updateComplete.then(()=>{this.displayMenu(preview.PAGE_STRING,preview.MNO_RESPONSE_SESSION_STATE)})})}makeRequest(){var params={MSISDN:this.msisdn,accessPoint:this.serviceCode,sessionID:this.session,input:this.ussdString,sessionState:this.sessionState};this.isLoading=!0;return this.el.makeRequest(params)}handleSubmit(event){const selection=event.detail.selection;if(this.ussdString){this.ussdString+="*"+selection}else{this.ussdString=selection}this.makeRequest().then(preview=>{this.displayMenu(preview.PAGE_STRING,preview.MNO_RESPONSE_SESSION_STATE)})}handleCancel(){this.dialed=!1;this.updatePreview("")}updatePreview(message){const prvw=this.shadowRoot.querySelector("#preview");prvw.updateDisplay(message)}displayMenu(string,sessionState){this.isLoading=!1;if(sessionState==CONNECTION_END){const prvw=this.shadowRoot.querySelector("#preview");this.sessionState=CONNECTION_END;prvw.setState(this.sessionState)}else if(sessionState==CONNECTION_BEG){this.sessionState=CONNECTION_BEG}else if(sessionState==CONNECTION_CON){this.sessionState=CONNECTION_CON}else{Logger.i.warn("Unknown USSD startsWith")}this.updatePreview(string)}currentTab(evt){var els=this.shadowRoot.querySelectorAll(".phone-tabs li");for(let i=0;i<els.length;++i){const el=els[i];el.classList.remove("current")}const link=evt.currentTarget;link.parentElement.classList.add("current");var tabContents=this.shadowRoot.querySelector(".phone-tab-contents"),tab=evt.currentTarget.dataset.t;if("phone"==tab){tabContents.classList.remove("getpeoples");tabContents.classList.remove("getclock")}else if("clock"==tab){tabContents.classList.remove("getpeoples");tabContents.classList.add("getclock")}else if("people"==tab){tabContents.classList.remove("getclock");tabContents.classList.add("getpeoples")}}}customElements.define("nexus-4",Nexus4);
+    `;
+  }
+  /*	Pusher	*/
+
+
+  pusher(evt) {
+    var num = evt.currentTarget.dataset['v'];
+    const display = this.shadowRoot.querySelector('.number-area .numbers');
+    display.innerHTML += '' + num + '';
+  }
+  /*	Delete */
+
+
+  delete(evt) {
+    const display = this.shadowRoot.querySelector('.number-area .numbers');
+    var numbers = display.textContent;
+    var numbers2 = numbers.length;
+    display.innerHTML = numbers.substr(0, numbers2 - 1);
+  }
+
+  makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+  }
+
+  _callCode() {
+    var code = this.shadowRoot.querySelector('#code');
+    const codeV = code.textContent; // remove * at begining
+    // TODO deprecated, left for reference
+    // if (codeV.startsWith('*'))
+    // {codeV = codeV.slice(0, 0) + codeV.slice(1, codeV.length);}
+    // remove # at end
+    // TODO deprecated, left for reference
+    // if (codeV.endsWith('#')) {
+    //   codeV = codeV.slice(0, codeV.length - 1)
+    //     + codeV.slice(codeV.length, codeV.length);
+    // }
+
+    this.serviceCode = codeV; // generate session id
+
+    this.session = `EM${this.makeid(8)}`;
+    this.makeRequest().then(preview => {
+      this.state = 2;
+      this.dialed = true;
+      return this.updateComplete.then(() => {
+        this.displayMenu(preview['PAGE_STRING'], preview['MNO_RESPONSE_SESSION_STATE']);
+      });
+    });
+  }
+
+  makeRequest() {
+    var params = {
+      'MSISDN': this.msisdn,
+      'accessPoint': this.serviceCode,
+      'sessionID': this.session,
+      'input': this.ussdString,
+      'sessionState': this.sessionState
+    };
+    this.isLoading = true;
+    return this.el.makeRequest(params);
+  }
+
+  handleSubmit(event) {
+    const selection = event.detail['selection'];
+
+    if (this.ussdString) {
+      this.ussdString += '*' + selection;
+    } else {
+      this.ussdString = selection;
+    }
+
+    this.makeRequest().then(preview => {
+      this.displayMenu(preview['PAGE_STRING'], preview['MNO_RESPONSE_SESSION_STATE']);
+    });
+  }
+
+  handleCancel(evt) {
+    this.dialed = false; // clear preview for next dial
+
+    this.updatePreview('');
+  }
+
+  updatePreview(message) {
+    const prvw = this.shadowRoot.querySelector('#preview');
+    prvw.updateDisplay(message);
+  }
+
+  displayMenu(string, sessionState) {
+    this.isLoading = false;
+
+    if (sessionState == CONNECTION_END) {
+      const prvw = this.shadowRoot.querySelector('#preview');
+      this.sessionState = CONNECTION_END;
+      prvw.setState(this.sessionState);
+    } else if (sessionState == CONNECTION_BEG) {
+      this.sessionState = CONNECTION_BEG;
+    } else if (sessionState == CONNECTION_CON) {
+      this.sessionState = CONNECTION_CON;
+    } else {
+      Logger.i.warn('Unknown USSD startsWith');
+    } // Logger.i.debug(string);
+
+
+    this.updatePreview(string);
+  }
+  /*	Current Tab 	*/
+
+
+  currentTab(evt) {
+    var els = this.shadowRoot.querySelectorAll('.phone-tabs li');
+
+    for (let i = 0; i < els.length; ++i) {
+      const el = els[i];
+      el.classList.remove('current');
+    }
+
+    const link = evt.currentTarget; // console.log(link);
+
+    link.parentElement.classList.add('current');
+    /*	Simple Tab 	*/
+
+    var tabContents = this.shadowRoot.querySelector('.phone-tab-contents');
+    var tab = evt.currentTarget.dataset['t'];
+
+    if (tab == 'phone') {
+      tabContents.classList.remove('getpeoples');
+      tabContents.classList.remove('getclock');
+    } else if (tab == 'clock') {
+      tabContents.classList.remove('getpeoples');
+      tabContents.classList.add('getclock');
+    } else if (tab == 'people') {
+      tabContents.classList.remove('getclock');
+      tabContents.classList.add('getpeoples');
+    }
+  }
+
+}
+
+customElements.define('nexus-4', Nexus4);

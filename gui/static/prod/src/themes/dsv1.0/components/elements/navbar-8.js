@@ -1,4 +1,11 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{NavbarBase}from"../../../../elements/base/navbar-base.js";import"../../../../../node_modules/fa-icons/index.js";class Navbar8 extends NavbarBase{renderDefault(){html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { NavbarBase } from "../../../../elements/base/navbar-base.js";
+import "../../../../../node_modules/fa-icons/index.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class Navbar8 extends NavbarBase {
+  renderDefault() {
+    const light = html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="bind-box">
           <div class="block">
@@ -35,7 +42,9 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
             </nav>
           </div>
         </div>
-    `;return html`
+    `; // this is dark
+
+    return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
 
@@ -102,4 +111,13 @@ nav {
         </div>
 
 
-     `}static get is(){return"navbar-8"}}customElements.define(Navbar8.is,Navbar8);
+     `;
+  }
+
+  static get is() {
+    return 'navbar-8';
+  }
+
+}
+
+customElements.define(Navbar8.is, Navbar8);

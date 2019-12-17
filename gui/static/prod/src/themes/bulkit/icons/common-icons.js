@@ -1,4 +1,7 @@
-import"../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../node_modules/@polymer/iron-iconset-svg/iron-iconset-svg.js";import{html}from"../../../../node_modules/lit-element/lit-element.js";const template=html`
+import "../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "../../../../node_modules/@polymer/iron-iconset-svg/iron-iconset-svg.js";
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+const template = html`
 
 <iron-iconset-svg size="512" name="social">
 <svg><defs>
@@ -21,4 +24,4 @@ import"../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../..
 </g>
 </defs></svg>
 </iron-iconset-svg>
-`;
+`; // document.head.appendChild(template.content);

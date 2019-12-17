@@ -1,4 +1,11 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{TextAreaBase}from"../../../../elements/base/text-area.js";import{Logger}from"../../../../core/logger.js";class TextArea extends TextAreaBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { TextAreaBase } from "../../../../elements/base/text-area.js";
+import { Logger } from "../../../../core/logger.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class TextArea extends TextAreaBase {
+  renderDefault() {
+    return html`
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 <style>
@@ -72,4 +79,33 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
       <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
   </div>
 </div>
- `}getInput(){return this.qs("#input")}getValue(){return this.getInput().value}valid(validation){"block"===this.qs("#warning-text").style.display?this.qs("#warning-text").style.display="none":this.qs("#warning-text").style.display="block";Logger.i.debug(validation);if(validation){}}invalid(validation){this.qs("#warning-text").style.display="block";Logger.i.debug(validation)}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}window.customElements.define(TextArea.is,TextArea);
+ `;
+  }
+
+  getInput() {
+    return this.qs('#input');
+  }
+
+  getValue() {
+    return this.getInput().value;
+  }
+
+  valid(validation) {
+    this.qs('#warning-text').style.display === 'block' ? this.qs('#warning-text').style.display = 'none' : this.qs('#warning-text').style.display = 'block';
+    Logger.i.debug(validation);
+
+    if (validation) {}
+  }
+
+  invalid(validation) {
+    this.qs('#warning-text').style.display = 'block';
+    Logger.i.debug(validation);
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+}
+
+window.customElements.define(TextArea.is, TextArea);

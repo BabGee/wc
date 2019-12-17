@@ -1,4 +1,13 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{InputStyles}from"../../styles/shared.js";import{RENDER_M_DEFAULT,RENDER_M_SIDE_BY_SIDE}from"../../../../components/e-list.js";import{enterSubmitMixin}from"../../../../components/mixins/enter-submit-mixin.js";export const inputMixin=BaseClass=>class extends enterSubmitMixin(BaseClass){renderService(){if(this.renderMode===RENDER_M_SIDE_BY_SIDE){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { InputStyles } from "../../styles/shared.js";
+import { RENDER_M_DEFAULT, RENDER_M_SIDE_BY_SIDE } from "../../../../components/e-list.js";
+import { enterSubmitMixin } from "../../../../components/mixins/enter-submit-mixin.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass) {
+  renderService() {
+    if (this.renderMode === RENDER_M_SIDE_BY_SIDE) {
+      return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
@@ -40,7 +49,10 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
               </div>
             </div>
           </div>
-        `}else{return html`
+        `;
+    } else {
+      // RENDER_M_DEFAULT
+      return html`
         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
     <style>
@@ -247,7 +259,12 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
               </div>
             </div>
           </div>
-        `}}renderDefault(){return html`
+        `;
+    }
+  }
+
+  renderDefault() {
+    return html`
         <style>
           .inp {
             width: 100%;
@@ -303,4 +320,49 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
             ${this.e.name} required
           </p>
         </div>
-      `}invalid(){const input=this.shadowRoot.querySelector("#input"),dangerIcon=this.shadowRoot.querySelector("#danger-icon"),checkIcon=this.shadowRoot.querySelector("#check-icon"),warningText=this.shadowRoot.querySelector("#warning-text");input.className="input is-danger";warningText.style.display="block";dangerIcon.style.visibility="visible";checkIcon.style.visibility="hidden"}valid(){const input=this.shadowRoot.querySelector("#input"),dangerIcon=this.shadowRoot.querySelector("#danger-icon"),checkIcon=this.shadowRoot.querySelector("#check-icon"),warningText=this.shadowRoot.querySelector("#warning-text");input.className="input is-success";warningText.style.display="none";dangerIcon.style.visibility="hidden";checkIcon.style.visibility="visible"}getInput(){return this.shadowRoot.querySelector("#input")}getValue(){return this.getInput().value}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}get renderMode(){return this.pl.renderMode}get type(){return"text"}};
+      `;
+  }
+
+  invalid(validation) {
+    const input = this.shadowRoot.querySelector("#input");
+    const dangerIcon = this.shadowRoot.querySelector("#danger-icon");
+    const checkIcon = this.shadowRoot.querySelector("#check-icon");
+    const warningText = this.shadowRoot.querySelector("#warning-text");
+    input.className = "input is-danger";
+    warningText.style.display = "block";
+    dangerIcon.style.visibility = "visible";
+    checkIcon.style.visibility = "hidden";
+  }
+
+  valid(validation) {
+    const input = this.shadowRoot.querySelector("#input");
+    const dangerIcon = this.shadowRoot.querySelector("#danger-icon");
+    const checkIcon = this.shadowRoot.querySelector("#check-icon");
+    const warningText = this.shadowRoot.querySelector("#warning-text");
+    input.className = "input is-success";
+    warningText.style.display = "none";
+    dangerIcon.style.visibility = "hidden";
+    checkIcon.style.visibility = "visible";
+  }
+
+  getInput() {
+    return this.shadowRoot.querySelector("#input");
+  }
+
+  getValue() {
+    return this.getInput().value;
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  get renderMode() {
+    return this.pl.renderMode;
+  }
+
+  get type() {
+    return "text";
+  }
+
+};

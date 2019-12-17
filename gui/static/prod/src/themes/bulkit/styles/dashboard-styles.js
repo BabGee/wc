@@ -1,4 +1,5 @@
-import{html}from"../../../../node_modules/lit-element/lit-element.js";export const DASHBOARD_STYLES=html`
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+export const DASHBOARD_STYLES = html`
 <style>
 /*! dashboard.scss | Bulkit | CSS Ninja *//*! themes/_colors.scss | Bulkit | CSS Ninja *//*! themes/_dashboard.scss | Bulkit | CSS Ninja */
 .pageloader {

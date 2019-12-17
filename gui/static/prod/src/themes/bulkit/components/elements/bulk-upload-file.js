@@ -1,4 +1,13 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{BulkUploadFileBase}from"../../../../elements/base/bulk-upload-file.js";import{Dropzone}from"./dropzone/dropzone.js";class BulkUploadFile extends BulkUploadFileBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../../icons/my-icons.js';
+import { SharedStyles } from "../../styles/shared-styles.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import { BulkUploadFileBase } from "../../../../elements/base/bulk-upload-file.js";
+import { Dropzone } from "./dropzone/dropzone.js";
+
+class BulkUploadFile extends BulkUploadFileBase {
+  renderDefault() {
+    return html`
  ${SharedStyles}
 
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css"/>
@@ -62,4 +71,122 @@ data-dz-uploadprogress=""></SPAN></DIV>
 </div>
  
 </div>
-</div>`}constructor(){super()}getValue(){return this.value}valid(){}invalid(){}firstUpdated(changedProperties){super.firstUpdated(changedProperties);var dropzone=new Dropzone(this.shadowRoot.querySelector("#demo-upload"),{previewTemplate:this.shadowRoot.querySelector("#preview-template").innerHTML,parallelUploads:2,thumbnailHeight:120,thumbnailWidth:120,maxFilesize:3,filesizeBase:1e3,thumbnail:function(file,dataUrl){if(file.previewElement){file.previewElement.classList.remove("dz-file-preview");for(var images=file.previewElement.querySelectorAll("[data-dz-thumbnail]"),i=0,thumbnailElement;i<images.length;i++){thumbnailElement=images[i];thumbnailElement.alt=file.name;thumbnailElement.src=dataUrl}setTimeout(function(){file.previewElement.classList.add("dz-image-preview")},1)}}});dropzone.uploadFiles=function(files){for(var self=this,i=0;i<files.length;i++){for(var file=files[i],totalSteps=Math.round(Math.min(60,Math.max(6,file.size/1e5))),step=0,duration;step<totalSteps;step++){duration=100*(step+1);setTimeout(function(file,totalSteps,step){return function(){file.upload={progress:100*(step+1)/totalSteps,total:file.size,bytesSent:(step+1)*file.size/totalSteps};self.emit("uploadprogress",file,file.upload.progress,file.upload.bytesSent);if(100==file.upload.progress){file.status=Dropzone.SUCCESS;self.emit("success",file,"success",null);self.emit("complete",file);self.processQueue()}}}(file,totalSteps,step),duration)}}}}handleFile(){var self=this;const fileInput=this.qs("#input"),label=input.nextElementSibling,labelVal=label.innerHTML;if(fileInput.files&&fileInput.files.length){for(let i=0;i<fileInput.files.length;i++){const file=fileInput.files[i];self.uploadTempFile(file,"image",/image.*/).then(upload=>{self.uploads=[...self.uploads,{name:upload.name,response:upload.response,src:upload.result}]}).catch(reason=>{console.warn("[INCOMPLETE DEV] Better error handling.",reason)})}}else{label.innerHTML=labelVal}}}customElements.define(BulkUploadFile.is,BulkUploadFile);
+</div>`;
+  }
+
+  constructor() {
+    super();
+  }
+
+  getValue() {
+    return this.value;
+  }
+
+  valid(validation) {}
+
+  invalid(validation) {}
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    var dropzone = new Dropzone(this.shadowRoot.querySelector('#demo-upload'), {
+      previewTemplate: this.shadowRoot.querySelector('#preview-template').innerHTML,
+      parallelUploads: 2,
+      thumbnailHeight: 120,
+      thumbnailWidth: 120,
+      maxFilesize: 3,
+      filesizeBase: 1000,
+      thumbnail: function (file, dataUrl) {
+        if (file.previewElement) {
+          file.previewElement.classList.remove('dz-file-preview');
+          var images = file.previewElement.querySelectorAll('[data-dz-thumbnail]');
+
+          for (var i = 0; i < images.length; i++) {
+            var thumbnailElement = images[i];
+            thumbnailElement.alt = file.name;
+            thumbnailElement.src = dataUrl;
+          }
+
+          setTimeout(function () {
+            file.previewElement.classList.add('dz-image-preview');
+          }, 1);
+        }
+      }
+    }); // Now fake the file upload, since GitHub does not handle file uploads
+    // and returns a 404
+
+    var minSteps = 6;
+    var maxSteps = 60;
+    var timeBetweenSteps = 100;
+    var bytesPerStep = 100000;
+
+    dropzone.uploadFiles = function (files) {
+      var self = this;
+
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+
+        for (var step = 0; step < totalSteps; step++) {
+          var duration = timeBetweenSteps * (step + 1);
+          setTimeout(function (file, totalSteps, step) {
+            return function () {
+              file.upload = {
+                progress: 100 * (step + 1) / totalSteps,
+                total: file.size,
+                bytesSent: (step + 1) * file.size / totalSteps
+              };
+              self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
+
+              if (file.upload.progress == 100) {
+                file.status = Dropzone.SUCCESS;
+                self.emit('success', file, 'success', null);
+                self.emit('complete', file);
+                self.processQueue(); // document.getElementsByClassName("dz-success-mark").style.opacity = "1";
+              }
+            };
+          }(file, totalSteps, step), duration);
+        }
+      }
+    };
+  }
+
+  handleFile() {
+    var self = this;
+    const fileInput = this.qs('#input');
+    const label = input.nextElementSibling;
+    const labelVal = label.innerHTML;
+    /* TODO
+        var fileName = '';
+        if( this.files && this.files.length > 1 )
+            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+        else
+            fileName = e.target.value.split( '\\' ).pop();
+         if( fileName )
+            label.querySelector( 'span' ).innerHTML = fileName;
+        else
+            label.innerHTML = labelVal;
+        */
+
+    if (fileInput.files && fileInput.files.length) {
+      for (let i = 0; i < fileInput.files.length; i++) {
+        const file = fileInput.files[i];
+        self.uploadTempFile(file, 'image', /image.*/).then(upload => {
+          self.uploads = [...self.uploads, {
+            'name': upload['name'],
+            'response': upload['response'],
+            'src': upload['result'] // TODO is it possible to preview from /media/tmp/uploads/?
+
+          }];
+        }).catch(reason => {
+          // TODO add better error handling
+          console.warn('[INCOMPLETE DEV] Better error handling.', reason);
+        });
+      }
+    } else {
+      label.innerHTML = labelVal;
+    }
+  }
+
+}
+
+customElements.define(BulkUploadFile.is, BulkUploadFile);

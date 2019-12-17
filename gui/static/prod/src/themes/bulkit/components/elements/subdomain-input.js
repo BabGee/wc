@@ -1,4 +1,10 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{SubdomainInputBase}from"../../../../elements/base/subdomain-input.js";class SubdomainInput extends SubdomainInputBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import { SubdomainInputBase } from "../../../../elements/base/subdomain-input.js";
+
+class SubdomainInput extends SubdomainInputBase {
+  renderDefault() {
+    return html`
 
         <style>
         .message{
@@ -27,4 +33,25 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
             <input id="input" type="text" value="${this.value}"> <input type="text" value="${this.e.kind}" disabled>
         </div>
         <div id="message">
-        </div>`}invalid(validation){this.qs("#message").innerText=validation.message}valid(validation){this.qs("#message").innerText=validation.message}getValue(){return this.qs("#input").value}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}window.customElements.define(SubdomainInput.is,SubdomainInput);
+        </div>`;
+  }
+
+  invalid(validation) {
+    this.qs('#message').innerText = validation.message;
+  }
+
+  valid(validation) {
+    this.qs('#message').innerText = validation.message;
+  }
+
+  getValue() {
+    return this.qs('#input').value;
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+}
+
+window.customElements.define(SubdomainInput.is, SubdomainInput);

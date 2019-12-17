@@ -1,4 +1,20 @@
-import"../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js";import"../../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../../../node_modules/@polymer/paper-button/paper-button.js";import"../../../../../../node_modules/@polymer/iron-image/iron-image.js";import{dataSourceMixin}from"../../../../../core/mixins/datasource-mixin.js";import"./datasource-table-head.js";import"./datasource-table-actions.js";import"./datasource-table-footer.js";import{LitElement,html,css}from"../../../../../../node_modules/lit-element/lit-element.js";export class DataSourceList extends dataSourceMixin(LitElement){static get styles(){return css`
+/* eslint-disable no-throw-literal */
+
+/* eslint-disable guard-for-in */
+import "../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js";
+import "../../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "../../../../../../node_modules/@polymer/paper-button/paper-button.js";
+import "../../../../../../node_modules/@polymer/iron-image/iron-image.js";
+import { dataSourceMixin } from "../../../../../core/mixins/datasource-mixin.js";
+import "./datasource-table-head.js";
+import "./datasource-table-actions.js";
+import "./datasource-table-footer.js";
+import { LitElement, html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+export class DataSourceList extends dataSourceMixin(LitElement) {
+  static get styles() {
+    return css`
     :host {
                 display: block;
             }
@@ -954,7 +970,21 @@ import"../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js"
             }
             
     
-    `}constructor(){super();this.columns=[];this.cols=[];this.data=[];this.selected=[];this.availableSize=[10,50,100,500]}renderColumn(paperDatatableApiColumn,valueFromRowData,p,rowData,rowIndex){if(paperDatatableApiColumn.actions){return html`
+    `;
+  }
+
+  constructor() {
+    super();
+    this.columns = [];
+    this.cols = [];
+    this.data = [];
+    this.selected = [];
+    this.availableSize = [10, 50, 100, 500];
+  }
+
+  renderColumn(paperDatatableApiColumn, valueFromRowData, p, rowData, rowIndex) {
+    if (paperDatatableApiColumn.actions) {
+      return html`
         
         <datasource-table-actions
         .cols=${this.cols}
@@ -962,25 +992,70 @@ import"../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js"
         .item=${rowData}
         ></datasource-table-actions>
         
-        `}else if(this.selectable&&0===p){return html`
+        `;
+    } else if (this.selectable && p === 0) {
+      return html`
         <paper-checkbox
         .rowData=${rowData}
         .rowIndex=${rowIndex}
         ></paper-checkbox>
-        `}else{try{let columnValue=valueFromRowData;var dJson;if("object"==typeof columnValue){dJson=columnValue}else{dJson=JSON.parse(columnValue);if("object"!=typeof dJson){throw"Not Object JSON"}}const vs=[];for(var property in dJson){vs.push(html`<div style="margin-top:0.1px;"><strong>${property}: </strong><span>${dJson[property]}</span></div>`)}return html`
-          ${vs.map(v=>html` ${v}<br>`)}`}catch(e){switch(paperDatatableApiColumn.type){case"boolean":return html`
-              ${"false"==(valueFromRowData+"").toLowerCase()?html`
+        `;
+    } else {
+      try {
+        // todo possible optimization point, should probably be a column type
+        // test using jsPerf
+        let columnValue = valueFromRowData;
+        var dJson; // = JSON.parse(columnValue);
+
+        if (typeof columnValue == 'object') {
+          dJson = columnValue;
+        } else {
+          dJson = JSON.parse(columnValue); // skip boolean and number columns
+
+          if (typeof dJson != 'object') {
+            throw 'Not Object JSON';
+          }
+        }
+
+        const vs = [];
+
+        for (var property in dJson) {
+          // if (dJson.hasOwnProperty(property)) {
+          vs.push(html`<div style="margin-top:0.1px;"><strong>${property}: </strong><span>${dJson[property]}</span></div>`); // }
+        }
+
+        return html`
+          ${vs.map(v => html` ${v}<br>`)}`;
+      } catch (e) {
+        switch (paperDatatableApiColumn.type) {
+          case 'boolean':
+            return html`
+              ${String(valueFromRowData).toLowerCase() == 'false' ? html`
               <iron-icon icon="icons:close"></iron-icon>
-              `:html`
+              ` : html`
               <iron-icon icon="icons:check"></iron-icon>
               `}
               
-              `;break;default:return html`${valueFromRowData}`;}}}}render(){return html`
+              `;
+            break;
+          // todo OPTIMIZATION - parse types for only values to be displayed and not in
+          // dsc service command
+          // i.e date, time, datetime
+
+          default:
+            return html`${valueFromRowData}`;
+        }
+      }
+    }
+  }
+
+  render() {
+    return html`
         <style>
             
 
         </style>
-        ${this._searchFieldsExist(this.columns)?html`
+        ${this._searchFieldsExist(this.columns) ? html`
         
             <div class="topnav">
                 <div class="search-container">
@@ -991,7 +1066,7 @@ import"../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js"
                                        fallback-selection="q"
                                        attr-for-selected="param">
                             <paper-item param="q">All</paper-item>
-                            ${this.searchFields(this.columns).map(item=>html`<paper-item param="${item.propertyPath}">${item.header}</paper-item>`)}
+                            ${this.searchFields(this.columns).map(item => html`<paper-item param="${item.propertyPath}">${item.header}</paper-item>`)}
                         </paper-listbox>
                     </paper-dropdown-menu>
 
@@ -1005,9 +1080,9 @@ import"../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js"
 
                 </div>
             </div>        
-            `:html``}
+            ` : html``}
             <!-- Table starts here -->
-            ${this._type("table")?html`
+            ${this._type('table') ? html`
             
                      <!-- Responsive table starts here -->
             <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
@@ -1016,7 +1091,7 @@ import"../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js"
                 <table id="table" class="table table-hover table-mc-light-blue">
                 <thead>
                 <tr>
-                ${this.columns.map(column=>html`
+                ${this.columns.map(column => html`
                          <th style="">
                             <datasource-table-head
                                     .column="${column}"
@@ -1031,11 +1106,11 @@ import"../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js"
                 </tr>
                 </thead>
                 <tbody>
-                ${this.data.map((row,rowIndex)=>html`
+                ${this.data.map((row, rowIndex) => html`
                 <tr>
-                ${this.columns.map((column,columnIndex)=>html`
+                ${this.columns.map((column, columnIndex) => html`
                 
-                <td>${this.renderColumn(column,row[column.property],columnIndex,row,rowIndex)}</td>
+                <td>${this.renderColumn(column, row[column.property], columnIndex, row, rowIndex)}</td>
                 
                 `)}
                 </tr>
@@ -1046,10 +1121,10 @@ import"../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js"
             </table>
             </div>
             
-            `:html`
+            ` : html`
             <!--_type('card') todo check more types-->
             <div style="height: 60vh;overflow-y: scroll;">
-            ${this.data.map(item=>html`
+            ${this.data.map((item, itemIndex) => html`
             
                     <div class="item">
                         <iron-image class="avatar" sizing="contain" src="/media/${item.image}"></iron-image>
@@ -1057,18 +1132,18 @@ import"../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js"
 
                             <div class="primary">${item.name}</div>
 
-                            ${this.values(item).map(vv=>html`
+                            ${this.values(item).map(vv => html`
                             <div class="secondary"> ${vv[0]} <span class="secondary dim"> ${vv[1]}</span></div>
                             `)}
                                 
-                            ${this.downloads(item,this.details).map(download=>html`
+                            ${this.downloads(item, this.details).map(download => html`
                             <a target="_blank" 
                                 class="secondary" download href="/media/${download[1]}"> Download ${download[0]}</a>
                             `)}
                                 
 
                             <div>
-                                ${item.links.map(ll=>html`
+                                ${item.links.map(ll => html`
                                 <paper-button
                                             .dataLink=${ll}
                                             @tap="${this._action}"
@@ -1087,7 +1162,7 @@ import"../../../../../../node_modules/@polymer/paper-checkbox/paper-checkbox.js"
 
             
             `}
-${this.paginate?html`
+${this.paginate ? html`
 <datasource-table-footer resources="${this.resources}"
                        language="${this.language}"
                        footer-position="${this.footerPosition}"
@@ -1103,5 +1178,294 @@ ${this.paginate?html`
                        @p-page="${this._pageChanged}"
                        @n-page="${this._pageChanged}">
 </datasource-table-footer>
-`:html``}
-`}static get is(){return"datasource-list"}static get properties(){return{data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},cols:{type:Array,value:[]},columns:{type:Array},paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,type:{type:String,value:"table"},details:Object,selectable:{type:Boolean,value:!1},selected:{type:Array}}}firstUpdated(){}values(item){const v=[];for(var property in item){if(item.hasOwnProperty(property)){if("links"!==property&&"image"!==property&&"name"!==property){v.push([property,item[property]])}}}return v}downloads(item,details){if("download_links"in details&&details.download_links.length){const v=[];for(var property in item){if(item.hasOwnProperty(property)&&details.download_links.includes(property)){v.push([property,item[property]])}}return v}return[]}_type(typ){if(!this.type){return!0}return this.type==typ}_handleSort(evt){console.log(evt)}_handleInputChange(evt){this.dispatchEvent(new CustomEvent("dropdown-filter",{detail:{path:evt.detail.column.propertyPath,value:evt.detail.value}}))}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0&&oldPage!=page){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0&&oldSize!=size){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}_extractData(rowData,columnProperty){if(columnProperty){const splittedProperties=columnProperty.split(".");if(1<splittedProperties.length){return splittedProperties.reduce((prevRow,property)=>{if("string"===typeof prevRow&&rowData[prevRow]&&rowData[prevRow][property]){return rowData[prevRow][property]}return prevRow[property]||""})}return rowData[columnProperty]}return null}_selectChange(event){let localTarget;if(event.type&&"change"===event.type){localTarget=Polymer.dom(event).localTarget}else{localTarget=event}const tr=Polymer.dom(localTarget).parentNode.parentNode,rowData=localTarget.rowData,rowId=localTarget.rowIndex;if(localTarget.checked){this.push("selected",rowData.id);tr.classList.add("selected")}else{this.splice("selected",this.selectedRows.indexOf(rowData.id),1);tr.classList.remove("selected")}}_searchReset(){}_search(){const self=this,q=self.shadowRoot.querySelector("#q").value,qIn=self.shadowRoot.querySelector("#qIn").selected;if(q){this.dispatchEvent(new CustomEvent("search",{detail:{column:qIn,searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath}),value:q}}))}}}customElements.define(DataSourceList.is,DataSourceList);
+` : html``}
+`;
+  }
+
+  static get is() {
+    return 'datasource-list';
+  }
+
+  static get properties() {
+    return {
+      /**
+       * Contains the data which will be displayed in the table.
+       */
+      data: {
+        type: Array,
+        notify: true
+      },
+      q: {
+        type: String,
+        value: '',
+        notify: true
+      },
+      cols: {
+        type: Array,
+        value: []
+      },
+      columns: {
+        type: Array // value: () => [],
+        // notify: true,
+
+      },
+      // todo 3 sets of same columns, can be reduced
+
+      /**
+       * If true, the pagination will be activated.
+       */
+      paginate: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * The current page.
+       */
+      page: {
+        type: Number // notify: true,
+        // observer: '_pageChanged',
+
+      },
+
+      /**
+       * The current size.
+       */
+      size: {
+        type: Number // notify: true,
+        // observer: '_sizeChanged',
+
+      },
+
+      /**
+       * The number of the previous page
+       */
+      oldPage: {
+        type: Number,
+        notify: true
+      },
+
+      /**
+       * The total of elements have to be provided in case of pagination, it is mandatory.
+       */
+      totalElements: Number,
+
+      /**
+       * The total of pages have to be provided in case of pagination, it is mandatory.
+       * It is used to compute the footer.
+       */
+      totalPages: Number,
+
+      /**
+       * The available size in case of pagination.
+       */
+      availableSize: Array,
+      // types
+      type: {
+        type: String,
+        value: 'table'
+      },
+      details: Object,
+
+      /**
+       * If true, the rows may be selectable.
+       */
+      selectable: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Contains the positions of selected columns.
+       * Can contain a specific data if selectableDataKey is setted.
+       */
+      selected: {
+        type: Array // value: () => [],
+        // notify: true,
+
+      }
+    };
+  }
+
+  firstUpdated(changedProperties) {}
+
+  values(item) {
+    const v = [];
+
+    for (var property in item) {
+      if (item.hasOwnProperty(property)) {
+        // do stuff
+        if (property !== 'links' && property !== 'image' && property !== 'name') {
+          v.push([property, item[property]]);
+        } else {// console.log(item[property])
+        }
+      }
+    }
+
+    return v;
+  }
+
+  downloads(item, details) {
+    if ('download_links' in details && details['download_links'].length) {
+      const v = [];
+
+      for (var property in item) {
+        if (item.hasOwnProperty(property) && details['download_links'].includes(property)) {
+          v.push([property, item[property]]);
+        }
+      }
+
+      return v;
+    }
+
+    return [];
+  }
+
+  _type(typ) {
+    if (!this.type) {
+      return true;
+    }
+
+    return this.type == typ;
+  }
+
+  _handleSort(evt) {
+    console.log(evt);
+  }
+
+  _handleInputChange(evt) {
+    // console.log(evt);
+    this.dispatchEvent(new CustomEvent('dropdown-filter', {
+      detail: {
+        path: evt.detail.column.propertyPath,
+        value: evt.detail.value
+      }
+    }));
+  }
+
+  searchFields(columns) {
+    return columns.filter(function (item) {
+      return item.filter;
+    });
+  }
+
+  _searchFieldsExist(columns) {
+    return columns.filter(function (item) {
+      return item.filter;
+    }).length > 0;
+  }
+
+  _action(evt) {
+    const dataAction = evt.currentTarget.dataLink;
+
+    this.pl._dialog(dataAction.service, dataAction.params);
+  }
+
+  _pageChanged(evt) {
+    const page = evt.detail.page;
+    const oldPage = this.page;
+
+    if (oldPage !== undefined && oldPage != page) {
+      this.dispatchEvent(new CustomEvent('page-change', {
+        detail: {
+          oldPage: oldPage,
+          page: page
+        }
+      }));
+    }
+
+    this.page = page;
+  }
+
+  _sizeChanged(evt) {
+    const size = evt.detail.size;
+    const oldSize = this.size; // TODO this event keeps getting dispatched from dsc footer
+
+    if (oldSize !== undefined && oldSize != size) {
+      this.dispatchEvent(new CustomEvent('size-change', {
+        detail: {
+          oldSize: oldSize,
+          size: size
+        }
+      }));
+    }
+
+    this.size = size;
+  }
+
+  _extractData(rowData, columnProperty) {
+    if (columnProperty) {
+      // TODO this is support for accessing sub-property paths like man.head.nose, not needed
+      const splittedProperties = columnProperty.split('.');
+
+      if (splittedProperties.length > 1) {
+        return splittedProperties.reduce((prevRow, property) => {
+          if (typeof prevRow === 'string' && rowData[prevRow] && rowData[prevRow][property]) {
+            return rowData[prevRow][property];
+          }
+
+          return prevRow[property] || '';
+        });
+      }
+
+      return rowData[columnProperty];
+    }
+
+    return null;
+  }
+
+  _selectChange(event) {
+    let localTarget;
+
+    if (event.type && event.type === 'change') {
+      localTarget = Polymer.dom(event).localTarget;
+    } else {
+      localTarget = event;
+    }
+
+    const tr = Polymer.dom(localTarget).parentNode.parentNode;
+    const rowData = localTarget.rowData;
+    const rowId = localTarget.rowIndex;
+
+    if (localTarget.checked) {
+      this.push('selected', rowData['id']);
+      tr.classList.add('selected');
+    } else {
+      this.splice('selected', this.selectedRows.indexOf(rowData['id']), 1);
+      tr.classList.remove('selected');
+    }
+    /**
+         *
+         * Fired when a row is selected.
+         * @event selection-changed
+         * Event param: {{node: Object}} detail Contains selected id and row data.
+         */
+    // todo this.fire('selection-changed', eventData);
+
+  }
+
+  _searchReset(evt) {}
+
+  _search(evt) {
+    const self = this;
+    const q = self.shadowRoot.querySelector('#q').value;
+    const qIn = self.shadowRoot.querySelector('#qIn').selected; // console.log(q);
+
+    if (q) {
+      // console.log(self.qIn);
+      // self.q = q;
+      // console.log(evt);
+      this.dispatchEvent(new CustomEvent('search', {
+        detail: {
+          column: qIn,
+          searchFields: self.searchFields(self.columns).map(function (field) {
+            return field.propertyPath;
+          }),
+          value: q
+        }
+      }));
+    }
+  }
+
+}
+customElements.define(DataSourceList.is, DataSourceList);

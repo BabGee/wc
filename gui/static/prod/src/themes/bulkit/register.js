@@ -1,1 +1,7 @@
-export const register=function(ComponentClass){if(window.THEME==="bulkit"){window.customElements.define(ComponentClass.is,ComponentClass)}};
+export const register = function (ComponentClass) {
+  const registerIfThemeIs = 'bulkit';
+
+  if (window.THEME === registerIfThemeIs) {
+    window.customElements.define(ComponentClass.is, ComponentClass);
+  }
+};

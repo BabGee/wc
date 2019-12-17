@@ -1,6 +1,38 @@
-import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";import"./section-page.js";import"../form-render.js";import"../snack-bar.js";import{ServicePageBase}from"../../../../components/templates/service-page.js";import{Colors,Fonts,Reset}from"../../styles/shared.js";import{ServiceStyles}from"../../styles/service.js";import{VIEW_MODE_DIALOG,VIEW_MODE_MAIN}from"../../../../components/templates/page-view-element.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icons/editor-icons.js";import"../../../../../node_modules/@polymer/iron-icons/communication-icons.js";import"../../../../../node_modules/@polymer/iron-icons/notification-icons.js";import"../../../../../node_modules/fa-icons/index.js";import"./missing-page.js";import"../../../../components/adaptive-ui-icon.js";class ServicePage extends ServicePageBase{render(){if(!this.interface){return html`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html`
+/**
+ @license
+ Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+
+ */
+import { css, html } from "../../../../../node_modules/lit-element/lit-element.js";
+import "./section-page.js"; // todo move into base
+
+import '../form-render.js';
+import '../snack-bar.js';
+import { ServicePageBase } from "../../../../components/templates/service-page.js";
+import { Colors, Fonts, Reset } from "../../styles/shared.js";
+import { ServiceStyles } from "../../styles/service.js";
+import { VIEW_MODE_DIALOG, VIEW_MODE_MAIN } from "../../../../components/templates/page-view-element.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
+import "../../../../../node_modules/@polymer/iron-icons/editor-icons.js";
+import "../../../../../node_modules/@polymer/iron-icons/communication-icons.js";
+import "../../../../../node_modules/@polymer/iron-icons/notification-icons.js";
+import "../../../../../node_modules/fa-icons/index.js";
+import './missing-page.js';
+import "../../../../components/adaptive-ui-icon.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class ServicePage extends ServicePageBase {
+  render() {
+    if (!this.interface) {
+      return html`<div>Cannot render an UNDEFINED tab!!.</div>`;
+    } else if (!this.pageGroup || !this.page) {
+      return html`
       <missing-page></missing-page>
-      `}return html`
+      `;
+    }
+
+    return html`
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
       <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
       <style>
@@ -254,9 +286,9 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
       </style>
       <div class="main-wrapper">
         
-        ${this.view===VIEW_MODE_DIALOG?html`
+        ${this.view === VIEW_MODE_DIALOG ? html`
           <section-page id="dialog" @view-list=${this._viewList} queue=${this.dialogServicesQueue} ></section-page>
-        `:html`
+        ` : html`
         
         `}
         
@@ -269,23 +301,23 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
               <div class="aside-body">
                 <nav class="manu">
                   <ul class="menu-list">
-                    ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+                    ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
                         <li id="list_${pageGroupIndex}">
                           <a
                             href="#"
-                            class="${pageGroupIndex==this._pageGroup?"selected  active":""}"
+                            class="${pageGroupIndex == this._pageGroup ? "selected  active" : ""}"
                             @click="${this.handleClick}"
                           >
-                            <span class="icon is-small aside-icons"><adaptive-ui-icon style="width: 19px;height: 19px;fill: #fff;" icon="${pageGroup.icon||"icons:info"}"></adaptive-ui-icon></span>
+                            <span class="icon is-small aside-icons"><adaptive-ui-icon style="width: 19px;height: 19px;fill: #fff;" icon="${pageGroup.icon || 'icons:info'}"></adaptive-ui-icon></span>
                             ${ServicePage.toTitleCase(pageGroup.title)}&nbsp;
                             <span class="icon is-small aside-icons" style="float: right;"><fa-icon class="fa fa-caret-down" color="white"></fa-icon></span>
                           </a>
                           <ul class="aside-sub-menu">
-                            ${pageGroup.pages.map((menu,menuIndex)=>html`
+                            ${pageGroup.pages.map((menu, menuIndex) => html`
                                 <li @click="${this.toggleMenu}">
                                   <a
-                                    class="nav-item ${pageGroupIndex==this._pageGroup&&menuIndex==this._page?"selected  active":""}"
-                                    href="${window.location.pathname+window.location.search}#/${pageGroupIndex}/${menuIndex}/"
+                                    class="nav-item ${pageGroupIndex == this._pageGroup && menuIndex == this._page ? "selected  active" : ""}"
+                                    href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/"
                                     >${ServicePage.toTitleCase(menu.title)}</a
                                   >
                                 </li>
@@ -317,10 +349,10 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
                     <span></span>
                   </div>
                   <div class="section-user is-pulled-right is-flex">
-                    ${this.gateway.profile?html`
+                    ${this.gateway.profile ? html`
                     <div class="profile is-flex ">
                       <div class="profile-image">
-                        <img src="${this.gateway.profile.photo?"/media/"+this.gateway.profile.photo:"images/web/user.svg"}" alt="" />
+                        <img src="${this.gateway.profile.photo ? "/media/" + this.gateway.profile.photo : "images/web/user.svg"}" alt="" />
                       </div>
                       <p>${this.gateway.profile.firstName} ${this.gateway.profile.lastName}</p>
                     </div>
@@ -329,7 +361,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
                         <div class="columns is-mobile">
                           <div class="column is-5">
                             <div class="profile-image">
-                              <img src="${this.gateway.profile.photo?"/media/"+this.gateway.profile.photo:"images/web/user.svg"}" alt="" />
+                              <img src="${this.gateway.profile.photo ? "/media/" + this.gateway.profile.photo : "images/web/user.svg"}" alt="" />
                             </div>
                           </div>
 
@@ -345,7 +377,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
                         </div>
                     </div>
 
-                    `:html``}
+                    ` : html``}
                   </div>
                 </div>
 
@@ -354,7 +386,7 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
                     <h1 class="title is-capitalized">${ServicePage.toTitleCase(this.page.title)}</h1>
                   </div>
                   <div class="dash-body">
-                    ${this.page.pageInputGroups.map(feed=>html`
+                    ${this.page.pageInputGroups.map((feed, feedIndex) => html`
                         <div class="column ${this._gridClasses(feed)} is-paddingless">
                           <form-render
                             .feed="${feed}"
@@ -377,8 +409,111 @@ import{css,html}from"../../../../../node_modules/lit-element/lit-element.js";imp
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-     `}constructor(){super();this.isSideMenuVisible=!1}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
+     `;
+  }
+
+  constructor() {
+    super();
+    this.isSideMenuVisible = false;
+  }
+
+  static get properties() {
+    return {
+      pages: Array,
+      tab: Object,
+      profile: {
+        type: Object,
+        value: ""
+      },
+      page: Number,
+      mainColor: String,
+      isSideMenuVisible: Boolean
+    };
+  }
+
+  handleClick(evt) {
+    evt.preventDefault();
+    const menuItems = evt.currentTarget.nextElementSibling;
+    const toggleClass = "is-block";
+    const highLight = "selected";
+
+    if (menuItems.classList.contains(toggleClass)) {
+      menuItems.classList.remove(toggleClass);
+    } else {
+      // collapse all current active
+      this.qsa(".aside-sub-menu, .is-block").forEach(function (el) {
+        el.classList.remove(toggleClass);
+      }); // expand related to source of event
+
+      menuItems.classList.add(toggleClass);
+    }
+
+    this.qsa(".selected").forEach(function (el) {
+      if (!el.classList.contains("active")) el.classList.remove(highLight); //
+    });
+    this.qsa(".selected").forEach(function (el) {
+      if (!el.classList.contains("is-block")) el.classList.remove(highLight); //
+    });
+
+    if (menuItems.classList.contains(highLight)) {} else {
+      menuItems.classList.add(highLight);
+    }
+  }
+
+  static get styles() {
+    return [Colors, Fonts, ServiceStyles, css`
         :host {
           display: block;
         }
-      `]}toggleMenu(){const menu=document.querySelector(".mipay-aside"),bars=document.querySelector("#navbarBurger");if(this.isSideMenuVisible){menu.classList.remove("left");bars.style.left="0";this.isSideMenuVisible=!1}else{bars.style.left="314px";menu.classList.add("left");bars.style.background="white";this.isSideMenuVisible=!0}}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);
+      `];
+  }
+
+  toggleMenu(e) {
+    const menu = document.querySelector('.mipay-aside');
+    const bars = document.querySelector('#navbarBurger');
+
+    if (this.isSideMenuVisible) {
+      menu.classList.remove('left');
+      bars.style.left = '0';
+      this.isSideMenuVisible = false;
+    } else {
+      bars.style.left = '314px';
+      menu.classList.add('left');
+      bars.style.background = "white";
+      this.isSideMenuVisible = true;
+    }
+  }
+  /**
+   * Dialogs Back navigation, Pop dialogs' stack
+   *
+   * @param evt
+   * @private
+   */
+
+
+  _viewList(evt) {
+    this.mainNavigation();
+  }
+  /**
+   * TODO #301 duplicated function
+   * @param feed
+   * @returns {string}
+   * @private
+   */
+
+
+  _gridClasses(feed) {
+    const grid = super._gridClasses(feed);
+
+    const grids = grid.split('|');
+
+    try {
+      return `is-${Math.floor(Number(grids[0] / 2))}`;
+    } catch (e) {
+      return 'is-12';
+    }
+  }
+
+}
+
+window.customElements.define('service-page', ServicePage);

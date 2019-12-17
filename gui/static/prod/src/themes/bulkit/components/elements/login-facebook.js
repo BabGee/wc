@@ -1,4 +1,15 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../icons/my-icons.js";import"../../icons/common-icons.js";import{SharedStyles}from"../../styles/shared-styles.js";import"../../../../../node_modules/@polymer/iron-icons/iron-icons.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import{LoginFacebookBase}from"../../../../elements/base/login-facebook.js";class LoginFacebook extends LoginFacebookBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import '../../icons/my-icons.js';
+import '../../icons/common-icons.js';
+import { SharedStyles } from "../../styles/shared-styles.js";
+import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import { LoginFacebookBase } from "../../../../elements/base/login-facebook.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class LoginFacebook extends LoginFacebookBase {
+  renderDefault() {
+    return html`
         ${SharedStyles}
         <style>
         .icon:hover{
@@ -18,4 +29,21 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
   </a>
         </div>
         </div>
-        `}constructor(){super()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(LoginFacebook.is,LoginFacebook);
+        `;
+  }
+
+  constructor() {
+    super();
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+}
+
+customElements.define(LoginFacebook.is, LoginFacebook);

@@ -1,4 +1,15 @@
-import{html}from"../../../../node_modules/lit-element/lit-element.js";import{register}from"../register.js";import{SnackBarBase}from"../../../components/snack-bar.js";class SnackBar extends SnackBarBase{render(){return html`
+/**
+@license
+Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+
+*/
+import { html } from "../../../../node_modules/lit-element/lit-element.js";
+import { register } from "../register.js";
+import { SnackBarBase } from "../../../components/snack-bar.js";
+
+class SnackBar extends SnackBarBase {
+  render() {
+    return html`
       <style>
       :host {
         display: block;
@@ -29,4 +40,9 @@ import{html}from"../../../../node_modules/lit-element/lit-element.js";import{reg
       }
     </style>
     <slot></slot>
-    `}}register(SnackBar);
+    `;
+  }
+
+}
+
+register(SnackBar);

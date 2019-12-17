@@ -1,4 +1,9 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{spacerElementBase}from"../../../../elements/base/spacer-element.js";class SpacerElement extends spacerElementBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { spacerElementBase } from "../../../../elements/base/spacer-element.js";
+
+class SpacerElement extends spacerElementBase {
+  renderDefault() {
+    return html`
         <style>
             .spacer{
                 margin-top: 90px;
@@ -8,4 +13,9 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
             }
         </style>
         <div class="spacer"></div>
-    `}}customElements.define(SpacerElement.is,SpacerElement);
+    `;
+  }
+
+}
+
+customElements.define(SpacerElement.is, SpacerElement);

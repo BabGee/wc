@@ -1,4 +1,11 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{SharedStyles}from"../../styles/shared-styles.js";import{SHOP_STYLES}from"../../styles/shop-styles.js";import{ProductSearchBase}from"../../../../elements/base/product-search.js";class ProductSearch extends ProductSearchBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { SharedStyles } from "../../styles/shared-styles.js";
+import { SHOP_STYLES } from "../../styles/shop-styles.js";
+import { ProductSearchBase } from "../../../../elements/base/product-search.js";
+
+class ProductSearch extends ProductSearchBase {
+  renderDefault() {
+    return html`
         ${SHOP_STYLES}
         ${SharedStyles}
         <style>
@@ -22,4 +29,17 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
                              
                             </div>
 
-        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(ProductSearch.is,ProductSearch);
+        `;
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+}
+
+customElements.define(ProductSearch.is, ProductSearch);

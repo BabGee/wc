@@ -1,5 +1,20 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"../../../../../node_modules/@polymer/paper-button/paper-button.js";import"../../../../../node_modules/@polymer/iron-icon/iron-icon.js";import"./datalist-element/datasource-list.js";import{DataListElementBase}from"../../../../elements/base/datalist-element.js";import"./datalist-element/loader-element.js";class DataListElement extends DataListElementBase{constructor(){super();this.searchText=""}renderDefault(){return html`
-    ${this.loading?html`<loader-element></loader-element>`:html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import "../../../../../node_modules/@polymer/paper-button/paper-button.js";
+import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
+import "./datalist-element/datasource-list.js";
+import { DataListElementBase } from "../../../../elements/base/datalist-element.js";
+import "./datalist-element/loader-element.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class DataListElement extends DataListElementBase {
+  constructor() {
+    super();
+    this.searchText = '';
+  }
+
+  renderDefault() {
+    return html`
+    ${this.loading ? html`<loader-element></loader-element>` : html`
     <datasource-list
                         id="dt"
                         paginate
@@ -36,4 +51,109 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
                         .totalPages="${this.totalPages}">
                 </datasource-list>
     `}
-                `}static get properties(){return{table:{type:Boolean,value:!0},grid:{type:Boolean,value:!1},list:{type:Boolean,value:!1},sortProperty:{type:String},selectedRows:{type:Array,value:[]},showActions:{type:Boolean,value:!1,notify:!0},searchText:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_switchView(event){const sel=event.currentTarget.selected;if(0===sel){this.table=!0;this.list=!1;this.grid=!1}else if(1===sel){this.table=!1;this.list=!0;this.grid=!1}else if(2===sel){this.table=!1;this.list=!1;this.grid=!0}}_handleSearch(event){var filter=event.detail.value,column=event.detail.column,columns=event.detail.searchFields;this.searchText=filter;this.deleteParamKeys(columns.concat(["q"]),!1);this.updateParams(column,filter)}_handleClearSearch(event){this.searchText="";var columns=event.detail.searchFields;this.deleteParamKeys(columns.concat(["q"]),!0)}_handleDateRangeChange(event){var filter=event.detail.range;this.$.datasource.mergeParams(filter)}_handleSelectionChanged(event){if(event.detail.selected){this.actionRow=event.detail.data;this.showActions=!0}else{this.showActions=!1}}_handleExport(event){"pdf"==event.detail.type?this.generatePDF():this.generateCSV()}}customElements.define(DataListElement.is,DataListElement);
+                `;
+  }
+
+  static get properties() {
+    return {
+      table: {
+        type: Boolean,
+        value: true
+      },
+      grid: {
+        type: Boolean,
+        value: false
+      },
+      list: {
+        type: Boolean,
+        value: false
+      },
+      sortProperty: {
+        type: String
+      },
+      selectedRows: {
+        type: Array,
+        value: []
+      },
+      showActions: {
+        type: Boolean,
+        value: false,
+        notify: true
+      },
+      searchText: String
+    };
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  _switchView(event) {
+    const sel = event.currentTarget.selected;
+
+    if (sel === 0) {
+      this.table = true;
+      this.list = false;
+      this.grid = false;
+    } else if (sel === 1) {
+      this.table = false;
+      this.list = true;
+      this.grid = false;
+    } else if (sel === 2) {
+      this.table = false;
+      this.list = false;
+      this.grid = true;
+    }
+  }
+  /**
+   * General and per column search event handler
+   *
+   *
+   * @param event
+   * @private
+   */
+
+
+  _handleSearch(event) {
+    var filter = event.detail.value;
+    var column = event.detail.column;
+    var columns = event.detail.searchFields;
+    this.searchText = filter; // console.log(columns);
+    // delete any previous column and general search query
+
+    this.deleteParamKeys(columns.concat(['q']), false); // update new search query param
+
+    this.updateParams(column, filter);
+  }
+
+  _handleClearSearch(event) {
+    this.searchText = "";
+    var columns = event.detail.searchFields; // delete any previous column and general search query
+
+    this.deleteParamKeys(columns.concat(['q']), true);
+  }
+
+  _handleDateRangeChange(event) {
+    var filter = event.detail.range;
+    this.$.datasource.mergeParams(filter);
+  }
+
+  _handleSelectionChanged(event) {
+    if (event.detail.selected) {
+      // event.detail.selected
+      // event.detail.data
+      this.actionRow = event.detail.data;
+      this.showActions = true;
+    } else {
+      // event.detail.deselected
+      this.showActions = false;
+    }
+  }
+
+  _handleExport(event) {
+    event.detail.type == 'pdf' ? this.generatePDF() : this.generateCSV();
+  }
+
+}
+
+customElements.define(DataListElement.is, DataListElement);

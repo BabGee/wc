@@ -1,4 +1,13 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{DASHBOARD_STYLES}from"../../styles/dashboard-styles.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{LANDING_STYLES}from"../../styles/landing-style.js";import{SectionPElementDsc}from"../../../../elements/base/section-pelement-dsc.js";class SectionTeam extends SectionPElementDsc{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
+import { BULMA_STYLES } from "../../styles/bulma-styles.js";
+import { LANDING_STYLES } from "../../styles/landing-style.js";
+import { SectionPElementDsc } from "../../../../elements/base/section-pelement-dsc.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class SectionTeam extends SectionPElementDsc {
+  renderDefault() {
+    return html`
         ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 
      ${LANDING_STYLES}
@@ -6,8 +15,8 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
         <section class="section is-small">
             <div class="container">
                 <div class="content-wrapper">
-                        ${this.rows.map((slide,index)=>html` 
-                  ${0===index%2?html`
+                        ${this.rows.map((slide, index) => html` 
+                  ${index % 2 === 0 ? html`
                     <!-- Feature -->
                     <div class="columns is-vcentered">
                         <!-- Featured image -->
@@ -27,7 +36,7 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
                         </div>
                     </div>
                     <!-- /Feature -->
-                                        `:html`
+                                        ` : html`
                                  <!-- Feature -->
                     <div class="columns is-vcentered">
                                             <!-- Content -->
@@ -59,4 +68,21 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{
 
             </div>
         </section>
-        `}static get is(){return"section-team"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(SectionTeam.is,SectionTeam);
+        `;
+  }
+
+  static get is() {
+    return 'section-team';
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+  }
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+}
+
+customElements.define(SectionTeam.is, SectionTeam);

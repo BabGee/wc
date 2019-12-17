@@ -1,4 +1,11 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"./location-picker/map-marker.js";import{LocationPickerBase}from"../../../../elements/base/location-picker.js";class LocationPicker extends LocationPickerBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import "./location-picker/map-marker.js";
+import { LocationPickerBase } from "../../../../elements/base/location-picker.js";
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class LocationPicker extends LocationPickerBase {
+  renderDefault() {
+    return html`
 
         <style>
             :host {
@@ -21,4 +28,39 @@ import{html}from"../../../../../node_modules/lit-element/lit-element.js";import"
            </div>
         
         
-        `}static get properties(){return{location:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_centerChanged(e){const location=e.detail.location;this.location=location;const onIdlePositionView=this.shadowRoot.querySelector("#picked");onIdlePositionView.innerHTML="Chosen location: lat "+location.lat+", lng "+location.lng}getValue(){return this.location.lng+","+this.location.lat}valid(){}invalid(){}init(pElement,loader){super.init(pElement,loader)}}customElements.define(LocationPicker.is,LocationPicker);
+        `;
+  }
+
+  static get properties() {
+    return {
+      location: Object
+    };
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties); // this.getLocation();
+  }
+
+  _centerChanged(e) {
+    // console.log(e.detail);
+    const location = e.detail['location'];
+    this.location = location;
+    const onIdlePositionView = this.shadowRoot.querySelector('#picked');
+    onIdlePositionView.innerHTML = 'Chosen location: lat ' + location.lat + ', lng ' + location.lng;
+  }
+
+  getValue() {
+    return this.location.lng + ',' + this.location.lat;
+  }
+
+  valid(validation) {}
+
+  invalid(validation) {}
+
+  init(pElement, loader) {
+    super.init(pElement, loader);
+  }
+
+}
+
+customElements.define(LocationPicker.is, LocationPicker);

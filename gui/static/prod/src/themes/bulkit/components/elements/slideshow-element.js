@@ -1,4 +1,12 @@
-import{html}from"../../../../../node_modules/lit-element/lit-element.js";import{BULMA_STYLES}from"../../styles/bulma-styles.js";import{DASHBOARD_STYLES}from"../../styles/dashboard-styles.js";import{LANDING_STYLES}from"../../styles/landing-style.js";import{SlideshowElementBase}from"../../../../elements/base/slideshow-element.js";class SlideshowElement extends SlideshowElementBase{renderDefault(){return html`
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import { BULMA_STYLES } from "../../styles/bulma-styles.js";
+import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
+import { LANDING_STYLES } from "../../styles/landing-style.js";
+import { SlideshowElementBase } from "../../../../elements/base/slideshow-element.js";
+
+class SlideshowElement extends SlideshowElementBase {
+  renderDefault() {
+    return html`
      ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 
      ${LANDING_STYLES}
@@ -140,25 +148,53 @@ visibility: hidden;
 </style>
 <div class="slider-wrapper">
 	
-${this.rows.map((slide,index)=>html` 
+${this.rows.map((slide, index) => html` 
 
-<input class ="checkbox" type="radio" id="i${index}" name="images" ?checked=${0===index} />`)}
+<input class ="checkbox" type="radio" id="i${index}" name="images" ?checked=${index === 0} />`)}
 
-	    ${this.rows.map((slide,index)=>html`   
+	    ${this.rows.map((slide, index) => html`   
 	<div class="slide_img" id="slide_${index}">			
 			
 			<img src="/media/${slide[3]}">
 			
-				<label class="prev" for="i${index-1}"><span>&#x2039;</span></label>
-				<label class="next" for="i${index+1}"><span>&#x203a;</span></label>	
+				<label class="prev" for="i${index - 1}"><span>&#x2039;</span></label>
+				<label class="next" for="i${index + 1}"><span>&#x203a;</span></label>	
 		
 	</div>
     `)}  
 
 	<div id="nav_slide">
-	      ${this.rows.map((slide,index)=>html` 
+	      ${this.rows.map((slide, index) => html` 
 		<label for="i${index}" class="dots" id="dot${index}"></label>
 		 `)}  
 	</div>
 		
-</div>`}onLoadData(){this.showSlidesAuto()}showSlidesAuto(){let i=0;const self=this;function Move(){if(i===self.rows.length-1){i=0;self.shadowRoot.querySelector("#i"+i).checked=!0;return}i=i%self.rows.length+1;self.shadowRoot.querySelector("#i"+i).checked=!0}setInterval(Move,3e3)}}customElements.define(SlideshowElement.is,SlideshowElement);
+</div>`;
+  }
+
+  onLoadData(dsc) {
+    this.showSlidesAuto();
+  }
+
+  showSlidesAuto() {
+    let i = 0;
+    const self = this;
+
+    function Move() {
+      if (i === self.rows.length - 1) {
+        // means we have reached the end
+        i = 0;
+        self.shadowRoot.querySelector('#i' + i).checked = true;
+        return;
+      }
+
+      i = i % self.rows.length + 1;
+      self.shadowRoot.querySelector('#i' + i).checked = true;
+    }
+
+    setInterval(Move, 3000); // change img in 3 sec
+  }
+
+}
+
+customElements.define(SlideshowElement.is, SlideshowElement);
