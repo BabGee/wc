@@ -87,8 +87,8 @@ class FileInput extends FileInputBase {
             id="input" 
             >
           <div class="is-flex" style="background-color: #fff;border-radius: 6px;  border: 1px solid #e5e5e5;">
-            <span class='file-btn file-cta'>Choose ${this.e.name} file</span>
-            <span class='label' data-js-label>Choose file here</label>
+            <span class='file-btn file-cta'>Choose file</span>
+            <span class='label' id="display" data-js-label>Choose file here</label>
           </div>
         </div>
       </form>
@@ -133,17 +133,18 @@ class FileInput extends FileInputBase {
   updateUploadMessage(message) {
     const display = this.shadowRoot.querySelector('#display');
     display.textContent = message;
-  }
-  /**
-   * Cancel Last Upload
-   * @param evt
-   */
+  } // getFileExtension(filename){
+  //   return filename.split('.').pop();
+  // }
+  // /**
+  //  * Cancel Last Upload
+  //  * @param evt
+  //  */
+  // cancelUpload(evt) {
+  //   this.resetUpload();
+  //   this.updateUploadMessage('');
+  // }
 
-
-  cancelUpload(evt) {
-    this.resetUpload();
-    this.updateUploadMessage('');
-  }
   /**
    * File Selection Change handler
    * @param evt
@@ -151,8 +152,22 @@ class FileInput extends FileInputBase {
 
 
   handleFile(evt) {
-    const fileInput = this.shadowRoot.querySelector('#input');
-    this.uploadFile(fileInput);
+    const fileInput = this.shadowRoot.querySelector('[type="file"]');
+    this.uploadFile(fileInput); // const label = this.shadowRoot.querySelector('[data-js-label]');
+    // let preview = this.shadowRoot.querySelector('.file-preview img');
+    // let reader = new FileReader();
+    // reader.onload = function(){
+    //   preview.src = reader.result;
+    // };
+    // reader.readAsDataURL(evt.target.files[0]);
+    // fileInput.onmouseout = function () {
+    //   if (!fileInput.value) return
+    //   let value = fileInput.value.replace(/^.*[\\\/]/, '')
+    //   // console.log(this.getFileExtension(value))
+    //   // el.className += ' -chosen'
+    //   label.innerText = value
+    // }
+    // this.uploadFile(fileInput);
   }
 
 }

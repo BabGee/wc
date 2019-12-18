@@ -22,8 +22,7 @@ ${DASHBOARD_STYLES}
             name=${this.e.name}             
             required=${this.required} 
             @change="${this.handleFile}"
-            minlength=${this.e.min}  
-            maxlength=${this.e.max} >
+             >
             <span class='button btn-align info-btn raised'><iron-icon icon="icons:file-upload"></iron-icon>Choose File</span>
             <span class='label' id="display" data-js-label>No file selected</span>
         </div>

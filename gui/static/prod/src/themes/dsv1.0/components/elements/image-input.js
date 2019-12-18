@@ -78,7 +78,7 @@ class ImageInput extends ImageInputBase {
     <div class="mainwrapper drop-area">
       <form id="file-form" class="upload-form is-flex">
           <div class="file-preview">
-            <img />
+            <img id="display" src="" />
           </div>
         <div class='ii-file-input'>
           <input type='file'
@@ -86,8 +86,8 @@ class ImageInput extends ImageInputBase {
             multiple accept='image/*|audio/*|video/*'
             >
           <div class="is-flex"style="background-color: #fff;border-radius: 6px;  border: 1px solid #e5e5e5;">
-            <span class='file-btn file-cta'>Choose file</span>
-            <span class='label' data-js-label>Choose file here</label>
+            <span class='file-btn file-cta'>Upload  ${this.e.name} </span>
+            <span id="label" class='label' data-js-label> ${this.fileName}</label>
           </div>
         </div>
       </form>
@@ -103,14 +103,12 @@ class ImageInput extends ImageInputBase {
     return this.value;
   }
 
-  firstUpdated() {
-    let preview = this.shadowRoot.querySelector(".file-preview img");
-    let previewFile = this.shadowRoot.querySelector(".file-preview");
-
-    if (preview.src) {
-      previewFile.innerContent = "No Preview";
-    }
-  } // /**
+  firstUpdated() {} // let preview = this.shadowRoot.querySelector(".file-preview img");
+  // let previewFile = this.shadowRoot.querySelector(".file-preview");
+  // if (preview.src) {
+  //   previewFile.innerContent = "No Preview";
+  // }
+  // /**
   //  * from SerializableElement
   //  * @override
   //  */
@@ -130,23 +128,27 @@ class ImageInput extends ImageInputBase {
   //     validationDisplay.textContent= validation;
   //   }
   // }
-  // /**
-  //  * from ImageInputBase
-  //  * @override
-  //  */
-  // updatePreview(src) {
-  //   var display = this.qs('#preview');
-  //   display.src = src;
-  // }
-  // /**
-  //  * Override to display a message to user
-  //  * @param message
-  //  */
-  // updateUploadMessage(message) {
-  //   const display = this.shadowRoot.querySelector('#display');
-  //   display.textContent = message;
-  // }
-  // /**
+
+  /**
+   * from ImageInputBase
+   * @override
+   */
+
+
+  updatePreview(src) {
+    var display = this.qs('#display');
+    display.src = src;
+  }
+  /**
+   * Override to display a message to user
+   * @param message
+   */
+
+
+  updateUploadMessage(message) {
+    const display = this.shadowRoot.querySelector('#label');
+    display.textContent = message;
+  } // /**
   //  * Cancel Last Upload
   //  * @param evt
   //  */
@@ -154,11 +156,12 @@ class ImageInput extends ImageInputBase {
   //   this.resetUpload();
   //   this.updateUploadMessage('');
   // }
-  // handleFile() {
-  //   const fileInput = this.qs('#file-upload');
-  //   this.uploadImage(fileInput);
-  // }
 
+
+  handleFile() {
+    const fileInput = this.shadowRoot.querySelector('[type="file"]');
+    this.uploadImage(fileInput);
+  }
   /**
    * from SerializableElement
    * @override
@@ -179,20 +182,18 @@ class ImageInput extends ImageInputBase {
     const errorDisplay = this.shadowRoot.querySelector("#errorDisplay");
     errorDisplay.style.display = "block";
     errorDisplay.textContent = validation;
-  }
-  /**
-   * from FileInputBase
-   * @override
-   */
+  } // /**
+  //  * from FileInputBase
+  //  * @override
+  //  */
+  // updateUploadMessage(message) {
+  //   const display = this.shadowRoot.querySelector("#display");
+  //   // display.textContent = message;
+  // }
+  // getFileExtension(filename) {
+  //   return filename.split(".").pop();
+  // }
 
-
-  updateUploadMessage(message) {
-    const display = this.shadowRoot.querySelector("#display"); // display.textContent = message;
-  }
-
-  getFileExtension(filename) {
-    return filename.split(".").pop();
-  }
   /**
    * Cancel Last Upload
    * @param evt
@@ -202,58 +203,56 @@ class ImageInput extends ImageInputBase {
   cancelUpload(evt) {
     this.resetUpload();
     this.updateUploadMessage("");
-  }
+  } // uploadFile(fileInput) {
+  //   var file = fileInput.files[0];
+  //   const self = this;
+  //   if (!file) {
+  //     // no file selected
+  //     return;
+  //   }
+  //   if (
+  //     self._validFileExtensions &&
+  //     self._hasExtension(file.name, self._validFileExtensions)
+  //   ) {
+  //     this.uploadTempFile(file, "image", null)
+  //       .then(upload => {
+  //         this.value = upload["response"]; // Bind Image Path
+  //         this.updateUploadMessage(
+  //           "File successfully uploaded. Please Proceed!"
+  //         );
+  //       })
+  //       .catch(reason => {
+  //         // TODO add better error handling
+  //         Logger.i.incompleteDev("Better error handling.", reason);
+  //       });
+  //   } else {
+  //     this.updateUploadMessage("File type" + file.type + " not supported!");
+  //   }
+  // }
+  // /**
+  //  * File Selection Change handler
+  //  * @param evt
+  //  */
+  // handleFile(evt) {
+  //   const fileInput = this.shadowRoot.querySelector('[type="file"]');
+  //   const label = this.shadowRoot.querySelector("[data-js-label]");
+  //   let preview = this.shadowRoot.querySelector(".file-preview img");
+  //   let reader = new FileReader();
+  //   // console.log(preview.src);
+  //   reader.onload = function() {
+  //     preview.src = reader.result;
+  //   };
+  //   reader.readAsDataURL(evt.target.files[0]);
+  //   fileInput.onmouseout = function() {
+  //     if (!fileInput.value) return;
+  //     let value = fileInput.value.replace(/^.*[\\\/]/, "");
+  //     // console.log(this.getFileExtension(value))
+  //     // el.className += ' -chosen'
+  //     label.innerText = value;
+  //   };
+  //   this.uploadFile(fileInput);
+  // }
 
-  uploadFile(fileInput) {
-    var file = fileInput.files[0];
-    const self = this;
-
-    if (!file) {
-      // no file selected
-      return;
-    }
-
-    if (self._validFileExtensions && self._hasExtension(file.name, self._validFileExtensions)) {
-      this.uploadTempFile(file, "image", null).then(upload => {
-        this.value = upload["response"]; // Bind Image Path
-
-        this.updateUploadMessage("File successfully uploaded. Please Proceed!");
-      }).catch(reason => {
-        // TODO add better error handling
-        Logger.i.incompleteDev("Better error handling.", reason);
-      });
-    } else {
-      this.updateUploadMessage("File type" + file.type + " not supported!");
-    }
-  }
-  /**
-   * File Selection Change handler
-   * @param evt
-   */
-
-
-  handleFile(evt) {
-    const fileInput = this.shadowRoot.querySelector('[type="file"]');
-    const label = this.shadowRoot.querySelector("[data-js-label]");
-    let preview = this.shadowRoot.querySelector(".file-preview img");
-    let reader = new FileReader(); // console.log(preview.src);
-
-    reader.onload = function () {
-      preview.src = reader.result;
-    };
-
-    reader.readAsDataURL(evt.target.files[0]);
-
-    fileInput.onmouseout = function () {
-      if (!fileInput.value) return;
-      let value = fileInput.value.replace(/^.*[\\\/]/, ""); // console.log(this.getFileExtension(value))
-      // el.className += ' -chosen'
-
-      label.innerText = value;
-    };
-
-    this.uploadFile(fileInput);
-  }
 
 }
 
