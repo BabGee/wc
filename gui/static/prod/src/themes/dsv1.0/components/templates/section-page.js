@@ -4,6 +4,7 @@ import '../snack-bar.js';
 import '../form-render.js';
 import { SectionPageBase } from "../../../../components/templates/section-page.js";
 import { Colors, Fonts, Reset } from "../../styles/shared.js";
+import "../../../../../node_modules/fa-icons/index.js";
 /* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
 
 class SectionPage extends SectionPageBase {
@@ -105,9 +106,9 @@ ${this.payload ? html`
     <div class="modal-header" >
       <div class="heading" >
         <h1 class="title has-text-black-bis" style="width: 80%; display: inline-block; ">${this._computePage(this.payload).title}</h1>
-        <a style="display: inline-block; color: black;
-        border: 1px solid black; padding: 0.1rem 1rem; 
-        border-radius: 25px 1px 1px 25px; box-shadow: 1px 1px 1px 0px black; " class="is-pulled-right" @click=${this._triggerViewList}>Back</a>
+        <a style="display: inline-block;position: relative; right: 20px;" class="is-pulled-right" @click=${this._triggerViewList}>
+        <fa-icon class="fas fa-times" color="#4a4a4a" size="2em"></fa-icon>
+        </a>
       </div>
     </div>
     <div id="d-styling" class="modal-body">            

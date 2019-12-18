@@ -23,7 +23,7 @@ class FormRender extends FormRenderBase {
 
     if (formType === FORM_TYPE_FORM) {
       form = html`
-       <form-x id="form">
+       <form-x id="form" .sections=${this.sections} .pos=${this.pos} @pos-change=${this._onPosChange}>
         <p slot="header" class="card-header-title">${this.feed.title}</p> 
         <e-list 
           slot="body" 

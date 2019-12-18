@@ -1210,6 +1210,7 @@ class TagInput extends TagInputBase {
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     const self = this;
+    this.limit = 1000;
     this.loadData().then(dsc => {
       // first item is the pk
       // second item is the label

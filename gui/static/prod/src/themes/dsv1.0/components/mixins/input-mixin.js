@@ -45,7 +45,7 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
           <div class="column">
             <div class="field">
               <div class="control">
-                <input class="input" id="input" type="${this.type}" placeholder="${this.e.name}">
+                <input class="input"  value=${this.value} id="input" type="${this.type}" placeholder="${this.e.name}">
               </div>
             </div>
           </div>
@@ -141,9 +141,7 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
 
             .form{
               font-size: 16px;
-              width: 50%;
               position: relative;
-              height: 50px;
               overflow: hidden;
           }
           .form input{
@@ -233,7 +231,7 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
       <div class="main-wrapper">
       <div class="animait">
           <div class="form has-icons-right">
-              <input type="${this.type}" name="name" autocomplete="off" style="padding: 10px; padding-top: 15px;" required/>
+              <input type="${this.type}"  id="input" value=${this.value} name="name" autocomplete="off" style="padding: 10px; padding-top: 15px;" required/>
               <label for="name" class="label-name"><span class="content-name">${this.e.name}</span></label>
           </div>
       </div>
@@ -299,6 +297,7 @@ export const inputMixin = BaseClass => class extends enterSubmitMixin(BaseClass)
               class="input inp"
               id="input"
               type="${this.type}"
+              value=${this.value}
               placeholder="${this.e.name}"
             />
             <span id="danger-icon" class="icon is-small is-right">

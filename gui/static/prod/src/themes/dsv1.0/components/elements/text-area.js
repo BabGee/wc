@@ -91,7 +91,10 @@ class TextArea extends TextAreaBase {
   }
 
   valid(validation) {
-    this.qs('#warning-text').style.display === 'block' ? this.qs('#warning-text').style.display = 'none' : this.qs('#warning-text').style.display = 'block';
+    if (this.qs('#warning-text').style.display === 'block') {
+      this.qs('#warning-text').style.display = 'none';
+    }
+
     Logger.i.debug(validation);
 
     if (validation) {}
