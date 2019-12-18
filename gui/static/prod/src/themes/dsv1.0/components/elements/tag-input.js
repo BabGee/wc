@@ -1512,7 +1512,8 @@ class TagInput extends TagInputBase {
 
 
   isTagDuplicate(s) {
-    return this.value.findIndex(item => s.trim().toLowerCase() === item.value.toLowerCase()); // return this.value.some(item => s.toLowerCase() === item.value.toLowerCase());
+    // return this.value.findIndex(item => s.trim().toLowerCase() === item.value.toLowerCase());
+    return this.value.findIndex(item => s.trim() === item.value); // return this.value.some(item => s.toLowerCase() === item.value.toLowerCase());
   }
 
   getTagIndexByValue(value) {
