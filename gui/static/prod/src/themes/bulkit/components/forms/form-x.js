@@ -25,14 +25,6 @@ class FormX extends FormBase {
                 box-sizing:border-box;
             }
 
-            paper-button{
-                display: inline-block;
-                background: #54667a;
-            }
-
-            paper-button[hidden]{
-                display: none;
-            }
 
             .header{
                 color: #000000;
