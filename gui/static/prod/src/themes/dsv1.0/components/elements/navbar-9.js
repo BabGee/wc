@@ -71,7 +71,7 @@ class Navbar9 extends NavbarBase {
           <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
               <a class="navbar-item" href="/" @click=${this.reloadPage}>
-                <img src="${this.e.defaultValue}" width="112" height="28">
+                <img src="/media/${this.gateway.logo}" width="112" height="28">
               </a>
                 
               <a role="button" class="navbar-burger burger" @click=${this.addBlock} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -83,14 +83,12 @@ class Navbar9 extends NavbarBase {
                 
             <div id="navbarBasicExample" class="navbar-menu">
               <div class="navbar-end">
-                <!-- ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
-                <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
-                    class="navbar-item is-capitalized">
-                    ${pageGroup.title}
-                </a>`)} -->
-
-                ${this.e.details.nav_links.map((link, index) => html`
-                    <a class="navbar-item nav__item is-capitalized" @click="${() => this.scrollToSection(index)}">${link}</a>
+               ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+                  ${pageGroup.pages.map((menu, menuIndex) => html`
+                  <a class="navbar-item nav__item is-capitalized"
+                  href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/">${menu.title}</a>
+                  `)}
+                  
                 `)}
                 
               </div>

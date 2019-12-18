@@ -76,15 +76,9 @@ class FileInput extends FileInputBase {
     <div class="mainwrapper drop-area">
       <form id="file-form" class="upload-form">
         <div class='ii-file-input'>
-          <!-- <div class="file-preview">
-            <img />
-          </div> -->
-          <span id="display" ></span>
-          <span id="errorDisplay" ></span>
           <input type='file'
-            name=${this.e.name} 
             @change="${this.handleFile}"
-            id="input" 
+            multiple accept='text/*|pdf/*|word/*/|excel/*|powerpoint/*|zip/*'
             >
           <div class="is-flex" style="background-color: #fff;border-radius: 6px;  border: 1px solid #e5e5e5;">
             <span class='file-btn file-cta'>Choose file</span>
