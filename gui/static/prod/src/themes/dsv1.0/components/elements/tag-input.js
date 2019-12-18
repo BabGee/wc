@@ -443,13 +443,18 @@ class TagInput extends TagInputBase {
 .control{
   padding:16px;
 }
+
+
 </style>
     
  <div class="column">
 <div class="field" style="margin-top: 2px">
 <div class="control  ">
     <input id="input" class="countries " placeholder="Write Some ${this.title} ...">
-    </div></div></div>
+    </div>    
+    <div id="validationMessage" class="Username-or-Password" style="color:red;"></div>
+
+    </div></div>
     `;
   }
 
@@ -1193,9 +1198,19 @@ class TagInput extends TagInputBase {
     };
   }
 
-  valid(validation) {}
+  invalid(validation) {
+    if (validation) {
+      this.shadowRoot.querySelector('#validationMessage').style.display = 'block';
+      this.shadowRoot.querySelector('#validationMessage').textContent = validation;
+    }
+  }
 
-  invalid(validation) {}
+  valid(validation) {
+    if (validation) {
+      this.shadowRoot.querySelector('#validationMessage').style.display = 'none';
+      this.shadowRoot.querySelector('#validationMessage').textContent = '';
+    }
+  }
 
   getValue() {
     const input = this.qs('#input');
