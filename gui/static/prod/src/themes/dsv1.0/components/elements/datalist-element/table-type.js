@@ -799,6 +799,56 @@ export class TableType extends LitElement {
       td:nth-child(5){
         word-break: break-all;
       }
+
+      @media screen and (max-width: 1023px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+    padding: 20px 0!important;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
       </style>
       ${this._searchFieldsExist(this.columns) ? html`
 
@@ -838,7 +888,7 @@ export class TableType extends LitElement {
         <thead>
             <tr>
             ${this.columns.map(column => html`
-            <th style="">
+            <th style="" scope="col">
                 <datasource-table-head
                         .column="${column}"
                         sort-direction$="[[column.sortDirection]]"
@@ -856,7 +906,7 @@ export class TableType extends LitElement {
         ${this.data.map((row, rowIndex) => html`
             <tr>
             ${this.columns.map((column, columnIndex) => html`
-                <td>${this.renderColumn(column, row[column.property], columnIndex, row, rowIndex)}</td>
+                <td data-label= ${column}>${this.renderColumn(column, row[column.property], columnIndex, row, rowIndex)}</td>
             `)}
             </tr>
         `)}

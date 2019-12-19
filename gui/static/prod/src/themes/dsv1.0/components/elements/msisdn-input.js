@@ -16,7 +16,7 @@ class MsisdnInput extends MsisdnInputBase {
           padding: 20px!important;
           line-height: 1;
           background-color: #fcfcfc!important;
-          border: 1px solid #a3a3a4!important;
+          border: 1px solid #e5e5e5!important;
           box-shadow: 0 0 0 transparent!important;
         }
         select {

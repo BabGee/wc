@@ -11,6 +11,7 @@ export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
 export const GET_PAYLOAD = 'GET_PAYLOAD';
 import { Response } from '../core/parsers/response.js';
+import { COMMAND_GET_INTERFACE } from "../core/parsers/response.js";
 export const getPayload = (payloadjson, template) => (dispatch, getState) => {
   // Parse initial interface payload.
   let response = new Response(payloadjson);
@@ -26,7 +27,9 @@ export const getPayload = (payloadjson, template) => (dispatch, getState) => {
   }); // TODO #258 Template Switching Without Reload
   // this can enhance the user experience as template changes currently require a full reload
   // this is achievable through what dispatching `loadTemplate(template)` does
-  // initial load is unnecessary because of the pre-loading in index.html
+  // Start Preloading elements
+
+  dispatch(preloadElements(response)); // initial load is unnecessary because of the pre-loading in index.html
   // there is need to load the 404 template even for index.html pre-loads
 
   dispatch(loadTemplate(template)); // TODO #259 above is uncomment for backward compatibility but it's optional when pre-loading is in effect
@@ -82,6 +85,22 @@ export const loadTemplate = template => dispatch => {
       });
   } // dispatch(updateTemplate(template));
 
+};
+export const preloadElements = payload => dispatch => {
+  let elLoader = document.createElement('element-loader'); // pre-loading elements
+
+  let rp = payload.serviceCommands[COMMAND_GET_INTERFACE];
+  rp.pageGroups.forEach(function (pageGroup) {
+    pageGroup.pages.forEach(function (page) {
+      page.pageInputGroups.forEach(function (pageInputGroup) {
+        pageInputGroup.oe.forEach(function (pElement) {
+          elLoader.headless = true; // trigger a load
+
+          elLoader.element = pElement;
+        });
+      });
+    });
+  });
 };
 let snackbarTimer;
 export const showSnackbar = (message, title, context) => dispatch => {

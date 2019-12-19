@@ -463,7 +463,9 @@ class DateElement extends DateElementBase {
             this.dateSelected = `${month + 1}` + '/' + cell.innerText + '/' + year;
             this.wasDateSelected = true;
             let str = `<p id="dateSelected" class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${dateClicked}</p>`;
-            inpInput.innerHTML = str; // //IMPLEMENTATION OF DATE RANGE FOR FUTURE PURPOSES
+            inpInput.innerHTML = str; //to close back body
+
+            this.dateToggle(); // //IMPLEMENTATION OF DATE RANGE FOR FUTURE PURPOSES
             // dateRange.push(...[cell.innerText + " " + months[month] + " " + year]);
             // dateRange.shift();
             // let filtered = dateRange.filter(function (el) {

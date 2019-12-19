@@ -17,6 +17,9 @@ class TextArea extends TextAreaBase {
 .text-area .field.success{
     position: relative;
 }
+.text-area{
+  position: relative;
+}
 .text-area textarea{
     height: 200px;
     position: relative;
@@ -70,11 +73,17 @@ class TextArea extends TextAreaBase {
 #warning-text{
   display:none;
 }
+.counter{
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
 </style>
 <div class="text-area">
   <div class="field">
       <div class="control">
           <textarea id="input" class="textarea" placeholder=${this.e.name}>${this.value}</textarea>
+          <div class="counter"><p>${this.e.max}</p></div>
       </div>
       <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
   </div>

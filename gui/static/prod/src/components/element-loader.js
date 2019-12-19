@@ -7,6 +7,11 @@ class ElementLoader extends LitElement {
     super();
     this.renderInstance = 0;
     this.loading = true;
+    /**
+     * Used Element Pre-loadinng - Dynamically import an element but do not init
+     */
+
+    this.headless = false;
   }
 
   render() {
@@ -161,7 +166,7 @@ class ElementLoader extends LitElement {
 
     let elementProps = this.elementPath(); // Display loading indicator
 
-    this.loading = true;
+    if (!this.headless) this.loading = true;
     this.loadDynamic(elementProps, this.renderInstance, (newElement, rI, hl) => {
       // check if callback is outdated,
       // only the highest renderInstance is valid
@@ -200,13 +205,15 @@ class ElementLoader extends LitElement {
     import(elementPath).then(module => {
       Logger.i.debug(`Auto-Loaded ${elementName} from ${elementPath}.`); // e.target.import is the import document.
 
-      let newElement = document.createElement(elementName);
+      if (!this.headless) {
+        let newElement = document.createElement(elementName);
 
-      if (newElement.constructor === HTMLElement) {
-        throw new DOMException('Custom Element Not Found: ' + elementName);
+        if (newElement.constructor === HTMLElement) {
+          throw new DOMException('Custom Element Not Found: ' + elementName);
+        }
+
+        if (cb) return cb(newElement, renderInstance, self);
       }
-
-      if (cb) return cb(newElement, renderInstance, self);
     }).catch(error => {
       Logger.i.info(`${elementName} Couldn't be loaded`);
       Logger.i.error(error);
@@ -218,9 +225,11 @@ class ElementLoader extends LitElement {
 
       const missingElementPath = '../elements/missing-element.js';
       self.importAndInit(missingElementPath, missingElementName, renderInstance, (newElement, hl) => {
-        newElement.msg = elementName; // TODO ignored promise
+        if (!this.headless) {
+          newElement.msg = elementName; // TODO ignored promise
 
-        this.replaceWith(newElement);
+          this.replaceWith(newElement);
+        }
       });
     });
   }

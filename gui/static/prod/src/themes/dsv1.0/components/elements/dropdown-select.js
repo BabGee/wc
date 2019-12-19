@@ -313,14 +313,15 @@ class DropdownSelect extends DropdownSelectBase {
         select: this.shadowRoot.querySelector('#select'),
         placeholder: this.e.name,
         showContent: 'down',
-        onChange: () => {
-          slim.destroy();
+        onChange: info => {
           selectDiv.className = 'select is-hidden'; //adding bulma back
 
           arrow.classList.remove('is-hidden');
           selected.className = '';
-          selected.innerHTML = select.options[select.selectedIndex].text;
+          selected.innerHTML = info.text;
           this.selectedIndex = select.value;
+          self.deleteParamKeys("q", true);
+          slim.destroy();
         }
       });
       slim.open(); //slim select search input from closing dropdown

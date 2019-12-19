@@ -39,6 +39,10 @@ class SectionPage extends SectionPageBase {
       div.modal-container div.modal-base .modal-header{
         padding: 25px 0 25px 35px;
         /* border-bottom: solid 1px rgba(71, 71, 71, 0.2); */
+        width: 91%;
+        position: fixed;
+        z-index: 9999;
+        background: #fff;
       }
       div.modal-container div.modal-base .modal-header h1 {
         font-size: 24px;
@@ -98,6 +102,11 @@ class SectionPage extends SectionPageBase {
         font-weight: bold;
         color: #fff;
       }
+
+      .modal-body{
+        position: relative;
+        top: 90px;
+      }
      
 </style>
 ${this.payload ? html`
@@ -105,7 +114,7 @@ ${this.payload ? html`
   <div class="modal-base " style="max-height: 92vh; padding: 7px; overflow: auto; width: 100vw;">
     <div class="modal-header" >
       <div class="heading" >
-        <h1 class="title has-text-black-bis" style="width: 80%; display: inline-block; ">${this._computePage(this.payload).title}</h1>
+        <h1 class="title has-text-black-bis" style="font-weight: 500!important; width: 80%; display: inline-block; ">${this._computePage(this.payload).title}</h1>
         <a style="display: inline-block;position: relative; right: 20px;" class="is-pulled-right" @click=${this._triggerViewList}>
         <fa-icon class="fas fa-times" color="#4a4a4a" size="2em"></fa-icon>
         </a>

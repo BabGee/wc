@@ -10,7 +10,10 @@ class TimeElement extends TimeElementBase {
       today: String,
       todayHourTime: String,
       todayMinTime: String,
-      amOrPm: String
+      amOrPm: String,
+      isHourSelected: Boolean,
+      isMinSelected: Boolean,
+      isTODSelected: Boolean
     };
   }
 
@@ -436,7 +439,7 @@ a {
             <p class="time-font-title has-text-centered">TOD</p>
           </div>
           <div class="radio timer-radio">
-            <div class ="radio-div"><input type="radio" name="tod" value="AM" checked @click='${() => this.addTOD("AM")}'> AM</div>
+            <div class ="radio-div"><input type="radio" name="tod" value="AM"  @click='${() => this.addTOD("AM")}'> AM</div>
             <div class ="radio-div"><input type="radio" name="tod" value="PM"  @click='${() => this.addTOD("PM")}'> PM </div>
           </div>
         </div>
@@ -463,6 +466,10 @@ a {
       dropdown.classList.add('is-hidden');
       this.dropDownMenuHidden = true;
     }
+
+    this.isHourSelected = false;
+    this.isMinSelected = false;
+    this.isTODSelected = false;
   }
 
   addHour(time) {
@@ -474,6 +481,11 @@ a {
       li.classList.remove("time-active");
     });
     selectedHour.classList.add("time-active");
+    this.isHourSelected = true;
+
+    if (this.isHourSelected && this.isMinSelected && this.isTODSelected) {
+      this._dropdown();
+    }
   }
 
   addMin(time) {
@@ -487,11 +499,21 @@ a {
       li.classList.remove("time-active");
     });
     selectedMin.classList.add("time-active");
+    this.isMinSelected = true;
+
+    if (this.isHourSelected && this.isMinSelected && this.isTODSelected) {
+      this._dropdown();
+    }
   }
 
   addTOD(tod) {
     const timeofDay = this.shadowRoot.querySelector("#tod");
     timeofDay.innerHTML = tod;
+    this.isTODSelected = true;
+
+    if (this.isHourSelected && this.isMinSelected && this.isTODSelected) {
+      this._dropdown();
+    }
   }
 
   range(start, end) {

@@ -383,7 +383,7 @@ class ServicePage extends ServicePageBase {
 
                 <div class="dash-content">
                   <div class="dash-title" style="margin-bottom: 20px;">
-                    <h1 class="title is-capitalized">${ServicePage.toTitleCase(this.page.title)}</h1>
+                    <h1 class="title is-capitalized has-text-weight-regular" style="font-weight: 500!important;">${ServicePage.toTitleCase(this.page.title)}</h1>
                   </div>
                   <div class="dash-body">
                     ${this.page.pageInputGroups.map((feed, feedIndex) => html`

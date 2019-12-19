@@ -42,13 +42,13 @@ export class ProductsElement extends SectionPElementDsc {
     ${this.rows.map(slide => html` 
      
     <div class="column">
-        <a href="${slide[4]}" target="_blank">
+        <a href="${this._getLink(slide[1])}" target="_blank">
           <div class="ii__product">
             <div class="ii__product-logo">
               <img src="${slide[3]}" alt="products logo">
             </div>
             <div class="ii__content">
-              <h3 class="is-size-6 ii__title has-text-weight-bold"> ${slide[1]}</h3>
+              <h3 class="is-size-6 ii__title has-text-weight-bold">${this._getTitle(slide[1])}</h3>
               <p class="ii__paragraph is-size-7">${slide[2]}</p>
             </div>
           </div>
@@ -66,6 +66,16 @@ export class ProductsElement extends SectionPElementDsc {
 
   static get properties() {
     return {};
+  }
+
+  _getLink(text) {
+    let [title, link] = text.split('|');
+    return link;
+  }
+
+  _getTitle(text) {
+    let [title, link] = text.split('|');
+    return title;
   }
 
 }
