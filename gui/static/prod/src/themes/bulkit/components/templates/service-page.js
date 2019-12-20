@@ -544,7 +544,7 @@ ${this._snackbarTitle} ${this._snackbarMessage}
     this.qsa('.side-icon.is-active').forEach(function (item) {
         item.classList.remove('is-active');
     });
-     // make clicked to show selected
+      // make clicked to show selected
     e.currentTarget.classList.add('is-active');
     */
     this.qs('.menu-wrapper .icon-box-toggle').classList.add('active');
@@ -576,13 +576,13 @@ ${this._snackbarTitle} ${this._snackbarMessage}
     /*
     // UN-OPTIMIZED VERSION OF ABOVE
     let app = document.querySelector('adaptive-ui');
-     let hashPaths = e.currentTarget.hash.split('/');
+      let hashPaths = e.currentTarget.hash.split('/');
     let currentPage = hashPaths[1];
     let currentTab = hashPaths[2];
-     if (currentPage!==app._page && currentTab !== app._tab){
+      if (currentPage!==app._page && currentTab !== app._tab){
         this.view = 'main';
     }
-     */
+      */
 
 
     this._menuWrapperClick(e);

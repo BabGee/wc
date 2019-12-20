@@ -32,14 +32,14 @@ export const CanvasPageBase = class extends PageViewElement {
       dialogsStack: Array,
     };
   }
-   stateChanged(state) {
+    stateChanged(state) {
     this.title = state.app.payload.name;
     this.name = state.app.payload.name;
     this.logo = state.app.payload.logo;
-     this.defaultColor = state.app.payload.defaultColor;
+      this.defaultColor = state.app.payload.defaultColor;
     updateStyles({'--app-default-color': this.defaultColor});
   }
-   */
+    */
 
   /**
      * Dialogs Back navigation, Pop dialogs' stack
