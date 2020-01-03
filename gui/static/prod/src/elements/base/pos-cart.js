@@ -100,14 +100,14 @@ export const PosCartBase = class extends utilsMixin(mqttMixin(dataSourceMixin(Ba
     const self = this;
     this.loader.then(dsc => {
       /* todo incomplete dev
-             let payload = req.response;
-             target.cols = payload.response.data_source.cols;
+              let payload = req.response;
+              target.cols = payload.response.data_source.cols;
             target.rows = payload.response.data_source.rows;
             var items = [];
             var itemIds = [];
             var sums = {};
-             var config = document.querySelector('switch-config');
-              for (var i = 0; i < target.rows.length; i++) {
+              var config = document.querySelector('switch-config');
+                for (var i = 0; i < target.rows.length; i++) {
                 var item = {};
                 var itemLinks = [];
                 for (var j = 0; j < target.cols.length; j++) {
@@ -120,49 +120,49 @@ export const PosCartBase = class extends utilsMixin(mqttMixin(dataSourceMixin(Ba
                         }
                         sums[target.cols[j]['value']]['value'] += parseInt(target.rows[i][j])
                     }
-                     if (target.cols[j]['type'] == 'href') {
+                      if (target.cols[j]['type'] == 'href') {
                         // target.cols[j]['type']
                         var links = target.cols[j]['links'];
-                         for (var link in links) {
+                          for (var link in links) {
                             var linkObject = links[link];
                             //console.log(link + " -> " + linkObject);
-                             var linkProcessed = {};
+                              var linkProcessed = {};
                             linkProcessed['service'] = linkObject['service'];
                             linkProcessed['icon'] = linkObject['icon'];
-                             linkProcessed['params'] = {};
+                              linkProcessed['params'] = {};
                             for (var linkParamKey in linkObject['params']) {
                                 var linkParam = linkObject['params'][linkParamKey];
                                 // get from item, simple hack since links are the always the last
                                 linkProcessed['params'][linkParamKey] = item[linkParam]
                             }
-                              var endpoint = config.protocol
+                                var endpoint = config.protocol
                                 + '//' + config.hostname + '/' + linkProcessed['service'] + "/?";
-                             var params_string = Object.keys(linkProcessed['params']).map(function (k) {
+                              var params_string = Object.keys(linkProcessed['params']).map(function (k) {
                                 return encodeURIComponent(k) + "=" + encodeURIComponent(linkProcessed['params'][k]);
                             }).join('&');
-                             endpoint = endpoint + params_string;
-                             linkProcessed['fullUrl'] = endpoint;
-                             itemLinks.push(linkProcessed);
+                              endpoint = endpoint + params_string;
+                              linkProcessed['fullUrl'] = endpoint;
+                              itemLinks.push(linkProcessed);
                             //console.log(item);
                             //console.log(linkProcessed);
-                         }
-                     }
+                          }
+                      }
                     else {
                         item[target.cols[j]['label']] = target.rows[i][j]
                     }
-                  }
-                 item['inline'] = itemLinks;
+                    }
+                  item['inline'] = itemLinks;
                 items.push(item);
                 itemIds.push(item['id']);
-             }
+              }
             target.currentData = items;
-             // ES8 :)
+              // ES8 :)
             target.col_sums = Object.values(sums);
-             target.cart_items = itemIds.join(',');
-             */
+              target.cart_items = itemIds.join(',');
+              */
     });
     /* todo incomplete dev
-         try {
+          try {
             self.$.mqtt.register(self,self.e.kind);
         }catch (e){
             console.error(e)

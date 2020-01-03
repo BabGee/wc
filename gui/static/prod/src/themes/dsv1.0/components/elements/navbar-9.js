@@ -86,7 +86,8 @@ class Navbar9 extends NavbarBase {
                ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
                   ${pageGroup.pages.map((menu, menuIndex) => html`
                   <a class="navbar-item nav__item is-capitalized"
-                  href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${menuIndex}/">${menu.title}</a>
+                  @click="${this.scrollToSection(menu.id)}"
+                  >${menu.title}</a>
                   `)}
                   
                 `)}
@@ -116,34 +117,43 @@ class Navbar9 extends NavbarBase {
 
   scrollToSection(index) {
     //MAXIMUM OF 6 ONLY
-    if (index == 0) {
-      window.scroll({
-        top: 0,
-        behavior: 'smooth'
-      });
-    } else if (index == 1) {
-      window.scroll({
-        top: 800,
-        behavior: 'smooth'
-      });
-    } else if (index == 2) {
-      window.scroll({
-        top: 1600,
-        behavior: 'smooth'
-      });
-    } else if (index == 3) {
-      window.scroll({
-        top: 2400,
-        behavior: 'smooth'
-      });
-    } else if (index == 4) {
-      window.scroll({
-        top: 3200,
-        behavior: 'smooth'
-      });
-    } else if (index == 5) {
-      window.scroll({
-        top: 4000,
+    // if(index == 0 ){
+    //   window.scroll({
+    //     top: 0,
+    //     behavior: 'smooth'
+    //   });
+    // }else if(index == 1){
+    //   window.scroll({
+    //     top: 800,
+    //     behavior: 'smooth'
+    //   });
+    // }else if(index == 2){
+    //   window.scroll({
+    //     top: 1600,
+    //     behavior: 'smooth'
+    //   });
+    // }else if(index == 3){
+    //   window.scroll({
+    //     top: 2400,
+    //     behavior: 'smooth'
+    //   });
+    // }else if(index == 4){
+    //   window.scroll({
+    //     top: 3200,
+    //     behavior: 'smooth'
+    //   });
+    // }else if(index == 5){
+    //  window.scroll({
+    //     top: 4000,
+    //     behavior: 'smooth'
+    //   });
+    // }
+    var elementToFocus = document.getElementById(index);
+
+    if (elementToFocus) {
+      //  elementToFocus.scrollIntoView(true);
+      elementToFocus.scrollIntoView({
+        block: 'start',
         behavior: 'smooth'
       });
     }

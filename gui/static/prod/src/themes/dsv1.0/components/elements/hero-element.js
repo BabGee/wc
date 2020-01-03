@@ -39,7 +39,7 @@ class HeroElement extends BaseElement {
             line-height: 1.33333333333333333333;
         }
         </style>
-        <section class="section module ">
+        <section class="section module " style="background: #e5e5e5e5;">
             <div class="module-inner">
                 <div class="module-wrap">
                     <div class="columns">

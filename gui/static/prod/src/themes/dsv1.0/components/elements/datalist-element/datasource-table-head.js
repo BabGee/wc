@@ -289,6 +289,8 @@ export class DataSourceTableHead extends LitElement {
   }
 
   _handleFilter() {
+    console.log("VALUE");
+
     if (this.column.filter) {
       if (this.column.activeFilter) {
         const paperInput = this.shadowRoot.querySelector('paper-input');
@@ -307,10 +309,12 @@ export class DataSourceTableHead extends LitElement {
   }
 
   setPaperInputValue(value) {
+    console.log("VALUE2");
     this.shadowRoot.querySelector('paper-input').value = value;
   }
 
   _handleChoiceChanged() {
+    console.log("VALUE3");
     this.dispatchEvent(new CustomEvent('input-change-th-content', {
       detail: {
         column: this.column,
@@ -320,6 +324,7 @@ export class DataSourceTableHead extends LitElement {
   }
 
   _handleColumnDropdownFilter(evt) {
+    console.log("VALUE4");
     this.dispatchEvent(new CustomEvent('input-change-th-content', {
       detail: {
         column: this.column,
