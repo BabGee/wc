@@ -248,20 +248,9 @@ import{dataSourceMixin,LitElement,html,css,DataListElementBase}from"../../../../
           }
   
         </style>
-            <!-- view starts here -->
-            
-            ${this._viewType(this.type)?this.createCustomElement(this.type):html`
-            <!--fallback to table-->
-
-            <table-type
-            .data = ${this.data}
-            .details = ${this.details}
-            .columns = ${this.columns}></table-type>
-
-            
-            `}
-
-`}static get is(){return"datasource-list"}static get properties(){return{data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},cols:{type:Array,value:[]},columns:{type:Array},paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,type:{type:String,value:"table"},details:Object,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String,searchText:String}}firstUpdated(){}_searchReset(){this.shadowRoot.querySelector("#q").value=""}_viewType(type){let isDefaultType=!0,typeBase="./";if("production"===window.process.env.NODE_ENV){typeBase="./datalist-element/"}let typeModule=typeBase+"table-type.js";if(!(null==type)||!(type==void 0)||!(""==type)){typeModule=typeBase+`${type}-type.js`;isDefaultType=!1}import(typeModule).then(()=>{}).catch(err=>{console.warn("ERROR IS.."+err)});return isDefaultType}createCustomElement(type){if("table"==type){return html`<table-type
+        <!-- view starts here -->
+        ${this.createCustomElement(this.type)}
+`}static get is(){return"datasource-list"}static get properties(){return{data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},cols:{type:Array,value:[]},columns:{type:Array},paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,type:{type:String,value:"table"},details:Object,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String,searchText:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this._loadTypeModule()}_searchReset(){this.shadowRoot.querySelector("#q").value=""}_loadTypeModule(){let typeBase="./";if("production"===window.process.env.NODE_ENV){typeBase="./datalist-element/"}import(typeBase+`${this.type}-type.js`).then(()=>{}).catch(err=>{console.warn("ERROR IS.."+err)})}createCustomElement(type){if("table"==type){return html`<table-type
         .data = ${this.data}
         .details = ${this.details}
         .columns = ${this.columns}

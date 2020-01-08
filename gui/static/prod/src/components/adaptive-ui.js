@@ -52384,11 +52384,7 @@ a {
 </style>
     `;var shopStyles={SHOP_STYLES:SHOP_STYLES};const register$4=function(ComponentClass){if(window.THEME==="dsv1.0"){window.customElements.define(ComponentClass.is,ComponentClass)}};var register$5={register:register$4};class EList$1 extends EListBase{static get is(){return"e-list"}static get properties(){return{oe:Array}}render(){return html$1`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-    <style>
-    element-loader{
-
-    }
-    </style>
+    
     <div class="columns is-multiline">
     
     ${this.oe.map(el=>html$1`
@@ -52396,8 +52392,9 @@ a {
         class="column is-block ${this._gridClasses(el)}"
         id="${el.id}"
         .element="${el}"
-        .pl="${this}"></element-loader>  
-    `)}
+        .pl="${this}"></element-loader>`)}
+    
+    
     </div>
     `}elementLoaders(){return this.shadowRoot.querySelectorAll("element-loader")}_gridClasses(el){const grid=super._gridClasses(el),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}register$4(EList$1);class DataSourceTableActions extends LitElement{render(){return html$1`
         <style>
