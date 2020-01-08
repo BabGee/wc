@@ -95,11 +95,28 @@ import{css,html,SectionPageBase,Colors,Fonts,Reset}from"../../../../components/a
         position: relative;
         top: 90px;
       }
+
+      @media screen and (max-width: 700px){
+        div.modal-container div.modal-base .modal-header{
+          width: 70%;
+        }
+        div.modal-container div.modal-base .modal-header h1{
+          font-size: 14px;
+        }
+      }
+      @media screen and (max-width: 1023px){
+        div.modal-container div.modal-base .modal-header{
+          width: 80%;
+        }
+        div.modal-container div.modal-base .modal-header h1{
+          font-size: 14px;
+        }
+      }
      
 </style>
 ${this.payload?html`
 <div class="modal-container">
-  <div class="modal-base " style="max-height: 92vh; padding: 7px; overflow: auto; width: 100vw;">
+  <div class="modal-base " style="max-height: 100%; padding: 7px; overflow: auto; width: 100vw;height: 100%">
     <div class="modal-header" >
       <div class="heading" >
         <h1 class="title has-text-black-bis" style="font-weight: 500!important; width: 80%; display: inline-block; ">${this._computePage(this.payload).title}</h1>

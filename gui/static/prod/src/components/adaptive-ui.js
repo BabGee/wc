@@ -52764,17 +52764,20 @@ a {
 <style>
 
 
-
+.l-title{
+  position: relative;
+  top: -13px;
+}
   </style>
 
 <div class="card form-x-card" style="box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03); ">
     <header class="card-header" style="padding-left: 32px; padding-top: 11px; padding-right: 32px;">    
-        <adaptive-ui-icon style="float: left;"
-                   ?hidden="${this._hideB(this.pos,this.sections)}"
+        <adaptive-ui-icon style="float: left;position:relative;top: 13px;"
+                    ?hidden="${this._hideB(this.pos,this.sections)}"
                    icon="icons:arrow-back"
                    @click="${this._back}"></adaptive-ui-icon>
         <slot name="header"></slot>
-        <adaptive-ui-icon style="float: right;"
+        <adaptive-ui-icon style="float: right;position: relative; top:13px;"
                    ?hidden="${this._hideF(this.pos,this.sections)}"
                    icon="icons:arrow-forward"
                    @click="${this._forward}"></adaptive-ui-icon>
@@ -56003,126 +56006,24 @@ header {
 
     }
 
-            .row .inp-right .field.success,
-            .row .inp-right .field.success input,
-            .row .inp-right .field.success svg {
-              color: #23d160;
-              fill: #23d160;
-            }
-            .row .inp-right .field.success {
-              font-weight: normal;
-              font-size: 12px;
-            }
-            #danger-icon {
-              visibility: hidden;
-            }
-
-            #check-icon {
-              visibility: hidden;
-            }
-            #warning-text {
-              display: none;
-            }
-
-            /* NEW IMPLEMENTATION */
-
-            .form{
-              font-size: 16px;
-              position: relative;
-              overflow: hidden;
-          }
-          .form input{
-              width: 100%;
-              height: 100%;
-              color: #595f6e;
-              padding-top: 20px;
-              border: none;
-          }
-          .form input:focus{
-              outline: none;
-          }
-          .form label{
-              position: absolute;
-              bottom: 0px;
-              left: 0;
-              height: 100%;
-              width: 100%;
-              pointer-events: none;
-              
-          }
-          .form label::after{
-              content: '';
-              position: absolute;
-              left: 0px;
-              bottom: -1px;
-              height: 100%;
-              width: 100%;
-              border-bottom: #595f6e;
-              transform: translateX(-100%);
-              transition: transform .3s ease;
-          }
-          .content-name{
-              position: absolute;
-              bottom: 14px;
-              left: 10px;
-              transition: all .3s ease;
-          }
-          .form input:focus + .label-name .content-name, .form input:valid + .label-name .content-name{
-              transform: translateY(-10px);
-              color: blue;
-              margin-left: 0px;
-              margin-bottom: 5px;
-            font-size: 70%;
-              
-          }
-          .form input:focus + .label-name::after, .form input:valid + .label-name::after{
-              transform: translateX(0%);
-              margin-left: 0px;
-              
-          }
-  .form{
-  
-      /* border:solid 1px #cecece; */
-      padding: 0px;
-      border-radius: 2%;
-  }
-  
-  
-  .form:focus-within {
-      
-      animation-duration: 0.2s;
-      transition-delay: 0.2s;
-      border: solid 1px var(--app-default-color);
-      border-radius: 6px;
-  }
-  
-  
-
-          </style>
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
-          />
-
-          <div class="column row">
-          <div class="inp-right">
-            <!-- <label class="label">${this.e.name}</label> -->
-            <!-- For success message use 'is-success' within the 'input' element and add is-danger whithin the input tag-->
-            <!-- For error message use 'is-danger' within the 'input' element and add is-danger whithin the input tag-->
-            <!--- Error message is commented at the bottom of this component --->
-  
-
-              <div class="field">
-                <div class="control has-icons-right">
-                 
-      <div class="main-wrapper">
-      <div class="animait">
-          <div class="form has-icons-right">
-              <input type="${this.type}"  id="input" value=${this.value} name="name" autocomplete="off" style="padding: 10px; padding-top: 15px;" required/>
-              <label for="name" class="label-name"><span class="content-name">${this.e.name}</span></label>
-          </div>
-      </div>
-  </div>
+    }
+    .pass-icon{
+      position: absolute;
+      right: 11px;
+      cursor: pointer;
+      top: 9px;
+    }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <div class="column row">
+      <div class="inp-right">
+        <label class="label">${this.e.name}</label>
+        <!-- For success message use 'is-success' within the 'input' element and add is-danger whithin the input tag-->
+        <!-- For error message use 'is-danger' within the 'input' element and add is-danger whithin the input tag-->
+        <!--- Error message is commented at the bottom of this component --->
+          <div class="field">
+              <div class="control has-icons-right">
+                  <input class="input" id="input" type="${this.type}" placeholder="${this.e.name}">
                   <span id="danger-icon" class="icon is-small is-right">
                     <fa-icon
                       class="fas fa-exclamation-triangle icon"
@@ -56137,10 +56038,11 @@ header {
                       color="#23d160"
                     ></fa-icon>
                   </span>
-                </div>
-                <p id="warning-text" style="color:#ff3860;">
-                  ${this.e.name} required
-                </p>
+                  ${"password"==this.type?html$1`
+                  <span class="pass-icon" @click="${this.reveal}">
+                    <fa-icon class="fas fa-eye"></fa-icon>
+                  </span>
+                  `:html$1``}
               </div>
             </div>
           </div>
@@ -56201,7 +56103,7 @@ header {
             ${this.e.name} required
           </p>
         </div>
-      `}invalid(){const input=this.shadowRoot.querySelector("#input"),dangerIcon=this.shadowRoot.querySelector("#danger-icon"),checkIcon=this.shadowRoot.querySelector("#check-icon"),warningText=this.shadowRoot.querySelector("#warning-text");input.className="input is-danger";warningText.style.display="block";dangerIcon.style.visibility="visible";checkIcon.style.visibility="hidden"}valid(){const input=this.shadowRoot.querySelector("#input"),dangerIcon=this.shadowRoot.querySelector("#danger-icon"),checkIcon=this.shadowRoot.querySelector("#check-icon"),warningText=this.shadowRoot.querySelector("#warning-text");input.className="input is-success";warningText.style.display="none";dangerIcon.style.visibility="hidden";checkIcon.style.visibility="visible"}getInput(){return this.shadowRoot.querySelector("#input")}getValue(){return this.getInput().value}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}get renderMode(){return this.pl.renderMode}get type(){return"text"}};var inputMixin$1={inputMixin:inputMixin};class SnackBar$1 extends SnackBarBase{render(){return html$1`   
+      `}invalid(){const input=this.shadowRoot.querySelector("#input"),dangerIcon=this.shadowRoot.querySelector("#danger-icon"),checkIcon=this.shadowRoot.querySelector("#check-icon"),warningText=this.shadowRoot.querySelector("#warning-text");input.className="input is-danger";warningText.style.display="block";dangerIcon.style.visibility="visible";checkIcon.style.visibility="hidden"}valid(){const input=this.shadowRoot.querySelector("#input"),dangerIcon=this.shadowRoot.querySelector("#danger-icon"),checkIcon=this.shadowRoot.querySelector("#check-icon"),warningText=this.shadowRoot.querySelector("#warning-text");input.className="input is-success";warningText.style.display="none";dangerIcon.style.visibility="hidden";checkIcon.style.visibility="visible"}reveal(){var password=this.shadowRoot.querySelector("#input").value,type=this.shadowRoot.querySelector("#input").type;if("password"===this.shadowRoot.querySelector("#input").type){this.shadowRoot.querySelector("#input").type="text";var elementToFocus=this.shadowRoot.querySelector("#eye");elementToFocus.icon="icons:visibility-off"}else if("text"===this.shadowRoot.querySelector("#input").type){this.shadowRoot.querySelector("#input").type="password";var elementToFocus2=this.shadowRoot.querySelector("#eye");elementToFocus2.icon="icons:visibility"}}getInput(){return this.shadowRoot.querySelector("#input")}getValue(){return this.getInput().value}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}get renderMode(){return this.pl.renderMode}get type(){return"text"}};var inputMixin$1={inputMixin:inputMixin};class SnackBar$1 extends SnackBarBase{render(){return html$1`   
     
       <style>
 
