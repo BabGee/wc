@@ -570,8 +570,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
                     <div class="peer align-c flex-nw">
                       <div class="peer">
                         <div class="logo">
-                          <!-- <img src="${this._computeLogo(this.gateway)}" alt=""> -->
-                          <img src="https://gomipay.com/media/administration_gateway_logo/mipay.png" alt="$1"/>
+                           <img src="${this._computeLogo(this.gateway)}" alt=""> 
                         </div>
                       </div>
                     </div>
