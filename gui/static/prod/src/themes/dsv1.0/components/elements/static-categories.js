@@ -1,12 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
-import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import { StaticCategoriesBase } from "../../../../elements/base/static-categories.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class StaticCategories extends StaticCategoriesBase {
-  renderDefault() {
-    return html`
+import{html,StaticCategoriesBase}from"../../../../components/adaptive-ui.js";class StaticCategories extends StaticCategoriesBase{renderDefault(){return html`
 					
     <style>
         .wrapper{
@@ -55,7 +47,7 @@ class StaticCategories extends StaticCategoriesBase {
 
                 <div>
                     <div class="wrapper is-vcentered has-text-centered">
-                              ${this.currentData.map((item, index) => html` 
+                              ${this.currentData.map(item=>html` 
 						 
                         <!-- Icon box -->
                         <div class="column is-3">
@@ -73,7 +65,7 @@ class StaticCategories extends StaticCategoriesBase {
         <div class="dropOut">
         
             <ul>
-            ${item.value.map(sub => html`
+            ${item.value.map(sub=>html`
                 <li><iron-icon icon="icons:shopping-cart"></iron-icon><a  .dataLink="${sub.href[0]}"  @click="${this._followLink}"><div class="text-content">${sub.name}</div><div class="hover">${sub.name}</div></a></li>
                  `)}
             </ul>
@@ -91,17 +83,4 @@ class StaticCategories extends StaticCategoriesBase {
             </div>
         </section> 
         <!-- /Features section -->
-        `;
-  }
-
-  constructor() {
-    super();
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-}
-
-customElements.define(StaticCategories.is, StaticCategories);
+        `}constructor(){super()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(StaticCategories.is,StaticCategories);

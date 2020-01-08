@@ -1,14 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
-import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import { LANDING_STYLES } from "../../styles/landing-style.js";
-import { BULMA_STYLES } from "../../styles/bulma-styles.js";
-import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
-import { StaticCategoriesBase } from "../../../../elements/base/static-categories.js";
-
-class StaticCategories extends StaticCategoriesBase {
-  renderDefault() {
-    return html`   
+import{html,LANDING_STYLES,BULMA_STYLES,DASHBOARD_STYLES,StaticCategoriesBase}from"../../../../components/adaptive-ui.js";class StaticCategories extends StaticCategoriesBase{renderDefault(){return html`   
         ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 
      ${LANDING_STYLES}
@@ -60,7 +50,7 @@ class StaticCategories extends StaticCategoriesBase {
 
                 <div>
                     <div class="wrapper is-vcentered has-text-centered">
-                              ${this.currentData.map((item, index) => html` 
+                              ${this.currentData.map(item=>html` 
 						 
                         <!-- Icon box -->
                         <div class="column is-3">
@@ -78,7 +68,7 @@ class StaticCategories extends StaticCategoriesBase {
         <div class="dropOut">
         
             <ul>
-            ${item.value.map(sub => html`
+            ${item.value.map(sub=>html`
                 <li><iron-icon icon="icons:shopping-cart"></iron-icon><a  .dataLink="${sub.href[0]}"  @click="${this._followLink}"><div class="text-content">${sub.name}</div><div class="hover">${sub.name}</div></a></li>
                  `)}
             </ul>
@@ -96,17 +86,4 @@ class StaticCategories extends StaticCategoriesBase {
             </div>
         </section> 
         <!-- /Features section -->
-        `;
-  }
-
-  constructor() {
-    super();
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-}
-
-customElements.define(StaticCategories.is, StaticCategories);
+        `}constructor(){super()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(StaticCategories.is,StaticCategories);

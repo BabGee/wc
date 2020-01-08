@@ -1,12 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import '../../icons/my-icons.js';
-import { SharedStyles } from "../../styles/shared-styles.js";
-import { TextViewBase } from "../../../../elements/base/text-view.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class TextView extends TextViewBase {
-  renderDefault() {
-    return html`
+import{html,SharedStyles,TextViewBase}from"../../../../components/adaptive-ui.js";class TextView extends TextViewBase{renderDefault(){return html`
  ${SharedStyles}
  <div class="column" style="margin:auto">
 <div class="field">
@@ -21,17 +13,4 @@ class TextView extends TextViewBase {
 </div>
 </div>
 
-        `;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-  }
-
-}
-
-window.customElements.define(TextView.is, TextView);
+        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(TextView.is,TextView);

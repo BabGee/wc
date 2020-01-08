@@ -1,12 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/@polymer/paper-card/paper-card.js";
-import "./datalist-element/loader-element.js";
-import { SummaryBoxesBase } from "../../../../elements/base/summary-boxes.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class SummaryBoxes extends SummaryBoxesBase {
-  renderDefault() {
-    return html`
+import{html,SummaryBoxesBase}from"../../../../components/adaptive-ui.js";class SummaryBoxes extends SummaryBoxesBase{renderDefault(){return html`
 
         <style>
         @media screen and (max-width: 775px){
@@ -65,19 +57,19 @@ class SummaryBoxes extends SummaryBoxesBase {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <div class="summary-content">
         
-            ${this.loading ? html`
+            ${this.loading?html`
             <loader-element></loader-element>
-            ` : html`
-            ${!this._rowsOrColumns(this.rows) ? html`
+            `:html`
+            ${!this._rowsOrColumns(this.rows)?html`
             
-            ${this.groups.map((group, groupIndex) => html`
+            ${this.groups.map((group,groupIndex)=>html`
              <div class="row">
                 <div class="col-md-12 group-summary">
                     <h1>${group}</h1>
                 </div>
             </div>
             <div class="columns is-multiline">
-            ${this._computeData(groupIndex).map(item => html`
+            ${this._computeData(groupIndex).map(item=>html`
                 <div class="column">
                     <div class="summary-wrapper">
                         <div class="graph">
@@ -115,7 +107,7 @@ class SummaryBoxes extends SummaryBoxesBase {
             </div>
              
              `)}
-            ` : html`
+            `:html`
             
               <div class="row">
                 <div class="col-md-12">
@@ -123,7 +115,7 @@ class SummaryBoxes extends SummaryBoxesBase {
                 </div>
               </div>
               
-              ${this.rows.map(item => html`
+              ${this.rows.map(item=>html`
                 <div class="column">
                     <div class="summary-wrapper">
                         <div class="graph">
@@ -141,29 +133,4 @@ class SummaryBoxes extends SummaryBoxesBase {
             `}
             `}
             
-        </div>`;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  _computeData(index) {
-    return this.data[index];
-  }
-
-  _rowsOrColumns(cData) {
-    if (cData === undefined) {
-      return;
-    }
-
-    return cData.length;
-  }
-
-  onLoadData(dsc) {
-    super.onLoadData(dsc);
-  }
-
-}
-
-customElements.define(SummaryBoxes.is, SummaryBoxes);
+        </div>`}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}onLoadData(dsc){super.onLoadData(dsc)}}customElements.define(SummaryBoxes.is,SummaryBoxes);

@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import { HyperlinkWindowBase } from "../../../../elements/base/hyperlink-window.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class HyperlinkWindow extends HyperlinkWindowBase {
-  renderDefault() {
-    return html`
+import{html,HyperlinkWindowBase}from"../../../../components/adaptive-ui.js";class HyperlinkWindow extends HyperlinkWindowBase{renderDefault(){return html`
                  <div class="column is-3 is-offset-5">
         <div class="field" style="margin-top: 20px; margin-bottom: 20px;">
         <a href="${this.e.defaultValue}" 
@@ -16,9 +9,4 @@ class HyperlinkWindow extends HyperlinkWindowBase {
         </a>
         </div>
 
-        `;
-  }
-
-}
-
-customElements.define(HyperlinkWindow.is, HyperlinkWindow);
+        `}}customElements.define(HyperlinkWindow.is,HyperlinkWindow);

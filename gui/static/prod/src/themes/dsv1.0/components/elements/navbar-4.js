@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { NavbarBase } from "../../../../elements/base/navbar-base.js";
-import "../../../../../node_modules/fa-icons/index.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class Navbar4 extends NavbarBase {
-  renderDefault() {
-    return html`
+import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar4 extends NavbarBase{renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
 
@@ -92,9 +85,9 @@ nav {
                 </a>
               </div>
               <div class="navbar-menu is-spaced is-active">
-              ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
-              <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
-              class="navbar-item ${pageGroupIndex == this._pageGroup ? 'is-active has-text-link' : ''}" >
+              ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+              <a href="${window.location.pathname+window.location.search}#/${pageGroupIndex}/0/" 
+              class="navbar-item ${pageGroupIndex==this._pageGroup?"is-active has-text-link":""}" >
                   ${pageGroup.title}
               </a>`)}
               </div>
@@ -112,13 +105,4 @@ nav {
         </div>
         </div>
 
-     `;
-  }
-
-  static get is() {
-    return 'navbar-4';
-  }
-
-}
-
-customElements.define(Navbar4.is, Navbar4);
+     `}static get is(){return"navbar-4"}}customElements.define(Navbar4.is,Navbar4);

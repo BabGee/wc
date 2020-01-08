@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { CheckboxInputBase } from "../../../../elements/base/checkbox-input.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class CheckboxInput extends CheckboxInputBase {
-  // createRenderRoot() {return this;}
-  renderDefault() {
-    return html`
+import{html,CheckboxInputBase}from"../../../../components/adaptive-ui.js";class CheckboxInput extends CheckboxInputBase{renderDefault(){return html`
 <style>
 .checkbox input[type="checkbox"] {
     opacity: 0;
@@ -76,40 +69,4 @@ class CheckboxInput extends CheckboxInputBase {
       <label for="checkbox_1">${this.name}</label>
   </div>
 </div>
-`;
-  }
-
-  static get properties() {
-    return {
-      'rounded': Boolean
-    };
-  }
-
-  constructor() {
-    super();
-    this.rounded = false;
-  }
-
-  getInput() {
-    return this.qs('input');
-  }
-
-  getValue() {
-    return this.qs('#checkbox_1').checked ? 'on' : 'off';
-  }
-
-  valid(validation) {}
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-    this.rounded = this.e.details['rounded'] || false;
-    this.shadowRoot.querySelector('#checkbox_1').checked = this.checked;
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-  }
-
-}
-
-window.customElements.define(CheckboxInput.is, CheckboxInput);
+`}static get properties(){return{rounded:Boolean}}constructor(){super();this.rounded=!1}getInput(){return this.qs("input")}getValue(){return this.qs("#checkbox_1").checked?"on":"off"}valid(){}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.rounded=this.e.details.rounded||!1;this.shadowRoot.querySelector("#checkbox_1").checked=this.checked}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(CheckboxInput.is,CheckboxInput);

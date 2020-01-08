@@ -1,12 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
-import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import { StaticProductsScrollBase } from "../../../../elements/base/static-products-scroll.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class StaticProductsScroll extends StaticProductsScrollBase {
-  renderDefault() {
-    return html`
+import{html,StaticProductsScrollBase}from"../../../../components/adaptive-ui.js";class StaticProductsScroll extends StaticProductsScrollBase{renderDefault(){return html`
         <style>
         /* The Modal (background) */
 .product-modal {
@@ -133,15 +125,15 @@ background-color: #ffffff;
                             <!-- Product grid -->
                             <div class="column is-12 is-tablet-landscape-padded">
                             <div class="columns is-product-grid is-multiline is-overflow">
-                            <div class="slick-custom is-prev slick-arrow" style="display: block;"  @click=${() => this._scrollLeft()} ><i class="fa fa-chevron-left"><iron-icon icon="icons:chevron-left"></iron-icon></i></div>
-                              ${this.productItems.map(product => html`
+                            <div class="slick-custom is-prev slick-arrow" style="display: block;"  @click=${()=>this._scrollLeft()} ><i class="fa fa-chevron-left"><iron-icon icon="icons:chevron-left"></iron-icon></i></div>
+                              ${this.productItems.map(product=>html`
                                 <!-- Product -->
                                  
                                  <div class="column is-2">
-                                    <div class="flat-card" @click =${() => this._productDialog(product)}>
+                                    <div class="flat-card" @click =${()=>this._productDialog(product)}>
                                     <!-- Product zoomable image -->
                                 <div class="image">
-                                    <img src="/media/${product.image || 'crm_productitem_imagepath/NO_Image_sMI9Ypk.jpg'}" alt="">
+                                    <img src="/media/${product.image||"crm_productitem_imagepath/NO_Image_sMI9Ypk.jpg"}" alt="">
                                     </div>
                                     <!-- Product meta -->
                                     <div class="product-info has-text-centered">
@@ -167,7 +159,7 @@ background-color: #ffffff;
                            
                                 <!-- Product -->
                                  `)} 
-                              <div class="slick-custom is-next slick-arrow" style="display: block;"><i class="fa fa-chevron-right"  @click=${() => this._scrollRight()} ><iron-icon icon="icons:chevron-right"></iron-icon></i> </div>
+                              <div class="slick-custom is-next slick-arrow" style="display: block;"><i class="fa fa-chevron-right"  @click=${()=>this._scrollRight()} ><iron-icon icon="icons:chevron-right"></iron-icon></i> </div>
                             </div>
                             <!-- /Product grid -->
                             </div>
@@ -191,11 +183,11 @@ background-color: #ffffff;
                                              <div class="column is-12">
                                               <div class="box has-ribbon-left" style="margin: 5px">  
                                               <div class="ribbon is-success">ON OFFER</div>
-                                              <div class="close-modal"  @click =${() => this._productDialogClose()} ><iron-icon icon="icons:close"></iron-icon></div>
+                                              <div class="close-modal"  @click =${()=>this._productDialogClose()} ><iron-icon icon="icons:close"></iron-icon></div>
         
                 <!-- Product image -->
                 <div id="product-view" class="detail-image translateLeft">
-                    <img data-action="zoom" alt="" src="/media/${this.selectedProduct.image || 'crm_productitem_imagepath/NO_Image_sMI9Ypk.jpg'}">
+                    <img data-action="zoom" alt="" src="/media/${this.selectedProduct.image||"crm_productitem_imagepath/NO_Image_sMI9Ypk.jpg"}">
                 </div>
         
                                              </div> </div>
@@ -236,51 +228,4 @@ background-color: #ffffff;
 </div>
         <!-- /Main wrapper --  
     
-        `;
-  }
-
-  constructor() {
-    super();
-  }
-
-  _productDialog(product) {
-    this.selectedProduct = product;
-    this.shadowRoot.querySelector('#productModal').style.display = 'block';
-  }
-
-  _productDialogClose() {
-    this.shadowRoot.querySelector('#productModal').style.display = 'none';
-  }
-
-  _scrollRight() {
-    this.shadowRoot.querySelector('.is-overflow').scrollLeft += 400; // $('#content').animate({
-    //     scrollLeft: "-=775px"
-    // }, "slow");
-  }
-
-  _scrollLeft() {
-    this.shadowRoot.querySelector('.is-overflow').scrollLeft -= 400; // $('#content').animate({
-    //     scrollLeft: "-=775px"
-    // }, "slow");
-  }
-
-  _productDetails(evt) {
-    // console.log(evt.currentTarget.dataset);
-    const productId = evt.currentTarget['product-id'];
-
-    const product = this._findProductItem(productId); // console.log(cartItem);
-
-
-    this.currentProduct = product; // todo Update to show product item details in a dialog with quantity input field
-    // then remove below
-
-    this._addCartItem(evt);
-
-    return;
-    this.$.quantity.value = 1;
-    this.$.dialog.open();
-  }
-
-}
-
-customElements.define(StaticProductsScroll.is, StaticProductsScroll);
+        `}constructor(){super()}_productDialog(product){this.selectedProduct=product;this.shadowRoot.querySelector("#productModal").style.display="block"}_productDialogClose(){this.shadowRoot.querySelector("#productModal").style.display="none"}_scrollRight(){this.shadowRoot.querySelector(".is-overflow").scrollLeft+=400}_scrollLeft(){this.shadowRoot.querySelector(".is-overflow").scrollLeft-=400}_productDetails(evt){const productId=evt.currentTarget["product-id"],product=this._findProductItem(productId);this.currentProduct=product;this._addCartItem(evt)}}customElements.define(StaticProductsScroll.is,StaticProductsScroll);

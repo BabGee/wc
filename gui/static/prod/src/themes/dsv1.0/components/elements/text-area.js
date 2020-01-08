@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { TextAreaBase } from "../../../../elements/base/text-area.js";
-import { Logger } from "../../../../core/logger.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class TextArea extends TextAreaBase {
-  renderDefault() {
-    return html`
+import{html,TextAreaBase,Logger}from"../../../../components/adaptive-ui.js";class TextArea extends TextAreaBase{renderDefault(){return html`
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 <style>
@@ -77,47 +70,20 @@ class TextArea extends TextAreaBase {
   position: absolute;
   right: 20px;
   bottom: 10px;
+  color: #cecece;
 }
 </style>
 <div class="text-area">
   <div class="field">
       <div class="control">
-          <textarea id="input" class="textarea" placeholder=${this.e.name}>${this.value}</textarea>
-          <div class="counter"><p>${this.e.max}</p></div>
+          <textarea 
+            id="input" 
+            class="textarea"
+            @keyup="${this.count}" 
+            placeholder=${this.e.name}>${this.value}</textarea>
+          <div class="counter" id="count"><p>0/${this.max}</p></div>
       </div>
       <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
   </div>
 </div>
- `;
-  }
-
-  getInput() {
-    return this.qs('#input');
-  }
-
-  getValue() {
-    return this.getInput().value;
-  }
-
-  valid(validation) {
-    if (this.qs('#warning-text').style.display === 'block') {
-      this.qs('#warning-text').style.display = 'none';
-    }
-
-    Logger.i.debug(validation);
-
-    if (validation) {}
-  }
-
-  invalid(validation) {
-    this.qs('#warning-text').style.display = 'block';
-    Logger.i.debug(validation);
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-}
-
-window.customElements.define(TextArea.is, TextArea);
+ `}getInput(){return this.qs("#input")}getValue(){return this.getInput().value}valid(validation){if("block"===this.qs("#warning-text").style.display){this.qs("#warning-text").style.display="none"}Logger.i.debug(validation);if(validation){}}invalid(validation){this.qs("#warning-text").style.display="block";Logger.i.debug(validation)}count(){const valueLength=this.shadowRoot.querySelector("#input").value.length;this.shadowRoot.querySelector("#count").textContent=valueLength+"/"+this.max;if(null!=this.e.max&&valueLength>this.e.max){this.shadowRoot.querySelector("#count").style.color="#FF7273"}else{this.shadowRoot.querySelector("#count").style.color="#cecece"}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);console.log(this.e.max);if(null==this.e.max){this.max="unlimited"}else{this.max=this.e.max}}}window.customElements.define(TextArea.is,TextArea);

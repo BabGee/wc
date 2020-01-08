@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import '../../icons/my-icons.js';
-import { SharedStyles } from "../../styles/shared-styles.js";
-import { ToggleInputBase } from "../../../../elements/base/toggle-input.js";
-
-class ToggleInput extends ToggleInputBase {
-  renderDefault() {
-    return html`
+import{html,SharedStyles,ToggleInputBase}from"../../../../components/adaptive-ui.js";class ToggleInput extends ToggleInputBase{renderDefault(){return html`
  ${SharedStyles}
 <style>
 .switch {
@@ -72,21 +65,4 @@ input:checked + .slider:before {
 </label>
  <label for="switch">${this.name}</label>
   </div>
-  </div>`;
-  }
-
-  static get is() {
-    return 'toggle-input';
-  }
-
-  getInput() {
-    return this.qs('#input');
-  }
-
-  getValue() {
-    return this.getInput().checked;
-  }
-
-}
-
-window.customElements.define(ToggleInput.is, ToggleInput);
+  </div>`}static get is(){return"toggle-input"}getInput(){return this.qs("#input")}getValue(){return this.getInput().checked}}window.customElements.define(ToggleInput.is,ToggleInput);

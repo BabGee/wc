@@ -1,10 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { TextViewBase } from "../../../../elements/base/text-view.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class TextView extends TextViewBase {
-  renderDefault() {
-    return html`
+import{html,TextViewBase}from"../../../../components/adaptive-ui.js";class TextView extends TextViewBase{renderDefault(){return html`
 
 <div class="field">
 <article class="message is-primary">
@@ -17,9 +11,4 @@ class TextView extends TextViewBase {
 </article>
 </div>
 
-        `;
-  }
-
-}
-
-window.customElements.define(TextView.is, TextView);
+        `}}window.customElements.define(TextView.is,TextView);

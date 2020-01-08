@@ -1,15 +1,4 @@
-import { InputSubmitBase } from "../../../../elements/base/input-submit.js";
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import '../../icons/my-icons.js';
-import { SharedStyles } from "../../styles/shared-styles.js";
-
-class InputSubmit extends InputSubmitBase {
-  constructor() {
-    super();
-  }
-
-  renderDefault() {
-    return html`
+import{InputSubmitBase,html,SharedStyles}from"../../../../components/adaptive-ui.js";class InputSubmit extends InputSubmitBase{constructor(){super()}renderDefault(){return html`
         ${SharedStyles}
         <div class="field">
           <div class="control  has-icons-left has-icons-right">
@@ -26,9 +15,4 @@ class InputSubmit extends InputSubmitBase {
 
           </div>
         </div>
-        `;
-  }
-
-}
-
-window.customElements.define(InputSubmit.is, InputSubmit);
+        `}}window.customElements.define(InputSubmit.is,InputSubmit);

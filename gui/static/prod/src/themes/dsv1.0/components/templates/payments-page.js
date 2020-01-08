@@ -1,31 +1,8 @@
-/**
- @license
- Copyright (c) 2018 InterIntel Technologies. All rights reserved.
-
- */
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/fa-icons/index.js"; // import './section-page';
-
-import "../snack-bar.js";
-import "../form-render.js";
-import "./missing-page.js";
-import { PaymentsPageBase } from "../../../../components/templates/payments-page.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-// import "../elements/gateway-header";
-
-class PaymentsPage extends PaymentsPageBase {
-  render() {
-    if (!this.interface) {
-      return html`
+import{html,PaymentsPageBase}from"../../../../components/adaptive-ui.js";class PaymentsPage extends PaymentsPageBase{render(){if(!this.interface){return html`
         <div>Cannot render an UNDEFINED tab!!.</div>
-      `;
-    } else if (!this.pageGroup || !this.page) {
-      return html`
+      `}else if(!this.pageGroup||!this.page){return html`
         <missing-page></missing-page>
-      `;
-    }
-
-    return html`
+      `}return html`
       <link
         href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
         rel="stylesheet"
@@ -163,21 +140,21 @@ class PaymentsPage extends PaymentsPageBase {
               >
                 <div class="container">
                   <ul>
-                    ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+                    ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
                         <link
                           rel="stylesheet"
                           href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css"
                           type="text/css"
                         />
-                        ${pageGroup.pages.map((tab, tabIndex) => html`
+                        ${pageGroup.pages.map((tab,tabIndex)=>html`
                             <li
                               id="tab_${tabIndex}"
                               class="tab is-marginless ii__tab"
                             >
                               <a
-                                href="${this._changeLink(pageGroupIndex, tabIndex)}"
+                                href="${this._changeLink(pageGroupIndex,tabIndex)}"
                                 @click=${this.addActive}
-                                class="frame-bg  ${pageGroupIndex == this._pageGroup && tabIndex == this._page ? "is-active" : ""}"
+                                class="frame-bg  ${pageGroupIndex==this._pageGroup&&tabIndex==this._page?"is-active":""}"
                                 >${PaymentsPage.toTitleCase(tab.title)}</a
                               >
                             </li>
@@ -190,7 +167,7 @@ class PaymentsPage extends PaymentsPageBase {
             <div class="content">
               <div class="content-tab">
                 <div class="columns is-multiline cols is-paddingless">
-                  ${this.page.pageInputGroups.map((feed, feedIndex) => html`
+                  ${this.page.pageInputGroups.map(feed=>html`
                       <div
                         class="column is-paddingless w__cols ${this._gridClasses(feed)}"
                       >
@@ -213,119 +190,4 @@ class PaymentsPage extends PaymentsPageBase {
       >
         ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar
       >
-    `;
-  }
-
-  constructor() {
-    super(); // this.title = [1]._title;
-    // console.log(this.page.pageInputGroups);
-  }
-
-  static get properties() {
-    return {
-      title: String,
-      tagline: String,
-      logo: String,
-      pages: Array,
-      tab: Object,
-      oe: Array,
-      profile: {
-        type: Object,
-        value: ""
-      }
-    };
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  _profileTriggerClick(e) {
-    const self = this;
-    this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");
-
-    if (this.qs(".js-hamburger").classList.contains("is-active")) {
-      this.qs(".js-hamburger").classList.remove("is-active");
-      document.querySelector("body").classList.remove("is-fixed");
-    } else {
-      this.qs(".js-hamburger").classList.add("is-active"); // wait 700ms before adding the fixed class to the body to prevent unpleasant effects
-
-      setTimeout(function () {
-        document.querySelector("body").classList.add("is-fixed");
-      }, 700);
-    }
-  }
-
-  _sideIconClick(e) {
-    this.shadowRoot.querySelector(".tab-icon.is-active").classList.remove("is-active");
-    e.currentTarget.classList.add("is-active");
-    this.shadowRoot.querySelector(".menu-wrapper .icon-box-toggle").classList.add("active"); // this.shadowRoot.querySelector('.child-menu').classList.add('is-sidebar-translated');
-
-    this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function (el) {
-      el.classList.add("is-pushed");
-    }); // disable reader mode switch when sidebar is opened
-
-    this.shadowRoot.querySelector(".reader-switch label").classList.add("is-disabled");
-
-    this._dataChildMenuSetup(e);
-  }
-
-  _viewList(evt) {
-    this.shadowRoot.querySelector("#hero").style.display = "block";
-    this.shadowRoot.querySelector("#pay").style.display = "none";
-    this.shadowRoot.querySelector("#pay").classList.add("is-hidden-mobile");
-  }
-
-  _gridClasses(pageInputGroup) {
-    const grid = super._gridClasses(pageInputGroup);
-
-    const grids = grid.split("|");
-
-    try {
-      return `is-${Math.floor(Number(grids[0] / 2))}`;
-    } catch (e) {
-      return "is-12";
-    }
-  }
-
-  _iconBoxToggle(e) {
-    e.currentTarget.classList.toggle("active");
-    e.preventDefault();
-  }
-
-  _dataChildMenuSetup(e) {
-    const menuId = e.currentTarget["data-child-menu"];
-    const menuTitle = e.currentTarget["data-title"];
-    this.qsa(".sidebar-menu.is-active").forEach(function (el) {
-      el.classList.remove("is-active");
-    });
-    this.qs("#" + menuId).classList.add("is-active");
-    this.qs(".sidebar-title").textContent = menuTitle;
-  }
-
-  addActive() {
-    let current = document.getElementsByClassName("active");
-
-    if (current.length > 0) {
-      current[0].className = current[0].className.replace(" active", "");
-    }
-
-    this.className += " active";
-  }
-
-  stateChanged(state) {
-    super.stateChanged(state);
-  }
-
-  _changeLink(pageGroupIndex, tabIndex) {
-    var url = window.location.pathname + window.location.search + "#/" + pageGroupIndex + "/" + tabIndex + "/"; //   console.log('Link '+url);
-    // console.log('param '+this.getParams(window.location.search.substr(1)));
-    // this.qs('.has-text-centered').classList.remove('is-active');
-    //     e.currentTarget.classList.add('is-active');
-
-    return url;
-  }
-
-}
-
-window.customElements.define("payments-page", PaymentsPage);
+    `}constructor(){super()}static get properties(){return{title:String,tagline:String,logo:String,pages:Array,tab:Object,oe:Array,profile:{type:Object,value:""}}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_profileTriggerClick(){this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){this.shadowRoot.querySelector(".tab-icon.is-active").classList.remove("is-active");e.currentTarget.classList.add("is-active");this.shadowRoot.querySelector(".menu-wrapper .icon-box-toggle").classList.add("active");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});this.shadowRoot.querySelector(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}_viewList(){this.shadowRoot.querySelector("#hero").style.display="block";this.shadowRoot.querySelector("#pay").style.display="none";this.shadowRoot.querySelector("#pay").classList.add("is-hidden-mobile")}_gridClasses(pageInputGroup){const grid=super._gridClasses(pageInputGroup),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget["data-child-menu"],menuTitle=e.currentTarget["data-title"];this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}addActive(){let current=document.getElementsByClassName("active");if(0<current.length){current[0].className=current[0].className.replace(" active","")}this.className+=" active"}stateChanged(state){super.stateChanged(state)}_changeLink(pageGroupIndex,tabIndex){var url=window.location.pathname+window.location.search+"#/"+pageGroupIndex+"/"+tabIndex+"/";return url}}window.customElements.define("payments-page",PaymentsPage);

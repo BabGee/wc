@@ -1,13 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import '../../icons/my-icons.js';
-import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
-import { BULMA_STYLES } from "../../styles/bulma-styles.js";
-import { LANDING_STYLES } from "../../styles/landing-style.js";
-import { PriceSelectBase } from "../../../../elements/base/price-select.js";
-
-class PriceSelect extends PriceSelectBase {
-  renderDefault() {
-    return html`
+import{html,DASHBOARD_STYLES,BULMA_STYLES,LANDING_STYLES,PriceSelectBase}from"../../../../components/adaptive-ui.js";class PriceSelect extends PriceSelectBase{renderDefault(){return html`
         ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 
      ${LANDING_STYLES}
@@ -83,13 +74,13 @@ class PriceSelect extends PriceSelectBase {
                     <div class="columns is-vcentered">
                         <div class="column is-12">
                             <div class="columns is-vcentered">
-                                ${this.rows.map((data, index) => html`
+                                ${this.rows.map((data,index)=>html`
                                     <div class="column is-3">
                                         <!-- Pricing table -->
                                         <div class="flex-card header-pricing-card ${this.colorType[index]} hover-inset">
                                             <h3 class="plan-name">${data[2]}</h3>
                                            <label   class="container">${data[3]}
-                                           <input id="check_${data[0]}"  type="radio" name="radio" @click="${() => this.setSelected(data[0])}" ?checked=${this.check(data[0])}><span class="checkmark"></span>
+                                           <input id="check_${data[0]}"  type="radio" name="radio" @click="${()=>this.setSelected(data[0])}" ?checked=${this.check(data[0])}><span class="checkmark"></span>
                                            </label>
                                         </div>
                                         <!-- /Pricing table -->
@@ -107,26 +98,4 @@ class PriceSelect extends PriceSelectBase {
  
  
   </div>
-  </div>`;
-  }
-
-  getValue() {
-    return this.selected;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-    const self = this;
-  }
-
-  check(num) {
-    if (this.dropdownValue !== null && this.dropdownValue === num) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-}
-
-customElements.define(PriceSelect.is, PriceSelect);
+  </div>`}getValue(){return this.selected}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this}check(num){if(null!==this.dropdownValue&&this.dropdownValue===num){return!0}else{return!1}}}customElements.define(PriceSelect.is,PriceSelect);

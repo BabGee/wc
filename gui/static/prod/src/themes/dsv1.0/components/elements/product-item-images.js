@@ -1,14 +1,4 @@
-import { ProductItemImagesBase } from "../../../../elements/base/product-item-images.js";
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class ProductItemImages extends ProductItemImagesBase {
-  constructor() {
-    super();
-  }
-
-  renderDefault() {
-    return html`
+import{ProductItemImagesBase,html}from"../../../../components/adaptive-ui.js";class ProductItemImages extends ProductItemImagesBase{constructor(){super()}renderDefault(){return html`
         <style>
 
         @import url("https://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css");
@@ -110,9 +100,4 @@ class ProductItemImages extends ProductItemImagesBase {
             </center>
         </div>
     </div>
-        `;
-  }
-
-}
-
-customElements.define(ProductItemImages.is, ProductItemImages);
+        `}}customElements.define(ProductItemImages.is,ProductItemImages);

@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import '../../icons/my-icons.js';
-import { SharedStyles } from "../../styles/shared-styles.js";
-import { ReceiveSyncBase } from "../../../../elements/base/receive-sync.js";
-
-class ReceiveSync extends ReceiveSyncBase {
-  renderDefault() {
-    return html`
+import{html,SharedStyles,ReceiveSyncBase}from"../../../../components/adaptive-ui.js";class ReceiveSync extends ReceiveSyncBase{renderDefault(){return html`
  ${SharedStyles}
 <div class="field">
 <article class="message is-primary">
@@ -18,24 +11,4 @@ class ReceiveSync extends ReceiveSyncBase {
 </article>
 </div>
 
-        `;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  onMqttMessage(message) {
-    super.onMqttMessage(message);
-    var self = this;
-    console.log('on-mqtt-message');
-    /*
-        var payload = JSON.parse(message.payloadString);
-        console.info(payload);
-        self.$.datasource._parsePayload(payload);
-        */
-  }
-
-}
-
-window.customElements.define(ReceiveSync.is, ReceiveSync);
+        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}onMqttMessage(message){super.onMqttMessage(message);this;console.log("on-mqtt-message")}}window.customElements.define(ReceiveSync.is,ReceiveSync);

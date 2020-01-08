@@ -1,10 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { SectionPElementDsc } from "../../../../elements/base/section-pelement-dsc.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class SectionTeam extends SectionPElementDsc {
-  renderDefault() {
-    return html`
+import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class SectionTeam extends SectionPElementDsc{renderDefault(){return html`
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
             
             <style>
@@ -29,8 +23,8 @@ class SectionTeam extends SectionPElementDsc {
         <section class="section is-small">
             <div class="container">
                 <div class="content-wrapper">
-                        ${this.rows.map((slide, index) => html` 
-                  ${index % 2 === 0 ? html`
+                        ${this.rows.map((slide,index)=>html` 
+                  ${0===index%2?html`
                     <!-- Feature -->
                     <div class="columns is-vcentered">
                         <!-- Featured image -->
@@ -50,7 +44,7 @@ class SectionTeam extends SectionPElementDsc {
                         </div>
                     </div>
                     <!-- /Feature -->
-                                        ` : html`
+                                        `:html`
                                  <!-- Feature -->
                     <div class="columns is-vcentered">
                                             <!-- Content -->
@@ -82,21 +76,4 @@ class SectionTeam extends SectionPElementDsc {
 
             </div>
         </section>
-        `;
-  }
-
-  static get is() {
-    return 'section-team';
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-  }
-
-}
-
-customElements.define(SectionTeam.is, SectionTeam);
+        `}static get is(){return"section-team"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(SectionTeam.is,SectionTeam);

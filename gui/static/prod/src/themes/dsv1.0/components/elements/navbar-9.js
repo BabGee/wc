@@ -1,15 +1,11 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { NavbarBase } from "../../../../elements/base/navbar-base.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class Navbar9 extends NavbarBase {
-  renderDefault() {
-    return html`
+import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9 extends NavbarBase{renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
     .ii__container-main{
           margin: 0 auto;
           padding: 0 90px;
+          background-color: var(--app-primary-color);
+
       }
       /* header */
       .ii__main-header{
@@ -83,10 +79,11 @@ class Navbar9 extends NavbarBase {
                 
             <div id="navbarBasicExample" class="navbar-menu">
               <div class="navbar-end">
-               ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
-                  ${pageGroup.pages.map((menu, menuIndex) => html`
+               ${this.interface.pageGroups.map(pageGroup=>html`
+                  ${pageGroup.pages.map(menu=>html`
                   <a class="navbar-item nav__item is-capitalized"
-                  @click="${this.scrollToSection(menu.id)}"
+                  @click="${this.scrollToSection}"
+                  data-name="${menu.id}"
                   >${menu.title}</a>
                   `)}
                   
@@ -99,74 +96,4 @@ class Navbar9 extends NavbarBase {
       </header>
     </div>
 
-     `;
-  }
-
-  reloadPage() {
-    window.location.reload();
-  }
-
-  addBlock() {
-    let nav = this.shadowRoot.querySelector('.navbar-menu');
-    nav.classList.toggle('is-block'); // if(nav.classList == 'top'){
-    //   nav.classList.remove('top')
-    // }else{
-    //   nav.classList.add('top')
-    // }
-  }
-
-  scrollToSection(index) {
-    //MAXIMUM OF 6 ONLY
-    // if(index == 0 ){
-    //   window.scroll({
-    //     top: 0,
-    //     behavior: 'smooth'
-    //   });
-    // }else if(index == 1){
-    //   window.scroll({
-    //     top: 800,
-    //     behavior: 'smooth'
-    //   });
-    // }else if(index == 2){
-    //   window.scroll({
-    //     top: 1600,
-    //     behavior: 'smooth'
-    //   });
-    // }else if(index == 3){
-    //   window.scroll({
-    //     top: 2400,
-    //     behavior: 'smooth'
-    //   });
-    // }else if(index == 4){
-    //   window.scroll({
-    //     top: 3200,
-    //     behavior: 'smooth'
-    //   });
-    // }else if(index == 5){
-    //  window.scroll({
-    //     top: 4000,
-    //     behavior: 'smooth'
-    //   });
-    // }
-    var elementToFocus = document.getElementById(index);
-
-    if (elementToFocus) {
-      //  elementToFocus.scrollIntoView(true);
-      elementToFocus.scrollIntoView({
-        block: 'start',
-        behavior: 'smooth'
-      });
-    }
-  }
-
-  static get is() {
-    return 'navbar-9';
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-  }
-
-}
-
-customElements.define(Navbar9.is, Navbar9);
+     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){var menuId=event.target.getAttribute("data-name"),elementToFocus=document.getElementById(menuId);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);

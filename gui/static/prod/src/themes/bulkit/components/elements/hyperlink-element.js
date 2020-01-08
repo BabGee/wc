@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
-import { BULMA_STYLES } from "../../styles/bulma-styles.js";
-import { HyperlinkElementBase } from "../../../../elements/base/hyperlink-element.js";
-
-class HyperlinkElement extends HyperlinkElementBase {
-  renderDefault() {
-    return html`
+import{html,DASHBOARD_STYLES,BULMA_STYLES,HyperlinkElementBase}from"../../../../components/adaptive-ui.js";class HyperlinkElement extends HyperlinkElementBase{renderDefault(){return html`
         ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 
 
@@ -16,30 +9,4 @@ class HyperlinkElement extends HyperlinkElementBase {
         </a>
         </div>
         </div>
-        `;
-  }
-
-  static get properties() {
-    return {
-      name: String,
-      params: {
-        type: Object,
-        value: {}
-      }
-    };
-  }
-
-  constructor() {
-    super();
-    this.addEventListener('click', this._onAction.bind(this));
-  }
-
-  _onAction(evt) {
-    evt.preventDefault();
-
-    this.pl._dialog(this.e.service, this.params);
-  }
-
-}
-
-customElements.define(HyperlinkElement.is, HyperlinkElement);
+        `}static get properties(){return{name:String,params:{type:Object,value:{}}}}constructor(){super();this.addEventListener("click",this._onAction.bind(this))}_onAction(evt){evt.preventDefault();this.pl._dialog(this.e.service,this.params)}}customElements.define(HyperlinkElement.is,HyperlinkElement);

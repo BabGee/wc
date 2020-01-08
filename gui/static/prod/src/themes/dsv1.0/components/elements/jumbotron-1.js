@@ -1,10 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { JumbotronBase } from "../../../../elements/base/jumbotron-base.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class Jumbotron1 extends JumbotronBase {
-  renderDefault() {
-    return html`
+import{utilsMixin,BaseElement,html}from"../../../../components/adaptive-ui.js";const JumbotronBase=class extends utilsMixin(BaseElement){static get is(){throw new DOMException("Extending [JumbotronBaseBase] must implement `static get is()`")}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}};var jumbotronBase={JumbotronBase:JumbotronBase};class Jumbotron1 extends JumbotronBase{renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
     
@@ -35,13 +29,4 @@ class Jumbotron1 extends JumbotronBase {
         <div id="page-title">System-wide elements, Navigation<br /> &amp; Step-Menus</div>
       </div>
     </section>
-     `;
-  }
-
-  static get is() {
-    return 'jumbotron-1';
-  }
-
-}
-
-customElements.define(Jumbotron1.is, Jumbotron1);
+     `}static get is(){return"jumbotron-1"}}customElements.define(Jumbotron1.is,Jumbotron1);export{jumbotronBase as $jumbotronBase,JumbotronBase};

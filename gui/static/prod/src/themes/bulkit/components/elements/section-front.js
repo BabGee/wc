@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { SharedStyles } from "../../styles/shared-styles.js";
-import { SectionPElementBase } from "../../../../elements/base/section-pelement.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class SectionFront extends SectionPElementBase {
-  renderDefault() {
-    return html`
+import{html,SharedStyles,SectionPElementBase}from"../../../../components/adaptive-ui.js";class SectionFront extends SectionPElementBase{renderDefault(){return html`
  ${SharedStyles}
    <style>
 
@@ -351,31 +344,4 @@ class SectionFront extends SectionPElementBase {
             <!--<a href="#section-b" class="btn">Read More</a>-->
         </div>
         </header>
-        `;
-  }
-
-  static get is() {
-    return 'section-front';
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-    const self = this; // TODO update to use customEvent
-
-    self.addEventListener('click', function (evt) {
-      evt.preventDefault();
-
-      self.pl._dialog(self.e.service, self.params);
-    });
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-    var self = this;
-    self.service = pElement.service;
-    self.params = loader.pl.paramsCopy();
-  }
-
-}
-
-customElements.define(SectionFront.is, SectionFront);
+        `}static get is(){return"section-front"}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;self.addEventListener("click",function(evt){evt.preventDefault();self.pl._dialog(self.e.service,self.params)})}init(pElement,loader){super.init(pElement,loader);var self=this;self.service=pElement.service;self.params=loader.pl.paramsCopy()}}customElements.define(SectionFront.is,SectionFront);

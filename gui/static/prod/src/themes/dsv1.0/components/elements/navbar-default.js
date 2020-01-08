@@ -1,16 +1,4 @@
-import { css, html } from "../../../../../node_modules/lit-element/lit-element.js"; // import {Colors} from '../../styles/shared.js'
-
-import { NavbarDefaultBase } from "../../../../elements/base/navbar-default.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class NavbarDefault extends NavbarDefaultBase {
-  constructor() {
-    super();
-    this.activeMenuGroup = 0;
-  }
-
-  renderDefault() {
-    return html`
+import{css,html,NavbarDefaultBase}from"../../../../components/adaptive-ui.js";class NavbarDefault extends NavbarDefaultBase{constructor(){super();this.activeMenuGroup=0}renderDefault(){return html`
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
         <style>
@@ -84,8 +72,8 @@ class NavbarDefault extends NavbarDefaultBase {
         <nav class="navbar">
           <div class="navbar-menu">
             <div class="navbar-start">
-            ${this.menuGroups.map((menuGroup, menuGroupIndex) => html`
-              <a class="navbar-item ${menuGroupIndex == this.activeMenuGroup ? 'is-active' : ''}"  
+            ${this.menuGroups.map((menuGroup,menuGroupIndex)=>html`
+              <a class="navbar-item ${menuGroupIndex==this.activeMenuGroup?"is-active":""}"  
                     @click=${this._setActiveMenuGroup} 
                     data-group=${menuGroupIndex} >${menuGroup.title}</a>
 
@@ -132,7 +120,7 @@ class NavbarDefault extends NavbarDefaultBase {
             <div class="level-left">
               <div class="tabs">
                 <ul>
-                ${this.menuGroupItems(this.activeMenuGroup).map(menu => html`
+                ${this.menuGroupItems(this.activeMenuGroup).map(menu=>html`
                   <li> 
                     <a 
                       class="New-products"
@@ -163,32 +151,9 @@ class NavbarDefault extends NavbarDefaultBase {
             </div>
           </nav>
         </div>
-      </div>`;
-  }
-
-  static get styles() {
-    return css`
+      </div>`}static get styles(){return css`
     :host {
  
     }
     
-    `;
-  }
-
-  _setActiveMenuGroup(evt) {
-    this.activeMenuGroup = evt.currentTarget.dataset['group'];
-  }
-
-  menuGroupItems(index) {
-    return this.menuGroups[index].items;
-  }
-
-  static get properties() {
-    return {
-      activeMenuGroup: Number
-    };
-  }
-
-}
-
-customElements.define(NavbarDefault.is, NavbarDefault);
+    `}_setActiveMenuGroup(evt){this.activeMenuGroup=evt.currentTarget.dataset.group}menuGroupItems(index){return this.menuGroups[index].items}static get properties(){return{activeMenuGroup:Number}}}customElements.define(NavbarDefault.is,NavbarDefault);

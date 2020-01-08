@@ -1,13 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { BULMA_STYLES } from "../../styles/bulma-styles.js";
-import { LANDING_STYLES } from "../../styles/landing-style.js";
-import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
-import { SectionPElementBase } from "../../../../elements/base/section-pelement.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class SectionTitle extends SectionPElementBase {
-  renderDefault() {
-    return html`
+import{html,BULMA_STYLES,LANDING_STYLES,DASHBOARD_STYLES,SectionPElementBase}from"../../../../components/adaptive-ui.js";class SectionTitle extends SectionPElementBase{renderDefault(){return html`
      ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 
      ${LANDING_STYLES}
@@ -26,13 +17,4 @@ class SectionTitle extends SectionPElementBase {
                 </section>
                 
                 
-        `;
-  }
-
-  static get is() {
-    return 'section-title';
-  }
-
-}
-
-customElements.define(SectionTitle.is, SectionTitle);
+        `}static get is(){return"section-title"}}customElements.define(SectionTitle.is,SectionTitle);

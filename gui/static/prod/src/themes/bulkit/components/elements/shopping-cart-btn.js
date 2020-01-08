@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import '../../icons/my-icons.js';
-import { SharedStyles } from "../../styles/shared-styles.js";
-import { ShoppingCartBtnBase } from "../../../../elements/base/shopping-cart-btn.js"; // TODO IMPLEMENT OWN LOCAL STORAGE
-
-class ShoppingCartBtn extends ShoppingCartBtnBase {
-  renderDefault() {
-    return html`
+import{html,SharedStyles,ShoppingCartBtnBase}from"../../../../components/adaptive-ui.js";class ShoppingCartBtn extends ShoppingCartBtnBase{renderDefault(){return html`
              ${SharedStyles}
              <style>
 
@@ -54,21 +47,4 @@ class ShoppingCartBtn extends ShoppingCartBtnBase {
              <a id="shopping">     <iron-icon icon="icons:shopping-cart"></iron-icon></a>
              <div class="cart-badge" aria-hidden="true">${this.carted}</div>
             </div>
-             `;
-  }
-
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-  }
-
-}
-
-customElements.define(ShoppingCartBtn.is, ShoppingCartBtn);
+             `}constructor(){super()}connectedCallback(){super.connectedCallback()}disconnectedCallback(){super.disconnectedCallback()}}customElements.define(ShoppingCartBtn.is,ShoppingCartBtn);

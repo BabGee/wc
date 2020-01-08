@@ -1,10 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { SectionPElementBase } from "../../../../elements/base/section-pelement.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class SectionTitle extends SectionPElementBase {
-  renderDefault() {
-    return html`
+import{html,SectionPElementBase}from"../../../../components/adaptive-ui.js";class SectionTitle extends SectionPElementBase{renderDefault(){return html`
           <style>
       .c-title-container {
           max-width: 630px;
@@ -44,13 +38,4 @@ class SectionTitle extends SectionPElementBase {
             <p class="ii__paragraph" style="color: #7b7b7b">${this.e.defaultValue}</p> 
                    
         </div>    
-    `;
-  }
-
-  static get is() {
-    return 'section-title';
-  }
-
-}
-
-customElements.define(SectionTitle.is, SectionTitle);
+    `}static get is(){return"section-title"}}customElements.define(SectionTitle.is,SectionTitle);

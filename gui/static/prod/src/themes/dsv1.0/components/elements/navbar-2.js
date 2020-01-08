@@ -1,22 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { NavbarBase } from "../../../../elements/base/navbar-base.js";
-import "../../../../../node_modules/fa-icons/index.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class Navbar2 extends NavbarBase {
-  static get properties() {
-    return {
-      newProductsMenuHidden: Boolean
-    };
-  }
-
-  constructor() {
-    super();
-    this.newProductsMenuHidden = true;
-  }
-
-  renderDefault() {
-    return html`
+import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar2 extends NavbarBase{static get properties(){return{newProductsMenuHidden:Boolean}}constructor(){super();this.newProductsMenuHidden=!0}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
     <style>
@@ -128,9 +110,9 @@ a figure img#user-pic {
         <nav class="navbar">
           <div class="navbar-menu">
             <div class="navbar-start">
-            ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
-            <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
-            class="navbar-item ${pageGroupIndex == this._pageGroup ? 'is-active' : ''}" >
+            ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+            <a href="${window.location.pathname+window.location.search}#/${pageGroupIndex}/0/" 
+            class="navbar-item ${pageGroupIndex==this._pageGroup?"is-active":""}" >
                 ${pageGroup.title}
             </a>`)}
             </div>
@@ -143,7 +125,7 @@ a figure img#user-pic {
           <div class="navbar-menu">
             <div class="navbar-end">
               <div class="navbar-item has-dropdown is-active">
-                <a @click="${() => this.activePage('user')}" class="navbar-item">
+                <a @click="${()=>this.activePage("user")}" class="navbar-item">
                 ${this.gateway.profile.firstName} ${this.gateway.profile.lastName}
                 </a>
                 <a class="navbar-link">
@@ -175,11 +157,11 @@ a figure img#user-pic {
             <div class="level-left">
               <div class="tabs">
                 <ul>
-                  <li><a @click="${() => this.dropDownMenu('newProducts')}">New Products</a></li>
-                  <li><a @click="${() => this.dropDownMenu('men')}" >Men</a></li>
-                  <li><a @click="${() => this.dropDownMenu('women')}">Women</a></li>
-                  <li><a @click="${() => this.dropDownMenu('kids')}">Kids</a></li>
-                  <li><a @click="${() => this.dropDownMenu('topSales')}">Top Sales</a></li>
+                  <li><a @click="${()=>this.dropDownMenu("newProducts")}">New Products</a></li>
+                  <li><a @click="${()=>this.dropDownMenu("men")}" >Men</a></li>
+                  <li><a @click="${()=>this.dropDownMenu("women")}">Women</a></li>
+                  <li><a @click="${()=>this.dropDownMenu("kids")}">Kids</a></li>
+                  <li><a @click="${()=>this.dropDownMenu("topSales")}">Top Sales</a></li>
                 </ul>
               </div>
             </div>
@@ -300,71 +282,4 @@ a figure img#user-pic {
       </div>
       </div>
 
-     `;
-  }
-
-  activePage(mainNavLink) {
-    const links = this.shadowRoot.querySelector('.navbar').querySelectorAll('a');
-    const userLink = this.shadowRoot.querySelector('.navbar-end').querySelector('a');
-
-    if (mainNavLink === 'home') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[0].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'about') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[1].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'portfolio') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[2].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'blog') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[3].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'contacts') {
-      links.forEach(link => link.className = 'navbar-item');
-      links[4].className = 'navbar-item is-active';
-    } else if (mainNavLink === 'user') {
-      userLink.className === 'navbar-item is-active' ? userLink.className = 'navbar-item' : userLink.className = 'navbar-item is-active';
-    }
-  } // end of activePage()
-
-
-  dropDownMenu(linkName) {
-    const newProductsMenu = this.shadowRoot.getElementById('section3');
-    const links = this.shadowRoot.querySelector('.tabs').querySelectorAll('li');
-
-    if (linkName === 'newProducts') {
-      links.forEach(link => link.classList.remove('is-active'));
-      links[0].classList.add('is-active');
-      this.toggleNewProductsMenu(newProductsMenu);
-    } else if (linkName === 'men') {
-      links.forEach(link => link.classList.remove('is-active'));
-      links[1].classList.add('is-active');
-    } else if (linkName === 'women') {
-      links.forEach(link => link.classList.remove('is-active'));
-      links[2].classList.add('is-active');
-    } else if (linkName === 'kids') {
-      links.forEach(link => link.classList.remove('is-active'));
-      links[3].classList.add('is-active');
-    } else if (linkName === 'topSales') {
-      links.forEach(link => link.classList.remove('is-active'));
-      links[4].classList.add('is-active');
-    }
-  }
-
-  toggleNewProductsMenu(section) {
-    if (this.newProductsMenuHidden === true) {
-      section.style.display = 'block';
-      this.newProductsMenuHidden = false;
-    } else {
-      section.style.display = 'none';
-      this.newProductsMenuHidden = true;
-    }
-  }
-
-  static get is() {
-    return 'navbar-2';
-  }
-
-}
-
-customElements.define(Navbar2.is, Navbar2);
+     `}activePage(mainNavLink){const links=this.shadowRoot.querySelector(".navbar").querySelectorAll("a"),userLink=this.shadowRoot.querySelector(".navbar-end").querySelector("a");if("home"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[0].className="navbar-item is-active"}else if("about"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[1].className="navbar-item is-active"}else if("portfolio"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[2].className="navbar-item is-active"}else if("blog"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[3].className="navbar-item is-active"}else if("contacts"===mainNavLink){links.forEach(link=>link.className="navbar-item");links[4].className="navbar-item is-active"}else if("user"===mainNavLink){"navbar-item is-active"===userLink.className?userLink.className="navbar-item":userLink.className="navbar-item is-active"}}dropDownMenu(linkName){const newProductsMenu=this.shadowRoot.getElementById("section3"),links=this.shadowRoot.querySelector(".tabs").querySelectorAll("li");if("newProducts"===linkName){links.forEach(link=>link.classList.remove("is-active"));links[0].classList.add("is-active");this.toggleNewProductsMenu(newProductsMenu)}else if("men"===linkName){links.forEach(link=>link.classList.remove("is-active"));links[1].classList.add("is-active")}else if("women"===linkName){links.forEach(link=>link.classList.remove("is-active"));links[2].classList.add("is-active")}else if("kids"===linkName){links.forEach(link=>link.classList.remove("is-active"));links[3].classList.add("is-active")}else if("topSales"===linkName){links.forEach(link=>link.classList.remove("is-active"));links[4].classList.add("is-active")}}toggleNewProductsMenu(section){if(!0===this.newProductsMenuHidden){section.style.display="block";this.newProductsMenuHidden=!1}else{section.style.display="none";this.newProductsMenuHidden=!0}}static get is(){return"navbar-2"}}customElements.define(Navbar2.is,Navbar2);

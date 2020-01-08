@@ -1,12 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import '../../icons/my-icons.js';
-import { SharedStyles } from "../../styles/shared-styles.js";
-import { MenuServiceButtonBase } from "../../../../elements/base/menu-service-button.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class MenuServiceButton extends MenuServiceButtonBase {
-  renderDefault() {
-    return html`
+import{html,SharedStyles,MenuServiceButtonBase}from"../../../../components/adaptive-ui.js";class MenuServiceButton extends MenuServiceButtonBase{renderDefault(){return html`
  ${SharedStyles}
          <style>
             .ccc {
@@ -69,17 +61,4 @@ class MenuServiceButton extends MenuServiceButtonBase {
                 </div>
               </div>
           </div>
-        `;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-  }
-
-}
-
-window.customElements.define(MenuServiceButton.is, MenuServiceButton);
+        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(MenuServiceButton.is,MenuServiceButton);

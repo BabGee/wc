@@ -1,37 +1,59 @@
-/**
- @license
- Copyright (c) 2018 InterIntel Technologies. All rights reserved.
+import{html,DASHBOARD_STYLES,BULMA_STYLES,ServicePageBase,VIEW_MODE_DIALOG,VIEW_MODE_MAIN}from"../../../../components/adaptive-ui.js";import"./section-page.js";const TooltipStyles=html`
+<style>
+    /* copied from https://www.w3schools.com/howto/howto_css_tooltip.asp */
+  /* TODO application of shared styles, what happens to :host*/ 
+  :host {
+    
+  }
 
- */
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
-import "../../../../../node_modules/@polymer/iron-icons/social-icons.js";
-import "../../../../../node_modules/@polymer/iron-icons/communication-icons.js";
-import '../snack-bar.js'; // These are the shared styles needed by this element.
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
 
-import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
-import { BULMA_STYLES } from "../../styles/bulma-styles.js";
-import { TooltipStyles } from "../../styles/tooltip-styles.js";
-import "./section-page.js"; // todo move into base
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 80%;
+  left: 50%;
+  margin-left: -60px;
 
-import '../form-render.js';
-import { ServicePageBase } from "../../../../components/templates/service-page.js";
-import { VIEW_MODE_DIALOG, VIEW_MODE_MAIN } from "../../../../components/templates/page-view-element.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
 
-class ServicePage extends ServicePageBase {
-  render() {
-    if (!this.interface) {
-      return html`<div>Cannot render an UNDEFINED tab!!.</div>`;
-    } else if (!this.pageGroup || !this.page) {
-      return html`
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  
+}
+  
+  
+  
+</style>
+`;var tooltipStyles={TooltipStyles:TooltipStyles};class ServicePage extends ServicePageBase{render(){if(!this.interface){return html`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html`
       <h3> this is a missing page </h3>
       <a href="/#/0/0/">Go Home</a>
-      `;
-    }
-
-    return html`
+      `}return html`
         
 ${BULMA_STYLES}            
 ${DASHBOARD_STYLES}    
@@ -113,19 +135,19 @@ nav {
                         </a>
                     </li>
                     
-                    ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
-                    <li class="side-icon ${pageGroupIndex == this._pageGroup ? 'is-active' : ''}" 
+                    ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+                    <li class="side-icon ${pageGroupIndex==this._pageGroup?"is-active":""}" 
                        @mouseover="${this._sideIconClick}" 
                         data-title="${pageGroup.title}"
                         data-child-menu="dashboard-menu-${pageGroupIndex}">
-                        <iron-icon icon="${pageGroup.icon || 'icons:announcement'}"></iron-icon>
+                        <iron-icon icon="${pageGroup.icon||"icons:announcement"}"></iron-icon>
                         
                     </li>
                     `)}
                 </ul>
                 <!-- /Side icon menu -->
                 
-                ${this.gateway.profile ? html`
+                ${this.gateway.profile?html`
                     <!-- Profile wrapper -->
                     <ul class="profile">
                         <li>
@@ -133,7 +155,7 @@ nav {
                             <a class="profile-trigger" 
                                 @click="${this._profileTriggerClick}"
                             href="javascript:void(0);">
-                            <img class="main-menu-avatar" src="${this.gateway.profile.photo ? '/media/' + this.gateway.profile.photo : 'images/web/user.svg'}" alt="">
+                            <img class="main-menu-avatar" src="${this.gateway.profile.photo?"/media/"+this.gateway.profile.photo:"images/web/user.svg"}" alt="">
                             <span class="dot"></span>
                         </a>
                         <!-- /Profile avatar -->
@@ -155,7 +177,7 @@ nav {
                                                                 <div class="avatar-overlay">
                                                                     <i class="fa fa-camera fa-2x"></i>
                                                                 </div>
-                                                                <img src="${this.gateway.profile.photo ? '/media/' + this.gateway.profile.photo : 'images/web/user.svg'}" alt="">
+                                                                <img src="${this.gateway.profile.photo?"/media/"+this.gateway.profile.photo:"images/web/user.svg"}" alt="">
                                                             </div>
                                                         </div>
                                                         <div class="column is-4 name">
@@ -283,7 +305,7 @@ nav {
                 </ul>
                 <!-- /Profile wrapper -->
                 
-                ` : html``}
+                `:html``}
             </div>
         </nav>
         <!-- /Main sidebar menu -->
@@ -307,16 +329,16 @@ nav {
                     </li>
                 </ul>
                 <!-- /Child menu header -->
-                ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
+                ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
                 <!-- Sidebar menu 1 -->
                 <ul id="dashboard-menu-${pageGroupIndex}" class="sidebar-menu is-active animated preFadeInRIght fadeInRight">
-                    ${pageGroup.pages.map((tab, tabIndex) => html`
+                    ${pageGroup.pages.map((tab,tabIndex)=>html`
                     <li class="">
-                    <a class="parent-link ${pageGroupIndex == this._pageGroup && tabIndex == this._page ? 'is-active' : ''}"
+                    <a class="parent-link ${pageGroupIndex==this._pageGroup&&tabIndex==this._page?"is-active":""}"
                         @click="${this._closeChildMenu}"
-                        href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/${tabIndex}/">
+                        href="${window.location.pathname+window.location.search}#/${pageGroupIndex}/${tabIndex}/">
                           <span class="material-icons">
-                        <iron-icon icon="${tab.icon || 'icons:announcement'}"></iron-icon>
+                        <iron-icon icon="${tab.icon||"icons:announcement"}"></iron-icon>
                         </span>
                         ${tab.title}
                         </a>
@@ -337,7 +359,7 @@ nav {
             <div class="container is-fluid" style="background: var(--app-default-color);">
                 <!-- Nav left -->
                 <div class="nav-left">
-                    ${this.view === VIEW_MODE_DIALOG ? html`
+                    ${this.view===VIEW_MODE_DIALOG?html`
                         <!-- Section Back button -->
                     <div class="nav-item nav-icon logout-button" @click="${this._viewList}">
                         <iron-icon icon="icons:arrow-back"
@@ -345,7 +367,7 @@ nav {
                     </div>
                      <button class="menu-fab" @click="${this._viewList}"><iron-icon icon="icons:close"></iron-icon></button>
                     <!-- /Section Back button -->
-                    ` : html``}
+                    `:html``}
                     
                     <!-- Reader mode switch TODO display on mobile -->
                     <div class="nav-item reader-switch is-hidden-desktop is-hidden-mobile is-hidden-tablet">
@@ -448,17 +470,17 @@ nav {
                         <div class="column">
                             <!-- Main content -->
                             <div id="main-dashboard" class="section-wrapper">
-                            ${this.view === VIEW_MODE_DIALOG ? html`
+                            ${this.view===VIEW_MODE_DIALOG?html`
 
 
                                 <section-page id="dialog" queue=${this.dialogServicesQueue}></section-page>
 
 
-                            ` : html`
+                            `:html`
                                 <!-- Dashboard content -->
                                 <div class="columns dashboard-columns is-multiline">
                                     <!-- YOUR CONTENT COLUMNS GO HERE -->
-                                    ${this.page.pageInputGroups.map((feed, feedIndex) => html`
+                                    ${this.page.pageInputGroups.map(feed=>html`
                                     <div class="column ${this._gridClasses(feed)} mobile-fullwidth">
                                     <div class="flex-card light-bordered mobile-borderless">
                                       <div class="card-body is-responsive" style="padding: 0px;">
@@ -501,140 +523,4 @@ nav {
             
           <snack-bar id="snack-bar" ?active="${this._snackbarOpened}">
 ${this._snackbarTitle} ${this._snackbarMessage}
-</snack-bar>`;
-  }
-
-  constructor() {
-    super();
-  }
-
-  static get properties() {
-    return {
-      view: String,
-      pages: Array,
-      tab: Object,
-      profile: {
-        type: Object,
-        value: ''
-      },
-      page: Object
-    };
-  }
-
-  _profileTriggerClick(e) {
-    const self = this;
-    this.qs('.main-menu-avatar, .dot').classList.toggle('vanish');
-
-    if (this.qs('.js-hamburger').classList.contains('is-active')) {
-      this.qs('.js-hamburger').classList.remove('is-active');
-      document.querySelector('body').classList.remove('is-fixed');
-    } else {
-      this.qs('.js-hamburger').classList.add('is-active'); // wait 700ms before adding the fixed class to the body to prevent unpleasant effects
-
-      setTimeout(function () {
-        document.querySelector('body').classList.add('is-fixed');
-      }, 700);
-    }
-  }
-
-  _sideIconClick(e) {
-    /*
-    // make previous menu not selected
-    // though a loop might not be needed as only one item will be previously active
-    this.qsa('.side-icon.is-active').forEach(function (item) {
-        item.classList.remove('is-active');
-    });
-      // make clicked to show selected
-    e.currentTarget.classList.add('is-active');
-    */
-    this.qs('.menu-wrapper .icon-box-toggle').classList.add('active');
-    this.qs('.child-menu').classList.add('is-sidebar-translated');
-    this.qsa('.dashboard-nav, #dashboard-wrapper').forEach(function (el) {
-      el.classList.add('is-pushed');
-    }); // disable reader mode switch when sidebar is opened
-
-    this.qs('.reader-switch label').classList.add('is-disabled');
-
-    this._dataChildMenuSetup(e);
-  }
-  /**
-     * Close child menu on page menu item click
-     * Activates main view mode if there is a page change
-     *
-     * @param e
-     * @private
-     */
-
-
-  _closeChildMenu(e) {
-    // activate main view mode, page might have changed
-    this.scrollToTop();
-
-    if (this.view !== VIEW_MODE_MAIN) {
-      this.viewMain();
-    }
-    /*
-    // UN-OPTIMIZED VERSION OF ABOVE
-    let app = document.querySelector('adaptive-ui');
-      let hashPaths = e.currentTarget.hash.split('/');
-    let currentPage = hashPaths[1];
-    let currentTab = hashPaths[2];
-      if (currentPage!==app._page && currentTab !== app._tab){
-        this.view = 'main';
-    }
-      */
-
-
-    this._menuWrapperClick(e);
-  }
-  /**
-   * Dialogs Back navigation, Pop dialogs' stack
-   *
-   * @param {Event} evt
-   * @private
-   */
-
-
-  _viewList(evt) {
-    this.mainNavigation();
-  }
-
-  _menuWrapperClick(e) {
-    this.qs('.child-menu').classList.remove('is-sidebar-translated');
-    this.qsa('.dashboard-nav, #dashboard-wrapper').forEach(function (el) {
-      el.classList.remove('is-pushed');
-    }); // enable reader mode switch when sidebar is closed
-
-    this.qs('.reader-switch label').classList.remove('is-disabled');
-  }
-
-  _iconBoxToggle(e) {
-    e.currentTarget.classList.toggle('active');
-    e.preventDefault();
-  }
-
-  _dataChildMenuSetup(e) {
-    const menuId = e.currentTarget.dataset.childMenu;
-    const menuTitle = e.currentTarget.dataset['title'];
-    this.qsa('.sidebar-menu.is-active').forEach(function (el) {
-      el.classList.remove('is-active');
-    });
-    this.qs('#' + menuId).classList.add('is-active');
-    this.qs('.sidebar-title').textContent = menuTitle;
-  }
-
-  _gridClasses(feed) {
-    const grid = super._gridClasses(feed);
-
-    const grids = grid.split('|');
-
-    try {
-      return `is-${Math.floor(Number(grids[0] / 2))}`;
-    } catch (e) {
-      return 'is-12';
-    }
-  }
-
-}
-
-window.customElements.define('service-page', ServicePage);
+</snack-bar>`}constructor(){super()}static get properties(){return{view:String,pages:Array,tab:Object,profile:{type:Object,value:""},page:Object}}_profileTriggerClick(){this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){this.qs(".menu-wrapper .icon-box-toggle").classList.add("active");this.qs(".child-menu").classList.add("is-sidebar-translated");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});this.qs(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}_closeChildMenu(e){this.scrollToTop();if(this.view!==VIEW_MODE_MAIN){this.viewMain()}this._menuWrapperClick(e)}_viewList(){this.mainNavigation()}_menuWrapperClick(){this.qs(".child-menu").classList.remove("is-sidebar-translated");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.remove("is-pushed")});this.qs(".reader-switch label").classList.remove("is-disabled")}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget.dataset.childMenu,menuTitle=e.currentTarget.dataset.title;this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{tooltipStyles as $tooltipStyles,TooltipStyles};

@@ -1,13 +1,4 @@
-import { LitElement, html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { BaseElement } from "../../../../core/base-element.js";
-import { SectionPElementDsc } from "../../../../elements/base/section-pelement-dsc.js";
-export class ProductsElement extends SectionPElementDsc {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return html`
+import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class ProductsElement extends SectionPElementDsc{constructor(){super()}render(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
       .ii__product{
@@ -39,13 +30,13 @@ export class ProductsElement extends SectionPElementDsc {
       }
     </style>
     <div class="columns is-multiline">
-    ${this.rows.map(slide => html` 
+    ${this.rows.map(slide=>html` 
      
     <div class="column">
         <a href="${this._getLink(slide[1])}" target="_blank">
           <div class="ii__product">
             <div class="ii__product-logo">
-              <img src="${slide[3]}" alt="products logo">
+              <img src="/media/${slide[3]}" alt="products logo">
             </div>
             <div class="ii__content">
               <h3 class="is-size-6 ii__title has-text-weight-bold">${this._getTitle(slide[1])}</h3>
@@ -57,26 +48,4 @@ export class ProductsElement extends SectionPElementDsc {
     
     `)}
     </div>
-        `;
-  }
-
-  static get is() {
-    return 'products-element';
-  }
-
-  static get properties() {
-    return {};
-  }
-
-  _getLink(text) {
-    let [title, link] = text.split('|');
-    return link;
-  }
-
-  _getTitle(text) {
-    let [title, link] = text.split('|');
-    return title;
-  }
-
-}
-customElements.define(ProductsElement.is, ProductsElement);
+        `}static get is(){return"products-element"}static get properties(){return{}}_getLink(text){let[title,link]=text.split("|");return link}_getTitle(text){let[title,link]=text.split("|");return title}}customElements.define(ProductsElement.is,ProductsElement);var productsElement={ProductsElement:ProductsElement};export{productsElement as $productsElement,ProductsElement};

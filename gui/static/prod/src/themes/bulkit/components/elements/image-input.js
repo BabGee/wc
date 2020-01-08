@@ -1,12 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import '../../icons/my-icons.js';
-import { SharedStyles } from "../../styles/shared-styles.js";
-import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import { ImageInputBase } from "../../../../elements/base/image-input.js";
-
-class ImageInput extends ImageInputBase {
-  renderDefault() {
-    return html`
+import{html,SharedStyles,ImageInputBase}from"../../../../components/adaptive-ui.js";class ImageInput extends ImageInputBase{renderDefault(){return html`
  ${SharedStyles}
 
     
@@ -48,64 +40,4 @@ class ImageInput extends ImageInputBase {
 
 </div>
 </div>
-        `;
-  }
-
-  getValue() {
-    return this.value;
-  }
-  /**
-   * from SerializableElement
-   * @override
-   */
-
-
-  valid(validation) {
-    this.shadowRoot.querySelector('.validation-info').style.display = 'none'; // Revert general text content
-
-    this.shadowRoot.querySelector('.validation-info').textContent = 'Required';
-  }
-  /**
-   * from SerializableElement
-   * @override
-   */
-
-
-  invalid(validation) {
-    this.shadowRoot.querySelector('.validation-info').style.display = 'flex';
-
-    if (validation) {
-      this.shadowRoot.querySelector('.validation-info').textContent = validation;
-    }
-  }
-  /**
-   * from ImageInputBase
-   * @override
-   */
-
-
-  updateUploadMessage(message) {
-    const fileInput = this.qs('#input');
-    fileInput.label = 'Image successfully uploaded. Please Proceed!';
-    fileInput.placeholder = 'Image successfully uploaded. Please Proceed!';
-  }
-  /**
-   * from ImageInputBase
-   * @override
-   */
-
-
-  updatePreview(src) {
-    var display = this.qs('#display');
-    display.style['background-color'] = 'lightgray';
-    display.src = src;
-  }
-
-  handleFile() {
-    const fileInput = this.qs('#input');
-    this.uploadImage(fileInput);
-  }
-
-}
-
-customElements.define(ImageInput.is, ImageInput);
+        `}getValue(){return this.value}valid(){this.shadowRoot.querySelector(".validation-info").style.display="none";this.shadowRoot.querySelector(".validation-info").textContent="Required"}invalid(validation){this.shadowRoot.querySelector(".validation-info").style.display="flex";if(validation){this.shadowRoot.querySelector(".validation-info").textContent=validation}}updateUploadMessage(){const fileInput=this.qs("#input");fileInput.label="Image successfully uploaded. Please Proceed!";fileInput.placeholder="Image successfully uploaded. Please Proceed!"}updatePreview(src){var display=this.qs("#display");display.style["background-color"]="lightgray";display.src=src}handleFile(){const fileInput=this.qs("#input");this.uploadImage(fileInput)}}customElements.define(ImageInput.is,ImageInput);

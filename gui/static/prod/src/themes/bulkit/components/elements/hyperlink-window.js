@@ -1,12 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import { DASHBOARD_STYLES } from "../../styles/dashboard-styles.js";
-import { BULMA_STYLES } from "../../styles/bulma-styles.js";
-import { HyperlinkWindowBase } from "../../../../elements/base/hyperlink-window.js";
-
-class HyperlinkWindow extends HyperlinkWindowBase {
-  renderDefault() {
-    return html`
+import{html,DASHBOARD_STYLES,BULMA_STYLES,HyperlinkWindowBase}from"../../../../components/adaptive-ui.js";class HyperlinkWindow extends HyperlinkWindowBase{renderDefault(){return html`
      ${BULMA_STYLES}
      ${DASHBOARD_STYLES} 
                  <div class="column is-3 is-offset-5">
@@ -19,13 +11,4 @@ class HyperlinkWindow extends HyperlinkWindowBase {
         </a>
         </div>
 
-        `;
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-  }
-
-}
-
-customElements.define(HyperlinkWindow.is, HyperlinkWindow);
+        `}init(pElement,loader){super.init(pElement,loader)}}customElements.define(HyperlinkWindow.is,HyperlinkWindow);

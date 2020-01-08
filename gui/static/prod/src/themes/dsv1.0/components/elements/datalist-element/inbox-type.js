@@ -1,19 +1,99 @@
-import { LitElement, html } from "../../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../../node_modules/fa-icons/index.js";
-import "../../../../../../node_modules/@polymer/paper-listbox/paper-listbox.js";
-import "../../../../../../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js";
-import "../../../../../../node_modules/@polymer/paper-item/paper-item.js";
-import "../../../../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";
-import "../../../../../../node_modules/@polymer/paper-dropdown-menu/paper-dropdown-menu.js";
-import "./inbox-type-footer.js";
-import "./inbox-type-header.js";
-export class InboxType extends LitElement {
-  constructor() {
-    super();
-  }
+import{LitElement,html}from"../../../../../components/adaptive-ui.js";class InboxTypeFooter extends LitElement{render(){return html`
+        <style>
+            :host {
+                display: block;
+            }
 
-  render() {
-    return html`
+            .foot  {
+                font-size: 12px;
+                font-weight: normal;
+                height: 55px;
+                border-top: 1px solid;
+                border-color: rgba(0, 0, 0, var(--dark-divider-opacity));
+                padding: 0 14px 0 0;
+                color: rgba(0, 0, 0, var(--dark-secondary-opacity));
+            }
+
+            .foot .left  {
+                padding: 0 0 0 14px;
+            }
+
+            .foot paper-icon-button {
+                width: 24px;
+                height: 24px;
+                padding: 0;
+                margin-left: 24px;
+            }
+
+            .foot .status {
+                margin: 0 8px 0 32px;
+            }
+
+            .foot .size {
+                width: 64px;
+                text-align: right;
+            }
+
+            .size paper-dropdown-menu {
+                --paper-input-container-underline: {
+                    display: none;
+                };
+                --paper-input-container-input: {
+                    text-align: right;
+                    font-size: 12px;
+                    font-weight: 500;
+                    color: var(--app-default-color, rgba(0, 0, 0, .54));
+                };
+                --paper-dropdown-menu-icon: {
+                    color: var(--app-default-color, rgba(0, 0, 0, .54));
+                };
+            }
+        </style>
+        <div class$="layout horizontal center foot [[_computePosition(footerPosition)]]">
+            <div class$="[[footerPosition]]">
+                <div class="layout horizontal end-justified center">
+                    <div class="layout horizontal center" style="display: inline-block;">
+                        <div style="text-align: right;">
+                            Per Page
+                        </div>
+                        <div class="size">
+                          ${this.availableSize.length?html`
+                                <paper-dropdown-menu no-label-float vertical-align="bottom">
+                                    <paper-listbox attr-for-selected="size"
+                                                   @iron-select="${this._newSizeIsSelected}"
+                                                   selected="${this.size}"
+                                                   slot="dropdown-content">
+                                        ${this.availableSize.map(size=>html`<paper-item size="${size}">${size}</paper-item>`)}
+                                    </paper-listbox>
+                                </paper-dropdown-menu>
+                          `:html`
+                                <span>50</span>
+                          `}                            
+                        </div>
+                    </div>
+
+                    <div class="status" style="display: inline-block;">
+                        ${this._computeCurrentSize(this.page,this.size)} - ${this._computeCurrentMaxSize(this.page,this.size,this.totalElements)} of ${this.totalElements}
+                    </div>
+                    
+                    <paper-icon-button icon="chevron-left" 
+                                       ?disabled="${!this._prevButtonEnabled(this.page)}" 
+                                       @click="${this._prevPage}"></paper-icon-button>
+                                       
+                    <paper-icon-button icon="chevron-right" 
+                                       ?disabled="${!this._nextButtonEnabled(this.page,this.totalPages)}" 
+                                       @click="${this._nextPage}"></paper-icon-button>
+                
+                </div>
+            </div>
+        </div>`}constructor(){super();this.availableSize=[];this.size=50}static get is(){return"inbox-type-footer"}static get properties(){return{footerPosition:String,size:{type:Number},page:{type:Number},totalElements:{type:Number},totalPages:{type:Number},availableSize:Array}}_computeCurrentSize(page,size){return(page-1)*size+1}_computeCurrentMaxSize(page,size,totalElements){const maxSize=size*page;return maxSize>totalElements?totalElements:maxSize}_nextPage(){if(this.page<this.totalPages){this.page=this.page+1}this.dispatchEvent(new CustomEvent("n-page",{detail:{page:this.page}}))}_prevPage(){if(0<this.page-1){this.page=this.page-1}this.dispatchEvent(new CustomEvent("p-page",{detail:{page:this.page}}))}_nextButtonEnabled(page,totalPages){return page<totalPages}_prevButtonEnabled(page){return 1<page}_newSizeIsSelected(){const newSize=this.shadowRoot.querySelector("paper-listbox").selected;if(newSize){if(null!==this.oldPage&&this.oldPage!==void 0){this.page=1}this.size=newSize;this.dispatchEvent(new CustomEvent("size-change",{detail:{size:newSize}}))}}_computePosition(position){if("right"===position){return"end-justified"}return""}}customElements.define(InboxTypeFooter.is,InboxTypeFooter);var inboxTypeFooter={InboxTypeFooter:InboxTypeFooter};class InboxTypeHeader extends LitElement{render(){return html`
+
+        <h4>${this.title}</h4>
+        <div>
+       <paper-button  @tap="${this.generatePDF}" style=" background: #3498db; color:white;"><iron-icon icon="image:picture-as-pdf"></iron-icon>Export PDF</paper-button>
+       <paper-button @tap="${this.generateCSV}" style=" background: #2ecc71; color:white;"><iron-icon icon="icons:save"></iron-icon>Export CSV</paper-button>
+   </div>
+`}static get is(){return"inbox-type-header"}static get properties(){return{title:String}}}customElements.define(InboxTypeHeader.is,InboxTypeHeader);var inboxTypeHeader={InboxTypeHeader:InboxTypeHeader};class InboxType extends LitElement{constructor(){super()}render(){return html`
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <style>
@@ -179,14 +259,14 @@ background-color: #fff;
       
         <tbody>
 
-        ${this.data.map((item, itemIndex) => html`
+        ${this.data.map((item,itemIndex)=>html`
         
         <tr id="tr-${itemIndex}" class="normal-tr">
         <th style="padding-top: 20px; padding-bottom: 20px;">
             
             <label class="checkbox">
 
-                <input id="checkbox-${itemIndex}" class="inboxCheckBox" @click="${() => this.checkRow(itemIndex)}" type="checkbox">
+                <input id="checkbox-${itemIndex}" class="inboxCheckBox" @click="${()=>this.checkRow(itemIndex)}" type="checkbox">
                 
               </label>
             
@@ -194,7 +274,7 @@ background-color: #fff;
 
 
         <td style="padding-top: 20px; padding-bottom: 20px;">
-            <span id="span-icon1-${itemIndex}" class="icon has-text-grey pointer visible" @click="${() => this.favorite(itemIndex)}" >
+            <span id="span-icon1-${itemIndex}" class="icon has-text-grey pointer visible" @click="${()=>this.favorite(itemIndex)}" >
                         
                
                 <fa-icon id="fa-${itemIndex}"  class="far fa-star" style="fill: #d4d4d4;height: 17px;width: 19px;" ></fa-icon>
@@ -202,7 +282,7 @@ background-color: #fff;
                
                           
             </span>
-            <span id="span-icon2-${itemIndex}" class="icon has-text-grey pointer hidden " @click="${() => this.favorite(itemIndex)}" >
+            <span id="span-icon2-${itemIndex}" class="icon has-text-grey pointer hidden " @click="${()=>this.favorite(itemIndex)}" >
                         
                
                 <fa-icon id="fa-${itemIndex}"  class="fas fa-star" style="fill: #ff8000;height: 17px;width: 19px;" ></fa-icon>
@@ -225,7 +305,7 @@ background-color: #fff;
         </tbody>
       </table>
 
-      ${this.paginate ? html`
+      ${this.paginate?html`
 <inbox-type-footer resources="${this.resources}"
                        language="${this.language}"
                        footer-position="${this.footerPosition}"
@@ -241,210 +321,10 @@ background-color: #fff;
                        @p-page="${this._pageChanged}"
                        @n-page="${this._pageChanged}">
 </inbox-type-footer>
-` : html``}
+`:html``}
 
 
 </section>
   
 
-        `;
-  }
-
-  static get is() {
-    return 'inbox-type';
-  }
-
-  static get properties() {
-    return {
-      /**
-       * Contains the data which will be displayed in the table.
-       */
-      data: {
-        type: Array,
-        notify: true
-      },
-      columns: {},
-      details: Object,
-      paginate: {
-        type: Boolean,
-        value: false
-      },
-      page: {
-        type: Number
-      },
-      size: {
-        type: Number
-      },
-
-      /**
-       * The number of the previous page
-       */
-      oldPage: {
-        type: Number,
-        notify: true
-      },
-
-      /**
-       * The total of elements have to be provided in case of pagination, it is mandatory.
-       */
-      totalElements: Number,
-
-      /**
-       * The total of pages have to be provided in case of pagination, it is mandatory.
-       * It is used to compute the footer.
-       */
-      totalPages: Number,
-
-      /**
-       * The available size in case of pagination.
-       */
-      availableSize: Array,
-
-      /**
-       * If true, the rows may be selectable.
-       */
-      selectable: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Contains the positions of selected columns.
-       * Can contain a specific data if selectableDataKey is setted.
-       */
-      selected: {
-        type: Array
-      },
-      title: String
-    };
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-    const selectable = this.details.selectable;
-    const allCheckBoxes = this.shadowRoot.querySelectorAll('input[type=checkbox]');
-    const allStars = this.shadowRoot.querySelectorAll('.icon.has-text-grey.pointer.visible');
-    const columnsType = typeof this.columns;
-    columnsType !== "Boolean" ? allStars.forEach(star => {
-      star.classList.replace("visible", "hidden");
-    }) : allStars.forEach(star => {});
-
-    if (selectable === undefined) {
-      allCheckBoxes.forEach(checkbox => {
-        checkbox.style.display = "none";
-      });
-    } else {
-      selectable !== true ? allCheckBoxes.forEach(checkbox => {
-        checkbox.style.display = "none";
-      }) : allCheckBoxes.forEach(checkbox => {
-        checkbox.style.display = "block";
-      });
-    }
-  }
-
-  checkRow(index) {
-    const row = this.shadowRoot.querySelector('#tr-' + index);
-    const checkbox = this.shadowRoot.querySelector('#checkbox-' + index);
-    const deleteAchieveSec = this.shadowRoot.querySelector('#deleteAchieveSec');
-    const hideUnhideSec = this.shadowRoot.querySelector('#hideUnhideSec');
-    const rowTexts = row.querySelectorAll('.normal-td');
-    var checked = this.shadowRoot.querySelectorAll('input:checked');
-
-    if (checked.length === 0) {
-      // there are no checked checkboxes
-      deleteAchieveSec.className = 'hide-action';
-      hideUnhideSec.className = 'hide-action';
-    } else {
-      // there are some checked checkboxes
-      deleteAchieveSec.className = 'unhide-action';
-      hideUnhideSec.className = 'unhide-action';
-    }
-
-    if (checkbox.checked == true) {
-      row.classList.add('active-row');
-      rowTexts.forEach(text => {
-        text.classList.add('active-color');
-      });
-    } else {
-      row.classList.remove('active-row');
-      rowTexts.forEach(text => {
-        text.classList.remove('active-color');
-      });
-    }
-  }
-
-  favorite(index) {
-    const span1 = this.shadowRoot.querySelector('#span-icon1-' + index);
-    const span2 = this.shadowRoot.querySelector('#span-icon2-' + index);
-
-    if (span1.classList.contains('visible')) {
-      span1.classList.replace('visible', 'hidden');
-      span2.classList.replace('hidden', 'visible');
-    } else {
-      span1.classList.replace('hidden', 'visible');
-      span2.classList.replace('visible', 'hidden');
-    }
-  }
-
-  deleteMessages() {
-    const selectedMessages = this.shadowRoot.querySelectorAll('tr[class~="active-row"]');
-    selectedMessages.forEach(message => {
-      message.classList.add('hidden');
-    });
-  }
-
-  archiveMessages() {
-    const selectedMessages = this.shadowRoot.querySelectorAll('tr[class~="active-row"]');
-    selectedMessages.forEach(message => {
-      message.classList.add('hidden');
-    });
-  }
-
-  overlayMessages() {
-    const selectedMessages = this.shadowRoot.querySelectorAll('tr[class~="active-row"]');
-    selectedMessages.forEach(message => {
-      message.classList.add('overlay');
-    });
-  }
-
-  removeOverlayMessages() {
-    const overlayMessages = this.shadowRoot.querySelectorAll('tr[class~="overlay"]');
-    overlayMessages.forEach(message => {
-      message.classList.remove('overlay');
-    });
-  }
-
-  _pageChanged(evt) {
-    const page = evt.detail.page;
-    const oldPage = this.page;
-
-    if (oldPage !== undefined) {
-      this.dispatchEvent(new CustomEvent('page-change', {
-        detail: {
-          oldPage: oldPage,
-          page: page
-        }
-      }));
-    }
-
-    this.page = page;
-  }
-
-  _sizeChanged(evt) {
-    const size = evt.detail.size;
-    const oldSize = this.size;
-
-    if (oldSize !== undefined) {
-      this.dispatchEvent(new CustomEvent('size-change', {
-        detail: {
-          oldSize: oldSize,
-          size: size
-        }
-      }));
-    }
-
-    this.size = size;
-  }
-
-}
-customElements.define(InboxType.is, InboxType);
+        `}static get is(){return"inbox-type"}static get properties(){return{data:{type:Array,notify:!0},columns:{},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const selectable=this.details.selectable,allCheckBoxes=this.shadowRoot.querySelectorAll("input[type=checkbox]"),allStars=this.shadowRoot.querySelectorAll(".icon.has-text-grey.pointer.visible"),columnsType=typeof this.columns;"Boolean"!==columnsType?allStars.forEach(star=>{star.classList.replace("visible","hidden")}):allStars.forEach(()=>{});if(selectable===void 0){allCheckBoxes.forEach(checkbox=>{checkbox.style.display="none"})}else{!0!==selectable?allCheckBoxes.forEach(checkbox=>{checkbox.style.display="none"}):allCheckBoxes.forEach(checkbox=>{checkbox.style.display="block"})}}checkRow(index){const row=this.shadowRoot.querySelector("#tr-"+index),checkbox=this.shadowRoot.querySelector("#checkbox-"+index),deleteAchieveSec=this.shadowRoot.querySelector("#deleteAchieveSec"),hideUnhideSec=this.shadowRoot.querySelector("#hideUnhideSec"),rowTexts=row.querySelectorAll(".normal-td");var checked=this.shadowRoot.querySelectorAll("input:checked");if(0===checked.length){deleteAchieveSec.className="hide-action";hideUnhideSec.className="hide-action"}else{deleteAchieveSec.className="unhide-action";hideUnhideSec.className="unhide-action"}if(!0==checkbox.checked){row.classList.add("active-row");rowTexts.forEach(text=>{text.classList.add("active-color")})}else{row.classList.remove("active-row");rowTexts.forEach(text=>{text.classList.remove("active-color")})}}favorite(index){const span1=this.shadowRoot.querySelector("#span-icon1-"+index),span2=this.shadowRoot.querySelector("#span-icon2-"+index);if(span1.classList.contains("visible")){span1.classList.replace("visible","hidden");span2.classList.replace("hidden","visible")}else{span1.classList.replace("hidden","visible");span2.classList.replace("visible","hidden")}}deleteMessages(){const selectedMessages=this.shadowRoot.querySelectorAll("tr[class~=\"active-row\"]");selectedMessages.forEach(message=>{message.classList.add("hidden")})}archiveMessages(){const selectedMessages=this.shadowRoot.querySelectorAll("tr[class~=\"active-row\"]");selectedMessages.forEach(message=>{message.classList.add("hidden")})}overlayMessages(){const selectedMessages=this.shadowRoot.querySelectorAll("tr[class~=\"active-row\"]");selectedMessages.forEach(message=>{message.classList.add("overlay")})}removeOverlayMessages(){const overlayMessages=this.shadowRoot.querySelectorAll("tr[class~=\"overlay\"]");overlayMessages.forEach(message=>{message.classList.remove("overlay")})}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}}customElements.define(InboxType.is,InboxType);var inboxType={InboxType:InboxType};export{inboxTypeFooter as $inboxTypeFooter,inboxTypeHeader as $inboxTypeHeader,inboxType as $inboxType,InboxTypeFooter,InboxTypeHeader,InboxType};

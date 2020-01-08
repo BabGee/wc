@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/@polymer/gold-cc-cvc-input/gold-cc-cvc-input.js";
-import { CvcInputBase } from "../../../../elements/base/cvc-input.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class CvcInput extends CvcInputBase {
-  renderService() {
-    return html`
+import{html,CvcInputBase}from"../../../../components/adaptive-ui.js";class CvcInput extends CvcInputBase{renderService(){return html`
     <style>
     .row{
         width: 100%;
@@ -86,11 +79,7 @@ class CvcInput extends CvcInputBase {
           </div>
       </div>
     </div>
-          `;
-  }
-
-  renderDefault() {
-    return html`
+          `}renderDefault(){return html`
         <style>
         .inp{
             border-radius: 6px!important;
@@ -110,45 +99,4 @@ class CvcInput extends CvcInputBase {
             </div>
         </div>
     </div>
-        `;
-  }
-
-  static get properties() {
-    return {
-      value: String,
-      params: {
-        type: Object,
-        value: {}
-      },
-      columnSize: {
-        type: Array
-      }
-    };
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  getInput() {
-    return this.qs('#input');
-  }
-
-  getValue() {
-    return this.getInput().value;
-  }
-
-  invalid(validation) {
-    this.qs('.control').classList.add('required');
-    this.qs('.control').classList.add('has-error'); // if (validation)
-    // {this.qs('.validation-info').textContent= validation;}
-  }
-
-  valid(validation) {
-    this.qs('.control').classList.remove('required');
-    this.qs('.control').classList.remove('has-error'); // Revert general text content
-  }
-
-}
-
-customElements.define(CvcInput.is, CvcInput);
+        `}static get properties(){return{value:String,params:{type:Object,value:{}},columnSize:{type:Array}}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}getInput(){return this.qs("#input")}getValue(){return this.getInput().value}invalid(){this.qs(".control").classList.add("required");this.qs(".control").classList.add("has-error")}valid(){this.qs(".control").classList.remove("required");this.qs(".control").classList.remove("has-error")}}customElements.define(CvcInput.is,CvcInput);

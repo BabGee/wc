@@ -1,10 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { SectionPElementDsc } from "../../../../elements/base/section-pelement-dsc.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class SectionBox extends SectionPElementDsc {
-  renderDefault() {
-    return html`
+import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class SectionBox extends SectionPElementDsc{renderDefault(){return html`
             <style>
                 img {  
                     width:128px;
@@ -17,7 +11,7 @@ class SectionBox extends SectionPElementDsc {
                 <div class="container">
                     <div class="content-wrapper">
                         <div class="columns is-vcentered is-multiline has-text-centered">
-                            ${this.rows.map(slide => html` 
+                            ${this.rows.map(slide=>html` 
                                 <div class="column">
                                     <div class="startup-icon-box">
                                         <div class="is-icon-reveal" 
@@ -40,21 +34,4 @@ class SectionBox extends SectionPElementDsc {
                     </div> 
                 </div>
             </section>
-        `;
-  }
-
-  static get is() {
-    return 'section-box';
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-  }
-
-}
-
-customElements.define(SectionBox.is, SectionBox);
+        `}static get is(){return"section-box"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(SectionBox.is,SectionBox);

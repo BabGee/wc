@@ -1,11 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { NavbarBase } from "../../../../elements/base/navbar-base.js";
-import "../../../../../node_modules/fa-icons/index.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class Navbar8 extends NavbarBase {
-  renderDefault() {
-    const light = html`
+import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar8 extends NavbarBase{renderDefault(){html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="bind-box">
           <div class="block">
@@ -42,9 +35,7 @@ class Navbar8 extends NavbarBase {
             </nav>
           </div>
         </div>
-    `; // this is dark
-
-    return html`
+    `;return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
 
@@ -111,13 +102,4 @@ nav {
         </div>
 
 
-     `;
-  }
-
-  static get is() {
-    return 'navbar-8';
-  }
-
-}
-
-customElements.define(Navbar8.is, Navbar8);
+     `}static get is(){return"navbar-8"}}customElements.define(Navbar8.is,Navbar8);

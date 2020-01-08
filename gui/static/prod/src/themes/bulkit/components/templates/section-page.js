@@ -1,20 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import "../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
-import "../../../../../node_modules/@polymer/iron-icons/social-icons.js";
-import "../../../../../node_modules/@polymer/iron-icons/communication-icons.js";
-import "../../../../../node_modules/@polymer/paper-spinner/paper-spinner.js"; // todo this can be dynamically imported as a dynamic-import from the base class
-// import '../elements-list';
-
-import '../form-render.js';
-import '../snack-bar.js';
-import { SectionPageBase } from "../../../../components/templates/section-page.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class SectionPage extends SectionPageBase {
-  render() {
-    // TODO render 404
-    return html`
+import{html,SectionPageBase}from"../../../../components/adaptive-ui.js";class SectionPage extends SectionPageBase{render(){return html`
      <style>
      .flex-card {
     position: relative;
@@ -31,10 +15,10 @@ class SectionPage extends SectionPageBase {
 
 </style>
         
-        ${this.payload ? html`
+        ${this.payload?html`
                 
         <div id="dashboard-wrapper" class="columns is-multiline" style="background: -webkit-linear-gradient(45deg, #F4F6FE, #ecf0f1); background: linear-gradient(45deg, #F4F6FE, #ecf0f1);">
-            ${this._computeFeed(this.payload).map(feed => html`
+            ${this._computeFeed(this.payload).map(feed=>html`
             
             <div class="column ${this._gridClasses(feed)}"> 
             <div class="flex-card light-bordered"> 
@@ -50,7 +34,7 @@ class SectionPage extends SectionPageBase {
         </div>
 
         
-        ` : html`
+        `:html`
             
             <div style="width: 100px;height: 100px;margin:10px auto;">
                 <paper-spinner style="width: 100%;height: 100%;" active></paper-spinner>
@@ -58,25 +42,4 @@ class SectionPage extends SectionPageBase {
         `}
         
      <snack-bar id="snack-bar" ?active="${this._snackbarOpened}">${this._snackbarMessage}</snack-bar>   
-`;
-  }
-
-  constructor() {
-    super();
-  }
-
-  _gridClasses(feed) {
-    const grid = super._gridClasses(feed);
-
-    const grids = grid.split('|');
-
-    try {
-      return `is-${Math.floor(Number(grids[0] / 2))}`;
-    } catch (e) {
-      return 'is-12';
-    }
-  }
-
-}
-
-customElements.define(SectionPage.is, SectionPage);
+`}constructor(){super()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}customElements.define(SectionPage.is,SectionPage);

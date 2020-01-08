@@ -1,10 +1,4 @@
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import { ShopProductsSectionBase } from "../../../../elements/base/shop-products-section.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class ShopProductsSection extends ShopProductsSectionBase {
-  renderDefault() {
-    return html`
+import{html,ShopProductsSectionBase}from"../../../../components/adaptive-ui.js";class ShopProductsSection extends ShopProductsSectionBase{renderDefault(){return html`
 
         <div class="title_section">
             <div class="wrapper">
@@ -79,9 +73,4 @@ class ShopProductsSection extends ShopProductsSectionBase {
                 </template>
             </div>
         </section>
-        `;
-  }
-
-}
-
-customElements.define(ShopProductsSection.is, ShopProductsSection);
+        `}}customElements.define(ShopProductsSection.is,ShopProductsSection);
