@@ -115,4 +115,6 @@ import{html,SharedStyles,PaymentOptionsBase}from"../../../../components/adaptive
 </div>
 </div>
   </div>
-  </div>`}constructor(){super()}getValue(){const method=this.qs("input[name=\"method\"]:checked").value,select=this.qs("#"+method);return select.value}valid(){}invalid(){}}customElements.define(PaymentOptions.is,PaymentOptions);
+  </div>`}constructor(){super()}getValue(){const method=this.qs("input[name=\"method\"]:checked").value,select=this.qs("#"+method);// find selected payment method
+// find selection option in the method
+return select.value}valid(validation){}invalid(validation){}}customElements.define(PaymentOptions.is,PaymentOptions);

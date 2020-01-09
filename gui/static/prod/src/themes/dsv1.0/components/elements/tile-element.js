@@ -17,7 +17,7 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
         padding: 20px;
         background-color: #fff;
         border-radius: 6px;
-        height: 320px;
+        height: auto;
         box-shadow: 1px 1px 11px 0 hsla(0, 0%, 79.2%, 0.5);
     }
     .ii__tile:hover{
@@ -58,7 +58,7 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
                 <img src="/media/${slide[3]}"  alt="services image"/>
                 </div>
                 <div class="ii__tile-body">
-                    <h3 class="ii_title ii__title-small is-size-6 has-text-weight-bold">
+                    <h3 class="ii_title ii__title-small is-size-6 has-text-weight-bold has-text-centered">
                     ${slide[1]}
                     </h3>
                     <p class="ii__paragraph" style="color: #7b7b7b; font-weight: normal; font-size: 14px;">${slide[2]}</p>

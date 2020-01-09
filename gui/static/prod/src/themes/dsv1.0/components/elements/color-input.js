@@ -6,4 +6,5 @@ import{html,ColorInputBase}from"../../../../components/adaptive-ui.js";class Col
         <paper-swatch-picker id="input" color="${this.value}"></paper-swatch-picker>
         </div>
         </div>
-        `}static get properties(){return{}}getInput(){return this.qs("#input")}getValue(){return this.getInput().color}valid(){}invalid(){}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(ColorInput.is,ColorInput);
+        `}static get properties(){return{}}getInput(){return this.qs("#input")}getValue(){//   return this.selectedColor;
+return this.getInput().color}valid(validation){}invalid(validation){}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(ColorInput.is,ColorInput);
