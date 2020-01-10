@@ -52883,7 +52883,6 @@ a {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <style>
         .button.is-link {
-          background-color: var(--app-default-color);
           border-color: transparent;
           color: #fff;
         }       
@@ -52891,7 +52890,7 @@ a {
 </style>       
 <div class="field">
   <div class="control">
-    <button class="button is-link" style="width: 100%;">${this.name}</button>
+    <button class="button is-link" style="width: 100%; background-color: var(--app-default-color);">${this.name}</button>
   </div>
 
 </div>

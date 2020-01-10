@@ -64,7 +64,7 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
     <div id="section11" class="bind-box">
       <header class="ii__main-header">
         <div class="ii__container-main">
-          <nav class="navbar" role="navigation" aria-label="main navigation">
+          <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:var(--app-primary-color)">
             <div class="navbar-brand">
               <a class="navbar-item" href="/" @click=${this.reloadPage}>
                 <img src="/media/${this.gateway.logo}" width="112" height="28">
