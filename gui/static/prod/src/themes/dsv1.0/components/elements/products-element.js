@@ -3,7 +3,7 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
     <style>
       .ii__product{
         width: 100%;
-        height: 150px;
+        height: auto;
         background: #fff;
         padding: 20px;
         border-radius: 8px;
@@ -39,7 +39,7 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
               <img src="/media/${slide[3]}" alt="products logo">
             </div>
             <div class="ii__content">
-              <h3 class="is-size-6 ii__title has-text-weight-bold">${this._getTitle(slide[1])}</h3>
+              <h3 class="is-size-6 ii__title has-text-weight-bold has-text-centered">${this._getTitle(slide[1])}</h3>
               <p class="ii__paragraph is-size-7">${slide[2]}</p>
             </div>
           </div>

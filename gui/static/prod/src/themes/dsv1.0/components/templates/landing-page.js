@@ -146,7 +146,7 @@ import{html,LandingPageBase,VIEW_MODE_DIALOG}from"../../../../components/adaptiv
       <div class="main-wrapper">
                   
         ${this.view===VIEW_MODE_DIALOG?html`
-        <section-page id="dialog" queue=${this.dialogServicesQueue} ></section-page>
+        <section-page id="dialog" @view-list=${this._viewList} queue=${this.dialogServicesQueue} ></section-page>
         `:html`
         ${this.pageGroup.pages.map(page=>html`        
           <!-- Feature -->
