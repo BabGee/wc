@@ -93,7 +93,42 @@ import{LitElement,html}from"../../../../../components/adaptive-ui.js";class Cont
        <paper-button  @tap="${this.generatePDF}" style=" background: #3498db; color:white;"><iron-icon icon="image:picture-as-pdf"></iron-icon>Export PDF</paper-button>
        <paper-button @tap="${this.generateCSV}" style=" background: #2ecc71; color:white;"><iron-icon icon="icons:save"></iron-icon>Export CSV</paper-button>
    </div>
-`}static get is(){return"contact-type-header"}static get properties(){return{title:String}}}customElements.define(ContactTypeHeader.is,ContactTypeHeader);var contactTypeHeader={ContactTypeHeader:ContactTypeHeader};class ContactType extends LitElement{constructor(){super()}render(){return html`
+`}static get is(){return"contact-type-header"}static get properties(){return{title:String//   language: String,
+//   column: {
+//     type: Object,
+//     notify: true,
+//     value: () => ({}),
+//   },
+//   positionSortIcon: String,
+//   sortable: {
+//     type: Boolean,
+//     value: () => false,
+//   },
+//   sorted: {
+//     type: Boolean,
+//     value: () => false,
+//   },
+//   sortDirection: {
+//     type: String,
+//     value: () => 'asc',
+//   },
+//   previousValue: {
+//     type: String,
+//     value: () => '',
+//   },
+//   currentValue: {
+//     type: String,
+//     value: () => '',
+//   },
+//   timeoutFilter: Number,
+//   focused: {
+//     type: Boolean,
+//     value: false,
+//   },
+//   _dateFrom: Number,
+//   _dateTo: Number,
+//   dateFormat: String,
+}}}customElements.define(ContactTypeHeader.is,ContactTypeHeader);var contactTypeHeader={ContactTypeHeader:ContactTypeHeader};class ContactType extends LitElement{constructor(){super()}render(){return html`
 
       <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -616,4 +651,20 @@ margin-left: -200px;
 `:html``}
 
   </section>
-        `}static get is(){return"contact-type"}static get properties(){return{data:{type:Array,notify:!0},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String}}checkRow(index){const row=this.shadowRoot.querySelector("#tr-"+index),checkbox=this.shadowRoot.querySelector("#checkbox-"+index);if(!0==checkbox.checked){row.classList.add("active-row")}else{row.classList.remove("active-row")}}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}}customElements.define(ContactType.is,ContactType);var contactType={ContactType:ContactType};export{contactTypeFooter as $contactTypeFooter,contactTypeHeader as $contactTypeHeader,contactType as $contactType,ContactTypeFooter,ContactTypeHeader,ContactType};
+        `}static get is(){return"contact-type"}static get properties(){return{/**
+       * Contains the data which will be displayed in the table.
+       */data:{type:Array,notify:!0},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},/**
+       * The number of the previous page
+       */oldPage:{type:Number,notify:!0},/**
+       * The total of elements have to be provided in case of pagination, it is mandatory.
+       */totalElements:Number,/**
+       * The total of pages have to be provided in case of pagination, it is mandatory.
+       * It is used to compute the footer.
+       */totalPages:Number,/**
+       * The available size in case of pagination.
+       */availableSize:Array,/**
+       * If true, the rows may be selectable.
+       */selectable:{type:Boolean,value:!1},/**
+       * Contains the positions of selected columns.
+       * Can contain a specific data if selectableDataKey is setted.
+       */selected:{type:Array},title:String}}checkRow(index){const row=this.shadowRoot.querySelector("#tr-"+index),checkbox=this.shadowRoot.querySelector("#checkbox-"+index);if(!0==checkbox.checked){row.classList.add("active-row")}else{row.classList.remove("active-row")}}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}}customElements.define(ContactType.is,ContactType);var contactType={ContactType:ContactType};export{contactType as $contactType,contactTypeFooter as $contactTypeFooter,contactTypeHeader as $contactTypeHeader,ContactType,ContactTypeFooter,ContactTypeHeader};

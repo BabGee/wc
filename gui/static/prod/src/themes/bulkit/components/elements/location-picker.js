@@ -1,4 +1,4 @@
-import{html,LitElement,SharedStyles,LocationPickerBase}from"../../../../components/adaptive-ui.js";class MapMarker extends LitElement{render(){return html`
+import{LitElement,html,SharedStyles,LocationPickerBase}from"../../../../components/adaptive-ui.js";class MapMarker extends LitElement{render(){return html`
   ${SharedStyles}
         <style>
         
@@ -167,7 +167,34 @@ import{html,LitElement,SharedStyles,LocationPickerBase}from"../../../../componen
         
         
 
-`}constructor(){super();this.API=Object}static get is(){return"map-marker"}static get properties(){return{map:Object,lat:Object,lng:Object,pickedLocation:Object,results:Array,key:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}nearbyPlacesCallback(results,status){console.log(results,status);if(status===google.maps.places.PlacesServiceStatus.OK){for(var i=0;i<results.length;i++){results[i];createMarker(results[i])}}}requestNearbyPlaces(){var service=new this.API.places.PlacesService(this.map),request={bounds:this.map.getBounds()};service.nearbySearch(request,this.nearbyPlacesCallback)}loaded(e){const self=this,API=e.target.api;this.API=e.target.api;var map=new API.Map(this.shadowRoot.querySelector("#map"),{center:{lat:-34.397,lng:150.644},zoom:8,disableDefaultUI:!0});this.map=map;this.initZoomControl(map);this.autoComplete();API.event.addListener(map,"idle",function(){var location=self.getMarkerPosition();if(location){self.dispatchEvent(new CustomEvent("center-change",{detail:{location:location}}))}})}autoComplete(){const self=this,input=this.shadowRoot.querySelector("#search");var autocomplete=new this.API.places.Autocomplete(input);autocomplete.setFields(["address_components","geometry","icon","name"]);autocomplete.addListener("place_changed",function(){var place=autocomplete.getPlace();if(!place.geometry){window.alert("No details available for input: '"+place.name+"'");return}if(place.geometry.viewport){self.map.fitBounds(place.geometry.viewport)}else{self.map.setCenter(place.geometry.location);self.map.setZoom(17)}})}initZoomControl(map){this.shadowRoot.querySelector(".zoom-control-in").onclick=function(){map.setZoom(map.getZoom()+1)};this.shadowRoot.querySelector(".zoom-control-out").onclick=function(){map.setZoom(map.getZoom()-1)};map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(this.shadowRoot.querySelector(".zoom-control"))}getMarkerPosition(){const latLng=this.map.getCenter();if(latLng){return{lat:latLng.lat(),lng:latLng.lng()}}}setCurrentPosition(){if(navigator.geolocation){navigator.geolocation.getCurrentPosition(position=>{const pos={lat:position.coords.latitude,lng:position.coords.longitude};this.map.setCenter(pos)},()=>{console.log("Could not determine your location...")})}else{console.log("Your browser does not support Geolocation.")}}}customElements.define(MapMarker.is,MapMarker);class LocationPicker extends LocationPickerBase{renderDefault(){return html`
+`}constructor(){super();this.API=Object}static get is(){return"map-marker"}static get properties(){return{map:Object,lat:Object,lng:Object,pickedLocation:Object,results:Array,key:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);// this.getLocation();
+}nearbyPlacesCallback(results,status){console.log(results,status);if(status===google.maps.places.PlacesServiceStatus.OK){for(var i=0,place;i<results.length;i++){place=results[i];createMarker(results[i])}}}requestNearbyPlaces(){var service=new this.API.places.PlacesService(this.map),request={bounds:this.map.getBounds()};service.nearbySearch(request,this.nearbyPlacesCallback)}loaded(e){const self=this,API=e.target.api;this.API=e.target.api;// The map,
+var map=new API.Map(this.shadowRoot.querySelector("#map"),{center:{lat:-34.397,lng:150.644},zoom:8,disableDefaultUI:!0// setCurrentPosition: true
+});this.map=map;this.initZoomControl(map);// this.setCurrentPosition();
+this.autoComplete();API.event.addListener(map,"idle",function(){var location=self.getMarkerPosition();if(location){self.dispatchEvent(new CustomEvent("center-change",{detail:{location:location}}))}//  self.requestNearbyPlaces();
+})}autoComplete(){const self=this,input=this.shadowRoot.querySelector("#search");var autocomplete=new this.API.places.Autocomplete(input);// Set the data fields to return when the user selects a place.
+autocomplete.setFields(["address_components","geometry","icon","name"]);autocomplete.addListener("place_changed",function(){// todo infowindow.close();
+// todo marker.setVisible(false);
+var place=autocomplete.getPlace();if(!place.geometry){// User entered the name of a Place that was not suggested and
+// pressed the Enter key, or the Place Details request failed.
+window.alert("No details available for input: '"+place.name+"'");return}// If the place has a geometry, then present it on a map.
+if(place.geometry.viewport){self.map.fitBounds(place.geometry.viewport)}else{self.map.setCenter(place.geometry.location);self.map.setZoom(17);// Why 17? Because it looks good.
+}// todo marker.setPosition(place.geometry.location);
+// todo marker.setVisible(true);
+/* // todo
+              var address = '';
+            if (place.address_components) {
+                address = [
+                    (place.address_components[0] && place.address_components[0].short_name || ''),
+                    (place.address_components[1] && place.address_components[1].short_name || ''),
+                    (place.address_components[2] && place.address_components[2].short_name || '')
+                ].join(' ');
+            }
+              infowindowContent.children['place-icon'].src = place.icon;
+            infowindowContent.children['place-name'].textContent = place.name;
+            infowindowContent.children['place-address'].textContent = address;
+            infowindow.open(map, marker);
+            */})}initZoomControl(map){this.shadowRoot.querySelector(".zoom-control-in").onclick=function(){map.setZoom(map.getZoom()+1)};this.shadowRoot.querySelector(".zoom-control-out").onclick=function(){map.setZoom(map.getZoom()-1)};map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(this.shadowRoot.querySelector(".zoom-control"))}getMarkerPosition(){const latLng=this.map.getCenter();if(latLng){return{lat:latLng.lat(),lng:latLng.lng()}}}setCurrentPosition(){if(navigator.geolocation){navigator.geolocation.getCurrentPosition(position=>{const pos={lat:position.coords.latitude,lng:position.coords.longitude};this.map.setCenter(pos)},()=>{console.log("Could not determine your location...")})}else{console.log("Your browser does not support Geolocation.")}}}customElements.define(MapMarker.is,MapMarker);class LocationPicker extends LocationPickerBase{renderDefault(){return html`
   ${SharedStyles}
         <style>
             :host {
@@ -190,4 +217,6 @@ import{html,LitElement,SharedStyles,LocationPickerBase}from"../../../../componen
            </div>
         
         
-        `}static get properties(){return{location:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_centerChanged(e){const location=e.detail.location;this.location=location;const onIdlePositionView=this.shadowRoot.querySelector("#picked");onIdlePositionView.innerHTML="Chosen location: lat "+location.lat+", lng "+location.lng}getValue(){return this.location.lng+","+this.location.lat}valid(){}invalid(){}init(pElement,loader){super.init(pElement,loader)}}customElements.define(LocationPicker.is,LocationPicker);
+        `}static get properties(){return{location:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);// this.getLocation();
+}_centerChanged(e){// console.log(e.detail);
+const location=e.detail.location;this.location=location;const onIdlePositionView=this.shadowRoot.querySelector("#picked");onIdlePositionView.innerHTML="Chosen location: lat "+location.lat+", lng "+location.lng}getValue(){return this.location.lng+","+this.location.lat}valid(validation){}invalid(validation){}init(pElement,loader){super.init(pElement,loader)}}customElements.define(LocationPicker.is,LocationPicker);
