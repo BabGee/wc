@@ -140,7 +140,7 @@ import{html,BaseElement}from"../../../../components/adaptive-ui.js";class Footer
             <div class="footer-bottom">
                 <div class="columns">
                     <div class="column">
-                        <p class="ii__paragraph is-size-7 footer-rights">${this.e.name} Copyright &copy; 2019. All rights reserved</p>
+                        <p class="ii__paragraph is-size-7 footer-rights">${this.e.name} Copyright &copy; ${this._getCurrentYear()}. All rights reserved</p>
                     </div>
                     <div class="column">
                         <div class="ii-footerfexrow">
@@ -157,4 +157,4 @@ import{html,BaseElement}from"../../../../components/adaptive-ui.js";class Footer
             </div>
         </div>
     </footer>
-        `}static get is(){return"footer-element"}init(pElement,loader){super.init(pElement,loader)}firstUpdated(changedProperties){super.firstUpdated(changedProperties);console.log("LINKS..."+JSON.stringify(this.e.details.links))}}customElements.define(FooterElement.is,FooterElement);
+        `}static get is(){return"footer-element"}init(pElement,loader){super.init(pElement,loader)}_getCurrentYear(){let year=new Date().getFullYear();return year}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(FooterElement.is,FooterElement);

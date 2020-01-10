@@ -69,4 +69,5 @@ input:checked + .slider:before {
 </label>
  <label for="switch" class="lbl">${this.name}</label>
   </div>
-  </div>`}static get is(){return"toggle-input"}getInput(){return this.qs("#input")}getValue(){return this.getInput().checked}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}window.customElements.define(ToggleInput.is,ToggleInput);
+  </div>`}static get is(){return"toggle-input"}getInput(){return this.qs("#input")}getValue(){return this.getInput().checked}firstUpdated(changedProperties){super.firstUpdated(changedProperties);// this.type = "text";
+}}window.customElements.define(ToggleInput.is,ToggleInput);

@@ -189,4 +189,13 @@ import{html,BULMA_STYLES,LANDING_STYLES,VIEW_MODE_DIALOG,LandingPageBase}from"..
             </div>
         </footer> 
 <snack-bar id="snack-bar" ?active="${this._snackbarOpened}">${this._snackbarMessage}</snack-bar>
-`}constructor(){super()}scrollPage(evt){const index=evt.currentTarget.pageIndex;var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get properties(){return{title:String,name:String,logo:String,view:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){if(this.toggle){this.qs(".navbar-wrapper").classList.remove("navbar-light");this.qs(".navbar-wrapper").classList.remove("mobile-menu-dark");this.qs(".nav-toggle").classList.remove("is-active");this.qs(".nav-right").classList.remove("is-active");this.toggle=!1}else{this.qs(".navbar-wrapper").classList.add("navbar-light");this.qs(".navbar-wrapper").classList.add("mobile-menu-dark");this.qs(".nav-toggle").classList.add("is-active");this.qs(".nav-right").classList.add("is-active");this.toggle=!0}}stateChanged(state){super.stateChanged(state)}_viewList(){this.mainNavigation()}}window.customElements.define("landing-page",LandingPage);
+`}constructor(){super()}scrollPage(evt){const index=evt.currentTarget.pageIndex;// var elementToFocus = document.getElementById(window.location.hash.slice(1));
+//   var elementToFocus = document.getElementById("#section_1");
+var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){//  elementToFocus.scrollIntoView(true);
+elementToFocus.scrollIntoView({block:"start",behavior:"smooth"});//   console.log("Scroll");
+}}static get properties(){return{title:String,name:String,logo:String,view:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){if(this.toggle){this.qs(".navbar-wrapper").classList.remove("navbar-light");this.qs(".navbar-wrapper").classList.remove("mobile-menu-dark");this.qs(".nav-toggle").classList.remove("is-active");this.qs(".nav-right").classList.remove("is-active");this.toggle=!1}else{this.qs(".navbar-wrapper").classList.add("navbar-light");this.qs(".navbar-wrapper").classList.add("mobile-menu-dark");this.qs(".nav-toggle").classList.add("is-active");this.qs(".nav-right").classList.add("is-active");this.toggle=!0}}stateChanged(state){super.stateChanged(state)}/**
+     * Dialogs Back navigation, Pop dialogs' stack
+     *
+     * @param {ClickEvent} evt
+     * @private
+     */_viewList(evt){this.mainNavigation()}}window.customElements.define("landing-page",LandingPage);

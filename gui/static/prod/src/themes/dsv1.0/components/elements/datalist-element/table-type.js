@@ -106,7 +106,44 @@ import{LitElement,html}from"../../../../../components/adaptive-ui.js";class Tabl
       <button @tap="${this.generatePDF}" class="button is-info is-size-7 is-rounded">Export PDF</button>
       <button @tap="${this.generateCSV}" class="button is-success is-size-7 is-rounded">Export CSV</button>
     </div>
-`}static get is(){return"table-type-header"}static get properties(){return{title:String}}generateCSV(){this.dispatchEvent(new CustomEvent("export-type",{detail:{type:"csv"}}))}generatePDF(){this.dispatchEvent(new CustomEvent("export-type",{detail:{type:"pdf"}}))}}customElements.define(TableTypeHeader.is,TableTypeHeader);var tableTypeHeader={TableTypeHeader:TableTypeHeader};class TableType extends LitElement{constructor(){super();this.columns=[];this.cols=[];this.data=[];this.selected=[];this.availableSize=[10,50,100,500]}render(){return html`
+`}static get is(){return"table-type-header"}static get properties(){return{title:String//   language: String,
+//   column: {
+//     type: Object,
+//     notify: true,
+//     value: () => ({}),
+//   },
+//   positionSortIcon: String,
+//   sortable: {
+//     type: Boolean,
+//     value: () => false,
+//   },
+//   sorted: {
+//     type: Boolean,
+//     value: () => false,
+//   },
+//   sortDirection: {
+//     type: String,
+//     value: () => 'asc',
+//   },
+//   previousValue: {
+//     type: String,
+//     value: () => '',
+//   },
+//   currentValue: {
+//     type: String,
+//     value: () => '',
+//   },
+//   timeoutFilter: Number,
+//   focused: {
+//     type: Boolean,
+//     value: false,
+//   },
+//   _dateFrom: Number,
+//   _dateTo: Number,
+//   dateFormat: String,
+}}generateCSV(){const csv="csv";// console.log(evt);
+this.dispatchEvent(new CustomEvent("export-type",{detail:{type:csv}}))}generatePDF(){const pdf="pdf";// console.log(evt);
+this.dispatchEvent(new CustomEvent("export-type",{detail:{type:pdf}}))}}customElements.define(TableTypeHeader.is,TableTypeHeader);var tableTypeHeader={TableTypeHeader:TableTypeHeader};class TableType extends LitElement{constructor(){super();this.columns=[];this.cols=[];this.data=[];this.selected=[];this.availableSize=[10,50,100,500]}render(){return html`
       <style>
       
       /* -- Material Design Table style -------------- */
@@ -1031,7 +1068,13 @@ ${this.paginate?html`
         .rowData=${rowData}
         .rowIndex=${rowIndex}
         ></paper-checkbox>
-        `}else{try{let columnValue=valueFromRowData;var dJson;if("object"==typeof columnValue){dJson=columnValue}else{dJson=JSON.parse(columnValue);if("object"!=typeof dJson){throw"Not Object JSON"}}const vs=[];for(var property in dJson){vs.push(html`<div style="margin-top:0.1px;"><strong>${property}: </strong><span>${dJson[property]}</span></div>`)}return html`
+        `}else{try{// todo possible optimization point, should probably be a column type
+// test using jsPerf
+let columnValue=valueFromRowData;var dJson;// = JSON.parse(columnValue);
+if("object"==typeof columnValue){dJson=columnValue}else{dJson=JSON.parse(columnValue);// skip boolean and number columns
+if("object"!=typeof dJson){throw"Not Object JSON"}}const vs=[];for(var property in dJson){// if (dJson.hasOwnProperty(property)) {
+vs.push(html`<div style="margin-top:0.1px;"><strong>${property}: </strong><span>${dJson[property]}</span></div>`);// }
+}return html`
           ${vs.map(v=>html` ${v}<br>`)}`}catch(e){switch(paperDatatableApiColumn.type){case"boolean":return html`
               ${"false"==(valueFromRowData+"").toLowerCase()?html`
               <iron-icon icon="icons:close"></iron-icon>
@@ -1039,4 +1082,65 @@ ${this.paginate?html`
               <iron-icon icon="icons:check"></iron-icon>
               `}
               
-              `;break;default:return html`${valueFromRowData}`;}}}}static get properties(){return{data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},pl:Object,details:Object,columns:{type:Array},paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String,searchText:String}}firstUpdated(){}_handleSort(evt){console.log(evt)}_exportType(evt){const type=evt.detail.type;this.dispatchEvent(new CustomEvent("export",{detail:{type:type}}))}_handleInputChange(evt){this.dispatchEvent(new CustomEvent("dropdown-filter",{detail:{path:evt.detail.column.propertyPath,value:evt.detail.value}}))}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}_selectChange(event){if(event.type&&"change"===event.type){Polymer.dom(event).localTarget}else{}}_searchReset(){this._clearSearch()}_search(){const self=this,q=self.shadowRoot.querySelector("#q").value,qIn=self.shadowRoot.querySelector("#qIn").selected;this.searchText=q;if(q){this.dispatchEvent(new CustomEvent("search",{detail:{column:qIn,searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath}),value:q}}))}}_clearSearch(){const self=this;this.dispatchEvent(new CustomEvent("clear-search",{detail:{searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath})}}))}}customElements.define(TableType.is,TableType);var tableType={TableType:TableType};export{tableTypeFooter as $tableTypeFooter,tableTypeHeader as $tableTypeHeader,tableType as $tableType,TableTypeFooter,TableTypeHeader,TableType};
+              `;break;// todo OPTIMIZATION - parse types for only values to be displayed and not in
+// dsc service command
+// i.e date, time, datetime
+default:return html`${valueFromRowData}`;}}}}static get properties(){return{/**
+           * Contains the data which will be displayed in the table.
+           */data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},pl:Object,details:Object,columns:{type:Array// value: () => [],
+// notify: true,
+},paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},/**
+           * The number of the previous page
+           */oldPage:{type:Number,notify:!0},/**
+           * The total of elements have to be provided in case of pagination, it is mandatory.
+           */totalElements:Number,/**
+           * The total of pages have to be provided in case of pagination, it is mandatory.
+           * It is used to compute the footer.
+           */totalPages:Number,/**
+           * The available size in case of pagination.
+           */availableSize:Array,/**
+           * If true, the rows may be selectable.
+           */selectable:{type:Boolean,value:!1},/**
+           * Contains the positions of selected columns.
+           * Can contain a specific data if selectableDataKey is setted.
+           */selected:{type:Array},title:String,searchText:String}}firstUpdated(changedProperties){// console.log("DATA is..."+this.data +"COLUMNS is..."+this.columns);
+}_handleSort(evt){console.log(evt)}_exportType(evt){const type=evt.detail.type;this.dispatchEvent(new CustomEvent("export",{detail:{type:type}}))}_handleInputChange(evt){// console.log(evt);
+this.dispatchEvent(new CustomEvent("dropdown-filter",{detail:{path:evt.detail.column.propertyPath,value:evt.detail.value}}))}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}// _extractData(rowData, columnProperty) {
+//   if (columnProperty) {
+//     // TODO this is support for accessing sub-property paths like man.head.nose, not needed
+//     const splittedProperties = columnProperty.split('.');
+//     if (splittedProperties.length > 1) {
+//       return splittedProperties.reduce((prevRow, property) => {
+//         if (typeof prevRow === 'string' && rowData[prevRow] && rowData[prevRow][property]) {
+//           return rowData[prevRow][property];
+//         }
+//         return prevRow[property] || '';
+//       });
+//     }
+//     return rowData[columnProperty];
+//   }
+//   return null;
+// }
+_selectChange(event){let localTarget;if(event.type&&"change"===event.type){localTarget=Polymer.dom(event).localTarget}else{localTarget=event}//   const tr = Polymer.dom(localTarget).parentNode.parentNode;
+//   const rowData = localTarget.rowData;
+//   const rowId = localTarget.rowIndex;
+//   if (localTarget.checked) {
+//     this.push('selected', rowData['id']);
+//     tr.classList.add('selected');
+//   } else {
+//     this.splice('selected', this.selectedRows.indexOf(rowData['id']), 1);
+//     tr.classList.remove('selected');
+//   }
+//   /**
+//        *
+//        * Fired when a row is selected.
+//        * @event selection-changed
+//        * Event param: {{node: Object}} detail Contains selected id and row data.
+//        */
+//   // todo this.fire('selection-changed', eventData);
+// }
+}_searchReset(evt){this._clearSearch()}_search(evt){const self=this,q=self.shadowRoot.querySelector("#q").value,qIn=self.shadowRoot.querySelector("#qIn").selected;// console.log(q);
+this.searchText=q;if(q){// console.log(self.qIn);
+// self.q = q;
+// console.log(evt);
+this.dispatchEvent(new CustomEvent("search",{detail:{column:qIn,searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath}),value:q}}))}}_clearSearch(event){const self=this;this.dispatchEvent(new CustomEvent("clear-search",{detail:{searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath})}}))}}customElements.define(TableType.is,TableType);var tableType={TableType:TableType};export{tableType as $tableType,tableTypeFooter as $tableTypeFooter,tableTypeHeader as $tableTypeHeader,TableType,TableTypeFooter,TableTypeHeader};

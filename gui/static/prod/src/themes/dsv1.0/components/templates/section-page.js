@@ -1,4 +1,5 @@
-import{css,html,SectionPageBase,Colors,Fonts,Reset}from"../../../../components/adaptive-ui.js";class SectionPage extends SectionPageBase{render(){return html`
+import{html,css,SectionPageBase,Reset,Colors,Fonts}from"../../../../components/adaptive-ui.js";class SectionPage extends SectionPageBase{render(){// TODO render 404
+return html`
      <style>
       div.modal-container, .modal-spinner{
         width: 100%;
@@ -156,4 +157,9 @@ ${this.payload?html`
               <span slot="title">${this._snackbarTitle}</span>
               ${this._snackbarMessage}</snack-bar>
 
-`}constructor(){super()}_computePage(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;return pageGroup.getTab(0)}_triggerViewList(){this.dispatchEvent(new CustomEvent("view-list",{bubbles:!0,composed:!0,detail:{}}))}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}static get styles(){return[Reset,Colors,Fonts,css`:host { display: block; }`]}}customElements.define(SectionPage.is,SectionPage);
+`}constructor(){super()}_computePage(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;return pageGroup.getTab(0)}_triggerViewList(evt){this.dispatchEvent(new CustomEvent("view-list",{bubbles:!0,composed:!0,detail:{}}))}/**
+     * TODO #301 duplicated function
+     * @param feed
+     * @returns {string}
+     * @private
+     */_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}static get styles(){return[Reset,Colors,Fonts,css`:host { display: block; }`]}}customElements.define(SectionPage.is,SectionPage);
