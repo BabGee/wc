@@ -93,42 +93,7 @@ import{LitElement,html}from"../../../../../components/adaptive-ui.js";class Inbo
        <paper-button  @tap="${this.generatePDF}" style=" background: #3498db; color:white;"><iron-icon icon="image:picture-as-pdf"></iron-icon>Export PDF</paper-button>
        <paper-button @tap="${this.generateCSV}" style=" background: #2ecc71; color:white;"><iron-icon icon="icons:save"></iron-icon>Export CSV</paper-button>
    </div>
-`}static get is(){return"inbox-type-header"}static get properties(){return{title:String//   language: String,
-//   column: {
-//     type: Object,
-//     notify: true,
-//     value: () => ({}),
-//   },
-//   positionSortIcon: String,
-//   sortable: {
-//     type: Boolean,
-//     value: () => false,
-//   },
-//   sorted: {
-//     type: Boolean,
-//     value: () => false,
-//   },
-//   sortDirection: {
-//     type: String,
-//     value: () => 'asc',
-//   },
-//   previousValue: {
-//     type: String,
-//     value: () => '',
-//   },
-//   currentValue: {
-//     type: String,
-//     value: () => '',
-//   },
-//   timeoutFilter: Number,
-//   focused: {
-//     type: Boolean,
-//     value: false,
-//   },
-//   _dateFrom: Number,
-//   _dateTo: Number,
-//   dateFormat: String,
-}}}customElements.define(InboxTypeHeader.is,InboxTypeHeader);var inboxTypeHeader={InboxTypeHeader:InboxTypeHeader};class InboxType extends LitElement{constructor(){super()}render(){return html`
+`}static get is(){return"inbox-type-header"}static get properties(){return{title:String}}}customElements.define(InboxTypeHeader.is,InboxTypeHeader);var inboxTypeHeader={InboxTypeHeader:InboxTypeHeader};class InboxType extends LitElement{constructor(){super()}render(){return html`
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <style>
@@ -362,22 +327,4 @@ background-color: #fff;
 </section>
   
 
-        `}static get is(){return"inbox-type"}static get properties(){return{/**
-       * Contains the data which will be displayed in the table.
-       */data:{type:Array,notify:!0},columns:{},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},/**
-       * The number of the previous page
-       */oldPage:{type:Number,notify:!0},/**
-       * The total of elements have to be provided in case of pagination, it is mandatory.
-       */totalElements:Number,/**
-       * The total of pages have to be provided in case of pagination, it is mandatory.
-       * It is used to compute the footer.
-       */totalPages:Number,/**
-       * The available size in case of pagination.
-       */availableSize:Array,/**
-       * If true, the rows may be selectable.
-       */selectable:{type:Boolean,value:!1},/**
-       * Contains the positions of selected columns.
-       * Can contain a specific data if selectableDataKey is setted.
-       */selected:{type:Array},title:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const selectable=this.details.selectable,allCheckBoxes=this.shadowRoot.querySelectorAll("input[type=checkbox]"),allStars=this.shadowRoot.querySelectorAll(".icon.has-text-grey.pointer.visible"),columnsType=typeof this.columns;"Boolean"!==columnsType?allStars.forEach(star=>{star.classList.replace("visible","hidden")}):allStars.forEach(star=>{});if(selectable===void 0){allCheckBoxes.forEach(checkbox=>{checkbox.style.display="none"})}else{!0!==selectable?allCheckBoxes.forEach(checkbox=>{checkbox.style.display="none"}):allCheckBoxes.forEach(checkbox=>{checkbox.style.display="block"})}}checkRow(index){const row=this.shadowRoot.querySelector("#tr-"+index),checkbox=this.shadowRoot.querySelector("#checkbox-"+index),deleteAchieveSec=this.shadowRoot.querySelector("#deleteAchieveSec"),hideUnhideSec=this.shadowRoot.querySelector("#hideUnhideSec"),rowTexts=row.querySelectorAll(".normal-td");var checked=this.shadowRoot.querySelectorAll("input:checked");if(0===checked.length){// there are no checked checkboxes
-deleteAchieveSec.className="hide-action";hideUnhideSec.className="hide-action"}else{// there are some checked checkboxes
-deleteAchieveSec.className="unhide-action";hideUnhideSec.className="unhide-action"}if(!0==checkbox.checked){row.classList.add("active-row");rowTexts.forEach(text=>{text.classList.add("active-color")})}else{row.classList.remove("active-row");rowTexts.forEach(text=>{text.classList.remove("active-color")})}}favorite(index){const span1=this.shadowRoot.querySelector("#span-icon1-"+index),span2=this.shadowRoot.querySelector("#span-icon2-"+index);if(span1.classList.contains("visible")){span1.classList.replace("visible","hidden");span2.classList.replace("hidden","visible")}else{span1.classList.replace("hidden","visible");span2.classList.replace("visible","hidden")}}deleteMessages(){const selectedMessages=this.shadowRoot.querySelectorAll("tr[class~=\"active-row\"]");selectedMessages.forEach(message=>{message.classList.add("hidden")})}archiveMessages(){const selectedMessages=this.shadowRoot.querySelectorAll("tr[class~=\"active-row\"]");selectedMessages.forEach(message=>{message.classList.add("hidden")})}overlayMessages(){const selectedMessages=this.shadowRoot.querySelectorAll("tr[class~=\"active-row\"]");selectedMessages.forEach(message=>{message.classList.add("overlay")})}removeOverlayMessages(){const overlayMessages=this.shadowRoot.querySelectorAll("tr[class~=\"overlay\"]");overlayMessages.forEach(message=>{message.classList.remove("overlay")})}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}}customElements.define(InboxType.is,InboxType);var inboxType={InboxType:InboxType};export{inboxType as $inboxType,inboxTypeFooter as $inboxTypeFooter,inboxTypeHeader as $inboxTypeHeader,InboxType,InboxTypeFooter,InboxTypeHeader};
+        `}static get is(){return"inbox-type"}static get properties(){return{data:{type:Array,notify:!0},columns:{},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const selectable=this.details.selectable,allCheckBoxes=this.shadowRoot.querySelectorAll("input[type=checkbox]"),allStars=this.shadowRoot.querySelectorAll(".icon.has-text-grey.pointer.visible"),columnsType=typeof this.columns;"Boolean"!==columnsType?allStars.forEach(star=>{star.classList.replace("visible","hidden")}):allStars.forEach(()=>{});if(selectable===void 0){allCheckBoxes.forEach(checkbox=>{checkbox.style.display="none"})}else{!0!==selectable?allCheckBoxes.forEach(checkbox=>{checkbox.style.display="none"}):allCheckBoxes.forEach(checkbox=>{checkbox.style.display="block"})}}checkRow(index){const row=this.shadowRoot.querySelector("#tr-"+index),checkbox=this.shadowRoot.querySelector("#checkbox-"+index),deleteAchieveSec=this.shadowRoot.querySelector("#deleteAchieveSec"),hideUnhideSec=this.shadowRoot.querySelector("#hideUnhideSec"),rowTexts=row.querySelectorAll(".normal-td");var checked=this.shadowRoot.querySelectorAll("input:checked");if(0===checked.length){deleteAchieveSec.className="hide-action";hideUnhideSec.className="hide-action"}else{deleteAchieveSec.className="unhide-action";hideUnhideSec.className="unhide-action"}if(!0==checkbox.checked){row.classList.add("active-row");rowTexts.forEach(text=>{text.classList.add("active-color")})}else{row.classList.remove("active-row");rowTexts.forEach(text=>{text.classList.remove("active-color")})}}favorite(index){const span1=this.shadowRoot.querySelector("#span-icon1-"+index),span2=this.shadowRoot.querySelector("#span-icon2-"+index);if(span1.classList.contains("visible")){span1.classList.replace("visible","hidden");span2.classList.replace("hidden","visible")}else{span1.classList.replace("hidden","visible");span2.classList.replace("visible","hidden")}}deleteMessages(){const selectedMessages=this.shadowRoot.querySelectorAll("tr[class~=\"active-row\"]");selectedMessages.forEach(message=>{message.classList.add("hidden")})}archiveMessages(){const selectedMessages=this.shadowRoot.querySelectorAll("tr[class~=\"active-row\"]");selectedMessages.forEach(message=>{message.classList.add("hidden")})}overlayMessages(){const selectedMessages=this.shadowRoot.querySelectorAll("tr[class~=\"active-row\"]");selectedMessages.forEach(message=>{message.classList.add("overlay")})}removeOverlayMessages(){const overlayMessages=this.shadowRoot.querySelectorAll("tr[class~=\"overlay\"]");overlayMessages.forEach(message=>{message.classList.remove("overlay")})}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}}customElements.define(InboxType.is,InboxType);var inboxType={InboxType:InboxType};export{inboxTypeFooter as $inboxTypeFooter,inboxTypeHeader as $inboxTypeHeader,inboxType as $inboxType,InboxTypeFooter,InboxTypeHeader,InboxType};

@@ -78,42 +78,4 @@ import{html,FileInputBase}from"../../../../components/adaptive-ui.js";class File
         </div>
       </form>
     </div>
-        `}constructor(){super()}getValue(){return this.value}/**
-     * from SerializableElement
-     * @override
-     */valid(validation){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="none"}/**
-     * from SerializableElement
-     * @override
-     */invalid(validation){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="block";errorDisplay.textContent=validation}/**
-     * from FileInputBase
-     * @override
-     */updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}// getFileExtension(filename){
-//   return filename.split('.').pop();
-// }
-// /**
-//  * Cancel Last Upload
-//  * @param evt
-//  */
-// cancelUpload(evt) {
-//   this.resetUpload();
-//   this.updateUploadMessage('');
-// }
-/**
-   * File Selection Change handler
-   * @param evt
-   */handleFile(evt){const fileInput=this.shadowRoot.querySelector("[type=\"file\"]");this.uploadFile(fileInput);// const label = this.shadowRoot.querySelector('[data-js-label]');
-// let preview = this.shadowRoot.querySelector('.file-preview img');
-// let reader = new FileReader();
-// reader.onload = function(){
-//   preview.src = reader.result;
-// };
-// reader.readAsDataURL(evt.target.files[0]);
-// fileInput.onmouseout = function () {
-//   if (!fileInput.value) return
-//   let value = fileInput.value.replace(/^.*[\\\/]/, '')
-//   // console.log(this.getFileExtension(value))
-//   // el.className += ' -chosen'
-//   label.innerText = value
-// }
-// this.uploadFile(fileInput);
-}}window.customElements.define(FileInput.is,FileInput);
+        `}constructor(){super()}getValue(){return this.value}valid(){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="none"}invalid(validation){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="block";errorDisplay.textContent=validation}updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}handleFile(){const fileInput=this.shadowRoot.querySelector("[type=\"file\"]");this.uploadFile(fileInput)}}window.customElements.define(FileInput.is,FileInput);

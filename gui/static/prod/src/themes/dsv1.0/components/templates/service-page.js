@@ -570,8 +570,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
                     <div class="peer align-c flex-nw">
                       <div class="peer">
                         <div class="logo">
-                          <!-- <img src="${this._computeLogo(this.gateway)}" alt=""> -->
-                          <img src="https://gomipay.com/media/administration_gateway_logo/mipay.png" alt="$1"/>
+                           <img src="${this._computeLogo(this.gateway)}" alt=""> 
                         </div>
                       </div>
                     </div>
@@ -659,7 +658,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
 
           <main class="main-container">
             <div class="row">
-              ${this.page.pageInputGroups.map((feed,feedIndex)=>html$1`
+              ${this.page.pageInputGroups.map(feed=>html$1`
                   <div class="column ${this._gridClasses(feed)} is-paddingless">
                     <form-render
                       .feed="${feed}"
@@ -679,24 +678,8 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean}}drawer(evt){evt.preventDefault();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");this.isSideMenuVisible=!0}hum.firstElementChild.classList.toggle("active");hum.lastElementChild.classList.toggle("active");hum.children[1].classList.toggle("active");if(280==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu");// menuItems
-menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{// collapse all current active
-this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});// expand related to source of event
-menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight);//
-});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight);//
-});if(menuItems.classList.contains(highLight)){}else{menuItems.classList.add(highLight)}const aside=document.querySelector("#sidebar");if(60==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu"),navTitle=document.querySelectorAll(".nav-title");navTitle.styles.display="none";// menuItems
-menuItems.forEach(item=>{item.classList.remove("is-block")})}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
+     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean}}drawer(evt){evt.preventDefault();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");this.isSideMenuVisible=!0}hum.firstElementChild.classList.toggle("active");hum.lastElementChild.classList.toggle("active");hum.children[1].classList.toggle("active");if(280==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu");menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}const aside=document.querySelector("#sidebar");if(60==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu"),navTitle=document.querySelectorAll(".nav-title");navTitle.styles.display="none";menuItems.forEach(item=>{item.classList.remove("is-block")})}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
         :host {
           display: block;
         }
-      `]}/**
-     * Dialogs Back navigation, Pop dialogs' stack
-     *
-     * @param evt
-     * @private
-     */_viewList(evt){this.mainNavigation()}/**
-     * TODO #301 duplicated function
-     * @param feed
-     * @returns {string}
-     * @private
-     */_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{service as $service,ServiceStyles};
+      `]}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{service as $service,ServiceStyles};

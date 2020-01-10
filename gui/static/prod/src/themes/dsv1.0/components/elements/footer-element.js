@@ -128,7 +128,7 @@ import{html,BaseElement}from"../../../../components/adaptive-ui.js";class Footer
                         <div class="ii-footer-col">
                                 <h3 class="ii__footer-col-title is-capitalized">${slide.title}</h3>
                                 ${slide.links.map(link=>html`
-                                <a href="#" class="ii__footer-col-link">${link}</a>
+                                <a href="mailto:${link}" class="ii__footer-col-link">${link}</a>
                                 `)}
                         </div>
                     `)}

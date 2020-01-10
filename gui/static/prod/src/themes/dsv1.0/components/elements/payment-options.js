@@ -115,6 +115,4 @@ import{html,PaymentOptionsBase}from"../../../../components/adaptive-ui.js";class
 </div>
 </div>
   </div>
-  </div>`}constructor(){super()}getValue(){const method=this.qs("input[name=\"method\"]:checked").value,select=this.qs("#"+method);// find selected payment method
-// find selection option in the method
-return select.value}valid(validation){}invalid(validation){}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this}}customElements.define(PaymentOptions.is,PaymentOptions);
+  </div>`}constructor(){super()}getValue(){const method=this.qs("input[name=\"method\"]:checked").value,select=this.qs("#"+method);return select.value}valid(){}invalid(){}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this}}customElements.define(PaymentOptions.is,PaymentOptions);

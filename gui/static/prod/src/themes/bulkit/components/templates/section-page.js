@@ -1,5 +1,4 @@
-import{html,SectionPageBase}from"../../../../components/adaptive-ui.js";class SectionPage extends SectionPageBase{render(){// TODO render 404
-return html`
+import{html,SectionPageBase}from"../../../../components/adaptive-ui.js";class SectionPage extends SectionPageBase{render(){return html`
      <style>
      .flex-card {
     position: relative;

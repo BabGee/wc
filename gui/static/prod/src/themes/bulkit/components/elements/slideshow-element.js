@@ -161,6 +161,4 @@ ${this.rows.map((slide,index)=>html`
 		 `)}  
 	</div>
 		
-</div>`}onLoadData(dsc){this.showSlidesAuto()}showSlidesAuto(){let i=0;const self=this;function Move(){if(i===self.rows.length-1){// means we have reached the end
-i=0;self.shadowRoot.querySelector("#i"+i).checked=!0;return}i=i%self.rows.length+1;self.shadowRoot.querySelector("#i"+i).checked=!0}setInterval(Move,3e3);// change img in 3 sec
-}}customElements.define(SlideshowElement.is,SlideshowElement);
+</div>`}onLoadData(){this.showSlidesAuto()}showSlidesAuto(){let i=0;const self=this;function Move(){if(i===self.rows.length-1){i=0;self.shadowRoot.querySelector("#i"+i).checked=!0;return}i=i%self.rows.length+1;self.shadowRoot.querySelector("#i"+i).checked=!0}setInterval(Move,3e3)}}customElements.define(SlideshowElement.is,SlideshowElement);

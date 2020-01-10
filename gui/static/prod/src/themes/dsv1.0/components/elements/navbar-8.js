@@ -1,4 +1,4 @@
-import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar8 extends NavbarBase{renderDefault(){const light=html`
+import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar8 extends NavbarBase{renderDefault(){html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="bind-box">
           <div class="block">
@@ -35,8 +35,7 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar8
             </nav>
           </div>
         </div>
-    `;// this is dark
-return html`
+    `;return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
 

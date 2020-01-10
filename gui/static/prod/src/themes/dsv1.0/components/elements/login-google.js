@@ -18,4 +18,4 @@ import{html,LoginGoogleBase}from"../../../../components/adaptive-ui.js";class Lo
   </a>
         </div>
         </div>
-        `}constructor(){super()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}invalid(validation){}valid(validation){}}customElements.define(LoginGoogle.is,LoginGoogle);
+        `}constructor(){super()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}invalid(){}valid(){}}customElements.define(LoginGoogle.is,LoginGoogle);

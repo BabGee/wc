@@ -93,42 +93,7 @@ import{LitElement,html}from"../../../../../components/adaptive-ui.js";class Card
        <paper-button  @tap="${this.generatePDF}" style=" background: #3498db; color:white;"><iron-icon icon="image:picture-as-pdf"></iron-icon>Export PDF</paper-button>
        <paper-button @tap="${this.generateCSV}" style=" background: #2ecc71; color:white;"><iron-icon icon="icons:save"></iron-icon>Export CSV</paper-button>
    </div>
-`}static get is(){return"card-type-header"}static get properties(){return{title:String//   language: String,
-//   column: {
-//     type: Object,
-//     notify: true,
-//     value: () => ({}),
-//   },
-//   positionSortIcon: String,
-//   sortable: {
-//     type: Boolean,
-//     value: () => false,
-//   },
-//   sorted: {
-//     type: Boolean,
-//     value: () => false,
-//   },
-//   sortDirection: {
-//     type: String,
-//     value: () => 'asc',
-//   },
-//   previousValue: {
-//     type: String,
-//     value: () => '',
-//   },
-//   currentValue: {
-//     type: String,
-//     value: () => '',
-//   },
-//   timeoutFilter: Number,
-//   focused: {
-//     type: Boolean,
-//     value: false,
-//   },
-//   _dateFrom: Number,
-//   _dateTo: Number,
-//   dateFormat: String,
-}}}customElements.define(CardTypeHeader.is,CardTypeHeader);var cardTypeHeader={CardTypeHeader:CardTypeHeader};class CardType extends LitElement{constructor(){super()}render(){return html`
+`}static get is(){return"card-type-header"}static get properties(){return{title:String}}}customElements.define(CardTypeHeader.is,CardTypeHeader);var cardTypeHeader={CardTypeHeader:CardTypeHeader};class CardType extends LitElement{constructor(){super()}render(){return html`
         <style>
         /* Card Styles */
 
@@ -182,7 +147,7 @@ import{LitElement,html}from"../../../../../components/adaptive-ui.js";class Card
         <card-type-header .title="${this.title}"></card-type-header>
 
         <div style="height: 60vh;overflow-y: scroll;">
-        ${this.data.map((item,itemIndex)=>html`
+        ${this.data.map(item=>html`
         
                 <div class="item">
                     <iron-image class="avatar" sizing="contain" src="/media/${item.image}"></iron-image>
@@ -237,22 +202,4 @@ import{LitElement,html}from"../../../../../components/adaptive-ui.js";class Card
         `:html``} 
         
 
-        `}static get is(){return"card-type"}static get properties(){return{/**
-       * Contains the data which will be displayed in the table.
-       */data:{type:Array,notify:!0},pl:Object,details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},/**
-       * The number of the previous page
-       */oldPage:{type:Number,notify:!0},/**
-       * The total of elements have to be provided in case of pagination, it is mandatory.
-       */totalElements:Number,/**
-       * The total of pages have to be provided in case of pagination, it is mandatory.
-       * It is used to compute the footer.
-       */totalPages:Number,/**
-       * The available size in case of pagination.
-       */availableSize:Array,/**
-       * If true, the rows may be selectable.
-       */selectable:{type:Boolean,value:!1},/**
-       * Contains the positions of selected columns.
-       * Can contain a specific data if selectableDataKey is setted.
-       */selected:{type:Array},title:String}}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}values(item){const v=[];for(var property in item){if(item.hasOwnProperty(property)){// do stuff
-if("links"!==property&&"image"!==property&&"name"!==property){v.push([property,item[property]])}else{// console.log(item[property])
-}}}return v}downloads(item,details){if("download_links"in details&&details.download_links.length){const v=[];for(var property in item){if(item.hasOwnProperty(property)&&details.download_links.includes(property)){v.push([property,item[property]])}}return v}return[]}}customElements.define(CardType.is,CardType);var cardType={CardType:CardType};export{cardType as $cardType,cardTypeFooter as $cardTypeFooter,cardTypeHeader as $cardTypeHeader,CardType,CardTypeFooter,CardTypeHeader};
+        `}static get is(){return"card-type"}static get properties(){return{data:{type:Array,notify:!0},pl:Object,details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String}}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}values(item){const v=[];for(var property in item){if(item.hasOwnProperty(property)){if("links"!==property&&"image"!==property&&"name"!==property){v.push([property,item[property]])}}}return v}downloads(item,details){if("download_links"in details&&details.download_links.length){const v=[];for(var property in item){if(item.hasOwnProperty(property)&&details.download_links.includes(property)){v.push([property,item[property]])}}return v}return[]}}customElements.define(CardType.is,CardType);var cardType={CardType:CardType};export{cardTypeFooter as $cardTypeFooter,cardTypeHeader as $cardTypeHeader,cardType as $cardType,CardTypeFooter,CardTypeHeader,CardType};
