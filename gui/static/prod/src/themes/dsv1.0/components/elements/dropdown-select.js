@@ -1,250 +1,359 @@
-import{html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components/adaptive-ui.js";class DropdownSelect extends DropdownSelectBase{renderDefault(){if(this.renderMode===RENDER_M_SIDE_BY_SIDE){return html`
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet"/>
-        <style>
-          /*Dropdown select*/
-          .dropdown-item-select{
-            position: relative;
-            padding:11px;
-          -moz-user-select: none; 
-          -webkit-user-select: none; 
-          -ms-user-select:none; 
-          user-select:none;
-          -o-user-select:none;
-          }
-        .dropdown-item-select .dropdown-item-header{
-          background: #fff;
-          padding: 16px;
-          display:inline-block;
-          position: relative;
-          cursor: pointer;
-          width: 100%;
-          border-radius: 6px;
-          border: 1px solid #e5e5e5;
-          /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
-          -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
-          box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);*/
-        }
-        .arrow{
-          position: relative;
-        }
-        .arrow::after{
-          content: '';
-          width: 8px;
-          height: 8px;
-          border-left: 2px solid #4a4a4a;
-          border-bottom: 2px solid #4a4a4a;
-          border-right: 2px solid transparent;
-          border-top: 2px solid transparent;
-          position: absolute;
-          transform: rotate(-43deg);
-          top: -17px;
-          right: 9px;
-        }
-        .dropdown-item-select .dropdown-item-header p{
-          font-size: 14px;
-          font-weight: 500;
-          color: #4A4A4A;
-        }
-        .dropdown-item-body{
-          background: #fff;
-          display: none;
-          width:98%;
-          position:absolute;
-          padding: 16px;
-          z-index: 5000;
-          padding-right:33px;
-          border-radius: 6px;
-          border: 1px solid #e5e5e5;
-          margin-top:8px;
-        }
-        .dropdown-item-body ul li{
-          
-          border-bottom: 1px solid #f5f5f5;
-          padding: 10px 20px;
-          font-weight: 500;
-          font-size: 14px;
-        }
-        .dropdown-item-body ul li:hover{
-          background-color: #f1f1f1;
-
-        }
-        .is-active{
-          background-color: #f1f1f1;
-        }
-        .active-list{
-          background-color: red;
-
-        }
-        .is-hidden{
-          display: none;
-        }
-        .is-visible{
-          display:block;
-        }
-        .custom-width{
-          width: 342px;
-        }
-          div.select-item label{
-            font-size: 12px;
-            font-weight: bold;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: 1.17;
-            letter-spacing: normal;
-            color: #4A4A4A;
-          }
-          /* div.select select{
-            width: 317px;
-            font-size: 14px;
-            height: 40px;
-            padding: 0 13.9px;
-            display: inline-block;
-            color: #202124;
-            line-height: 1;
-            background-color: #f6f6f6;
-            border: 1px solid #ededed;
-          } */
-        </style>
-        <div class="columns select-item">
-          <div class="column is-one-quarter" style="display: flex; align-items: center;">
-            <label class="label is-uppercase">Select role</label>
-          </div>
-          <div class="column">
-          <div class="dropdown-item-select">
-              <div class="dropdown-item-header" @click='${()=>this.dropdown("head")}'>
-                  <p>${this.e.name}</p>
-                  <div id='select-div' class="select is-hidden">
-                      <select id="select">
-                        <option data-placeholder="true" value="" disabled hidden ?selected="${!this.e.kind}">${this.e.name}</option>
-                        ${this._computeItems(this.rows,this.q).map(data=>html`
-                        <option id="option-${data[0]}" class="" value="${data[0]}" ?selected="${this.e.kind===data[0]}"  @click='${()=>this.dropdown(this._dataJoined(data),data[0])}'>${this._dataJoined(data)}</option>
-                            `)} 
-                      </select>
-              </div>
-              <div id='arrow' class="arrow"></div>
-              </div>
-              <div id="dropdown-item-body" class="dropdown-item-body">
-                  <ul>
-                  ${this._computeItems(this.rows,this.q).map(data=>html`
-                  <li id="list-${data[0]}"  value="${data[0]}" ?selected="${this.e.kind===data[0]}"  @click='${()=>this.dropdown(this._dataJoined(data),data[0])}'>${this._dataJoined(data)}</li>
-              `)} 
-                  </ul>
-              </div>
-          </div>
-
-          </div>
-        </div>
-      `}else{return html`
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet"/>
-      <style>
-        /*Dropdown select*/
-        .dropdown-item-select{
-          position: relative;
-          padding:11px;
-        -moz-user-select: none; 
-        -webkit-user-select: none; 
-        -ms-user-select:none; 
-        user-select:none;
-        -o-user-select:none;
-        }
-      .dropdown-item-select .dropdown-item-header{
-        background: #fff;
-        padding: 16px;
-        display:inline-block;
-        position: relative;
-        cursor: pointer;
+import{css,html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components/adaptive-ui.js";class DropdownSelect extends DropdownSelectBase{static get styles(){return css`
+      .ss-main {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  color: #666666;
+  width: 100%; }
+  .ss-main .ss-single-selected {
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    height: 30px;
+    padding: 6px;
+    border: 1px solid #dcdee2;
+    border-radius: 4px;
+    background-color: #ffffff;
+    outline: 0;
+    box-sizing: border-box;
+    transition: background-color .2s; }
+    .ss-main .ss-single-selected.ss-disabled {
+      background-color: #dcdee2;
+      cursor: not-allowed; }
+    .ss-main .ss-single-selected.ss-open-above {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px; }
+    .ss-main .ss-single-selected.ss-open-below {
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px; }
+    .ss-main .ss-single-selected .placeholder {
+      display: flex;
+      flex: 1 1 100%;
+      align-items: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: left;
+      width: calc(100% - 30px);
+      line-height: 1em;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none; }
+      .ss-main .ss-single-selected .placeholder * {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: auto; }
+      .ss-main .ss-single-selected .placeholder .ss-disabled {
+        color: #dedede; }
+    .ss-main .ss-single-selected .ss-deselect {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 0 1 auto;
+      margin: 0 6px 0 6px;
+      font-weight: bold; }
+      .ss-main .ss-single-selected .ss-deselect.ss-hide {
+        display: none; }
+    .ss-main .ss-single-selected .ss-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 0 1 auto;
+      margin: 0 6px 0 6px; }
+      .ss-main .ss-single-selected .ss-arrow span {
+        border: solid #666666;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 3px;
+        transition: transform .2s, margin .2s; }
+        .ss-main .ss-single-selected .ss-arrow span.arrow-up {
+          transform: rotate(-135deg);
+          margin: 3px 0 0 0; }
+        .ss-main .ss-single-selected .ss-arrow span.arrow-down {
+          transform: rotate(45deg);
+          margin: -3px 0 0 0; }
+  .ss-main .ss-multi-selected {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    min-height: 30px;
+    width: 100%;
+    padding: 0 0 0 3px;
+    border: 1px solid #dcdee2;
+    border-radius: 4px;
+    background-color: #ffffff;
+    outline: 0;
+    box-sizing: border-box;
+    transition: background-color .2s; }
+    .ss-main .ss-multi-selected.ss-disabled {
+      background-color: #dcdee2;
+      cursor: not-allowed; }
+      .ss-main .ss-multi-selected.ss-disabled .ss-values .ss-disabled {
+        color: #666666; }
+      .ss-main .ss-multi-selected.ss-disabled .ss-values .ss-value .ss-value-delete {
+        cursor: not-allowed; }
+    .ss-main .ss-multi-selected.ss-open-above {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px; }
+    .ss-main .ss-multi-selected.ss-open-below {
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px; }
+    .ss-main .ss-multi-selected .ss-values {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      flex: 1 1 100%;
+      width: calc(100% - 30px); }
+      .ss-main .ss-multi-selected .ss-values .ss-disabled {
+        display: flex;
+        padding: 4px 5px;
+        margin: 2px 0px;
+        line-height: 1em;
+        align-items: center;
         width: 100%;
-        border-radius: 6px;
-        border: 1px solid #e5e5e5;
-        /*-webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);*/
-      }
-      .arrow{
+        color: #dedede;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+    opacity: 0; }
+  100% {
+    transform: scale(1);
+    opacity: 1; } }
+
+@keyframes scaleOut {
+  0% {
+    transform: scale(1);
+    opacity: 1; }
+  100% {
+    transform: scale(0);
+    opacity: 0; } }
+      .ss-main .ss-multi-selected .ss-values .ss-value {
+        display: flex;
+        user-select: none;
+        align-items: center;
+        font-size: 12px;
+        padding: 3px 5px;
+        margin: 3px 5px 3px 0px;
+        color: #ffffff;
+        background-color: #5897fb;
+        border-radius: 4px;
+        animation-name: scaleIn;
+        animation-duration: .2s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: both; }
+        .ss-main .ss-multi-selected .ss-values .ss-value.ss-out {
+          animation-name: scaleOut;
+          animation-duration: .2s;
+          animation-timing-function: ease-out; }
+        .ss-main .ss-multi-selected .ss-values .ss-value .ss-value-delete {
+          margin: 0 0 0 5px;
+          cursor: pointer; }
+    .ss-main .ss-multi-selected .ss-add {
+      display: flex;
+      flex: 0 1 3px;
+      margin: 9px 12px 0 5px; }
+      .ss-main .ss-multi-selected .ss-add .ss-plus {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #666666;
         position: relative;
-      }
-      .arrow::after{
-        content: '';
-        width: 8px;
-        height: 8px;
-        border-left: 2px solid #4a4a4a;
-        border-bottom: 2px solid #4a4a4a;
-        border-right: 2px solid transparent;
-        border-top: 2px solid transparent;
-        position: absolute;
-        transform: rotate(-43deg);
-        top: -17px;
-        right: 9px;
-      }
-      .dropdown-item-select .dropdown-item-header p{
-        font-size: 14px;
-        font-weight: 500;
-        color: #4A4A4A;
-      }
-      .dropdown-item-body{
-        background: #fff;
-        display: none;
-        width:98%;
-        position:absolute;
-        padding: 16px;
-        z-index: 5000;
-        padding-right:33px;
-        border-radius: 6px;
-        border: 1px solid #e5e5e5;
-        margin-top:8px;
-      }
-      .dropdown-item-body ul li{
-        
-        border-bottom: 1px solid #f5f5f5;
-        padding: 10px 20px;
-        font-weight: 500;
-        font-size: 14px;
-      }
-      .dropdown-item-body ul li:hover{
-        background-color: #f1f1f1;
+        height: 10px;
+        width: 2px;
+        transition: transform .2s; }
+        .ss-main .ss-multi-selected .ss-add .ss-plus:after {
+          background: #666666;
+          content: "";
+          position: absolute;
+          height: 2px;
+          width: 10px;
+          left: -4px;
+          top: 4px; }
+        .ss-main .ss-multi-selected .ss-add .ss-plus.ss-cross {
+          transform: rotate(45deg); }
+  .ss-main .ss-content {
+    position: absolute;
+    width: 100%;
+    margin: -1px 0 0 0;
+    box-sizing: border-box;
+    border: solid 1px #dcdee2;
+    z-index: 1010;
+    background-color: #ffffff;
+    transform-origin: center top;
+    transition: transform .2s, opacity .2s;
+    opacity: 0;
+    transform: scaleY(0); }
+    .ss-main .ss-content.ss-open {
+      display: block;
+      opacity: 1;
+      transform: scaleY(1); }
+    .ss-main .ss-content .ss-search {
+      display: flex;
+      flex-direction: row;
+      padding: 8px 8px 6px 8px; }
+      .ss-main .ss-content .ss-search.ss-hide {
+        height: 0px;
+        opacity: 0;
+        padding: 0px 0px 0px 0px;
+        margin: 0px 0px 0px 0px; }
+        .ss-main .ss-content .ss-search.ss-hide input {
+          height: 0px;
+          opacity: 0;
+          padding: 0px 0px 0px 0px;
+          margin: 0px 0px 0px 0px; }
+      .ss-main .ss-content .ss-search input {
+        display: inline-flex;
+        font-size: inherit;
+        line-height: inherit;
+        flex: 1 1 auto;
+        width: 100%;
+        min-width: 0px;
+        height: 30px;
+        padding: 6px 8px;
+        margin: 0;
+        border: 1px solid #dcdee2;
+        border-radius: 4px;
+        background-color: #ffffff;
+        outline: 0;
+        text-align: left;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -webkit-appearance: textfield; }
+        .ss-main .ss-content .ss-search input::placeholder {
+          color: #8a8a8a;
+          vertical-align: middle; }
+        .ss-main .ss-content .ss-search input:focus {
+          box-shadow: 0 0 5px #5897fb; }
+      .ss-main .ss-content .ss-search .ss-addable {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 22px;
+        font-weight: bold;
+        flex: 0 0 30px;
+        height: 30px;
+        margin: 0 0 0 8px;
+        border: 1px solid #dcdee2;
+        border-radius: 4px;
+        box-sizing: border-box; }
+    .ss-main .ss-content .ss-addable {
+      padding-top: 0px; }
+    .ss-main .ss-content .ss-list {
+      max-height: 200px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      text-align: left; }
+      .ss-main .ss-content .ss-list .ss-optgroup .ss-optgroup-label {
+        padding: 6px 10px 6px 10px;
+        font-weight: bold; }
+      .ss-main .ss-content .ss-list .ss-optgroup .ss-option {
+        padding: 6px 6px 6px 25px; }
+      .ss-main .ss-content .ss-list .ss-optgroup-label-selectable {
+        cursor: pointer; }
+        .ss-main .ss-content .ss-list .ss-optgroup-label-selectable:hover {
+          color: #ffffff;
+          background-color: #5897fb; }
+      .ss-main .ss-content .ss-list .ss-option {
+        padding: 6px 10px 6px 10px;
+        cursor: pointer;
+        user-select: none; }
+        .ss-main .ss-content .ss-list .ss-option * {
+          display: inline-block; }
+        .ss-main .ss-content .ss-list .ss-option:hover, .ss-main .ss-content .ss-list .ss-option.ss-highlighted {
+          color: #ffffff;
+          background-color: #5897fb; }
+        .ss-main .ss-content .ss-list .ss-option.ss-disabled {
+          cursor: not-allowed;
+          color: #dedede;
+          background-color: #ffffff; }
+        .ss-main .ss-content .ss-list .ss-option:not(.ss-disabled).ss-option-selected {
+          color: #666666;
+          background-color: rgba(88, 151, 251, 0.1); }
+        .ss-main .ss-content .ss-list .ss-option.ss-hide {
+          display: none; }
+        .ss-main .ss-content .ss-list .ss-option .ss-search-highlight {
+          background-color: #fffb8c; }
+    `}constructor(){super();this.options=[];this.contentOpen=!1;this.selected=null}renderDefault(){if(this.renderMode===RENDER_M_SIDE_BY_SIDE){return html`
+        RENDER_M_SIDE_BY_SIDE not supported
+      `}else{return html`
 
-      }
-      .is-active{
-        background-color: #f1f1f1;
-      }
-      .active-list{
-        background-color: red;
-
-      }
-      .is-hidden{
-        display: none;
-      }
-      .is-visible{
-        display:block;
-      }
-      .custom-width{
-        width: 342px;
-      }
-      #warning-text{
-        display:none;
-      }
+      <style>        
+        #warning-text{
+          display:none;
+        }
       </style>
-      <div class="dropdown-item-select">
-          <div class="dropdown-item-header" @click='${()=>this.dropdown("head")}'>
-              <p>${this.e.name}</p>
-              <div id='select-div' class="select is-hidden">
-                  <select id="select">
-                    <option data-placeholder="true" value="" disabled hidden ?selected="${!this.e.kind}">${this.e.name}</option>
-                    ${this._computeItems(this.rows,this.q).map(data=>html`
-                    <option id="option-${data[0]}" class="" value="${data[0]}" ?selected="${this.e.kind===data[0]}"  @click='${()=>this.dropdown(this._dataJoined(data),data[0])}'>${this._dataJoined(data)}</option>
-                        `)} 
-                  </select>
-          </div>
-          <div id='arrow' class="arrow"></div>
-          </div>
-          <div id="dropdown-item-body" class="dropdown-item-body">
-              <ul>
-              ${this._computeItems(this.rows,this.q).map(data=>html`
-              <li id="list-${data[0]}"  value="${data[0]}" ?selected="${this.e.kind===data[0]}"  @click='${()=>this.dropdown(this._dataJoined(data),data[0])}'>${this._dataJoined(data)}</li>
-          `)} 
-              </ul>
-          </div>
-          <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
-      </div>`}}static get properties(){return{icon:String,dataName:{type:String,value:""},service:String,title:String,maxlength:Number,pattern:String,q:{type:String,value:""},dropdownValue:Object,rows:{value:[]},params:{type:Object,value:""},columnSize:{type:Array},selectedIndex:Number}}dropdown(link,data){const body=this.shadowRoot.querySelector(".dropdown-item-body"),selectDiv=this.shadowRoot.querySelector("#select-div"),select=this.shadowRoot.querySelector("#select"),allLists=this.shadowRoot.querySelector("#dropdown-item-body").querySelectorAll("li"),arrow=this.shadowRoot.querySelector("#arrow"),selected=this.shadowRoot.querySelector(".dropdown-item-header").querySelector("p"),self=this;if(10<allLists.length){body.classList.add("is-hidden");arrow.classList.add("is-hidden");selected.className="is-hidden";selectDiv.className="";select.className="custom-width";const slim=new SlimSelect({select:this.shadowRoot.querySelector("#select"),placeholder:this.e.name,showContent:"down",onChange:info=>{selectDiv.className="select is-hidden";arrow.classList.remove("is-hidden");selected.className="";selected.innerHTML=info.text;this.selectedIndex=select.value;self.deleteParamKeys("q",!0);slim.destroy()}});slim.open();let searchInput=this.shadowRoot.querySelector(".ss-search").querySelector("input");searchInput.addEventListener("click",function(event){event.stopPropagation()});searchInput.addEventListener("keyup",function(){let searchText=searchInput.value,column="q";self.deleteParamKeys(column,!1);self.updateParams(column,searchText)})}else{if("head"==link){this.shadowRoot.querySelector(".dropdown-item-body").classList.toggle("is-block")}else{const selected=this.shadowRoot.querySelector(".dropdown-item-header").querySelector("p");selected.innerHTML=link;this.selectedIndex=data;const allLists=this.shadowRoot.querySelector("#dropdown-item-body").querySelectorAll("li");allLists.forEach(list=>list.className="");const selectedList=this.shadowRoot.querySelector("#list-"+data);selectedList.className="is-active";this.shadowRoot.querySelector(".dropdown-item-body").classList.toggle("is-block")}}}getValue(){this.dropdownValue=this.selectedIndex;return this.dropdownValue}valid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="none"}invalid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="block"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(DropdownSelect.is,DropdownSelect);
+      
+      <div class="ss-main">
+      
+        <div class="ss-single-selected ${this.contentOpen?"ss-open-below":""}" @click="${this._onMultiSelectContainerClick}">
+          <span class="placeholder">${this.getSelected(this.selected)}</span>
+          <span class="ss-deselect ss-plus" @click="${this._onDeselectClick}">x</span>
+          <!--arrow container-->
+          <span class="ss-arrow">
+                <!--arrow icons-->
+               <span class="${this.contentOpen?"arrow-up":"arrow-down"}"></span>        
+          </span>
+        </div>
+        
+        <div class="ss-content ${this.contentOpen?"ss-open":""}">
+              <!--container -->
+              <div class="ss-search">
+                  <!--input-->
+                  <input 
+                    type="search" 
+                    placeholder="Enter Search" 
+                    tabindex="0" 
+                    aria-label="Enter Search"
+                    @click=${this._onSearchInputClick}"  
+                    @keyup=${this._onSearchKeyUp}" 
+                    @focus=${this._onSearchFocus}">
+            </div>
+        
+            <!--list-->
+            <div class="ss-list">
+            
+            ${this.loading?html`
+                 <div class="ss-option ss-disabled" >Searching options ... </div>
+            `:html`            
+                ${this.selectOptions(this.options).length?html`
+                    ${this.selectOptions(this.options).map(option=>html`
+                      <div class="ss-option ${option.selected?"ss-option-selected":""}" 
+                            data-value="${option.value}" 
+                            @click="${this._onOptionClick}">${option.label}</div>
+                      `)}
+                `:html`
+                    <div class="ss-option ss-disabled" >No Results</div>
+                `}
+            `}
+            </div>
+    </div>
+</div>
+
+<p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
+
+`}}static get properties(){return{icon:String,title:String,q:{type:String,value:""},// slim
+contentOpen:{type:Boolean},options:{type:Array}}}getValue(){return this.selected}valid(validation){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="none"}invalid(validation){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="block"}getOption(value){return this.options.find(function(element){return element.value==value})}// used fro multi select
+getSelections(){const ss=this.selections.map(s=>this.getOption(s));console.log(ss);return ss}// used fro single select
+getSelected(){if(this.selected){return this.getOption(this.selected).label}return"Select an Option"}/**
+     * adds a property 'selected=true' to options that have been selected
+     *
+     * @return {Array}
+     */selectOptions(){const options=[];for(var i=0;i<this.options.length;i++){const option={...this.options[i]};option.selected=this.selected==option.value;options.push(option)}return options}_onMultiSelectContainerClick(e){e.preventDefault();e.stopPropagation();this.contentOpen?this.close():this.open()}_onDeselectClick(e){e.stopPropagation();const item=e.currentTarget.dataset.value;// remove animation is set by adding class ss-out
+// TODO e.currentTarget.parentElement.classList.add('ss-out');
+// remove item from selections
+var filteredAry=this.selections.filter(e=>e!=item);console.log(filteredAry);this.selections=filteredAry}_onSearchInputClick(evt){evt.stopPropagation()}_onSearchKeyUp(e){const searchValue=e.target.value;this.updateParams("q",searchValue).then(dsc=>this.parseOptions(dsc))}_onSearchFocus(e){// todo slim.js 342
+this.open()}_onOptionClick(e){e.preventDefault();// todo this event should not reach up to document
+e.stopPropagation();const selected=e.currentTarget.dataset.value;console.log(selected);this.selected=selected;this.close()}open(){if(this.contentOpen){return}this.contentOpen=!0}close(){if(!this.contentOpen){return}this.contentOpen=!1}parseOptions(dsc){// first item is the pk
+// second item is the label
+this.options=dsc.rows.map(item=>{return{value:item[0],label:item[1]}})}firstUpdated(){const self=this;this.loader.then(dsc=>this.parseOptions(dsc));// TODO #307 Test whether this event listener is automatically detached when this component is detached
+document.addEventListener("click",function(e){// TODO this doesn't work
+if(!self.shadowRoot.contains(e.currentTarget)){self.close()}else{console.log(e.target);console.log(self.contains(e.target))}})}}customElements.define(DropdownSelect.is,DropdownSelect);
