@@ -201,4 +201,4 @@ import{html,SharedStyles,SectionPElementBase}from"../../../../components/adaptiv
                 <!--<a href="#section-b" class="btn">Read More</a>-->
             </div>
         </header>
-        `}static get is(){return"section-row"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);this}}customElements.define(SectionRow.is,SectionRow);
+        `}static get is(){return"section-row"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);var self=this}}customElements.define(SectionRow.is,SectionRow);

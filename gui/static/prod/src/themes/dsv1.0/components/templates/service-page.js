@@ -538,6 +538,47 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         .sticky{
           display: none;
         }
+        .header .header-container .header-right:hover .profile-select{
+          top: 65px;
+        }
+        .profile-select{
+          position: absolute;
+          right: 13px;
+          top: -160px;
+          width: 300px;
+          background: #fff;
+          padding: 20px;
+          box-shadow: 3px 8px 5px #e5e5e5;
+          z-index: -1;
+          border-radius: 4px;
+          display: block;
+          height: 155px;
+          transition: .3s ease-in-out top;
+      }
+      .profile-select::after{
+        content: '';
+        position: absolute;
+        border-top: 10px solid transparent;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #fff;
+        top: -20px;
+        right: 20px;
+      }
+      .profile-select .profile-image{
+        width: 70px;
+        height: 70px;
+        margin-left: 20px;
+      }
+      .profile-out a{
+        background-color: var(--app-default-color);
+        color: white;
+        padding: 13px 25px;
+        margin: 20px 0 0 0;
+        position: relative;
+        top: 19px;
+        border-radius: 6px;
+      }
         @media (min-width: 567px){
           .sticky{
             display:none;
@@ -641,7 +682,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
               <ul class="header-right">
                 <li class="pos-r">
                   ${this.gateway.profile?html$1`
-                  <a class="dropdown-toggle no-after peers flex-nw align-c lh-1" data-toggle="dropdown">
+                  <a class="dropdown-toggle profile-toggle no-after peers flex-nw align-c lh-1" data-toggle="dropdown">
                     <div class="peer mR-10 profile">
                       <img class="w-2r bdrs-50p" src="${this.gateway.profile.photo?"/media/"+this.gateway.profile.photo:"images/web/user.svg"}" alt="">
                     </div>
@@ -652,14 +693,34 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
                   </a>
                   `:html$1``}
                 </li>
+
+                <div class="profile-select" id="profile">
+                        <div class="columns is-mobile">
+                          <div class="column is-5">
+                            <div class="profile-image">
+                              <img src="${this.gateway.profile.photo?"/media/"+this.gateway.profile.photo:"images/web/user.svg"}" alt="" />
+                            </div>
+                          </div>
+
+                          <div class="column">
+                            <div class="profile-name">
+                              <p>${this.gateway.profile.firstName} ${this.gateway.profile.lastName}</p>
+                            </div>
+
+                            <div class="profile-out">
+                              <a  @click="${this.logout}" href="#">Logout</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
               </ul>
             </div>
           </header>
 
           <main class="main-container">
             <div class="row">
-              ${this.page.pageInputGroups.map(feed=>html$1`
-                  <div class="column ${this._gridClasses(feed)} is-paddingless">
+              ${this.page.pageInputGroups.map((feed,feedIndex)=>html$1`
+                  <div class="column ${this._gridClasses(feed)} is-paddingless" style="width: calc(100vw - 107px)">
                     <form-render
                       .feed="${feed}"
                       .params=${this.parseParams()}
@@ -674,12 +735,29 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         id="snack-bar"
         ?active="${this._snackbarOpened}"
         context="${this._snackbarContext}"
+        style="z-index: 9999;"
       >
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean}}drawer(evt){evt.preventDefault();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");this.isSideMenuVisible=!0}hum.firstElementChild.classList.toggle("active");hum.lastElementChild.classList.toggle("active");hum.children[1].classList.toggle("active");if(280==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu");menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}const aside=document.querySelector("#sidebar");if(60==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu"),navTitle=document.querySelectorAll(".nav-title");navTitle.styles.display="none";menuItems.forEach(item=>{item.classList.remove("is-block")})}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
+     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean}}drawer(evt){evt.preventDefault();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");this.isSideMenuVisible=!0}hum.firstElementChild.classList.toggle("active");hum.lastElementChild.classList.toggle("active");hum.children[1].classList.toggle("active");if(280==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu");// menuItems
+menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{// collapse all current active
+this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});// expand related to source of event
+menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight);//
+});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight);//
+});if(menuItems.classList.contains(highLight)){}else{menuItems.classList.add(highLight)}const aside=document.querySelector("#sidebar");if(60==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu"),navTitle=document.querySelectorAll(".nav-title");navTitle.styles.display="none";// menuItems
+menuItems.forEach(item=>{item.classList.remove("is-block")})}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
         :host {
           display: block;
         }
-      `]}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{service as $service,ServiceStyles};
+      `]}/**
+     * Dialogs Back navigation, Pop dialogs' stack
+     *
+     * @param evt
+     * @private
+     */_viewList(evt){this.mainNavigation()}/**
+     * TODO #301 duplicated function
+     * @param feed
+     * @returns {string}
+     * @private
+     */_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{service as $service,ServiceStyles};

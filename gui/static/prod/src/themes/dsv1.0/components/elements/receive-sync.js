@@ -11,4 +11,8 @@ import{html,ReceiveSyncBase}from"../../../../components/adaptive-ui.js";class Re
 </article>
 </div>
 
-        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}onMqttMessage(message){super.onMqttMessage(message);this;console.log("on-mqtt-message")}}window.customElements.define(ReceiveSync.is,ReceiveSync);
+        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}onMqttMessage(message){super.onMqttMessage(message);var self=this;console.log("on-mqtt-message");/*
+                                        var payload = JSON.parse(message.payloadString);
+                                        console.info(payload);
+                                        self.$.datasource._parsePayload(payload);
+                                        */}}window.customElements.define(ReceiveSync.is,ReceiveSync);

@@ -18,4 +18,11 @@ import{html,CcExpirationBase}from"../../../../components/adaptive-ui.js";class C
             </div>
         </div>
     </div>
-        `}static get is(){return"cc-expiration"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}getInput(){return this.qs("#input")}getValue(){let newValue="";if(this.getInput().value){let oldValue=this.getInput().value,year=oldValue.substring(0,4),month=oldValue.substring(5);newValue=month+"-"+year}console.log("Expire ",newValue);return newValue}invalid(){this.shadowRoot.querySelector(".control").classList.add("required");this.shadowRoot.querySelector(".control").classList.add("has-error")}valid(){this.shadowRoot.querySelector(".control").classList.remove("required");this.shadowRoot.querySelector(".control").classList.remove("has-error")}}customElements.define(CcExpiration.is,CcExpiration);
+        `}static get is(){return"cc-expiration"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}getInput(){// return  this.shadowRoot.querySelector('#input');
+return this.qs("#input")}getValue(){let newValue="";if(this.getInput().value){let oldValue=this.getInput().value,year=oldValue.substring(0,4),month=oldValue.substring(5);newValue=month+"-"+year}console.log("Expire ",newValue);return newValue}invalid(validation){this.shadowRoot.querySelector(".control").classList.add("required");this.shadowRoot.querySelector(".control").classList.add("has-error");// this.shadowRoot.querySelector('.validation-info').style.display='flex';
+// if (validation)
+// {this.shadowRoot.querySelector('.validation-info').textContent= validation;}
+}valid(validation){this.shadowRoot.querySelector(".control").classList.remove("required");this.shadowRoot.querySelector(".control").classList.remove("has-error");// this.shadowRoot.querySelector('.validation-info').style.display='none';
+// // Revert general text content
+// this.shadowRoot.querySelector('.validation-info').textContent= 'Required';
+}}customElements.define(CcExpiration.is,CcExpiration);
