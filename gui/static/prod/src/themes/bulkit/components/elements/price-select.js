@@ -98,4 +98,4 @@ import{html,DASHBOARD_STYLES,BULMA_STYLES,LANDING_STYLES,PriceSelectBase}from"..
  
  
   </div>
-  </div>`}getValue(){return this.selected}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this}check(num){if(null!==this.dropdownValue&&this.dropdownValue===num){return!0}else{return!1}}}customElements.define(PriceSelect.is,PriceSelect);
+  </div>`}getValue(){return this.selected}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this}check(num){if(null!==this.dropdownValue&&this.dropdownValue===num){return!0}else{return!1}}}customElements.define(PriceSelect.is,PriceSelect);

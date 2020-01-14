@@ -1,4 +1,4 @@
-import{PosCartBase,html}from"../../../../components/adaptive-ui.js";const posCartTheme=html`
+import{html,PosCartBase}from"../../../../components/adaptive-ui.js";const posCartTheme=html`
 <style>
             /*
             * TODO These styles are copied from list select, they are deprecated but not tested

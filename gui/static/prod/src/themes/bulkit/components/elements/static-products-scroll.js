@@ -232,14 +232,4 @@ background-color: #ffffff;
 </div>
         <!-- /Main wrapper --  
     
-        `}constructor(){super()}_productDialog(product){this.selectedProduct=product;this.shadowRoot.querySelector("#productModal").style.display="block"}_productDialogClose(){this.shadowRoot.querySelector("#productModal").style.display="none"}_scrollRight(){this.shadowRoot.querySelector(".is-overflow").scrollLeft+=400;// $('#content').animate({
-//     scrollLeft: "-=775px"
-// }, "slow");
-}_scrollLeft(){this.shadowRoot.querySelector(".is-overflow").scrollLeft-=400;// $('#content').animate({
-//     scrollLeft: "-=775px"
-// }, "slow");
-}_productDetails(evt){// console.log(evt.currentTarget.dataset);
-const productId=evt.currentTarget["product-id"],product=this._findProductItem(productId);// console.log(cartItem);
-this.currentProduct=product;// todo Update to show product item details in a dialog with quantity input field
-// then remove below
-this._addCartItem(evt);return;this.$.quantity.value=1;this.$.dialog.open()}}customElements.define(StaticProductsScroll.is,StaticProductsScroll);
+        `}constructor(){super()}_productDialog(product){this.selectedProduct=product;this.shadowRoot.querySelector("#productModal").style.display="block"}_productDialogClose(){this.shadowRoot.querySelector("#productModal").style.display="none"}_scrollRight(){this.shadowRoot.querySelector(".is-overflow").scrollLeft+=400}_scrollLeft(){this.shadowRoot.querySelector(".is-overflow").scrollLeft-=400}_productDetails(evt){const productId=evt.currentTarget["product-id"],product=this._findProductItem(productId);this.currentProduct=product;this._addCartItem(evt)}}customElements.define(StaticProductsScroll.is,StaticProductsScroll);

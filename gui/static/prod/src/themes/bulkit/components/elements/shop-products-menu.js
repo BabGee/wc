@@ -40,8 +40,4 @@ import{html,ShopProductsMenuTheme,ShopProductsMenuBase}from"../../../../componen
                     </div>    
 	            </header>
 	        </div>
-	    </div>`}constructor(){super()}move_out(index){if(this.menu_open&&window.matchMedia("screen and (max-width: 768px)").matches){// console.log("close");
-this.qs("#sub_item_"+index).classList.remove("is-hidden");this.qs(".cd-dropdown-content").classList.add("move-out")}}go_back(index){if(this.menu_open&&window.matchMedia("screen and (max-width: 768px)").matches){// console.log("back");
-this.qs("#sub_item_"+index).classList.add("is-hidden");this.qs(".cd-dropdown-content").classList.remove("move-out")}}close_menu(){if(this.menu_open){this.menu_open=!1;// console.log("close");
-this.qs(".cd-dropdown-trigger").classList.remove("dropdown-is-active");this.qs(".cd-dropdown").classList.remove("dropdown-is-active")}else{this.menu_open=!0;// console.log("open");
-this.qs(".cd-dropdown-trigger").classList.add("dropdown-is-active");this.qs(".cd-dropdown").classList.add("dropdown-is-active")}}}customElements.define(ShopProductsMenu.is,ShopProductsMenu);
+	    </div>`}constructor(){super()}move_out(index){if(this.menu_open&&window.matchMedia("screen and (max-width: 768px)").matches){this.qs("#sub_item_"+index).classList.remove("is-hidden");this.qs(".cd-dropdown-content").classList.add("move-out")}}go_back(index){if(this.menu_open&&window.matchMedia("screen and (max-width: 768px)").matches){this.qs("#sub_item_"+index).classList.add("is-hidden");this.qs(".cd-dropdown-content").classList.remove("move-out")}}close_menu(){if(this.menu_open){this.menu_open=!1;this.qs(".cd-dropdown-trigger").classList.remove("dropdown-is-active");this.qs(".cd-dropdown").classList.remove("dropdown-is-active")}else{this.menu_open=!0;this.qs(".cd-dropdown-trigger").classList.add("dropdown-is-active");this.qs(".cd-dropdown").classList.add("dropdown-is-active")}}}customElements.define(ShopProductsMenu.is,ShopProductsMenu);

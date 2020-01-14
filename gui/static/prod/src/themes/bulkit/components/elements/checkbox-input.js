@@ -77,4 +77,4 @@ import{html,SharedStyles,CheckboxInputBase}from"../../../../components/adaptive-
 </label>
   </div>
   </div>
-`}constructor(){super()}getInput(){return this.qs("input")}getValue(){return this.shadowRoot.querySelector("#input").checked?"on":"off"}valid(validation){}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.shadowRoot.querySelector("#input").checked=this.checked}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(CheckboxInput.is,CheckboxInput);
+`}constructor(){super()}getInput(){return this.qs("input")}getValue(){return this.shadowRoot.querySelector("#input").checked?"on":"off"}valid(){}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.shadowRoot.querySelector("#input").checked=this.checked}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(CheckboxInput.is,CheckboxInput);

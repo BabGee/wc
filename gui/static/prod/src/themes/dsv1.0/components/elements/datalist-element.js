@@ -1,4 +1,4 @@
-import{LitElement,css,html,dataSourceMixin,DataListElementBase}from"../../../../components/adaptive-ui.js";class DataSourceList extends dataSourceMixin(LitElement){static get styles(){return css`
+import{dataSourceMixin,LitElement,html,css,DataListElementBase}from"../../../../components/adaptive-ui.js";class DataSourceList extends dataSourceMixin(LitElement){static get styles(){return css`
     :host {
                 display: block;
             }
@@ -250,41 +250,7 @@ import{LitElement,css,html,dataSourceMixin,DataListElementBase}from"../../../../
         </style>
         <!-- view starts here -->
         ${this.createCustomElement(this.type)}
-`}static get is(){return"datasource-list"}static get properties(){return{/**
-       * Contains the data which will be displayed in the table.
-       */data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},cols:{type:Array,value:[]},columns:{type:Array// value: () => [],
-// notify: true,
-},// todo 3 sets of same columns, can be reduced
-/**
-       * If true, the pagination will be activated.
-       */paginate:{type:Boolean,value:!1},/**
-       * The current page.
-       */page:{type:Number// notify: true,
-// observer: '_pageChanged',
-},/**
-       * The current size.
-       */size:{type:Number// notify: true,
-// observer: '_sizeChanged',
-},/**
-       * The number of the previous page
-       */oldPage:{type:Number,notify:!0},/**
-       * The total of elements have to be provided in case of pagination, it is mandatory.
-       */totalElements:Number,/**
-       * The total of pages have to be provided in case of pagination, it is mandatory.
-       * It is used to compute the footer.
-       */totalPages:Number,/**
-       * The available size in case of pagination.
-       */availableSize:Array,// types
-type:{type:String,value:"table"},details:Object,/**
-       * If true, the rows may be selectable.
-       */selectable:{type:Boolean,value:!1},/**
-       * Contains the positions of selected columns.
-       * Can contain a specific data if selectableDataKey is setted.
-       */selected:{type:Array// value: () => [],
-// notify: true,
-},title:String,searchText:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this._loadTypeModule()}_searchReset(evt){this.shadowRoot.querySelector("#q").value=""}_loadTypeModule(){let typeBase="./";// if it's a bundled build, relative path do not work
-if("production"===window.process.env.NODE_ENV){typeBase="./datalist-element/"}import(typeBase+`${this.type}-type.js`).then(module=>{}).catch(err=>{//TO_DO incase import fail import table and display
-console.warn("ERROR IS.."+err)})}createCustomElement(type){if("table"==type){return html`<table-type
+`}static get is(){return"datasource-list"}static get properties(){return{data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},cols:{type:Array,value:[]},columns:{type:Array},paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,type:{type:String,value:"table"},details:Object,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String,searchText:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this._loadTypeModule()}_searchReset(){this.shadowRoot.querySelector("#q").value=""}_loadTypeModule(){let typeBase="./";if("production"===window.process.env.NODE_ENV){typeBase="./datalist-element/"}import(typeBase+`${this.type}-type.js`).then(()=>{}).catch(err=>{console.warn("ERROR IS.."+err)})}createCustomElement(type){if("table"==type){return html`<table-type
         .data = ${this.data}
         .details = ${this.details}
         .columns = ${this.columns}
@@ -322,8 +288,7 @@ console.warn("ERROR IS.."+err)})}createCustomElement(type){if("table"==type){ret
         .selected = ${this.selected}
         .title=${this.title}
         .pl=${this.pl}
-        ></card-type>`}//Add more types here
-if("inbox"==type){return html`<inbox-type
+        ></card-type>`}if("inbox"==type){return html`<inbox-type
       .data = ${this.data}
       .details = ${this.details}
       .columns = ${this.columns}
@@ -365,15 +330,7 @@ if("inbox"==type){return html`<inbox-type
     .selectable = ${this.selectable} 
     .selected = ${this.selected}
     .title=${this.title}
-    ></contact-type>`}}searchFields(columns){return columns.filter(function(item){return item.filter})}_handleSort(evt){console.log(evt)}_handleInputChange(evt){// console.log(evt);
-this.dispatchEvent(new CustomEvent("dropdown-filter",{detail:{path:evt.detail.path,value:evt.detail.value}}))}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}_exportType(evt){const type=evt.detail.type;this.dispatchEvent(new CustomEvent("export",{detail:{type:type}}))}_pageChanged(evt){const page=evt.detail.page,oldPage=evt.detail.oldPage;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=evt.detail.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}_extractData(rowData,columnProperty){if(columnProperty){// TODO this is support for accessing sub-property paths like man.head.nose, not needed
-const splittedProperties=columnProperty.split(".");if(1<splittedProperties.length){return splittedProperties.reduce((prevRow,property)=>{if("string"===typeof prevRow&&rowData[prevRow]&&rowData[prevRow][property]){return rowData[prevRow][property]}return prevRow[property]||""})}return rowData[columnProperty]}return null}_selectChange(event){let localTarget;if(event.type&&"change"===event.type){localTarget=Polymer.dom(event).localTarget}else{localTarget=event}const tr=Polymer.dom(localTarget).parentNode.parentNode,rowData=localTarget.rowData,rowId=localTarget.rowIndex;if(localTarget.checked){this.push("selected",rowData.id);tr.classList.add("selected")}else{this.splice("selected",this.selectedRows.indexOf(rowData.id),1);tr.classList.remove("selected")}/**
-           *
-           * Fired when a row is selected.
-           * @event selection-changed
-           * Event param: {{node: Object}} detail Contains selected id and row data.
-           */ // todo this.fire('selection-changed', eventData);
-}_search(evt){var filter=evt.detail.value,column=evt.detail.column,columns=evt.detail.searchFields;this.dispatchEvent(new CustomEvent("search",{detail:{column:column,searchFields:columns,value:filter}}))}_clearSearch(event){this.dispatchEvent(new CustomEvent("clear-search",{detail:{searchFields:event.detail.searchFields}}))}}customElements.define(DataSourceList.is,DataSourceList);var datasourceList={DataSourceList:DataSourceList};class DataListElement extends DataListElementBase{constructor(){super();this.searchText=""}renderDefault(){return html`
+    ></contact-type>`}}searchFields(columns){return columns.filter(function(item){return item.filter})}_handleSort(evt){console.log(evt)}_handleInputChange(evt){this.dispatchEvent(new CustomEvent("dropdown-filter",{detail:{path:evt.detail.path,value:evt.detail.value}}))}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}_exportType(evt){const type=evt.detail.type;this.dispatchEvent(new CustomEvent("export",{detail:{type:type}}))}_pageChanged(evt){const page=evt.detail.page,oldPage=evt.detail.oldPage;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=evt.detail.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}_extractData(rowData,columnProperty){if(columnProperty){const splittedProperties=columnProperty.split(".");if(1<splittedProperties.length){return splittedProperties.reduce((prevRow,property)=>{if("string"===typeof prevRow&&rowData[prevRow]&&rowData[prevRow][property]){return rowData[prevRow][property]}return prevRow[property]||""})}return rowData[columnProperty]}return null}_selectChange(event){let localTarget;if(event.type&&"change"===event.type){localTarget=Polymer.dom(event).localTarget}else{localTarget=event}const tr=Polymer.dom(localTarget).parentNode.parentNode,rowData=localTarget.rowData,rowId=localTarget.rowIndex;if(localTarget.checked){this.push("selected",rowData.id);tr.classList.add("selected")}else{this.splice("selected",this.selectedRows.indexOf(rowData.id),1);tr.classList.remove("selected")}}_search(evt){var filter=evt.detail.value,column=evt.detail.column,columns=evt.detail.searchFields;this.dispatchEvent(new CustomEvent("search",{detail:{column:column,searchFields:columns,value:filter}}))}_clearSearch(event){this.dispatchEvent(new CustomEvent("clear-search",{detail:{searchFields:event.detail.searchFields}}))}}customElements.define(DataSourceList.is,DataSourceList);var datasourceList={DataSourceList:DataSourceList};class DataListElement extends DataListElementBase{constructor(){super();this.searchText=""}renderDefault(){return html`
     ${this.loading?html`<loader-element></loader-element>`:html`
     <datasource-list
                         id="dt"
@@ -411,17 +368,4 @@ const splittedProperties=columnProperty.split(".");if(1<splittedProperties.lengt
                         .totalPages="${this.totalPages}">
                 </datasource-list>
     `}
-                `}static get properties(){return{table:{type:Boolean,value:!0},grid:{type:Boolean,value:!1},list:{type:Boolean,value:!1},sortProperty:{type:String},selectedRows:{type:Array,value:[]},showActions:{type:Boolean,value:!1,notify:!0},searchText:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_switchView(event){const sel=event.currentTarget.selected;if(0===sel){this.table=!0;this.list=!1;this.grid=!1}else if(1===sel){this.table=!1;this.list=!0;this.grid=!1}else if(2===sel){this.table=!1;this.list=!1;this.grid=!0}}/**
-     * General and per column search event handler
-     *
-     *
-     * @param event
-     * @private
-     */_handleSearch(event){var filter=event.detail.value,column=event.detail.column,columns=event.detail.searchFields;this.searchText=filter;// console.log(columns);
-// delete any previous column and general search query
-this.deleteParamKeys(columns.concat(["q"]),!1);// update new search query param
-this.updateParams(column,filter)}_handleClearSearch(event){this.searchText="";var columns=event.detail.searchFields;// delete any previous column and general search query
-this.deleteParamKeys(columns.concat(["q"]),!0)}_handleDateRangeChange(event){var filter=event.detail.range;this.$.datasource.mergeParams(filter)}_handleSelectionChanged(event){if(event.detail.selected){// event.detail.selected
-// event.detail.data
-this.actionRow=event.detail.data;this.showActions=!0}else{// event.detail.deselected
-this.showActions=!1}}_handleExport(event){"pdf"==event.detail.type?this.generatePDF():this.generateCSV()}}customElements.define(DataListElement.is,DataListElement);export{datasourceList as $datasourceList,DataSourceList};
+                `}static get properties(){return{table:{type:Boolean,value:!0},grid:{type:Boolean,value:!1},list:{type:Boolean,value:!1},sortProperty:{type:String},selectedRows:{type:Array,value:[]},showActions:{type:Boolean,value:!1,notify:!0},searchText:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_switchView(event){const sel=event.currentTarget.selected;if(0===sel){this.table=!0;this.list=!1;this.grid=!1}else if(1===sel){this.table=!1;this.list=!0;this.grid=!1}else if(2===sel){this.table=!1;this.list=!1;this.grid=!0}}_handleSearch(event){var filter=event.detail.value,column=event.detail.column,columns=event.detail.searchFields;this.searchText=filter;this.deleteParamKeys(columns.concat(["q"]),!1);this.updateParams(column,filter)}_handleClearSearch(event){this.searchText="";var columns=event.detail.searchFields;this.deleteParamKeys(columns.concat(["q"]),!0)}_handleDateRangeChange(event){var filter=event.detail.range;this.$.datasource.mergeParams(filter)}_handleSelectionChanged(event){if(event.detail.selected){this.actionRow=event.detail.data;this.showActions=!0}else{this.showActions=!1}}_handleExport(event){"pdf"==event.detail.type?this.generatePDF():this.generateCSV()}}customElements.define(DataListElement.is,DataListElement);export{datasourceList as $datasourceList,DataSourceList};

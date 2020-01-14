@@ -47,7 +47,7 @@ import{html,StaticCategoriesBase}from"../../../../components/adaptive-ui.js";cla
 
                 <div>
                     <div class="wrapper is-vcentered has-text-centered">
-                              ${this.currentData.map((item,index)=>html` 
+                              ${this.currentData.map(item=>html` 
 						 
                         <!-- Icon box -->
                         <div class="column is-3">

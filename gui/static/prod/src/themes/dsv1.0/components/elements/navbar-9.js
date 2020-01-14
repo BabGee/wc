@@ -79,8 +79,8 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
                 
             <div id="navbarBasicExample" class="navbar-menu">
               <div class="navbar-end">
-               ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
-                  ${pageGroup.pages.map((menu,menuIndex)=>html`
+               ${this.interface.pageGroups.map(pageGroup=>html`
+                  ${pageGroup.pages.map(menu=>html`
                   <a class="navbar-item nav__item is-capitalized"
                   @click="${this.scrollToSection}"
                   data-name="${menu.id}"
@@ -96,45 +96,4 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
       </header>
     </div>
 
-<<<<<<< HEAD
      `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){var menuId=event.target.getAttribute("data-name"),elementToFocus=document.getElementById(menuId);if(elementToFocus){elementToFocus.scrollIntoView({block:"end",behavior:"smooth"})}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);
-=======
-     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block");// if(nav.classList == 'top'){
-//   nav.classList.remove('top')
-// }else{
-//   nav.classList.add('top')
-// }
-}scrollToSection(event){var menuId=event.target.getAttribute("data-name"),elementToFocus=document.getElementById(menuId);//MAXIMUM OF 6 ONLY
-// if(index == 0 ){
-//   window.scroll({
-//     top: 0,
-//     behavior: 'smooth'
-//   });
-// }else if(index == 1){
-//   window.scroll({
-//     top: 800,
-//     behavior: 'smooth'
-//   });
-// }else if(index == 2){
-//   window.scroll({
-//     top: 1600,
-//     behavior: 'smooth'
-//   });
-// }else if(index == 3){
-//   window.scroll({
-//     top: 2400,
-//     behavior: 'smooth'
-//   });
-// }else if(index == 4){
-//   window.scroll({
-//     top: 3200,
-//     behavior: 'smooth'
-//   });
-// }else if(index == 5){
-//  window.scroll({
-//     top: 4000,
-//     behavior: 'smooth'
-//   });
-// }
-if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);
->>>>>>> d6dfa267387a22108b29e08fe5c46fa0b0d3909e

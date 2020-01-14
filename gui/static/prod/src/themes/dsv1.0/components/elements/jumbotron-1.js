@@ -1,5 +1,4 @@
-import{utilsMixin,BaseElement,html}from"../../../../components/adaptive-ui.js";const JumbotronBase=class extends utilsMixin(BaseElement){static get is(){// todo test
-throw new DOMException("Extending [JumbotronBaseBase] must implement `static get is()`")}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}};var jumbotronBase={JumbotronBase:JumbotronBase};class Jumbotron1 extends JumbotronBase{renderDefault(){return html`
+import{utilsMixin,BaseElement,html}from"../../../../components/adaptive-ui.js";const JumbotronBase=class extends utilsMixin(BaseElement){static get is(){throw new DOMException("Extending [JumbotronBaseBase] must implement `static get is()`")}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}};var jumbotronBase={JumbotronBase:JumbotronBase};class Jumbotron1 extends JumbotronBase{renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
     

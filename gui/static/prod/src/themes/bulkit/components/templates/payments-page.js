@@ -1,5 +1,4 @@
-import{html,LANDING_STYLES,SHOP_STYLES,BULMA_STYLES,PaymentsPageBase}from"../../../../components/adaptive-ui.js";class PaymentsPage extends PaymentsPageBase{render(){// console.log(title,pages,tab);
-if(!this.interface){return html`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html`
+import{html,LANDING_STYLES,SHOP_STYLES,BULMA_STYLES,PaymentsPageBase}from"../../../../components/adaptive-ui.js";class PaymentsPage extends PaymentsPageBase{render(){if(!this.interface){return html`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html`
       <h3> this is a missing page </h3>
       <a href="/#/0/0/">Go Home</a>
       `}return html`
@@ -138,7 +137,7 @@ if(!this.interface){return html`<div>Cannot render an UNDEFINED tab!!.</div>`}el
                                         </ul>
                                     </div>
                                     <div class="columns is-gapless ">
-                                    ${this.page.pageInputGroups.map((feed,feedIndex)=>html`
+                                    ${this.page.pageInputGroups.map(feed=>html`
                                         <!-- Order Total -->
                                         <div class="column is-6">
                                             <div>
@@ -175,19 +174,4 @@ if(!this.interface){return html`<div>Cannot render an UNDEFINED tab!!.</div>`}el
         </div>
 </div>
 <snack-bar id="snack-bar" ?active="${this._snackbarOpened}">${this._snackbarMessage}</snack-bar>
-`}constructor(){super()}static get properties(){return{title:String,view:String,tagline:String,logo:String,pages:Array,tab:Object,profile:{type:Object},page:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);// if only one page exists, activate it's first tab
-if(1===this.interface.pageGroups.length){this._closeChildMenu()}}_profileTriggerClick(e){const self=this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");// wait 700ms before adding the fixed class to the body to prevent unpleasant effects
-setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){document.querySelector(".tab-icon.is-active").classList.remove("is-active");e.currentTarget.classList.add("is-active");document.querySelector(".menu-wrapper .icon-box-toggle").classList.add("active");// this.shadowRoot.querySelector('.child-menu').classList.add('is-sidebar-translated');
-this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});// disable reader mode switch when sidebar is opened
-document.querySelector(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}_closeChildMenu(e){document.querySelector("#hero").style.display="none";document.querySelector("#pay").style.display="unset";document.querySelector("#pay").classList.remove("is-hidden-mobile");this._menuWrapperClick(e)}_viewList(evt){document.querySelector("#hero").style.display="block";document.querySelector("#pay").style.display="none";document.querySelector("#pay").classList.add("is-hidden-mobile")}_menuWrapperClick(e){/*
-                            this.qs('.child-menu').classList.toggle('is-sidebar-translated');
-                            this.qsa('.dashboard-nav, #dashboard-wrapper').forEach(function (el) {
-                                el.classList.toggle('is-pushed');
-                            });
-                              //enable reader mode switch when sidebar is closed
-                            this.qs('.reader-switch label').classList.remove('is-disabled');
-                              */}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget["data-child-menu"],menuTitle=e.currentTarget["data-title"];this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}stateChanged(state){super.stateChanged(state)}_changeLink(pageGroupIndex,tabIndex){var url=window.location.pathname+window.location.search+"#/"+pageGroupIndex+"/"+tabIndex+"/";//   console.log('Link '+url);
-// console.log('param '+this.getParams(window.location.search.substr(1)));
-// this.qs('.has-text-centered').classList.remove('is-active');
-//     e.currentTarget.classList.add('is-active');
-return url}}window.customElements.define("payments-page",PaymentsPage);
+`}constructor(){super()}static get properties(){return{title:String,view:String,tagline:String,logo:String,pages:Array,tab:Object,profile:{type:Object},page:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);if(1===this.interface.pageGroups.length){this._closeChildMenu()}}_profileTriggerClick(){this;this.qs(".main-menu-avatar, .dot").classList.toggle("vanish");if(this.qs(".js-hamburger").classList.contains("is-active")){this.qs(".js-hamburger").classList.remove("is-active");document.querySelector("body").classList.remove("is-fixed")}else{this.qs(".js-hamburger").classList.add("is-active");setTimeout(function(){document.querySelector("body").classList.add("is-fixed")},700)}}_sideIconClick(e){document.querySelector(".tab-icon.is-active").classList.remove("is-active");e.currentTarget.classList.add("is-active");document.querySelector(".menu-wrapper .icon-box-toggle").classList.add("active");this.qsa(".dashboard-nav, #dashboard-wrapper").forEach(function(el){el.classList.add("is-pushed")});document.querySelector(".reader-switch label").classList.add("is-disabled");this._dataChildMenuSetup(e)}_closeChildMenu(e){document.querySelector("#hero").style.display="none";document.querySelector("#pay").style.display="unset";document.querySelector("#pay").classList.remove("is-hidden-mobile");this._menuWrapperClick(e)}_viewList(){document.querySelector("#hero").style.display="block";document.querySelector("#pay").style.display="none";document.querySelector("#pay").classList.add("is-hidden-mobile")}_menuWrapperClick(){}_iconBoxToggle(e){e.currentTarget.classList.toggle("active");e.preventDefault()}_dataChildMenuSetup(e){const menuId=e.currentTarget["data-child-menu"],menuTitle=e.currentTarget["data-title"];this.qsa(".sidebar-menu.is-active").forEach(function(el){el.classList.remove("is-active")});this.qs("#"+menuId).classList.add("is-active");this.qs(".sidebar-title").textContent=menuTitle}stateChanged(state){super.stateChanged(state)}_changeLink(pageGroupIndex,tabIndex){var url=window.location.pathname+window.location.search+"#/"+pageGroupIndex+"/"+tabIndex+"/";return url}}window.customElements.define("payments-page",PaymentsPage);
