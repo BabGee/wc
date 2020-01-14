@@ -352,4 +352,30 @@ import{css,html,TagInputBase}from"../../../../components/adaptive-ui.js";class T
 <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
 
     
+<<<<<<< HEAD
     `}getValue(){return this.selected.join(",")}parseOptions(dsc){this.options=dsc.rows.map(item=>{return{value:item[0],label:item[1]}})}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(dsc=>this.parseOptions(dsc));document.addEventListener("click",function(e){if(!self.shadowRoot.contains(e.currentTarget)){self.close()}else{console.log(e.target);console.log(self.contains(e.target))}})}static get properties(){return{icon:String,title:String,pattern:String,q:{type:String,value:""},dropdownValue:Object,selectedIndex:Number,contentOpen:{type:Boolean},options:{type:Array},selected:Array}}valid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="none"}invalid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="block"}getOption(value){return this.options.find(function(element){return element.value==value})}getSelections(){const ss=this.selected.map(s=>this.getOption(s));console.log(ss);return ss}getSelected(){if(this.selected){return this.getOption(this.selected).label}return"Select an Option"}selectOptions(){const options=[];for(var i=0;i<this.options.length;i++){const option={...this.options[i]};option.selected=this.selected.includes(option.value);options.push(option)}return options}_onSingleSelectContainerClick(e){e.preventDefault();e.stopPropagation();this.contentOpen?this.close():this.open()}_onDeselectValueClick(e){e.stopPropagation();const item=e.currentTarget.dataset.value;var filteredAry=this.selected.filter(e=>e!=item);console.log(filteredAry);this.selected=filteredAry}_onSearchInputClick(evt){evt.stopPropagation()}_onSearchKeyUp(e){const searchValue=e.target.value;this.updateParams("q",searchValue).then(dsc=>this.parseOptions(dsc))}_onSearchFocus(){this.open()}_onOptionClick(e){e.preventDefault();e.stopPropagation();const selected=e.currentTarget.dataset.value;console.log(selected);this.selected=Array.from(new Set([...this.selected,selected]))}open(){if(this.contentOpen){return}this.contentOpen=!0}close(){if(!this.contentOpen){return}this.contentOpen=!1}}window.customElements.define(TagInput.is,TagInput);
+=======
+    `}getValue(){return this.selected.join(",")}parseOptions(dsc){// first item is the pk
+// second item is the label
+this.options=dsc.rows.map(item=>{return{value:item[0],label:item[1]}})}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(dsc=>this.parseOptions(dsc));// TODO #307 Test whether this event listener is automatically detached when this component is detached
+document.addEventListener("click",function(e){// TODO this doesn't work
+if(!self.shadowRoot.contains(e.currentTarget)){self.close()}else{console.log(e.target);console.log(self.contains(e.target))}})}static get properties(){return{icon:String,title:String,pattern:String,q:{type:String,value:""},dropdownValue:Object,selectedIndex:Number,// slim
+contentOpen:{type:Boolean},options:{type:Array},selected:Array}}valid(validation){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="none"}invalid(validation){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="block"}getOption(value){return this.options.find(function(element){return element.value==value})}// used fro multi select
+getSelections(){const ss=this.selected.map(s=>this.getOption(s));console.log(ss);return ss}// used fro single select
+getSelected(){if(this.selected){return this.getOption(this.selected).label}return"Select an Option"}/**
+     * adds a property 'selected=true' to options that have been selected
+     *
+     * @return {Array}
+     */selectOptions(){const options=[];for(var i=0;i<this.options.length;i++){const option={...this.options[i]};option.selected=this.selected.includes(option.value);options.push(option)}return options}_onSingleSelectContainerClick(e){e.preventDefault();e.stopPropagation();this.contentOpen?this.close():this.open()}_onDeselectValueClick(e){e.stopPropagation();const item=e.currentTarget.dataset.value;// remove animation is set by adding class ss-out
+// TODO e.currentTarget.parentElement.classList.add('ss-out');
+// remove item from selections
+var filteredAry=this.selected.filter(e=>e!=item);console.log(filteredAry);this.selected=filteredAry}_onSearchInputClick(evt){evt.stopPropagation()}_onSearchKeyUp(e){const searchValue=e.target.value;this.updateParams("q",searchValue).then(dsc=>this.parseOptions(dsc))}_onSearchFocus(e){// todo slim.js 342
+this.open()}_onOptionClick(e){e.preventDefault();// todo this event should not reach up to document
+e.stopPropagation();const selected=e.currentTarget.dataset.value;console.log(selected);// the selections are unique
+// we use the spread to combine the new selection with current existing
+this.selected=Array.from(new Set([...this.selected,selected]))}open(){if(this.contentOpen){return}this.contentOpen=!0;// if (_this.config.searchFocus) {
+//     _this.slim.search.input.focus();
+// }
+//
+}close(){if(!this.contentOpen){return}this.contentOpen=!1}}window.customElements.define(TagInput.is,TagInput);
+>>>>>>> d6dfa267387a22108b29e08fe5c46fa0b0d3909e

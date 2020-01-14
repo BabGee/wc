@@ -79,4 +79,17 @@ import{html,SharedStyles,BulkUploadBase}from"../../../../components/adaptive-ui.
  
  
 </div>
-</div>`}constructor(){super()}getValue(){return this.value}valid(){this.shadowRoot.querySelector(".validation-info").style.display="none";this.shadowRoot.querySelector(".validation-info").textContent="Required"}invalid(validation){this.shadowRoot.querySelector(".validation-info").style.display="flex";if(validation){this.shadowRoot.querySelector(".validation-info").textContent=validation}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);if(this.e.defaultValue){this.qs("#display").src="/media/"+this.e.defaultValue}}handleFile(){var self=this;const fileInput=this.qs("#input"),label=input.nextElementSibling,labelVal=label.innerHTML;if(fileInput.files&&fileInput.files.length){for(let i=0;i<fileInput.files.length;i++){const file=fileInput.files[i];self.uploadTempFile(file,"image",/image.*/).then(upload=>{self.uploads=[...self.uploads,{name:upload.name,response:upload.response,src:upload.result}]}).catch(reason=>{console.warn("[INCOMPLETE DEV] Better error handling.",reason)})}}else{label.innerHTML=labelVal}}}customElements.define(BulkUpload.is,BulkUpload);
+</div>`}constructor(){super()}getValue(){return this.value}valid(validation){this.shadowRoot.querySelector(".validation-info").style.display="none";// Revert general text content
+this.shadowRoot.querySelector(".validation-info").textContent="Required"}invalid(validation){this.shadowRoot.querySelector(".validation-info").style.display="flex";if(validation){this.shadowRoot.querySelector(".validation-info").textContent=validation}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);if(this.e.defaultValue){this.qs("#display").src="/media/"+this.e.defaultValue}}handleFile(){var self=this;const fileInput=this.qs("#input"),label=input.nextElementSibling,labelVal=label.innerHTML;/* TODO
+                                          var fileName = '';
+                                          if( this.files && this.files.length > 1 )
+                                              fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+                                          else
+                                              fileName = e.target.value.split( '\\' ).pop();
+                                            if( fileName )
+                                              label.querySelector( 'span' ).innerHTML = fileName;
+                                          else
+                                              label.innerHTML = labelVal;
+                                          */if(fileInput.files&&fileInput.files.length){for(let i=0;i<fileInput.files.length;i++){const file=fileInput.files[i];self.uploadTempFile(file,"image",/image.*/).then(upload=>{self.uploads=[...self.uploads,{name:upload.name,response:upload.response,src:upload.result// TODO is it possible to preview from /media/tmp/uploads/?
+}]}).catch(reason=>{// TODO add better error handling
+console.warn("[INCOMPLETE DEV] Better error handling.",reason)})}}else{label.innerHTML=labelVal}}}customElements.define(BulkUpload.is,BulkUpload);
