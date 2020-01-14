@@ -96,4 +96,4 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
       </header>
     </div>
 
-     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){var menuId=event.target.getAttribute("data-name"),elementToFocus=document.getElementById(menuId);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);
+     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){var menuId=event.target.getAttribute("data-name"),elementToFocus=document.getElementById(menuId);if(elementToFocus){elementToFocus.scrollIntoView({block:"end",behavior:"smooth"})}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);

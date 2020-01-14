@@ -850,10 +850,12 @@ import{LitElement,html}from"../../../../../components/adaptive-ui.js";class Tabl
       .table-container{
           width: 100%;
           position: relative;
+          overflow-x: scroll;
       }
       .table-container table.dt-table{
           width: 100%;
           border-spacing: 0;
+          overflow-x: scroll;
       }
       .table-container table.dt-table tr{
           background: #fff;
@@ -876,7 +878,7 @@ import{LitElement,html}from"../../../../../components/adaptive-ui.js";class Tabl
       }
       .table-container table.dt-table tr td{
         color: #6c7a89;
-        padding: 0 10px;
+        padding: 15px 10px;
       }
       .table-container table.dt-table tr:hover{
           background: #f4f6f9;

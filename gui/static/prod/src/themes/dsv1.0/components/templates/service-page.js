@@ -538,6 +538,47 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         .sticky{
           display: none;
         }
+        .header .header-container .header-right:hover .profile-select{
+          display: block;
+        }
+        .profile-select{
+          position: absolute;
+          right: 13px;
+          top: 65px;
+          width: 300px;
+          background: #fff;
+          padding: 20px;
+          box-shadow: 3px 8px 5px #e5e5e5;
+          z-index: -1;
+          border-radius: 4px;
+          display: none;
+          height: auto;
+          transition: .3s ease-in-out top;
+      }
+      .profile-select::after{
+        content: '';
+        position: absolute;
+        border-top: 10px solid transparent;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #fff;
+        top: -20px;
+        right: 20px;
+      }
+      .profile-select .profile-list li{
+        color: #4a4a4a;
+        border-bottom: 1px solid #4a4a4a
+      }
+      .profile-select .profile-list li:last-child{
+        border-bottom: 0 solid transparent;
+      }
+      .profile-select .profile-list li a{
+        width: 100%;
+        color: inherit;
+        margin: 5px 0;
+        display: inline-block;
+        text-transform: capitalize;
+      }
         @media (min-width: 567px){
           .sticky{
             display:none;
@@ -641,7 +682,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
               <ul class="header-right">
                 <li class="pos-r">
                   ${this.gateway.profile?html$1`
-                  <a class="dropdown-toggle no-after peers flex-nw align-c lh-1" data-toggle="dropdown">
+                  <a class="dropdown-toggle profile-toggle no-after peers flex-nw align-c lh-1" data-toggle="dropdown">
                     <div class="peer mR-10 profile">
                       <img class="w-2r bdrs-50p" src="${this.gateway.profile.photo?"/media/"+this.gateway.profile.photo:"images/web/user.svg"}" alt="">
                     </div>
@@ -652,6 +693,12 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
                   </a>
                   `:html$1``}
                 </li>
+
+                <div class="profile-select" id="profile">
+                  <ul class="profile-list">
+                    <li><a @click=${this.logout}>Logout</a></li>
+                  </ul>                 
+                </div>
               </ul>
             </div>
           </header>
@@ -659,7 +706,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
           <main class="main-container">
             <div class="row">
               ${this.page.pageInputGroups.map(feed=>html$1`
-                  <div class="column ${this._gridClasses(feed)} is-paddingless">
+                  <div class="column ${this._gridClasses(feed)} is-paddingless" style="width: calc(100vw - 107px)">
                     <form-render
                       .feed="${feed}"
                       .params=${this.parseParams()}
@@ -674,6 +721,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         id="snack-bar"
         ?active="${this._snackbarOpened}"
         context="${this._snackbarContext}"
+        style="z-index: 9999;"
       >
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>

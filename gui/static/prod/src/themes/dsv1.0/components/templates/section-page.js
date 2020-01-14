@@ -4,7 +4,7 @@ import{css,html,SectionPageBase,Colors,Fonts,Reset}from"../../../../components/a
         width: 100%;
         height: 100vh;
         background: rgba(226, 226, 226, .9);
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
