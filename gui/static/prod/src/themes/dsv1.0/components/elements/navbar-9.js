@@ -49,6 +49,14 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
           width: 115px;
           height: 3em;
       }
+      .navbar-item .logo-img {
+        height: auto;
+        object-fit: contain;
+        width: 100%;
+      }
+      .navbar-item img{
+        min-height: 3.75rem!important; 
+      }
       @media screen and (max-width: 1023px){
         .ii__container-main{
           margin: 0 auto;
@@ -66,8 +74,8 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
         <div class="ii__container-main">
           <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:var(--app-primary-color)">
             <div class="navbar-brand">
-              <a class="navbar-item" href="/" @click=${this.reloadPage}>
-                <img src="/media/${this.gateway.logo}" width="112" height="28">
+              <a class="navbar-item" href="/" @click=${this.reloadPage} style="width: 200px;">
+                <img class="logo-img" src="/media/${this.gateway.logo}" alt="brand" >
               </a>
                 
               <a role="button" class="navbar-burger burger" @click=${this.addBlock} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -96,4 +104,4 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar9
       </header>
     </div>
 
-     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){var menuId=event.target.getAttribute("data-name"),elementToFocus=document.getElementById(menuId);if(elementToFocus){elementToFocus.scrollIntoView({block:"end",behavior:"smooth"})}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);
+     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);
