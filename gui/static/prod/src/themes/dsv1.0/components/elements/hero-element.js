@@ -4,7 +4,7 @@ import{html,BaseElement}from"../../../../components/adaptive-ui.js";class HeroEl
         /* Hero */
         .module-inner {
             padding-top: calc(10.638888888888888888 * 1vw);
-            padding-bottom: calc(15 * 1vw);
+            padding-bottom: calc(10 * 1vw);
         }
         .module .module-inner{
             position: relative;
