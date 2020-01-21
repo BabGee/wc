@@ -394,4 +394,4 @@ import{html,SummaryBoxesBase}from"../../../../components/adaptive-ui.js";class S
             </div>
 
         </div>
-        `}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}onLoadData(){this.loading=!1}}customElements.define(SummaryBoxes.is,SummaryBoxes);
+        `}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}onLoadData(dsc){this.loading=!1}}customElements.define(SummaryBoxes.is,SummaryBoxes);
