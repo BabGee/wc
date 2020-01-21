@@ -172,6 +172,9 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
       <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
       <style>
+        body{
+          font-size: 14px;
+        }
         .lh-1 {
           line-height: 1!important;
         }
@@ -248,8 +251,33 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         .sidebar.active{
           width: 280px;
         }
+
+        .section-card-content{
+          width: 100%!important;
+        }
+
+        .sidebar.active + .page-container{
+          width: calc(100% - 280px);
+        }
+        .sidebar.active + .page-container .section-card-content{
+          width: 100%
+        }
+        .sidebar.active + .page-container .nav-bar{
+          width: calc(100% - 280px)
+        }
+
         .sidebar:hover{
           width: 280px;
+        }
+
+        .sidebar:hover + .page-container{
+          width: calc(100% - 280px);
+        }
+        .sidebar:hover + .page-container .section-card-content{
+          width: 100%
+        }
+        .sidebar:hover + .page-container .nav-bar{
+          width: calc(100% - 280px)
         }
         .sidebar.active .logo{
           width: 40%;
@@ -538,16 +566,16 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         .sticky{
           display: none;
         }
-        .header .header-container .header-right:hover .profile-select{
+        /* .header .header-container .header-right:hover .profile-select{
           display: block;
-        }
+        } */
         .profile-select{
           position: absolute;
-          right: 13px;
-          top: 65px;
-          width: 300px;
+          right: -1px;
+          top: 78px;
+          width: 230px;
           background: #fff;
-          padding: 20px;
+          /* padding: 20px; */
           box-shadow: 3px 8px 5px #e5e5e5;
           z-index: -1;
           border-radius: 4px;
@@ -565,9 +593,14 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         top: -20px;
         right: 20px;
       }
+      .profile-select-icon{
+        position: relative; 
+        top: 4px;
+        font-size: 12px;
+      }
       .profile-select .profile-list li{
-        color: #4a4a4a;
-        border-bottom: 1px solid #4a4a4a
+        color: #202124;
+        border-bottom: 1px solid #f6f6f6;
       }
       .profile-select .profile-list li:last-child{
         border-bottom: 0 solid transparent;
@@ -575,9 +608,14 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
       .profile-select .profile-list li a{
         width: 100%;
         color: inherit;
-        margin: 5px 0;
+        /* margin: 5px 0; */
         display: inline-block;
         text-transform: capitalize;
+        padding: 16px 20px;
+        font-size: 14px;
+      }
+      .profile-select .profile-list li a:hover{
+        background: #e5e5e5;
       }
         @media (min-width: 567px){
           .sticky{
@@ -602,7 +640,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         
         `}
       <div class="is-flex">
-        <div class="sidebar" id="sidebar">
+        <div class="sidebar" id="sidebar"  @click=${this.closeProfile}>
           <div class="sidebar-inner">
             <div class="sidebar-logo">
               <div class="peers flex-nw align-c">
@@ -680,9 +718,9 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
                 </li>
               </ul>
               <ul class="header-right">
-                <li class="pos-r">
+                <li id="profile-drop" class="pos-r" @click=${this.selectToggle}>
                   ${this.gateway.profile?html$1`
-                  <a class="dropdown-toggle profile-toggle no-after peers flex-nw align-c lh-1" data-toggle="dropdown">
+                  <a class="dropdown-toggle profile-toggle no-after peers flex-nw align-c lh-1"  data-toggle="dropdown">
                     <div class="peer mR-10 profile">
                       <img class="w-2r bdrs-50p" src="${this.gateway.profile.photo?"/media/"+this.gateway.profile.photo:"images/web/user.svg"}" alt="">
                     </div>
@@ -696,17 +734,17 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
 
                 <div class="profile-select" id="profile">
                   <ul class="profile-list">
-                    <li><a @click=${this.logout}>Logout</a></li>
+                    <li><a @click=${this.logout} class="profile-item"><span class="profile-select-icon"><fa-icon class="fas fa-power-off" color="var(--app-default-color)" ></fa-icon></span>&nbsp; Logout</a></li>
                   </ul>                 
                 </div>
               </ul>
             </div>
           </header>
 
-          <main class="main-container">
+          <main class="main-container" @click="${this.closeProfile}">
             <div class="row">
-              ${this.page.pageInputGroups.map(feed=>html$1`
-                  <div class="column ${this._gridClasses(feed)} is-paddingless" style="width: calc(100vw - 107px)">
+              ${this.page.pageInputGroups.map((feed,feedIndex)=>html$1`
+                  <div class="column ${this._gridClasses(feed)} is-paddingless">
                     <form-render
                       .feed="${feed}"
                       .params=${this.parseParams()}
@@ -726,8 +764,24 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean}}drawer(evt){evt.preventDefault();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");this.isSideMenuVisible=!0}hum.firstElementChild.classList.toggle("active");hum.lastElementChild.classList.toggle("active");hum.children[1].classList.toggle("active");if(280==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu");menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}const aside=document.querySelector("#sidebar");if(60==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu"),navTitle=document.querySelectorAll(".nav-title");navTitle.styles.display="none";menuItems.forEach(item=>{item.classList.remove("is-block")})}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
+     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}drawer(evt){evt.preventDefault();this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");this.isSideMenuVisible=!0}hum.firstElementChild.classList.toggle("active");hum.lastElementChild.classList.toggle("active");hum.children[1].classList.toggle("active");if(280==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu");// menuItems
+menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{// collapse all current active
+this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});// expand related to source of event
+menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight);//
+});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight);//
+});if(menuItems.classList.contains(highLight)){}else{menuItems.classList.add(highLight)}const aside=document.querySelector("#sidebar");if(60==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu"),navTitle=document.querySelectorAll(".nav-title");navTitle.styles.display="none";// menuItems
+menuItems.forEach(item=>{item.classList.remove("is-block")})}}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}closeProfile(){let profile=document.querySelector("#profile");if(this.isProfileVisible){if(profile.classList.contains("is-block")){profile.classList.toggle("is-block");this.isProfileVisible=!1}}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
         :host {
           display: block;
         }
-      `]}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{service as $service,ServiceStyles};
+      `]}/**
+     * Dialogs Back navigation, Pop dialogs' stack
+     *
+     * @param evt
+     * @private
+     */_viewList(evt){this.mainNavigation()}/**
+     * TODO #301 duplicated function
+     * @param feed
+     * @returns {string}
+     * @private
+     */_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{service as $service,ServiceStyles};

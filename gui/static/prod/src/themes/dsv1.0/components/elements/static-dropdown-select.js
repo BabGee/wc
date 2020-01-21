@@ -18,4 +18,4 @@ import{html,StaticDropdownSelectBase}from"../../../../components/adaptive-ui.js"
         </div>
     </div>
 </div>
-`}constructor(){super()}getValue(){const select=this.shadowRoot.querySelector("#input");this.dropdownValue=select.value;return this.dropdownValue}valid(){}invalid(){}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(StaticDropdownSelect.is,StaticDropdownSelect);
+`}constructor(){super()}getValue(){const select=this.shadowRoot.querySelector("#input");this.dropdownValue=select.value;return this.dropdownValue}valid(validation){}invalid(validation){}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(StaticDropdownSelect.is,StaticDropdownSelect);
