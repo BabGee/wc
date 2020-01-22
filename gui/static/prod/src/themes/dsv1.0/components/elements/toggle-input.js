@@ -1,5 +1,8 @@
 import{html,ToggleInputBase}from"../../../../components/adaptive-ui.js";class ToggleInput extends ToggleInputBase{renderDefault(){return html`
 <style>
+.main-container{
+  padding:16px;
+}
 .switch {
   position: relative;
   display: inline-block;
@@ -49,7 +52,7 @@ input:checked + .slider:before {
 .lbl{
     position: relative;
     top: -12px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 /* Rounded sliders */
@@ -61,13 +64,16 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 </style>
- <div class="column">
-<div class="field">
-<label class="switch">
-  <input type="checkbox" id="input" required=${this.required}>
-  <span class="slider round"></span>
-</label>
- <label for="switch" class="lbl">${this.name}</label>
+<div class="main-container">
+  <div class="column">
+  <div class="field">
+  <label class="switch">
+    <input type="checkbox" id="input" required=${this.required}>
+    <span class="slider round"></span>
+  </label>
+  <label for="switch" class="lbl">${this.name}</label>
+    </div>
+    </div>
   </div>
-  </div>`}static get is(){return"toggle-input"}getInput(){return this.qs("#input")}getValue(){return this.getInput().checked}firstUpdated(changedProperties){super.firstUpdated(changedProperties);// this.type = "text";
+  `}static get is(){return"toggle-input"}getInput(){return this.qs("#input")}getValue(){return this.getInput().checked}firstUpdated(changedProperties){super.firstUpdated(changedProperties);// this.type = "text";
 }}window.customElements.define(ToggleInput.is,ToggleInput);

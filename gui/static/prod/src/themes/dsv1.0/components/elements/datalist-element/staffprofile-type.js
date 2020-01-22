@@ -363,7 +363,6 @@ background-color: #fff;
 }
 
 tr {
-    box-shadow: 1px 1px 30px -10px rgba(0, 0, 0, 0.15);
     height: 64px;
 }
 .active-row {
@@ -397,11 +396,15 @@ tr {
 .hidden{
   visibility: hidden;
 }
+.normal-td{
+  color: #6c7a89; 
+  font-size:14px;
+}
 </style>
   
 <section class="section">
 
-<staffprofile-type-header .title="${this.title}"></staffprofile-type-header>
+<staffprofile-type-header ></staffprofile-type-header>
 
 
 <table class="table is-fullwidth is-hoverable" >
@@ -410,7 +413,7 @@ tr {
           <tr>
             <th style="padding-top: 20px; padding-bottom: 20px;" class="arrow">
               
-                    <p style="font-weight: bold; font-size: 16px;  color: #202124;" >Short code</p>
+                    <p style="font-weight: bold; font-size: 16px;" >${this.title}</p>
             </th>
 
             <th style="padding-top: 20px; padding-bottom: 20px;">
@@ -441,7 +444,7 @@ tr {
                                 <fa-icon class="fas fa-user-plus fa-flip-horizontal" color="var(--app-primary-color)"></fa-icon>
                                 
                               </span>
-                          Add staff profile</p>
+                          Add ${this.details.addType}</p>
                 
             </th>
 
@@ -473,7 +476,7 @@ tr {
           <tr id="tr-${itemIndex}">
           <th class="index-column" style="padding-top: 20px; padding-bottom: 20px;">
 
-          ${!0!==this.details.selectable?html`<span class= "normal-td" style="color: #6c7a89; font-size: 14px; font-weight: 500; ">${item.index}</span>
+          ${!0!==this.details.selectable?html`<span class="normal-td" style="font-weight: normal;">${item.index}</span>
           `:html`<label class="checkbox">
           <input id="checkbox-${itemIndex}" @click="${()=>this.checkRow(itemIndex)}" type="checkbox">
           
@@ -484,9 +487,9 @@ tr {
                   
 
 
-              <td class="normal-td" style="padding-top: 20px; padding-bottom: 20px;">
+              <td  style="padding-top: 20px; padding-bottom: 20px;">
 
-                      <span class= "normal-td" style="color: #6c7a89; font-size: 14px; font-weight: 500; ">${item.name}</span>
+                      <span class= "normal-td" >${item.name}</span>
               </td>
 
               <td " style="padding-top: 20px; padding-bottom: 20px;"> 
@@ -496,7 +499,7 @@ tr {
 
               <td  style="padding-top: 20px; padding-bottom: 20px;">
                   
-                  <span style="color: #6c7a89; font-size: 14px; font-weight: 500; " class= "normal-td">${item["Contact Count"]}</span>
+                  <span class= "normal-td">${item["Contact Count"]}</span>
 
               
               </td>

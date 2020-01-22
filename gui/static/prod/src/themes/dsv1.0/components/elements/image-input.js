@@ -10,6 +10,9 @@ import{html,ImageInputBase}from"../../../../components/adaptive-ui.js";class Ima
       }
       .drop-area form.upload-form{
         width: 100%;
+        padding-left: 16px;
+        padding-top: 16px;
+        padding-bottom: 16px
       }
       .ii-file-input {
         display: inline-block;
