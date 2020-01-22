@@ -5,6 +5,10 @@ import{html,StaticDropdownSelectBase}from"../../../../components/adaptive-ui.js"
  font-size: 18px;
  }
 </style>
+.main-container {
+  padding: 16px;
+}
+<div class="main-container">
 <div class="column is-5 is-offset-4">
     <div class="field" style="margin-top: 10px; margin-bottom: 10px;">
         <label class="form-label">
@@ -17,5 +21,6 @@ import{html,StaticDropdownSelectBase}from"../../../../components/adaptive-ui.js"
             </select>
         </div>
     </div>
+</div>
 </div>
 `}constructor(){super()}getValue(){const select=this.shadowRoot.querySelector("#input");this.dropdownValue=select.value;return this.dropdownValue}valid(validation){}invalid(validation){}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(StaticDropdownSelect.is,StaticDropdownSelect);

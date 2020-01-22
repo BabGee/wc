@@ -266,7 +266,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
           width: calc(100% - 280px)
         }
 
-        .sidebar:hover{
+        /* .sidebar:hover{
           width: 280px;
         }
 
@@ -285,7 +285,6 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
           justify-content: center;
           margin: 15px auto;
           position: relative;
-          /* padding: 20px; */
         }
         .sidebar:hover .logo{
           width: 40%;
@@ -293,8 +292,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
           justify-content: center;
           margin: 15px auto;
           position: relative;
-          /* padding: 20px; */
-        }
+        } */
         .sidebar-menu>ul>li>a{
           display: none;
         }
@@ -390,10 +388,10 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
           background: var(--app-default-color);
           content: '';
         }
-        .sidebar:hover .sub-menu{
+        /* .sidebar:hover .sub-menu{
           display: none;
           margin-top: 10px;
-        }
+        } */
         .sub-menu{
           display: none;
           margin-top: 10px;
@@ -436,9 +434,9 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         .page-container.active{
           margin-left: 280px;
         }
-        .sidebar:hover + .page-container{
+        /* .sidebar:hover + .page-container{
           margin-left: 280px;
-        }
+        } */
         .header {
           background-color: #fff;
           border-bottom: 1px solid rgba(0,0,0,.0625);
@@ -662,7 +660,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
               <ul>
                 ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html$1`
                 <li class="nav-item" title="${ServicePage.toTitleCase(pageGroup.title)}">
-                  <a href="$1" class="nav-menu-item ${pageGroupIndex==this._pageGroup?"selected  active":""} items" @click=${this.handleClick}>
+                  <a href="$1" id="menu-item" class="nav-menu-item ${pageGroupIndex==this._pageGroup?"selected  active":""} items" @click=${this.handleClick}>
                     <span class="icon-holder">
                       <adaptive-ui-icon style="width: 19px;height: 19px;fill: #fff;" icon="${pageGroup.icon||"icons:info"}"></adaptive-ui-icon>
                     </span>
@@ -764,13 +762,14 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}drawer(evt){evt.preventDefault();this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");this.isSideMenuVisible=!0}hum.firstElementChild.classList.toggle("active");hum.lastElementChild.classList.toggle("active");hum.children[1].classList.toggle("active");if(280==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu");// menuItems
-menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{// collapse all current active
+     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}drawer(evt){evt.preventDefault();this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");hum.firstElementChild.classList.remove("active");hum.lastElementChild.classList.remove("active");hum.children[1].classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");hum.firstElementChild.classList.add("active");hum.lastElementChild.classList.add("active");hum.children[1].classList.add("active");this.isSideMenuVisible=!0}if(aside.clientWidth==this.sideBarOpen){const menuItems=document.querySelectorAll(".sub-menu");// menuItems
+menuItems.forEach(item=>{item.classList.remove("is-block")})}// this.handleClick();
+}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(!this.isSideMenuVisible){//if sidebar is not visible drawer function to open sidebar
+this.drawer(evt)}else{if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{// collapse all current active
 this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});// expand related to source of event
 menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight);//
 });this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight);//
-});if(menuItems.classList.contains(highLight)){}else{menuItems.classList.add(highLight)}const aside=document.querySelector("#sidebar");if(60==aside.clientWidth){const menuItems=document.querySelectorAll(".sub-menu"),navTitle=document.querySelectorAll(".nav-title");navTitle.styles.display="none";// menuItems
-menuItems.forEach(item=>{item.classList.remove("is-block")})}}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}closeProfile(){let profile=document.querySelector("#profile");if(this.isProfileVisible){if(profile.classList.contains("is-block")){profile.classList.toggle("is-block");this.isProfileVisible=!1}}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
+});if(menuItems.classList.contains(highLight)){}else{menuItems.classList.add(highLight)}}}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}closeProfile(){let profile=document.querySelector("#profile");if(this.isProfileVisible){if(profile.classList.contains("is-block")){profile.classList.toggle("is-block");this.isProfileVisible=!1}}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
         :host {
           display: block;
         }

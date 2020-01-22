@@ -1,4 +1,7 @@
 import{css,html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../components/adaptive-ui.js";class DropdownSelect extends DropdownSelectBase{static get styles(){return css`
+    .main-container {
+      padding: 16px;
+    }
       .ss-main {
   position: relative;
   display: inline-block;
@@ -291,7 +294,8 @@ import{css,html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../compon
           display:none;
         }
       </style>
-      
+
+    <div class="main-container">
       <div class="ss-main">
       
         <div class="ss-single-selected ${this.contentOpen?"ss-open-below":""}" @click="${this._onMultiSelectContainerClick}">
@@ -336,6 +340,7 @@ import{css,html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../compon
             `}
             </div>
     </div>
+</div>
 </div>
 
 <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>

@@ -12,6 +12,7 @@ import{html,TextAreaBase,Logger}from"../../../../components/adaptive-ui.js";clas
 }
 .text-area{
   position: relative;
+  padding: 16px;
 }
 .text-area textarea{
     height: 200px;
@@ -72,18 +73,105 @@ import{html,TextAreaBase,Logger}from"../../../../components/adaptive-ui.js";clas
   bottom: 10px;
   color: #cecece;
 }
+
+
+/* NEW IMPLEMENTATION */
+
+
+.form {
+  font-size: 16px;
+  width: 100%;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.form textarea{
+    
+    
+    padding-top: 30px;
+    
+}
+.form textarea:focus{
+    outline: none;
+}
+.form label{
+    position: absolute;
+    top: -78px;
+    left: 11px; 
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    
+}
+.form label::after{
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: -1px;
+    height: 100%;
+    width: 100%;
+    border-bottom: #595f6e;
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+}
+.content-name{
+    position: absolute;
+    bottom: 70px;
+    left: 10px;
+    transition: all .3s ease;
+}
+.form textarea:focus + .label-name .content-name, .form input:valid + .label-name .content-name{
+    transform: translateY(-17px);
+    font-size: 85%;
+    color: var(--app-default-color);
+    margin-left: 0px;
+    margin-bottom: 7px;
+    
+}
+.form textarea:focus + .label-name::after, .form input:valid + .label-name::after{
+    transform: translateX(50%);
+    margin-left: 20px;
+    
+}
+
+textarea{
+
+    padding-top: 20px;
+    
+}
+
+textarea:focus, textarea:hover{
+
+  border-color: var(--app-default-color);
+  
+}
+
+
 </style>
-<div class="text-area">
-  <div class="field">
-      <div class="control">
-          <textarea 
-            id="input" 
-            class="textarea"
-            @keyup="${this.count}" 
-            placeholder=${this.e.name}>${this.value}</textarea>
-          <div class="counter" id="count"><p>0/${this.max}</p></div>
-      </div>
-      <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
-  </div>
-</div>
+
+
+
+
+
+ <div class="text-area">
+        <div class="animait">
+
+            <div class="form">
+            <div class="field">
+            <div class="control">
+   
+                <textarea class="textarea" name="" id="input" @keyup="${this.count}">${this.value}</textarea>
+
+                <label for="name" class="label-name"><span class="content-name">${this.e.name}</span></label>
+                <div class="counter" id="count"><p>0/${this.max}</p></div>
+            </div>
+            </div>
+            </div>
+            <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
+            
+        </div>
+    </div>
+
+
  `}getInput(){return this.qs("#input")}getValue(){return this.getInput().value}valid(validation){if("block"===this.qs("#warning-text").style.display){this.qs("#warning-text").style.display="none"}Logger.i.debug(validation);if(validation){}}invalid(validation){this.qs("#warning-text").style.display="block";Logger.i.debug(validation)}count(){const valueLength=this.shadowRoot.querySelector("#input").value.length;this.shadowRoot.querySelector("#count").textContent=valueLength+"/"+this.max;if(null!=this.e.max&&valueLength>this.e.max){this.shadowRoot.querySelector("#count").style.color="#FF7273"}else{this.shadowRoot.querySelector("#count").style.color="#cecece"}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);console.log(this.e.max);if(null==this.e.max){this.max="unlimited"}else{this.max=this.e.max}}}window.customElements.define(TextArea.is,TextArea);
