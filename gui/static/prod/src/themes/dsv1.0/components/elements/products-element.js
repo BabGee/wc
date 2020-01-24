@@ -2,6 +2,10 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
       .ii__product{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-content: center;
         width: 100%;
         height: auto;
         background: #fff;
@@ -14,13 +18,12 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
         box-shadow: 1px 1px 11px 0 hsla(0, 0%, 79.2%, 0.5);
       }
       .ii__product-logo{
-        position: absolute;
-        width: 60px;
-        height: 60px;
-        background: #1C1565;
+        width: 95px;
+        height: 95px;
+        background: var(--app-accent-color);
         border-radius: 50%;
-        left: 37%;
-        top: -44px;
+        margin: 0 auto;
+        
       }
       .ii__product-logo img{
         width: 75%;
@@ -28,24 +31,45 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
         top: 30%;
         left: 16%;
       }
+      .read_more{
+        color:var(--app-accent-color);
+        font-weight:bolder;
+        cursor:pointer;
+        
+      }
+      .show_less{
+        color:var(--app-accent-color);
+        font-weight:bolder;
+        cursor:pointer;
+        
+      }
+      .is-custom-color{
+        background-color: var(--app-accent-color);
+        color: #fff;
+      }
+      .ii__content{
+        margin-top:10px;
+      }
     </style>
-    <div class="columns is-multiline">
-    ${this.rows.map(slide=>html` 
+    <div id="id" class="columns is-multiline">
+    ${this.rows.map((slide,index)=>html` 
      
     <div class="column">
-        <a href="${this._getLink(slide[1])}" target="_blank">
-          <div class="ii__product">
+       
+          <div  class="ii__product">
             <div class="ii__product-logo">
-              <img src="/media/${slide[3]}" alt="products logo">
+            <img src="/media/${slide[3]}" alt="products logo">
             </div>
             <div class="ii__content">
               <h3 class="is-size-6 ii__title has-text-weight-bold has-text-centered">${this._getTitle(slide[1])}</h3>
-              <p class="ii__paragraph is-size-7">${slide[2]}</p>
+              <p id="paragraph-${index}" data-name="${this._getLink(slide[1])}" class="ii__paragraph has-text-centered is-size-7">${slide[2]}</p>
             </div>
           </div>
-        </a>
+        
       </div>
+
     
     `)}
     </div>
-        `}static get is(){return"products-element"}static get properties(){return{}}_getLink(text){let[title,link]=text.split("|");return link}_getTitle(text){let[title,link]=text.split("|");return title}}customElements.define(ProductsElement.is,ProductsElement);var productsElement={ProductsElement:ProductsElement};export{productsElement as $productsElement,ProductsElement};
+        `}static get is(){return"products-element"}static get properties(){return{}}_getLink(text){let[title,link]=text.split("|");return link}_getTitle(text){let[title,link]=text.split("|");return title}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.loader.then(dsc=>{const allP=this.shadowRoot.querySelectorAll(".ii__paragraph");allP.forEach(p=>{let productLink=p.getAttribute("data-name");if(80<p.innerText.length){this.addReadMore(p,productLink)}else{this.addGetStarted(p,productLink)}})})}addReadMore(paragraph,productLink){let excessText=paragraph.innerText.substr(80,paragraph.innerText.length),splitText=paragraph.innerText.slice(0,80);//getting the excess text
+paragraph.innerText=splitText;let lessTextnode=document.createTextNode("...Show less"),lessP=document.createElement("p"),lessNode=document.createElement("span"),textnode=document.createTextNode("...Read more"),morenode=document.createElement("span");morenode.className="read_more";morenode.appendChild(textnode);paragraph.appendChild(morenode);lessNode.className="show_less";lessNode.appendChild(lessTextnode);lessP.appendChild(lessNode);morenode.addEventListener("click",()=>{paragraph.innerText=splitText+excessText;paragraph.appendChild(lessP);this.addGetStarted(paragraph,productLink)});lessNode.addEventListener("click",()=>{paragraph.innerText=splitText;paragraph.appendChild(morenode)})}addGetStarted(paragraph,productLink){let newLine=document.createElement("p"),span=document.createElement("span"),a=document.createElement("a"),textnode=document.createTextNode("Get Started");span.className="tag is-custom-color is-normal";span.style.backgroundColor="var(--app-accent-color)";span.style.marginTop="8px";a.href=productLink;a.target="_blank";a.style.color="#fff";a.appendChild(textnode);span.appendChild(a);newLine.appendChild(span);paragraph.appendChild(newLine)}}customElements.define(ProductsElement.is,ProductsElement);var productsElement={ProductsElement:ProductsElement};export{productsElement as $productsElement,ProductsElement};
