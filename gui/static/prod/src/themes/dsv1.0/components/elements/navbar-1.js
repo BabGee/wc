@@ -1,58 +1,77 @@
 import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar1 extends NavbarBase{renderDefault(){return html`
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
+    body{
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn{
+      border-radius: 5px;
+      width: 120px;
+      height: 3em;
+      background-color: #F49E37;
+      color: #fff;
+    }
+    .btnless{
+      border: 0 solid transparent;
+    }
+    nav{
+      margin: 14px 0 0 0;
+    }
+    .nav__item{
+      color: #2F4799;
+    }
+    .nav__item:hover{
+      color: #4a4a4a!important;
+    }
+    .navbar-item img {
+      max-height: 100%;
+    }
 
-nav {
-	font-size: 16px;
-}
-      .bind-box {
-	margin-bottom: 1.5rem;
-	background-color: white;
-	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-	color: #4a4a4a;
-    display: block;
-    padding: 1.25rem 4.5rem;
-    
-}
+    @media screen and (min-width: 1024px){
+      .navbar {
+          min-height: 5.25rem;
+      }
+    }
+    </style>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io"  style="width: 138px; top: -3px;">
+            <img src="https://gomipay.com/media/administration_gateway_logo/mipay.png">
+          </a>
 
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
 
-#section1 nav.navbar div.navbar-menu div.navbar-end a {
-	color: #d4d3d3;
-}
-#section1 .navbar .navbar-menu .navbar-end a.is-active {
-	color: #2f75ec;
-	list-style: disc;
-}
-#section1 .navbar .navbar-menu .navbar-end a.is-active::before {
-	color: #2f75ec;
-	content: "•"  ; /* &#8226; &#160; */
-	font-size: 18px;
-}
-#section1 .navbar .navbar-menu .navbar-start a:hover {
-	color: #2f75ec;
-}
-
-#site-name {
-	font-size: 25px;
-}
-
-      </style>
-    <div id="section1" class="bind-box">
-        <nav class="navbar">
-          <div id="site-name" class="navbar-brand has-text-weight-semibold">
-            <a class="navbar-item" href="#">
-              <img src="/media/${this.gateway.logo}" alt="logo" width="112" height="28">
-            </a>
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+          ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+            ${pageGroup.pages.map((menu,menuIndex)=>html`
+              <a class="navbar-item nav__item is-capitalized has-text-weight-bold"
+              data-name="${menu.id}"
+              >${menu.title}</a>
+            `)}
+          `)}
           </div>
-          <div class="navbar-menu">
-            <div class="navbar-end">
-            ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
-            <a href="${window.location.pathname+window.location.search}#/${pageGroupIndex}/0/" 
-            class="navbar-item ${pageGroupIndex==this._pageGroup?"is-active":""}" >
-                ${pageGroup.title}
-            </a>`)}
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button btnless has-text-weight-bold">
+                  <strong style="color: #2F4799;">Sign in</strong>
+                </a>
+                <a class="button btn has-text-weight-bold">
+                  Sign up
+                </a>
+              </div>
             </div>
           </div>
-        </nav>
+        </div>
       </div>
+    </nav>
      `}static get is(){return"navbar-1"}}customElements.define(Navbar1.is,Navbar1);
