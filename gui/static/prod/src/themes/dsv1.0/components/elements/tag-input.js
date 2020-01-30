@@ -1,4 +1,7 @@
 import{css,html,TagInputBase}from"../../../../components/adaptive-ui.js";class TagInput extends TagInputBase{constructor(){super();this.contentOpen=!1;this.selected=[]}static get styles(){return css`
+    .main-container{
+      padding: 16px;
+    }
       .ss-main {
   position: relative;
   display: inline-block;
@@ -77,12 +80,13 @@ import{css,html,TagInputBase}from"../../../../components/adaptive-ui.js";class T
           transform: rotate(45deg);
           margin: -3px 0 0 0; }
   .ss-main .ss-multi-selected {
+    
     display: flex;
     flex-direction: row;
     cursor: pointer;
     min-height: 30px;
     width: 100%;
-    padding: 0 0 0 3px;
+    padding: 18px calc(.625em - 1px) 18px 20px;
     border: 1px solid #dcdee2;
     border-radius: 4px;
     background-color: #ffffff;
@@ -143,7 +147,7 @@ import{css,html,TagInputBase}from"../../../../components/adaptive-ui.js";class T
         padding: 3px 5px;
         margin: 3px 5px 3px 0px;
         color: #ffffff;
-        background-color: #5897fb;
+        background-color: var(--app-default-color);
         border-radius: 4px;
         animation-name: scaleIn;
         animation-duration: .2s;
@@ -270,7 +274,7 @@ import{css,html,TagInputBase}from"../../../../components/adaptive-ui.js";class T
           display: inline-block; }
         .ss-main .ss-content .ss-list .ss-option:hover, .ss-main .ss-content .ss-list .ss-option.ss-highlighted {
           color: #ffffff;
-          background-color: #5897fb; }
+          background-color: var(--app-default-color); }
         .ss-main .ss-content .ss-list .ss-option.ss-disabled {
           cursor: not-allowed;
           color: #dedede;
@@ -289,8 +293,14 @@ import{css,html,TagInputBase}from"../../../../components/adaptive-ui.js";class T
         #warning-text{
           display:none;
         }
+        .placeholder{
+            color: #4a4a4a;
+            font-weight: 499;
+
+        }
       </style>
-      
+
+    <div class="main-container">
       <div class="ss-main">
       
         <div class="ss-multi-selected ${this.contentOpen?"ss-open-below":""}" @click="${this._onSingleSelectContainerClick}">
@@ -347,6 +357,7 @@ import{css,html,TagInputBase}from"../../../../components/adaptive-ui.js";class T
             `}
             </div>
     </div>
+</div>
 </div>
 
 <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>

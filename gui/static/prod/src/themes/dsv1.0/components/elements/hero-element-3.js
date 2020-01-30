@@ -56,13 +56,13 @@ import{html,BaseElement}from"../../../../components/adaptive-ui.js";class HeroEl
                 <div class="columns row">
                     <div class="column">
                         <div class="hero-iso-image">
-                            <img src="src/themes/dsv1.0/img/isometic/pay_9abj.svg" />
+                            <img src="${this.e.details.hero_image_src}" />
                         </div>
                     </div>
                     <div class="column">
-                        <h1 class="c-title-xl">Lorem ipsum dolor sit amet, consectetur</h1>
-                        <p class="c-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <a href="$1" class="button str-btn">Get started</a>
+                        <h1 class="c-title-xl">${this.e.name}</h1>
+                        <p class="c-paragraph">${this.e.defaultValue}</p>
+                        <a href="${this.e.details.path}" class="button str-btn">${this.e.details.button_title}</a>
                     </div>
                 </div>
             </div
