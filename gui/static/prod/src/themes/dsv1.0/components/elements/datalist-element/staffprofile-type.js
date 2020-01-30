@@ -350,198 +350,151 @@ const picker=evt.currentTarget,x={start_date:moment.unix(picker.dateFrom).format
 //   dateFormat: String,
 }}}customElements.define(StaffProfileHeader.is,StaffProfileHeader);var staffprofileTypeHeader={StaffProfileHeader:StaffProfileHeader};class StaffProfileType extends LitElement{constructor(){super()}render(){return html`
 
-        <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
-<style>
-  table {
-background-color: #fff;
-}
+    <style>
+    .table td, .table th{
+      padding: 15px 0;
+    }
+    .staff-profile{
+      width: 100%;
+      background: #fff;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    } 
+    .staffTitle h3, .staffTitle p{
+      font-size: 20px;
+    }
+    .staffTitle p{
+      cursor: pointer;
+      color: var(--app-primary-color);
+    }
 
-tr {
-    height: 64px;
-}
-.active-row {
-  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.05);
-  background-color: #f5f5f5; 
-  border-left: 5px solid #419588;  
-}
-.active-color {
-  color: #419588;     
-}
-.suspended{
- background-color: #299ed8;
- color: #fff;
- height: 19px;
- width: 80px;
+    .staff-header{
+      padding: 5px 30px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .staff-table{
+      padding: 5px 30px;
+    }
 
-}
-.active{
- background-color: #56e73c; 
- color: black;
- height: 19px; 
- width: 80px;
-
-}
-.pointer{
-  cursor:pointer;
-}
-.arrow{
- cursor:default;
-}
-.hidden{
-  visibility: hidden;
-}
-.normal-td{
-  color: #6c7a89; 
-  font-size:14px;
-}
-</style>
+    .table thead td, .table thead th{
+      border-bottom: 0 solid transparent;
+      border: 0;
+      border-width: 0 0 0!important;
+    }
+    </style>
   
-<section class="section">
+    <section class="section">
 
-<staffprofile-type-header ></staffprofile-type-header>
+    <staffprofile-type-header ></staffprofile-type-header>
 
-
-<table class="table is-fullwidth is-hoverable" >
-       
-        <thead>
-          <tr>
-            <th style="padding-top: 20px; padding-bottom: 20px;" class="arrow">
-              
-                    <p style="font-weight: bold; font-size: 16px;" >${this.title}</p>
-            </th>
-
-            <th style="padding-top: 20px; padding-bottom: 20px;">
-              
-
-            </th>
-
-            <th style="padding-top: 20px; padding-bottom: 20px;"></th>
-
-            <th>
-
-               
-
-            </th>
-
-            <th style="padding-top: 20px; padding-bottom: 20px;"></th>
-            
-            
-
-            <th style="padding-top: 20px; padding-bottom: 20px;">
-
-                    <p @click="${this.doService}"  style="font-weight: bold; font-size: 16px;  color: var(--app-primary-color);" 
-                    class="is-pulled-right pointer">
-
-                            <span class="icon" style="color: #000;">
-              
-                                <!-- <fa-icon class="fas fa-xs fa-user-plus " color= "#000" ></fa-icon> -->
-                                <fa-icon class="fas fa-user-plus fa-flip-horizontal" color="var(--app-primary-color)"></fa-icon>
-                                
-                              </span>
-                          Add ${this.details.addType}</p>
-                
-            </th>
-
+    <div class="staff-profile">
+      <div class="columns staff-header">
+        <div class="column">
+          <div class="staffTitle">
+            <h3 class="has-text-weight-bold">${this.title}</h3>
+          </div>
+        </div>
+        ${this.details.addType?html`
            
-
-            
+        <div class="column">
+          <div class="staffTitle is-pulled-right">
+              <p @click="${this.doService}" class="has-text-weight-bold" color="var(--app-primary-color)">
+                <span class="icon" style="color: #000;">
+                  <fa-icon class="fas fa-user-plus fa-flip-horizontal" color="var(--app-primary-color)"></fa-icon>
+                </span>
+              Add ${this.details.addType}</p>
+            </div>
+        </div>
            
-          </tr>
-        </thead>
-      
-        <tbody>
+           `:html``}
+        
+      </div>
 
-          <tr id="first-row" >
-          ${this.columns.map(column=>html`
-            <th  style="padding-top: 20px; padding-bottom: 20px; border-bottom: 0px solid #fff;">
-                <datasource-staffprofile-head
-                        .column="${column}"
-                        sort-direction$="[[column.sortDirection]]"
-                        @input-change-th-content="${this._handleInputChange}"
-                        sorted$="[[column.sorted]]"
-                        sortable$="[[column.sortable]]"
-                        @sort-th-content="${this._handleSort}">
-                </datasource-staffprofile-head>
-            </th>
+      <div class="staff-table">
+        <table class="table is-fullwidth is-hoverable">
+          <thead>
+            <tr>
+              ${this.columns.map(column=>html`
+                <th>
+                  <p class="has-text-weight-bold is-capitalized">
+                    <datasource-staffprofile-head
+                      .column="${column}"
+                      sort-direction$="[[column.sortDirection]]"
+                      @input-change-th-content="${this._handleInputChange}"
+                      sorted$="[[column.sorted]]"
+                      sortable$="[[column.sortable]]"
+                      @sort-th-content="${this._handleSort}">
+                    </datasource-staffprofile-head>
+                  </p>
+                </th>
+              `)}
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            ${this.data.map((item,itemIndex)=>html`
+            <tr>
+              ${!0!==this.details.selectable?html`
+              <td><span class="normal-td" style="font-weight: normal;">${item.index}</span></td>
+              `:html`
+              <td>
+                <label class="checkbox">
+                  <input id="checkbox-${itemIndex}" @click="${()=>this.checkRow(itemIndex)}" type="checkbox">
+                </label>
+              </td>
+              </th>`}
+              <td>
+                <span class= "normal-td" >${item.name}</span>
+              </td>
+              <td> 
+                <a id="status-${itemIndex}"  class="button is-small  is-rounded active">${item.description}</a>
+              </td>
+              <td>
+                <span class= "normal-td">${item["Contact Count"]}</span>
+              </td>
+              ${!0!==this.details.selectable?html``:html`
+              <td class="side-action">  
+                <span class="icon is-pulled-right pointer">
+                  <fa-icon class="fas fa-ellipsis-v" color="#6c7a89"></fa-icon>
+                </span>
+              </td>
+              `}
+              
+            </tr>
             `)}
-          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-          ${this.data.map((item,itemIndex)=>html`
-          <tr id="tr-${itemIndex}">
-          <th class="index-column" style="padding-top: 20px; padding-bottom: 20px;">
-
-          ${!0!==this.details.selectable?html`<span class="normal-td" style="font-weight: normal;">${item.index}</span>
-          `:html`<label class="checkbox">
-          <input id="checkbox-${itemIndex}" @click="${()=>this.checkRow(itemIndex)}" type="checkbox">
-          
-        </label>
+    ${this.paginate?html`
+    <staffprofile-type-footer resources="${this.resources}"
+      language="${this.language}"
+      footer-position="${this.footerPosition}"
+      .availableSize="${this.availableSize}"
+      .totalPages="${this.totalPages}"
+      .totalElements="${this.totalElements}"
+      .oldPage="${this.oldPage}"
       
-      </th>`}
-          
-                  
+      size="${this.size}"
+      page="${this.page}"
+      
+      @size-change="${this._sizeChanged}"
+      @p-page="${this._pageChanged}"
+      @n-page="${this._pageChanged}">
+    </staffprofile-type-footer>
+    `:html``}
 
+    </section>
 
-              <td  style="padding-top: 20px; padding-bottom: 20px;">
-
-                      <span class= "normal-td" >${item.name}</span>
-              </td>
-
-              <td " style="padding-top: 20px; padding-bottom: 20px;"> 
-                      <a id="status-${itemIndex}"  class="button is-small  is-rounded active" 
-                      >${item.description}</a>
-              </td>
-
-              <td  style="padding-top: 20px; padding-bottom: 20px;">
-                  
-                  <span class= "normal-td">${item["Contact Count"]}</span>
-
-              
-              </td>
-
-             
-
-              <td class="side-action" style="padding-top: 20px; padding-bottom: 20px;">  
-                      <span class="icon is-pulled-right pointer">
-
-                              <!-- <fa-icon class="fas  fa-ellipsis-v" ></fa-icon> -->
-                              <fa-icon class="fas fa-ellipsis-v" color="#6c7a89"></fa-icon>
-
-                      </span>
-
-              </td>
-    </tr>    
-          `)}    
-       
-        </tbody>
-      </table>
-
-      ${this.paginate?html`
-      <staffprofile-type-footer resources="${this.resources}"
-                             language="${this.language}"
-                             footer-position="${this.footerPosition}"
-                             .availableSize="${this.availableSize}"
-                             .totalPages="${this.totalPages}"
-                             .totalElements="${this.totalElements}"
-                             .oldPage="${this.oldPage}"
-                             
-                             size="${this.size}"
-                             page="${this.page}"
-                             
-                             @size-change="${this._sizeChanged}"
-                             @p-page="${this._pageChanged}"
-                             @n-page="${this._pageChanged}">
-      </staffprofile-type-footer>
-      `:html``}
-
-</section>
-
-        `}static get is(){return"staffprofile-type"}static get properties(){return{/**
+    `}static get is(){return"staffprofile-type"}static get properties(){return{/**
        * Contains the data which will be displayed in the table.
        */data:{type:Array,notify:!0},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},/**
        * The number of the previous page

@@ -643,7 +643,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
             <div class="sidebar-logo">
               <div class="peers flex-nw align-c">
                 <div class="peer peer-greed">
-                  <a href="#" class="sidebar-logo">
+                  <a @click="${this.reloadPage}"class="sidebar-logo">
                     <div class="peer align-c flex-nw">
                       <div class="peer">
                         <div class="logo">
@@ -762,7 +762,7 @@ import{html$1 as html,css,html as html$1,ServicePageBase,Colors,Fonts,VIEW_MODE_
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}drawer(evt){evt.preventDefault();this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");hum.firstElementChild.classList.remove("active");hum.lastElementChild.classList.remove("active");hum.children[1].classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");hum.firstElementChild.classList.add("active");hum.lastElementChild.classList.add("active");hum.children[1].classList.add("active");this.isSideMenuVisible=!0}if(aside.clientWidth==this.sideBarOpen){const menuItems=document.querySelectorAll(".sub-menu");// menuItems
+     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}reloadPage(){window.location.reload()}drawer(evt){evt.preventDefault();this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");hum.firstElementChild.classList.remove("active");hum.lastElementChild.classList.remove("active");hum.children[1].classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");hum.firstElementChild.classList.add("active");hum.lastElementChild.classList.add("active");hum.children[1].classList.add("active");this.isSideMenuVisible=!0}if(aside.clientWidth==this.sideBarOpen){const menuItems=document.querySelectorAll(".sub-menu");// menuItems
 menuItems.forEach(item=>{item.classList.remove("is-block")})}// this.handleClick();
 }handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(!this.isSideMenuVisible){//if sidebar is not visible drawer function to open sidebar
 this.drawer(evt)}else{if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{// collapse all current active

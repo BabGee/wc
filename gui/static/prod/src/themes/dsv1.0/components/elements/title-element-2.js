@@ -7,8 +7,8 @@ import{html,BaseElement}from"../../../../components/adaptive-ui.js";class TitleE
             </style>
             <div class="container">
                 <div class="heading">
-                    <h1 class="title has-text-centered">Lorem ipsum dolor sit amet</h1>
-                    <p class="sub-title has-text-centered">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+                    <h1 class="title has-text-centered">${this.e.name}</h1>
+                    <p class="sub-title has-text-centered">${this.e.defaultValue}</p>
                 </div>
             </div>
         `}static get is(){return"title-element-2"}}customElements.define(TitleElement2.is,TitleElement2);
