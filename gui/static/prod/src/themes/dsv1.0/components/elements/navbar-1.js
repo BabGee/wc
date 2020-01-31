@@ -8,14 +8,14 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar1
     .btn{
       border-radius: 5px;
       width: 120px;
-      height: 3em;
-      background-color: #F49E37;
-      color: #fff;
+      height: 3em!important;
+      background-color: var(--app-secondary-color)!important;
+      color: #fff!important;
     }
     .btn:hover{
       background-color: #fff;
-      color: #F49E37;
-      border: 2px solid #F49E37;
+      color: var(--app-secondary-color)!important;
+      border: 2px solid var(--app-secondary-color)!important;
     }
     .btnless{
       border: 0 solid transparent;
@@ -24,7 +24,7 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar1
       margin: 14px 0 0 0;
     }
     .nav__item{
-      color: #2F4799;
+      color: var(--app-default-color)!important;
     }
     .nav__item:hover{
       color: #4a4a4a!important;
@@ -35,7 +35,7 @@ import{html,NavbarBase}from"../../../../components/adaptive-ui.js";class Navbar1
 
     @media screen and (min-width: 1024px){
       .navbar {
-          min-height: 5.25rem;
+          min-height: 5.25rem!important;
       }
     }
     </style>

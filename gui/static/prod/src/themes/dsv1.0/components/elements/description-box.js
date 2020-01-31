@@ -4,10 +4,10 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
         .descriptionBox{
             width: 100%;
             padding: 10px;
-            background: #fff;
+            background: #fff!important;
         }
         /* .descriptionBox button{
-            background: transparent;
+            background: transparent!important;
             border: none;
             cursor: pointer;
         } */
@@ -15,19 +15,20 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
             width: 28%;
             top: 0;
             right: 0;
-            border-right: 1px solid #e0e7ef;
+            border-right: 1px solid var(--app-secondary-color)!important;
             position: relative;
         }
         .descriptionBox__item{
             padding: 10px 60px 10px 20px;
             min-height: 74px;
-            border-bottom: 1px solid #ffffff;
+            border-bottom: 1px solid #ffffff!important;
             cursor: pointer;
             position: relative;
         }
         .descriptionBox__item:hover{
-            background-color: #e0e7ef;
-            border-right: 3px solid var(--app-accent-color);
+            background-color: var(--app-secondary-color)!important;
+            border-right: 3px solid var(--app-default-color);
+            color: #fff!important;
         }
         .bodTItle{
             font-weight: 500;
@@ -46,14 +47,14 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
             display: none;
         }
         .li-active {
-            background-color: var(--app-accent-color);
-            color: #fff;
-            border-right: 3px solid var(--app-primary-color);
+            background-color: var(--app-secondary-color)!important;
+            color: #fff!important;
+            border-right: 3px solid var(--app-default-color)!important;
         }
         .li-active:hover {
-            background-color: var(--app-primary-color);
-            color: #fff;
-            border-right: 3px solid var(--app-accent-color);
+            background-color: var(--app-secondary-color)!important;
+            color:#fff!important;
+            border-right: 3px solid var(--app-default-color)!important;
         }
 
         @media screen and (max-width: 800px) {
@@ -61,7 +62,7 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
                 display: none;
             }
             .tab_drawer_heading {
-                background-color: #ccc;
+                background-color: #ccc!important;
                 margin: 0;
                 padding: 10px 40px;
                 display: block;
