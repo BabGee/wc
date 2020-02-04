@@ -9,7 +9,7 @@ import{html,BaseElement}from"../../../../components/adaptive-ui.js";class HeroEl
             padding-bottom: 25px;
             padding-left: 24px;
             padding-top: 80px;
-            background-color: #fff;
+            background-color: #fff!important;
         }
         .hero-container::before, .row::before{
             display: table;
@@ -27,7 +27,7 @@ import{html,BaseElement}from"../../../../components/adaptive-ui.js";class HeroEl
         .c-title-xl {
             margin-top: 8px;
             margin-bottom: 18px;
-            color: #0C3866;
+            color: var(--app-default-color)!important;;
             font-size: 70px;
             font-weight: bold;
             line-height: 58px;
@@ -43,7 +43,7 @@ import{html,BaseElement}from"../../../../components/adaptive-ui.js";class HeroEl
             border-radius: 5px!important;
             width: 170px!important;
             height: 3em!important;
-            background-color: #F49E37!important;
+            background-color: var(--app-secondary-color)!important;
             color: #fff!important;
             margin-top: 20px;
             border: none!important;

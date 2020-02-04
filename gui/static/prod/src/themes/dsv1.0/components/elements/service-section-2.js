@@ -2,7 +2,7 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <style>
         .service-section{
-            background-color: #fff;
+            background-color: #fff!important;
         }
         /* .row {
             margin-left: -10px;
@@ -16,13 +16,7 @@ import{html,SectionPElementDsc}from"../../../../components/adaptive-ui.js";class
             grid-column-end: 2;
             grid-row-end: 2;
         }
-        .service-label{
-            width: 100px;
-            border-radius: 8px;
-            padding: 10px;
-            background: #e5e5e5;
-            color: var(--app-default-color);
-        }
+    
         .service-title{
             margin: 10px 0;
             font-size: 20px;

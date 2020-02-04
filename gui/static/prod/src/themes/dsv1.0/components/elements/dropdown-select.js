@@ -4,22 +4,21 @@ import{css,html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../compon
     }
       .ss-main {
   position: relative;
+  border-radius: 7px;
   display: inline-block;
   user-select: none;
   color: #666666;
   width: 100%; }
   .ss-main .ss-single-selected {
-    display: flex;
-    cursor: pointer;
-    width: 100%;
-    height: 30px;
-    padding: 6px;
-    border: 1px solid #dcdee2;
-    border-radius: 4px;
-    background-color: #ffffff;
-    outline: 0;
-    box-sizing: border-box;
-    transition: background-color .2s; }
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Work Sans', sans-serif;
+    line-height: 0px;
+    color: #4a4a4a;
+    padding: 29px 31px 28px 12px;
+    border: 1px solid #e5e5e5;
+    box-shadow: none; }
     .ss-main .ss-single-selected.ss-disabled {
       background-color: #dcdee2;
       cursor: not-allowed; }
@@ -42,7 +41,7 @@ import{css,html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../compon
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
-      user-select: none; }
+      user-select: none; margin-top: -6px; }
       .ss-main .ss-single-selected .placeholder * {
         display: flex;
         align-items: center;
@@ -57,7 +56,7 @@ import{css,html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../compon
       align-items: center;
       justify-content: flex-end;
       flex: 0 1 auto;
-      margin: 0 6px 0 6px;
+      margin: -10px 6px 0 6px;
       font-weight: bold; }
       .ss-main .ss-single-selected .ss-deselect.ss-hide {
         display: none; }
@@ -75,10 +74,10 @@ import{css,html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../compon
         transition: transform .2s, margin .2s; }
         .ss-main .ss-single-selected .ss-arrow span.arrow-up {
           transform: rotate(-135deg);
-          margin: 3px 0 0 0; }
+          margin: 10px 0 0 0; }
         .ss-main .ss-single-selected .ss-arrow span.arrow-down {
           transform: rotate(45deg);
-          margin: -3px 0 0 0; }
+          margin: -17px; }
   .ss-main .ss-multi-selected {
     display: flex;
     flex-direction: row;
@@ -122,7 +121,6 @@ import{css,html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../compon
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap; }
-
 @keyframes scaleIn {
   0% {
     transform: scale(0);
@@ -130,7 +128,6 @@ import{css,html,DropdownSelectBase,RENDER_M_SIDE_BY_SIDE}from"../../../../compon
   100% {
     transform: scale(1);
     opacity: 1; } }
-
 @keyframes scaleOut {
   0% {
     transform: scale(1);
