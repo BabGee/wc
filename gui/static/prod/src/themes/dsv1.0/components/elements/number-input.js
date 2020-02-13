@@ -1,1 +1,0 @@
-import{NumberInputBase,inputMixin}from"../../../../components/adaptive-ui.js";class NumberInput extends inputMixin(NumberInputBase){get type(){return"number"}}customElements.define(NumberInput.is,NumberInput);

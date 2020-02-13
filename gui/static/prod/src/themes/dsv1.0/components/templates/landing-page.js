@@ -1,4 +1,22 @@
-import{html,LandingPageBase,VIEW_MODE_DIALOG}from"../../../../components/adaptive-ui.js";import"./section-page.js";import"../elements/navbar-9.js";import"../elements/hero-element.js";class LandingPage extends LandingPageBase{render(){if(!this.interface){return html`        
+/**
+ @license
+ Copyright (c) 2018 InterIntel. All rights reserved.
+ */
+import { html } from "../../../../../node_modules/lit-element/lit-element.js";
+import "../../../../../node_modules/fa-icons/index.js";
+import '../form-render.js';
+import "./section-page.js"; // todo move into base
+
+import '../snack-bar.js';
+import { LandingPageBase } from "../../../../components/templates/landing-page.js";
+import { VIEW_MODE_DIALOG } from "../../../../components/templates/page-view-element.js";
+import './missing-page.js';
+/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+
+class LandingPage extends LandingPageBase {
+  render() {
+    if (!this.interface) {
+      return html`        
       <div class="Wallop Wallop--fade">
         <div class="Wallop-list">
           <div class="Wallop-item  has-background-image" >
@@ -27,9 +45,14 @@ import{html,LandingPageBase,VIEW_MODE_DIALOG}from"../../../../components/adaptiv
          </div>
         </div>
       </div>
-`}else if(!this.pageGroup||!this.page){return html`
+`;
+    } else if (!this.pageGroup || !this.page) {
+      return html`
       <missing-page></missing-page>
-      `}return html`        
+      `;
+    }
+
+    return html`        
     <style>
         body{
             font-family: 'Montserrat', sans-serif;
@@ -145,15 +168,15 @@ import{html,LandingPageBase,VIEW_MODE_DIALOG}from"../../../../components/adaptiv
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
       <div class="main-wrapper">
                   
-        ${this.view===VIEW_MODE_DIALOG?html`
+        ${this.view === VIEW_MODE_DIALOG ? html`
         <section-page id="dialog" @view-list=${this._viewList} queue=${this.dialogServicesQueue} ></section-page>
-        `:html`
-        ${this.pageGroup.pages.map((page,index)=>html`        
+        ` : html`
+        ${this.pageGroup.pages.map((page, index) => html`        
           <!-- Feature -->
           <section  class="section is-fullWidth"  style="padding: 0px; background-color: #f4f6fb;" id=${page.id}>
                                     
             <div class="is-fullWidth columns is-centered is-multiline">
-                  ${page.pageInputGroups.map(feed=>html`
+                  ${page.pageInputGroups.map(feed => html`
                   <div class="column ${this._gridClasses(feed)} is-paddingless">
                     <form-render .feed="${feed}" .top=${this._computeTop()} .params=${this.parseParams()}></form-render>
                   </div>
@@ -166,18 +189,80 @@ import{html,LandingPageBase,VIEW_MODE_DIALOG}from"../../../../components/adaptiv
         <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
 
       </div>
-`}constructor(){super()}scrollPage(evt){const index=evt.currentTarget.pageIndex;// var elementToFocus = document.getElementById(window.location.hash.slice(1));
-//   var elementToFocus = document.getElementById("#section_1");
-var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){//  elementToFocus.scrollIntoView(true);
-elementToFocus.scrollIntoView({block:"start",behavior:"smooth"});//   console.log("Scroll");
-}}static get properties(){return{title:String,name:String,logo:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){let nav=document.getElementsByClassName("navbar-menu");nav[0].classList.toggle("mob-nav")}stateChanged(state){super.stateChanged(state)}/**
-       * Dialogs Back navigation, Pop dialogs' stack
-       *
-       * @param {ClickEvent} evt
-       * @private
-       */_viewList(evt){this.mainNavigation()}/**
-     * TODO #301 duplicated function
-     * @param feed
-     * @returns {string}
+`;
+  }
+
+  constructor() {
+    super();
+  }
+
+  scrollPage(evt) {
+    const index = evt.currentTarget.pageIndex; // var elementToFocus = document.getElementById(window.location.hash.slice(1));
+    //   var elementToFocus = document.getElementById("#section_1");
+
+    var elementToFocus = this.shadowRoot.querySelector('#section_' + index);
+
+    if (elementToFocus) {
+      //  elementToFocus.scrollIntoView(true);
+      elementToFocus.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth'
+      }); //   console.log("Scroll");
+    }
+  }
+
+  static get properties() {
+    return {
+      title: String,
+      name: String,
+      logo: String,
+      defaultColor: String,
+      pages: Array,
+      tab: Object,
+      group: Object,
+      toggle: Boolean
+    };
+  }
+
+  toggleNav() {
+    let nav = document.getElementsByClassName('navbar-menu');
+    nav[0].classList.toggle('mob-nav');
+  }
+
+  stateChanged(state) {
+    super.stateChanged(state);
+  }
+  /**
+     * Dialogs Back navigation, Pop dialogs' stack
+     *
+     * @param {ClickEvent} evt
      * @private
-     */_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("landing-page",LandingPage);
+     */
+
+
+  _viewList(evt) {
+    this.mainNavigation();
+  }
+  /**
+   * TODO #301 duplicated function
+   * @param feed
+   * @returns {string}
+   * @private
+   */
+
+
+  _gridClasses(feed) {
+    const grid = super._gridClasses(feed);
+
+    const grids = grid.split('|');
+
+    try {
+      return `is-${Math.floor(Number(grids[0] / 2))}`;
+    } catch (e) {
+      return 'is-12';
+    }
+  }
+
+}
+
+window.customElements.define('landing-page', LandingPage);
