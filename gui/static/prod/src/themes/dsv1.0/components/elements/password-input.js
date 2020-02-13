@@ -1,1 +1,0 @@
-import{PasswordInputBase,inputMixin}from"../../../../components/adaptive-ui.js";class PasswordInput extends inputMixin(PasswordInputBase){get type(){return"password"}}window.customElements.define(PasswordInput.is,PasswordInput);

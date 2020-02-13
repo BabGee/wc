@@ -1,1 +1,0 @@
-import{SubmitElementBase,buttonMixin}from"../../../../components/adaptive-ui.js";class SubmitElement extends buttonMixin(SubmitElementBase){}customElements.define(SubmitElement.is,SubmitElement);
