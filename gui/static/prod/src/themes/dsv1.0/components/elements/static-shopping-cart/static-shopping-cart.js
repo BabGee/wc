@@ -1,20 +1,10 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";
-import { StaticShoppingCartBase } from "../../../../../elements/base/static-shopping-cart.js";
-import { StaticShoppingCartStyles } from "./static-shopping-cart-css.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{SerializableElement,utilsMixin,css,html}from"../../../../../components/adaptive-ui.js";const StaticShoppingCartBase=class extends utilsMixin(SerializableElement){static get is(){return"static-shopping-cart"}constructor(){super();this.cartItems=[];var retrievedObject=localStorage.getItem("shop-cart");if(!retrievedObject){localStorage.setItem("shop-cart","[]")}else{this.cartItems=JSON.parse(retrievedObject)}}static get properties(){return{icon:String,target:String,data_name:String,service:String,params:{type:Object,value:{}},color:String,sums:Object,loading:{type:Boolean,value:!1},title:String,cartItems:{type:Array}}}static get observers(){return["_computeQuantity(cartItems.*)"]}getName(){return this.e.formName}getValue(){if(!this.cartItems){return""}const cartItemQuantities=this.cartItems.map(item=>item.item.id+"|"+item.quantity);return cartItemQuantities.join(",")}validate(){return!0}valid(){return!0}static get behaviors(){return[]}_computeTotal(quantity,price){return quantity*price}_computeTotals(){this;if(!this.cartItems){return 0}return this.cartItems.reduce(function(accumulator,currentValue){return accumulator+currentValue.quantity*currentValue.item.price},0)}_computeQuantity(){if(!this.cartItems){return 0}this.pl.bind=this.cartItems.reduce(function(accumulator,currentValue){return accumulator+currentValue.quantity},0)}_findCartItem(productId){var results=this.cartItems.filter(function(item){return item.item.id===parseInt(productId)});if(results.length){return results[0]}}_changeQuantity(productId){const value=this.shadowRoot.querySelector("#chart_item_"+productId).value,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);this.cartItems[index].quantity=value;this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems));this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}_incrementQuantity(evt){const productId=evt.currentTarget.dataset.product,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);this.cartItems[index].quantity=cartItem.quantity+1;this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems));this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}_decrementQuantity(evt){const productId=evt.currentTarget.dataset.product,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);if(1<cartItem.quantity){this.cartItems[index].quantity=cartItem.quantity-1;this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems))}this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}_removeCartItem(evt){const product_id=evt.currentTarget.cartItem,cartItem=this._findCartItem(product_id);var index=this.cartItems.indexOf(cartItem);if(-1<index){this.cartItems.splice(index,1);this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems))}this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}_removeAllCartItems(){if(0!==this.cartItems){this.cartItems=[];localStorage.removeItem("shop-cart")}this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_submit(){this.pl.submitForm()}init(pElement,loader){super.init(pElement,loader);var self=this;self.title=StaticShoppingCartBase.toTitleCase(pElement.name);self.icon=pElement.icon}};var staticShoppingCart={StaticShoppingCartBase:StaticShoppingCartBase};const StaticShoppingCartStyles=css`
 
-class StaticShoppingCart extends StaticShoppingCartBase {
-  static get styles() {
-    return [StaticShoppingCartStyles, css`
+`;var staticShoppingCartCss={StaticShoppingCartStyles:StaticShoppingCartStyles};class StaticShoppingCart extends StaticShoppingCartBase{static get styles(){return[StaticShoppingCartStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
     
  <div class="shop-wrapper is-mobile-mode">
 <div class="section" >
@@ -31,7 +21,7 @@ class StaticShoppingCart extends StaticShoppingCartBase {
                                 <span class="cart-total">
                                     KES ${this._computeTotals(this.cartItems)} <small>${this.cartItems.length} <span>items in cart</span></small>
                                        <span>
-                                 <a class="button is-danger is-outlined" @click=${() => this._removeAllCartItems()} ><span>Clear</span><span><iron-icon icon="icons:delete"></iron-icon></span></a> </span>
+                                 <a class="button is-danger is-outlined" @click=${()=>this._removeAllCartItems()} ><span>Clear</span><span><iron-icon icon="icons:delete"></iron-icon></span></a> </span>
                                 </span>
                               
                                 <button class="button feather-button is-bold primary-button raised" @click=${this._submit}>
@@ -41,7 +31,7 @@ class StaticShoppingCart extends StaticShoppingCartBase {
         
                             <!-- Cart Layout -->
                             <div class="columns is-account-grid is-multiline">
-                                            ${this.cartItems.map((cartItem, idx) => html`
+                                            ${this.cartItems.map(cartItem=>html`
                                 <!-- Product list -->
                                 <div class="column is-12">
                                     <!-- Product -->
@@ -61,7 +51,7 @@ class StaticShoppingCart extends StaticShoppingCartBase {
                                                 <span class="product-quantity">
                                                     <span>Qty</span>
                                                     <span class="control">
-                                                        <input id="chart_item_${cartItem.item.id}" class="input" type="number" min="1" step="1" value="${cartItem.quantity}" @change=${() => this._changeQuantity(cartItem.item.id)}>
+                                                        <input id="chart_item_${cartItem.item.id}" class="input" type="number" min="1" step="1" value="${cartItem.quantity}" @change=${()=>this._changeQuantity(cartItem.item.id)}>
                                                     </span>
                                                 </span>
         
@@ -95,100 +85,4 @@ class StaticShoppingCart extends StaticShoppingCartBase {
             
 </div>
         
-    `;
-  } // TODO IMPLEMENT OWN LOCAL STORAGE
-
-
-  constructor() {
-    super();
-  }
-
-  valid(validation) {}
-
-  invalid(validation) {} // todo override kept because of qs
-
-
-  _changeQuantity(productId) {
-    const value = this.shadowRoot.querySelector('#chart_item_' + productId).value;
-
-    const cartItem = this._findCartItem(productId);
-
-    const index = this.cartItems.indexOf(cartItem);
-    this.cartItems[index].quantity = value;
-    this.cartItems = [...this.cartItems]; // this.cartItems[index] = cartItem['quantity'] + 1;
-    // this.set('cartItems.' + index + '.quantity', cartItem['quantity'] + 1);
-
-    localStorage.setItem('shop-cart', JSON.stringify(this.cartItems));
-    this.dispatchEvent(new CustomEvent('change-cart-count', {
-      bubbles: true,
-      composed: true,
-      detail: {}
-    }));
-  } // todo override kept because of qs
-
-
-  _incrementQuantity(evt) {
-    console.log('_incrementQuantity');
-    const productId = evt.currentTarget.dataset['product'];
-
-    const cartItem = this._findCartItem(productId);
-
-    const index = this.cartItems.indexOf(cartItem);
-    this.cartItems[index].quantity = cartItem['quantity'] + 1;
-    this.cartItems = [...this.cartItems]; // this.cartItems[index] = cartItem['quantity'] + 1;
-    // this.set('cartItems.' + index + '.quantity', cartItem['quantity'] + 1);
-
-    localStorage.setItem('shop-cart', JSON.stringify(this.cartItems));
-    this.dispatchEvent(new CustomEvent('change-cart-count', {
-      bubbles: true,
-      composed: true,
-      detail: {}
-    }));
-  } // todo override kept because of qs
-
-
-  _decrementQuantity(evt) {
-    console.log('_decrementQuantity');
-    const productId = evt.currentTarget.dataset['product'];
-
-    const cartItem = this._findCartItem(productId);
-
-    const index = this.cartItems.indexOf(cartItem);
-
-    if (cartItem['quantity'] > 1) {
-      this.cartItems[index].quantity = cartItem['quantity'] - 1;
-      this.cartItems = [...this.cartItems];
-      localStorage.setItem('shop-cart', JSON.stringify(this.cartItems));
-    }
-
-    this.dispatchEvent(new CustomEvent('change-cart-count', {
-      bubbles: true,
-      composed: true,
-      detail: {}
-    }));
-  } // todo override kept because of qs
-
-
-  _removeCartItem(evt) {
-    const product_id = evt.currentTarget.cartItem;
-
-    const cartItem = this._findCartItem(product_id);
-
-    var index = this.cartItems.indexOf(cartItem);
-
-    if (index > -1) {
-      this.cartItems.splice(index, 1);
-      this.cartItems = [...this.cartItems];
-      localStorage.setItem('shop-cart', JSON.stringify(this.cartItems));
-    }
-
-    this.dispatchEvent(new CustomEvent('change-cart-count', {
-      bubbles: true,
-      composed: true,
-      detail: {}
-    }));
-  }
-
-}
-
-customElements.define(StaticShoppingCart.is, StaticShoppingCart);
+    `}constructor(){super()}valid(){}invalid(){}_changeQuantity(productId){const value=this.shadowRoot.querySelector("#chart_item_"+productId).value,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);this.cartItems[index].quantity=value;this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems));this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}_incrementQuantity(evt){console.log("_incrementQuantity");const productId=evt.currentTarget.dataset.product,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);this.cartItems[index].quantity=cartItem.quantity+1;this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems));this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}_decrementQuantity(evt){console.log("_decrementQuantity");const productId=evt.currentTarget.dataset.product,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);if(1<cartItem.quantity){this.cartItems[index].quantity=cartItem.quantity-1;this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems))}this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}_removeCartItem(evt){const product_id=evt.currentTarget.cartItem,cartItem=this._findCartItem(product_id);var index=this.cartItems.indexOf(cartItem);if(-1<index){this.cartItems.splice(index,1);this.cartItems=[...this.cartItems];localStorage.setItem("shop-cart",JSON.stringify(this.cartItems))}this.dispatchEvent(new CustomEvent("change-cart-count",{bubbles:!0,composed:!0,detail:{}}))}}customElements.define(StaticShoppingCart.is,StaticShoppingCart);export{staticShoppingCart as $staticShoppingCart,staticShoppingCartCss as $staticShoppingCartCss,StaticShoppingCartBase,StaticShoppingCartStyles};

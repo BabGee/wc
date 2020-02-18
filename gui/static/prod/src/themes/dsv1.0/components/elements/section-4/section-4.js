@@ -1,19 +1,10 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { SectionPElementBase } from "../../../../../elements/base/section-pelement.js";
-import { Section4Styles } from "./section-4-css.js";
-import { SectionStyles } from "../../../styles/section.js";
+import{css,html,SectionPElementBase,SectionStyles}from"../../../../../components/adaptive-ui.js";const Section4Styles=css`
 
-class SectionPElement4 extends SectionPElementBase {
-  static get styles() {
-    return [Section4Styles, SectionStyles, css`
+`;var section4Css={Section4Styles:Section4Styles};class SectionPElement4 extends SectionPElementBase{static get styles(){return[Section4Styles,SectionStyles,css`
             :host {
               display: block;
             }
-          `];
-  }
-
-  renderDefault() {
-    return html`
+          `]}renderDefault(){return html`
     
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <div class="section coffee-break-2" style="padding: 50px 0;">
@@ -75,13 +66,4 @@ class SectionPElement4 extends SectionPElementBase {
                     </div>
                 </div>
             </div>
-        `;
-  }
-
-  static get is() {
-    return 'section-4';
-  }
-
-}
-
-customElements.define(SectionPElement4.is, SectionPElement4);
+        `}static get is(){return"section-4"}}customElements.define(SectionPElement4.is,SectionPElement4);export{section4Css as $section$4Css,Section4Styles};

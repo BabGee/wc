@@ -1,19 +1,8 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { MonthYearBase } from "../../../../../elements/base/month-year.js";
-import { InputDefaultStyles } from "../../../styles/input-shared-default.js";
-import { InputLabelAnimationtStyles } from "../../../styles/input-label-animation.js";
-
-class MonthYear extends MonthYearBase {
-  static get styles() {
-    return [InputDefaultStyles, InputLabelAnimationtStyles, css`
+import{dataSourceMixin,utilsMixin,SerializableElement,html,css,InputDefaultStyles,InputLabelAnimationtStyles}from"../../../../../components/adaptive-ui.js";const MonthYearBase=class extends utilsMixin(dataSourceMixin(SerializableElement)){static get is(){return"month-year"}init(pElement,loader){super.init(pElement,loader);var self=this;self.required=this.e.required||pElement.min&&0<pElement.min;self.title=MonthYearBase.toTitleCase(pElement.name);self.icon=pElement.icon;self.params=self.pl.paramsCopy();self.maxlength=pElement.max}};var monthYear={MonthYearBase:MonthYearBase};class MonthYear extends MonthYearBase{static get styles(){return[InputDefaultStyles,InputLabelAnimationtStyles,css`
             :host {
                 display: block;
             }
-            `];
-  }
-
-  renderDefault() {
-    return html`
+            `]}renderDefault(){return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <div class="column">
             <div class="input-mixin input-effect">
@@ -22,9 +11,4 @@ class MonthYear extends MonthYearBase {
                 <span class="focus-bg"></span>
             </div>
         </div>
-        `;
-  }
-
-}
-
-customElements.define(MonthYear.is, MonthYear);
+        `}}customElements.define(MonthYear.is,MonthYear);export{monthYear as $monthYear,MonthYearBase};

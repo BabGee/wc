@@ -1,21 +1,188 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
-import "../../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import { StaticPosBase } from "../../../../../elements/base/static-pos.js";
-import { StaticPosStyles } from "./static-pos-css.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const StaticPosBase=class extends utilsMixin(dataSourceMixin(BaseElement)){constructor(){super();this.productItems=[];this.cartItems=[];var retrievedObject=localStorage.getItem("pos-cart");if(!retrievedObject){localStorage.setItem("pos-cart","[]")}else{this.cartItems=JSON.parse(retrievedObject)}}static get is(){return"static-pos"}static get properties(){return{icon:String,q:{type:String,value:""},title:String,pattern:String,required:Boolean,rows:{value:[]},productItems:{type:Array,value:[]},items:{type:Array,value:[]},params:Object,is_pad:Boolean,cartItems:{type:Array},itemPad:{type:Object}}}dscDataName(){return this.e.defaultValue}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(dsc=>{self.cols=dsc.cols;self.rows=dsc.rows;self.q="";self.groups=dsc.groups;self.currentGroups=self.groups;self.data=dsc.data;self.productItems=dsc.data;self.currentData=self.data;if(0<Object.keys(self.rows).length){self.dropdownValue=self.rows[0][0]}})}getValue(){if(!this.cartItems){return""}const cartItemQuantities=this.cartItems.map(item=>item.item.id+"|"+item.quantity);return cartItemQuantities.join(",")}_computeTotal(quantity,price){return quantity*price}_computeTotals(){this;if(!this.cartItems){return 0}return this.cartItems.reduce(function(accumulator,currentValue){return accumulator+currentValue.quantity*currentValue.item.price},0)}_computeQuantity(){if(!this.cartItems){return 0}this.pl.bind=this.cartItems.reduce(function(accumulator,currentValue){return accumulator+currentValue.quantity},0)}_findCartItem(productId){var results=this.cartItems.filter(function(item){return item.item.id===parseInt(productId)});if(results.length){return results[0]}}_removeCartItem(product_id){const cartItem=this._findCartItem(product_id);var index=this.cartItems.indexOf(cartItem);if(-1<index){this.cartItems.splice(index,1);this.cartItems=[...this.cartItems];localStorage.setItem("pos-cart",JSON.stringify(this.cartItems))}}_addProduct(productId){const product=this._findProductItem(productId);this.currentProduct=product;this._addCartItem(product)}_addCartItem(item){const productId=item.id;console.log("id "+productId);var retrievedObject=localStorage.getItem("pos-cart");const items=JSON.parse(retrievedObject);let cartItem=this._findInCartItem(items,productId);if(cartItem===void 0){cartItem={item:item,quantity:1};items.push(cartItem)}else{var index=items.indexOf(cartItem);items[index].quantity=+items[index].quantity+1}localStorage.setItem("pos-cart",JSON.stringify(items));this.cartItems=items}_findInCartItem(items,productId){var results=items.filter(function(item){return item.item.id===parseInt(productId)});if(results.length){return results[0]}}_findProductItem(productId){var results=this.productItems.filter(function(item){return item.id===parseInt(productId)});return results[0]}_submit(){this.pl.submitForm()}init(pElement,loader){super.init(pElement,loader);var self=this;self.required=this.e.required||pElement.min&&0<pElement.min;self.title=StaticPosBase.toTitleCase(pElement.name);self.icon=pElement.icon;self.params=self.pl.paramsCopy();self.loader=this.loadData()}};var staticPos={StaticPosBase:StaticPosBase};const StaticPosStyles=css`
 
-class StaticPos extends StaticPosBase {
-  static get styles() {
-    return [StaticPosStyles, css`
+html {
+    box-sizing: border-box;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+  /* Responsive Images */
+  
+  embed,
+  iframe,
+  img,
+  object,
+  video {
+    max-width: 100%;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul,
+  ol,
+  li,
+  p,
+  pre,
+  blockquote,
+  figure,
+  hr {
+    margin: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  a:focus {
+    outline: none;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    display: block;
+  }
+  
+  /* Removes all decimals and discs from lists */
+  
+  ol,
+  ul {
+    list-style: none;
+  }
+  
+  /* 
+   * Completely resets form items
+   * ----------------------------
+   * Super hard reset that removes all borders
+   * and radiuses of all form items (including
+   * checkboxes and radios)
+   */
+  
+  .calculator__keys input,
+  .calculator__keys textarea, button {
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    outline: none;
+    appearance: none;
+    text-align: left;
+  }
+  
+  
+  
+  
+  
+  
+  .pad {
+  display: none;
+    font-size: 120%;
+    font-weight: 700;
+    line-height: 1.3;
+    max-width: 40em;
+    margin: auto;
+  }
+  
+  .pad > p {
+    text-align: center;
+  }
+  
+  .calculator {
+    border-radius: 12px;
+    box-shadow: 0 0 40px 0px rgba(0, 0, 0, 0.15);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    overflow: hidden;
+  }
+  
+  .calculator__display {
+    background-color: #222222;
+    color: #fff;
+    font-size: 1.714285714em;
+    padding: 1.5em 2.5em;
+    text-align: right;
+  }
+  
+  .calculator__keys {
+    background-color: #999;
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .calculator__keys > * {
+    background-color: #fff;
+    padding:  3em 2em;
+    position: relative;
+    text-align: center;
+  }
+  
+  .calculator__keys > *:active::before,
+  .calculator__keys > .is-depressed::before {
+    background-color: rgba(0, 0, 0, 0.2);
+    bottom: 0;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5) inset;
+    content: "";
+    left: 0;
+    opacity: 0.3;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .key--operator {
+    background-color: #eee;
+  }
+  
+  .key--equal {
+    background-image: linear-gradient(to bottom, #fe886a, #ff7033);
+  }
+  #btn-keypad{
+  display: none;
+  }
+              .cart-badge {
+                  position: absolute;
+                  top: -2px;
+                  right: 0;
+                  width: 20px;
+                  height: 20px;
+                  background-color: #F44336;
+                  border-radius: 50%;
+                  color: white;
+                  font-size: 12px;
+                  font-weight: 500;
+                  pointer-events: none;
+                  text-align: center;
+                  
+                  
+              }
+
+`;var staticPosCss={StaticPosStyles:StaticPosStyles};class StaticPos extends StaticPosBase{static get styles(){return[StaticPosStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
     
         
         <div class="title_section">
@@ -40,7 +207,7 @@ class StaticPos extends StaticPosBase {
 <div class="section" >
                             <div id="products_section" class="column is-12 is-tablet-landscape-padded">
                             <div class="columns is-product-grid is-multiline">
-                         ${this._filterKeypad(this.productItems).map(product => html`
+                         ${this._filterKeypad(this.productItems).map(product=>html`
 
                                     <div class="column is-3">
                                             <div class="flat-card" style="min-height: unset; max-height: unset">
@@ -78,7 +245,7 @@ class StaticPos extends StaticPosBase {
                                                                      </div>
                                                                     </div>
                                                                     <button   style="cursor: pointer" data-target="modal" aria-haspopup="true"
-                                                                    product-id=${product.id} onclick=${() => this._addProduct(product.id)} class="btncart">Add to Cart</button>
+                                                                    product-id=${product.id} onclick=${()=>this._addProduct(product.id)} class="btncart">Add to Cart</button>
                                                         <div class="v_center_flex">
                                                            
                                                             <div class="cb"></div>
@@ -117,7 +284,7 @@ class StaticPos extends StaticPosBase {
                 <!-- Cart quickview body -->
                 <div class="cart-body">
                     <ul class="shopping-cart-items">
-                     ${this.cartItems.map((cartItem, idx) => html`
+                     ${this.cartItems.map(cartItem=>html`
                         <!-- Item -->
                         <li class="clearfix">
                             <img src="/media/${cartItem.item.image}" alt="">
@@ -126,10 +293,10 @@ class StaticPos extends StaticPosBase {
                                 <span class="item-price">${cartItem.item.currency_code} ${cartItem.item.price}</span>
                             </span>
                             <span class="quantity">
-                                <input id="chart_item_${cartItem.item.id}" class="input is-rounded" type="number" min="1" step="1" value="${cartItem.quantity}" onchange=${() => this._changeQuantity(cartItem.item.id)}>
+                                <input id="chart_item_${cartItem.item.id}" class="input is-rounded" type="number" min="1" step="1" value="${cartItem.quantity}" onchange=${()=>this._changeQuantity(cartItem.item.id)}>
                             </span>
         
-                            <span class="remove-item" onclick="${() => this._removeCartItem(cartItem.item.id)}">
+                            <span class="remove-item" onclick="${()=>this._removeCartItem(cartItem.item.id)}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x has-simple-popover" data-content="Remove from Cart" data-placement="top"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                             </span>
                         </li>
@@ -165,133 +332,4 @@ class StaticPos extends StaticPosBase {
         </section> 
         
      
-        `;
-  }
-
-  constructor() {
-    super();
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  _filterKeypad(rows) {
-    const filtered_items = [];
-
-    for (let i = 0; i < rows.length; i++) {
-      const item = rows[i]; // institution name isn't specified in values
-
-      var group = item.group;
-
-      if (group === 'Keypad') {
-        this.qs('#btn-keypad').style.display = 'unset';
-        this.itemPad = item;
-      } else {
-        filtered_items.push(item);
-      }
-    }
-
-    return filtered_items;
-  }
-
-  showpad() {
-    if (!this.is_pad) {
-      this.qs('#products_section').style.display = 'none';
-      this.qs('.pad').style.display = 'block';
-      this.is_pad = true;
-    } else {
-      this.qs('#products_section').style.display = 'flex';
-      this.qs('.pad').style.display = 'none';
-      this.is_pad = false;
-    }
-  }
-
-  display(numb) {
-    var result = this.qs('.calculator__display').textContent;
-    this.qs('.calculator__display').textContent = +result + '' + numb;
-  }
-
-  clear() {
-    this.qs('.calculator__display').textContent = '';
-  }
-
-  setCharAt(str, index, chr) {
-    if (index > str.length - 1) return str;
-    return str.substr(0, index) + chr + str.substr(index + 1);
-  }
-
-  addPadCart() {
-    var result = this.qs('.calculator__display').textContent;
-    var retrievedObject = localStorage.getItem('pos-cart');
-    const items = JSON.parse(retrievedObject);
-
-    if (result.charAt(0) == 0) {
-      result = this.setCharAt(result, 0, '');
-    }
-
-    if (Number(result) !== 0) {
-      // this.itemPad.price = Number(result);
-      const product = this._findProductItem(this.itemPad.id); // console.log(cartItem);
-
-
-      this.currentProduct = product;
-      product.price = Number(result);
-
-      let cartItem = this._findInCartItem(items, this.itemPad.id); // console.log(cartItem);
-
-
-      if (cartItem === undefined) {
-        cartItem = {
-          'item': product,
-          'quantity': 1
-        };
-        items.push(cartItem);
-      } else {
-        var index = items.indexOf(cartItem);
-        items[index].item.price = Number(items[index].item.price) + Number(result);
-      }
-    }
-
-    localStorage.setItem('pos-cart', JSON.stringify(items));
-    this.cartItems = items;
-    this.clear();
-  }
-
-  _changeQuantity(productId) {
-    const value = this.qs('#chart_item_' + productId).value;
-
-    const cartItem = this._findCartItem(productId);
-
-    const index = this.cartItems.indexOf(cartItem);
-    var group = cartItem.group;
-
-    if (group !== 'Keypad') {
-      this.cartItems[index].quantity = Number(value);
-      this.cartItems = [...this.cartItems]; // this.cartItems[index] = cartItem['quantity'] + 1;
-    } else {
-      this.qs('#chart_item_' + productId).value = 1;
-      this.qs('#chart_item_' + productId).textContent = 1;
-      this.cartItems[index].quantity = 1;
-      this.cartItems = [...this.cartItems];
-    } // this.set('cartItems.' + index + '.quantity', cartItem['quantity'] + 1);
-
-
-    localStorage.setItem('pos-cart', JSON.stringify(this.cartItems));
-  }
-
-  closeCartView() {
-    this.qs('#cart-view').classList.remove('is-active');
-  }
-
-  openCartView() {
-    this.qs('#cart-view').classList.add('is-active');
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-  }
-
-}
-
-customElements.define(StaticPos.is, StaticPos);
+        `}constructor(){super()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_filterKeypad(rows){const filtered_items=[];for(let i=0;i<rows.length;i++){const item=rows[i];var group=item.group;if("Keypad"===group){this.qs("#btn-keypad").style.display="unset";this.itemPad=item}else{filtered_items.push(item)}}return filtered_items}showpad(){if(!this.is_pad){this.qs("#products_section").style.display="none";this.qs(".pad").style.display="block";this.is_pad=!0}else{this.qs("#products_section").style.display="flex";this.qs(".pad").style.display="none";this.is_pad=!1}}display(numb){var result=this.qs(".calculator__display").textContent;this.qs(".calculator__display").textContent=+result+""+numb}clear(){this.qs(".calculator__display").textContent=""}setCharAt(str,index,chr){if(index>str.length-1)return str;return str.substr(0,index)+chr+str.substr(index+1)}addPadCart(){var result=this.qs(".calculator__display").textContent,retrievedObject=localStorage.getItem("pos-cart");const items=JSON.parse(retrievedObject);if(0==result.charAt(0)){result=this.setCharAt(result,0,"")}if(0!==+result){const product=this._findProductItem(this.itemPad.id);this.currentProduct=product;product.price=+result;let cartItem=this._findInCartItem(items,this.itemPad.id);if(cartItem===void 0){cartItem={item:product,quantity:1};items.push(cartItem)}else{var index=items.indexOf(cartItem);items[index].item.price=+items[index].item.price+ +result}}localStorage.setItem("pos-cart",JSON.stringify(items));this.cartItems=items;this.clear()}_changeQuantity(productId){const value=this.qs("#chart_item_"+productId).value,cartItem=this._findCartItem(productId),index=this.cartItems.indexOf(cartItem);var group=cartItem.group;if("Keypad"!==group){this.cartItems[index].quantity=+value;this.cartItems=[...this.cartItems]}else{this.qs("#chart_item_"+productId).value=1;this.qs("#chart_item_"+productId).textContent=1;this.cartItems[index].quantity=1;this.cartItems=[...this.cartItems]}localStorage.setItem("pos-cart",JSON.stringify(this.cartItems))}closeCartView(){this.qs("#cart-view").classList.remove("is-active")}openCartView(){this.qs("#cart-view").classList.add("is-active")}init(pElement,loader){super.init(pElement,loader)}}customElements.define(StaticPos.is,StaticPos);export{staticPos as $staticPos,staticPosCss as $staticPosCss,StaticPosBase,StaticPosStyles};

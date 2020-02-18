@@ -1,24 +1,10 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
-import "../../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import "../../../../../../node_modules/fa-icons/index.js";
-import { FileInputBase } from "../../../../../elements/base/file-input.js";
-import { FileInputStyles } from "./file-input-css.js";
-import { InputDefaultStyles } from "../../../styles/input-shared-default.js";
-import { FileUploadStyles } from "../../../styles/file-upload.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{utilsMixin,fileUploadMixin,SerializableElement,Logger,css,html,InputDefaultStyles,FileUploadStyles}from"../../../../../components/adaptive-ui.js";const FileInputBase=class extends utilsMixin(fileUploadMixin(SerializableElement)){constructor(){super();this._validFileExtensions=[]}static get is(){return"file-input"}static get properties(){return{_validFileExtensions:Array,extensions:String,title:String,required:Boolean,value:String}}getValue(){return this.value}getName(){return this.e.formName}validate(){if(this.required&&!this.getValue()){return new this.Validation(!1,"invalid")}return new this.Validation(!0,"valid")}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_hasExtension(fileName,exts){return new RegExp("("+exts.join("|").replace(/\./g,"\\.")+")$").test(fileName)}updateUploadMessage(){Logger.i.incompleteDev("file upload not displayed to user ")}uploadFile(fileInput){var file=fileInput.files[0];const self=this;if(!file){return}if(self._validFileExtensions&&self._hasExtension(file.name,self._validFileExtensions)){this.uploadTempFile(file,"image",null).then(upload=>{this.value=upload.response;this.updateUploadMessage("File successfully uploaded. Please Proceed!")}).catch(reason=>{Logger.i.incompleteDev("Better error handling.",reason)})}else{this.updateUploadMessage("File type"+file.type+" not supported!")}}resetUpload(){this.value=""}init(pElement,loader){super.init(pElement,loader);var self=this;self.required=this.e.required||pElement.min&&0<pElement.min;self.icon=pElement.icon;self.title=FileInputBase.toTitleCase(pElement.name);this.value="";self.extensions=pElement.kind;if(self.extensions){this._validFileExtensions=this.extensions.split("|").map(function(li){return"."+li})}}};var fileInput={FileInputBase:FileInputBase};const FileInputStyles=css`
 
-class FileInput extends FileInputBase {
-  static get styles() {
-    return [InputDefaultStyles, FileInputStyles, FileUploadStyles, css`
+`;var fileInputCss={FileInputStyles:FileInputStyles};class FileInput extends FileInputBase{static get styles(){return[InputDefaultStyles,FileInputStyles,FileUploadStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
     <!-- <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="mainwrapper drop-area">
@@ -35,83 +21,4 @@ class FileInput extends FileInputBase {
         </div>
       </form>
     </div>
-        `;
-  }
-
-  constructor() {
-    super();
-  }
-
-  getValue() {
-    return this.value;
-  }
-  /**
-   * from SerializableElement
-   * @override
-   */
-
-
-  valid(validation) {
-    const errorDisplay = this.shadowRoot.querySelector('#errorDisplay');
-    errorDisplay.style.display = 'none';
-  }
-  /**
-   * from SerializableElement
-   * @override
-   */
-
-
-  invalid(validation) {
-    const errorDisplay = this.shadowRoot.querySelector('#errorDisplay');
-    errorDisplay.style.display = 'block';
-    errorDisplay.textContent = validation;
-  }
-  /**
-   * from FileInputBase
-   * @override
-   */
-
-
-  updateUploadMessage(message) {
-    const display = this.shadowRoot.querySelector('#display');
-    display.textContent = message;
-  } // getFileExtension(filename){
-  //   return filename.split('.').pop();
-  // }
-  // /**
-  //  * Cancel Last Upload
-  //  * @param evt
-  //  */
-  // cancelUpload(evt) {
-  //   this.resetUpload();
-  //   this.updateUploadMessage('');
-  // }
-
-  /**
-   * File Selection Change handler
-   * @param evt
-   */
-
-
-  handleFile(evt) {
-    const fileInput = this.shadowRoot.querySelector('[type="file"]');
-    this.uploadFile(fileInput); // const label = this.shadowRoot.querySelector('[data-js-label]');
-    // let preview = this.shadowRoot.querySelector('.file-preview img');
-    // let reader = new FileReader();
-    // reader.onload = function(){
-    //   preview.src = reader.result;
-    // };
-    // reader.readAsDataURL(evt.target.files[0]);
-    // fileInput.onmouseout = function () {
-    //   if (!fileInput.value) return
-    //   let value = fileInput.value.replace(/^.*[\\\/]/, '')
-    //   // console.log(this.getFileExtension(value))
-    //   // el.className += ' -chosen'
-    //   label.innerText = value
-    // }
-    // this.uploadFile(fileInput);
-  }
-
-}
-
-window.customElements.define(FileInput.is, FileInput);
+        `}constructor(){super()}getValue(){return this.value}valid(){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="none"}invalid(validation){const errorDisplay=this.shadowRoot.querySelector("#errorDisplay");errorDisplay.style.display="block";errorDisplay.textContent=validation}updateUploadMessage(message){const display=this.shadowRoot.querySelector("#display");display.textContent=message}handleFile(){const fileInput=this.shadowRoot.querySelector("[type=\"file\"]");this.uploadFile(fileInput)}}window.customElements.define(FileInput.is,FileInput);export{fileInput as $fileInput,fileInputCss as $fileInputCss,FileInputBase,FileInputStyles};

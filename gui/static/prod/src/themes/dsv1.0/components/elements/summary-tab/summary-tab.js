@@ -1,28 +1,38 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { SummaryTabBase } from "../../../../../elements/base/summary-tab.js";
-import { SummaryTabStyles } from "./summary-tab-css.js";
+import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const SummaryTabBase=class extends utilsMixin(dataSourceMixin(BaseElement)){static get is(){return"summary-tab"}static get properties(){return{service:String,color:String,icon:String,params:Object,currentData:Object}}dscDataName(){return this.e.defaultValue}dataResponseType(){return Symbol.for("DATA")}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{self.currentGroups=self.groups;self.currentData=self.data;self.loading=!1})}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}init(pElement,loader){super.init(pElement,loader);var self=this;self.title=SummaryTabBase.toTitleCase(pElement.name);self.icon=pElement.icon;self.service=pElement.service;self.params=loader.pl.paramsCopy();self.maxlength=pElement.max;self.loader=this.loadData()}};var summaryTab={SummaryTabBase:SummaryTabBase};const SummaryTabStyles=css`
+.column {
+    display: block;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 1.75rem;
+    padding-right: 2rem;
+}
+.summary-p{
+    background-color: var(--app-default-color);
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+}
+.summary-info{
+    font-weight: normal!important;
+    margin-bottom: 15px;
+}
 
-class SummaryTab extends SummaryTabBase {
-  static get styles() {
-    return [SummaryTabStyles, css`
+`;var summaryTabCss={SummaryTabStyles:SummaryTabStyles};class SummaryTab extends SummaryTabBase{static get styles(){return[SummaryTabStyles,css`
             :host {
               display: block;
             }
-          `];
-  }
-
-  render() {
-    return html`
+          `]}render(){return html`
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
         
 
     <section>
-    ${!this._rowsOrColumns(this.rows) ? html`
+    ${!this._rowsOrColumns(this.rows)?html`
         <div class="columns has-text-weight-bold is-size-6">
 
-            ${this.groups.map((group, groupIndex) => html`
+            ${this.groups.map((group,groupIndex)=>html`
 
-             ${this._computeData(groupIndex).map(item => html`
+             ${this._computeData(groupIndex).map(item=>html`
              
                 <div class="column">
                     <p class="summary-info">${item.count}</p>
@@ -42,35 +52,10 @@ class SummaryTab extends SummaryTabBase {
     
     
          </div>
-    ` : html`
+    `:html`
     
     `}
         
     </section>
         
-        `;
-  }
-
-  static get is() {
-    return 'summary-tab';
-  }
-
-  _computeData(index) {
-    return this.data[index];
-  }
-
-  _rowsOrColumns(cData) {
-    if (cData === undefined) {
-      return;
-    }
-
-    return cData.length;
-  }
-
-  onLoadData(dsc) {
-    super.onLoadData(dsc);
-  }
-
-}
-
-customElements.define(SummaryTab.is, SummaryTab);
+        `}static get is(){return"summary-tab"}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}onLoadData(dsc){super.onLoadData(dsc)}}customElements.define(SummaryTab.is,SummaryTab);export{summaryTab as $summaryTab,summaryTabCss as $summaryTabCss,SummaryTabBase,SummaryTabStyles};

@@ -1,33 +1,64 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { NavbarBase } from "../../../../../elements/base/navbar-base.js";
-import { NavbarTenStyles } from "./navbar-10-css.js";
-import "../../../../../../node_modules/fa-icons/index.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const NavbarTenStyles=css`
+nav {
+	font-size: 16px;
+}
+      .bind-box {
+	margin-bottom: 1.5rem;
+	background-color: white;
+	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+	color: #4a4a4a;
+    display: block;
+    padding: 1.25rem 4.5rem;
+    
+}
 
-class Navbar10 extends NavbarBase {
-  static get properties() {
-    return {
-      categoriesDropDownMenuHidden: Boolean,
-      newProductsDropDownMenuHidden: Boolean
-    };
-  }
+.icon {
+  margin-left:2px;
+  margin-right:2px;
+}
+.level p a{
+  color: #D4D3D3;
+}
 
-  constructor() {
-    super();
-    this.categoriesDropDownMenuHidden = true;
-    this.newProductsDropDownMenuHidden = true;
-  }
+.level p a:hover{
+  color: #4a4a4a;
+}
 
-  static get styles() {
-    return [NavbarTenStyles, css`
+.navbar-link{
+  color: #FFFFFF;
+}
+
+nav a{
+  font-size: 12px;
+}
+
+.menu-label {
+  color: #7a7a7a;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#drop-down-container a{
+  font-size: 16px;
+  font-weight: 420;
+}
+a.news::after, aside.menu ul.menu-list li a.news::after {
+  color: #fff;
+  content: " new ";
+  font-size: 10px;
+  background-color: #3273dc;
+  text-align: center;
+}
+
+#site-name {
+	font-size: 25px;
+}
+`;var navbar10Css={NavbarTenStyles:NavbarTenStyles};class Navbar10 extends NavbarBase{static get properties(){return{categoriesDropDownMenuHidden:Boolean,newProductsDropDownMenuHidden:Boolean}}constructor(){super();this.categoriesDropDownMenuHidden=!0;this.newProductsDropDownMenuHidden=!0}static get styles(){return[NavbarTenStyles,css`
         :host{
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
       <div id="section12" class="bind-box has-background-dark">
@@ -71,7 +102,7 @@ class Navbar10 extends NavbarBase {
         <hr class="navbar-divider" clear="all">
         <nav class="navbar has-background-dark has-text-white is-size-7"role="navigation" aria-label="dropdown navigation">
           <div class="navbar-item has-dropdown is-active">
-            <a class="navbar-link has-background-info" @click = "${() => this.dropCategoriesMenu()}">
+            <a class="navbar-link has-background-info" @click = "${()=>this.dropCategoriesMenu()}">
               Categories
             </a>
             <div class="navbar-dropdown has-background-info is-hidden">
@@ -143,13 +174,13 @@ class Navbar10 extends NavbarBase {
           <div id="drop-down-categories-menu" class="column has-background-info">
             <aside class="menu">
               <ul id="category-menu" class="menu-list">
-                <li><a class= "is-active" @click='${() => this.toggleProductMenu('new')}'>New</a></li>
-                <li><a @click='${() => this.toggleProductMenu('men')}'>Men</a></li>
-                <li><a @click='${() => this.toggleProductMenu('women')}'>Women</a></li>
-                <li><a @click='${() => this.toggleProductMenu('kids')}'>Kids</a></li>
-                <li><a @click='${() => this.toggleProductMenu('accessories')}'>Accessories</a></li>
-                <li><a @click='${() => this.toggleProductMenu('discounts')}'>Discounts</a></li>
-                <li><a @click='${() => this.toggleProductMenu('collections')}'>Collections</a></li>
+                <li><a class= "is-active" @click='${()=>this.toggleProductMenu("new")}'>New</a></li>
+                <li><a @click='${()=>this.toggleProductMenu("men")}'>Men</a></li>
+                <li><a @click='${()=>this.toggleProductMenu("women")}'>Women</a></li>
+                <li><a @click='${()=>this.toggleProductMenu("kids")}'>Kids</a></li>
+                <li><a @click='${()=>this.toggleProductMenu("accessories")}'>Accessories</a></li>
+                <li><a @click='${()=>this.toggleProductMenu("discounts")}'>Discounts</a></li>
+                <li><a @click='${()=>this.toggleProductMenu("collections")}'>Collections</a></li>
               </ul>
             </aside>
           </div>
@@ -226,55 +257,4 @@ class Navbar10 extends NavbarBase {
       </div>
       </div>
 
-     `;
-  }
-
-  dropCategoriesMenu() {
-    const dropDownContainer = this.shadowRoot.getElementById('drop-down-container');
-
-    if (this.categoriesDropDownMenuHidden === true) {
-      dropDownContainer.classList.remove('is-hidden');
-      this.categoriesDropDownMenuHidden = false;
-    } else {
-      dropDownContainer.classList.add('is-hidden');
-      this.categoriesDropDownMenuHidden = true;
-      const menuItems = this.shadowRoot.querySelector('#category-menu').querySelectorAll('a');
-      menuItems.forEach(item => item.classList.remove('is-active'));
-      menuItems[0].classList.add('is-active');
-    }
-  }
-
-  toggleProductMenu(product) {
-    const menuItems = this.shadowRoot.querySelector('#category-menu').querySelectorAll('a');
-
-    if (product === 'new') {
-      menuItems.forEach(item => item.classList.remove('is-active'));
-      menuItems[0].classList.add('is-active');
-    } else if (product === 'men') {
-      menuItems.forEach(item => item.classList.remove('is-active'));
-      menuItems[1].classList.add('is-active');
-    } else if (product === 'women') {
-      menuItems.forEach(item => item.classList.remove('is-active'));
-      menuItems[2].classList.add('is-active');
-    } else if (product === 'kids') {
-      menuItems.forEach(item => item.classList.remove('is-active'));
-      menuItems[3].classList.add('is-active');
-    } else if (product === 'accessories') {
-      menuItems.forEach(item => item.classList.remove('is-active'));
-      menuItems[4].classList.add('is-active');
-    } else if (product === 'discounts') {
-      menuItems.forEach(item => item.classList.remove('is-active'));
-      menuItems[5].classList.add('is-active');
-    } else if (product === 'collections') {
-      menuItems.forEach(item => item.classList.remove('is-active'));
-      menuItems[6].classList.add('is-active');
-    }
-  }
-
-  static get is() {
-    return 'navbar-10';
-  }
-
-}
-
-customElements.define(Navbar10.is, Navbar10);
+     `}dropCategoriesMenu(){const dropDownContainer=this.shadowRoot.getElementById("drop-down-container");if(!0===this.categoriesDropDownMenuHidden){dropDownContainer.classList.remove("is-hidden");this.categoriesDropDownMenuHidden=!1}else{dropDownContainer.classList.add("is-hidden");this.categoriesDropDownMenuHidden=!0;const menuItems=this.shadowRoot.querySelector("#category-menu").querySelectorAll("a");menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[0].classList.add("is-active")}}toggleProductMenu(product){const menuItems=this.shadowRoot.querySelector("#category-menu").querySelectorAll("a");if("new"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[0].classList.add("is-active")}else if("men"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[1].classList.add("is-active")}else if("women"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[2].classList.add("is-active")}else if("kids"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[3].classList.add("is-active")}else if("accessories"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[4].classList.add("is-active")}else if("discounts"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[5].classList.add("is-active")}else if("collections"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[6].classList.add("is-active")}}static get is(){return"navbar-10"}}customElements.define(Navbar10.is,Navbar10);export{navbar10Css as $navbar$10Css,NavbarTenStyles};

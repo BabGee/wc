@@ -1,18 +1,15 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { PaymentFooterBase } from "../../../../../elements/base/payment-footer.js";
-import { PaymentFooterStyles } from "./payment-footer-css.js";
-
-class PaymentFooter extends PaymentFooterBase {
-  static get styles() {
-    return [PaymentFooterStyles, css`
+import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const PaymentFooterBase=class extends utilsMixin(BaseElement){static get is(){return"payment-footer"}};var paymentFooter={PaymentFooterBase:PaymentFooterBase};const PaymentFooterStyles=css`
+.tab-right-bottom{
+    margin-top: 20px;
+    position: absolute;
+    bottom: 0px;
+    /* margin-top: 30px; */
+  }
+`;var paymentFooterCss={PaymentFooterStyles:PaymentFooterStyles};class PaymentFooter extends PaymentFooterBase{static get styles(){return[PaymentFooterStyles,css`
       :host{
         display: block;
       }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
     <div class="tab-right-bottom">
       <div class="columns">
         <div class="column">
@@ -24,13 +21,4 @@ class PaymentFooter extends PaymentFooterBase {
         </div>
       </div>
     </div>
-        `;
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-  }
-
-}
-
-window.customElements.define(PaymentFooter.is, PaymentFooter);
+        `}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(PaymentFooter.is,PaymentFooter);export{paymentFooter as $paymentFooter,paymentFooterCss as $paymentFooterCss,PaymentFooterBase,PaymentFooterStyles};

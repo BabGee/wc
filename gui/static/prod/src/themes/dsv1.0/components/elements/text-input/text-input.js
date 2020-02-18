@@ -1,8 +1,3 @@
-import { TextInputBase } from "../../../../../elements/base/text-input.js";
-import { inputMixin } from "../../mixins/input-mixin.js";
-import { TextInputStyles } from "./text-input-css.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{utilsMixin,SerializableElement,css,inputMixin}from"../../../../../components/adaptive-ui.js";const TextInputBase=class extends utilsMixin(SerializableElement){static get is(){return"text-input"}static get properties(){return{params:{type:Object,value:{}},type:String,pageType:{type:Object,value:{}},columnSize:{type:Array},columnOffset:{type:Array}}}getName(){return this.e.formName}validate(){if(this.required&&!this.getValue()){return new this.Validation(!1,this.e.name+" is Required")}return new this.Validation(!0,"valid")}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);const self=this;self.title=TextInputBase.toTitleCase(pElement.name);this.required=this.e.required||pElement.min&&0<pElement.min;this.value=pElement.defaultValue||""}};var textInput={TextInputBase:TextInputBase};const TextInputStyles=css`
 
-class TextInput extends inputMixin(TextInputBase) {}
-
-window.customElements.define(TextInput.is, TextInput);
+`;var textInputCss={TextInputStyles:TextInputStyles};class TextInput extends inputMixin(TextInputBase){}window.customElements.define(TextInput.is,TextInput);export{textInput as $textInput,textInputCss as $textInputCss,TextInputBase,TextInputStyles};

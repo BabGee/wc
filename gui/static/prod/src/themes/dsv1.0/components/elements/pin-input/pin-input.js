@@ -1,22 +1,8 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../../node_modules/@polymer/iron-icons/iron-icons.js";
-import "../../../../../../node_modules/@polymer/iron-icon/iron-icon.js";
-import { PinInputBase } from "../../../../../elements/base/pin-input.js";
-import { InputDefaultStyles } from "../../../styles/input-shared-default.js";
-import { InputLabelAnimationtStyles } from "../../../styles/input-label-animation.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class PinInput extends PinInputBase {
-  static get styles() {
-    return [InputDefaultStyles, InputLabelAnimationtStyles, css`
+import{SerializableElement,html,css,InputDefaultStyles,InputLabelAnimationtStyles}from"../../../../../components/adaptive-ui.js";const PinInputBase=class extends SerializableElement{static get is(){return"pin-input"}static get properties(){return{params:{type:Object,value:{}},type:String,columnSize:{type:Array}}}getName(){return this.e.formName}validate(){if(this.required&&!this.getValue()){return new this.Validation(!1,this.e.name+" is Required")}return new this.Validation(!0,"valid")}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);this.required=this.e.required||pElement.min&&0<pElement.min;this.value=pElement.defaultValue||""}};var pinInput={PinInputBase:PinInputBase};class PinInput extends PinInputBase{static get styles(){return[InputDefaultStyles,InputLabelAnimationtStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
@@ -39,79 +25,4 @@ class PinInput extends PinInputBase {
     </div>
 
     <!-- Has counter and the eye reveal button -->
-        `;
-  }
-
-  invalid(message) {
-    this.shadowRoot.querySelector('.control').classList.add('required');
-    this.shadowRoot.querySelector('.control').classList.add('has-error');
-    this.shadowRoot.querySelector('.validation-info').style.display = 'flex';
-
-    if (message) {
-      this.shadowRoot.querySelector('.validation-info').textContent = message;
-    }
-  }
-
-  valid(validation) {
-    this.shadowRoot.querySelector('.control').classList.remove('required');
-    this.shadowRoot.querySelector('.control').classList.remove('has-error');
-    this.shadowRoot.querySelector('.validation-info').style.display = 'none'; // Revert general text content
-
-    this.shadowRoot.querySelector('.validation-info').textContent = 'Required';
-  }
-
-  getValue() {
-    return this.shadowRoot.querySelector('#input').value;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-
-    if (this.e.max != null) {
-      this.shadowRoot.querySelector('#input').setAttribute('maxlength', this.e.max);
-    }
-
-    if (this.e.min != null) {
-      this.shadowRoot.querySelector('#input').setAttribute('minlength', this.e.min);
-    } // if (this.required=== true) {
-    //   this.shadowRoot.querySelector('#require').style.display='flex';
-    // } else {
-    //   this.shadowRoot.querySelector('#require').style.display='none';
-    // }
-
-  }
-
-  reveal() {
-    var password = this.shadowRoot.querySelector('#input').value;
-    var type = this.shadowRoot.querySelector('#input').type;
-
-    if (this.shadowRoot.querySelector('#input').type === 'password') {
-      this.shadowRoot.querySelector('#input').type = 'text'; //  this.$.input.icon = "icons:visibility-off";
-
-      var elementToFocus = this.shadowRoot.querySelector('#eye');
-      elementToFocus.icon = 'icons:visibility-off'; //  elementToFocus.icon = "icons:visibility";
-    } else if (this.shadowRoot.querySelector('#input').type === 'text') {
-      this.shadowRoot.querySelector('#input').type = 'password'; // iconButton.icon = "icons:visibility";
-      //  this.$.input.eye.icon = "icons:visibility";
-
-      var elementToFocus2 = this.shadowRoot.querySelector('#eye');
-      elementToFocus2.icon = 'icons:visibility';
-    }
-  }
-
-  count() {
-    if (this.e.max != null) {
-      var content = this.shadowRoot.querySelector('#input').value.length;
-      this.shadowRoot.querySelector('#count').textContent = content + '/' + this.e.max;
-
-      if (this.shadowRoot.querySelector('#input').value.length == this.e.max) {
-        this.shadowRoot.querySelector('#count').style.color = '#FF7273';
-      } else {
-        this.shadowRoot.querySelector('#count').style.color = '#cecece';
-      }
-    }
-  }
-
-}
-
-window.customElements.define(PinInput.is, PinInput);
+        `}invalid(message){this.shadowRoot.querySelector(".control").classList.add("required");this.shadowRoot.querySelector(".control").classList.add("has-error");this.shadowRoot.querySelector(".validation-info").style.display="flex";if(message){this.shadowRoot.querySelector(".validation-info").textContent=message}}valid(){this.shadowRoot.querySelector(".control").classList.remove("required");this.shadowRoot.querySelector(".control").classList.remove("has-error");this.shadowRoot.querySelector(".validation-info").style.display="none";this.shadowRoot.querySelector(".validation-info").textContent="Required"}getValue(){return this.shadowRoot.querySelector("#input").value}firstUpdated(changedProperties){super.firstUpdated(changedProperties);if(null!=this.e.max){this.shadowRoot.querySelector("#input").setAttribute("maxlength",this.e.max)}if(null!=this.e.min){this.shadowRoot.querySelector("#input").setAttribute("minlength",this.e.min)}}reveal(){var password=this.shadowRoot.querySelector("#input").value,type=this.shadowRoot.querySelector("#input").type;if("password"===this.shadowRoot.querySelector("#input").type){this.shadowRoot.querySelector("#input").type="text";var elementToFocus=this.shadowRoot.querySelector("#eye");elementToFocus.icon="icons:visibility-off"}else if("text"===this.shadowRoot.querySelector("#input").type){this.shadowRoot.querySelector("#input").type="password";var elementToFocus2=this.shadowRoot.querySelector("#eye");elementToFocus2.icon="icons:visibility"}}count(){if(null!=this.e.max){var content=this.shadowRoot.querySelector("#input").value.length;this.shadowRoot.querySelector("#count").textContent=content+"/"+this.e.max;if(this.shadowRoot.querySelector("#input").value.length==this.e.max){this.shadowRoot.querySelector("#count").style.color="#FF7273"}else{this.shadowRoot.querySelector("#count").style.color="#cecece"}}}}window.customElements.define(PinInput.is,PinInput);export{pinInput as $pinInput,PinInputBase};

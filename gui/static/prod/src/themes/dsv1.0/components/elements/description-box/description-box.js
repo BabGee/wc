@@ -1,27 +1,112 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { SectionPElementDsc } from "../../../../../elements/base/section-pelement-dsc.js";
-import { DescriptionBoxStyles } from "./description-box-css.js";
+import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js";const DescriptionBoxStyles=css`
+.main-container{
+    background: #fff!important;
+}
+.descriptionBox{
+    width: 80%;
+    margin:0 auto;
+    padding: 10px;
+    background: #fff!important;
+}
+/* .descriptionBox button{
+    background: transparent!important;
+    border: none;
+    cursor: pointer;
+} */
+.descriptionBox__tabs{
+    width: 28%;
+    top: 0;
+    right: 0;
+    order: 2;
+    border-left: 1px solid var(--app-secondary-color)!important;
+    position: relative;
+}
+.my-content{
+    order:2;
+    width:50%;
+}
+.content{
+    width:100%;
+}
+.image-container{
+    width:70%;
+    margin-right:0px;
+}
+.descriptionBox__item{
+    padding: 10px 60px 10px 20px;
+    min-height: 74px;
+    border-bottom: 1px solid #ffffff!important;
+    cursor: pointer;
+    position: relative;
+}
+.descriptionBox__item:hover{
+    background-color: var(--app-secondary-color)!important;
+    border-left: 3px solid var(--app-default-color);
+    color: #fff!important;
+}
+.bodTItle{
+    font-weight: 500;
+    line-height: 18px;
+}
 
-class DescriptionBox extends SectionPElementDsc {
-  static get styles() {
-    return [DescriptionBoxStyles, css`
+.descriptionBox__content{
+    padding: 20px;
+    width: 100%;
+}
+.descriptionBox__content .content-container{
+    width: inherit;
+    display: none;
+}   
+.tab_drawer_heading{
+    display: none;
+}
+.li-active {
+    background-color: var(--app-secondary-color)!important;
+    color: #fff!important;
+    border-left: 3px solid var(--app-default-color)!important;
+}
+.li-active:hover {
+    background-color: var(--app-secondary-color)!important;
+    color:#fff!important;
+    border-left: 3px solid var(--app-default-color)!important;
+}
+
+@media screen and (max-width: 800px) {
+    .descriptionBox__tabs {
+        display: none;
+    }
+    .tab_drawer_heading {
+        background-color: #ccc!important;
+        margin: 0;
+        padding: 10px 40px;
+        display: block;
+        cursor: pointer;
+        user-select: none;
+    }
+    .descriptionBox__content .content-container{
+        width: inherit;
+        display: block;
+    } 
+    .data{
+        display: none;
+    }
+    
+}
+
+`;var descriptionBoxCss={DescriptionBoxStyles:DescriptionBoxStyles};class DescriptionBox extends SectionPElementDsc{static get styles(){return[DescriptionBoxStyles,css`
             :host {
               display: block;
             }
-          `];
-  }
-
-  render() {
-    return html`
+          `]}render(){return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
-     
+    <div class="main-container">
         <div class="descriptionBox is-flex">
        
                 
                 <div class="descriptionBox__tabs">
                 <ul>
-                ${this.rows.map((slide, index) => html`
-                    <li id="li-${index}" class="descriptionBox__item" data-item="" @click="${() => this.openTab(index, 'content-' + index)}">
+                ${this.rows.map((slide,index)=>html`
+                    <li id="li-${index}" class="descriptionBox__item" data-item="" @click="${()=>this.openTab(index,"content-"+index)}">
                         <div class="boxTitle">
                             <h4 class="has-text-weight-bold">${this._getTitle(slide[1])}</h4>
                         </div>
@@ -35,7 +120,7 @@ class DescriptionBox extends SectionPElementDsc {
             </div>
 
             <div class="descriptionBox__content">
-            ${this.rows.map((slide, index) => html`
+            ${this.rows.map((slide,index)=>html`
                 <div class="content-container" id="content-${index}">
                     <div class="tab_drawer_heading">
                         <div class="boxTitle">
@@ -45,14 +130,14 @@ class DescriptionBox extends SectionPElementDsc {
                             <p>${this._getSubTitle(slide[1])}</p>
                         </div>
                     </div>
-                    <div class="columns data">
-                        <div class="column is-three-quarters">
+                    <div class="columns is-flex data">
+                        <div class="my-content column is-three-quarters">
                             <div class="content">
                                 <h1>${this._getTitle(slide[1])}</h1>
                                 <p>${slide[2]}</p>
                             </div>
                         </div>
-                        <div class="column">
+                        <div class="image-container column">
                             <img src="/media/${slide[3]}" alt="image-${slide[3]}"/>
                         </div>
                     </div>
@@ -62,48 +147,6 @@ class DescriptionBox extends SectionPElementDsc {
             </div>
                        
         </div>
+    </div>
 
-        `;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-    this.loader.then(dsc => {
-      let contents = this.shadowRoot.querySelectorAll(".content-container");
-      let lists = this.shadowRoot.querySelectorAll(".descriptionBox__item");
-      contents[0].style.display = 'block'; //to show the first content block by default
-
-      lists[0].classList.add('active');
-    });
-  }
-
-  _getSubTitle(text) {
-    let [title, subTitle] = text.split('|');
-    return subTitle;
-  }
-
-  _getTitle(text) {
-    let [title, subTitle] = text.split('|');
-    return title;
-  }
-
-  static get is() {
-    return 'description-box';
-  }
-
-  openTab(index, tabName) {
-    let contents = this.shadowRoot.querySelectorAll(".content-container");
-    let lists = this.shadowRoot.querySelectorAll(".descriptionBox__item");
-    contents.forEach(content => {
-      content.style.display = "none";
-    });
-    lists.forEach(list => {
-      list.classList.remove("li-active");
-    });
-    this.shadowRoot.querySelector("#" + tabName).style.display = "block";
-    this.shadowRoot.querySelector("#li-" + index).classList.add("li-active");
-  }
-
-}
-
-customElements.define(DescriptionBox.is, DescriptionBox);
+        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.loader.then(()=>{let contents=this.shadowRoot.querySelectorAll(".content-container"),lists=this.shadowRoot.querySelectorAll(".descriptionBox__item");contents[0].style.display="block";lists[0].classList.add("active")})}_getSubTitle(text){let[title,subTitle]=text.split("|");return subTitle}_getTitle(text){let[title,subTitle]=text.split("|");return title}static get is(){return"description-box"}openTab(index,tabName){let contents=this.shadowRoot.querySelectorAll(".content-container"),lists=this.shadowRoot.querySelectorAll(".descriptionBox__item");contents.forEach(content=>{content.style.display="none"});lists.forEach(list=>{list.classList.remove("li-active")});this.shadowRoot.querySelector("#"+tabName).style.display="block";this.shadowRoot.querySelector("#li-"+index).classList.add("li-active")}}customElements.define(DescriptionBox.is,DescriptionBox);export{descriptionBoxCss as $descriptionBoxCss,DescriptionBoxStyles};

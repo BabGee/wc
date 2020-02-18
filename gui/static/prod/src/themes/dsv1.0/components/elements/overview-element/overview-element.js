@@ -1,22 +1,23 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { BaseElement } from "../../../../../core/base-element.js";
-import { OverviewElementStyles } from "./overview-element-css.js";
+import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const OverviewElementStyles=css`
+.btn{
+    margin: 20px 0;
+    background: #f49e37;
+    width: 200px;
+    color: #fff;
+}
+.mipay-overview{
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
 
-class OverviewElement extends BaseElement {
-  static get is() {
-    return 'overview-element';
-  }
-
-  static get styles() {
-    return [OverviewElementStyles, css`
+`;var overviewElementCss={OverviewElementStyles:OverviewElementStyles};class OverviewElement extends BaseElement{static get is(){return"overview-element"}static get styles(){return[OverviewElementStyles,css`
             :host {
               display: block;
             }
-          `];
-  }
-
-  render() {
-    return html`
+          `]}render(){return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
 
@@ -32,9 +33,4 @@ class OverviewElement extends BaseElement {
                 </div>
             </div>
         </div>
-        `;
-  }
-
-}
-
-customElements.define(OverviewElement.is, OverviewElement);
+        `}}customElements.define(OverviewElement.is,OverviewElement);export{overviewElementCss as $overviewElementCss,OverviewElementStyles};

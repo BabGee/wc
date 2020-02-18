@@ -1,19 +1,34 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { NavbarBase } from "../../../../../elements/base/navbar-base.js";
-import { NavbarFiveStyles } from "./navbar-5-css.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const NavbarFiveStyles=css`
+nav {
+	font-size: 16px;
+}
+      .bind-box {
+	margin-bottom: 1.5rem;
+	background-color: white;
+	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+	color: #4a4a4a;
+    display: block;
+    padding: 1.25rem 4.5rem;
+    
+}
 
-class Navbar5 extends NavbarBase {
-  static get styles() {
-    return [NavbarFiveStyles, css`
+.bind-box-4block-left {
+  padding: 0 0 0 4.5rem;
+}
+
+.has-text-white a {
+ 	color: #fff;
+ }
+
+#site-name {
+	font-size: 25px;
+}
+
+`;var navbar5Css={NavbarFiveStyles:NavbarFiveStyles};class Navbar5 extends NavbarBase{static get styles(){return[NavbarFiveStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
     <div class="bind-box is-paddingless">
@@ -51,13 +66,4 @@ class Navbar5 extends NavbarBase {
         </div>
 
 
-     `;
-  }
-
-  static get is() {
-    return 'navbar-5';
-  }
-
-}
-
-customElements.define(Navbar5.is, Navbar5);
+     `}static get is(){return"navbar-5"}}customElements.define(Navbar5.is,Navbar5);export{navbar5Css as $navbar$5Css,NavbarFiveStyles};

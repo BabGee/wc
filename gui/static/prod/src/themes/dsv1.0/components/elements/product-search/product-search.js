@@ -1,19 +1,13 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { ProductSearchBase } from "../../../../../elements/base/product-search.js";
-import { ProductSearchStyles } from "./product-search-css.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class ProductSearch extends ProductSearchBase {
-  static get styles() {
-    return [ProductSearchStyles, css`
+import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const ProductSearchBase=class extends utilsMixin(dataSourceMixin(BaseElement)){static get is(){return"product-search"}static get properties(){return{icon:String,dataName:{type:String,value:""},service:String,q:{type:String,value:""},title:String,pattern:String,required:Boolean,rows:{value:[]},params:{type:Object,value:""},colorType:{type:Array}}}dscDataName(){return this.e.defaultValue}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this;this.loader.then(()=>{})}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}init(pElement,loader){super.init(pElement,loader);var self=this;self.required=pElement.min&&0<pElement.min;self.title=ProductSearchBase.toTitleCase(pElement.name);self.icon=pElement.icon;self.service=pElement.service;self.params=self.pl.params;self.colorType=["success","secondary","warning","danger","primary"];self.loader=this.loadData()}};var productSearch={ProductSearchBase:ProductSearchBase};const ProductSearchStyles=css`
+.search-wrapper{
+    height:60px;
+    background-color:var(--app-default-color);
+    }
+`;var productSearchCss={ProductSearchStyles:ProductSearchStyles};class ProductSearch extends ProductSearchBase{static get styles(){return[ProductSearchStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
         </style>
     <div  class="search-wrapper">
                             <!-- Title -->
@@ -30,17 +24,4 @@ class ProductSearch extends ProductSearchBase {
                              
                             </div>
 
-        `;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  init(pElement, loader) {
-    super.init(pElement, loader);
-  }
-
-}
-
-customElements.define(ProductSearch.is, ProductSearch);
+        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}customElements.define(ProductSearch.is,ProductSearch);export{productSearch as $productSearch,productSearchCss as $productSearchCss,ProductSearchBase,ProductSearchStyles};

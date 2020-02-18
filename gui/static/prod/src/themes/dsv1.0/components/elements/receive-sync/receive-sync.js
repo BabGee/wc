@@ -1,19 +1,10 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { ReceiveSyncBase } from "../../../../../elements/base/receive-sync.js";
-import { ReceiveSyncStyles } from "./receive-sync-css.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{utilsMixin,mqttMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const ReceiveSyncBase=class extends utilsMixin(mqttMixin(BaseElement)){static get is(){return"receive-sync"}static get properties(){return{icon:String,text:String,name:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);let self=this;if(self.e.kind){try{self.register(self,self.e.kind)}catch(e){console.error(e)}}}onMqttMessage(message){super.onMqttMessage(message);this;console.log("on-mqtt-message")}init(pElement,loader){super.init(pElement,loader);this.required=pElement.min&&0<pElement.min;this.name=ReceiveSyncBase.toTitleCase(pElement.name);this.text=ReceiveSyncBase.toTitleCase(pElement.defaultValue)}};var receiveSync={ReceiveSyncBase:ReceiveSyncBase};const ReceiveSyncStyles=css`
 
-class ReceiveSync extends ReceiveSyncBase {
-  static get styles() {
-    return [ReceiveSyncStyles, css`
+`;var receiveSyncCss={ReceiveSyncStyles:ReceiveSyncStyles};class ReceiveSync extends ReceiveSyncBase{static get styles(){return[ReceiveSyncStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
  
 <div class="field">
 <article class="message is-primary">
@@ -26,24 +17,4 @@ class ReceiveSync extends ReceiveSyncBase {
 </article>
 </div>
 
-        `;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  onMqttMessage(message) {
-    super.onMqttMessage(message);
-    var self = this;
-    console.log('on-mqtt-message');
-    /*
-        var payload = JSON.parse(message.payloadString);
-        console.info(payload);
-        self.$.datasource._parsePayload(payload);
-        */
-  }
-
-}
-
-window.customElements.define(ReceiveSync.is, ReceiveSync);
+        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}onMqttMessage(message){super.onMqttMessage(message);this;console.log("on-mqtt-message")}}window.customElements.define(ReceiveSync.is,ReceiveSync);export{receiveSync as $receiveSync,receiveSyncCss as $receiveSyncCss,ReceiveSyncBase,ReceiveSyncStyles};
