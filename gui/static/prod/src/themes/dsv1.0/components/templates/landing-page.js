@@ -1,22 +1,4 @@
-/**
- @license
- Copyright (c) 2018 InterIntel. All rights reserved.
- */
-import { html } from "../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../node_modules/fa-icons/index.js";
-import '../form-render.js';
-import "./section-page.js"; // todo move into base
-
-import '../snack-bar.js';
-import { LandingPageBase } from "../../../../components/templates/landing-page.js";
-import { VIEW_MODE_DIALOG } from "../../../../components/templates/page-view-element.js";
-import './missing-page.js';
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class LandingPage extends LandingPageBase {
-  render() {
-    if (!this.interface) {
-      return html`        
+import{PageViewElement,VIEW_MODE_DIALOG,html}from"../../../../components/adaptive-ui.js";import"./section-page.js";const LandingPageBase=class extends PageViewElement{constructor(){super()}_tabs(page){if(page===void 0){return}return page.tabs}static get properties(){return{toggle:Boolean}}_viewList(){if(!this.dialogsStack.length){this.view="list";this.updateLocationHash()}else{const args=this.dialogsStack.pop();console.log(args);const dialog=this.qs("#dialog");dialog.payload=args[0];dialog.params=args[1];dialog.loading=!1}}async _computeTop(){await this.updateComplete;return this.qs("#top")}};var landingPage={LandingPageBase:LandingPageBase};class LandingPage extends LandingPageBase{render(){if(!this.interface){return html`        
       <div class="Wallop Wallop--fade">
         <div class="Wallop-list">
           <div class="Wallop-item  has-background-image" >
@@ -45,14 +27,9 @@ class LandingPage extends LandingPageBase {
          </div>
         </div>
       </div>
-`;
-    } else if (!this.pageGroup || !this.page) {
-      return html`
+`}else if(!this.pageGroup||!this.page){return html`
       <missing-page></missing-page>
-      `;
-    }
-
-    return html`        
+      `}return html`        
     <style>
         body{
             font-family: 'Montserrat', sans-serif;
@@ -168,15 +145,15 @@ class LandingPage extends LandingPageBase {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
       <div class="main-wrapper">
                   
-        ${this.view === VIEW_MODE_DIALOG ? html`
+        ${this.view===VIEW_MODE_DIALOG?html`
         <section-page id="dialog" @view-list=${this._viewList} queue=${this.dialogServicesQueue} ></section-page>
-        ` : html`
-        ${this.pageGroup.pages.map((page, index) => html`        
+        `:html`
+        ${this.pageGroup.pages.map(page=>html`        
           <!-- Feature -->
           <section  class="section is-fullWidth"  style="padding: 0px; background-color: #f4f6fb;" id=${page.id}>
                                     
             <div class="is-fullWidth columns is-centered is-multiline">
-                  ${page.pageInputGroups.map(feed => html`
+                  ${page.pageInputGroups.map(feed=>html`
                   <div class="column ${this._gridClasses(feed)} is-paddingless">
                     <form-render .feed="${feed}" .top=${this._computeTop()} .params=${this.parseParams()}></form-render>
                   </div>
@@ -189,80 +166,4 @@ class LandingPage extends LandingPageBase {
         <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
 
       </div>
-`;
-  }
-
-  constructor() {
-    super();
-  }
-
-  scrollPage(evt) {
-    const index = evt.currentTarget.pageIndex; // var elementToFocus = document.getElementById(window.location.hash.slice(1));
-    //   var elementToFocus = document.getElementById("#section_1");
-
-    var elementToFocus = this.shadowRoot.querySelector('#section_' + index);
-
-    if (elementToFocus) {
-      //  elementToFocus.scrollIntoView(true);
-      elementToFocus.scrollIntoView({
-        block: 'start',
-        behavior: 'smooth'
-      }); //   console.log("Scroll");
-    }
-  }
-
-  static get properties() {
-    return {
-      title: String,
-      name: String,
-      logo: String,
-      defaultColor: String,
-      pages: Array,
-      tab: Object,
-      group: Object,
-      toggle: Boolean
-    };
-  }
-
-  toggleNav() {
-    let nav = document.getElementsByClassName('navbar-menu');
-    nav[0].classList.toggle('mob-nav');
-  }
-
-  stateChanged(state) {
-    super.stateChanged(state);
-  }
-  /**
-     * Dialogs Back navigation, Pop dialogs' stack
-     *
-     * @param {ClickEvent} evt
-     * @private
-     */
-
-
-  _viewList(evt) {
-    this.mainNavigation();
-  }
-  /**
-   * TODO #301 duplicated function
-   * @param feed
-   * @returns {string}
-   * @private
-   */
-
-
-  _gridClasses(feed) {
-    const grid = super._gridClasses(feed);
-
-    const grids = grid.split('|');
-
-    try {
-      return `is-${Math.floor(Number(grids[0] / 2))}`;
-    } catch (e) {
-      return 'is-12';
-    }
-  }
-
-}
-
-window.customElements.define('landing-page', LandingPage);
+`}constructor(){super()}scrollPage(evt){const index=evt.currentTarget.pageIndex;var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get properties(){return{title:String,name:String,logo:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){let nav=document.getElementsByClassName("navbar-menu");nav[0].classList.toggle("mob-nav")}stateChanged(state){super.stateChanged(state)}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("landing-page",LandingPage);export{landingPage as $landingPage,LandingPageBase};

@@ -1,7 +1,1 @@
-import { SubmitElementBase } from "../../../../../elements/base/submit-element.js";
-import { buttonMixin } from "../../mixins/button-mixin.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class SubmitElement extends buttonMixin(SubmitElementBase) {}
-
-customElements.define(SubmitElement.is, SubmitElement);
+import{BaseElement,buttonMixin}from"../../../../../components/adaptive-ui.js";const SubmitElementBase=class extends BaseElement{static get is(){return"submit-element"}constructor(){super()}static get properties(){return{title:String,name:String,type:String,params:{type:Object,value:{}}}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.type="submit"}submit(){this.pl.submitForm()}init(pElement,loader){super.init(pElement,loader);this.name=pElement.name}};var submitElement={SubmitElementBase:SubmitElementBase};class SubmitElement extends buttonMixin(SubmitElementBase){}customElements.define(SubmitElement.is,SubmitElement);export{submitElement as $submitElement,SubmitElementBase};

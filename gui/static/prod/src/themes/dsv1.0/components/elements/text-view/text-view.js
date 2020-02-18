@@ -1,20 +1,10 @@
-import { html } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { TextViewBase } from "../../../../../elements/base/text-view.js";
-import { css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { TextViewStyles } from "./text-view-css.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const TextViewBase=class extends utilsMixin(BaseElement){static get is(){return"text-view"}static get properties(){return{icon:String,text:String,name:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);this.name=TextViewBase.toTitleCase(pElement.name);this.text=pElement.defaultValue}};var textView={TextViewBase:TextViewBase};const TextViewStyles=css`
 
-class TextView extends TextViewBase {
-  static get styles() {
-    return [TextViewStyles, css`
+`;var textViewCss={TextViewStyles:TextViewStyles};class TextView extends TextViewBase{static get styles(){return[TextViewStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
 
 <div class="field">
 <article class="message is-primary">
@@ -27,9 +17,4 @@ class TextView extends TextViewBase {
 </article>
 </div>
 
-        `;
-  }
-
-}
-
-window.customElements.define(TextView.is, TextView);
+        `}}window.customElements.define(TextView.is,TextView);export{textView as $textView,textViewCss as $textViewCss,TextViewBase,TextViewStyles};

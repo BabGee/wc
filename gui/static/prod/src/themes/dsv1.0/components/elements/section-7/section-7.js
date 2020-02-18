@@ -1,19 +1,10 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { SectionPElementBase } from "../../../../../elements/base/section-pelement.js";
-import { Section7Styles } from "./section-7-css.js";
-import { SectionStyles } from "../../../styles/section.js";
+import{css,html,SectionPElementBase,SectionStyles}from"../../../../../components/adaptive-ui.js";const Section7Styles=css`
 
-class SectionPElement7 extends SectionPElementBase {
-  static get styles() {
-    return [Section7Styles, SectionStyles, css`
+`;var section7Css={Section7Styles:Section7Styles};class SectionPElement7 extends SectionPElementBase{static get styles(){return[Section7Styles,SectionStyles,css`
             :host {
               display: block;
             }
-          `];
-  }
-
-  renderDefault() {
-    return html`
+          `]}renderDefault(){return html`
         
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
@@ -91,13 +82,4 @@ class SectionPElement7 extends SectionPElementBase {
                         <a href="" class="landing-btn-borderd button is-rounded btn" style="width: 20%; margin: 0 auto; display: flex; justify-content: center; align-content: center">All Work</a>
                     </div>
                 </div>
-            </section> `;
-  }
-
-  static get is() {
-    return 'section-7';
-  }
-
-}
-
-customElements.define(SectionPElement7.is, SectionPElement7);
+            </section> `}static get is(){return"section-7"}}customElements.define(SectionPElement7.is,SectionPElement7);export{section7Css as $section$7Css,Section7Styles};

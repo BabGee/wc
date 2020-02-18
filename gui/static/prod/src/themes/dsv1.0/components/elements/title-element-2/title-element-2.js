@@ -1,18 +1,14 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { BaseElement } from "../../../../../core/base-element.js";
-import { TitleElement2Styles } from "./title-element-2-css.js";
+import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const TitleElement2Styles=css`
 
-class TitleElement2 extends BaseElement {
-  static get styles() {
-    return [TitleElement2Styles, css`
+h1{
+    text-transform: initial!important;
+}
+
+`;var titleElement2Css={TitleElement2Styles:TitleElement2Styles};class TitleElement2 extends BaseElement{static get styles(){return[TitleElement2Styles,css`
             :host {
               display: block;
             }
-          `];
-  }
-
-  render() {
-    return html`
+          `]}render(){return html`
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
            
             <div class="container">
@@ -21,13 +17,4 @@ class TitleElement2 extends BaseElement {
                     <p class="sub-title has-text-centered">${this.e.defaultValue}</p>
                 </div>
             </div>
-        `;
-  }
-
-  static get is() {
-    return 'title-element-2';
-  }
-
-}
-
-customElements.define(TitleElement2.is, TitleElement2);
+        `}static get is(){return"title-element-2"}}customElements.define(TitleElement2.is,TitleElement2);export{titleElement2Css as $titleElement$2Css,TitleElement2Styles};

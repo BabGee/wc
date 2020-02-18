@@ -1,36 +1,30 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { NavbarBase } from "../../../../../elements/base/navbar-base.js";
-import { NavbarEightDarkStyles } from "./navbar-8-dark-css.js";
-import { NavbarEightDefaultStyles } from "./navbar-8-default-css.js";
-import "../../../../../../node_modules/fa-icons/index.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const NavbarEightDarkStyles=css`
+nav {
+	font-size: 16px;
+}
+.bind-box {
+	margin-bottom: 1.5rem;
+	background-color: #4a4a4a!important;
+	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+	color: white;
+    display: block;
+    padding: 1.25rem 4.5rem;
+    
+}
+#site-name {
+	font-size: 25px;
+}
 
-class Navbar8 extends NavbarBase {
-  constructor() {
-    super();
-  }
+.icon{
+  margin: 0px 3px;
+}
+`;var navbar8DarkCss={NavbarEightDarkStyles:NavbarEightDarkStyles};const NavbarEightDefaultStyles=css`
 
-  static get properties() {
-    return {
-      darkMode: {
-        type: Boolean,
-        reflect: true
-      }
-    };
-  }
-
-  get styles() {
-    console.log("dark mode");
-    return [this.darkModeUpdator, css`
+`;var navbar8DefaultCss={NavbarEightDefaultStyles:NavbarEightDefaultStyles};class Navbar8 extends NavbarBase{constructor(){super()}static get properties(){return{darkMode:{type:Boolean,reflect:!0}}}get styles(){console.log("dark mode");return[this.darkModeUpdator,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    // this is dark
-    return html`
+      `]}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
   
     <div class="bind-box">
@@ -70,27 +64,4 @@ class Navbar8 extends NavbarBase {
     </div>
 
 
-     `;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  darkModeUpdator() {
-    this.darkMode = this.e.details.darkMode;
-
-    if (this.darkMode) {
-      return NavbarEightDarkStyles;
-    } else {
-      return NavbarEightDefaultStyles;
-    }
-  }
-
-  static get is() {
-    return 'navbar-8';
-  }
-
-}
-
-customElements.define(Navbar8.is, Navbar8);
+     `}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}darkModeUpdator(){this.darkMode=this.e.details.darkMode;if(this.darkMode){return NavbarEightDarkStyles}else{return NavbarEightDefaultStyles}}static get is(){return"navbar-8"}}customElements.define(Navbar8.is,Navbar8);export{navbar8DarkCss as $navbar$8DarkCss,navbar8DefaultCss as $navbar$8DefaultCss,NavbarEightDarkStyles,NavbarEightDefaultStyles};

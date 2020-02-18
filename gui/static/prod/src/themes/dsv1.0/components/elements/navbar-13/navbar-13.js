@@ -1,19 +1,24 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { NavbarBase } from "../../../../../elements/base/navbar-base.js";
-import { NavbarThirteenStyles } from "./navbar-13-css.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class Navbar13 extends NavbarBase {
-  static get styles() {
-    return [NavbarThirteenStyles, css`
+import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const NavbarThirteenStyles=css`
+nav {
+	font-size: 16px;
+}
+      .bind-box {
+	margin-bottom: 1.5rem;
+	background-color: white;
+	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+	color: #4a4a4a;
+    display: block;
+    padding: 1.25rem 4.5rem;
+    
+}
+#site-name {
+	font-size: 25px;
+}
+`;var navbar13Css={NavbarThirteenStyles:NavbarThirteenStyles};class Navbar13 extends NavbarBase{static get styles(){return[NavbarThirteenStyles,css`
       :host{
         display: block;
       }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
     <div class="bind-box">
@@ -73,13 +78,4 @@ class Navbar13 extends NavbarBase {
           </nav>
         </div>
 
-     `;
-  }
-
-  static get is() {
-    return 'navbar-13';
-  }
-
-}
-
-customElements.define(Navbar13.is, Navbar13);
+     `}static get is(){return"navbar-13"}}customElements.define(Navbar13.is,Navbar13);export{navbar13Css as $navbar$13Css,NavbarThirteenStyles};

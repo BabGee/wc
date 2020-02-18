@@ -1,32 +1,7 @@
-import { HyperlinkElementBase } from "../../../../../elements/base/hyperlink-element.js";
-import { ACTION_SERVICE_CALL, buttonMixin } from "../../mixins/button-mixin.js";
-import { HyperlinkElementStyles } from "./hyperlink-element-css.js";
-import { css } from "../../../../../../node_modules/lit-element/lit-element.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{utilsMixin,BaseElement,css,ACTION_SERVICE_CALL,buttonMixin}from"../../../../../components/adaptive-ui.js";const HyperlinkElementBase=class extends utilsMixin(BaseElement){static get is(){return"hyperlink-element"}static get properties(){return{name:String,params:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);this.title=HyperlinkElementBase.toTitleCase(pElement.name);this.name=HyperlinkElementBase.toTitleCase(pElement.name);this.params=loader.pl.paramsCopy()}};var hyperlinkElement={HyperlinkElementBase:HyperlinkElementBase};const HyperlinkElementStyles=css`
 
-class HyperlinkElement extends buttonMixin(HyperlinkElementBase) {
-  static get properties() {
-    return {
-      name: String,
-      params: {
-        type: Object,
-        value: {}
-      }
-    };
-  }
-
-  static get styles() {
-    return [HyperlinkElementStyles, css`
+`;var hyperlinkElementCss={HyperlinkElementStyles:HyperlinkElementStyles};class HyperlinkElement extends buttonMixin(HyperlinkElementBase){static get properties(){return{name:String,params:{type:Object,value:{}}}}static get styles(){return[HyperlinkElementStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  get action() {
-    return ACTION_SERVICE_CALL;
-  }
-
-}
-
-customElements.define(HyperlinkElement.is, HyperlinkElement);
+      `]}get action(){return ACTION_SERVICE_CALL}}customElements.define(HyperlinkElement.is,HyperlinkElement);export{hyperlinkElement as $hyperlinkElement,hyperlinkElementCss as $hyperlinkElementCss,HyperlinkElementBase,HyperlinkElementStyles};

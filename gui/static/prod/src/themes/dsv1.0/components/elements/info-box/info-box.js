@@ -1,18 +1,28 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { BaseElement } from "../../../../../core/base-element.js";
-import { InfoBoxStyles } from "./info-box-css.js";
+import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const InfoBoxStyles=css`
+.button{
+    margin-top: 20px;
+}
+.hero-body{
+    color: var(--app-default-color);
+}
+.default{
+    color: var(--app-default-color);
+}
+.button{
+    background-color: var(--app-default-color) !important;
+    border-radius: 15px;
+}
+.hero-body {
+    flex-grow: 1;
+    flex-shrink: 0;
+    padding: 3rem 2.5rem;
+}
 
-class InfoBox extends BaseElement {
-  static get styles() {
-    return [InfoBoxStyles, css`
+`;var infoBoxCss={InfoBoxStyles:InfoBoxStyles};class InfoBox extends BaseElement{static get styles(){return[InfoBoxStyles,css`
             :host {
               display: block;
             }
-          `];
-  }
-
-  render() {
-    return html`
+          `]}render(){return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         
         <section class="hero">
@@ -30,13 +40,4 @@ class InfoBox extends BaseElement {
                 <p class="button has-text-white">Claim direct deposit</p>
             </div>
         </section>
-        `;
-  }
-
-  static get is() {
-    return 'info-box';
-  }
-
-}
-
-customElements.define(InfoBox.is, InfoBox);
+        `}static get is(){return"info-box"}}customElements.define(InfoBox.is,InfoBox);export{infoBoxCss as $infoBoxCss,InfoBoxStyles};

@@ -1,19 +1,10 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { SectionPElementBase } from "../../../../../elements/base/section-pelement.js";
-import { SectionStyles } from "../../../styles/section.js";
-import { Section5Styles } from "./section-5-css.js";
+import{css,html,SectionPElementBase,SectionStyles}from"../../../../../components/adaptive-ui.js";const Section5Styles=css`
 
-class SectionPElement5 extends SectionPElementBase {
-  static get styles() {
-    return [Section5Styles, SectionStyles, css`
+`;var section5Css={Section5Styles:Section5Styles};class SectionPElement5 extends SectionPElementBase{static get styles(){return[Section5Styles,SectionStyles,css`
             :host {
               display: block;
             }
-          `];
-  }
-
-  renderDefault() {
-    return html`
+          `]}renderDefault(){return html`
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <section class="section blue-section">
@@ -47,13 +38,4 @@ class SectionPElement5 extends SectionPElementBase {
                         </div>
                     </div>
                 </div>
-            </section>`;
-  }
-
-  static get is() {
-    return 'section-5';
-  }
-
-}
-
-customElements.define(SectionPElement5.is, SectionPElement5);
+            </section>`}static get is(){return"section-5"}}customElements.define(SectionPElement5.is,SectionPElement5);export{section5Css as $section$5Css,Section5Styles};

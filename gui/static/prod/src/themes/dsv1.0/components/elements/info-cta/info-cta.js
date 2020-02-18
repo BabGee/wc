@@ -1,22 +1,32 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { SectionPElementDsc } from "../../../../../elements/base/section-pelement-dsc.js";
-import { InfoCtaStyles } from "./info-cta-css.js";
+import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js";const InfoCtaStyles=css`
 
-class InfoCta extends SectionPElementDsc {
-  static get styles() {
-    return [InfoCtaStyles, css`
+.mipay-info-cta{
+    width: 100%;
+    height: 260px;
+    align-items: center;
+    background: #fff!important;
+    display: flex;
+    padding: 0 10%;
+}
+.info-btn{
+    margin-right: 20px;
+}
+.btn{
+    width: 200px!important;
+    height: 4em!important;
+    color: #fff!important;
+    border-radius: 50px;
+}
+.button.btn:hover{
+    background: var(--app-default-color)!important;
+    color: #fff!important;
+}
+
+`;var infoCtaCss={InfoCtaStyles:InfoCtaStyles};class InfoCta extends SectionPElementDsc{static get styles(){return[InfoCtaStyles,css`
             :host {
               display: block;
             }
-          `];
-  }
-
-  static get is() {
-    return 'info-cta';
-  }
-
-  render() {
-    return html`
+          `]}static get is(){return"info-cta"}render(){return html`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
      
 
@@ -35,9 +45,4 @@ class InfoCta extends SectionPElementDsc {
                 </div>
             </div>
         </div>
-        `;
-  }
-
-}
-
-customElements.define(InfoCta.is, InfoCta);
+        `}}customElements.define(InfoCta.is,InfoCta);export{infoCtaCss as $infoCtaCss,InfoCtaStyles};

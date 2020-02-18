@@ -1,20 +1,31 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { NavbarBase } from "../../../../../elements/base/navbar-base.js";
-import { NavbarFourStyles } from "./navbar-4-css.js";
-import "../../../../../../node_modules/fa-icons/index.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const NavbarFourStyles=css`
+nav {
+	font-size: 16px;
+}
 
-class Navbar4 extends NavbarBase {
-  static get styles() {
-    return [NavbarFourStyles, css`
+.bind-box {
+	margin-bottom: 1.5rem;
+	background-color: white;
+	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+	color: #4a4a4a;
+    display: block;
+    padding: 1.25rem 4.5rem;
+    
+}
+
+#site-name {
+	font-size: 25px;
+}
+
+.has-text-white a {
+ 	color: #fff;
+ }
+
+`;var navbar4Css={NavbarFourStyles:NavbarFourStyles};class Navbar4 extends NavbarBase{static get styles(){return[NavbarFourStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <style>
 
@@ -101,9 +112,9 @@ nav {
                 </a>
               </div>
               <div class="navbar-menu is-spaced is-active">
-              ${this.interface.pageGroups.map((pageGroup, pageGroupIndex) => html`
-              <a href="${window.location.pathname + window.location.search}#/${pageGroupIndex}/0/" 
-              class="navbar-item ${pageGroupIndex == this._pageGroup ? 'is-active has-text-link' : ''}" >
+              ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+              <a href="${window.location.pathname+window.location.search}#/${pageGroupIndex}/0/" 
+              class="navbar-item ${pageGroupIndex==this._pageGroup?"is-active has-text-link":""}" >
                   ${pageGroup.title}
               </a>`)}
               </div>
@@ -121,13 +132,4 @@ nav {
         </div>
         </div>
 
-     `;
-  }
-
-  static get is() {
-    return 'navbar-4';
-  }
-
-}
-
-customElements.define(Navbar4.is, Navbar4);
+     `}static get is(){return"navbar-4"}}customElements.define(Navbar4.is,Navbar4);export{navbar4Css as $navbar$4Css,NavbarFourStyles};

@@ -1,38 +1,79 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../../node_modules/@polymer/paper-card/paper-card.js";
-import "../datalist-element/loader-element.js";
-import { SummaryBoxesStyles } from "./summary-boxes-css.js";
-import { SummaryBoxesBase } from "../../../../../elements/base/summary-boxes.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
+import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const SummaryBoxesBase=class extends utilsMixin(dataSourceMixin(BaseElement)){static get is(){return"summary-boxes"}static get properties(){return{service:String,color:String,icon:String,params:Object,currentData:Object}}dscDataName(){return this.e.defaultValue}dataResponseType(){return Symbol.for("DATA")}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{self.currentGroups=self.groups;self.currentData=self.data;self.loading=!1})}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}init(pElement,loader){super.init(pElement,loader);var self=this;self.title=SummaryBoxesBase.toTitleCase(pElement.name);self.icon=pElement.icon;self.service=pElement.service;self.params=loader.pl.paramsCopy();self.maxlength=pElement.max;self.loader=this.loadData()}};var summaryBoxes={SummaryBoxesBase:SummaryBoxesBase};const SummaryBoxesStyles=css`
+@media screen and (max-width: 775px){
+    .column{
+        width: 100%;
+        max-width: 100%;
+    }
+}
+.column{
+    width: 236px;
+    max-width: 236px;
+}
+.summary-wrapper{
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ebebed;
+    border-radius: 10px;
+    padding: 30px;
+}
+.summary-details{
+    width: 100%;
+}
+.summary-details h1{
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    color: #141821;
+}
+.summary-details p, .summary-details h1{
+    margin: 0;
+}
+.summary-details p.currency{
+    font-size: 12px;
+    font-weight: bold;
+}
+.summary-details p.summary-type{
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #858997;
+}
+.chart {
+    background: white;
+    padding: 0px 20px 20px 29px;       
+    position: relative;
+    left: -30px;
+}
 
-class SummaryBoxes extends SummaryBoxesBase {
-  static get styles() {
-    return [SummaryBoxesStyles, css`
+`;var summaryBoxesCss={SummaryBoxesStyles:SummaryBoxesStyles};class SummaryBoxes extends SummaryBoxesBase{static get styles(){return[SummaryBoxesStyles,css`
             :host {
               display: block;
             }
-          `];
-  }
-
-  renderDefault() {
-    return html`
+          `]}renderDefault(){return html`
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <div class="summary-content">
         
-            ${this.loading ? html`
+            ${this.loading?html`
             <loader-element></loader-element>
-            ` : html`
-            ${!this._rowsOrColumns(this.rows) ? html`
+            `:html`
+            ${!this._rowsOrColumns(this.rows)?html`
             
-            ${this.groups.map((group, groupIndex) => html`
+            ${this.groups.map((group,groupIndex)=>html`
              <div class="row">
                 <div class="col-md-12 group-summary">
                     <h1>${group}</h1>
                 </div>
             </div>
             <div class="columns is-multiline">
-            ${this._computeData(groupIndex).map(item => html`
+            ${this._computeData(groupIndex).map(item=>html`
                 <div class="column">
                     <div class="summary-wrapper">
                         <div class="graph">
@@ -70,7 +111,7 @@ class SummaryBoxes extends SummaryBoxesBase {
             </div>
              
              `)}
-            ` : html`
+            `:html`
             
               <div class="row">
                 <div class="col-md-12">
@@ -78,7 +119,7 @@ class SummaryBoxes extends SummaryBoxesBase {
                 </div>
               </div>
               
-              ${this.rows.map(item => html`
+              ${this.rows.map(item=>html`
                 <div class="column">
                     <div class="summary-wrapper">
                         <div class="graph">
@@ -96,29 +137,4 @@ class SummaryBoxes extends SummaryBoxesBase {
             `}
             `}
             
-        </div>`;
-  }
-
-  firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-  }
-
-  _computeData(index) {
-    return this.data[index];
-  }
-
-  _rowsOrColumns(cData) {
-    if (cData === undefined) {
-      return;
-    }
-
-    return cData.length;
-  }
-
-  onLoadData(dsc) {
-    super.onLoadData(dsc);
-  }
-
-}
-
-customElements.define(SummaryBoxes.is, SummaryBoxes);
+        </div>`}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}onLoadData(dsc){super.onLoadData(dsc)}}customElements.define(SummaryBoxes.is,SummaryBoxes);export{summaryBoxes as $summaryBoxes,summaryBoxesCss as $summaryBoxesCss,SummaryBoxesBase,SummaryBoxesStyles};

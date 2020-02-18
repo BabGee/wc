@@ -1,28 +1,284 @@
-import { LitElement, html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import "../../../../../../node_modules/fa-icons/index.js";
-import "../../../../../../node_modules/@polymer/paper-listbox/paper-listbox.js";
-import "../../../../../../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js";
-import "../../../../../../node_modules/@polymer/paper-item/paper-item.js";
-import "../../../../../../node_modules/@polymer/paper-icon-button/paper-icon-button.js";
-import "../../../../../../node_modules/@polymer/paper-dropdown-menu/paper-dropdown-menu.js";
-import "./contact-type-footer.js";
-import "./contact-type-header.js";
-import { ContactTypeStyles } from "./datalist-element-styles/contact-type-css.js";
-export class ContactType extends LitElement {
-  constructor() {
-    super();
-  }
+import{css,LitElement,html,DatalistFooterStyles,DatalistHeaderStyles}from"../../../../../components/adaptive-ui.js";const ContactTypeFooterStyles=css`
 
-  static get styles() {
-    return [ContactTypeStyles, css`
+`;var contactTypeFooterCss={ContactTypeFooterStyles:ContactTypeFooterStyles};class ContactTypeFooter extends LitElement{static get styles(){return[DatalistFooterStyles,ContactTypeFooterStyles,css`
         :host {
           display: block;
         }
-      `];
-  }
+      `]}render(){return html`
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <div class="wrapper is-flex" style="margin-top: 20px;">
+      <div class="size">
+      
+        <div class="perpage-dropdown">
+          <div class="p-display" >
+          
+            ${this.availableSize.length?html`
+            <p class="per is-capitalized is-size-7" @click=${this._dropdownReveal}>Per Page ${this.size}</p>
+            <div class="p-dropdown">
+            <ul>
+              ${this.availableSize.map(size=>html`<li class="${size==this.size?"active-list":""}"><a href="$1" class="is-size-7" data-name="${size}"  @click="${this._newSizeIsSelected}">${size}</a></li>`)}
+              
+            </ul>
+            </div>
+            `:html`<p class="is-capitalized is-size-7">Per Page ${this.size}</p>`}
+          </div>
 
-  render() {
-    return html`
+        </div>
+      </div>
+      <div class="range">
+        <div class="is-flex">
+          <div class="pagination-range">
+            <p class="is-size-7">${this._computeCurrentSize(this.page,this.size)} - ${this._computeCurrentMaxSize(this.page,this.size,this.totalElements)} of ${this.totalElements}</p>
+          </div>
+          <div class="is-flex pagination-buttons">
+          ${this._prevButtonEnabled(this.page)?html`<div class="left-btn btn" @click="${this._prevPage}" ?disabled="${!this._prevButtonEnabled(this.page)}"></div>`:html`<div></div>`}
+          ${this._nextButtonEnabled(this.page,this.totalPages)?html`<div class="right-btn btn" @click="${this._nextPage}" ?disabled="${!this._nextButtonEnabled(this.page,this.totalPages)}"></div>`:html`<div></div>`} 
+          </div>
+        </div>
+      </div>
+    </div>`}constructor(){super();this.availableSize=[];this.size=50}static get is(){return"contact-type-footer"}static get properties(){return{footerPosition:String,size:{type:Number},page:{type:Number},totalElements:{type:Number},totalPages:{type:Number},availableSize:Array}}_dropdownReveal(){const drp=this.shadowRoot.querySelector(".p-dropdown");switch(drp.style.display){case"block":drp.style.display="none";break;default:drp.style.display="block";break;}}_computeCurrentSize(page,size){return(page-1)*size+1}_computeCurrentMaxSize(page,size,totalElements){const maxSize=size*page;return maxSize>totalElements?totalElements:maxSize}_nextPage(){if(this.page<this.totalPages){this.page=this.page+1}this.dispatchEvent(new CustomEvent("n-page",{detail:{page:this.page}}))}_prevPage(){if(0<this.page-1){this.page=this.page-1}this.dispatchEvent(new CustomEvent("p-page",{detail:{page:this.page}}))}_nextButtonEnabled(page,totalPages){return page<totalPages}_prevButtonEnabled(page){return 1<page}_newSizeIsSelected(){const newSize=this.shadowRoot.querySelector("paper-listbox").selected;if(newSize){if(null!==this.oldPage&&this.oldPage!==void 0){this.page=1}this.size=newSize;this.dispatchEvent(new CustomEvent("size-change",{detail:{size:newSize}}))}}_computePosition(position){if("right"===position){return"end-justified"}return""}}customElements.define(ContactTypeFooter.is,ContactTypeFooter);var contactTypeFooter={ContactTypeFooter:ContactTypeFooter};const ContactTypeHeaderStyles=css`
+
+`;var contactTypeHeaderCss={ContactTypeHeaderStyles:ContactTypeHeaderStyles};class ContactTypeHeader extends LitElement{static get styles(){return[DatalistHeaderStyles,ContactTypeHeaderStyles,css`
+        :host {
+          display: block;
+        }
+      `]}render(){return html`
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    
+    <div class="table-header-buttons" style="margin-bottom: 15px;">
+      <div class="heading">
+        <h1 class="title is-size-6">${this.title}</h1>
+      </div>
+      <button @tap="${this.generatePDF}" class="button is-info is-size-7 is-rounded">Export PDF</button>
+      <button @tap="${this.generateCSV}" class="button is-success is-size-7 is-rounded">Export CSV</button>
+    </div>
+`}static get is(){return"contact-type-header"}static get properties(){return{title:String}}}customElements.define(ContactTypeHeader.is,ContactTypeHeader);var contactTypeHeader={ContactTypeHeader:ContactTypeHeader};const ContactTypeStyles=css`
+
+ 
+
+.basic-info-p1 {
+    
+    margin-top: -40px; 
+    margin-left: 45px;
+}
+
+.basic-info-p2 {
+
+    margin-left: 45px;
+}
+
+.th-basic-info {
+
+    margin-left: -80px;
+    padding-top:5px;
+}
+
+.td-basic-info {
+
+    margin-left: -90px;
+}
+
+.td-basic-info1 {
+
+    margin-left: -50px;
+}
+
+
+.sortbtn{
+    margin-left: 20px;
+}
+
+.th-add-contact{
+
+    margin-left: -20px;
+}
+
+.items-per{
+
+    margin-left: -130px;
+}
+
+.pagination-1 {
+
+    margin-left: -50px;
+}
+
+.list-icon{
+
+padding-top: 0px;
+padding-bottom: 13px;
+margin-top: 1px;
+}
+
+.basic-info-icon{
+
+padding-top: 7px;
+padding-bottom: 0px;
+}
+
+
+/* small tablet to big tablets: 1024px*/
+@media only screen and (max-width: 1024px ) {
+
+.list-icon{
+
+        margin-left: -150px;
+        }
+
+.th-add-contact{
+
+        margin-left: -80px;
+        }
+
+.td-basic-info {
+
+        margin-left: -80px;
+        }
+
+.td-basic-info1 {
+
+        margin-left: -40px;
+        }
+
+.items-per{
+
+    margin-left: -110px;
+    }
+
+.separatore-line {
+
+    display: none;
+}
+
+.counting-pagination {
+
+    display: block;
+}
+
+.pagination-1 {
+
+margin-left: -200px;
+}
+
+
+}
+
+/* small tablet to big tablets: from 768px to 1023px */
+@media only screen and (max-width: 768px ) {
+
+.list-icon{
+
+        margin-left: -150px;
+        }
+
+.th-add-contact{
+
+        margin-left: -80px;
+        }
+
+.td-basic-info {
+
+        margin-left: -80px;
+        }
+
+.td-basic-info1 {
+
+        margin-left: -40px;
+        }
+
+.items-per{
+
+    margin-left: -110px;
+    }
+
+.separatore-line {
+
+    display: none;
+}
+
+.counting-pagination {
+
+    display: block;
+}
+
+.pagination-1 {
+
+margin-left: -200px;
+}
+
+
+}
+
+/* small tablet to big tablets: from 751px to 1023px */
+@media only screen and (max-width: 751px ) {
+
+    .list-icon{
+
+            margin-left: -150px;
+            }
+
+    .th-add-contact{
+
+            margin-left: -80px;
+            }
+
+    .td-basic-info {
+
+            margin-left: -80px;
+            }
+
+    .td-basic-info1 {
+
+            margin-left: -40px;
+            }
+
+    .items-per{
+
+        margin-left: -110px;
+        }
+
+    .separatore-line {
+
+        display: none;
+    }
+
+    .counting-pagination {
+
+        display: block;
+    }
+
+    .pagination-1 {
+
+margin-left: -200px;
+}
+
+   
+}
+
+.active-row {
+  background-color: grey; 
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03); 
+  border-left: 5px solid #419588;  
+  border-radius: 3px; 
+  margin-bottom: 5px;
+  }
+.active-color {
+   color: #419588;
+}
+.normal-tr{
+  background-color: white; 
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.03); 
+  border-radius: 3px; 
+  margin-bottom: 5px;
+ 
+}
+
+`;var contactTypeCss={ContactTypeStyles:ContactTypeStyles};class ContactType extends LitElement{constructor(){super()}static get styles(){return[ContactTypeStyles,css`
+        :host {
+          display: block;
+        }
+      `]}render(){return html`
 
       <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -159,7 +415,7 @@ export class ContactType extends LitElement {
               
                 <tbody>
 
-                ${this.data.map((item, itemIndex) => html`
+                ${this.data.map((item,itemIndex)=>html`
                 
                 <tr id="tr-${itemIndex}" class="normal-tr">
 
@@ -167,7 +423,7 @@ export class ContactType extends LitElement {
 
                   <label class="checkbox">
 
-                  <input id="checkbox-${itemIndex}" @click="${() => this.checkRow(itemIndex)}" type="checkbox">
+                  <input id="checkbox-${itemIndex}" @click="${()=>this.checkRow(itemIndex)}" type="checkbox">
                   
                   </label>
 
@@ -199,7 +455,7 @@ export class ContactType extends LitElement {
                   <td style="padding-top: 24px; padding-bottom: 21px;">
 
                   <p style=" font-size: 12px; font-family: Montserrat;  
-                  color: #757575; font-weight: 500px; ">${item['Contact Count']}</p>
+                  color: #757575; font-weight: 500px; ">${item["Contact Count"]}</p>
                   </td>
 
 
@@ -305,7 +561,7 @@ export class ContactType extends LitElement {
                 </tbody>
               </table>
 
-              ${this.paginate ? html`
+              ${this.paginate?html`
 <contact-type-footer resources="${this.resources}"
                        language="${this.language}"
                        footer-position="${this.footerPosition}"
@@ -321,122 +577,7 @@ export class ContactType extends LitElement {
                        @p-page="${this._pageChanged}"
                        @n-page="${this._pageChanged}">
 </contact-type-footer>
-` : html``}
+`:html``}
 
   </section>
-        `;
-  }
-
-  static get is() {
-    return 'contact-type';
-  }
-
-  static get properties() {
-    return {
-      /**
-       * Contains the data which will be displayed in the table.
-       */
-      data: {
-        type: Array,
-        notify: true
-      },
-      details: Object,
-      paginate: {
-        type: Boolean,
-        value: false
-      },
-      page: {
-        type: Number
-      },
-      size: {
-        type: Number
-      },
-
-      /**
-       * The number of the previous page
-       */
-      oldPage: {
-        type: Number,
-        notify: true
-      },
-
-      /**
-       * The total of elements have to be provided in case of pagination, it is mandatory.
-       */
-      totalElements: Number,
-
-      /**
-       * The total of pages have to be provided in case of pagination, it is mandatory.
-       * It is used to compute the footer.
-       */
-      totalPages: Number,
-
-      /**
-       * The available size in case of pagination.
-       */
-      availableSize: Array,
-
-      /**
-       * If true, the rows may be selectable.
-       */
-      selectable: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Contains the positions of selected columns.
-       * Can contain a specific data if selectableDataKey is setted.
-       */
-      selected: {
-        type: Array
-      },
-      title: String
-    };
-  }
-
-  checkRow(index) {
-    const row = this.shadowRoot.querySelector('#tr-' + index);
-    const checkbox = this.shadowRoot.querySelector('#checkbox-' + index);
-
-    if (checkbox.checked == true) {
-      row.classList.add('active-row');
-    } else {
-      row.classList.remove('active-row');
-    }
-  }
-
-  _pageChanged(evt) {
-    const page = evt.detail.page;
-    const oldPage = this.page;
-
-    if (oldPage !== undefined) {
-      this.dispatchEvent(new CustomEvent('page-change', {
-        detail: {
-          oldPage: oldPage,
-          page: page
-        }
-      }));
-    }
-
-    this.page = page;
-  }
-
-  _sizeChanged(evt) {
-    const size = evt.detail.size;
-    const oldSize = this.size;
-
-    if (oldSize !== undefined) {
-      this.dispatchEvent(new CustomEvent('size-change', {
-        detail: {
-          oldSize: oldSize,
-          size: size
-        }
-      }));
-    }
-
-    this.size = size;
-  }
-
-}
-customElements.define(ContactType.is, ContactType);
+        `}static get is(){return"contact-type"}static get properties(){return{data:{type:Array,notify:!0},details:Object,paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String}}checkRow(index){const row=this.shadowRoot.querySelector("#tr-"+index),checkbox=this.shadowRoot.querySelector("#checkbox-"+index);if(!0==checkbox.checked){row.classList.add("active-row")}else{row.classList.remove("active-row")}}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}}customElements.define(ContactType.is,ContactType);var contactType={ContactType:ContactType};export{contactTypeFooter as $contactTypeFooter,contactTypeHeader as $contactTypeHeader,contactType as $contactType,contactTypeCss as $contactTypeCss,contactTypeFooterCss as $contactTypeFooterCss,contactTypeHeaderCss as $contactTypeHeaderCss,ContactTypeFooter,ContactTypeHeader,ContactType,ContactTypeStyles,ContactTypeFooterStyles,ContactTypeHeaderStyles};

@@ -1,19 +1,24 @@
-import { html, css } from "../../../../../../node_modules/lit-element/lit-element.js";
-import { NavbarBase } from "../../../../../elements/base/navbar-base.js";
-import { NavbarTwelveStyles } from "./navbar-12-css.js";
-/* eslint max-len: ["error", { "ignoreTemplateLiterals": true }]*/
-
-class Navbar12 extends NavbarBase {
-  static get styles() {
-    return [NavbarTwelveStyles, css`
+import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const NavbarTwelveStyles=css`
+nav {
+	font-size: 16px;
+}
+      .bind-box {
+	margin-bottom: 1.5rem;
+	background-color: white;
+	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+	color: #4a4a4a;
+    display: block;
+    padding: 1.25rem 4.5rem;
+    
+}
+#site-name {
+	font-size: 25px;
+}
+`;var navbar12Css={NavbarTwelveStyles:NavbarTwelveStyles};class Navbar12 extends NavbarBase{static get styles(){return[NavbarTwelveStyles,css`
       :host{
         display: block;
       }
-      `];
-  }
-
-  renderDefault() {
-    return html`
+      `]}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
    <div class="bind-box">
           <div class="block">
@@ -42,13 +47,4 @@ class Navbar12 extends NavbarBase {
         </div>
 
 
-     `;
-  }
-
-  static get is() {
-    return 'navbar-12';
-  }
-
-}
-
-customElements.define(Navbar12.is, Navbar12);
+     `}static get is(){return"navbar-12"}}customElements.define(Navbar12.is,Navbar12);export{navbar12Css as $navbar$12Css,NavbarTwelveStyles};
