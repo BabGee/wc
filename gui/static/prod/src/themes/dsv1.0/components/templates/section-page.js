@@ -693,15 +693,20 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
 }
 .modal-dialogue{
   width: 90%;
+  height: 90%;
   padding: 0;
   background-color: #fff;
   border-radius: 6px;
+  overflow: auto;
 }
 .dialogue-header{
   background: var(--app-default-color);
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   padding: 20px 30px;
+  width: 84.5%;
+  z-index: 9999;
+  position: fixed;
 }
 .modal-column{
   width: 50%;
@@ -724,6 +729,51 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
   position: relative;
   top: 12px;
 }
+.dialogue-body{
+  position: relative;
+  top: 100px;
+}
+@media screen and (max-width: 320px){
+  .dialogue-header{
+    width: 75%!important;
+  }
+}
+@media screen and (max-width: 360px){
+  .dialogue-header{
+    width: 75%!important;
+  }
+}
+@media screen and (max-width: 375px){
+  .dialogue-header{
+    width: 75%!important;
+  }
+}
+@media screen and (max-width: 411px){
+  .dialogue-header{
+    width: 75%!important;
+  }
+}
+@media screen and (max-width: 414px){
+  .dialogue-header{
+    width: 75%!important;
+  }
+}
+@media screen and (max-width: 700px){
+  .dialogue-header{
+    width: 75%!important;
+  }
+}
+@media screen and (max-width: 768px){
+  .dialogue-header{
+    width: 75%!important;
+  }
+}
+@media screen and (max-width: 1023px){
+  .dialogue-header{
+    width: 84.5%;
+  }
+}
+
       </style>
       ${this.payload?html$1`
       <div class="modal-container">
