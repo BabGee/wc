@@ -733,46 +733,228 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
   position: relative;
   top: 100px;
 }
-@media screen and (max-width: 320px){
+
+@media screen and (max-width: 1280px){
   .dialogue-header{
-    width: 75%!important;
-  }
-}
-@media screen and (max-width: 360px){
+    width: 83.6%!important;
+  } }
+
+@media screen and (max-width: 1276px){
   .dialogue-header{
-    width: 75%!important;
-  }
-}
-@media screen and (max-width: 375px){
-  .dialogue-header{
-    width: 75%!important;
-  }
-}
-@media screen and (max-width: 411px){
-  .dialogue-header{
-    width: 75%!important;
-  }
-}
-@media screen and (max-width: 414px){
-  .dialogue-header{
-    width: 75%!important;
-  }
-}
-@media screen and (max-width: 700px){
-  .dialogue-header{
-    width: 75%!important;
-  }
-}
-@media screen and (max-width: 768px){
-  .dialogue-header{
-    width: 75%!important;
-  }
-}
-@media screen and (max-width: 1023px){
-  .dialogue-header{
-    width: 84.5%;
-  }
-}
+    width: 83.7%!important;
+  } }
+
+  @media screen and (max-width: 1257px){
+    .dialogue-header{
+      width: 83.5%!important;
+    }  }
+
+    @media screen and (max-width: 1242px){
+      .dialogue-header{
+        width: 83.4%!important;
+      } }
+
+      @media screen and (max-width: 1225px){
+        .dialogue-header{
+          width: 83.39%!important;
+        } }
+
+        @media screen and (max-width: 1215px){
+          .dialogue-header{
+            width: 83.29%!important;
+          } }
+
+          @media screen and (max-width: 1205px){
+            .dialogue-header{
+              width: 83.28%!important;
+            } }
+
+            @media screen and (max-width: 1190px){
+              .dialogue-header{
+                width: 83.22%!important;
+              } }
+
+              @media screen and (max-width: 1178px){
+                .dialogue-header{
+                  width: 83.1%!important;
+                } }
+
+                @media screen and (max-width: 1158px){
+                  .dialogue-header{
+                    width: 82.9%!important;
+                  } }
+
+                  @media screen and (max-width: 1117px){
+                    .dialogue-header{
+                      width: 82.7%!important;
+                    } }
+
+                    @media screen and (max-width: 1090px){
+                      .dialogue-header{
+                        width: 82.6%!important;
+                      } }
+
+                      @media screen and (max-width: 1063px){
+                        .dialogue-header{
+                          width: 82.2%!important;
+                        } }
+
+
+                        @media screen and (max-width: 1020px){
+                          .dialogue-header{
+                            width: 82%!important;
+                          } }
+
+                          @media screen and (max-width: 967px){
+                            .dialogue-header{
+                              width: 81.7%!important;
+                            } }
+
+
+                            @media screen and (max-width: 937px){
+                              .dialogue-header{
+                                width: 81.4%!important;
+                              } }
+
+                              @media screen and (max-width: 895px){
+                                .dialogue-header{
+                                  width: 80.9%!important;
+                                } }
+
+                                @media screen and (max-width: 850px){
+                                  .dialogue-header{
+                                    width: 80.4%!important;
+                                  } }
+
+
+                                  @media screen and (max-width: 814px){
+                                    .dialogue-header{
+                                      width: 80%!important;
+                                    } }
+
+                                    @media screen and (max-width: 782px){
+                                      .dialogue-header{
+                                        width: 79.5%!important;
+                                      } }
+
+
+
+                        @media screen and (max-width: 768px){
+
+                          .dialogue-header{
+                            width: 79.3%!important;
+                          }
+
+                          
+                        }
+
+                        @media screen and (max-width: 710px){
+                          .dialogue-header{
+                            width: 78.5%!important;
+                          } }
+
+                          @media screen and (max-width: 670px){
+                            .dialogue-header{
+                              width: 77.7%!important;
+                            } }
+
+
+                            @media screen and (max-width: 637px){
+                              .dialogue-header{
+                                width: 77%!important;
+                              } }
+
+                              @media screen and (max-width: 587px){
+                                .dialogue-header{
+                                  width: 76%!important;
+                                } }
+
+
+                                @media screen and (max-width: 541px){
+                                  .dialogue-header{
+                                    width: 75%!important;
+                                  } }
+
+                                  @media screen and (max-width: 500px){
+                                    .dialogue-header{
+                                      width: 73.6%!important;
+                                    } }
+
+
+                        @media screen and (max-width: 414px){
+                          .dialogue-header{
+                            
+                          width: 71%!important;
+                          
+                          height: 12% !important;
+
+                          }
+                          .modal-title {
+                            font-size: 21px;
+                          }
+                          
+                        }
+
+                        @media screen and (max-width: 411px){
+                          .dialogue-header{
+                            
+                          width: 70%!important;
+                          
+                          height: 12% !important;
+
+                          }
+                          .modal-title {
+                            font-size: 21px;
+                          }
+                          
+                        }
+
+                        @media screen and (max-width: 375px){
+                          .dialogue-header{
+                            
+                          width: 69%!important;
+                          
+                          height: 15% !important;
+
+                          }
+                          .modal-title {
+                            font-size: 17px;
+                          }
+                          
+                        }
+
+                        @media screen and (max-width: 360px){
+                          .dialogue-header{
+                            
+                          width: 67.4%!important;
+                          
+                          height: 15% !important;
+
+                          }
+                          .modal-title {
+                            font-size: 17px;
+                          }
+                          
+                        }
+          
+                        @media screen and (max-width: 320px){
+                          .dialogue-header{
+                            
+                          width: 65.2%!important;
+                          
+                          height: 15% !important;
+
+                          }
+                          .modal-title {
+                            font-size: 19px;
+                            line-height: 30px;
+                          }
+                          
+                        }
+
+      
+  
+
 
       </style>
       ${this.payload?html$1`
