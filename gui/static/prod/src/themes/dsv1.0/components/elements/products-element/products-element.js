@@ -16,19 +16,22 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
   .ii__product:hover{
     box-shadow: 1px 1px 11px 0 hsla(0, 0%, 79.2%, 0.5);
   }
-  .ii__product-logo{
-    width: 95px;
-    height: 95px;
-    background: var(--app-accent-color);
-    border-radius: 50%;
-    margin: 0 auto;
-    
+
+  .ii__product-logo img 
+  {
+   max-width: 50px;
+   max-height: 50px;
+   margin-left:25px;
   }
-  .ii__product-logo img{
-    width: 75%;
-    position: relative;
-    top: 30%;
-    left: 16%;
+  
+  .ii__product-logo{
+      display: flex;
+      align-items: center;
+      width: 95px;
+      height: 95px;
+      background: var(--app-accent-color);
+      border-radius: 50%;
+      margin: 0 auto;
   }
   .read_more{
     color:var(--app-accent-color);
