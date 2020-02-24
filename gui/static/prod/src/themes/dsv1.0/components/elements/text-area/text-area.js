@@ -78,7 +78,7 @@ import{utilsMixin,SerializableElement,css,html,Logger}from"../../../../../compon
     <div class="column is-paddingless">
       <div class="text-area-contaner">
         <div class="text-area">
-          <textarea class="textarea" name="" id="input" @keyup="${this.count}" @click=${this.stickyLabel} @focusout=${this.stickyLabel2}}>${this.value}</textarea>
+          <textarea class="textarea" name="" id="input" @keyup="${this.count}" @focusin=${this.stickyLabel} @focusout=${this.stickyLabel2}}>${this.value}</textarea>
           <label id="label" class="lbl">${this.e.name}</label>
           <span id="danger-icon" class="icon is-small is-right">
             <fa-icon

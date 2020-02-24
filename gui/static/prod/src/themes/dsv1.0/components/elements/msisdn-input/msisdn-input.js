@@ -125,7 +125,7 @@ import{dataSourceMixin,SerializableElement,css,html}from"../../../../../componen
           <div class="input-right">
             <div class="msisdn-input field">
               <div class="input-container control has-icons-right">
-                <input pattern="[^0-9]+" @keydown=${this.filterNumericInput} type="text" id="input" name="${this.e.name}" class="form-input" required="${this.required}" aria-required="true" aria-describedby="gentle_0" minlength="${this.e.min}" maxlength="${this.e.max}" @click=${this.stickyLabel} @focusout =${this.labelReset}>
+                <input pattern="[^0-9]+" @keydown=${this.filterNumericInput} type="text" id="input" name="${this.e.name}" class="form-input" required="${this.required}" aria-required="true" aria-describedby="gentle_0" minlength="${this.e.min}" maxlength="${this.e.max}" @focusin=${this.stickyLabel} @focusout =${this.labelReset}>
                 <label class="input-label lbl" id="label">${this.e.name}</label>
 
                 <span id="danger-icon" class="icon is-small is-right">

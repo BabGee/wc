@@ -10,7 +10,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     padding-left: 24px;
     padding-top: 80px;
     background-color: #fff!important;
-    margin-top:130px;
+    margin-top:10px;
 }
 .hero-container::before, .row::before{
     display: table;

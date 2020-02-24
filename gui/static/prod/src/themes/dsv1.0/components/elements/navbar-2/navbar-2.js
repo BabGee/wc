@@ -118,6 +118,85 @@ a figure img#user-pic {
     background-color: var(--app-secondary-color)!important;
     color: #fff!important;
 }
+.is-active:hover {
+    border-radius: 15px!important;
+    background-color: var(--app-secondary-color)!important;
+    color: #fff!important;
+}
+.navbar-link::after{
+    border: 3px solid var(--app-secondary-color)!important;
+    border-radius: 2px!important;
+    border-right: 0!important;
+    border-top: 0!important;
+    content: " "!important;
+    display: block!important;
+    height: .625em!important;
+    margin-top: -.4375em!important;
+    pointer-events: none!important;
+    position: absolute!important;
+    top: 50%!important;
+    -webkit-transform: rotate(-45deg)!important;
+    transform: rotate(-45deg)!important;
+    -webkit-transform-origin: center!important;
+    transform-origin: center!important;
+    width: .625em!important;
+
+}
+.navbar-link:hover::after{
+    border: 3px solid var(--app-secondary-color)!important;
+    border-radius: 2px!important;
+    border-right: 0!important;
+    border-top: 0!important;
+    content: " "!important;
+    display: block!important;
+    height: .625em!important;
+    margin-top: -.4375em!important;
+    pointer-events: none!important;
+    position: absolute!important;
+    top: 50%!important;
+    -webkit-transform: rotate(-45deg)!important;
+    transform: rotate(-45deg)!important;
+    -webkit-transform-origin: center!important;
+    transform-origin: center!important;
+    width: .625em!important;
+
+}
+.is-active::after {
+    border: 3px solid white!important;
+    border-radius: 2px!important;
+    border-right: 0!important;
+    border-top: 0!important;
+    content: " "!important;
+    display: block!important;
+    height: .625em!important;
+    margin-top: -.4375em!important;
+    pointer-events: none!important;
+    position: absolute!important;
+    top: 50%!important;
+    -webkit-transform: rotate(-45deg)!important;
+    transform: rotate(-45deg)!important;
+    -webkit-transform-origin: center!important;
+    transform-origin: center!important;
+    width: .625em!important;
+}
+.navbar-link.is-active:hover::after{
+    border: 3px solid white!important;
+    border-radius: 2px!important;
+    border-right: 0!important;
+    border-top: 0!important;
+    content: " "!important;
+    display: block!important;
+    height: .625em!important;
+    margin-top: -.4375em!important;
+    pointer-events: none!important;
+    position: absolute!important;
+    top: 50%!important;
+    -webkit-transform: rotate(-45deg)!important;
+    transform: rotate(-45deg)!important;
+    -webkit-transform-origin: center!important;
+    transform-origin: center!important;
+    width: .625em!important;
+}
 .navbar-item.is-active:hover{
     color: #fff!important;
     background-color: var(--app-secondary-color)!important;
@@ -138,6 +217,26 @@ a.navbar-item:hover {
     color: var(--app-secondary-color)!important;
 
 }
+.is-boxed{
+    margin-top:5px!important;
+}
+.navbar-link:hover{
+    background-color:transparent!important;
+    color:var(--app-secondary-color)!important;
+}
+.navbar-link.is-active:hover{
+    border-radius: 15px!important;
+    background-color: var(--app-secondary-color)!important;
+    color: #fff!important;
+}
+.navbar-link:hover:after{
+    background-color:transparent!important;
+    color:var(--app-secondary-color)!important;
+}
+.navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:focus-within .navbar-link{
+     background-color:transparent!important;
+    color:var(--app-secondary-color)!important;
+}
 `;var navbar2Css={NavbarTwoStyles:NavbarTwoStyles};class Navbar2 extends NavbarBase{static get styles(){return[NavbarTwoStyles,css`
         :host {
           display: block;
@@ -146,9 +245,9 @@ a.navbar-item:hover {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
     <div id="section2" class="bind-box">
-        <nav class="navbar" style="top: -7px;">
-          <div class="navbar-brand">
-            <div class="navbar-start">
+      <nav class="navbar" style="top: -7px;">
+        <div class="navbar-brand">
+          <div class="navbar-start">
             <a class="navbar-item"  @click=${this.reloadPage} >
               <img src="/media/${this.gateway.logo}" alt="logo" width="112" height="28">
             </a>
@@ -158,50 +257,46 @@ a.navbar-item:hover {
           </div>
           <div id="site-name" class="navbar-menu has-text-weight-semibold">
           <div class="navbar-end">
-            ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
-            <a href="${window.location.pathname+window.location.search}#/${pageGroupIndex}/0/" 
-            class="is-uppercase navbar-item is-size-6 ${pageGroupIndex==this._pageGroup?"is-active":""}" >
-                ${pageGroup.title}
-            </a>`)}
-          </div>
           
-          </div>
-         
-        </nav>
-        <hr class="navbar-divider" clear="all">
+            ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a href="${window.location.pathname+window.location.search}#/${pageGroupIndex}/0/" 
+              class="is-uppercase navbar-link is-size-6 ${pageGroupIndex==this._pageGroup?"is-active":""}" >
+                  ${pageGroup.title}
+              </a>
 
-        <div class="block">
-          <nav class="level">
-          <!-- left side -->
-            <div class="level-left">
-              <div class="tabs">
-                <ul>
-                ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
-                  ${pageGroup.pages.map((menu,menuIndex)=>html`
-                  ${pageGroupIndex==this._pageGroup?html`
-                  <li><a @click="${this.scrollToSection}"
-                  data-name="${menu.id}"  class="li-page ${menuIndex==this._page?"active-page":""} ">${menu.title}</a></li>
-                  `:html``}
-                 
-
-                  
-                  `)}
-  
-                
-                `)}
-                  
-                </ul>
-              </div>
-            </div>
-            <!-- right side -->
+              <div class="navbar-dropdown is-boxed">
             
-          </nav>
+              
+              ${pageGroup.pages.map((menu,menuIndex)=>html`
+              
+              <a @click="${this.scrollToSection}"
+              data-name="${menu.id}" pageGroup="${pageGroupIndex}" page="${menuIndex}"  class="navbar-item li-page ">${menu.title}</a>
+              
+             
+
+              
+              `)}
+
+            
+              </div>
+            
+              
+            
+            </div>
+            `)}
+             
+          
         </div>
-      </div>
+         
+      </nav>
+
+      
+    </div>
 
 
 
 
    </div>
 
-     `}reloadPage(){window.location.reload()}scrollToSection(event){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}}static get is(){return"navbar-2"}}customElements.define(Navbar2.is,Navbar2);export{navbar2Css as $navbar$2Css,NavbarTwoStyles};
+     `}reloadPage(){window.location.reload()}scrollToSection(event){let targetElement=event.target,selectedPagegroup=event.target.getAttribute("pageGroup"),selectedPage=event.target.getAttribute("page");if(this.pageGroup==selectedPagegroup){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"});targetElement.classList.add("active-page")}}else{window.location.hash="#/"+selectedPagegroup+"/"+selectedPage;var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}targetElement.classList.add("active-page")}}static get is(){return"navbar-2"}}customElements.define(Navbar2.is,Navbar2);export{navbar2Css as $navbar$2Css,NavbarTwoStyles};
