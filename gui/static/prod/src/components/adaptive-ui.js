@@ -6179,7 +6179,7 @@ label.active{
         <div class="column">
           <div class="field">
             <div class="control has-icons-right input-mixin input-effect">
-              <input class="label-animation" id="#input" @click=${this.stickyLabel} @focusout=${this.stickyLabel2}} type="${this._type}" placeholder="">
+              <input class="label-animation" id="#input" @focusin=${this.stickyLabel} @focusout=${this.stickyLabel2}} type="${this._type}" placeholder="">
               <label id="label">${this.e.name}</label>
 
               <span id="danger-icon" class="icon is-small is-right">
@@ -6213,7 +6213,7 @@ label.active{
           <div class="column">
             <div class="field">
               <div class="control has-icons-right input-mixin input-effect">
-                <input class="label-animation" id="#input" @click=${this.stickyLabel} @focusout=${this.stickyLabel2}} type="${this._type}" placeholder="">
+                <input class="label-animation" id="#input" @focusin=${this.stickyLabel} @focusout=${this.stickyLabel2}} type="${this._type}" placeholder="">
                 <label id="label">${this.e.name}</label>
 
                 ${"password"==this.type?html$3`
@@ -6249,7 +6249,7 @@ label.active{
         <div class="column">
           <div class="field">
             <div class="control has-icons-right input-mixin input-effect">
-              <input class="label-animation" id="#input" @click=${this.stickyLabel} @focusout=${this.stickyLabel2}} type="${this._type}" placeholder="">
+              <input class="label-animation" id="#input" @focusin=${this.stickyLabel} @focusout=${this.stickyLabel2}} type="${this._type}" placeholder="">
               <label id="label">${this.e.name}</label>
 
               ${"password"==this.type?html$3`
