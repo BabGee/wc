@@ -7,13 +7,23 @@ a figure img#user-pic {
     border: solid 3px #157cf8;
 }
 
+.navbar{
+    background: transparent;
+    height: 5.5em;
+}
+
+.navbar-end{
+    padding-top: 13px;
+    padding-bottom: 18px;
+}
+
 .bind-box {
     margin-bottom: 1.5rem;
     background-color: white;
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
     color: #4a4a4a;
     display: block;
-    padding: 1.25rem 4.5rem;
+    padding: 0 4.5rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -245,15 +255,18 @@ a.navbar-item:hover {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
     <div id="section2" class="bind-box">
-      <nav class="navbar" style="top: -7px;">
-        <div class="navbar-brand">
-          <div class="navbar-start">
+    <nav class="navbar">
+    <div class="navbar-start">
+      <div class="navbar-brand">
             <a class="navbar-item"  @click=${this.reloadPage} >
               <img src="/media/${this.gateway.logo}" alt="logo" width="112" height="28">
             </a>
-
-            
-            </div>
+            <a role="button" class="navbar-burger burger" @click=${this.addBlock} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            </a>
+      </div>
           </div>
           <div id="site-name" class="navbar-menu has-text-weight-semibold">
           <div class="navbar-end">
@@ -271,7 +284,7 @@ a.navbar-item:hover {
               ${pageGroup.pages.map((menu,menuIndex)=>html`
               
               <a @click="${this.scrollToSection}"
-              data-name="${menu.id}" pageGroup="${pageGroupIndex}" page="${menuIndex}"  class="navbar-item li-page ">${menu.title}</a>
+              data-name="${menu.id}" pageGroup="${pageGroupIndex}" page="${menuIndex}"  class="navbar-item li-page">${menu.title}</a>
               
              
 
@@ -299,4 +312,4 @@ a.navbar-item:hover {
 
    </div>
 
-     `}reloadPage(){window.location.reload()}scrollToSection(event){let targetElement=event.target,selectedPagegroup=event.target.getAttribute("pageGroup"),selectedPage=event.target.getAttribute("page");if(this.pageGroup==selectedPagegroup){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"});targetElement.classList.add("active-page")}}else{window.location.hash="#/"+selectedPagegroup+"/"+selectedPage;var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}targetElement.classList.add("active-page")}}static get is(){return"navbar-2"}}customElements.define(Navbar2.is,Navbar2);export{navbar2Css as $navbar$2Css,NavbarTwoStyles};
+     `}reloadPage(){window.location.reload()}scrollToSection(event){let targetElement=event.target,selectedPagegroup=event.target.getAttribute("pageGroup"),selectedPage=event.target.getAttribute("page");const allLinks=this.shadowRoot.querySelectorAll(".active-page");if(this.pageGroup==selectedPagegroup){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"});allLinks.forEach(link=>{link.classList.remove("active-page")});targetElement.classList.add("active-page")}}else{window.location.hash="#/"+selectedPagegroup+"/"+selectedPage;var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}allLinks.forEach(link=>{link.classList.remove("active-page")});targetElement.classList.add("active-page")}}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}static get is(){return"navbar-2"}}customElements.define(Navbar2.is,Navbar2);export{navbar2Css as $navbar$2Css,NavbarTwoStyles};

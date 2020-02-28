@@ -1,4 +1,4 @@
-import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const HeroElement3Styles=css`
+import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const HeroElement4Styles=css`
 
 .hero-container{
     max-width: 100%;
@@ -14,6 +14,31 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     display:flex!important;
     justify-content:center!important;
     align-items:center!important;
+}
+
+.circle{
+    position: absolute;
+    background-color:  var(--app-default-color);
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    top: -45px;
+    left: -175px;
+
+}
+
+.circle2{
+    position: absolute;
+    background-color: var(--app-default-color);
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    right: -443px;
+    top: 151px;
+
+}
+img{
+    z-index:1000;
 }
 .container{
     display:flex!important;
@@ -63,7 +88,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     font-weight: bold;
 }
 
-`;var heroElement3Css={HeroElement3Styles:HeroElement3Styles};class HeroElement3 extends BaseElement{static get styles(){return[HeroElement3Styles,css`
+`;var heroElement4Css={HeroElement4Styles:HeroElement4Styles};class HeroElement4 extends BaseElement{static get styles(){return[HeroElement4Styles,css`
             :host {
               display: block;
             }
@@ -73,9 +98,11 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
         <div class="hero-container">
             <div class="container">
                 <div class="columns row">
-                    <div class="column hero-column">
+                <div class="circle"></div>
+                <div class="circle2"></div>
+                    <div class="column hero-column" style="z-index:1000;">
                         <div class="hero-iso-image">
-                            <img src="${this.e.details.hero_image_src}" />
+                        <img src="${this.e.details.hero_image_src}" />
                         </div>
                     </div>
                     <div class="column">
@@ -86,4 +113,4 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
                 </div>
             </div
         </div>
-        `}static get is(){return`hero-element-3`}}customElements.define(HeroElement3.is,HeroElement3);export{heroElement3Css as $heroElement$3Css,HeroElement3Styles};
+        `}static get is(){return`hero-element-4`}}customElements.define(HeroElement4.is,HeroElement4);export{heroElement4Css as $heroElement$4Css,HeroElement4Styles};

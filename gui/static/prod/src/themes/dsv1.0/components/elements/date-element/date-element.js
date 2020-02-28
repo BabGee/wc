@@ -1,5 +1,16 @@
 import{utilsMixin,SerializableElement,format,parse,css,html}from"../../../../../components/adaptive-ui.js";const DateElementBase=class extends utilsMixin(SerializableElement){static get is(){return"date-element"}static get properties(){return{label:{type:String,value:"Choose Date"},required:Boolean,datestring:{type:String,value:""},columnSize:{type:Array},noPastDate:Boolean}}getName(){return this.e.formName}valid(){}invalid(){}validate(){if(this.required&&!this.getValue()){return new this.Validation(!1,"Invalid date")}else{this.noPastDate=this.e.details.noPastDate;if(this.noPastDate){if(null==this.getInput().valueAsDate){return new this.Validation(!1,"Invalid date")}else{const datePicked=this.getInput().valueAsDate,todaysDate=new Date;if(datePicked<todaysDate){return new this.Validation(!1,"Invalid date")}else{return new this.Validation(!0,"valid date")}}}return new this.Validation(!0,"valid date")}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);var self=this;self.required=this.e.required||pElement.min&&0<pElement.min;self.label=DateElementBase.toTitleCase(pElement.name);self.params=loader.pl.paramsCopy()}};var dateElement={DateElementBase:DateElementBase};const DateElementStyles=css`
 
+label {
+  font-size: 12px;
+  font-weight: 700;
+  width: 100%;
+  color: rgb(1, 50, 67);
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  padding-bottom: 10px;  
+  position: relative;
+  top: -5px;
+}
 .calendar-select{
     border: 1px solid #e5e5e5;
     border-radius: 6px;
@@ -38,7 +49,7 @@ import{utilsMixin,SerializableElement,format,parse,css,html}from"../../../../../
 .calendar-select-body{
   width: 100%;
   margin-top: 15px;
-  border-radius: 6px;
+  border-radius: 4px;
   display: none;
   z-index: 9999;
   border: 1px solid #e5e5e5;
@@ -100,7 +111,6 @@ import{utilsMixin,SerializableElement,format,parse,css,html}from"../../../../../
   width: 13.5%;
   text-align: center;
   margin-bottom: 5px;
-  font-size:12px;
   color: #013243;
   cursor: pointer;
 }
@@ -130,6 +140,7 @@ import{utilsMixin,SerializableElement,format,parse,css,html}from"../../../../../
   list-style-type: none;
   display: inline-block;
   width: 13.5%;
+  font-size: 14px;
   text-align: center;
   margin-bottom: 5px;
   font-size:12px;
@@ -142,6 +153,16 @@ import{utilsMixin,SerializableElement,format,parse,css,html}from"../../../../../
   background:var(--app-accent-color);
   color: white !important;
   /* border-radius: 50%; */
+}
+
+.weekdays li, .days li{
+  font-size: 12px;
+ 
+}
+#weekdays li {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
 
@@ -208,6 +229,7 @@ import{utilsMixin,SerializableElement,format,parse,css,html}from"../../../../../
 
 
  <div class="column">
+ <label>${this.e.name}</label>
   <div class="calendar-select" style="width:100%;">
     <div class="calendar-select-header" @click="${this.dateToggle}">
         <p id="dateSelected" class="has-text-center"><fa-icon class="fas fa-calendar-minus center" color="#4a4a4a" size="1em"></fa-icon>&nbsp;&nbsp; ${this.todayDateNumber+` `+this.months[this.currentMonth]+`, `+this.currentYear}</p>
