@@ -352,7 +352,7 @@ width: 100%; }
     }
     `]}renderDefault(){return html`
 
-    <div class="main-container">
+    <div class="main-container" style="padding:16px">
       <div class="ss-main" @click=${this.animLabel}>
       
         <div class="ss-multi-selected ${this.contentOpen?"ss-open-below":""}" @click="${this._onSingleSelectContainerClick}">
@@ -411,9 +411,10 @@ width: 100%; }
             </div>
     </div>
 </div>
+<p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
+
 </div>
 
-<p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
 
     
     `}getValue(){return this.selected.join(",")}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{});document.addEventListener("click",function(e){if(!self.shadowRoot.contains(e.currentTarget)){self.close()}else{console.log(e.target);console.log(self.contains(e.target))}})}static get properties(){return{icon:String,title:String,contentOpen:{type:Boolean},options:{type:Array},selected:Array}}valid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="none"}invalid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="block"}getOption(value){const o=this.rows.find(function(element){return element[0]==value});if(o){return{label:o[1],value:o[0]}}}getSelections(){const ss=this.selected.map(s=>this.getOption(s));console.log(ss);return ss}selectOptions(){const options=[];for(var i=0;i<this.rows.length;i++){const item=this.rows[i],option={};option.value=item[0];option.label=item[1];option.selected=this.selected.includes(option.value);options.push(option)}return options}_onSingleSelectContainerClick(e){e.preventDefault();e.stopPropagation();this.contentOpen?this.close():this.open()}_onDeselectValueClick(e){e.stopPropagation();const item=e.currentTarget.dataset.value;var filteredAry=this.selected.filter(e=>e!=item);this.selected=filteredAry}_onSearchInputClick(evt){evt.stopPropagation()}_onSearchKeyUp(e){const searchValue=e.target.value;this.updateParams("q",searchValue)}_onSearchFocus(){this.open()}_onOptionClick(e){e.preventDefault();e.stopPropagation();const selected=e.currentTarget.dataset.value;this.selected=Array.from(new Set([...this.selected,selected]))}open(){if(this.contentOpen){return}this.contentOpen=!0}close(){if(!this.contentOpen){return}this.contentOpen=!1}onLoadData(){if(0>this.selected.length){console.log(!0)}else{console.log(!1)}}}window.customElements.define(TagInput.is,TagInput);export{tagInput as $tagInput,tagInputCss as $tagInputCss,TagInputBase,TagInputStyles};

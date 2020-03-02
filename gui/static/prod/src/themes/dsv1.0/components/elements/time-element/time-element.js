@@ -1,5 +1,15 @@
 import{utilsMixin,SerializableElement,css,html}from"../../../../../components/adaptive-ui.js";const TimeElementBase=class extends utilsMixin(SerializableElement){static get is(){return"time-element"}static get properties(){return{label:{type:String,value:"Choose Time"},required:Boolean,datestring:{type:String,value:""},columnSize:{type:Array}}}convertTime24to12(timeString){var H=+timeString.substr(0,2),ampm=12>H||24===H?"AM":"PM";timeString=(H%12||12)+timeString.substr(2,3)+" "+ampm;return timeString}convertTime12to24(time12h){const[time,modifier]=time12h.split(" ");let[hours,minutes]=time.split(":");if("12"===hours){hours="00"}if("PM"===modifier){hours=parseInt(hours,10)+12}return hours+":"+minutes}getName(){return this.e.formName}valid(){}invalid(){}validate(){if((this.e.required||this.required)&&!this.getValue()){return new this.Validation(!1,"invalid")}return new this.Validation(!0,"valid")}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);var self=this;self.required=this.e.required||pElement.min&&0<pElement.min;self.label=TimeElementBase.toTitleCase(pElement.name)}};var timeElement={TimeElementBase:TimeElementBase};const TimeElementStyles=css`
-
+label {
+  font-size: 12px;
+  font-weight: 700;
+  width: 100%;
+  color: rgb(1, 50, 67);
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  padding-bottom: 10px;  
+  position: relative;
+  top: -5px;
+}
 .timer-container{
     width: 100%;
   }
@@ -360,6 +370,7 @@ import{utilsMixin,SerializableElement,css,html}from"../../../../../components/ad
 
 
 <div class="column">
+<label>${this.e.name}</label>
   <div class="calendar-select" style="width:100%;">
     <div class="calendar-select-header" @click="${()=>this._dropdown()}">
       <p id="dateSelected" class="has-text-center">

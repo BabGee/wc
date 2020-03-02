@@ -7,6 +7,7 @@ import{utilsMixin,SerializableElement,css,html,Logger}from"../../../../../compon
     border: 1px solid #b7b5b5;
     outline: 0;
     color: #013243;
+    box-shadow: none!important;
 
 }
 
