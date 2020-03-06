@@ -1,11 +1,53 @@
 import{dataSourceMixin,utilsMixin,SerializableElement,css,html}from"../../../../../components/adaptive-ui.js";const TagInputBase=class extends utilsMixin(dataSourceMixin(SerializableElement)){constructor(){super();this.selected=[]}static get is(){return"tag-input"}static get properties(){return{title:{type:String,value:""},selected:{type:Array}}}dscDataName(){return this.e.defaultValue}getName(){return this.e.formName}valid(){return!0}invalid(){}getValue(){if(!this.selected){return""}return this.selected.join(",")}validate(){if((this.e.required||this.required)&&!this.getValue()){return new this.Validation(!1,"invalid")}return new this.Validation(!0,"valid")}init(pElement,loader){super.init(pElement,loader);var self=this;this.params=loader.pl.paramsCopy();self.title=TagInputBase.toTitleCase(pElement.name);this.required=this.e.required||pElement.min&&0<pElement.min;if(pElement.kind){const preselection=pElement.kind.split(",");this.selected=preselection.filter(function(el){return!isNaN(parseFloat(el))&&isFinite(el)})}self.loader=this.loadData()}};var tagInput={TagInputBase:TagInputBase};const TagInputStyles=css`
 #warning-text{
-    display:none;
+  position: relative;
+  top: 5px;
+  font-size: 0.75rem;
+  padding: 0px;
+  margin: 0px 0px 0px 1px;
+  display:none;
 }
 .placeholder{
-    color: #4a4a4a;
-    font-weight: 499;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Work Sans", sans-serif;
+  color: rgb(74, 74, 74);
 
+}
+
+.is-danger {
+  color: rgb(255, 56, 96)!important;
+  border-width: 2px!important;
+  border-style: solid!important;
+  border-color: rgb(255, 56, 96)!important;
+}
+
+.is-success{
+  color: rgb(35, 209, 96)!important;
+  border-width: 2px!important;
+  border-style: solid!important;
+  border-color: rgb(35, 209, 96)!important;
+}
+
+.is-label-success{
+  color: rgb(35, 209, 96)!important;
+}
+.is-label-danger{
+  color: rgb(255, 56, 96)!important;
+}
+
+.is-plus-success{
+  background-color: rgb(35, 209, 96)!important;
+}
+.is-plus-danger{
+  background-color: rgb(255, 56, 96)!important;
+}
+
+.is-plus-success::after{
+  background-color: rgb(35, 209, 96)!important;
+}
+.is-plus-danger::after{
+  background-color: rgb(255, 56, 96)!important;
 }
 
 /* .form label{
@@ -147,7 +189,7 @@ width: 100%; }
   min-height: 30px;
   width: 100%;
   padding: 18px calc(.625em - 1px) 18px 20px;
-  border: 1px solid #dcdee2;
+  border: 1px solid rgb(183, 181, 181);
   border-radius: 4px;
   background-color: #ffffff;
   outline: 0;
@@ -258,6 +300,7 @@ width: 100%; }
   .ss-main .ss-content.ss-open {
     display: block;
     opacity: 1;
+    border: 1px solid rgb(183, 181, 181);
     transform: scaleY(1); }
   .ss-main .ss-content .ss-search {
     display: flex;
@@ -283,7 +326,7 @@ width: 100%; }
       height: 30px;
       padding: 6px 8px;
       margin: 0;
-      border: 1px solid #dcdee2;
+      border: 1px solid rgb(183, 181, 181);
       border-radius: 4px;
       background-color: #ffffff;
       outline: 0;
@@ -355,11 +398,11 @@ width: 100%; }
     <div class="main-container" style="padding:16px">
       <div class="ss-main" @click=${this.animLabel}>
       
-        <div class="ss-multi-selected ${this.contentOpen?"ss-open-below":""}" @click="${this._onSingleSelectContainerClick}">
+        <div  id="d-down" class="ss-multi-selected ${this.contentOpen?"ss-open-below":""}" @click="${this._onSingleSelectContainerClick}">
           
           <div class="ss-values">
           ${this.selected.length?html`
-          <label for="name" class="label-name placeholder lbl active"><span class="content-name">Select ${this.title}s</span></label>
+          <label for="name" class="label-name placeholder lbl active"><span id="label" class="content-name">Select ${this.title}s</span></label>
               ${this.getSelections(this.selected).map(option=>html`
               <div class="ss-value">
                 <span class="ss-value-text">${option.label}</span>
@@ -367,11 +410,11 @@ width: 100%; }
               </div>          
               `)}
           `:html`
-            <label for="name" class="label-name placeholder"><span class="content-name">Select ${this.title}s</span></label>
+            <label for="name" class="label-name placeholder"><span id="label" class="content-name">Select ${this.title}s</span></label>
           `}
 </div>
           <div class="ss-add">
-          <span class="ss-plus ${this.contentOpen?"ss-cross":""}"></span>
+          <span id="plus" class="ss-plus ${this.contentOpen?"ss-cross":""}"></span>
           
       </div>
           
@@ -417,4 +460,4 @@ width: 100%; }
 
 
     
-    `}getValue(){return this.selected.join(",")}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{});document.addEventListener("click",function(e){if(!self.shadowRoot.contains(e.currentTarget)){self.close()}else{console.log(e.target);console.log(self.contains(e.target))}})}static get properties(){return{icon:String,title:String,contentOpen:{type:Boolean},options:{type:Array},selected:Array}}valid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="none"}invalid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="block"}getOption(value){const o=this.rows.find(function(element){return element[0]==value});if(o){return{label:o[1],value:o[0]}}}getSelections(){const ss=this.selected.map(s=>this.getOption(s));console.log(ss);return ss}selectOptions(){const options=[];for(var i=0;i<this.rows.length;i++){const item=this.rows[i],option={};option.value=item[0];option.label=item[1];option.selected=this.selected.includes(option.value);options.push(option)}return options}_onSingleSelectContainerClick(e){e.preventDefault();e.stopPropagation();this.contentOpen?this.close():this.open()}_onDeselectValueClick(e){e.stopPropagation();const item=e.currentTarget.dataset.value;var filteredAry=this.selected.filter(e=>e!=item);this.selected=filteredAry}_onSearchInputClick(evt){evt.stopPropagation()}_onSearchKeyUp(e){const searchValue=e.target.value;this.updateParams("q",searchValue)}_onSearchFocus(){this.open()}_onOptionClick(e){e.preventDefault();e.stopPropagation();const selected=e.currentTarget.dataset.value;this.selected=Array.from(new Set([...this.selected,selected]))}open(){if(this.contentOpen){return}this.contentOpen=!0}close(){if(!this.contentOpen){return}this.contentOpen=!1}onLoadData(){if(0>this.selected.length){console.log(!0)}else{console.log(!1)}}}window.customElements.define(TagInput.is,TagInput);export{tagInput as $tagInput,tagInputCss as $tagInputCss,TagInputBase,TagInputStyles};
+    `}getValue(){return this.selected.join(",")}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{});document.addEventListener("click",function(e){if(!self.shadowRoot.contains(e.currentTarget)){self.close()}else{console.log(e.target);console.log(self.contains(e.target))}})}static get properties(){return{icon:String,title:String,contentOpen:{type:Boolean},options:{type:Array},selected:Array}}valid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="none";const dropdown=this.shadowRoot.querySelector("#d-down"),label=this.shadowRoot.querySelector("#label"),plus=this.shadowRoot.querySelector("#plus");dropdown.classList.remove("is-danger");dropdown.classList.add("is-success");label.classList.remove("is-label-danger");label.classList.add("is-label-success");label.style.color="rgb(35, 209, 96)";plus.classList.remove("is-plus-danger");plus.classList.add("is-plus-success");warningText.style.display="none"}invalid(){const warningText=this.shadowRoot.querySelector("#warning-text"),dropdown=this.shadowRoot.querySelector("#d-down"),label=this.shadowRoot.querySelector("#label"),plus=this.shadowRoot.querySelector("#plus");warningText.style.display="block";dropdown.classList.remove("is-success");dropdown.classList.add("is-danger");label.classList.remove("is-label-success");label.classList.add("is-label-danger");label.style.color="";plus.classList.remove("is-plus-success");plus.classList.add("is-plus-danger")}getOption(value){const o=this.rows.find(function(element){return element[0]==value});if(o){return{label:o[1],value:o[0]}}}getSelections(){const ss=this.selected.map(s=>this.getOption(s));console.log(ss);return ss}selectOptions(){const options=[];for(var i=0;i<this.rows.length;i++){const item=this.rows[i],option={};option.value=item[0];option.label=item[1];option.selected=this.selected.includes(option.value);options.push(option)}return options}_onSingleSelectContainerClick(e){e.preventDefault();e.stopPropagation();this.contentOpen?this.close():this.open()}_onDeselectValueClick(e){e.stopPropagation();const item=e.currentTarget.dataset.value;var filteredAry=this.selected.filter(e=>e!=item);this.selected=filteredAry}_onSearchInputClick(evt){evt.stopPropagation()}_onSearchKeyUp(e){const searchValue=e.target.value;this.updateParams("q",searchValue)}_onSearchFocus(){this.open()}_onOptionClick(e){e.preventDefault();e.stopPropagation();const selected=e.currentTarget.dataset.value;this.selected=Array.from(new Set([...this.selected,selected]))}open(){if(this.contentOpen){return}this.contentOpen=!0}close(){if(!this.contentOpen){return}this.contentOpen=!1}onLoadData(){if(0>this.selected.length){console.log(!0)}else{console.log(!1)}}}window.customElements.define(TagInput.is,TagInput);export{tagInput as $tagInput,tagInputCss as $tagInputCss,TagInputBase,TagInputStyles};

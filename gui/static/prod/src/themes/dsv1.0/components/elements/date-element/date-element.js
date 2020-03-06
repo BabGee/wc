@@ -12,7 +12,7 @@ label {
   top: -5px;
 }
 .calendar-select{
-    border: 1px solid #e5e5e5;
+    border: 1px solid rgb(183, 181, 181);;
     border-radius: 6px;
     position: relative;
   }
@@ -52,7 +52,7 @@ label {
   border-radius: 4px;
   display: none;
   z-index: 9999;
-  border: 1px solid #e5e5e5;
+  border: 1px solid rgb(183, 181, 181);;
   position: absolute;
 }
 /* .calendar-select-body::before{

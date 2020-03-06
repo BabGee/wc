@@ -1,7 +1,73 @@
 import{dataSourceMixin,utilsMixin,SerializableElement,css,html,RENDER_M_SIDE_BY_SIDE}from"../../../../../components/adaptive-ui.js";const DropdownSelectBase=class extends utilsMixin(dataSourceMixin(SerializableElement)){static get is(){return"dropdown-select"}static get properties(){return{icon:String,title:String,selected:String}}getName(){const el=this.e.formName.split("=");return el[0]}validate(){if(this.e.required&&!this.getValue()||this.getValue()===void 0){return new this.Validation(!1,"invalid")}return new this.Validation(!0,"valid")}valid(){}invalid(){}_dataJoined(data){const self=this;var concatExclude=[];if(self.e.details.concat_exclude){concatExclude=self.e.details.concat_exclude.split(",")}return data.filter(function(item,index){return!(0===index||concatExclude.includes(index+"")||self.cols.length&&"href"===self.cols[index].type)}).join(" ")}dscDataName(){return this.e.defaultValue}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{self.q="";self.currentGroups=self.groups;self.currentData=self.data})}_computeItemsCount(rows){return rows.length}_shouldFilter(items){var b=this._computeItemsCount(items);return 10<b}_computeItems(rows,q){const filteredItems=[];for(let i=0;i<rows.length;i++){const item=rows[i];if(q){var query=q.toLowerCase(),name=item[1].toLowerCase();if(-1!==name.indexOf(query)){filteredItems.push(item)}}else{filteredItems.push(item)}}return filteredItems}init(pElement,loader){super.init(pElement,loader);var self=this;self.required=this.e.required||pElement.min&&0<pElement.min;self.title=DropdownSelectBase.toTitleCase(pElement.name);self.icon=pElement.icon;self.params=self.pl.paramsCopy();if(pElement.kind){this.selected=+pElement.kind}else if(self.required&&0<self.rows.length){self.selected=self.rows[0][0]}self.loader=this.loadData()}};var dropdownSelect={DropdownSelectBase:DropdownSelectBase};const DropDownSelectStyles=css`
+#warning-text{
+  display:none;
+}
+.lbl{
+  position: absolute;
+  bottom: 0px;
+  left: 11px;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+.lbl::after{
+  content: '';
+  position: absolute;
+  left: 0px;
+  bottom: -1px;
+  height: 100%;
+  width: 100%;
+  border-bottom: #595f6e;
+  transform: translateX(-100%);
+  transition: transform .3s ease;
+}
+.lbl.active{
+  /* position: absolute; */
+  width: 100%;
+  transform: translateY(-17px);
+  color: var(--app-default-color);
+  font-size: 70%;
+  position: relative;
+  left: 0;
+}
 
 .main-container {
     padding: 16px;
+  }
+  #warning-text{
+    padding: 0px;
+    margin: 0;
+    margin-left: 17px;
+    position: relative;
+    top: -12px;
+    font-size: .75rem;
+  }
+
+  .is-danger {
+    color: rgb(255, 56, 96)!important;
+    border-width: 2px!important;
+    border-style: solid!important;
+    border-color: rgb(255, 56, 96)!important;
+  }
+  .is-arrow-danger {
+    border-color:rgb(255, 56, 96)!important;
+  }
+  .is-success{
+    color: rgb(35, 209, 96)!important;
+    border-width: 2px!important;
+    border-style: solid!important;
+    border-color: rgb(35, 209, 96)!important;
+  }
+  .is-arrow-success{
+    border-color: rgb(35, 209, 96)!important;
+  }
+  .is-label-success{
+    color: rgb(35, 209, 96)!important;
+
+
+  }
+  .is-label-danger{
+    color: rgb(255, 56, 96)!important;
   }
     .ss-main {
 position: relative;
@@ -18,7 +84,7 @@ width: 100%; }
   line-height: 0px;
   color: #4a4a4a;
   padding: 29px 31px 28px 12px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid rgb(183, 181, 181);
   box-shadow: none; }
   .ss-main .ss-single-selected.ss-disabled {
     background-color: #dcdee2;
@@ -195,6 +261,7 @@ width: 100%; }
   .ss-main .ss-content.ss-open {
     display: block;
     opacity: 1;
+    border: 1px solid rgb(183, 181, 181);
     transform: scaleY(1); }
   .ss-main .ss-content .ss-search {
     display: flex;
@@ -220,7 +287,7 @@ width: 100%; }
       height: 30px;
       padding: 6px 8px;
       margin: 0;
-      border: 1px solid #dcdee2;
+      border: 1px solid rgb(183, 181, 181);
       border-radius: 4px;
       background-color: #ffffff;
       outline: 0;
@@ -292,51 +359,17 @@ width: 100%; }
         RENDER_M_SIDE_BY_SIDE not supported
       `}else{return html`
 
-      <style>        
-        #warning-text{
-          display:none;
-        }
-        .lbl{
-          position: absolute;
-          bottom: 0px;
-          left: 11px;
-          height: 100%;
-          width: 100%;
-          pointer-events: none;
-        }
-        .lbl::after{
-          content: '';
-          position: absolute;
-          left: 0px;
-          bottom: -1px;
-          height: 100%;
-          width: 100%;
-          border-bottom: #595f6e;
-          transform: translateX(-100%);
-          transition: transform .3s ease;
-        }
-        .lbl.active{
-          /* position: absolute; */
-          width: 100%;
-          transform: translateY(-17px);
-          color: var(--app-default-color);
-          font-size: 70%;
-          position: relative;
-          left: 0;
-        }
-      </style>
-
     <div class="main-container">
       <div class="ss-main">
       
-        <div class="ss-single-selected ${this.contentOpen?"ss-open-below":""}" @click="${this._onMultiSelectContainerClick}">
-          <label for="name" class="label-name placeholder lbl"><span class="content-name">select a ${this.title}</span></label>
+        <div id="d-down" class="ss-single-selected ${this.contentOpen?"ss-open-below":""}" @click="${this._onMultiSelectContainerClick}">
+          <label for="name" class="label-name placeholder lbl"><span id="label" class="content-name">select a ${this.title}</span></label>
           <span class="placeholder" style="height: 16px">${this.getSelected(this.selected)}</span>
           <span class="ss-deselect ss-plus" @click="${this._onDeselectClick}">x</span>
           <!--arrow container-->
           <span class="ss-arrow">
                 <!--arrow icons-->
-               <span class="${this.contentOpen?"arrow-up":"arrow-down"}"></span>        
+               <span id="arrow" class="${this.contentOpen?"arrow-up":"arrow-down"}"></span>        
           </span>
         </div>
         
@@ -377,4 +410,4 @@ width: 100%; }
 
 <p id="warning-text" style="color:#ff3860;">${this.e.name} required</p>
 
-`}}static get properties(){return{icon:String,title:String,q:{type:String,value:""},contentOpen:{type:Boolean},options:{type:Array}}}getValue(){return this.selected}valid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="none"}invalid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="block"}getOption(value){const label=this.shadowRoot.querySelector(".lbl");console.log(label);label.classList.add("active");const o=this.rows.find(function(element){return element[0]==value});if(o){return{label:o[1],value:o[0],selected:this.selected==o.value}}}getSelections(){const ss=this.selections.map(s=>this.getOption(s));console.log(ss);return ss}getSelected(){if(this.selected){const option=this.getOption(this.selected);return option.label}}selectOptions(){const options=[];for(var i=0;i<this.rows.length;i++){const item=this.rows[i],option={value:item[0],label:item[1]};option.selected=this.selected==option.value;options.push(option)}return options}_onMultiSelectContainerClick(e){e.preventDefault();e.stopPropagation();this.contentOpen?this.close():this.open()}_onDeselectClick(e){e.stopPropagation();const item=e.currentTarget.dataset.value;var filteredAry=this.selections.filter(e=>e!=item);console.log(filteredAry);this.selections=filteredAry}_onSearchInputClick(evt){evt.stopPropagation()}_onSearchKeyUp(e){const searchValue=e.target.value;this.updateParams("q",searchValue)}_onSearchFocus(){this.open()}_onOptionClick(e){e.preventDefault();e.stopPropagation();const selected=e.currentTarget.dataset.value;console.log(selected);this.selected=selected;this.close()}open(){if(this.contentOpen){return}this.contentOpen=!0}close(){if(!this.contentOpen){return}this.contentOpen=!1}firstUpdated(){const self=this;this.loader.then(()=>{});document.addEventListener("click",function(e){if(!self.shadowRoot.contains(e.currentTarget)){self.close()}else{console.log(e.target);console.log(self.contains(e.target))}})}}customElements.define(DropdownSelect.is,DropdownSelect);export{dropdownSelect as $dropdownSelect,dropdownSelectCss as $dropdownSelectCss,DropdownSelectBase,DropDownSelectStyles};
+`}}static get properties(){return{icon:String,title:String,q:{type:String,value:""},contentOpen:{type:Boolean},options:{type:Array}}}getValue(){return this.selected}valid(){const warningText=this.shadowRoot.querySelector("#warning-text");warningText.style.display="none";const dropdown=this.shadowRoot.querySelector("#d-down"),arrow=this.shadowRoot.querySelector("#arrow"),label=this.shadowRoot.querySelector("#label");dropdown.classList.remove("is-danger");dropdown.classList.add("is-success");arrow.classList.remove("is-arrow-danger");arrow.classList.add("is-arrow-success");label.classList.remove("is-label-danger");label.classList.add("is-label-success");warningText.style.display="none"}invalid(){const warningText=this.shadowRoot.querySelector("#warning-text"),dropdown=this.shadowRoot.querySelector("#d-down"),arrow=this.shadowRoot.querySelector("#arrow"),label=this.shadowRoot.querySelector("#label");warningText.style.display="block";dropdown.classList.remove("is-success");dropdown.classList.add("is-danger");arrow.classList.remove("is-arrow-success");arrow.classList.add("is-arrow-danger");label.classList.remove("is-label-success");label.classList.add("is-label-danger")}getOption(value){const label=this.shadowRoot.querySelector(".lbl");console.log(label);label.classList.add("active");const o=this.rows.find(function(element){return element[0]==value});if(o){return{label:o[1],value:o[0],selected:this.selected==o.value}}}getSelections(){const ss=this.selections.map(s=>this.getOption(s));console.log(ss);return ss}getSelected(){if(this.selected){const option=this.getOption(this.selected);return option.label}}selectOptions(){const options=[];for(var i=0;i<this.rows.length;i++){const item=this.rows[i],option={value:item[0],label:item[1]};option.selected=this.selected==option.value;options.push(option)}return options}_onMultiSelectContainerClick(e){e.preventDefault();e.stopPropagation();this.contentOpen?this.close():this.open()}_onDeselectClick(e){e.stopPropagation();const item=e.currentTarget.dataset.value;var filteredAry=this.selections.filter(e=>e!=item);console.log(filteredAry);this.selections=filteredAry}_onSearchInputClick(evt){evt.stopPropagation()}_onSearchKeyUp(e){const searchValue=e.target.value;this.updateParams("q",searchValue)}_onSearchFocus(){this.open()}_onOptionClick(e){e.preventDefault();e.stopPropagation();const selected=e.currentTarget.dataset.value;console.log(selected);this.selected=selected;this.close()}open(){if(this.contentOpen){return}this.contentOpen=!0}close(){if(!this.contentOpen){return}this.contentOpen=!1}firstUpdated(){const self=this;this.loader.then(()=>{});document.addEventListener("click",function(e){if(!self.shadowRoot.contains(e.currentTarget)){self.close()}else{console.log(e.target);console.log(self.contains(e.target))}})}}customElements.define(DropdownSelect.is,DropdownSelect);export{dropdownSelect as $dropdownSelect,dropdownSelectCss as $dropdownSelectCss,DropdownSelectBase,DropDownSelectStyles};
