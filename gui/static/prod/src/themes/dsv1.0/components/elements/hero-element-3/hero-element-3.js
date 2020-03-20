@@ -40,7 +40,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
 .c-title-xl {
     margin-top: 8px;
     margin-bottom: 18px;
-    color: var(--app-default-color)!important;;
+    color: var(--app-default-color)!important;
     font-size: 65px;
     font-weight: bold;
     line-height: 58px;
@@ -61,6 +61,52 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     margin-top: 20px;
     border: none!important;
     font-weight: bold;
+}
+
+@media screen and (max-width: 414px){ 
+
+    .c-title-xl {
+        
+        color: var(--app-default-color)!important;
+        font-size: 50px;
+    }
+
+    .hero-column{
+        margin-right: 66px !important;
+    }
+}
+
+@media screen and (max-width: 375px){ 
+
+    .c-title-xl {
+        
+        color: var(--app-default-color)!important;
+        font-size: 45px;
+    }
+
+    
+}
+
+@media screen and (max-width: 360px){ 
+
+    .c-title-xl {
+        
+        color: var(--app-default-color)!important;
+        font-size: 40px;
+    }
+
+    
+}
+
+@media screen and (max-width: 320px){ 
+
+    .c-title-xl {
+        
+        color: var(--app-default-color)!important;
+        font-size: 35px;
+    }
+
+    
 }
 
 `;var heroElement3Css={HeroElement3Styles:HeroElement3Styles};class HeroElement3 extends BaseElement{static get styles(){return[HeroElement3Styles,css`
