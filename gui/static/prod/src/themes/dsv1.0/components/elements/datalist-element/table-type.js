@@ -847,13 +847,14 @@ border-bottom: 0;
     </div>
     <div class="sub-container">
       <div class="buttons is-pulled-left" style="width:20%;">
-        <button @tap="${this.generatePDF}" class="button is-info is-size-7 is-rounded">Export PDF</button>
-        <button @tap="${this.generateCSV}" class="button is-success is-size-7 is-rounded">Export CSV</button>
+        <button id ="pdf-btn" @click="${this.generatePDF}" class="button is-info is-size-7 is-rounded">Export PDF</button>
+        <button id ="csv-btn" @click="${this.generateCSV}" class="button is-success is-size-7 is-rounded">Export CSV</button>
       </div>
 
       ${this._searchFieldsExist(this.columns)?html`
       
-      <div class="search-container" style="position: relative; top: -23px;">
+      <div class="search-container" style="position: relative; top: -23px; float: right;
+      margin-right: 6px;">
 
       <paper-dropdown-menu label="Search In">
           <paper-listbox slot="dropdown-content"
