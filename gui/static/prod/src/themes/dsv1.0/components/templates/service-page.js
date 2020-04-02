@@ -722,7 +722,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
               </div>
             </div> 
 
-            <div class="sidebar-menu scrollable ps">
+            <div class="sidebar-menu scrollable ps" style="overflow-y: scroll!important">
               <ul>
                 ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html$1`
                 <li class="nav-item" title="${ServicePage.toTitleCase(pageGroup.title)}">
