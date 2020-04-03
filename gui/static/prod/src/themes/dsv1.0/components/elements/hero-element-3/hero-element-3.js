@@ -116,7 +116,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
           `]}render(){return html`
      
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-        <div class="hero-container">
+        <div class="hero-container" style="margin-top: ${this.e.details.margin_top}">
             <div class="container">
                 <div class="columns row">
                     <div class="column hero-column">

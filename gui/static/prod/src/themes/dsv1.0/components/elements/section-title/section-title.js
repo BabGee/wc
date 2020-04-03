@@ -39,7 +39,7 @@ import{css,html,SectionPElementBase}from"../../../../../components/adaptive-ui.j
         }
       `]}renderDefault(){return html`
       
-        <div class="c-title-container">
+        <div class="c-title-container" style="margin-top: 25px;">
             <h3 class="ii__title is-centered">${this.e.name}</h3>
             <p class="ii__paragraph" style="color: #7b7b7b">${this.e.defaultValue}</p> 
                    
