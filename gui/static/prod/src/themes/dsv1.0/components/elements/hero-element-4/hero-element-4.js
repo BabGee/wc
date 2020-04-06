@@ -18,7 +18,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
 
 .circle{
     position: absolute;
-    background-color:  var(--app-default-color);
+    background-color:  var(--app-secondary-color);
     width:500px;
     height:500px;
     border-radius:50%;
