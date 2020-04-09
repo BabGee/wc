@@ -90,11 +90,11 @@ import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const 
                 
             <div id="navbarBasicExample" class="navbar-menu">
               <div class="navbar-end">
-               ${this.interface.pageGroups.map(pageGroup=>html`
-                  ${pageGroup.pages.map(menu=>html`
+               ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+                  ${pageGroup.pages.map((menu,menuIndex)=>html`
                   <a class="navbar-item nav__item is-capitalized"
                   @click="${this.scrollToSection}"
-                  data-name="${menu.id}"
+                  data-name="${menu.id}"  pageGroup="${pageGroupIndex}" page="${menuIndex}" 
                   >${menu.title}</a>
                   `)}
                   
@@ -107,4 +107,4 @@ import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const 
       </header>
     </div>
 
-     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);export{navbar9Css as $navbar$9Css,NavbarNineStyles};
+     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){let targetElement=event.target,selectedPagegroup=event.target.getAttribute("pageGroup"),selectedPage=event.target.getAttribute("page");if(this.pageGroup==selectedPagegroup){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}}else{window.location.hash="#/"+selectedPagegroup+"/"+selectedPage}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);export{navbar9Css as $navbar$9Css,NavbarNineStyles};

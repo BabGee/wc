@@ -29,7 +29,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
 
 .circle2{
     position: absolute;
-    background-color: var(--app-default-color);
+    background-color:  var(--app-secondary-color);
     width:500px;
     height:500px;
     border-radius:50%;
@@ -38,7 +38,9 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
 
 }
 img{
-    z-index:1000;
+    position: absolute;
+    width: 600px;
+    left: 1px;
 }
 .container{
     display:flex!important;
@@ -88,6 +90,305 @@ img{
     font-weight: bold;
 }
 
+
+
+
+@media screen and (max-width: 1216px) {
+    .circle{
+        width: 400px;
+        height: 400px
+
+    }
+    .circle2{
+        width: 400px;
+        height: 400px;
+        right: -370px;
+ 
+    }
+ 
+    img{
+
+        width: 500px;
+        
+    }
+   
+}
+@media screen and (max-width: 980px) {
+    .circle{
+        width: 400px;
+        height: 400px
+
+    }
+    .circle2{
+        width: 400px;
+        height: 400px;
+        right: -390px;
+ 
+    }
+ 
+    img{
+
+        width: 400px;
+        
+    }
+   
+
+}
+@media screen and (max-width: 850px) {
+
+    .container{
+        display:flex!important;
+        flex-direction:column;
+    }
+
+    .circle{
+        
+
+    }
+    .circle2{
+ 
+    }
+ 
+    img{
+        width: 350px;
+    }
+
+}
+@media screen and (max-width: 770px) {
+    .container{
+        display:flex!important;
+        flex-direction:column;
+    }
+
+    .circle{
+        top: -30px;
+        left: -145px;
+        height: 400px;
+        width: 400px;
+
+    }
+    .circle2{
+ 
+    }
+ 
+    img{
+        position:relative;
+        width: 350px;
+        
+    }
+}
+@media screen and (max-width: 768px) {
+    .container{
+        display:flex!important;
+        flex-direction:column;
+    }
+
+    .circle{
+        top: -93px;
+        left: -191px;
+        height: 350px;
+        width: 350px;
+
+    }
+    .circle2{
+ 
+    }
+ 
+    img{
+        position:relative;
+        width: 350px;
+        
+    }
+}
+
+@media screen and (max-width: 684px) {
+    .container{
+        display:flex!important;
+        flex-direction:column;
+    }
+
+    .circle{
+        top: -38px;
+        left: -162px;
+        height: 300px;
+        width: 300px;
+
+    }
+    .circle2{
+ 
+    }
+ 
+    img{
+        position:relative;
+        width: 350px;
+        
+    }
+}
+@media screen and (max-width: 572px) {
+    .container{
+        display:flex!important;
+        flex-direction:column;
+    }
+
+    .circle{
+        top: -55px;
+        left: -162px;
+        height: 300px;
+        width: 300px;
+
+    }
+    .circle2{
+ 
+    }
+ 
+    img{
+        position:relative;
+        width: 350px;
+        
+    }
+}
+@media screen and (max-width: 514px) {
+    .container{
+        display:flex!important;
+        flex-direction:column;
+    }
+
+    .circle{
+        top: -30px;
+        left: -145px;
+        height: 250px;
+        width: 250px;
+
+    }
+    .circle2{
+ 
+    }
+ 
+    img{
+        position:relative;
+        width: 400px;
+        
+    }
+}
+
+@media screen and (max-width: 411px) {
+    .container{
+        display:flex!important;
+        flex-direction:column;
+    }
+
+    .circle{
+        top: -169px;
+        left: -145px;
+        height: 250px;
+        width: 250px;
+
+    }
+    .circle2{
+ 
+    }
+ 
+    img{
+        position: absolute;
+        top: -117px;
+        width: 500px;
+        
+    }
+
+    .c-title-xl {
+        font-size: 60px;
+        line-height: 66px;
+    }
+}
+@media screen and (max-width: 414px) {
+    .container{
+        display:flex!important;
+        flex-direction:column;
+    }
+
+    .circle{
+        top: -177px;
+        left: -162px;
+        height: 250px;
+        width: 250px;
+
+    }
+    .circle2{
+ 
+    }
+ 
+    img{
+        position: absolute;
+        top: -116px;
+        left: -14px;
+        
+    }
+
+    .c-title-xl {
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .container{
+        display:flex!important;
+        flex-direction:column;
+    }
+
+    .circle{
+        width: 250px;
+        left: -150px;
+        height: 250px;
+        top: -178px;
+
+    }
+    .circle2{
+ 
+    }
+ 
+    img{
+        position: absolute;
+        top: -84px;
+        width: 500px;
+        
+    }
+
+    .c-title-xl {
+        font-size: 51px!important;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .container{
+        display:flex!important;
+        flex-direction:column;
+    }
+
+    .circle{
+        top: -111px;
+        left: -145px;
+        height: 200px;
+        width: 200px;
+
+    }
+    .circle2{
+ 
+    }
+ 
+    img{
+        position: absolute;
+        top: -67px;
+        width: 500px;
+        left: -28px;
+        
+    }
+
+    .c-title-xl {
+        font-size: 50px !important;
+    }
+}
+
+
 `;var heroElement4Css={HeroElement4Styles:HeroElement4Styles};class HeroElement4 extends BaseElement{static get styles(){return[HeroElement4Styles,css`
             :host {
               display: block;
@@ -98,10 +399,10 @@ img{
         <div class="hero-container">
             <div class="container">
                 <div class="columns row">
-                <div class="circle"></div>
                 <div class="circle2"></div>
-                    <div class="column hero-column" style="z-index:1000;">
+                    <div class="column hero-column">
                         <div class="hero-iso-image">
+                        <div class="circle"></div>
                         <img src="${this.e.details.hero_image_src}" />
                         </div>
                     </div>

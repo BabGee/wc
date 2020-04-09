@@ -1,5 +1,9 @@
 import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js";const TileElementStyles=css`
 /* Services Section */
+img {
+    width:400px;
+    height:200px;
+}
 .ii__section{
     padding-top: 80px;
     padding-bottom: 80px;
@@ -44,8 +48,8 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
     align-content: center;
     position: relative;
     left: 30%;
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
 }
 .read_more{
     color:var(--app-accent-color);
@@ -83,4 +87,4 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
             </div>
         `)} 
     </div>
-        `}static get is(){return"tile-element"}static get properties(){return{}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.loader.then(()=>{const allP=this.shadowRoot.querySelectorAll(".ii__paragraph");allP.forEach(p=>{let productLink=p.getAttribute("data-name");if(240<p.innerText.length){this.addReadMore(p,productLink)}else{this.addGetStarted(p,productLink)}})})}addReadMore(paragraph){let excessText=paragraph.innerText.substr(240,paragraph.innerText.length),splitText=paragraph.innerText.slice(0,240);paragraph.innerText=splitText;let lessTextnode=document.createTextNode("...Show less"),lessP=document.createElement("p"),lessNode=document.createElement("span"),textnode=document.createTextNode("...Read more"),morenode=document.createElement("span");morenode.className="read_more";morenode.appendChild(textnode);paragraph.appendChild(morenode);lessNode.className="show_less";lessNode.appendChild(lessTextnode);lessP.appendChild(lessNode);morenode.addEventListener("click",()=>{paragraph.innerText=splitText+excessText;paragraph.appendChild(lessP)});lessNode.addEventListener("click",()=>{paragraph.innerText=splitText;paragraph.appendChild(morenode)})}}customElements.define(TileElement.is,TileElement);var tileElement={TileElement:TileElement};export{tileElementCss as $tileElementCss,tileElement as $tileElement,TileElementStyles,TileElement};
+        `}static get is(){return"tile-element"}static get properties(){return{}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{const allP=this.shadowRoot.querySelectorAll(".ii__paragraph");allP.forEach(p=>{let productLink=p.getAttribute("data-name");if(240<p.innerText.length){self.addReadMore(p,productLink)}})})}addReadMore(paragraph){let excessText=paragraph.innerText.substr(240,paragraph.innerText.length),splitText=paragraph.innerText.slice(0,240);paragraph.innerText=splitText;let lessTextnode=document.createTextNode("...Show less"),lessP=document.createElement("p"),lessNode=document.createElement("span"),textnode=document.createTextNode("...Read more"),morenode=document.createElement("span");morenode.className="read_more";morenode.appendChild(textnode);paragraph.appendChild(morenode);lessNode.className="show_less";lessNode.appendChild(lessTextnode);lessP.appendChild(lessNode);morenode.addEventListener("click",()=>{paragraph.innerText=splitText+excessText;paragraph.appendChild(lessP)});lessNode.addEventListener("click",()=>{paragraph.innerText=splitText;paragraph.appendChild(morenode)})}}customElements.define(TileElement.is,TileElement);var tileElement={TileElement:TileElement};export{tileElementCss as $tileElementCss,tileElement as $tileElement,TileElementStyles,TileElement};
