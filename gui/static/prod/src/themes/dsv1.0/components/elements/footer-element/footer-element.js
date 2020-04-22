@@ -1,4 +1,4 @@
-import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const FooterElementStyles=css`
+import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js";const FooterElementStyles=css`
 body{
     font-family: 'Montserrat', sans-serif;
     min-height: 100%;
@@ -108,7 +108,7 @@ a.navbar-item:hover {
 .footer-rights{
     color: #a8a9b7;
 }
-`;var footerElementCss={FooterElementStyles:FooterElementStyles};class FooterElement extends BaseElement{constructor(){super()}static get styles(){return[FooterElementStyles,css`
+`;var footerElementCss={FooterElementStyles:FooterElementStyles};class FooterElement extends SectionPElementDsc{constructor(){super()}static get styles(){return[FooterElementStyles,css`
             :host {
               display: block;
             }
@@ -132,7 +132,7 @@ a.navbar-item:hover {
                         <div class="ii-footer-col">
                                 <h3 class="ii__footer-col-title is-capitalized">${slide.title}</h3>
                                 ${slide.links.map(link=>html`
-                                <a href="mailto:${link}" class="ii__footer-col-link">${link}</a>
+                                <a id="link-${link}" href="${this._getHref(link)}" @click="${this.checkLink}" target="_blank" class="ii__footer-col-link">${this._getLinkTitle(link)}</a>
                                 `)}
                         </div>
                     `)}
@@ -161,4 +161,4 @@ a.navbar-item:hover {
             </div>
         </div>
     </footer>
-        `}static get is(){return"footer-element"}init(pElement,loader){super.init(pElement,loader)}_getCurrentYear(){let year=new Date().getFullYear();return year}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(FooterElement.is,FooterElement);export{footerElementCss as $footerElementCss,FooterElementStyles};
+        `}static get is(){return"footer-element"}init(pElement,loader){super.init(pElement,loader)}checkLink(e){const link=e.target.getAttribute("href");if(""==link){e.preventDefault()}}_getCurrentYear(){let year=new Date().getFullYear();return year}_getHref(text){if(text.includes("|")){let[title,link]=text.split("|");return link}else{return""}}_getLinkTitle(text){if(text.includes("|")){let[title,link]=text.split("|");return title}else{return text}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(FooterElement.is,FooterElement);export{footerElementCss as $footerElementCss,FooterElementStyles};
