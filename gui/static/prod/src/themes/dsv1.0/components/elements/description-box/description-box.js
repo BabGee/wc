@@ -76,7 +76,8 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
         display: none;
     }
     .tab_drawer_heading {
-        background-color: #ccc!important;
+        background: #e43537!important;
+        color: #fff;
         margin: 0;
         padding: 10px 40px;
         display: block;
@@ -89,6 +90,10 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
     } 
     .data{
         display: none;
+        padding: 20px 4px;
+    }
+    .content h1{
+        font-size: 16px;
     }
     
 }

@@ -3027,22 +3027,29 @@ if(!window.polymerSkipLoadingFontRoboto){const link=document.createElement("link
     ${this.loading?html$3`Processing...`:html$3``}
      ${form}
      `}}register$2(FormRender);const ACTION_SERVICE_CALL="1",ACTION_LINK_WINDOW="2",ACTION_SUBMIT="3",buttonMixin=BaseClass=>class extends BaseClass{renderDefault(){return html$3`
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-        <style>
-        .button.is-link {
-          border-color: transparent;
-          color: #fff;
-        }       
- 
-</style>       
-<div class="field">
-  <div class="control" style=" padding:12px;">
-    <button class="button is-link" style="width: 100%; background-color: var(--app-default-color);">${this.name}</button>
-  </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <style>
+      .button.is-link {
+        border-color: transparent;
+        color: #fff;
+      }       
+    </style>       
+    <div class="field">
+      ${"LINK"===this.type?html$3`
+      <div class="button-container">
+        <button class="button btn has-text-weight-bold">${this.name}</button>
+        <div class="awesome-icon">
+          <fa-icon class="fas fa-arrow-right" color = "#fff"></fa-icon>
+        </div>
+      </div>
+      `:html$3`
+      <div class="control" style=" padding:12px;">
+        <button class="button is-link" style="width: 100%; height: 40px; background-color: var(--app-default-color);">${this.name}</button>
+      </div>
+      `}
+    </div>
 
-</div>
-
-`}static get properties(){return{icon:Boolean,rounded:Boolean,large:Boolean,size:String,color:String}}constructor(){super();this.icon=!1;this.rounded=!1;this.large=!1;this.size=32;this.color="#0040bf";this.addEventListener("click",this._onAction.bind(this))}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.icon=this.e.details.icon||!1;this.large=this.e.details.large||!1;this.rounded=this.e.details.rounded||!1;this.size=this.e.details.size||32;this.color=this.e.details.color||"#0040bf"}get action(){return ACTION_SUBMIT}_onAction(){switch(this.action){case ACTION_SERVICE_CALL:this.pl._dialog(this.e.service,this.params);break;case ACTION_LINK_WINDOW:break;case ACTION_SUBMIT:default:this.pl.submitForm();}}};var buttonMixin$1={ACTION_SERVICE_CALL:ACTION_SERVICE_CALL,ACTION_LINK_WINDOW:ACTION_LINK_WINDOW,ACTION_SUBMIT:ACTION_SUBMIT,buttonMixin:buttonMixin};const InputRenderDefaultStyles=css`
+`}static get properties(){return{icon:Boolean,rounded:Boolean,large:Boolean,size:String,color:String}}constructor(){super();this.icon=!1;this.rounded=!1;this.large=!1;this.size=32;this.color="#0040bf";this.type="";this.addEventListener("click",this._onAction.bind(this))}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.icon=this.e.details.icon||!1;this.large=this.e.details.large||!1;this.rounded=this.e.details.rounded||!1;this.size=this.e.details.size||32;this.color=this.e.details.color||"#0040bf"}get action(){return ACTION_SUBMIT}_onAction(){switch(this.action){case ACTION_SERVICE_CALL:this.pl._dialog(this.e.service,this.params);break;case ACTION_LINK_WINDOW:break;case ACTION_SUBMIT:default:this.pl.submitForm();}}};var buttonMixin$1={ACTION_SERVICE_CALL:ACTION_SERVICE_CALL,ACTION_LINK_WINDOW:ACTION_LINK_WINDOW,ACTION_SUBMIT:ACTION_SUBMIT,buttonMixin:buttonMixin};const InputRenderDefaultStyles=css`
 `;var inputRenderDefaultStyles={InputRenderDefaultStyles:InputRenderDefaultStyles};const InputRenderServiceStyles=css`
 
 `;var inputRenderServiceStyles={InputRenderServiceStyles:InputRenderServiceStyles};const Reset=css`
