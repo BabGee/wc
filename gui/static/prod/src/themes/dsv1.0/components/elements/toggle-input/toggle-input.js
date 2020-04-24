@@ -78,4 +78,4 @@ import{SerializableElement,utilsMixin,css,html}from"../../../../../components/ad
     </div>
     </div>
   </div>
-  `}static get is(){return"toggle-input"}getInput(){return this.qs("#input")}getValue(){return this.getInput().checked}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}window.customElements.define(ToggleInput.is,ToggleInput);export{toggleInput as $toggleInput,toggleInputCss as $toggleInputCss,ToggleInputBase,ToggleInputStyles};
+  `}static get is(){return"toggle-input"}getInput(){return this.qs("#input")}getValue(){return this.getInput().checked?"on":"off"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}window.customElements.define(ToggleInput.is,ToggleInput);export{toggleInput as $toggleInput,toggleInputCss as $toggleInputCss,ToggleInputBase,ToggleInputStyles};

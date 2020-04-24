@@ -1,4 +1,4 @@
-import{PageViewElement,css,html,Reset,Colors,Fonts}from"../../../../components/adaptive-ui.js";import"./section-page.js";const CanvasPageBase=class extends PageViewElement{constructor(){super()}_tabs(page){if(page===void 0){return}return page.tabs}_viewList(){if(!this.dialogsStack.length){this.view="list";this.updateLocationHash()}else{const args=this.dialogsStack.pop();console.log(args);const dialog=this.qs("#dialog");dialog.payload=args[0];dialog.params=args[1];dialog.loading=!1}}async _computeTop(){await this.updateComplete;return this.qs("#top")}};var canvasPage={CanvasPageBase:CanvasPageBase};const CanvasStyles=css`
+import{PageViewElement,css,html,script,Reset,Colors,Fonts}from"../../../../components/adaptive-ui.js";import"./section-page.js";const CanvasPageBase=class extends PageViewElement{constructor(){super()}_tabs(page){if(page===void 0){return}return page.tabs}_viewList(){if(!this.dialogsStack.length){this.view="list";this.updateLocationHash()}else{const args=this.dialogsStack.pop();console.log(args);const dialog=this.qs("#dialog");dialog.payload=args[0];dialog.params=args[1];dialog.loading=!1}}async _computeTop(){await this.updateComplete;return this.qs("#top")}};var canvasPage={CanvasPageBase:CanvasPageBase};const CanvasStyles=css`
 
   :host {
   
@@ -15,6 +15,35 @@ import{PageViewElement,css,html,Reset,Colors,Fonts}from"../../../../components/a
       <missing-page></missing-page>
       `}return html`
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+      <script>
+      
+      ${"NenaSasa"===this.gateway.name?html`
+
+        ${this.gateway.googleAnalyticsCode?html`
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=${this.gateway.googleAnalyticsCode}"></script>
+        
+        ${script(`
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${this.gateway.googleAnalyticsCode}');
+        
+        
+        `)}
+        
+        
+        `:html``}
+
+      
+
+      
+      `:html``}
+      
+      
+      
+      </script>
     <style>
       ${Reset}
       ${Colors}

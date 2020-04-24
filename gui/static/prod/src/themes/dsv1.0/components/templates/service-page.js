@@ -1,4 +1,4 @@
-import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors,Fonts}from"../../../../components/adaptive-ui.js";import"./section-page.js";const template=html`<iron-iconset-svg name="communication" size="24">
+import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors,Fonts,script}from"../../../../components/adaptive-ui.js";import"./section-page.js";const template=html`<iron-iconset-svg name="communication" size="24">
 <svg><defs>
 <g id="business"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"></path></g>
 <g id="call"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></g>
@@ -224,6 +224,35 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
       `}return html$1`
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
       <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+      <script>
+      
+      ${"NenaSasa"===this.gateway.name?html$1`
+
+        ${this.gateway.googleAnalyticsCode?html$1`
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=${this.gateway.googleAnalyticsCode}"></script>
+        
+        ${script(`
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${this.gateway.googleAnalyticsCode}');
+        
+        
+        `)}
+        
+        
+        `:html$1``}
+
+      
+
+      
+      `:html$1``}
+      
+      
+      
+      </script>
       <style>
         body{
           font-size: 14px;
