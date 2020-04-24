@@ -1,5 +1,48 @@
 import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/adaptive-ui.js";const TableTypeStyles=css`
 
+.radio {
+    position: relative;
+    display: inline-block;
+    padding-left:30px;
+    cursor:pointer;
+}
+
+.radio input[type="radio"] {
+    display:none;
+
+}
+
+.radio span {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 3px solid var(--app-default-color);
+    display:block;
+    position: absolute;
+    left:0;
+    top:-18px;
+}
+
+.radio span:after {
+    content:"";
+    height: 11px;
+    width: 11px;
+    background: var(--app-default-color);
+    display:block;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%) scale(0);
+    border-radius:50%;
+    transition: 300ms ease-in-out 0s;
+
+}
+
+.radio input[type="radio"]:checked ~ span:after {
+    transform: translate(-50%,-50%) scale(1);
+
+}
+
 `;var tableTypeCss={TableTypeStyles:TableTypeStyles};const TableTypeHeaderStyles=css`
 
 `;var tableTypeHeaderCss={TableTypeHeaderStyles:TableTypeHeaderStyles};const TableStyles=css`
@@ -884,7 +927,7 @@ border-bottom: 0;
 
 
 
-`}static get is(){return"table-type-header"}static get properties(){return{title:String,columns:{type:Array}}}generateCSV(){this.dispatchEvent(new CustomEvent("export-type",{detail:{type:"csv"}}))}generatePDF(){this.dispatchEvent(new CustomEvent("export-type",{detail:{type:"pdf"}}))}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchReset(){const self=this;this.dispatchEvent(new CustomEvent("_clearSearch",{detail:{searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath})}}))}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_search(){const self=this,q=self.shadowRoot.querySelector("#q").value,qIn=self.shadowRoot.querySelector("#qIn").selected;this.searchText=q;if(q){this.dispatchEvent(new CustomEvent("_search",{detail:{column:qIn,searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath}),value:q}}))}}}customElements.define(TableTypeHeader.is,TableTypeHeader);var tableTypeHeader={TableTypeHeader:TableTypeHeader};class TableType extends LitElement{constructor(){super();this.columns=[];this.cols=[];this.data=[];this.selected=[];this.availableSize=[10,50,100,500]}static get styles(){return[TableStyles,TableTypeStyles,css`
+`}static get is(){return"table-type-header"}static get properties(){return{title:String,columns:{type:Array}}}generateCSV(){this.dispatchEvent(new CustomEvent("export-type",{detail:{type:"csv"}}))}generatePDF(){this.dispatchEvent(new CustomEvent("export-type",{detail:{type:"pdf"}}))}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchReset(){const self=this;this.dispatchEvent(new CustomEvent("_clearSearch",{detail:{searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath})}}))}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_search(){const self=this,q=self.shadowRoot.querySelector("#q").value,qIn=self.shadowRoot.querySelector("#qIn").selected;this.searchText=q;if(q){this.dispatchEvent(new CustomEvent("_search",{detail:{column:qIn,searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath}),value:q}}))}}}customElements.define(TableTypeHeader.is,TableTypeHeader);var tableTypeHeader={TableTypeHeader:TableTypeHeader};class TableType extends LitElement{constructor(){super();this.columns=[];this.cols=[];this.data=[];this.selected=[];this.selctedRadio="";this.availableSize=[10,50,100,500]}static get styles(){return[TableStyles,TableTypeStyles,css`
             :host {
               display: block;
             }
@@ -960,10 +1003,41 @@ ${this.paginate?html`
         ></datasource-table-actions>
         
         `}else if(this.selectable&&0===p){return html`
-        <paper-checkbox
-        .rowData=${rowData}
-        .rowIndex=${rowIndex}
-        ></paper-checkbox>
+
+      ${"single"===this.selectType?html`
+
+      
+      <label class="radio">
+        <input type="radio"
+          name="${rowData}"
+          value="${rowData}"
+          @click="${this.getRadioChecked}"
+          rowData=${rowData}
+          rowIndex=${rowIndex}>
+          <span></span>
+        
+      </label>
+    
+      
+      
+      
+      `:html`
+
+          <div @click="${this.getCheckedRow}"
+            rowData=${rowData}
+            rowIndex=${rowIndex}
+          >
+            <paper-checkbox
+            rowData=${rowData}
+            rowIndex=${rowIndex}
+            .rowData=${rowData}
+            .rowIndex=${rowIndex}
+            ></paper-checkbox>
+          </div>
+      
+      
+      `}
+      
         `}else{try{let columnValue=valueFromRowData;var dJson;if("object"==typeof columnValue){dJson=columnValue}else{dJson=JSON.parse(columnValue);if("object"!=typeof dJson){throw"Not Object JSON"}}const vs=[];for(var property in dJson){vs.push(html`<div style="margin-top:0.1px;"><strong>${property}: </strong><span>${dJson[property]}</span></div>`)}return html`
           ${vs.map(v=>html` ${v}<br>`)}`}catch(e){switch(paperDatatableApiColumn.type){case"boolean":return html`
               ${"false"==(valueFromRowData+"").toLowerCase()?html`
@@ -972,4 +1046,4 @@ ${this.paginate?html`
               <iron-icon icon="icons:check"></iron-icon>
               `}
               
-              `;break;default:return html`${valueFromRowData}`;}}}}static get properties(){return{data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},pl:Object,details:Object,columns:{type:Array},paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String,searchText:String}}firstUpdated(){}_handleSort(evt){console.log(evt)}_exportType(evt){const type=evt.detail.type;this.dispatchEvent(new CustomEvent("export",{detail:{type:type}}))}_handleInputChange(evt){this.dispatchEvent(new CustomEvent("dropdown-filter",{detail:{path:evt.detail.column.propertyPath,value:evt.detail.value}}))}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}_selectChange(event){if(event.type&&"change"===event.type){Polymer.dom(event).localTarget}else{}}_searchReset(){this._clearSearch()}_search(evt){var filter=evt.detail.value,column=evt.detail.column,columns=evt.detail.searchFields;this.dispatchEvent(new CustomEvent("search",{detail:{column:column,searchFields:columns,value:filter}}))}_clearSearch(event){var columns=event.detail.searchFields;this.dispatchEvent(new CustomEvent("clear-search",{detail:{searchFields:columns}}))}}customElements.define(TableType.is,TableType);var tableType$1={TableType:TableType};export{tableTypeCss as $tableTypeCss,tableTypeHeaderCss as $tableTypeHeaderCss,tableTypeHeader as $tableTypeHeader,tableType$1 as $tableType,tableType as $tableType$1,TableTypeStyles,TableTypeHeaderStyles,TableTypeHeader,TableType,TableStyles};
+              `;break;default:return html`${valueFromRowData}`;}}}}static get properties(){return{data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},pl:Object,details:Object,columns:{type:Array},paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String,searchText:String,selectType:{type:String}}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_handleSort(evt){console.log(evt)}getRadioChecked(event){const rowData=event.target.getAttribute("rowData"),rowIndex=event.target.getAttribute("rowIndex");let rowDataId=rowData.id;const self=this;if(rowDataId===void 0){rowDataId=rowIndex;self.selectedRadio=rowDataId;this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selectedRadio}}))}else{self.selectedRadio=rowDataId;this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selectedRadio}}))}}getCheckedRow(event){const rowData=event.target.getAttribute("rowData"),rowIndex=event.target.getAttribute("rowIndex");let rowDataId=rowData.id;if(this.selected==void 0){this.selected=[]}this;if(rowDataId===void 0){rowDataId=rowIndex;if(this.selected.includes(rowIndex)){this.selected=this.selected.filter(value=>value!=rowIndex);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}else{this.selected.push(rowDataId);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}}else{if(this.selected.includes(rowDataId)){this.selected=this.selected.filter(value=>value!=rowDataId);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}else{this.selected.push(rowDataId);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}}}_exportType(evt){const type=evt.detail.type;this.dispatchEvent(new CustomEvent("export",{detail:{type:type}}))}_handleInputChange(evt){this.dispatchEvent(new CustomEvent("dropdown-filter",{detail:{path:evt.detail.column.propertyPath,value:evt.detail.value}}))}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}_selectChange(event){if(event.type&&"change"===event.type){Polymer.dom(event).localTarget}else{}}_searchReset(){this._clearSearch()}_search(evt){var filter=evt.detail.value,column=evt.detail.column,columns=evt.detail.searchFields;this.dispatchEvent(new CustomEvent("search",{detail:{column:column,searchFields:columns,value:filter}}))}_clearSearch(event){var columns=event.detail.searchFields;this.dispatchEvent(new CustomEvent("clear-search",{detail:{searchFields:columns}}))}}customElements.define(TableType.is,TableType);var tableType$1={TableType:TableType};export{tableTypeCss as $tableTypeCss,tableTypeHeaderCss as $tableTypeHeaderCss,tableTypeHeader as $tableTypeHeader,tableType$1 as $tableType,tableType as $tableType$1,TableTypeStyles,TableTypeHeaderStyles,TableTypeHeader,TableType,TableStyles};

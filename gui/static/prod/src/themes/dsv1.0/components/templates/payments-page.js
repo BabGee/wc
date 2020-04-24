@@ -1,4 +1,4 @@
-import{PageViewElement,html}from"../../../../components/adaptive-ui.js";const PaymentsPageBase=class extends PageViewElement{constructor(){super()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}async _activateLoadSectionInterface(...args){self.params=params;this.dialogServicesQueue.push([service,params]);self.view="dialog"}};var paymentsPage={PaymentsPageBase:PaymentsPageBase};class PaymentsPage extends PaymentsPageBase{render(){if(!this.interface){return html`
+import{PageViewElement,html,script}from"../../../../components/adaptive-ui.js";const PaymentsPageBase=class extends PageViewElement{constructor(){super()}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}async _activateLoadSectionInterface(...args){self.params=params;this.dialogServicesQueue.push([service,params]);self.view="dialog"}};var paymentsPage={PaymentsPageBase:PaymentsPageBase};class PaymentsPage extends PaymentsPageBase{render(){if(!this.interface){return html`
         <div>Cannot render an UNDEFINED tab!!.</div>
       `}else if(!this.pageGroup||!this.page){return html`
         <missing-page></missing-page>
@@ -12,6 +12,39 @@ import{PageViewElement,html}from"../../../../components/adaptive-ui.js";const Pa
         href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css"
         type="text/css"
       />
+
+      <script>
+      
+      ${"NenaSasa"===this.gateway.name?html`
+
+        ${this.gateway.googleAnalyticsCode?html`
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=${this.gateway.googleAnalyticsCode}"></script>
+        
+        ${script(`
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${this.gateway.googleAnalyticsCode}');
+        
+        
+        `)}
+        
+        
+        `:html``}
+
+      
+
+      
+      `:html``}
+      
+      
+      
+      </script>
+
+
+
       <style>
         body {
           font-family: "Montserrat", sans-serif !important;
