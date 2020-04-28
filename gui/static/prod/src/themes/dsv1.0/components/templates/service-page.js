@@ -222,6 +222,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
 `;var service={ServiceStyles:ServiceStyles};class ServicePage extends ServicePageBase{render(){if(!this.interface){return html$1`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html$1`
       <missing-page></missing-page>
       `}return html$1`
+    <head>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
       <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
       <script>
@@ -253,6 +254,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
       
       
       </script>
+      </head>
       <style>
         body{
           font-size: 14px;

@@ -14,36 +14,38 @@ import{PageViewElement,css,html,script,Reset,Colors,Fonts}from"../../../../compo
 `;var canvas={CanvasStyles:CanvasStyles};class CanvasPage extends CanvasPageBase{render(){if(!this.interface){return html`<div>Cannot render an UNDEFINED tab.</div>`}else if(!this.pageGroup||!this.page){return html`
       <missing-page></missing-page>
       `}return html`
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-      <script>
-      
-      ${"NenaSasa"===this.gateway.name?html`
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+        <script>
+        
+        ${"NenaSasa"===this.gateway.name?html`
 
-        ${this.gateway.googleAnalyticsCode?html`
+          ${this.gateway.googleAnalyticsCode?html`
 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=${this.gateway.googleAnalyticsCode}"></script>
-        
-        ${script(`
+          <script async src="https://www.googletagmanager.com/gtag/js?id=${this.gateway.googleAnalyticsCode}"></script>
+          
+          ${script(`
 
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${this.gateway.googleAnalyticsCode}');
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${this.gateway.googleAnalyticsCode}');
+          
+          
+          `)}
+          
+          
+          `:html``}
+
         
-        
-        `)}
-        
+
         
         `:html``}
-
-      
-
-      
-      `:html``}
-      
-      
-      
-      </script>
+        
+        
+        
+        </script>
+      </head>
     <style>
       ${Reset}
       ${Colors}
