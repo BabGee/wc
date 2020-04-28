@@ -30,35 +30,37 @@ import{PageViewElement,VIEW_MODE_DIALOG,html,script}from"../../../../components/
 `}else if(!this.pageGroup||!this.page){return html`
       <missing-page></missing-page>
       `}return html` 
-    <script>
-      
-      ${"NenaSasa"===this.gateway.name?html`
+    <head>
+      <script>
+        
+        ${"NenaSasa"===this.gateway.name?html`
 
-        ${this.gateway.googleAnalyticsCode?html`
+          ${this.gateway.googleAnalyticsCode?html`
 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=${this.gateway.googleAnalyticsCode}"></script>
-        
-        ${script(`
+          <script async src="https://www.googletagmanager.com/gtag/js?id=${this.gateway.googleAnalyticsCode}"></script>
+          
+          ${script(`
 
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${this.gateway.googleAnalyticsCode}');
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${this.gateway.googleAnalyticsCode}');
+          
+          
+          `)}
+          
+          
+          `:html``}
+
         
-        
-        `)}
-        
+
         
         `:html``}
-
-      
-
-      
-      `:html``}
-      
-      
-      
-      </script>       
+        
+        
+        
+        </script>   
+      </head>    
     <style>
         body{
             font-family: 'Montserrat', sans-serif;

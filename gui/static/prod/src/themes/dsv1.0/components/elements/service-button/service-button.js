@@ -1,73 +1,55 @@
 import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const ServiceButtonBase=class extends utilsMixin(BaseElement){static get is(){return"service-button"}static get properties(){return{color:String,params:{type:Object,value:{}}}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;self.addEventListener("click",function(evt){evt.preventDefault();self.pl._dialog(self.e.service,self.params)})}init(pElement,loader){super.init(pElement,loader);var self=this;self.params=loader.pl.paramsCopy()}};var serviceButton={ServiceButtonBase:ServiceButtonBase};const ServiceButtonStyles=css`
-.ccc {
-    width : 100%;
-    min-width: 10em;
-    padding: 1em 0.5em;
-    text-align: center;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -ms-flex-direction: column;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    -ms-flex: 1 1 0.000000001px;
-    -webkit-flex: 1;
-    flex: 1;
-    -webkit-flex-basis: 0.000000001px;
-    flex-basis: 0.000000001px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-.feature-wrap {
-    font-size: 48px;
-    padding: 32px;
-    border-radius: 100%;
-    text-align: center;
+.service-button-container{
+    width: 150px;
+    height: 150px;
+    border-radius: 6px;
     background: var(--app-default-color);
-    color: #ffffff;
-    box-shadow: inset 0 0 0 5px #f2f2f2;
-    -webkit-box-shadow: inset 0 0 0 5px #f2f2f2;
-    -webkit-transition: 500ms;
-    -moz-transition: 500ms;
-    -o-transition: 500ms;
-    transition: 500ms;
+    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+    position: relative;
+}
+.service-button-container:hover {
+    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
+    /* transform: scale(1.1); */
+    background: #fff;
 }
 
-h3{
-    font-weight: 300;
+.service-button-container:hover .service-icon iron-icon,
+.service-button-container:hover .service-content h3{
+    color: var(--app-default-color);
 }
-.feature-wrap:hover {
-    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
-    opacity: 0.6;
-    transform: scale(1.1);
+.service-icon{
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    position: relative;
+    top: 35px;
+}
+.service-content{
+    width: 100%;
+    position: relative;
+    top: 30px;
+}
+.service-content h3{
+    text-align: center;
+    color: #fff;
 }
 iron-icon {
-    color: #ffffff;
+    color: #fff;
 }
 `;var serviceButtonCss={ServiceButtonStyles:ServiceButtonStyles};class ServiceButton extends ServiceButtonBase{static get styles(){return[ServiceButtonStyles,css`
             :host {
                 display: block;
             }
             `]}renderDefault(){return html`
-        <div class="row center-xs">
-            <div class="col-xs-6">
-                <div class="box">
-                    <div id="container">
-                        <div  class="ccc">
-                            <div class="feature-wrap">
-                                <iron-icon style="width:88px !important;height: 88px !important;"
-                                           icon="${this.e.icon}"></iron-icon>
-                            </div>
-                            <h3>${ServiceButton.toTitleCase(this.e.name)}</h3>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="service-button-container">
+        <div class="service-icon is-flex">
+            <iron-icon style="width:48px !important;height: 48px !important;"
+                icon="${this.e.icon}"></iron-icon>
         </div>
+        <div class="service-content">
+            <h3 class="is-centered is-size-7">${ServiceButton.toTitleCase(this.e.name)}</h3>
+        </div>
+    </div>
         
         `}}customElements.define(ServiceButton.is,ServiceButton);export{serviceButton as $serviceButton,serviceButtonCss as $serviceButtonCss,ServiceButtonBase,ServiceButtonStyles};

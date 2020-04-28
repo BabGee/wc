@@ -3,6 +3,7 @@ import{PageViewElement,html,script}from"../../../../components/adaptive-ui.js";c
       `}else if(!this.pageGroup||!this.page){return html`
         <missing-page></missing-page>
       `}return html`
+    <head>
       <link
         href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
         rel="stylesheet"
@@ -44,7 +45,7 @@ import{PageViewElement,html,script}from"../../../../components/adaptive-ui.js";c
       </script>
 
 
-
+    </head>
       <style>
         body {
           font-family: "Montserrat", sans-serif !important;
