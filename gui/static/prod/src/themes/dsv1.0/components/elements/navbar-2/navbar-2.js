@@ -19,7 +19,7 @@ a figure img#user-pic {
 
 .bind-box {
     margin-bottom: 1.5rem;
-    background-color: white;
+    background-color: var(--app-secondary-color)!important;
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
     color: #4a4a4a;
     display: block;
@@ -116,6 +116,9 @@ a figure img#user-pic {
   margin-left:2px;
   margin-right:2px;
 }
+.navbar-item, .navbar-link{
+    color: var(--app-default-color)!important;
+}
 .navbar-item img {
   max-height: 100%;!important
 }
@@ -125,7 +128,7 @@ a figure img#user-pic {
 }
 .is-active {
     border-radius: 15px!important;
-    background-color: var(--app-secondary-color)!important;
+    background-color: var(--app-default-color)!important;
     color: #fff!important;
 }
 .is-active:hover {
@@ -134,7 +137,7 @@ a figure img#user-pic {
     color: #fff!important;
 }
 .navbar-link::after{
-    border: 3px solid var(--app-secondary-color)!important;
+    border: 3px solid var(--app-default-color)!important;
     border-radius: 2px!important;
     border-right: 0!important;
     border-top: 0!important;
@@ -153,7 +156,7 @@ a figure img#user-pic {
 
 }
 .navbar-link:hover::after{
-    border: 3px solid var(--app-secondary-color)!important;
+    border: 3px solid var(--app-default-color)!important;
     border-radius: 2px!important;
     border-right: 0!important;
     border-top: 0!important;
@@ -215,6 +218,10 @@ a.navbar-item:hover {
     background-color: transparent!important;
     
 }
+.navbar-item.li-page{
+    color: #4a4a4a!important;
+
+}
 .li-page:hover{
     color: var(--app-secondary-color)!important;
 
@@ -232,20 +239,28 @@ a.navbar-item:hover {
 }
 .navbar-link:hover{
     background-color:transparent!important;
-    color:var(--app-secondary-color)!important;
+    color:#fff!important;
 }
 .navbar-link.is-active:hover{
     border-radius: 15px!important;
-    background-color: var(--app-secondary-color)!important;
+    background-color: var(--app-default-color)!important;
     color: #fff!important;
 }
 .navbar-link:hover:after{
     background-color:transparent!important;
-    color:var(--app-secondary-color)!important;
+    color:#fff!important;
 }
 .navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:focus-within .navbar-link{
      background-color:transparent!important;
     color:var(--app-secondary-color)!important;
+}
+
+@media screen and (max-width: 1023px) {
+    .navbar-link:hover{
+        background-color:transparent!important;
+        color:var(--app-default-color)!important;;
+    }
+   
 }
 `;var navbar2Css={NavbarTwoStyles:NavbarTwoStyles};class Navbar2 extends NavbarBase{static get styles(){return[NavbarTwoStyles,css`
         :host {
