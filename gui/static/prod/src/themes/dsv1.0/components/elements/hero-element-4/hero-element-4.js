@@ -8,7 +8,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     padding-right: 24px;
     padding-bottom: 25px;
     padding-left: 24px;
-    padding-top: 80px;
+    padding-top: 0px;
     background-color: #fff!important;
     margin-top:10px;
     display:flex!important;
@@ -397,7 +397,7 @@ img{
      
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <div class="hero-container">
-            <div class="container">
+            <div class="container"style="top: -120px;">
                 <div class="columns row">
                 <div class="circle2"></div>
                     <div class="column hero-column">
