@@ -131,9 +131,26 @@ a.navbar-item:hover {
                     ${this.e.details.links.map(slide=>html`
                         <div class="ii-footer-col">
                                 <h3 class="ii__footer-col-title is-capitalized">${slide.title}</h3>
-                                ${slide.links.map(link=>html`
-                                <a id="link-${link}" href="${this._getHref(link)}" @click="${this.checkLink}" target="_blank" class="ii__footer-col-link">${this._getLinkTitle(link)}</a>
-                                `)}
+                                ${"Socials"==slide.title?html`
+
+                                    ${slide.links.map(link=>html`
+                                    <a class="ii__footer-col-link" href="${this._getHref(link)}" @click="${this.checkLink}" target="_blank">
+                                    
+                                        <fa-icon class="fab fa-${this._getLinkTitle(link)}" color= "var(--app-secondary-color)" size="20px" style="" ></fa-icon>   
+                                                                         
+                                    </a>
+                                    `)}
+                                
+                                
+                                `:html`
+
+                                    ${slide.links.map(link=>html`
+                                    <a id="link-${link}" href="${this._getHref(link)}" @click="${this.checkLink}" target="_blank" class="ii__footer-col-link">${this._getLinkTitle(link)}</a>
+                                    `)}
+                                
+                                
+                                `}
+                               
                         </div>
                     `)}
                        
