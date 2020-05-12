@@ -21,6 +21,23 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     align-items:center!important;
 
 }
+.bg_image{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .9;
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    box-shadow: 0px 3px 6px #00000029;
+    opacity: 0.68;
+    filter: blur(7px);
+
+}
 .hero-column{
     margin-right:144px!important;
 }
@@ -41,26 +58,40 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     margin-top: 8px;
     margin-bottom: 18px;
     color: var(--app-default-color)!important;
-    font-size: 65px;
+    
     font-weight: bold;
-    line-height: 58px;
+    
     letter-spacing: .22px;
+
+    font-size: 80px;
+    line-height: 77px;
 }
 .c-paragraph {
-    font-size: 15px;
+    font-size: 19px;
     line-height: 20px;
     font-weight: 600;
     letter-spacing: .15px;
+    color: #fff!important;
 }
 .str-btn {
     border-radius: 5px!important;
-    width: 170px!important;
-    height: 3em!important;
+    
     background-color: var(--app-secondary-color)!important;
     color: #fff!important;
     margin-top: 20px;
     border: none!important;
     font-weight: bold;
+
+    width: 274px !important;
+    height: 4em !important;
+    font-size: 19px!important;
+}
+
+.str-btn:hover{
+    background-color: var(--app-default-color)!important;
+    color: var(--app-secondary-color)!important;
+    border: 4px var(--app-secondary-color) solid!important ;
+
 }
 
 @media screen and (max-width: 414px){ 
@@ -114,22 +145,45 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
               display: block;
             }
           `]}render(){return html`
+
+        <style>
+            .parallax {
+            /* The image used */
+            background-image: url("${this.e.details.bg_image}");
+
+
+            /* Create the parallax scrolling effect */
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            min-height:100%; 
+            opacity: .9;
+           
+
+            box-shadow: 0px 3px 6px #00000029;
+            opacity: 0.68;
+            filter: blur(7px);
+            }
+        </style>
      
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <div class="hero-container" style="margin-top: ${this.e.details.margin_top}">
+            <div class="parallax" ></div>
             <div class="container">
-                <div class="columns row">
-                    <div class="column hero-column">
-                        <div class="hero-iso-image">
-                            <img src="${this.e.details.hero_image_src}" />
-                        </div>
-                    </div>
-                    <div class="column">
-                        <h1 class="c-title-xl">${this.e.name}</h1>
-                        <p class="c-paragraph">${this.e.defaultValue}</p>
-                        <a href="${this.e.details.path}" class="button str-btn">${this.e.details.button_title}</a>
-                    </div>
+                <div class="column">
+                    <h1 class="c-title-xl">${this.e.name}</h1>
+                    <p class="c-paragraph">${this.e.defaultValue}</p>
+                    <a href="${this.e.details.path}" class="button str-btn">${this.e.details.button_title}</a>
                 </div>
-            </div
+                    
+                </div>
+            </
         </div>
         `}static get is(){return`hero-element-3`}}customElements.define(HeroElement3.is,HeroElement3);export{heroElement3Css as $heroElement$3Css,HeroElement3Styles};

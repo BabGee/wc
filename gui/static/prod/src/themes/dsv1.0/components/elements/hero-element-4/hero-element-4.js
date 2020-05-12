@@ -1,4 +1,4 @@
-import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const HeroElement4Styles=css`
+import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js";const HeroElement4Styles=css`
 
 .hero-container{
     max-width: 100%;
@@ -88,6 +88,38 @@ img{
     margin-top: 20px;
     border: none!important;
     font-weight: bold;
+}
+
+.str-btn:hover {
+    background-color: var(--app-default-color)!important;
+    color: var(--app-secondary-color)!important;
+    border 3px!important soild!important  var(--app-secondary-color)!important;
+
+
+}
+
+/*animations*/
+
+.animate1{
+    opacity:0;
+    transform:translateX(-40px);
+    transition:0.7s all ease-in-out;
+}
+.animate1-appear{
+    opacity: 1;
+    transform:translateX(0px);
+
+}
+.animate2{
+    opacity:0;
+    transform:translateX(-40px);
+    transition:1s all ease-in-out;
+}
+.animate2-appear{
+    opacity: 1;
+    transform:translateX(0px);
+
+
 }
 
 
@@ -389,24 +421,26 @@ img{
 }
 
 
-`;var heroElement4Css={HeroElement4Styles:HeroElement4Styles};class HeroElement4 extends BaseElement{static get styles(){return[HeroElement4Styles,css`
+`;var heroElement4Css={HeroElement4Styles:HeroElement4Styles};class HeroElement4 extends SectionPElementDsc{static get styles(){return[HeroElement4Styles,css`
             :host {
               display: block;
             }
-          `]}render(){return html`
+          `]}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{window.addEventListener("scroll",()=>{self.scrollAppear()})})}scrollAppear(){const self=this;let contentContainer=self.shadowRoot.querySelector(".hero-container"),image=self.shadowRoot.getElementById("animateImage"),content=self.shadowRoot.getElementById("animate2"),contentStartPosition=contentContainer.getBoundingClientRect().top,screenPosition=window.innerHeight/2;if(contentStartPosition<screenPosition){image.classList.add("animate1-appear");content.classList.add("animate2-appear")}}render(){return html`
      
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <div class="hero-container">
             <div class="container"style="top: -120px;">
                 <div class="columns row">
                 <div class="circle2"></div>
-                    <div class="column hero-column">
+                    <div  class="column hero-column">
                         <div class="hero-iso-image">
                         <div class="circle"></div>
-                        <img src="${this.e.details.hero_image_src}" />
+                            <div id="animateImage" class="animate1">
+                                <img  src="${this.e.details.hero_image_src}" />
+                            </div>
                         </div>
                     </div>
-                    <div class="column">
+                    <div id="animate2" class="column animate2">
                         <h1 class="c-title-xl">${this.e.name}</h1>
                         <p class="c-paragraph">${this.e.defaultValue}</p>
                         <a href="${this.e.details.path}" class="button str-btn">${this.e.details.button_title}</a>
