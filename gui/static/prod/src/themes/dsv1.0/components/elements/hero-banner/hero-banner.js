@@ -1,4 +1,4 @@
-import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const HeroElement3Styles=css`
+import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const HeroBannerStyles=css`
 
 .hero-container{
     max-width: 100%;
@@ -140,7 +140,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     
 }
 
-`;var heroElement3Css={HeroElement3Styles:HeroElement3Styles};class HeroElement3 extends BaseElement{static get styles(){return[HeroElement3Styles,css`
+`;var heroBannerCss={HeroBannerStyles:HeroBannerStyles};class HeroBanner extends BaseElement{static get styles(){return[HeroBannerStyles,css`
             :host {
               display: block;
             }
@@ -184,4 +184,4 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
                 </div>
             </
         </div>
-        `}static get is(){return`hero-element-3`}}customElements.define(HeroElement3.is,HeroElement3);export{heroElement3Css as $heroElement$3Css,HeroElement3Styles};
+        `}static get is(){return`hero-banner`}}customElements.define(HeroBanner.is,HeroBanner);export{heroBannerCss as $heroBannerCss,HeroBannerStyles};
