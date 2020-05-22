@@ -3002,7 +3002,7 @@ if(!window.polymerSkipLoadingFontRoboto){const link=document.createElement("link
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 170px;
+            /* margin-top: 170px; */
         }
         .session-columns{
             width: 30%; 
