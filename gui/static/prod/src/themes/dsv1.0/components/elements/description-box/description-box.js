@@ -2,6 +2,9 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
 .main-container{
     background: #fff!important;
 }
+.data{
+    flex-direction: column;
+}
 .descriptionBox{
     width: 80%;
     margin:0 auto;
@@ -31,6 +34,10 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
 .image-container{
     width:70%;
     margin-right:0px;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
 }
 .descriptionBox__item{
     padding: 10px 60px 10px 20px;
@@ -47,8 +54,18 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
 .bodTItle{
     font-weight: 500;
     line-height: 18px;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
 }
-
+.content h1, 
+.content p{
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
 .descriptionBox__content{
     padding: 20px;
     width: 100%;
@@ -76,7 +93,7 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
         display: none;
     }
     .tab_drawer_heading {
-        background: #e43537!important;
+        background: var(--app-secondary-color)!important;
         color: #fff;
         margin: 0;
         padding: 10px 40px;
@@ -90,12 +107,46 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
     } 
     .data{
         display: none;
+        flex-direction: row;
         padding: 20px 4px;
     }
     .content h1{
         font-size: 16px;
     }
     
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 `;var descriptionBoxCss={DescriptionBoxStyles:DescriptionBoxStyles};class DescriptionBox extends SectionPElementDsc{static get styles(){return[DescriptionBoxStyles,css`
@@ -143,7 +194,7 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
                             </div>
                         </div>
                         <div class="image-container column">
-                            <img src="/media/${slide[3]}" alt="image-${slide[3]}"/>
+                            <img class="fade-in one" src="/media/${slide[3]}" alt="image-${slide[3]}"/>
                         </div>
                     </div>
                 </div>

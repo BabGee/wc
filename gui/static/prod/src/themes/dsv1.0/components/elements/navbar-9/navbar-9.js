@@ -2,12 +2,11 @@ import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const 
 .ii__container-main{
     margin: 0 auto;
     padding: 0 90px;
-    background-color: var(--app-primary-color);
-
+    background-color: var(--app-default-color);
 }
 /* header */
 .ii__main-header{
-    background-color: var(--app-primary-color);
+    background-color: var(--app-default-color);
     position: fixed;
     top: 0;
     left: 0;
@@ -19,18 +18,28 @@ import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const 
 .navbar{
     background: transparent;
     height: 5.5em;
-    background-color: var(--app-primary-color);
+    background-color: var(--app-default-color);
 }
 .nav__item{
     font-weight: regular;
     font-size: 16px;
+    color: #fff;
 }
 .nav__item:hover{
     /* font-weight: bolder; */
     position: relative;
     color: #fff!important;
+    position: relative;
+    background: transparent!important;
+}
+.nav__item:hover::after{
+    position: absolute;
+    width: 100%;
     border-bottom: 4px solid #fff;
-    background: var(--app-accent-color)!important;
+    z-index: 9999;
+    content: '';
+    bottom: 0;
+    left: 0;
 }
 /* .nav__item:hover::after{
     content: '';
@@ -75,7 +84,7 @@ import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const 
     <div id="section11" class="bind-box">
       <header class="ii__main-header">
         <div class="ii__container-main">
-          <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:var(--app-primary-color)">
+          <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:var(--app-default-color)">
             <div class="navbar-brand">
               <a class="navbar-item" href="/" @click=${this.reloadPage} style="width: 200px;">
                 <img class="logo-img" src="/media/${this.gateway.logo}" alt="brand" >
