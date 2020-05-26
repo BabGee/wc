@@ -44,6 +44,16 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
 }
 
 `;var tableTypeCss={TableTypeStyles:TableTypeStyles};const TableTypeHeaderStyles=css`
+#pdf-btn{
+    background: var(--app-default-color)!important;
+    color:#fff!important;
+    border: none!important;
+}
+#csv-btn{
+    background: var(--app-secondary-color)!important;
+    color:#fff!important;
+    border: none!important;
+}
 
 `;var tableTypeHeaderCss={TableTypeHeaderStyles:TableTypeHeaderStyles};const TableStyles=css`
 
@@ -890,8 +900,8 @@ border-bottom: 0;
     </div>
     <div class="sub-container">
       <div class="buttons is-pulled-left" style="width:20%;">
-        <button id ="pdf-btn" @click="${this.generatePDF}" class="button is-info is-size-7 is-rounded">Export PDF</button>
-        <button id ="csv-btn" @click="${this.generateCSV}" class="button is-success is-size-7 is-rounded">Export CSV</button>
+        <button id ="pdf-btn" @click="${this.generatePDF}" class="button is-size-7 is-rounded">Export PDF</button>
+        <button id ="csv-btn" @click="${this.generateCSV}" class="button is-size-7 is-rounded">Export CSV</button>
       </div>
 
       ${this._searchFieldsExist(this.columns)?html`
