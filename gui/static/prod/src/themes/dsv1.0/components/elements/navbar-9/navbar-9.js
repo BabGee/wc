@@ -64,6 +64,12 @@ import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const 
 .navbar-item img{
   min-height: 3.75rem!important; 
 }
+.navbar-menu{
+    background-color: var(--app-default-color)!important;
+}
+.navbar-burger{
+    color:#fff!important;
+}
 @media screen and (max-width: 1023px){
   .ii__container-main{
         margin: 0 auto;

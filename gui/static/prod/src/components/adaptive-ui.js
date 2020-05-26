@@ -3099,7 +3099,7 @@ if(!window.polymerSkipLoadingFontRoboto){const link=document.createElement("link
       </div>
       `:html$3`
       <div class="control" style=" padding:12px;">
-        <button class="button is-link" style="width: 100%; height: 40px; background-color: var(--app-default-color);">${this.name}</button>
+        <button class="button is-link" style="width: 100%; height: 40px; background-color: var(--app-accent-color);">${this.name}</button>
       </div>
       `}
     </div>

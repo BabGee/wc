@@ -294,7 +294,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
           flex: 1 1 auto;
         }
         .sidebar {
-          background-color: var(--app-default-color);
+          background-color: var(--app-secondary-color);
           bottom: 0;
           overflow: hidden;
           position: fixed;
@@ -424,8 +424,8 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
           transition: all .3s ease;
         }
         .sidebar-menu li a.active{
-          background: rgba(4, 105, 255, 0.5)!important; 
-          border-left: 3px solid var(--app-accent-color);
+          background: var(--app-accent-color)!important; 
+          border-left: 3px solid #fff;
         }
         .sidebar-menu>ul>li>a .icon-holder {
           border-radius: 6px;
@@ -468,7 +468,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
           width: 100%;
         }
         .sub-menu li.active{
-          background: rgba(4, 105, 255, 0.5)!important;
+          background: var(--app-accent-color)!important; 
         }
         .logo{
           width: 47px;
@@ -678,7 +678,8 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
         font-size: 14px;
       }
       .profile-select .profile-list li a:hover{
-        background: #e5e5e5;
+        background: var(--app-default-color)!important;
+        color:var(--app-secondary-color)!important;
         border-radius: 4px;
       }
         @media (min-width: 567px){
@@ -798,7 +799,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
 
                 <div class="profile-select" id="profile">
                   <ul class="profile-list">
-                    <li><a @click=${this.logout} class="profile-item"><span class="profile-select-icon"><fa-icon class="fas fa-power-off" color="var(--app-default-color)" ></fa-icon></span>&nbsp; Logout</a></li>
+                    <li><a @click=${this.logout} class="profile-item"><span class="profile-select-icon"><fa-icon class="fas fa-power-off" color="var(--app-secondary-color)" ></fa-icon></span>&nbsp; Logout</a></li>
                   </ul>                 
                 </div>
               </ul>
