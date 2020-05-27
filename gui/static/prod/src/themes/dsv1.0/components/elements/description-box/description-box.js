@@ -205,7 +205,7 @@ img{
                             </div>
                         </div>
                         <div class="image-container column">
-                            <img class="fade-in one" src="${slide[3]}" alt="image-${slide[3]}"/>
+                            <img class="fade-in one" src="/media/${slide[3]}" alt="image-${slide[3]}"/>
                         </div>
                     </div>
                 </div>
