@@ -1,4 +1,8 @@
 import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js";const DescriptionBoxStyles=css`
+img{
+    height: 50%!important;
+    width: 50%!important;
+}
 .main-container{
     background: #fff!important;
 }
@@ -32,6 +36,10 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
     width:100%;
 }
 .image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
     width:70%;
     margin-right:0px;
     animation: fadein 2s;
@@ -58,6 +66,9 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
     -moz-animation: fadein 2s; /* Firefox */
     -webkit-animation: fadein 2s; /* Safari and Chrome */
     -o-animation: fadein 2s; /* Opera */
+}
+.content h1{
+    text-align:center!important;
 }
 .content h1, 
 .content p{
@@ -194,7 +205,7 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
                             </div>
                         </div>
                         <div class="image-container column">
-                            <img class="fade-in one" src="/media/${slide[3]}" alt="image-${slide[3]}"/>
+                            <img class="fade-in one" src="${slide[3]}" alt="image-${slide[3]}"/>
                         </div>
                     </div>
                 </div>

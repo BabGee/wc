@@ -8,26 +8,7 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
 .cont{
     align-items: center;
 }
-.mipay-info-cta{
-    width: 100%;
-    min-height:500px;
-    align-items: center;
-    display: flex;
-    max-width: inherit;
 
-    position: absolute;
-    opacity:1.50;
-    background-position:center;
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-attachment:fixed;
-
-    box-shadow: 0px 3px 6px #00000029;
-    opacity: 0.68;
-    filter: blur(7px);
-    
-
-}
 .columnsw{
         width: 100%!important;
         position: absolute!important;
@@ -109,7 +90,7 @@ img {
     transform:translateX(0px);
 
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 769px) {
     .main-container{
         width: 100%;
         min-height: 900px;
@@ -117,6 +98,9 @@ img {
     .mipay-info-cta{
         width: 100%;
         min-height: 900px;
+    }
+    .content-container{
+        width: 100%;
     }
     .info-btn{
         right: 0;
@@ -126,7 +110,10 @@ img {
 
     .screen-shot{
         top: 77px!important;
-        left: 24%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        left: 0;
     }
     .columnsw{
         top: 10% !important;
@@ -134,18 +121,24 @@ img {
     p{
         margin-top:0px;
         text-align: center;
+        display: flex;
+        justify-content: center;
     }
     .cont h1{
         font-size: 35px!important;
         text-align: center;
+        width: 100%;
     }
     .btn{
         width: 10em !important;
         height: 3em !important;
     }
     .info-btn{
-        top: 74%;
-        right: 19%;
+        right: 0;
+        width: 100%;
+        left: 0;
+        justify-content: center;
+        display: flex;
     }
     
     
@@ -156,10 +149,35 @@ img {
               display: block;
             }
           `]}static get is(){return"info-cta"}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{window.addEventListener("scroll",()=>{self.scrollAppear()})})}scrollAppear(){const self=this;let contentContainer=self.shadowRoot.getElementById("animate1"),screenShotContainer=self.shadowRoot.getElementById("animate2"),contentStartPosition=contentContainer.getBoundingClientRect().top,screenPosition=window.innerHeight/1.6;if(contentStartPosition<screenPosition){contentContainer.classList.add("animate1-appear");screenShotContainer.classList.add("animate2-appear")}}render(){return html`
+
+        <style>
+        .mipay-info-cta{
+            width: 100%;
+            min-height:500px;
+            align-items: center;
+            display: flex;
+            max-width: inherit;
+        
+            position: absolute;
+            opacity:1.50;
+            /* The image used */
+            background-image: url("${this.e.details.bg_image}");
+            background-position:center;
+            background-size:cover;
+            background-repeat:no-repeat;
+            background-attachment:fixed;
+        
+            box-shadow: 0px 3px 6px #00000029;
+            opacity: 0.68;
+            filter: blur(7px);
+            
+        
+        }
+        </style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
         <div class="main-container is-flex" data-aos="fade-right">
-            <div class="container mipay-info-cta" style="background-image:url('https://images.unsplash.com/photo-1541725476888-c03dffc89611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');"></div>
+            <div class="mipay-info-cta"></div>
             <div class="container">
                 <div class="columns">
                     <div class="column is-three-quarters cont is-flex">
