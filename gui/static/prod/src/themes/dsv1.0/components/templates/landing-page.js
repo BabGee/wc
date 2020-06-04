@@ -1,4 +1,11 @@
-import{PageViewElement,VIEW_MODE_DIALOG,html}from"../../../../components/adaptive-ui.js";import"./section-page.js";const LandingPageBase=class extends PageViewElement{constructor(){super()}_tabs(page){if(page===void 0){return}return page.tabs}static get properties(){return{toggle:Boolean}}_viewList(){if(!this.dialogsStack.length){this.view="list";this.updateLocationHash()}else{const args=this.dialogsStack.pop();console.log(args);const dialog=this.qs("#dialog");dialog.payload=args[0];dialog.params=args[1];dialog.loading=!1}}async _computeTop(){await this.updateComplete;return this.qs("#top")}};var landingPage={LandingPageBase:LandingPageBase};class LandingPage extends LandingPageBase{render(){if(!this.interface){return html`        
+import{PageViewElement,VIEW_MODE_DIALOG,html}from"../../../../components/adaptive-ui.js";import"./section-page.js";const LandingPageBase=class extends PageViewElement{constructor(){super()}_tabs(page){if(page===void 0){return}return page.tabs}static get properties(){return{toggle:Boolean}}_viewList(){if(!this.dialogsStack.length){this.view="list";this.updateLocationHash()}else{const args=this.dialogsStack.pop();console.log(args);const dialog=this.qs("#dialog");dialog.payload=args[0];dialog.params=args[1];dialog.loading=!1}}async _computeTop(){await this.updateComplete;return this.qs("#top")}};var landingPage={LandingPageBase:LandingPageBase};class LandingPage extends LandingPageBase{render(){if(!this.interface){return html` 
+      *{
+        font-family: '${this.getMainFont(this.gateway.mainFont)}',${this.getBackupFont(this.gateway.backUpFont)}, sans-serif;
+      } 
+       
+      body{
+        font-family: '${this.getMainFont(this.gateway.mainFont)}',${this.getBackupFont(this.gateway.backUpFont)}, sans-serif;
+      }      
       <div class="Wallop Wallop--fade">
         <div class="Wallop-list">
           <div class="Wallop-item  has-background-image" >
@@ -29,10 +36,15 @@ import{PageViewElement,VIEW_MODE_DIALOG,html}from"../../../../components/adaptiv
       </div>
 `}else if(!this.pageGroup||!this.page){return html`
       <missing-page></missing-page>
-      `}return html`    
+      `}return html` 
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">   
     <style>
+    @import url('${this.gateway.mainFont}');
+    *{
+      font-family: '${this.getMainFont(this.gateway.mainFont)}',${this.getBackupFont(this.gateway.backUpFont)}, sans-serif;
+    }
         body{
-            font-family: 'Montserrat', sans-serif;
+          font-family: '${this.getMainFont(this.gateway.mainFont)}',${this.getBackupFont(this.gateway.backUpFont)}, sans-serif;
             min-height: 100%;
             font-size: 14px;
             line-height: 20px;
@@ -166,4 +178,4 @@ import{PageViewElement,VIEW_MODE_DIALOG,html}from"../../../../components/adaptiv
         <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
 
       </div>
-`}constructor(){super()}scrollPage(evt){const index=evt.currentTarget.pageIndex;var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get properties(){return{title:String,name:String,logo:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){let nav=document.getElementsByClassName("navbar-menu");nav[0].classList.toggle("mob-nav")}stateChanged(state){super.stateChanged(state)}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("landing-page",LandingPage);export{landingPage as $landingPage,LandingPageBase};
+`}constructor(){super()}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}scrollPage(evt){const index=evt.currentTarget.pageIndex;var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get properties(){return{title:String,name:String,logo:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){let nav=document.getElementsByClassName("navbar-menu");nav[0].classList.toggle("mob-nav")}stateChanged(state){super.stateChanged(state)}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("landing-page",LandingPage);export{landingPage as $landingPage,LandingPageBase};
