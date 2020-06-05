@@ -12,8 +12,7 @@ button.btn{
     /* justify-content: flex-start; */
 }
 button.btn:hover{
-    color: #fff;
-    background: var(--app-primary-color)
+    
 }
 .button-container{
     position: relative;

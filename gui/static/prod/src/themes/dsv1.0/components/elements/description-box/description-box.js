@@ -1,8 +1,4 @@
 import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js";const DescriptionBoxStyles=css`
-img{
-    height: 50%!important;
-    width: 50%!important;
-}
 .main-container{
     background: #fff!important;
 }
@@ -36,16 +32,17 @@ img{
     width:100%;
 }
 .image-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-    width:70%;
+    width: 100%;
     margin-right:0px;
     animation: fadein 2s;
     -moz-animation: fadein 2s; /* Firefox */
     -webkit-animation: fadein 2s; /* Safari and Chrome */
     -o-animation: fadein 2s; /* Opera */
+    display: flex;
+    justify-content: center;
+}
+.image-container img{
+    width: 50%;
 }
 .descriptionBox__item{
     padding: 10px 60px 10px 20px;
@@ -67,15 +64,23 @@ img{
     -webkit-animation: fadein 2s; /* Safari and Chrome */
     -o-animation: fadein 2s; /* Opera */
 }
-.content h1{
-    text-align:center!important;
+.content h1, .content h4{
+    text-align: center;
+}
+.my-content{
+    width: 100%!important;
 }
 .content h1, 
 .content p{
+    text-align: center;
     animation: fadein 2s;
     -moz-animation: fadein 2s; /* Firefox */
     -webkit-animation: fadein 2s; /* Safari and Chrome */
     -o-animation: fadein 2s; /* Opera */
+}
+.content p {
+    text-align: start;
+
 }
 .descriptionBox__content{
     padding: 20px;
@@ -118,11 +123,18 @@ img{
     } 
     .data{
         display: none;
-        flex-direction: row;
+        flex-direction: column;
         padding: 20px 4px;
     }
     .content h1{
         font-size: 16px;
+    }
+    .image-container img{
+        width: 100%;
+    }
+    .content p {
+        text-align: center;
+    
     }
     
 }
@@ -191,7 +203,7 @@ img{
                 <div class="content-container" id="content-${index}">
                     <div class="tab_drawer_heading">
                         <div class="boxTitle">
-                            <h4 class="has-text-weight-bold">${this._getTitle(slide[1])}</h4>
+                            <h4 class="has-text-weight-bold is-centered">${this._getTitle(slide[1])}</h4>
                         </div>
                         <div class="boxSubtitle">
                             <p>${this._getSubTitle(slide[1])}</p>
