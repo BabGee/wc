@@ -2998,7 +2998,6 @@ if(!window.polymerSkipLoadingFontRoboto){const link=document.createElement("link
         .session-body{
             padding: 20px;
             width: 100%;
-            height: 69vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -3079,7 +3078,19 @@ if(!window.polymerSkipLoadingFontRoboto){const link=document.createElement("link
       <h4>Undefined Form Type  <strong style="color: red;">${formType}</strong> </h4>
       `}return html$3`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-    ${this.loading?html$3`Processing...`:html$3``}
+    <style>
+    .progress{
+      margin-bottom: 0.5rem!important;
+      
+    span{
+      padding-left:0.5rem;
+    }
+   
+    
+    </style>
+    ${this.loading?html$3`<span>Processing...</span>
+    <progress class="progress is-small is-primary" max="100">15%</progress>
+    `:html$3``}
      ${form}
      `}}register$2(FormRender);const ACTION_SERVICE_CALL="1",ACTION_LINK_WINDOW="2",ACTION_SUBMIT="3",buttonMixin=BaseClass=>class extends BaseClass{renderDefault(){return html$3`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
@@ -3096,7 +3107,7 @@ if(!window.polymerSkipLoadingFontRoboto){const link=document.createElement("link
     <div class="field">
       ${"LINK"===this.type?html$3`
       <div class="button-container">
-        <button class="button btn has-text-weight-bold">${this.name}</button>
+        <button class="button btn">${this.name}</button>
         <div class="awesome-icon">
           <fa-icon class="fas fa-arrow-right" color = "#fff"></fa-icon>
         </div>
@@ -6492,7 +6503,6 @@ label.active{
 }
 .drop-area form.upload-form{
     width: 100%;
-    padding-left: 16px;
     padding-top: 16px;
     padding-bottom: 16px
 }
@@ -6500,7 +6510,10 @@ label.active{
     display: inline-block;
     text-align: left;
     background: #fff;
-    padding: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left:16px;
+    padding-right: 9px;
     width: 100%;
     position: relative;
     border-radius: 3px;
@@ -6536,7 +6549,8 @@ label.active{
     font-family: 'Work Sans', sans-serif;
     font-size: 14px;
     font-weight: 500;
-    color: #4A4A4A
+    color: #4A4A4A;
+    padding-top: 4px;
 }
 .ii-file-input.-chosen .label {
     opacity: 1;

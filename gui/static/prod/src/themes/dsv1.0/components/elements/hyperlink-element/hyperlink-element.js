@@ -1,17 +1,27 @@
 import{utilsMixin,BaseElement,css,ACTION_SERVICE_CALL,buttonMixin}from"../../../../../components/adaptive-ui.js";const HyperlinkElementBase=class extends utilsMixin(BaseElement){static get is(){return"hyperlink-element"}static get properties(){return{name:String,params:Object,type:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);this.title=HyperlinkElementBase.toTitleCase(pElement.name);this.name=HyperlinkElementBase.toTitleCase(pElement.name);this.params=loader.pl.paramsCopy()}};var hyperlinkElement={HyperlinkElementBase:HyperlinkElementBase};const HyperlinkElementStyles=css`
 button.btn{
     width: 100%;
-    background: var(--app-default-color);
-    border: 0 solid transparent;
+    background: var(--app-accent-color);
+    border: 0 solid transparent!important;
     margin: 12px;
-    color: #fff;
+    color: #fff!important;
     font-size: 1rem;
-    border-radius: 5px;
-    padding-left: 2.75em;
+    border-radius: 5px!important;
+    
     height: 40px;
     /* justify-content: flex-start; */
+
+    justify-content: center!important;
+    padding-bottom: calc(.375em - 1px)!important;
+    padding-left: .75em!important;
+    padding-right: .75em!important;
+    padding-top: calc(.375em - 1px)!important;
+    text-align: center!important;
+    white-space: nowrap!important;
 }
 button.btn:hover{
+    
+    color: #fff!important;
     
 }
 .button-container{

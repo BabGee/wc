@@ -51,7 +51,7 @@ import{SerializableElement,utilsMixin,css,html}from"../../../../../components/ad
   .lbl{
       position: relative;
       top: -12px;
-      font-weight: 600;
+      font-weight: 400;
   }
   
   /* Rounded sliders */
