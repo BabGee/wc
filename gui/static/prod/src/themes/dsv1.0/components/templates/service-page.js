@@ -225,10 +225,14 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
       <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
       <style>
-      @import url('${this.gateway.mainFont}');
+      @font-face {
+        src: url('${this.getMainFontPath(this.gateway.mainFont)}');
+        font-family:'main';
+        ;
+      }
         body{
           font-size: 14px;
-          font-family: '${this.getMainFont(this.gateway.mainFont)}',${this.getBackupFont(this.gateway.backUpFont)}, sans-serif;
+          font-family: 'main',BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif
         }
         ::-webkit-scrollbar {
           width: 0px;
@@ -680,8 +684,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
         font-size: 14px;
       }
       .profile-select .profile-list li a:hover{
-        background: var(--app-default-color)!important;
-        color:var(--app-secondary-color)!important;
+        background: #E7E7E7!important;
         border-radius: 4px;
       }
         @media (min-width: 567px){
@@ -831,7 +834,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}reloadPage(){window.location.reload()}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}drawer(evt){evt.preventDefault();this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");hum.firstElementChild.classList.remove("active");hum.lastElementChild.classList.remove("active");hum.children[1].classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");hum.firstElementChild.classList.add("active");hum.lastElementChild.classList.add("active");hum.children[1].classList.add("active");this.isSideMenuVisible=!0}if(aside.clientWidth==this.sideBarOpen){const menuItems=document.querySelectorAll(".sub-menu");menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(!this.isSideMenuVisible){this.drawer(evt)}else{if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}}}fitstUpdated(){var parent=document.querySelector(".sidebar"),child=document.querySelector(".sidebar-inner");child.style.right=child.clientWidth-child.offsetWidth+"px"}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}closeProfile(){let profile=document.querySelector("#profile");if(this.isProfileVisible){if(profile.classList.contains("is-block")){profile.classList.toggle("is-block");this.isProfileVisible=!1}}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
+     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}reloadPage(){window.location.reload()}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}drawer(evt){evt.preventDefault();this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");hum.firstElementChild.classList.remove("active");hum.lastElementChild.classList.remove("active");hum.children[1].classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");hum.firstElementChild.classList.add("active");hum.lastElementChild.classList.add("active");hum.children[1].classList.add("active");this.isSideMenuVisible=!0}if(aside.clientWidth==this.sideBarOpen){const menuItems=document.querySelectorAll(".sub-menu");menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(!this.isSideMenuVisible){this.drawer(evt)}else{if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}}}fitstUpdated(){var parent=document.querySelector(".sidebar"),child=document.querySelector(".sidebar-inner");child.style.right=child.clientWidth-child.offsetWidth+"px"}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}closeProfile(){let profile=document.querySelector("#profile");if(this.isProfileVisible){if(profile.classList.contains("is-block")){profile.classList.toggle("is-block");this.isProfileVisible=!1}}}getMainFontPath(url){if(url!=void 0||null!=url||""!=url){return url}else{return""}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
         :host {
           display: block;
         }

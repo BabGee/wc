@@ -35,7 +35,7 @@ import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const 
 .nav__item:hover::after{
     position: absolute;
     width: 100%;
-    border-bottom: 4px solid #fff;
+    border-bottom: 4px solid var(--app-secondary-color);
     z-index: 9999;
     content: '';
     bottom: 0;

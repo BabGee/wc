@@ -19,10 +19,17 @@ import{PageViewElement,css,html,Reset,Colors,Fonts}from"../../../../components/a
       ${Colors}
       ${Fonts}
       ${CanvasStyles}
-      @import url('${this.gateway.mainFont}');
-      *{
-        font-family: '${this.getMainFont(this.gateway.mainFont)}',${this.getBackupFont(this.gateway.backUpFont)}, sans-serif;
+
+      @font-face {
+        src: url('${this.getMainFontPath(this.gateway.mainFont)}');
+        font-family:'main';
+        ;
       }
+  
+      *{
+        font-family: 'main',BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+        ;
+      } 
       </style>
 
 
@@ -38,4 +45,4 @@ import{PageViewElement,css,html,Reset,Colors,Fonts}from"../../../../components/a
     ${html`        <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
     `}
     
-    `}static get styles(){return[Reset,Colors,Fonts,CanvasStyles,css`:host { display: block; }`]}static get properties(){return{tab:Object,group:Object,toggle:Boolean}}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}_viewList(){if(!this.dialogsStack.length){this.view="list";this.updateLocationHash()}else{const args=this.dialogsStack.pop();console.log(args);const dialog=this.qs("#dialog");dialog.payload=args[0];dialog.params=args[1];dialog.loading=!1}}}window.customElements.define("canvas-page",CanvasPage);export{canvasPage as $canvasPage,canvas as $canvas,CanvasPageBase,CanvasStyles};
+    `}static get styles(){return[Reset,Colors,Fonts,CanvasStyles,css`:host { display: block; }`]}static get properties(){return{tab:Object,group:Object,toggle:Boolean}}getMainFontPath(url){if(url!=void 0||null!=url||""!=url){return url}else{return""}}_viewList(){if(!this.dialogsStack.length){this.view="list";this.updateLocationHash()}else{const args=this.dialogsStack.pop();console.log(args);const dialog=this.qs("#dialog");dialog.payload=args[0];dialog.params=args[1];dialog.loading=!1}}}window.customElements.define("canvas-page",CanvasPage);export{canvasPage as $canvasPage,canvas as $canvas,CanvasPageBase,CanvasStyles};
