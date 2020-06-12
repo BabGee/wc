@@ -1,55 +1,73 @@
 import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const ServiceButtonBase=class extends utilsMixin(BaseElement){static get is(){return"service-button"}static get properties(){return{color:String,params:{type:Object,value:{}}}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;self.addEventListener("click",function(evt){evt.preventDefault();self.pl._dialog(self.e.service,self.params)})}init(pElement,loader){super.init(pElement,loader);var self=this;self.params=loader.pl.paramsCopy()}};var serviceButton={ServiceButtonBase:ServiceButtonBase};const ServiceButtonStyles=css`
 .service-button-container{
-    width: 150px;
-    height: 150px;
-    border-radius: 6px;
-    background: var(--app-default-color);
-    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
-    cursor: pointer;
     position: relative;
-}
-.service-button-container:hover {
-    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
-    /* transform: scale(1.1); */
-    background: #fff;
-}
-
-.service-button-container:hover .service-icon iron-icon,
-.service-button-container:hover .service-content h3{
-    color: var(--app-default-color);
-}
-.service-icon{
-    justify-content: center;
-    width: 100%;
+    display: -ms-flexbox;
     display: flex;
-    position: relative;
-    top: 35px;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    margin-bottom: 1.875em;
+    border-radius: 5px;
+    padding: 0;
+    border: 0px solid transparent;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
 }
-.service-content{
+.service-button-container:hover{
+    transform: scale(1);
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 11px 0px;
+}
+.service-button-container .content-area{
+    padding: 1.25em;
+    position: relative;
     width: 100%;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    align-items: center;
+}
+.icon-holder{
     position: relative;
-    top: 30px;
-}
-.service-content h3{
-    text-align: center;
+    padding: 15px;
+    font-size: 24px;
+    font-weight: normal;
     color: #fff;
+    border-radius: 6px;
+    background-color: var(--app-accent-color);
+    box-shadow: 0 14px 26px -12px 
+        rgba(0,0,0,0.12),0 8px 10px -5px !important;
 }
-iron-icon {
-    color: #fff;
+.content-text{
+    margin-left: 20px;
+}
+.content-text p{
+    font-size: 10px;
+    text-transform: initial;
 }
 `;var serviceButtonCss={ServiceButtonStyles:ServiceButtonStyles};class ServiceButton extends ServiceButtonBase{static get styles(){return[ServiceButtonStyles,css`
             :host {
                 display: block;
             }
             `]}renderDefault(){return html`
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
     <div class="service-button-container">
-        <div class="service-icon is-flex">
-            <iron-icon style="width:48px !important;height: 48px !important;"
+        <div class="content-area is-flex">
+            <div class="icon-holder">
+                <iron-icon style="width:28px !important;height: 28px !important;"
                 icon="${this.e.icon}"></iron-icon>
-        </div>
-        <div class="service-content">
-            <h3 class="is-centered is-size-7">${ServiceButton.toTitleCase(this.e.name)}</h3>
+            </div>
+            <div class="content-text">
+                <div class="heading">
+                    <h2 class="is-size-5 title">${ServiceButton.toTitleCase(this.e.name)}</h2>
+                    <p class="subtitle">${this.e.details.description}</p>
+                </div>
+            </div>
         </div>
     </div>
-        
-        `}}customElements.define(ServiceButton.is,ServiceButton);export{serviceButton as $serviceButton,serviceButtonCss as $serviceButtonCss,ServiceButtonBase,ServiceButtonStyles};
+    `}}customElements.define(ServiceButton.is,ServiceButton);export{serviceButton as $serviceButton,serviceButtonCss as $serviceButtonCss,ServiceButtonBase,ServiceButtonStyles};

@@ -65,52 +65,84 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
             <loader-element></loader-element>
             `:html`
             ${!this._rowsOrColumns(this.rows)?html`
-            
-            ${this.groups.map((group,groupIndex)=>html`
-             <div class="row">
-                <div class="col-md-12 group-summary">
-                    <h1>${group}</h1>
-                </div>
-            </div>
-            <div class="columns is-multiline">
-            ${this._computeData(groupIndex).map(item=>html`
-                <div class="column">
-                    <div class="summary-wrapper">
-                        <div class="graph">
-                            <svg viewBox="0 0 230 100" class="chart">
-                                <polyline
-                                    fill="none"
-                                    stroke="#23d160"
-                                    stroke-width="5"
-                                    points="
-                                    00,90
-                                    60,70
-                                    90,90
-                                    140,10
-                                    160,80
-                                    180,60
-                                    200,100
-                                    "
-                                />
-                                
-                            </svg>
 
-                        </div>
-                        <div class="summary-details">
-                            <p class="currency is-text-7 has-text-justified has-text-uppercase">KES</p>
-                            <h1 class="title has-text-justified">${item.count}</h1>
-                            <p class="summary-type has-text-justified has-text-capitalized">${item.description}</p>
-                            <p class="summary-type has-text-justified has-text-capitalized">${item.kind}</p>
-                            <p class="summary-type has-text-justified has-text-capitalized">${item.type}</p>
-                            <p class="summary-type has-text-justified has-text-capitalized">${item.name}</p>
-                        </div>
-                    </div>
-                </div>
+                    ${0==this.groups.length?html`
+
+                    <empty-view 
+                    message="${this.e.details.empty_message}"
+                    gateway="${this.e.details.gateway}"
             
-            `)}
-            </div>
-             
-             `)}
+                    ></empty-view>
+            
+                    `:html`
+
+                    ${this.groups.map((group,groupIndex)=>html`
+                    <div class="row">
+                       <div class="col-md-12 group-summary">
+                           <h1>${group}</h1>
+                       </div>
+                   </div>
+
+                   ${0==this.data.length?html`
+
+                   <empty-view 
+                   message="${this.e.details.empty_message}"
+                   gateway="${this.e.details.gateway}"
+           
+                   ></empty-view>
+           
+                   `:html`
+
+                   <div class="columns is-multiline">
+                   ${this._computeData(groupIndex).map(item=>html`
+                       <div class="column">
+                           <div class="summary-wrapper">
+                               <div class="graph">
+                                   <svg viewBox="0 0 230 100" class="chart">
+                                       <polyline
+                                           fill="none"
+                                           stroke="#23d160"
+                                           stroke-width="5"
+                                           points="
+                                           00,90
+                                           60,70
+                                           90,90
+                                           140,10
+                                           160,80
+                                           180,60
+                                           200,100
+                                           "
+                                       />
+                                       
+                                   </svg>
+       
+                               </div>
+                               <div class="summary-details">
+                                   <p class="currency is-text-7 has-text-justified has-text-uppercase">KES</p>
+                                   <h1 class="title has-text-justified">${item.count}</h1>
+                                   <p class="summary-type has-text-justified has-text-capitalized">${item.description}</p>
+                                   <p class="summary-type has-text-justified has-text-capitalized">${item.kind}</p>
+                                   <p class="summary-type has-text-justified has-text-capitalized">${item.type}</p>
+                                   <p class="summary-type has-text-justified has-text-capitalized">${item.name}</p>
+                               </div>
+                           </div>
+                       </div>
+                   
+                   `)}
+                   </div>
+                   
+                   
+                   `}   
+
+
+                  
+                    
+                    `)}
+                    
+                    
+                    `}
+            
+          
             `:html`
             
               <div class="row">

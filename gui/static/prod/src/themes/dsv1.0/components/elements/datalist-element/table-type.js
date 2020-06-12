@@ -44,6 +44,19 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
 }
 
 `;var tableTypeCss={TableTypeStyles:TableTypeStyles};const TableTypeHeaderStyles=css`
+.active_item{
+    background-color: #e5e5e5;
+}
+.search_ul{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.75) 9px 11px 49px -21px;
+}
+#search_area{
+    justify-content: center!important;
+    align-items: center!important;
+    padding-top: 30px;
+}
 #pdf-btn{
     background: var(--app-default-color)!important;
     color:#fff!important;
@@ -54,7 +67,90 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
     color:#fff!important;
     border: none!important;
 }
+.table-header-buttons .search_box{
+    border: 1px solid rgb(183, 181, 181);
+    background: #fff;
+    border-radius: 6px; 
+    display: flex;
+    height: 40px;
+    width: 378px;
+    margin-right: 10px;
+    /* width: 200px; */
+    /* box-shadow: 0 8px 6px -10px #b3c6ff; */
+}
+.table-header-buttons .search_box .dropdown{
+    width: 150px;
+    border-right: 2px solid #dde2f1;
+    color: rgb(1, 50, 67);
+    position: relative;
+    cursor: pointer;
+}
+.table-header-buttons .search_box .dropdown::before{
+    content: '';
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    border: 5px solid;
+    border-color: #9B9B9B transparent transparent transparent;
+}
+.table-header-buttons .search_box .dropdown .default_option{
+    padding: 13px 15px;
+    font-size: 14px;
+    position: relative;
+    top: -3px;
+    font-weight: 500;
+}
+.table-header-buttons .search_box .dropdown ul{
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    background: #fff;
+    width: 150px;
+    -webkit-box-shadow: 9px 11px 49px -21px rgba(0,0,0,0.75);
+    -moz-box-shadow: 9px 11px 49px -21px rgba(0,0,0,0.75);
+    box-shadow: 9px 11px 49px -21px rgba(0,0,0,0.75);
+    z-index: 999;
+   
+}
+.table-header-buttons .search_box .dropdown ul li{
+    padding-bottom: 20px;
+    padding: 10px;
+    font-weight:500;
+}
+.table-header-buttons .search_box .dropdown ul li:hover{
+    background-color: #e5e5e5;
+}
+.search_field{
+    width: 250px;
+    position: relative;
+}
+.search_field input{
+    border-color: transparent;
+    width: 227px;
+    font-size: 16px; 
+    padding: none;
+    height: 38px;
+    padding: 0 0 0 20px;
+}
+.search_field input:hover{
+    border-color: transparent;
+}
+.search_field input:focus-within{
+    outline: none;
+}
+.search_field input:focus{
+    outline: none;
+}
 
+@media screen and (max-width: 769px){ 
+    .columns{
+
+        display: flex;
+        flex-direction: column;
+
+    }
+}
 `;var tableTypeHeaderCss={TableTypeHeaderStyles:TableTypeHeaderStyles};const TableStyles=css`
 
      
@@ -893,51 +989,44 @@ border-bottom: 0;
       `]}render(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="table-header-buttons" style="margin-bottom: 15px;">
-      <div class="heading">
-        <h1 class="title is-size-6">${this.title}</h1>
+      <div class="columns">
+        <div class="column">
+          <div class="heading">
+            <h1 class="title is-size-6">${this.title}</h1>
+          </div>
+          <div class="buttons is-pulled-left is-flex" style="width:45%;">
+            <button id ="pdf-btn" @click="${this.generatePDF}" class="button is-size-7 is-rounded">Export PDF</button>
+            <button id ="csv-btn" @click="${this.generateCSV}" class="button is-size-7 is-rounded">Export CSV</button>
+          </div>
+        </div>
+        ${this._searchFieldsExist(this.columns)?html`
+
+        <div id="search_area" class="column is-flex">
+          <div class="search_box">
+            <div class="dropdown" @click=${this.dropdown}>
+              <div id="qIn" class="default_option">All</div>
+              <ul class="search_ul">
+              <li class="search_item" @click="${this.updateSearchItem}">All</li>
+              ${this.searchFields(this.columns).map(item=>html`<li class="search_item" @click="${this.updateSearchItem}" param="${item.propertyPath}">${item.header}</li>`)}
+              </ul>
+            </div>
+            <div class="search_field">
+              <input id="q" type="text" name="serach" class="input" placeholder="Search..." value="${this.searchText}"/>
+            </div>
+          </div>
+          <button class="button is-size-9 is-rounded" style="height: 23px; background-color:var(--app-default-color); color: #fff; padding: 8px .75em;" type="submit" @click="${this._search}">Search</button>
+          <button class="button is-size-9 is-rounded" style="height: 23px; background-color:var(--app-secondary-color);margin-left: 3px; color: #fff; padding: 8px .75em;" type="button" @click="${this._searchReset}">Clear</button>
+        </div>
+        
+        
+        `:html``}
+        
       </div>
-      
     </div>
-    <div class="sub-container">
-      <div class="buttons is-pulled-left" style="width:20%;">
-        <button id ="pdf-btn" @click="${this.generatePDF}" class="button is-size-7 is-rounded">Export PDF</button>
-        <button id ="csv-btn" @click="${this.generateCSV}" class="button is-size-7 is-rounded">Export CSV</button>
-      </div>
-
-      ${this._searchFieldsExist(this.columns)?html`
-      
-      <div class="search-container" style="position: relative; top: -23px; float: right;
-      margin-right: 6px;">
-
-      <paper-dropdown-menu label="Search In">
-          <paper-listbox slot="dropdown-content"
-                         id="qIn"
-                         fallback-selection="q"
-                         attr-for-selected="param">
-              <paper-item param="q">All</paper-item>
-              ${this.searchFields(this.columns).map(item=>html`<paper-item param="${item.propertyPath}">${item.header}</paper-item>`)}
-          </paper-listbox>
-      </paper-dropdown-menu>
-  
-      <paper-input style="display: inline-block"
-                   placeholder="Search ..."
-                   name="search"
-                   value="${this.searchText}"
-                   id="q"></paper-input>
-        <button class="button" style="background-color:var(--app-default-color); color: #fff; padding: 8px .75em;" type="submit" @click="${this._search}">Search</button>
-        <button class="button" style="background-color:var(--app-default-color); color: #fff; padding: 8px .75em;" type="button" @click="${this._searchReset}">Clear</button>
-  
-      </div>
-      
-      
-      `:html``}
-
-
-  </div>
 
 
 
-`}static get is(){return"table-type-header"}static get properties(){return{title:String,columns:{type:Array}}}generateCSV(){this.dispatchEvent(new CustomEvent("export-type",{detail:{type:"csv"}}))}generatePDF(){this.dispatchEvent(new CustomEvent("export-type",{detail:{type:"pdf"}}))}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchReset(){const self=this;this.dispatchEvent(new CustomEvent("_clearSearch",{detail:{searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath})}}))}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_search(){const self=this,q=self.shadowRoot.querySelector("#q").value,qIn=self.shadowRoot.querySelector("#qIn").selected;this.searchText=q;if(q){this.dispatchEvent(new CustomEvent("_search",{detail:{column:qIn,searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath}),value:q}}))}}}customElements.define(TableTypeHeader.is,TableTypeHeader);var tableTypeHeader={TableTypeHeader:TableTypeHeader};class TableType extends LitElement{constructor(){super();this.columns=[];this.cols=[];this.data=[];this.selected=[];this.selctedRadio="";this.availableSize=[10,50,100,500]}static get styles(){return[TableStyles,TableTypeStyles,css`
+`}static get is(){return"table-type-header"}static get properties(){return{title:String,columns:{type:Array}}}updateSearchItem(e){const selectedItemText=e.target.innerText,qIn=this.shadowRoot.querySelector("#qIn");qIn.innerText=selectedItemText;const allSearchItem=this.shadowRoot.querySelectorAll(".search_item");allSearchItem.forEach(item=>{item.classList.remove("active_item")});const selectedItem=e.target;selectedItem.classList.add("active_item")}generateCSV(){this.dispatchEvent(new CustomEvent("export-type",{detail:{type:"csv"}}))}generatePDF(){this.dispatchEvent(new CustomEvent("export-type",{detail:{type:"pdf"}}))}dropdown(){const dropdown=this.shadowRoot.querySelector("ul");if(dropdown.classList.contains("is-block")){dropdown.classList.remove("is-block")}else{dropdown.classList.add("is-block")}}closeDropdown(){const dropdown=this.shadowRoot.querySelector("ul");if(dropdown.classList.contains("is-block")){dropdown.classList.remove("is-block")}}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchReset(){const self=this;this.dispatchEvent(new CustomEvent("_clearSearch",{detail:{searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath})}}))}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_search(){const self=this,q=self.shadowRoot.querySelector("#q").value,qIn=self.shadowRoot.querySelector("#qIn").innerText;this.searchText=q;if(q){this.dispatchEvent(new CustomEvent("_search",{detail:{column:qIn,searchFields:self.searchFields(self.columns).map(function(field){return field.propertyPath}),value:q}}))}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;if(self._searchFieldsExist(self.columns)){document.addEventListener("click",function(event){if(!("dropdown"==event.path[0].className)){self.closeDropdown()}})}}}customElements.define(TableTypeHeader.is,TableTypeHeader);var tableTypeHeader={TableTypeHeader:TableTypeHeader};class TableType extends LitElement{constructor(){super();this.columns=[];this.cols=[];this.data=[];this.selected=[];this.selctedRadio="";this.availableSize=[10,50,100,500]}static get styles(){return[TableStyles,TableTypeStyles,css`
             :host {
               display: block;
             }
@@ -945,7 +1034,8 @@ border-bottom: 0;
       
       <!-- Responsive table starts here -->
 <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
-<table-type-header 
+  
+    <table-type-header 
     .title="${this.title}"
     .columns="${this.columns}"
     .searchText="${this.searchText}"
@@ -954,6 +1044,8 @@ border-bottom: 0;
     @_clearSearch="${this._clearSearch}"
     >
 </table-type-header>
+
+    
 <div class="table-container">
       <table class="dt-table" cellspacing="0">
         <thead>
@@ -973,6 +1065,8 @@ border-bottom: 0;
             </tr>
         </thead>
 
+      
+
         <tbody>
         ${this.data.map((row,rowIndex)=>html`
             <tr>
@@ -985,23 +1079,42 @@ border-bottom: 0;
       </table>
 </div>
 
-${this.paginate?html`
-      <datasource-table-footer resources="${this.resources}"
-                             language="${this.language}"
-                             footer-position="${this.footerPosition}"
-                             .availableSize="${this.availableSize}"
-                             .totalPages="${this.totalPages}"
-                             .totalElements="${this.totalElements}"
-                             .oldPage="${this.oldPage}"
-                             
-                             size="${this.size}"
-                             page="${this.page}"
-                             
-                             @size-change="${this._sizeChanged}"
-                             @p-page="${this._pageChanged}"
-                             @n-page="${this._pageChanged}">
-      </datasource-table-footer>
+${0==this.data.length?html`
+
+        <empty-view 
+        message="${this.message}"
+        gateway="${this.gateway}"
+
+        ></empty-view>
+
+`:html`
+
+      ${this.paginate?html`
+            <datasource-table-footer resources="${this.resources}"
+                                  language="${this.language}"
+                                  footer-position="${this.footerPosition}"
+                                  .availableSize="${this.availableSize}"
+                                  .totalPages="${this.totalPages}"
+                                  .totalElements="${this.totalElements}"
+                                  .oldPage="${this.oldPage}"
+                                  
+                                  size="${this.size}"
+                                  page="${this.page}"
+                                  
+                                  @size-change="${this._sizeChanged}"
+                                  @p-page="${this._pageChanged}"
+                                  @n-page="${this._pageChanged}">
+            </datasource-table-footer>
       `:html``}
+
+
+
+`}
+
+
+
+
+   
 
 
   `}static get is(){return"table-type"}renderColumn(paperDatatableApiColumn,valueFromRowData,p,rowData,rowIndex){if(paperDatatableApiColumn.actions){return html`
@@ -1064,4 +1177,4 @@ ${this.paginate?html`
               <iron-icon icon="icons:check"></iron-icon>
               `}
               
-              `;break;default:return html`${valueFromRowData}`;}}}}static get properties(){return{data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},pl:Object,details:Object,columns:{type:Array},paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String,searchText:String,selectType:{type:String}}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_handleSort(evt){console.log(evt)}getRadioChecked(event){const rowData=event.target.getAttribute("rowData"),rowIndex=event.target.getAttribute("rowIndex"),rowValue=event.target.getAttribute("rowValue");let rowDataId=rowValue;const self=this;if(rowDataId===void 0){rowDataId=rowIndex;self.selectedRadio=rowDataId;this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selectedRadio}}))}else{self.selectedRadio=rowDataId;this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selectedRadio}}))}}getCheckedRow(e){const rowData=e.target.getAttribute("rowData"),rowIndex=e.target.getAttribute("rowIndex"),rowValue=e.target.getAttribute("rowValue");rowData.id;if(this.selected==void 0){this.selected=[]}this;if(rowValue===void 0){rowValue=rowIndex;if(this.selected.includes(rowIndex)){this.selected=this.selected.filter(value=>value!=rowIndex);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}else{this.selected.push(rowValue);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}}else{if(this.selected.includes(rowValue)){this.selected=this.selected.filter(value=>value!=rowValue);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}else{this.selected.push(rowValue);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}}}_exportType(evt){const type=evt.detail.type;this.dispatchEvent(new CustomEvent("export",{detail:{type:type}}))}_handleInputChange(evt){this.dispatchEvent(new CustomEvent("dropdown-filter",{detail:{path:evt.detail.column.propertyPath,value:evt.detail.value}}))}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}_selectChange(event){if(event.type&&"change"===event.type){Polymer.dom(event).localTarget}else{}}_searchReset(){this._clearSearch()}_search(evt){var filter=evt.detail.value,column=evt.detail.column,columns=evt.detail.searchFields;this.dispatchEvent(new CustomEvent("search",{detail:{column:column,searchFields:columns,value:filter}}))}_clearSearch(event){var columns=event.detail.searchFields;this.dispatchEvent(new CustomEvent("clear-search",{detail:{searchFields:columns}}))}}customElements.define(TableType.is,TableType);var tableType$1={TableType:TableType};export{tableTypeCss as $tableTypeCss,tableTypeHeaderCss as $tableTypeHeaderCss,tableTypeHeader as $tableTypeHeader,tableType$1 as $tableType,tableType as $tableType$1,TableTypeStyles,TableTypeHeaderStyles,TableTypeHeader,TableType,TableStyles};
+              `;break;default:return html`${valueFromRowData}`;}}}}static get properties(){return{data:{type:Array,notify:!0},q:{type:String,value:"",notify:!0},pl:Object,details:Object,columns:{type:Array},paginate:{type:Boolean,value:!1},page:{type:Number},size:{type:Number},oldPage:{type:Number,notify:!0},totalElements:Number,totalPages:Number,availableSize:Array,selectable:{type:Boolean,value:!1},selected:{type:Array},title:String,searchText:String,selectType:{type:String},message:String,gateway:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_handleSort(evt){console.log(evt)}getRadioChecked(event){const rowData=event.target.getAttribute("rowData"),rowIndex=event.target.getAttribute("rowIndex"),rowValue=event.target.getAttribute("rowValue");let rowDataId=rowValue;const self=this;if(rowDataId===void 0){rowDataId=rowIndex;self.selectedRadio=rowDataId;this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selectedRadio}}))}else{self.selectedRadio=rowDataId;this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selectedRadio}}))}}getCheckedRow(e){const rowData=e.target.getAttribute("rowData"),rowIndex=e.target.getAttribute("rowIndex"),rowValue=e.target.getAttribute("rowValue");rowData.id;if(this.selected==void 0){this.selected=[]}this;if(rowValue===void 0){rowValue=rowIndex;if(this.selected.includes(rowIndex)){this.selected=this.selected.filter(value=>value!=rowIndex);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}else{this.selected.push(rowValue);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}}else{if(this.selected.includes(rowValue)){this.selected=this.selected.filter(value=>value!=rowValue);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}else{this.selected.push(rowValue);this.dispatchEvent(new CustomEvent("selection-changed",{detail:{selected:this.selected.toString()}}))}}}_exportType(evt){const type=evt.detail.type;this.dispatchEvent(new CustomEvent("export",{detail:{type:type}}))}_handleInputChange(evt){this.dispatchEvent(new CustomEvent("dropdown-filter",{detail:{path:evt.detail.column.propertyPath,value:evt.detail.value}}))}searchFields(columns){return columns.filter(function(item){return item.filter})}_searchFieldsExist(columns){return 0<columns.filter(function(item){return item.filter}).length}_action(evt){const dataAction=evt.currentTarget.dataLink;this.pl._dialog(dataAction.service,dataAction.params)}_pageChanged(evt){const page=evt.detail.page,oldPage=this.page;if(oldPage!==void 0){this.dispatchEvent(new CustomEvent("page-change",{detail:{oldPage:oldPage,page:page}}))}this.page=page}_sizeChanged(evt){const size=evt.detail.size,oldSize=this.size;if(oldSize!==void 0){this.dispatchEvent(new CustomEvent("size-change",{detail:{oldSize:oldSize,size:size}}))}this.size=size}_selectChange(event){if(event.type&&"change"===event.type){Polymer.dom(event).localTarget}else{}}_searchReset(){this._clearSearch()}_search(evt){var filter=evt.detail.value,column=evt.detail.column,columns=evt.detail.searchFields;this.dispatchEvent(new CustomEvent("search",{detail:{column:column,searchFields:columns,value:filter}}))}_clearSearch(event){var columns=event.detail.searchFields;this.dispatchEvent(new CustomEvent("clear-search",{detail:{searchFields:columns}}))}}customElements.define(TableType.is,TableType);var tableType$1={TableType:TableType};export{tableTypeCss as $tableTypeCss,tableTypeHeaderCss as $tableTypeHeaderCss,tableTypeHeader as $tableTypeHeader,tableType$1 as $tableType,tableType as $tableType$1,TableTypeStyles,TableTypeHeaderStyles,TableTypeHeader,TableType,TableStyles};
