@@ -612,7 +612,9 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
           float: right;
         }
         .header .header-container .header-right .profile-name{
-          line-height: 61px;
+          display: flex;
+          flex-direction: column;
+          padding-top: 21px;
         }
         .header .header-container .header-right .profile{
           line-height: 84px;
@@ -797,7 +799,12 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
                     <div class="peer profile-name">
                       <span style="color: #4a4a4a; font-weight: bolder;">
                       ${this.gateway.profile.firstName} ${this.gateway.profile.lastName}</span>
+                      <span style="
+                      padding-top: 6px;">
+                      ${this.gateway.profile.role}
+                      </span>
                     </div>
+                   
                   </a>
                   `:html$1``}
                 </li>
