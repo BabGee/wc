@@ -80,7 +80,7 @@ a.navbar-item:hover {
     flex: 0 auto;
 }
 .ii__footer-col-title {
-    color: var(--app-primary-color);
+    color: var(--app-secondary-color);
     font-size: 12px;
     line-height: 16px;
     font-weight: 600;

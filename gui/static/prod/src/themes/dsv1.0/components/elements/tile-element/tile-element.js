@@ -3,6 +3,10 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
 .column{
     position: relative;
 }
+.ii__tile-head{
+    display: flex;
+    justify-content: center;
+}
 .ii__tile-head img{
     object-fit: cover;
 }
@@ -35,7 +39,7 @@ img {
     box-shadow: 0px 5px 11px 0 rgba(0, 0, 0, .5);
 }
 .ii__title-small{
-    margin-top: 0px;
+    margin-top: 10px;
     margin-bottom: 10px;
     color: #000;
     font-size: 22px;
@@ -91,19 +95,19 @@ img {
       `]}render(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     
-    <div class="columns animate1" id="service">
+    <div class="columns animate1 is-multiline" id="service" style="padding: 60px;">
         ${this.rows.map(slide=>html` 
-            <div class="column">
-            <div class="ii__tile">
-                <div class="ii__tile-head">
-               <img src="/media/${slide[3]}"  alt="services image"/> 
-                </div>
-                <div class="ii__tile-body">
-                    <h3 class="ii_title ii__title-small is-size-6 has-text-weight-bold has-text-centered">
-                    ${slide[1]}
-                    </h3>
-                    <p class="ii__paragraph" style="color: #7b7b7b; font-weight: normal; font-size: 14px;">${slide[2]}</p>
-                </div>
+            <div class="column is-4">
+              <div class="ii__tile">
+                  <div class="ii__tile-head">
+                <img src="/media/${slide[3]}"  alt="services image"/> 
+                  </div>
+                  <div class="ii__tile-body">
+                      <h3 class="ii_title ii__title-small is-size-6 has-text-weight-bold has-text-centered">
+                      ${slide[1]}
+                      </h3>
+                      <p class="ii__paragraph" style="color: #7b7b7b; font-weight: normal; font-size: 14px;">${slide[2]}</p>
+                  </div>
                 </div>
             </div>
         `)} 
