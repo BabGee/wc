@@ -100,7 +100,7 @@ img {
             <div class="column is-4">
               <div class="ii__tile">
                   <div class="ii__tile-head">
-                <img src="/media/${slide[3]}"  alt="services image"/> 
+                <img src="/media/${slide[3]}"  alt="${slide[1]} image"/> 
                   </div>
                   <div class="ii__tile-body">
                       <h3 class="ii_title ii__title-small is-size-6 has-text-weight-bold has-text-centered">

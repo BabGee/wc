@@ -41,6 +41,21 @@ import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const 
     bottom: 0;
     left: 0;
 }
+.nav__item:focus::after{
+    position: absolute!important;
+    width: 100%!important;
+    border-bottom: 4px solid var(--app-secondary-color)!important;
+    z-index: 9999!important;
+    content: ''!important;
+    bottom: 0!important;
+    left: 0!important;
+    background-color:var(--app-default-color)!important;
+    color:#fff!important;
+}
+a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
+    background-color:var(--app-default-color)!important;
+    color:#fff!important;
+}
 /* .nav__item:hover::after{
     content: '';
     position: absolute;
@@ -107,7 +122,7 @@ import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const 
               <div class="navbar-end">
                ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
                   ${pageGroup.pages.map((menu,menuIndex)=>html`
-                  <a class="navbar-item nav__item is-capitalized"
+                  <a tabindex="${menuIndex+1}" class="navbar-item nav__item is-capitalized"
                   @click="${this.scrollToSection}"
                   data-name="${menu.id}"  pageGroup="${pageGroupIndex}" page="${menuIndex}" 
                   >${menu.title}</a>

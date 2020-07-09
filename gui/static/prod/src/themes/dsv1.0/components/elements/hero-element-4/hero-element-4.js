@@ -174,6 +174,7 @@ img{
     }
 
     .circle{
+        top: 10%;
         
 
     }
@@ -183,6 +184,7 @@ img{
  
     img{
         width: 350px;
+        top: 100px;
     }
 
 }
@@ -206,10 +208,14 @@ img{
     img{
         position:relative;
         width: 350px;
+        top: 100px;
         
     }
 }
 @media screen and (max-width: 768px) {
+    .hero-container{
+        padding-top: 50%;
+    }
     .container{
         display:flex!important;
         flex-direction:column;
@@ -228,7 +234,8 @@ img{
  
     img{
         position:relative;
-        width: 350px;
+        width: 100%;
+        top:0px;
         
     }
 }
@@ -436,7 +443,7 @@ img{
                         <div class="hero-iso-image">
                         <div class="circle"></div>
                             <div id="animateImage" class="animate1">
-                                <img  src="${this.e.details.hero_image_src}" />
+                                <img  src="${this.e.details.hero_image_src}" alt="${this.e.name} images" />
                             </div>
                         </div>
                     </div>

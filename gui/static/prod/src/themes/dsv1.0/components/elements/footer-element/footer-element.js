@@ -134,7 +134,7 @@ a.navbar-item:hover {
                                 ${"Socials"==slide.title?html`
 
                                     ${slide.links.map(link=>html`
-                                    <a class="ii__footer-col-link" href="${this._getHref(link)}" @click="${this.checkLink}" target="_blank">
+                                    <a class="ii__footer-col-link" rel="noopener" href="${this._getHref(link)}" @click="${this.checkLink}" target="_blank">
                                     
                                         <fa-icon class="fab fa-${this._getLinkTitle(link)}" color= "var(--app-secondary-color)" size="20px" style="" ></fa-icon>   
                                                                          
