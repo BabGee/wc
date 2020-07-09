@@ -217,7 +217,7 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
                             </div>
                         </div>
                         <div class="image-container column">
-                            <img class="fade-in one" src="/media/${slide[3]}" alt="image-${slide[3]}"/>
+                            <img class="fade-in one" src="/media/${slide[3]}" alt=" ${this._getTitle(slide[1])} image}"/>
                         </div>
                     </div>
                 </div>
