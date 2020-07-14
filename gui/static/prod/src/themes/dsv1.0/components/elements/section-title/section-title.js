@@ -30,7 +30,7 @@ import{css,html,SectionPElementBase}from"../../../../../components/adaptive-ui.j
     line-height: 20px;
     font-weight: 600;
     letter-spacing: 0.15px;
-    color: rgba(255, 255, 255, .7);
+    color: #1d1d1d;
 }
 
 `;var sectionTitleCss={SectionTitleStyles:SectionTitleStyles};class SectionTitle extends SectionPElementBase{static get styles(){return[SectionTitleStyles,css`
@@ -41,7 +41,7 @@ import{css,html,SectionPElementBase}from"../../../../../components/adaptive-ui.j
       
         <div class="c-title-container" style="margin-top: 25px;">
             <h3 class="ii__title is-centered">${this.e.name}</h3>
-            <p class="ii__paragraph" style="color: #7b7b7b">${this.e.defaultValue}</p> 
+            <p class="ii__paragraph" style="color: #1d1d1d">${this.e.defaultValue}</p> 
                    
         </div>    
     `}static get is(){return"section-title"}}customElements.define(SectionTitle.is,SectionTitle);export{sectionTitleCss as $sectionTitleCss,SectionTitleStyles};

@@ -90,7 +90,7 @@ a.navbar-item:hover {
     display: block;
     margin-top: 10px;
     margin-bottom: 10px;
-    color: #a8a9b7;
+    color: #1d1d1d;
     font-size: 12px;
     line-height: 24px;
     font-weight: 600;
@@ -106,7 +106,10 @@ a.navbar-item:hover {
     padding-top: 20px;
 }
 .footer-rights{
-    color: #a8a9b7;
+    color: #1d1d1d;
+}
+a:hover{
+    color: var(--app-secondary-color);
 }
 `;var footerElementCss={FooterElementStyles:FooterElementStyles};class FooterElement extends SectionPElementDsc{constructor(){super()}static get styles(){return[FooterElementStyles,css`
             :host {
