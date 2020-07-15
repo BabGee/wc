@@ -80,6 +80,6 @@ input:checked + .slider:before {
         <span class="slider round"></span>
       </label>
       <small class="validation-info">Required</small>
-      <span class="label">${this.e.name}</span>
+      <span class="label">${this.e.name}${this.e.kind?html`: ${this.e.kind}`:html`:`}</span>
     </div>
     `}getInput(){return this.qs("#input")}getValue(){return this.shadowRoot.querySelector("#input").checked?"on":"off"}valid(){this.shadowRoot.querySelector(".validation-info").style.display="none";this.shadowRoot.querySelector(".validation-info").textContent="Required"}invalid(validation){this.shadowRoot.querySelector(".validation-info").style.display="block";if(validation){this.shadowRoot.querySelector(".validation-info").textContent=validation}}}window.customElements.define(CheckboxCheck.is,CheckboxCheck);export{checkboxCheck as $checkboxCheck,checkboxCheckCss as $checkboxCheckCss,CheckboxCheckBase,CheckboxCheckStyles};
