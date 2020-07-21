@@ -6,9 +6,13 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
     }
 }
 .column{
-    width: 236px;
-    max-width: 236px;
+    width: 100%;
 }
+.column:last-child{
+  
+    
+}
+
 .summary-wrapper{
     width: 100%;
     background: #fff;
@@ -93,9 +97,9 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
            
                    `:html`
 
-                   <div class="columns is-multiline">
+                   <div class="columns is-multiline container-group-${groupIndex}">
                    ${this._computeData(groupIndex).map(item=>html`
-                       <div class="column">
+                       <div class="column is-one-quarter column-group-${groupIndex}">
                            <div class="summary-wrapper">
                                <div class="graph">
                                    <svg viewBox="0 0 230 100" class="chart">
@@ -169,4 +173,4 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
             `}
             `}
             
-        </div>`}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}onLoadData(dsc){super.onLoadData(dsc)}}customElements.define(SummaryBoxes.is,SummaryBoxes);export{summaryBoxes as $summaryBoxes,summaryBoxesCss as $summaryBoxesCss,SummaryBoxesBase,SummaryBoxesStyles};
+        </div>`}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this;this.loader.then(()=>{const columns=this.shadowRoot.querySelectorAll(".column-group-0");console.log("number of columns are:",columns.length)})}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}onLoadData(dsc){super.onLoadData(dsc)}}customElements.define(SummaryBoxes.is,SummaryBoxes);export{summaryBoxes as $summaryBoxes,summaryBoxesCss as $summaryBoxesCss,SummaryBoxesBase,SummaryBoxesStyles};

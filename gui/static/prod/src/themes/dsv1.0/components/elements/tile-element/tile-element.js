@@ -10,6 +10,9 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
 .ii__tile-head img{
     object-fit: cover;
 }
+.tile-cont:last-child{
+    width: 100%!important;
+}
 img {
     width:400px;
     height:200px;
@@ -97,7 +100,7 @@ img {
     
     <div class="columns animate1 is-multiline" id="service" style="padding: 60px;">
         ${this.rows.map(slide=>html` 
-            <div class="column is-4">
+            <div class="column tile-cont is-4">
               <div class="ii__tile">
                   <div class="ii__tile-head">
                 <img src="/media/${slide[3]}"  alt="${slide[1]} image"/> 
