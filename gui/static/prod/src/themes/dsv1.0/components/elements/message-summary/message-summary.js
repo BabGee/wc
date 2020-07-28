@@ -22,7 +22,7 @@ import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-u
 .text{
     position: absolute;
     top: 30%;
-    left: 8%;
+    left: 9%;
     max-height: 260px;
    
 
@@ -83,7 +83,7 @@ h1{
     .text{
         position: absolute;
         top: 30%;
-        left: 10%;
+        left: 11%;
         
     
         
