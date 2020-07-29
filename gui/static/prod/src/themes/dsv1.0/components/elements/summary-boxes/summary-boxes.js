@@ -12,6 +12,13 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
   
     
 }
+.title {
+    font-size: 1.4em;
+    font-weight: 400;
+    padding-bottom: 24px;
+    padding-top: 8px;
+    padding-left: 3px;
+}
 
 .summary-wrapper{
     width: 100%;
@@ -83,7 +90,7 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
                     ${this.groups.map((group,groupIndex)=>html`
                     <div class="row">
                        <div class="col-md-12 group-summary">
-                           <h1>${group}</h1>
+                           <h1 class="title">${group}</h1>
                        </div>
                    </div>
 

@@ -10,9 +10,9 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
 .ii__tile-head img{
     object-fit: cover;
 }
-.tile-cont:last-child{
-    width: 100%!important;
-}
+// .tile-cont:last-child{
+//     width: 100%!important;
+// }
 img {
     width:400px;
     height:200px;
