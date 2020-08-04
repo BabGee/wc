@@ -2,10 +2,13 @@ import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-u
 .columns {
     display: flex!important;
     flex-direction: row!important;
+
 }
 .group {
     display: flex!important;
-    flex-direction: row!important;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
     
 }
 .group-title{
@@ -15,14 +18,18 @@ import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-u
     width:100%;
     max-height: 510px;
     overflow: auto;
+    border-left: 1.5px solid rgb(221, 208, 208);
+    margin-left: 16px;
 }
 .image-container{
     display:flex;
+    margin-left: 16px;
+    padding-right: 16px;
 }
 .text{
     position: absolute;
     top: 30%;
-    left: 9%;
+    left: 10%;
     max-height: 260px;
    
 
@@ -51,6 +58,8 @@ h1{
     flex-basis: 0;
     flex-grow: 1;
     flex-shrink: 1;
+    width: 60%;
+
     
 
     padding: 0px;
@@ -146,6 +155,11 @@ h1{
         
         
     }
+    .column {
+        width:100%;
+        margin-left:8px;
+        margin-right:8px;
+    }
 }
 @media screen and (max-width:675px) {
     
@@ -153,24 +167,14 @@ h1{
         
         left: 14%;
         overflow-y:auto
+        top: 24%;
        
     
         
         
     }
 }
-@media screen and (max-width:580px) {
-    
-    .text{
-        
-        top: 26%;
-        left: 18%;
-       
-    
-        
-        
-    }
-}
+
 @media screen and (max-width:580px) {
     
     .text{
