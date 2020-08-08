@@ -56,7 +56,7 @@ import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-u
             }
             `]}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>
-    <div class="service-button-container">
+    <div class="column service-button-container">
         <div class="content-area is-flex">
             <div class="icon-holder">
                 <iron-icon style="width:28px !important;height: 28px !important;"
