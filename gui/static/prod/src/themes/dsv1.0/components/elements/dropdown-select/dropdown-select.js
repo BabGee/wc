@@ -30,6 +30,14 @@ import{dataSourceMixin,utilsMixin,SerializableElement,css,html,RENDER_M_SIDE_BY_
   position: relative;
   left: 0;
 }
+.label-name.placeholder.lbl.active{
+  width: 100%;
+  transform: translateY(-17px);
+  color: var(--app-default-color);
+  font-size: 70%;
+  position: relative;
+  left: 0;
+}
 
 .main-container {
     padding: 16px;
@@ -103,8 +111,15 @@ width: 100%; }
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: left;
+    padding-bottom: 4px;
     width: calc(100% - 30px);
     line-height: 1em;
+    font-family: 'main',BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-weight: 495;
+    color: rgb(1, 50, 67);
+    letter-spacing: 0.5px;
+    padding-left: 8px;
+    font-size: 1rem;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -338,14 +353,15 @@ width: 100%; }
         display: inline-block; }
       .ss-main .ss-content .ss-list .ss-option:hover, .ss-main .ss-content .ss-list .ss-option.ss-highlighted {
         color: #ffffff;
-        background-color: #5897fb; }
+        background-color:var(--app-default-color);
+      }
       .ss-main .ss-content .ss-list .ss-option.ss-disabled {
         cursor: not-allowed;
         color: #dedede;
         background-color: #ffffff; }
       .ss-main .ss-content .ss-list .ss-option:not(.ss-disabled).ss-option-selected {
-        color: #666666;
-        background-color: rgba(88, 151, 251, 0.1); }
+          background-color:var(--app-secondary-color);
+          color: #fff; }
       .ss-main .ss-content .ss-list .ss-option.ss-hide {
         display: none; }
       .ss-main .ss-content .ss-list .ss-option .ss-search-highlight {
@@ -363,7 +379,7 @@ width: 100%; }
       <div class="ss-main">
       
         <div id="d-down" class="ss-single-selected ${this.contentOpen?"ss-open-below":""}" @click="${this._onMultiSelectContainerClick}">
-          <label for="name" class="label-name placeholder lbl"><span id="label" class="content-name">select a ${this.title}</span></label>
+          <label for="name" class="label-name placeholder lbl"><span id="label" class="content-name">Select ${this.title}</span></label>
           <span class="placeholder" style="height: 16px">${this.getSelected(this.selected)}</span>
           <span class="ss-deselect ss-plus" @click="${this._onDeselectClick}">x</span>
           <!--arrow container-->
