@@ -673,13 +673,28 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
       <div class="circle-clipper right"></div>
     </div>
   </div>
-`;template$1.setAttribute("strip-whitespace","");Polymer({_template:template$1,is:"paper-spinner",behaviors:[PaperSpinnerBehavior]});const SectionPageBase=class extends serviceCallMixin(LitElement){static get is(){return"section-page"}constructor(){super();this.params={}}createRenderRoot(){return this}static get properties(){return{payload:Object,title:String,params:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const au=document.querySelector("adaptive-ui"),p=au.getAttribute("params");this.params=p?JSON.parse(p):{}}_loadServiceParams(service,params){const self=this;self.params=params;this.load(service)}_computeFeed(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;var page=pageGroup.getTab(0);return page.pageInputGroups}_renderPayload(payload){var self=this;self.payload=payload}serviceCallParams(){return this.params}load(service){this.payload=null;this.callService(service).then(response=>{this._renderPayload(response.serviceCommands.get_section)}).catch(err=>console.log(err))}async _activateLoadSectionInterface(...args){console.warn("THIS SHOULD NEVER HAPPEN")}_gridClasses(el){if(!el.sectionSize){Logger.i.switchConfiguration(`Form ${el} is using default grid sizes`);return"24|24|24"}return el.sectionSize}};var sectionPage={SectionPageBase:SectionPageBase};class SectionPage extends SectionPageBase{render(){return html$1`
+`;template$1.setAttribute("strip-whitespace","");Polymer({_template:template$1,is:"paper-spinner",behaviors:[PaperSpinnerBehavior]});const SectionPageBase=class extends serviceCallMixin(LitElement){static get is(){return"section-page"}constructor(){super();this.params={}}createRenderRoot(){return this}static get properties(){return{payload:Object,title:String,params:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const au=document.querySelector("adaptive-ui"),p=au.getAttribute("params");this.params=p?JSON.parse(p):{}}_loadServiceParams(service,params){const self=this;self.params=params;this.load(service)}_computeFeed(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;var page=pageGroup.getTab(0);return page.pageInputGroups}_renderPayload(payload){var self=this;self.payload=payload}serviceCallParams(){return this.params}load(service){this.payload=null;console.log("SECTION PAGE SERVICE CALL MADE");this.callService(service).then(response=>{if(response.serviceCommands.get_section==void 0){console.debug("GET_SECTION not present getting other response info");let overallStatus=response.response.overall_status;console.log("OVERALL",overallStatus);let lastResponse=response.response.last_response;console.log("LAST_RESPONSE",lastResponse);this._renderPayload({overall_status:overallStatus,last_response:lastResponse})}else{console.debug("GET_SECTION PRESENT");this._renderPayload(response.serviceCommands.get_section)}}).catch(err=>console.log(err))}async _activateLoadSectionInterface(...args){console.warn("THIS SHOULD NEVER HAPPEN")}_gridClasses(el){if(!el.sectionSize){Logger.i.switchConfiguration(`Form ${el} is using default grid sizes`);return"24|24|24"}return el.sectionSize}};var sectionPage={SectionPageBase:SectionPageBase};const STATUS_SUCCESS="00",STATUS_FAILED="96";class SectionPage extends SectionPageBase{render(){return html$1`
      <style>
 
 .modal-container, .modal-spinner{
     width: 100%;
     height: 100vh;
     background: rgba(226, 226, 226, .9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 45px;
+}
+.modal-container2{
+   background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
@@ -698,6 +713,40 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
   background-color: #fff;
   border-radius: 6px;
   overflow: auto;
+}
+.modal-dialogue2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 250px;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: auto;
+  transition: all 5s ease-in-out;
+
+}
+.danger{
+  background-color:#F03A5F;
+  color:#fff;
+}
+.success{
+  background-color:#3EC46D;
+  color:#fff;
+}
+.danger-close{
+  color:#F03A5F;
+}
+.success-close{
+  color:#3EC46D;
+
+}
+.content h2 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.125;
+    color:#fff;
 }
 .dialogue-header{
   background: var(--app-default-color);
@@ -732,6 +781,59 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
 .dialogue-body{
   position: relative;
   top: 100px;
+}
+
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+  transition:1.5s all ease-in-out;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4; transform:translateX(600px);}
+  to {opacity: 1; transform:translateX(0px);}
+}
+
+@keyframes fade {
+  from {opacity: .4; transform:translateX(600px);}
+  to {opacity: 1; transform:translateX(0px);}
 }
 
 @media screen and (max-width: 1280px){
@@ -958,28 +1060,60 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
 
       </style>
       ${this.payload?html$1`
-      <div class="modal-container">
-        <div class="modal-dialogue">
-          <div class="dialogue-header is-flex">
-            <div class="modal-column modal-left">
-              <h1 class="modal-title is-pulled-left">${this._computePage(this.payload).title}</h1>
-            </div>
-            <div class="modal-column modal-right">
-              <span class="is-pulled-right cancel" @click=${this._triggerViewList}><fa-icon class="fas fa-times" color="#fff" size="2em"></fa-icon></span>
+
+          ${this.payload.last_response?html$1`
+          <div class="modal-container2">
+            <div class="modal-dialogue2 fade ${this.payload.overall_status==STATUS_SUCCESS?"success":"danger"}">
+                  <div class="content">
+                  <h2 class="mini-title">${this.payload.last_response}</h2>
+                  <a class="close ${this.payload.overall_status==STATUS_SUCCESS?"success-close":"danger-close"}" href="#"
+                  @click=${this._triggerViewList}
+                    style="
+                    position: absolute;
+                    top: 20px;
+                    right: 30px;
+                    transition: all 200ms;
+                    font-size: 40px;
+                    font-weight: bold;
+                    text-decoration: none;
+                    "
+                  >&times;</a>
+
+                </div>
+              
             </div>
           </div>
-          <div class="dialogue-body">
-            <div class="columns is-multiline">
-              ${this._computeFeed(this.payload).map(feed=>html$1`
-              <!-- a single column -->      
-              <div class="column ${this._gridClasses(feed)}" >
-                <form-render .feed="${feed}" .params=${this.params} ></form-render>
-              </div>
-              `)}
-            </div>
-          </div>
-        </div>
-      </div>       
+          
+          
+          
+          
+          `:html$1`
+          
+                <div class="modal-container">
+                  <div class="modal-dialogue">
+                    <div class="dialogue-header is-flex">
+                      <div class="modal-column modal-left">
+                        <h1 class="modal-title is-pulled-left">${this._computePage(this.payload).title}</h1>
+                      </div>
+                      <div class="modal-column modal-right">
+                        <span class="is-pulled-right cancel" @click=${this._triggerViewList}><fa-icon class="fas fa-times" color="#fff" size="2em"></fa-icon></span>
+                      </div>
+                    </div>
+                    <div class="dialogue-body">
+                      <div class="columns is-multiline">
+                        ${this._computeFeed(this.payload).map(feed=>html$1`
+                        <!-- a single column -->      
+                        <div class="column ${this._gridClasses(feed)}" >
+                          <form-render .feed="${feed}" .params=${this.params} ></form-render>
+                        </div>
+                        `)}
+                      </div>
+                    </div>
+                  </div>
+              </div>  
+          
+          `}
+     
               
       `:html$1`
         <div class="modal-spinner">
@@ -998,4 +1132,4 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
                     <span slot="title">${this._snackbarTitle}</span>
                     ${this._snackbarMessage}</snack-bar>
 
-      `}constructor(){super()}_computePage(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;return pageGroup.getTab(0)}_triggerViewList(){this.dispatchEvent(new CustomEvent("view-list",{bubbles:!0,composed:!0,detail:{}}))}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}static get styles(){return[Reset,Colors,Fonts,css`:host { display: block; }`]}}customElements.define(SectionPage.is,SectionPage);export{paperSpinnerBehavior as $paperSpinnerBehavior,sectionPage as $sectionPage,PaperSpinnerBehavior,SectionPageBase};
+      `}constructor(){super()}_computePage(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;return pageGroup.getTab(0)}_triggerViewList(){this.dispatchEvent(new CustomEvent("view-list",{bubbles:!0,composed:!0,detail:{}}))}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}static get styles(){return[Reset,Colors,Fonts,css`:host { display: block; }`]}}customElements.define(SectionPage.is,SectionPage);var sectionPage$1={STATUS_SUCCESS:STATUS_SUCCESS,STATUS_FAILED:STATUS_FAILED};export{paperSpinnerBehavior as $paperSpinnerBehavior,sectionPage as $sectionPage,sectionPage$1 as $sectionPage$1,PaperSpinnerBehavior,SectionPageBase,STATUS_SUCCESS,STATUS_FAILED};
