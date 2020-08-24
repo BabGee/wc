@@ -673,7 +673,7 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
       <div class="circle-clipper right"></div>
     </div>
   </div>
-`;template$1.setAttribute("strip-whitespace","");Polymer({_template:template$1,is:"paper-spinner",behaviors:[PaperSpinnerBehavior]});const SectionPageBase=class extends serviceCallMixin(LitElement){static get is(){return"section-page"}constructor(){super();this.params={}}createRenderRoot(){return this}static get properties(){return{payload:Object,title:String,params:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const au=document.querySelector("adaptive-ui"),p=au.getAttribute("params");this.params=p?JSON.parse(p):{}}_loadServiceParams(service,params){const self=this;self.params=params;this.load(service)}_computeFeed(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;var page=pageGroup.getTab(0);return page.pageInputGroups}_renderPayload(payload){var self=this;self.payload=payload}serviceCallParams(){return this.params}load(service){this.payload=null;console.log("SECTION PAGE SERVICE CALL MADE");this.callService(service).then(response=>{if(response.serviceCommands.get_section==void 0){console.debug("GET_SECTION not present getting other response info");let overallStatus=response.response.overall_status;console.log("OVERALL",overallStatus);let lastResponse=response.response.last_response;console.log("LAST_RESPONSE",lastResponse);this._renderPayload({overall_status:overallStatus,last_response:lastResponse})}else{console.debug("GET_SECTION PRESENT");this._renderPayload(response.serviceCommands.get_section)}}).catch(err=>console.log(err))}async _activateLoadSectionInterface(...args){console.warn("THIS SHOULD NEVER HAPPEN")}_gridClasses(el){if(!el.sectionSize){Logger.i.switchConfiguration(`Form ${el} is using default grid sizes`);return"24|24|24"}return el.sectionSize}};var sectionPage={SectionPageBase:SectionPageBase};const STATUS_SUCCESS="00",STATUS_FAILED="96";class SectionPage extends SectionPageBase{render(){return html$1`
+`;template$1.setAttribute("strip-whitespace","");Polymer({_template:template$1,is:"paper-spinner",behaviors:[PaperSpinnerBehavior]});const SectionPageBase=class extends serviceCallMixin(LitElement){static get is(){return"section-page"}constructor(){super();this.params={}}createRenderRoot(){return this}static get properties(){return{payload:Object,title:String,params:Object}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const au=document.querySelector("adaptive-ui"),p=au.getAttribute("params");this.params=p?JSON.parse(p):{}}_loadServiceParams(service,params){const self=this;self.params=params;this.load(service)}_computeFeed(getSection){var self=this,pageGroup=getSection.pageGroups[0];self.title=pageGroup.title;var page=pageGroup.getTab(0);return page.pageInputGroups}_renderPayload(payload){var self=this;self.payload=payload}serviceCallParams(){return this.params}load(service){this.payload=null;this.callService(service).then(response=>{if(response.serviceCommands.get_section==void 0){console.debug("GET_SECTION not present getting other response info");let overallStatus=response.response.overall_status,lastResponse=response.response.last_response;this._renderPayload({overall_status:overallStatus,last_response:lastResponse})}else{console.debug("GET_SECTION PRESENT");this._renderPayload(response.serviceCommands.get_section)}}).catch(err=>console.log(err))}async _activateLoadSectionInterface(...args){console.warn("THIS SHOULD NEVER HAPPEN")}_gridClasses(el){if(!el.sectionSize){Logger.i.switchConfiguration(`Form ${el} is using default grid sizes`);return"24|24|24"}return el.sectionSize}};var sectionPage={SectionPageBase:SectionPageBase};const STATUS_SUCCESS="00",STATUS_FAILED="96";class SectionPage extends SectionPageBase{render(){return html$1`
      <style>
 
 .modal-container, .modal-spinner{
@@ -784,38 +784,6 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
 }
 
 
-.popup {
-  margin: 70px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  width: 30%;
-  position: relative;
-  transition: all 5s ease-in-out;
-}
-
-.popup h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup .close:hover {
-  color: #06D85F;
-}
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
 
 /* Fading animation */
 .fade {
