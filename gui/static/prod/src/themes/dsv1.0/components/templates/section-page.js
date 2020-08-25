@@ -1034,7 +1034,7 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
             <div class="modal-dialogue2 fade ${this.payload.overall_status==STATUS_SUCCESS?"success":"danger"}">
                   <div class="content">
                   <h2 class="mini-title">${this.payload.last_response}</h2>
-                  <a class="close ${this.payload.overall_status==STATUS_SUCCESS?"success-close":"danger-close"}" href="#"
+                  <a class="close ${this.payload.overall_status==STATUS_SUCCESS?"success-close":"danger-close"}"
                   @click=${this._triggerViewList}
                     style="
                     position: absolute;
