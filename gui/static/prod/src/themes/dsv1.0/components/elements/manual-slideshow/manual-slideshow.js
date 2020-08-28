@@ -28,7 +28,7 @@ h4{
 img{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 /* Next & previous buttons */
@@ -72,15 +72,32 @@ img{
   padding: 8px 12px;
   position: absolute;
   right: 27px;
-  width: 50%;
-  top:55px;
-  text-align: center;
+  width: auto;
+  max-width: 20%;
+  right:18px;
+  bottom:111px;
+  text-align: left;
   max-height: 250px;
   border-radius: 12px;
   //filter: brightness(100%);
   background-color: var(--app-secondary-color);
   border-radius: 12px;
 
+}
+
+.text:after {
+  content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 28px solid transparent;
+	border-top-color:  var(--app-secondary-color);
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -14px;
+	margin-bottom: -28px;
 }
 
 /* Number text (1/3 etc) */
@@ -98,15 +115,14 @@ img{
 /* The dots/bullets/indicators */
 .dot {
   cursor:pointer;
-  height: 15px;
-  width: 40px;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
   margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 6%;
   display: inline-block;
   transition: background-color 1.2s ease;
-  border: 1.5px solid var(--app-default-color) ;
-  background-color: transparent;
+  background-color: #bbb;
+
 
 
 }
@@ -144,12 +160,12 @@ img{
 }
 
 @-webkit-keyframes pop-up {
-  from {opacity: .4; transform: translateY(300px); filter: brightness(25%);}
+  from {opacity: .4; transform: translateX(500px); filter: brightness(25%);}
   top {opacity: 1; transform: translateY(0px); filter: brightness(100%);}
 
 }
 @keyframes pop-up {
-  from {opacity: .4; top: 490px; transform: translateY(300px); filter: brightness(25%);}
+  from {opacity: .4; top: 490px; transform: translateX(500px); filter: brightness(25%);}
   top {opacity: 1; transform: translateY(0px); filter: brightness(100%);}
 }
 
@@ -184,7 +200,7 @@ img{
                     <div class="mySlides fade">
                       <div class="numbertext">${index+1}/${this.rows.length}</div>
                       <img src="/media/${slide[3]}" alt="${slide[1]}" style="width:100%">
-                      <div class="text pop-up">${slide[2]}</div> 
+                      <div id="pop-text-${index}" class="text pop-up">${this.checkNewLine(slide[2],index)}</div> 
                     </div>
 
 	              `)}  
@@ -205,4 +221,4 @@ img{
                
 
                
-`}constructor(){super();this.slideIndex=1}static get properties(){return{slideIndex:Number}}static get is(){return"manual-slideshow"}moveSlide(e){let moveValue=parseInt(e.target.getAttribute("move"));console.log("move value",moveValue);this.showSlides(this.slideIndex+=moveValue)}currentSlide(e){let currentSlideValue=parseInt(e.target.getAttribute("currentSlide"));this.showSlides(this.slideIndex=currentSlideValue)}showSlides(n){var i;let slides=this.shadowRoot.querySelectorAll(".mySlides"),captions=this.shadowRoot.querySelectorAll(".text"),dots=this.shadowRoot.querySelectorAll(".dot");if(n>slides.length){this.slideIndex=1}if(1>n){this.slideIndex=slides.length}for(i=0;i<slides.length;i++){slides[i].style.display="none"}for(i=0;i<slides.length;i++){captions[i].style.display="none"}for(i=0;i<dots.length;i++){dots[i].className=dots[i].className.replace(" active","")}slides[this.slideIndex-1].style.display="block";captions[this.slideIndex-1].style.display="block";dots[this.slideIndex-1].className+=" active"}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{self.showSlides(self.slideIndex)})}}customElements.define(ManualSlideshow.is,ManualSlideshow);export{manualSlideshow as $manualSlideshow,manualSlideshowCss as $manualSlideshowCss,ManualSlideshowBase,ManualSlideShowStyles};
+`}constructor(){super();this.slideIndex=1}static get properties(){return{slideIndex:Number}}static get is(){return"manual-slideshow"}checkNewLine(text,index){if(text.includes("<br/>")||text.includes("<b>")){this.loader.then(()=>{let pop=this.shadowRoot.querySelector("#pop-text-"+index);pop.innerHTML=text})}else{return text}}moveSlide(e){let moveValue=parseInt(e.target.getAttribute("move"));console.log("move value",moveValue);this.showSlides(this.slideIndex+=moveValue)}currentSlide(e){let currentSlideValue=parseInt(e.target.getAttribute("currentSlide"));this.showSlides(this.slideIndex=currentSlideValue)}showSlides(n){var i;let slides=this.shadowRoot.querySelectorAll(".mySlides"),captions=this.shadowRoot.querySelectorAll(".text"),dots=this.shadowRoot.querySelectorAll(".dot");if(n>slides.length){this.slideIndex=1}if(1>n){this.slideIndex=slides.length}for(i=0;i<slides.length;i++){slides[i].style.display="none"}for(i=0;i<slides.length;i++){captions[i].style.display="none"}for(i=0;i<dots.length;i++){dots[i].className=dots[i].className.replace(" active","")}slides[this.slideIndex-1].style.display="block";if(0==this.slideIndex-1){captions[this.slideIndex-1].style.display="none"}else{captions[this.slideIndex-1].style.display="block"}dots[this.slideIndex-1].className+=" active"}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{self.showSlides(self.slideIndex)})}}customElements.define(ManualSlideshow.is,ManualSlideshow);export{manualSlideshow as $manualSlideshow,manualSlideshowCss as $manualSlideshowCss,ManualSlideshowBase,ManualSlideShowStyles};

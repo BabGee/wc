@@ -5,10 +5,10 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
 }
 .ii__tile-head{
     display: flex;
-    justify-content: center;
+    // justify-content: center;
 }
 .ii__tile-head img{
-    object-fit: cover;
+    object-fit: contain;
 }
 // .tile-cont:last-child{
 //     width: 100%!important;
@@ -26,6 +26,7 @@ img {
     margin-bottom: 86px;
 }
 .ii__tile{
+    display: flex;
     margin-right: auto;
     margin-bottom: 28px;
     margin-left: auto;
@@ -100,13 +101,13 @@ img {
     
     <div class="columns animate1 is-multiline" id="service" style="padding: 60px;">
         ${this.rows.map(slide=>html` 
-            <div class="column tile-cont is-4">
+            <div class="column tile-cont is-6">
               <div class="ii__tile">
                   <div class="ii__tile-head">
-                <img src="/media/${slide[3]}"  alt="${slide[1]} image"/> 
+                  <img src="/media/${slide[3]}"  alt="${slide[1]} image"/> 
                   </div>
                   <div class="ii__tile-body">
-                      <h3 class="ii_title ii__title-small is-size-6 has-text-weight-bold has-text-centered">
+                      <h3 class="ii_title ii__title-small is-size-6 has-text-weight-bold">
                       ${slide[1]}
                       </h3>
                       <p class="ii__paragraph" style="color: #7b7b7b; font-weight: normal; font-size: 14px;">${slide[2]}</p>
