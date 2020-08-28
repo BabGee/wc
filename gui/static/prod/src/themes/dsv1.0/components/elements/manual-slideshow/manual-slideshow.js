@@ -199,7 +199,7 @@ img{
 
                     <div class="mySlides fade">
                       <div class="numbertext">${index+1}/${this.rows.length}</div>
-                      <img src="${slide[3]}" alt="${slide[1]}" style="width:100%">
+                      <img src="/media/${slide[3]}" alt="${slide[1]}" style="width:100%">
                       <div id="pop-text-${index}" class="text pop-up">${this.checkNewLine(slide[2],index)}</div> 
                     </div>
 
