@@ -715,17 +715,26 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
   overflow: auto;
 }
 .modal-dialogue2{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 500px;
-  height: 250px;
-  padding: 0;
+  /* display: flex;
+  justify-content: center; */
+  /* align-items: center; */
+  width: 400px;
+  /* height: 250px; */
+  padding: 20px;
   background-color: #fff;
   border-radius: 6px;
   overflow: auto;
   transition: all 5s ease-in-out;
 
+}
+.image-container{
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.image-container img{
+  width: 70px;
 }
 .danger{
   background-color:#F03A5F;
@@ -1021,16 +1030,46 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
                           }
                           
                         }
-
-      
-  
-
+                 
 
       </style>
       ${this.payload?html$1`
 
           ${this.payload.last_response?html$1`
-          <div class="modal-container2">
+
+          <div class="main-container" style="position: absolute;">
+            <div class="modal-container2">
+              <div class="modal-dialogue2 fade">
+                <div class="image-container">
+                  <!-- image here -->
+                  ${this.payload.overall_status==STATUS_SUCCESS?html$1`
+                  <img src="src/themes/dsv1.0/img/isometic/success_icon.svg" alt="Success icon" style="width: 42%"/>
+                  `:html$1`
+                  <img src="src/themes/dsv1.0/img/isometic/danger_icon.svg" alt="Failed icon" style="width: 46%"/>
+                  `}
+                </div>
+                <div class="content">
+                  <div class="heading" style="width: 100%;">
+                    <h1 class="title has-text-centered has-text-${this.payload.overall_status==STATUS_SUCCESS?"success":"danger"}">${this.payload.overall_status==STATUS_SUCCESS?"success":"Failed"}</h1>
+                  </div>
+                  <p class="mini-title has-text-centered">${this.payload.last_response}</p>
+                </div>        
+              </div>
+              <a class="close ${this.payload.overall_status==STATUS_SUCCESS?"success-close":"danger-close"}"
+                  @click=${this._triggerViewList}
+                    style="
+                    position: absolute;
+                    top: 20px;
+                    right: 30px;
+                    font-size: 40px;
+                    font-weight: bold;
+                    text-decoration: none;
+                    "
+                  >&times;</a>
+            </div>
+          </div>
+
+          <!-- <div class="modal-container2">
             <div class="modal-dialogue2 fade ${this.payload.overall_status==STATUS_SUCCESS?"success":"danger"}">
                   <div class="content">
                   <h2 class="mini-title">${this.payload.last_response}</h2>
@@ -1050,7 +1089,7 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
                 </div>
               
             </div>
-          </div>
+          </div> -->
           
           
           
