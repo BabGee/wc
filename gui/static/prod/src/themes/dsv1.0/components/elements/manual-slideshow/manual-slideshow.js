@@ -71,10 +71,9 @@ img{
   font-size: 15px;
   padding: 8px 12px;
   position: absolute;
-  right: 27px;
+  right: 80px;
   width: auto;
   max-width: 20%;
-  right:18px;
   bottom:111px;
   text-align: left;
   max-height: 250px;
