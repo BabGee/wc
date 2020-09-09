@@ -3451,7 +3451,7 @@ figure{
                 <slot name="body"></slot>
             </div>
         </div>
-    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register$2(ContentX);class PopupX extends FormBase{static get is(){return"popup-x"}static get properties(){return{title:String,details:Object}}render(){return html$3`
+    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register$2(ContentX);class PopupX extends FormBase{static get is(){return"popup-x"}static get properties(){return{title:String,details:String}}render(){return html$3`
 
         <style>
         div.popup-container{
@@ -3561,7 +3561,7 @@ figure{
                 </div>
             </div>
         </div>
-    `}getBgImage(){const bg_image=this.details.bg_image;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://interintel.co.ke/media/upc_institution_logo/Interintel_Logo_1.png"}}getSubTitle(){const subTitle=this.details.subtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}close(){const close=this.shadowRoot.querySelector(".popup-container");close.style.display="none"}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register$2(PopupX);class FormX extends FormBase{static get is(){return"form-x"}constructor(){super();this.pos=0;this.sections=[]}render(){return html$3`
+    `}getBgImage(){const bg_image=JSON.parse(this.details).bg_image;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://interintel.co.ke/media/upc_institution_logo/Interintel_Logo_1.png"}}getSubTitle(){const subTitle=JSON.parse(this.details).subtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}close(){const close=this.shadowRoot.querySelector(".popup-container");close.style.display="none"}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register$2(PopupX);class FormX extends FormBase{static get is(){return"form-x"}constructor(){super();this.pos=0;this.sections=[]}render(){return html$3`
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
@@ -3685,7 +3685,7 @@ figure{
                 </div>
             </div>
         </div>
-    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}_computeLogo(gateway){let defaultUrl="https://ui-avatars.com/api/?background=FFFFFF&name="+gateway.name;if(gateway.iconImage){defaultUrl=`/media/${gateway.iconImage}`}if(gateway.logo){defaultUrl=`/media/${gateway.logo}`}return defaultUrl}}register$2(SessionX);class FormRender extends FormRenderBase{constructor(){super()}render(){let form;const af=this.__computeActiveFeed(),formType=af.element,formDetails=this.feed.getInputVar()[14];if(formType===FORM_TYPE_FORM){form=html$3`
+    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}_computeLogo(gateway){let defaultUrl="https://ui-avatars.com/api/?background=FFFFFF&name="+gateway.name;if(gateway.iconImage){defaultUrl=`/media/${gateway.iconImage}`}if(gateway.logo){defaultUrl=`/media/${gateway.logo}`}return defaultUrl}}register$2(SessionX);class FormRender extends FormRenderBase{constructor(){super()}render(){let form;const af=this.__computeActiveFeed(),formType=af.element,formDetailsString=JSON.stringify(this.feed.getInputVar()[14]);if(formType===FORM_TYPE_FORM){form=html$3`
        <form-x id="form" .sections=${this.sections} .pos=${this.pos} @pos-change=${this._onPosChange}>
         <p slot="header" class="card-header-title">${this.feed.title}</p> 
         <e-list 
@@ -3729,7 +3729,7 @@ figure{
         <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed,this.pos)} ></e-list>
       </section-x>
       `}else if(formType===FORM_TYPE_POPUP_FORM){form=html$3`
-       <popup-x details = "${formDetails}" title="${this.feed.title}" id="form">
+       <popup-x details="${formDetailsString}" title="${this.feed.title}" id="form">
         <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed,this.pos)} ></e-list>
       </popup-x>
       `}else if(formType===FORM_TYPE_HERO_FORM){form=html$3`
