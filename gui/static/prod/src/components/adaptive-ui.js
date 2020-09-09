@@ -3451,7 +3451,7 @@ figure{
                 <slot name="body"></slot>
             </div>
         </div>
-    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register$2(ContentX);class PopupX extends FormBase{static get is(){return"popup-x"}static get properties(){return{title:String,details:String}}render(){return html$3`
+    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register$2(ContentX);class PopupX extends FormBase{static get is(){return"popup-x"}static get properties(){return{title:String,details:Object}}render(){return html$3`
 
         <style>
         div.popup-container{
@@ -3561,7 +3561,7 @@ figure{
                 </div>
             </div>
         </div>
-    `}getBgImage(){const bg_image=JSON.parse(this.details).bg_image;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://interintel.co.ke/media/upc_institution_logo/Interintel_Logo_1.png"}}getSubTitle(){const subTitle=JSON.parse(this.details).subtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}close(){const close=this.shadowRoot.querySelector(".popup-container");close.style.display="none"}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register$2(PopupX);class FormX extends FormBase{static get is(){return"form-x"}constructor(){super();this.pos=0;this.sections=[]}render(){return html$3`
+    `}getBgImage(){const bg_image=this.details.bg_image;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://interintel.co.ke/media/upc_institution_logo/Interintel_Logo_1.png"}}getSubTitle(){const subTitle=this.details.subtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}close(){const close=this.shadowRoot.querySelector(".popup-container");close.style.display="none"}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register$2(PopupX);class FormX extends FormBase{static get is(){return"form-x"}constructor(){super();this.pos=0;this.sections=[]}render(){return html$3`
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
