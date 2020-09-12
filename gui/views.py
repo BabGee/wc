@@ -8,8 +8,7 @@ from gui.models import *
 from django.db.models import Q
 from itertools import chain
 from django.contrib.auth import authenticate
-import types
-import csv
+import types, csv, re
 from processor.views import *
 import simplejson as json
 from django.contrib.gis.geoip2 import GeoIP2
@@ -114,17 +113,31 @@ class UI:
 	@method_decorator([csrf_exempt, requires_csrf_token])
 	def pages(self, request, page, subdomain=None, route=None):
 		try:
-			lgr.info('Request Host: %s' % request.get_host())
+			host = request.get_host()
+
 			lgr.info('Sub-domain %s' % subdomain)
+			lgr.info('Request Host: %s' % request.get_host())
 
 			lgr.info('Route %s' % route)
 			lgr.info('Request META: %s' % request.META)
 			if 'X-SUBDOMAIN' in request.META.keys(): subdomain=request.META['X-SUBDOMAIN']
+			if 'X-GATEWAY_HOST' in request.META.keys(): host = request.META['X-GATEWAY_HOST']
 
-			if 'X-GATEWAY_HOST' in request.META.keys():
-				gateway_path = GatewayHost.objects.using('read').filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
-			else:
-				gateway_path = GatewayHost.objects.using('read').filter(host=request.get_host(), status__name='ENABLED')
+			pattern = r'^(www\.)?((?P<domain>[\w.]+)(:(?P<port>\d+))?)'
+
+			subdomain_details =list(re.finditer(pattern, subdomain))[0].groupdict()
+			lgr.info(subdomain_details)
+			subdomain = subdomain_details.get('domain')
+
+
+			domain_details =list(re.finditer(pattern, host))[0].groupdict()
+			lgr.info(domain_details)
+			domain = domain_details.get('domain')
+
+			lgr.info('Sub-domain %s' % subdomain)
+			lgr.info('Domain: %s' % domain)
+
+			gateway_path = GatewayHost.objects.using('read').filter(host=domain, status__name='ENABLED')
 
 			if gateway_path.exists():
 
@@ -194,7 +207,7 @@ class UI:
 							lgr.info('Manifest Response: %s' % responseParams.response['manifest'])
 							return HttpResponse(responseParams.response['manifest'], content_type='application/json')
 						else:			
-							host = subdomain  if subdomain else request.get_host()
+							host = subdomain  if subdomain else domain
 							#host = request.get_host()
 							c = {
 								'route': route,
