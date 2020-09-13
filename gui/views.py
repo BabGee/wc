@@ -53,10 +53,24 @@ class UI:
 
 		session_id = request.session.get('session_id')
 
-		if 'X-GATEWAY_HOST' in request.META.keys():
-			gateway_path = GatewayHost.objects.using('read').filter(host=request.META['X-GATEWAY_HOST'], status__name='ENABLED')
-		else:
-			gateway_path = GatewayHost.objects.using('read').filter(host=request.get_host(), status__name='ENABLED')
+		lgr.info('Request Host: %s' % request.get_host())
+
+		host = request.get_host()
+
+		lgr.info('Request META: %s' % request.META)
+		if 'X-GATEWAY_HOST' in request.META.keys(): host = request.META['X-GATEWAY_HOST']
+
+		lgr.info('Request Host: %s' % host)
+
+		pattern = r'^(www\.)?((?P<domain>[\w.]+)(:(?P<port>\d+))?)'
+
+		domain_details =list(re.finditer(pattern, host))[0].groupdict()
+		lgr.info(domain_details)
+		domain = domain_details.get('domain')
+
+		lgr.info('Domain: %s' % domain)
+
+		gateway_path = GatewayHost.objects.using('read').filter(host=domain, status__name='ENABLED')
 
 		lgr.info('Gateway Path: %s' % gateway_path)
 		if gateway_path.exists():
@@ -91,6 +105,12 @@ class UI:
 				#lgr.info('Payload Original: %s' % payload)	
 				if 'X-SUBDOMAIN' in request.META.keys():
 					subdomain=request.META['X-SUBDOMAIN']
+
+					pattern = r'^(www\.)?((?P<domain>[\w.]+)(:(?P<port>\d+))?)'
+					subdomain_details =list(re.finditer(pattern, subdomain))[0].groupdict()
+					lgr.info(subdomain_details)
+					subdomain = subdomain_details.get('domain')
+
 					payload['subdomain'] = subdomain
 					payload['trigger'] = "with_subdomain"
 
@@ -113,22 +133,24 @@ class UI:
 	@method_decorator([csrf_exempt, requires_csrf_token])
 	def pages(self, request, page, subdomain=None, route=None):
 		try:
-			host = request.get_host()
-
 			lgr.info('Sub-domain %s' % subdomain)
 			lgr.info('Request Host: %s' % request.get_host())
+
+			host = request.get_host()
 
 			lgr.info('Route %s' % route)
 			lgr.info('Request META: %s' % request.META)
 			if 'X-SUBDOMAIN' in request.META.keys(): subdomain=request.META['X-SUBDOMAIN']
 			if 'X-GATEWAY_HOST' in request.META.keys(): host = request.META['X-GATEWAY_HOST']
 
+			lgr.info('Sub-domain %s' % subdomain)
+			lgr.info('Request Host: %s' % host)
+
 			pattern = r'^(www\.)?((?P<domain>[\w.]+)(:(?P<port>\d+))?)'
-
-			subdomain_details =list(re.finditer(pattern, subdomain))[0].groupdict()
-			lgr.info(subdomain_details)
-			subdomain = subdomain_details.get('domain')
-
+			if subdomain:
+				subdomain_details =list(re.finditer(pattern, subdomain))[0].groupdict()
+				lgr.info(subdomain_details)
+				subdomain = subdomain_details.get('domain')
 
 			domain_details =list(re.finditer(pattern, host))[0].groupdict()
 			lgr.info(domain_details)
@@ -154,11 +176,16 @@ class UI:
 
 						#lgr.info('PERMISSION: %s | CSRF EXEMPT: %s | XFRAME EXEMPT: %s' % (permissions[0], csrf_exempted, xframe_exempted))
 						try:
-							if 'HTTP_REFERER' in request.META.keys():
+							if request.META.get('HTTP_REFERER'):
 								referer = request.META['HTTP_REFERER']
-								referer_name = referer.split("/")[2]
-								lgr.info("Current Site Domain Referer: %s|%s" % (referer, referer_name)) #Referer gives even frame redirecting domains
-								referer_host = RefererHost.objects.using('read').filter(host=referer_name, permissions=permissions[0],status__name='ENABLED')
+								pattern = r'(.*\://)?(?:www.)?((?P<domain>[\w.]+)(:(?P<port>\d+))?).*$'
+
+								referer_details =list(re.finditer(pattern, referer))[0].groupdict()
+								lgr.info(referer_details)
+								referer = referer_details.get('domain')
+
+								lgr.info("Current Site Domain Referer: %s" % (referer)) #Referer gives even frame redirecting domains
+								referer_host = RefererHost.objects.using('read').filter(host=referer, permissions=permissions[0],status__name='ENABLED')
 								if referer_host.exists():
 									csrf_exempted = referer_host[0].csrf_exempted
 									xframe_exempted = referer_host[0].xframe_exempted
