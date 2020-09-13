@@ -111,7 +111,7 @@ class Interface(Wrapper):
 				#ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
 				#ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR')))
 				#ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('HTTP_X_REAL_IP', request.META.get('REMOTE_ADDR'))))
-				ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_ORIGINAL_FORWARDED_FOR', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('HTTP_X_REAL_IP', request.META.get('REMOTE_ADDR')))))
+				ip_address = request.META.get('HTTP_CF_CONNECTING_IP', request.META.get('HTTP_X_ORIGINAL_FORWARDED_FOR', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('HTTP_X_REAL_IP', request.META.get('REMOTE_ADDR')))))
 
 				filename = None 
 				#timestamp = datetime.now().isoformat()
@@ -189,7 +189,7 @@ class Interface(Wrapper):
 			#ip_address = request.META.get('REMOTE_ADDR') 
 			#ip_address = request.META.get('CF-Connecting-IP', request.META.get('REMOTE_ADDR'))
 			#ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR')))
-			ip_address = request.META.get('CF-Connecting-IP', request.META.get('HTTP_X_ORIGINAL_FORWARDED_FOR', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('HTTP_X_REAL_IP', request.META.get('REMOTE_ADDR')))))
+			ip_address = request.META.get('HTTP_CF_CONNECTING_IP', request.META.get('HTTP_X_ORIGINAL_FORWARDED_FOR', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('HTTP_X_REAL_IP', request.META.get('REMOTE_ADDR')))))
 
 			g = GeoIP2()
 			city = g.city(ip_address)
