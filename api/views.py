@@ -184,6 +184,8 @@ class Interface(Wrapper):
 	@csrf_exempt
 	def get_my_host(self, request):
 		try:
+			lgr.info('API Request: %s' % str(request)[:250] )
+
 			lgr.info('Get My IP')
 			payload = {}
 			#ip_address = request.META.get('REMOTE_ADDR') 
