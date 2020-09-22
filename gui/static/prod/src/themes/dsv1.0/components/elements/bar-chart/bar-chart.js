@@ -23,7 +23,9 @@ import{utilsMixin,dataSourceMixin,BaseElement,scaleBand,scaleLinear,select,axisB
             :host{
                 disply: block;
             }
-            `]}renderDefault(){return html`         
+            `]}renderDefault(){return html`  
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+       
             <div id="container">
             <div id="chart"></div>
             </div>`}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(BarChart.is,BarChart);export{barChart as $barChart,barChartCss as $barChartCss,BarChartBase,BarChartStyles};
