@@ -205,81 +205,47 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <div class="price-content animate1">
-        
-            ${this.loading?html`
-            <loader-element></loader-element>
-            `:html`
-            ${!this._rowsOrColumns(this.rows)?html`
+            ${this.getGroupTitles(this.e.details).map((group,index)=>html`
 
-                    ${0==this.groups.length?html`
+                <div class="row">
+                    <div class="col-md-12 group-summary">
+                        <p class="title is-3">${this.getTitle(group)}</p>
+                        <p class="subtitle is-5">${this.getSubTitle(group)}</p>
+                    </div>
+                  </div>
 
-                    <empty-view 
-                    message="${this.e.details.empty_message}"
-                    gateway="${this.e.details.gateway}"
-            
-                    ></empty-view>
-            
-                    `:html`
-
-                    ${this.groups.map((group,groupIndex)=>html`
-                    <div class="row">
-                       <div class="col-md-12 group-summary">
-                           <p class="title is-3">${this.getTitle(group)}</p>
-                           <p class="subtitle is-5">${this.getSubTitle(group)}</p>
-                       </div>
-                   </div>
-
-                   ${0==this.data.length?html`
-
-                   <empty-view 
-                   message="${this.e.details.empty_message}"
-                   gateway="${this.e.details.gateway}"
-           
-                   ></empty-view>
-           
-                   `:html`
-
-                   <div class="columns is-multiline container-group-${groupIndex}">
-                   ${this._computeData(groupIndex).map(item=>html`
-                   <div class="column">
-       
-                   <div  class="ii__product">
-                      <div class="price-title">
-                        <h2>${item.name}</h2>
-                      </div>
-                      <div class="contents">
-                            <div class="price">
-                              <p>${item.count}</p>
-                            </div>
-                            <div class="description">
-                                <p>${item.description}</p>
-
-                             
-                            </div>
-                            <a href="${item.kind}"  target="_blank" class="button is-normal is-fullwidth" service="${item.kind}" @click="${this.launchService}">
-                                <p>BUY NOW</p>
-                            </a>
-                      </div>
-                   </div>
-                 
-               </div>
-                   
-                   `)}
-                   </div>
-                   
-                   
-                   `}   
-
-
+                  <div class="columns is-multiline container-group-${index}">
+                  ${this._getData(group).map(item=>html`
+                  <div class="column">
+    
+                  <div  class="ii__product">
+                    <div class="price-title">
+                      <h2>${item.name}</h2>
+                    </div>
+                    <div class="contents">
+                          <div class="price">
+                            <p>${item.count}</p>
+                          </div>
+                          <div class="description">
+                              <p>${item.description}</p>
+    
+                            
+                          </div>
+                          <a href="${item.kind}"  target="_blank" class="button is-normal is-fullwidth" service="${item.kind}" @click="${this.launchService}">
+                              <p>BUY NOW</p>
+                          </a>
+                    </div>
+                  </div>
+                
+              </div>
                   
-                    
-                    `)}
-                    
-                    
-                    `}
+                  `)}<!-- data loop -->
+              </div>
             
-          
-            `:html``}
-          `}
             
-        </div>`}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{this.shadowRoot.querySelectorAll(".column-group-0");window.addEventListener("scroll",()=>{self.scrollAppear()})})}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}getTitle(text){let[title,subtitle]=text.split("|");return title}getSubTitle(text){let[title,subtitle]=text.split("|");return subtitle}scrollAppear(){const self=this;let contentContainer=self.shadowRoot.querySelector(".price-content"),contentStartPosition=contentContainer.getBoundingClientRect().top,screenPosition=window.innerHeight/2;if(contentStartPosition<screenPosition){contentContainer.classList.add("animate1-appear")}}onLoadData(dsc){super.onLoadData(dsc)}}customElements.define(PriceTable.is,PriceTable);export{priceTable as $priceTable,priceTableCss as $priceTableCss,PriceTableBase,PriceTableStyles};
+            `)}<!-- End of titles loop -->
+     
+
+              
+      
+  `}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{this.shadowRoot.querySelectorAll(".column-group-0");window.addEventListener("scroll",()=>{self.scrollAppear()})})}getGroupTitles(detailsObject){return Object.keys(detailsObject)}_getData(key){return this.e.details[key]}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}getTitle(text){let[title,subtitle]=text.split("|");return title}getSubTitle(text){let[title,subtitle]=text.split("|");return subtitle}scrollAppear(){const self=this;let contentContainer=self.shadowRoot.querySelector(".price-content"),contentStartPosition=contentContainer.getBoundingClientRect().top,screenPosition=window.innerHeight/2;if(contentStartPosition<screenPosition){contentContainer.classList.add("animate1-appear")}}onLoadData(dsc){super.onLoadData(dsc)}}customElements.define(PriceTable.is,PriceTable);export{priceTable as $priceTable,priceTableCss as $priceTableCss,PriceTableBase,PriceTableStyles};
