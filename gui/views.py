@@ -62,7 +62,7 @@ class UI:
 
 		lgr.info('Request Host: %s' % host)
 
-		pattern = r'^(www\.)?((?P<domain>[\w.]+)(:(?P<port>\d+))?)'
+		pattern = r'^(www\.)?((?P<domain>[\w.-]+)(:(?P<port>\d+))?)'
 
 		domain_details =list(re.finditer(pattern, host))[0].groupdict()
 		lgr.info(domain_details)
@@ -106,7 +106,7 @@ class UI:
 				if 'X-SUBDOMAIN' in request.META.keys():
 					subdomain=request.META['X-SUBDOMAIN']
 
-					pattern = r'^(www\.)?((?P<domain>[\w.]+)(:(?P<port>\d+))?)'
+					pattern = r'^(www\.)?((?P<domain>[\w.-]+)(:(?P<port>\d+))?)'
 					subdomain_details =list(re.finditer(pattern, subdomain))[0].groupdict()
 					lgr.info(subdomain_details)
 					subdomain = subdomain_details.get('domain')
@@ -146,7 +146,7 @@ class UI:
 			lgr.info('Sub-domain %s' % subdomain)
 			lgr.info('Request Host: %s' % host)
 
-			pattern = r'^(www\.)?((?P<domain>[\w.]+)(:(?P<port>\d+))?)'
+			pattern = r'^(www\.)?((?P<domain>[\w.-]+)(:(?P<port>\d+))?)'
 			if subdomain:
 				subdomain_details =list(re.finditer(pattern, subdomain))[0].groupdict()
 				lgr.info(subdomain_details)
@@ -178,7 +178,7 @@ class UI:
 						try:
 							if request.META.get('HTTP_REFERER'):
 								referer = request.META['HTTP_REFERER']
-								pattern = r'(.*\://)?(?:www.)?((?P<domain>[\w.]+)(:(?P<port>\d+))?).*$'
+								pattern = r'(.*\://)?(?:www.)?((?P<domain>[\w.-]+)(:(?P<port>\d+))?).*$'
 
 								referer_details =list(re.finditer(pattern, referer))[0].groupdict()
 								lgr.info(referer_details)
