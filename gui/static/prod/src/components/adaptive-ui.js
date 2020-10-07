@@ -3644,48 +3644,164 @@ figure{
               <slot name="body"></slot>
             </div>
         </section>
-    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register$2(SectionX);class SessionX extends adaptiveUiMixin(utilsMixin(FormBase)){static get is(){return"session-x"}render(){return html$3`
+    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}}register$2(SectionX);class SessionX extends adaptiveUiMixin(utilsMixin(FormBase)){static get is(){return"session-x"}static get properties(){return{title:String,details:String}}render(){return html$3`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
         <style>
-        .session-wrapper{
+          body{
+            font-family: 'Lato', sans-serif;
+          }
+          .limiter {
             width: 100%;
-            height: 100vh;
-            background: #ffffff; 
-        }
-        .session-menu{
-            width: inherit;
-            padding: 20px;
-        }
-        .session-body{
-            padding: 20px;
+            margin: 0 auto;
+          }
+          .session-container {
             width: 100%;
+            min-height: 100vh;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            /* margin-top: 170px; */
+            background: #f2f2f2;
         }
-        .session-columns{
-            width: 30%; 
+        .wrap-session {
+          width: 100%;
+          background: #fff;
+          overflow: hidden;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: stretch;
+          flex-direction: row-reverse;
         }
-        .column-title p{
-            font-size: 25px;
-            text-align: center;
+        .session-form {
+          width: 560px;
+          min-height: 100vh;
+          display: block;
+          background-color: #f7f7f7;
+          padding: 173px 55px 55px 55px;
+        }
+        .session-title {
+          width: 100%;
+          display: block;
+          font-family: Poppins-Regular;
+          font-size: 30px;
+          color: #333333;
+          line-height: 1.2;
+          text-align: center;
+          font-family: 'Lato', sans-serif;
+        }
+        .padd {
+          padding-bottom: 43px;
+        }
+        .session-inter {
+          width: calc(100% - 560px);
+          background-color: var(--app-default-color);
+          color:#fff;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+          z-index: 1;
+        }
+        .session-inter::before {
+          content: "";
+          display: block;
+          position: absolute;
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          background: rgba(255,255,255,1);
+        }
+        .image-container{
+          width: 100%;
+          display: flex;
+          flex-direction:column;
+          justify-content: center;
+          height: 100%;
+
+          padding-left: 80px;
+          background-color: var(--app-default-color);
+        }
+        img{
+          max-width:30%;
+          margin-bottom:80px;
+        }
+        .title.is-1 {
+          font-size: 3rem;
+          margin-bottom: 30px!important;
+          color: #fff!important;
+        }
+        h4 {
+          width: 71%!important;
+          color: #fff!important;
+        }
+
+        @media screen and (max-width: 960px){ 
+
+          img{
+            max-width:50%;
+            margin-bottom:50px;
+          }
+
+
+        }
+        @media screen and (max-width: 860px){ 
+
+          .session-form{
+            width:100%;
+          }
+
+
+        }
+        @media screen and (max-width: 545px){ 
+
+          .session-inter{
+            display:none;
+          }
+
+          .session-form{
+            width:100%;
+          }
+
+
         }
         </style>
-        <div class="session-wrapper">
-            <div class="session-body">
-                <div class="session-columns">
-                    <div class="column-title">
-                        <slot name="header"></slot>
-                    </div>
-                    <div class="column-body">
-                        <slot name="body"></slot>
-                    </div>
+        <div class="limiter">
+          <div class="session-container">
+            <div class="wrap-session">
+              <form class="session-form">
+                <span class="session-title padd">
+                  <slot name="header"></slot>
+                  <p class="subtitle is-4">${this.getSubTitle2()}</p>
+                </span>
+
+                <div class="session-inputs">
+                  <slot name="body"></slot>
                 </div>
+              </form>
+
+              <div class="session-inter">
+                <div class="image-container">
+                  <img src="${this.getBgImage()}" alt="session image"/>
+                  <h1 class="title is-1">${this.getTitle()}</h1>
+                  <h4 class="subtitle is-4">${this.getSubTitle()}</h4>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}_computeLogo(gateway){let defaultUrl="https://ui-avatars.com/api/?background=FFFFFF&name="+gateway.name;if(gateway.iconImage){defaultUrl=`/media/${gateway.iconImage}`}if(gateway.logo){defaultUrl=`/media/${gateway.logo}`}return defaultUrl}}register$2(SessionX);class FormRender extends FormRenderBase{constructor(){super()}render(){let form;const af=this.__computeActiveFeed(),formType=af.element,formDetailsString=JSON.stringify(this.feed.getInputVar()[14]);if(formType===FORM_TYPE_FORM){form=html$3`
+    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}getBgImage(){const bg_image=JSON.parse(this.details),bg_image2=JSON.parse(bg_image).bg_image;if(bg_image2!=void 0&&""!=bg_image2){return bg_image2}else{return"https://interintel.co.ke/media/upc_institution_logo/Interintel_Logo_1.png"}}getSubTitle2(){const subTitle=JSON.parse(this.details),subtitle2=JSON.parse(subTitle).logInSubtitle;if(subtitle2!=void 0&&""!=subtitle2){return subtitle2}else{return""}}getSubTitle(){const subTitle=JSON.parse(this.details),subtitle2=JSON.parse(subTitle).subtitle;if(subtitle2!=void 0&&""!=subtitle2){return subtitle2}else{return""}}getTitle(){const title=JSON.parse(this.details),title2=JSON.parse(title).title;if(title2!=void 0&&""!=title2){return title2}else{return""}}_computeLogo(gateway){let defaultUrl="https://ui-avatars.com/api/?background=FFFFFF&name="+gateway.name;if(gateway.iconImage){defaultUrl=`/media/${gateway.iconImage}`}if(gateway.logo){defaultUrl=`/media/${gateway.logo}`}return defaultUrl}}register$2(SessionX);class FormRender extends FormRenderBase{constructor(){super()}render(){let form;const af=this.__computeActiveFeed(),formType=af.element,formDetailsString=JSON.stringify(this.feed.getInputVar()[14]);if(formType===FORM_TYPE_FORM){form=html$3`
        <form-x id="form" .sections=${this.sections} .pos=${this.pos} @pos-change=${this._onPosChange}>
         <p slot="header" class="card-header-title">${this.feed.title}</p> 
         <e-list 
@@ -3714,13 +3830,13 @@ figure{
       `}else if(formType===FORM_TYPE_SESSION_FORM){form=html$3`
         <style>
         .session__title{
-          margin-bottom: 45px;
+          margin-bottom: 22px;
           font-size: 25px;
           font-weight: lighter;
           text-align: center;
         }
         </style>
-        <session-x id="form">
+        <session-x id="form" details="${formDetailsString}" title="${this.feed.title}">
           <p slot="header" class="is-capitalized has-text-weight-light session__title is-size-1">${FormRenderBase.toTitleCase(this.feed.title)}</p> 
           <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed,this.pos)} ></e-list>
         </session-x>
@@ -6920,7 +7036,7 @@ label.active{
         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
         <div class="column">
           <div class="field" style="
-          background: white;">
+          ">
             <div class="control has-icons-right input-mixin input-effect">
               <input class="label-animation" id="#input" @focusin=${this.stickyLabel} @focusout=${this.stickyLabel2}} value="${this.value}" type="${this._type}" placeholder="">
               <label id="label">${this.e.name}</label>
@@ -6955,7 +7071,7 @@ label.active{
           />
           <div class="column">
             <div class="field" style="
-            background: white;">
+            ">
               <div class="control has-icons-right input-mixin input-effect">
                 <input class="label-animation" id="#input" @focusin=${this.stickyLabel} @focusout=${this.stickyLabel2}} type="${this._type}" value="${this.value}"  placeholder="">
                 <label id="label">${this.e.name}</label>
@@ -6992,7 +7108,7 @@ label.active{
         />
         <div class="column">
           <div class="field" style="
-          background: white;">
+          ">
             <div class="control has-icons-right input-mixin input-effect">
               <input class="label-animation" id="#input" @focusin=${this.stickyLabel} @focusout=${this.stickyLabel2}} value="${this.value}"  type="${this._type}" placeholder="">
               <label id="label">${this.e.name}</label>
