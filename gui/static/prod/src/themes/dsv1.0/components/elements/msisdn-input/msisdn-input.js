@@ -90,6 +90,8 @@ import{dataSourceMixin,SerializableElement,css,html}from"../../../../../componen
   /*padding: 0 20px;*/
   background-color: #fff;
   width: 200px;
+  max-height: 350px;
+  overflow: scroll;
   z-index: 1000;
   border: 1px solid #b7b5b5;
   border-radius: 4px;

@@ -9,9 +9,9 @@ import{utilsMixin,SerializableElement,css,html}from"../../../../../components/ad
 }
 .close{
   position: absolute;
-    top: 182px;
-    right: 56px;
-    cursor: pointer;
+  top: 4px;
+  right: 20px;
+  cursor: pointer;
 }
 .is-danger {
   color: rgb(255, 56, 96)!important;
@@ -459,7 +459,7 @@ label {
   </div> 
 
   <!-- start of the timer dropdown -->
-  <div id="timer-dropdown" class="timer-dropdown-container dropdown-containeris-flex is-hidden">
+  <div id="timer-dropdown" class="timer-dropdown-container dropdown-containeris-flex is-hidden" style="position: relative;">
     <div id="timer-section" class="timer-columns is-flex">
       <div class="timer-column">
         <a @click="${this.increaseHour}"><span><fa-icon class="fas fa-angle-up"></fa-icon></span></a>
