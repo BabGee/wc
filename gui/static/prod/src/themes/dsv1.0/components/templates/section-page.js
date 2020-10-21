@@ -712,7 +712,7 @@ import{html$1 as html,Polymer,LitElement,css,html as html$1,serviceCallMixin,Log
   padding: 0;
   background-color: #fff;
   border-radius: 6px;
-  overflow: auto;
+  /*overflow: auto;*/
 }
 .modal-dialogue2{
   /* display: flex;

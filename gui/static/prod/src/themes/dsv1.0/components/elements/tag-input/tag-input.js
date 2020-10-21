@@ -8,13 +8,12 @@ import{dataSourceMixin,utilsMixin,SerializableElement,css,html}from"../../../../
   display:none;
 }
 .placeholder{
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: normal;
   font-family: "Work Sans", sans-serif;
-  color: rgb(74, 74, 74);
-
+  color: rgb(1, 50, 67);
+  letter-spacing: 1px;
 }
-
 .is-danger {
   color: rgb(255, 56, 96)!important;
   border-width: 2px!important;
@@ -73,7 +72,7 @@ import{dataSourceMixin,utilsMixin,SerializableElement,css,html}from"../../../../
 .content-name{
     position: absolute;
     bottom: 14px;
-    left: 10px;
+    left: 25px;
     transition: all .3s ease;
 }
 .lbl.active{
@@ -83,7 +82,7 @@ import{dataSourceMixin,utilsMixin,SerializableElement,css,html}from"../../../../
     color: var(--app-default-color);
     font-size: 70%;
     position: relative;
-    left: -9px;
+    left: -25px;
 }
 .lbl-2.active
 /* .lbl.active + .label-name .content-name, .lbl.active + .label-name .content-name{

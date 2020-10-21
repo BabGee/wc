@@ -6,12 +6,13 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
 }
 .module .module-inner{
     position: relative;
-    max-width: 90rem;
+    max-width: 80rem;
     margin: 0 auto;
     padding-left: calc(5 * 1vw);
     padding-right: calc(5 * 1vw);
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    background-color: var(--app-secondary-color);
 }
 .module .module-wrap {
     max-width: 66.75em;
@@ -19,7 +20,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
 }
 .section-box{
     width: 100%;
-    background-color: var(--app-primary-color);
+    background-color: var(--app-default-color);
 }
 .box{
     background: #fff;

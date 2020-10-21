@@ -25,7 +25,6 @@ p{
     color: var(--app-default-color)!important;
     font-weight: 600!important;
     line-height: 1.125!important;
-    font-family: Segoe UI!important;
 }
 
 .info-btn{
