@@ -1,4 +1,61 @@
 import{SerializableElement,utilsMixin,css,html}from"../../../../../components/adaptive-ui.js";const TermsConditionsBase=class extends utilsMixin(SerializableElement){static get is(){return"terms-conditions"}constructor(){super();this.checked=!1}static get properties(){return{}}getInput(){return this.qs("input")}getName(){return this.e.formName}validate(){if(this.e.required&&!this.getValue()){return new this.Validation(!1,"you must accept the ")}else{return new this.Validation(!0,"accepted")}}valid(){}invalid(){}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);var self=this;self.title=TermsConditionsBase.toTitleCase(pElement.name);self.name=pElement.name}};var termsConditions={TermsConditionsBase:TermsConditionsBase};const TermsConditionsStyles=css`
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: 178px;
+}
+
+
+.close:hover,
+.close:focus {
+  color: var(--app-secondary-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dialog-header{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.popup-image{
+    display:flex;
+    justify-content:center;
+}
+.content{
+    max-height: 375px;
+    overflow: auto;
+}
+img{
+    width:15%;
+}
 a{
     color: var(--app-secondary-color)!important;
     cursor: pointer;
@@ -78,15 +135,46 @@ span{
 .checkbox input[type="checkbox"]:focus + label::before {
     outline: rgb(59, 153, 252) auto 5px;
 }
+
+@media screen and (max-width: 930px) {
+    .close {
+        right: 100px;
+      }
+}
+@media screen and (max-width: 594px) {
+    .close {
+        right: 80px;
+      }
+}
 `;var termsConditionsCss={TermsConditionsStyles:TermsConditionsStyles};class TermsConditions extends TermsConditionsBase{renderDefault(){return html`
     <div class="column">
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="dialog-header">
+          <div class="popup-image">
+            <img src="${this.e.details.logo}" alt="brand logo" />
+          </div>
+          <span @click="${this.closeModal}"class="close">&times;</span>
+        </div>
+        <div class="dialog-body">
+          <h2>Terms and Conditions</h2>
+
+          <div id="content" class="content">
+          </div>
+
+        
+        </div>
+      </div>
+  
+  </div>
+  
       <div class="checkbox">
           <input type="checkbox" id="checkbox_1">
-          <label  for="checkbox_1">${this.name}<span><a href="${this.e.details.path}" target="_blank"> terms and conditions</span></label>
+          <label  for="checkbox_1">${this.name}<span><a  @click="${this.showTermsModal}"> terms and conditions</span></label>
       </div>
     </div>
 `}static get properties(){return{rounded:Boolean}}static get styles(){return[TermsConditionsStyles,css`
         :host {
           display: block;
         }
-      `]}constructor(){super()}getInput(){return this.qs("input")}getValue(){return this.qs("#checkbox_1").checked}invalid(){const label=this.qs("label");label.classList.add("error")}valid(){const label=this.qs("label");label.classList.remove("error")}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(TermsConditions.is,TermsConditions);export{termsConditions as $termsConditions,termsConditionsCss as $termsConditionsCss,TermsConditionsBase,TermsConditionsStyles};
+      `]}constructor(){super()}showTermsModal(){const modal=this.shadowRoot.querySelector("#myModal");modal.style.display="block";this.getTerms()}closeModal(){const modal=this.shadowRoot.querySelector("#myModal");modal.style.display="none"}getTerms(){const content=this.shadowRoot.querySelector("#content");if(null!=this.e.defaultValue||this.e.defaultValue!=void 0){content.innerHTML=this.e.defaultValue}}getInput(){return this.qs("input")}getValue(){return this.qs("#checkbox_1").checked}invalid(){const label=this.qs("label");label.classList.add("error")}valid(){const label=this.qs("label");label.classList.remove("error")}firstUpdated(changedProperties){super.firstUpdated(changedProperties);console.log("default",this.e.details.logo)}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(TermsConditions.is,TermsConditions);export{termsConditions as $termsConditions,termsConditionsCss as $termsConditionsCss,TermsConditionsBase,TermsConditionsStyles};
