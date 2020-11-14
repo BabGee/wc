@@ -52,6 +52,118 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.75) 9px 11px 49px -21px;
 }
+
+@media screen and (min-width: 280px) and (max-width: 320px){
+  .table-header-buttons .search_box {
+    width: 164px!important;
+  }
+  .search_field input{
+    width: 88px!important;
+  }
+  #search_area{
+    display: block!important;
+  }
+  .table-header-buttons .search_box .dropdown::before{
+      right: 4px!important;
+  }
+  .dl-buttons{
+      top: 12px;
+      width: 86%;
+      margin: 0!important;
+      display: block!important;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 359px){
+  .table-header-buttons .search_box {
+    width: 198px!important;
+  }
+  .search_field input{
+    width: 124px!important;
+  }
+  #search_area{
+    display: block!important;
+  }
+  .table-header-buttons .search_box .dropdown::before{
+      right: 2px!important;
+  }
+  .dl-buttons{
+      top: 12px;
+      width: 86%;
+      margin: 0!important;
+      display: block!important;
+  }
+}
+
+@media screen and (min-width: 360px) and (max-width: 406px){
+  .table-header-buttons .search_box {
+    width: 241px!important;
+  }
+  .search_field input{
+    width: 168px!important;
+  }
+  #search_area{
+    display: block!important;
+  }
+  .table-header-buttons .search_box .dropdown::before{
+      right: 2px!important;
+  }
+  .dl-buttons{
+      top: 12px;
+      width: 88%;
+      margin: 0!important;
+      display: block!important;
+  }
+}
+
+@media screen and (min-width: 407px) and (max-width: 480px){
+  .table-header-buttons .search_box {
+    width: 175px!important;
+  }
+  .search_field input{
+    width: 95px!important;
+  }
+  .table-header-buttons .search_box .dropdown::before{
+      right: 7px!important;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 540px){
+  .table-header-buttons .search_box {
+    width: 250px!important;
+  }
+  .search_field input{
+    width: 150px!important;
+  }
+  .table-header-buttons .search_box .dropdown::before{
+      right: 10px!important;
+  }
+}
+
+@media screen and (min-width: 541px) and (max-width: 570px){
+  .table-header-buttons .search_box {
+    width: 250px!important;
+  }
+  .search_field input{
+    width: 150px!important;
+  }
+  .table-header-buttons .search_box .dropdown::before{
+      right: 10px!important;
+  }
+}
+
+@media screen and (min-width: 571px) and (max-width: 606px){
+  .table-header-buttons .search_box {
+    width: 303px!important;
+  }
+  .search_field input{
+    width: 210px!important;
+  }
+  .table-header-buttons .search_box .dropdown::before{
+      right: 10px!important;
+  }
+}
+
 #search_area{
     justify-content: center!important;
     align-items: center!important;
@@ -1030,8 +1142,8 @@ border-bottom: 0;
               <input id="q" type="text" name="serach" class="input" placeholder="Search..." value="${this.searchText}"/>
             </div>
           </div>
-          <button class="button is-size-7 is-rounded" style="height: 23px; background-color:var(--app-default-color); color: #fff; padding: 8px .75em;" type="submit" @click="${this._search}">Search</button>
-          <button class="button is-size-7 is-rounded" style="height: 23px; background-color:var(--app-secondary-color);margin-left: 3px; color: #fff; padding: 8px .75em;" type="button" @click="${this._searchReset}">Clear</button>
+          <button class="button is-size-7 is-rounded dl-buttons" style="height: 23px; background-color:var(--app-default-color); color: #fff; padding: 8px .75em;" type="submit" @click="${this._search}">Search</button>
+          <button class="button is-size-7 is-rounded dl-buttons" style="height: 23px; background-color:var(--app-secondary-color);margin-left: 3px; color: #fff; padding: 8px .75em;" type="button" @click="${this._searchReset}">Clear</button>
         </div>
         
         
