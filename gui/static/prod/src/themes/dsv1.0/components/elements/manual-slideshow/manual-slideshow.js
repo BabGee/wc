@@ -180,6 +180,66 @@ img{
 
 }
 
+
+@media screen and (max-width: 360px) {
+  .text {
+    font-size: 12px;
+    
+    right: 50px;
+    max-width: 50%;
+    bottom: 388px;
+    max-height:124px;
+    overflow-y:auto;
+
+ 
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+    }
+
+}
+
+@media screen and (max-width: 414px) {
+  .text {
+    font-size: 12px;
+    
+    right: 50px;
+    max-width: 50%;
+    bottom: 388px;
+    max-height:124px;
+    overflow-y:auto;
+
+ 
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+    }
+
+}
+@media screen and (max-width: 540px) {
+  .text {
+    font-size: 14px;
+    
+    right: 50px;
+    max-width: 50%;
+    bottom: 388px;
+    max-height:124px;
+    overflow-y:auto;
+
+ 
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+    }
+
+}
+
 `;var manualSlideshowCss={ManualSlideShowStyles:ManualSlideShowStyles};class ManualSlideshow extends ManualSlideshowBase{static get styles(){return[ManualSlideShowStyles,css`
             :host {
               display: block;

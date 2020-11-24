@@ -29,7 +29,7 @@ import{SerializableElement,utilsMixin,css,html}from"../../../../../components/ad
   font-size: 28px;
   font-weight: bold;
   position: absolute;
-  right: 178px;
+  right: 228px;
 }
 
 
@@ -152,7 +152,7 @@ span{
       <div class="modal-content">
         <div class="dialog-header">
           <div class="popup-image">
-            <img src="${this.e.details.logo}" alt="brand logo" />
+            <img src="${this.getLogo()}" alt="brand logo" />
           </div>
           <span @click="${this.closeModal}"class="close">&times;</span>
         </div>
@@ -177,4 +177,4 @@ span{
         :host {
           display: block;
         }
-      `]}constructor(){super()}showTermsModal(){const modal=this.shadowRoot.querySelector("#myModal");modal.style.display="block";this.getTerms()}closeModal(){const modal=this.shadowRoot.querySelector("#myModal");modal.style.display="none"}getTerms(){const content=this.shadowRoot.querySelector("#content");if(null!=this.e.defaultValue||this.e.defaultValue!=void 0){content.innerHTML=this.e.defaultValue}}getInput(){return this.qs("input")}getValue(){return this.qs("#checkbox_1").checked}invalid(){const label=this.qs("label");label.classList.add("error")}valid(){const label=this.qs("label");label.classList.remove("error")}firstUpdated(changedProperties){super.firstUpdated(changedProperties);console.log("default",this.e.details.logo)}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(TermsConditions.is,TermsConditions);export{termsConditions as $termsConditions,termsConditionsCss as $termsConditionsCss,TermsConditionsBase,TermsConditionsStyles};
+      `]}constructor(){super()}showTermsModal(){const modal=this.shadowRoot.querySelector("#myModal");modal.style.display="block";this.getTerms()}closeModal(){const modal=this.shadowRoot.querySelector("#myModal");modal.style.display="none"}getTerms(){const content=this.shadowRoot.querySelector("#content");if(null!=this.e.defaultValue&&this.e.defaultValue!=void 0&&""!=this.e.defaultValue){if(null!=this.e.kind&&this.e.kind!=void 0&&""!=this.e.kind){let firstHalfTerms=this.e.defaultValue,secondHalfTerms=this.e.kind,fullTerms=firstHalfTerms.concat(secondHalfTerms);content.innerHTML=fullTerms}else{content.innerHTML=this.e.defaultValue}}else{content.innerHTML="<empty-view message='Terms and conditions is not up yet. Do check later'></empty-view>"}}getLogo(){const logo=this.e.details.logo;if(null!=logo&&logo!=void 0&&""!=logo){return logo}else{return"https://interintel.co.ke/media/upc_institution_logo/Interintel_Logo_1.png"}}getInput(){return this.qs("input")}getValue(){return this.qs("#checkbox_1").checked}invalid(){const label=this.qs("label");label.classList.add("error")}valid(){const label=this.qs("label");label.classList.remove("error")}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader)}}window.customElements.define(TermsConditions.is,TermsConditions);export{termsConditions as $termsConditions,termsConditionsCss as $termsConditionsCss,TermsConditionsBase,TermsConditionsStyles};
