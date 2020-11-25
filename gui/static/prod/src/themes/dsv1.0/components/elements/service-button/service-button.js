@@ -46,10 +46,84 @@ import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-u
 .content-text{
     margin-left: 20px;
 }
+.content-text h2{
+    text-transform: capitalize;
+}
 .content-text p{
     font-size: 10px;
     text-transform: initial;
 }
+
+@media screen and (max-width: 1023px) {
+    .action-icons, .dropdown-content{
+        position: absolute;
+        right: 0;
+    }
+    .dropdown-content{
+        top: 30px;
+    }
+}
+
+@media screen and (min-width: 280px) and (max-width: 320px){
+    .service-button-container .content-area {
+        padding: 10px;
+    }
+    .iron-icon{
+        width: 20px;
+        height: 20px;
+    }
+    .content-text{
+        margin-left: 10px;
+    }
+    .content-text h2{
+        font-size: 10px!important;
+    }
+    .icon-holder {
+        padding: 5%;
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width: 359px){
+    .service-button-container .content-area {
+        padding: 10px;
+    }
+    .content-text{
+        margin-left: 10px;
+    }
+    .icon-holder {
+        padding: 5%;
+    }
+    .content-text h2{
+        font-size: 13px!important;
+    }
+}
+@media screen and (min-width: 360px) and (max-width: 406px){
+    .service-button-container .content-area {
+        padding: 10px;
+    }
+    .content-text{
+        margin-left: 10px;
+    }
+    .icon-holder {
+        padding: 5%;
+    }
+    .content-text h2{
+        font-size: 15px!important;
+    }
+}
+@media screen and (min-width: 407px) and (max-width: 480px){
+    .service-button-container .content-area {
+        padding: 10px;
+    }
+    .content-text{
+        margin-left: 10px;
+    }
+    .icon-holder {
+        padding: 5%;
+        font-size: 12px!important;
+    }
+}
+  
 `;var serviceButtonCss={ServiceButtonStyles:ServiceButtonStyles};class ServiceButton extends ServiceButtonBase{static get styles(){return[ServiceButtonStyles,css`
             :host {
                 display: block;
@@ -59,7 +133,7 @@ import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-u
     <div class="column service-button-container">
         <div class="content-area is-flex">
             <div class="icon-holder">
-                <iron-icon style="width:28px !important;height: 28px !important;"
+                <iron-icon class="iron-icon" style="width:28px !important;height: 28px !important;"
                 icon="${this.e.icon}"></iron-icon>
             </div>
             <div class="content-text">
