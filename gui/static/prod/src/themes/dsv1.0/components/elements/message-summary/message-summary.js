@@ -27,20 +27,17 @@ import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-u
     padding-right: 16px;
 }
 .text{
-    position: absolute;
-    top: 30%;
-    left: 10%;
-    max-height: 260px;
-   
-
-    background-color: #CECECE;
+        max-height: 218px;
+    background-color: rgb(206, 206, 206);
     padding: 4px;
     text-align: end;
-    width: 10%;
-    overflow-x: hidden;
-    line-break: auto;
+    width: 40%;
     overflow-y: auto;
+    line-break: auto;
     border-radius: 8px;
+    position: relative;
+    margin-left: 80px;
+    margin-top: 83px;
     
     
 }
@@ -87,18 +84,103 @@ h1{
     font-weight: 600!important;
 }
 
-@media screen and (max-width:1294px) {
- 
-    .text{
-        position: absolute;
-        top: 30%;
-        left: 11%;
-        
-    
-        
-        
+@media screen and (max-width:1456px) {
+    .image-container {
+        width:68%;
     }
 }
+@media screen and (max-width:1413px) {
+    .image-container {
+        width:70%;
+    }
+}
+
+@media screen and (max-width:1360px) {
+    .image-container {
+        width:72%;
+    }
+}
+@media screen and (max-width:1316px) {
+    .image-container {
+        width:76%;
+    }
+    .text {
+        margin-left: 94px;
+    }
+}
+
+
+@media screen and (max-width:1264px) {
+ 
+    .image-container {
+        width:79%;
+    }
+}
+@media screen and (max-width:1212px) {
+ 
+    .image-container {
+        width:83%;
+    }
+}
+@media screen and (max-width:1165px) {
+ 
+    .image-container {
+        width:86%;
+    }
+}
+
+@media screen and (max-width:1134px) {
+ 
+    .image-container {
+        width:89%;
+    }
+}
+
+@media screen and (max-width:1096px) {
+
+    .columns {
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        display: flex !important;
+    }
+    .message-container {
+        width:70%;
+        margin-left:-4%;
+    }
+ 
+    .image-container {
+      background-image: url("src/themes/dsv1.0/img/isometic/phone-landscape.png");
+      width:100%;
+    }
+
+    .text {
+        margin-left: 284px;
+        max-height:400px;
+        overflow-y:auto;
+
+    }
+
+    .content{
+        border-top: 1.5px solid rgb(221, 208, 208);
+        border-left: none;
+        padding-top:8px;
+
+    }
+    .content h1 { 
+        text-align: center !important;
+
+    }
+
+    h1 {
+        font-size: 24px !important;
+        font-weight: 500 !important;
+        padding-left: 0px !important;
+    }
+
+
+}
+
 
 @media screen and (max-width:1040px) {
     .group {
@@ -106,30 +188,27 @@ h1{
         flex-direction: column!important;
         
     }
-    .text{
-        position: absolute;
-        top: 30%;
-        max-height: 250px;
-        overflow-y: auto;
-        overflow-x:hidden;
+    .text {
+        margin-left: 268px;
+        max-height:400px;
+        overflow-y:auto;
+        margin-top: 97px;
 
-        width: 20%;
-        left: 5%;
-    
-        
-        
     }
 }
 @media screen and (max-width:946px) {
     
     .text{
-        width: 13%;
-        max-height: 176px;
-
-        width: 18%;
-        left: 8%;
+        width: 40%;
+        max-height: 110px;
 
         overflow-y: auto;
+
+        margin-left: 161px;
+        overflow-y: auto;
+        margin-top: 97px;
+        text-align: center;
+        margin-top:161px;
     
         
         
@@ -137,68 +216,38 @@ h1{
 }
 @media screen and (max-width:852px) {
     
-    .text{
-        left: 12%;
-        max-height: 176px;
     
-        
-        
-    }
 }
 @media screen and (max-width:756px) {
     
-    .text{
-        width: 21%;
-        left: 11%;
-        overflow-y: hidden;
-    
-        
-        
-    }
     .column {
         width:100%;
         margin-left:8px;
         margin-right:8px;
     }
 }
+
+@media screen and (max-width:732px) {
+    
+   
+      .message-container {
+        width:90%;
+    }
+  
+}
 @media screen and (max-width:675px) {
     
-    .text{
-        
-        left: 14%;
-        overflow-y:auto
-        top: 24%;
-       
     
-        
-        
-    }
 }
 
-@media screen and (max-width:580px) {
-    
-    .text{
-        
-        top: 26%;
-        left: 18%;
-        overflow-y: auto;
-       
-    
-        
-        
+@media screen and (max-width:595px) {
+    .message-container {
+        width:115%;
     }
+   
 }
 @media screen and (max-width:512px) {
-    
-    .text{
-        
-        width: 28%;
-        left: 15%;
-       
-    
-        
-        
-    }
+  
 }
 
 
@@ -209,25 +258,47 @@ h1{
               display: block;
             }
           `]}render(){return html`
+
+<style>
+        .message-container{
+          width: 36%;
+        min-height: 400px;
+        position: relative;
+        margin-left:8%;
+        
+        }
+        .image-container{
+            width:66%;
+            min-height:400px;
+            align-items: center;
+            display: flex;
+            position: absolute;
+            
+            /* The image used */
+            background-image: url("src/themes/dsv1.0/img/isometic/message_screenshot.png");
+            background-position:0px;
+            background-size:cover;
+            background-repeat:no-repeat;
+            
+            
+        
+        }
+        </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
         
 
     <section>
     
         <div class="columns has-text-weight-bold is-size-6">
+            <div class="message-container">
+              <div class="image-container"></div>
+              <div class="text">
 
-            <div class="image-container">
-                <div class="screen-shot">
-                    <img src="src/themes/dsv1.0/img/isometic/message_screenshot.png" />
-                
-                </div>
-                <div class="text">
-
-                    <p id="phoneText" class="text-message">Your Message Comes Here</p>
-                
-                </div>
-            
+                      <p id="phoneText" class="text-message">Your Message Comes Here</p>
+                  
+              </div>
             </div>
+            
             <div class="content">
             ${this.getGroupTitles(JSON.parse(this.e.defaultValue)).map(groupTitle=>html`
                 <div class="group-title">

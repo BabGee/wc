@@ -3676,6 +3676,8 @@ body{
   .limiter {
     width: 100%;
     margin: 0 auto;
+    top: 11px;
+    position: relative;
   }
   .session-container {
     width: 100%;
@@ -3689,6 +3691,17 @@ body{
     justify-content: center;
     align-items: center;
     background: #f2f2f2;
+}
+.overlay{
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  position: absolute;
+  background: var(--app-default-color);
+  opacity: .7;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 .wrap-session {
   width: 100%;
@@ -3704,7 +3717,7 @@ body{
   flex-direction: row-reverse;
 }
 .session-form {
-  width: 560px;
+  width: 45%;
   min-height: 100vh;
   display: block;
   background-color: #f7f7f7;
@@ -3724,7 +3737,7 @@ body{
   padding-bottom: 43px;
 }
 .session-inter {
-  width: calc(100% - 560px);
+  width: 55%;
   background-color: var(--app-default-color);
   color:#fff;
   background-repeat: no-repeat;
@@ -3768,7 +3781,7 @@ h4 {
   color: #fff!important;
 }
 
-@media screen and (max-width: 960px){ 
+@media screen and (max-width: 960px){
 
   img{
     max-width:50%!important;
@@ -3777,7 +3790,7 @@ h4 {
 
 
 }
-@media screen and (max-width: 860px){ 
+@media screen and (max-width: 860px){
 
   .session-form{
     width:100%;
@@ -3785,7 +3798,7 @@ h4 {
 
 
 }
-@media screen and (max-width: 545px){ 
+@media screen and (max-width: 545px){
 
   .session-inter{
     display:none;
@@ -3821,18 +3834,18 @@ h4 {
                   <slot name="body"></slot>
                 </div>
               </form>
-
               <div class="session-inter">
-                <div class="image-container">
-                  <img src="${this.getBgImage()}" alt="session image"/>
-                  <h1 class="title is-1">${this.getTitle()}</h1>
-                  <h4 class="subtitle is-4">${this.getSubTitle()}</h4>
+                <div class="image-container" style="background-position: bottom center;background: url(${this.getBgImage()}) no-repeat; background-size: cover; max-height: 100%; max-width: 100%;">
+                  <div class="overlay"></div>
+                  <img src="${this.getLogo()}" alt="session image" style="z-index: 9999;"/>
+                  <h1 class="title is-1" style="z-index: 9999;">${this.getTitle()}</h1>
+                  <h4 class="subtitle is-4" style="z-index: 9999;">${this.getSubTitle()}</h4>
                 </div>
               </div>
             </div>
           </div>
         </div>
-    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}getBgImage(){const bg_image=JSON.parse(this.details).bg_image;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://interintel.co.ke/media/upc_institution_logo/Interintel_Logo_1.png"}}getSubTitle2(){const subTitle=JSON.parse(this.details).logInSubtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}getSubTitle(){const subTitle=JSON.parse(this.details).subtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}getTitle(){const title=JSON.parse(this.details).title;if(title!=void 0&&""!=title){return title}else{return""}}_computeLogo(gateway){let defaultUrl="https://ui-avatars.com/api/?background=FFFFFF&name="+gateway.name;if(gateway.iconImage){defaultUrl=`/media/${gateway.iconImage}`}if(gateway.logo){defaultUrl=`/media/${gateway.logo}`}return defaultUrl}}register$2(SessionX);class FormRender extends FormRenderBase{constructor(){super()}render(){let form;const af=this.__computeActiveFeed(),formType=af.element,formDetailsString=JSON.stringify(this.feed.getInputVar()[14]);if(formType===FORM_TYPE_FORM){form=html$3`
+    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}getLogo(){const bg_image=JSON.parse(this.details).logo;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://nenasasa.com/media/administration_gateway_logo/Nena_sasa_background__white.png"}}getBgImage(){const bg_image=JSON.parse(this.details).bg_image;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://images.unsplash.com/photo-1605201100110-1f07883d2882?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"}}getSubTitle2(){const subTitle=JSON.parse(this.details).logInSubtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}getSubTitle(){const subTitle=JSON.parse(this.details).subtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}getTitle(){const title=JSON.parse(this.details).title;if(title!=void 0&&""!=title){return title}else{return""}}_computeLogo(gateway){let defaultUrl="https://ui-avatars.com/api/?background=FFFFFF&name="+gateway.name;if(gateway.iconImage){defaultUrl=`/media/${gateway.iconImage}`}if(gateway.logo){defaultUrl=`/media/${gateway.logo}`}return defaultUrl}}register$2(SessionX);class FormRender extends FormRenderBase{constructor(){super()}render(){let form;const af=this.__computeActiveFeed(),formType=af.element,formDetailsString=JSON.stringify(this.feed.getInputVar()[14]);if(formType===FORM_TYPE_FORM){form=html$3`
        <form-x id="form" .sections=${this.sections} .pos=${this.pos} @pos-change=${this._onPosChange}>
         <p slot="header" class="card-header-title">${this.feed.title}</p> 
         <e-list 
