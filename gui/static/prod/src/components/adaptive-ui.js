@@ -3673,6 +3673,12 @@ to {opacity: 1; transform:translateY(0px);}
 body{
     font-family: 'Lato', sans-serif;
   }
+.progress.is-primary:indeterminate {
+    background-image: linear-gradient(to right,var(--app-default-color) 30%,#dbdbdb 30%)!important;
+ }
+ .pro-container{
+   margin:16px;
+ }
   .limiter {
     width: 100%;
     margin: 0 auto;
@@ -3772,7 +3778,7 @@ img{
   margin-bottom:80px!important;
 }
 .title.is-1 {
-  font-size: 3rem;
+  font-size: 4rem;
   margin-bottom: 30px!important;
   color: #fff!important;
 }
@@ -3810,7 +3816,7 @@ h4 {
 
 
 }
-`;var sessionXCss={SessionXStyles:SessionXStyles};class SessionX extends adaptiveUiMixin(utilsMixin(FormBase)){static get is(){return"session-x"}static get properties(){return{title:String,details:String}}static get styles(){return[SessionXStyles,css` 
+`;var sessionXCss={SessionXStyles:SessionXStyles};class SessionX extends adaptiveUiMixin(utilsMixin(FormBase)){static get is(){return"session-x"}static get properties(){return{title:String,details:String,loading:Boolean}}constructor(){super();this.pos=0;this.sections=[]}static get styles(){return[SessionXStyles,css` 
         :host{
             display: block;
         }
@@ -3819,17 +3825,21 @@ h4 {
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
         <style>
-          
         </style>
         <div class="limiter">
           <div class="session-container">
             <div class="wrap-session">
               <form class="session-form">
                 <span class="session-title padd">
+                <adaptive-ui-icon style="float: left;position:relative;top: 30px; cursor:pointer;"
+                   icon="icons:arrow-back"
+                   @click="${this._back}"></adaptive-ui-icon>
                   <slot name="header"></slot>
                   <p class="subtitle is-4">${this.getSubTitle2()}</p>
                 </span>
-
+                ${this.checkloading()?html$3`
+                <div class="pro-container"><progress class="progress is-small is-primary" max="100">15%</progress></div>
+                `:html$3``}
                 <div class="session-inputs">
                   <slot name="body"></slot>
                 </div>
@@ -3837,7 +3847,8 @@ h4 {
               <div class="session-inter">
                 <div class="image-container" style="background-position: bottom center;background: url(${this.getBgImage()}) no-repeat; background-size: cover; max-height: 100%; max-width: 100%;">
                   <div class="overlay"></div>
-                  <img src="${this.getLogo()}" alt="session image" style="z-index: 9999;"/>
+                  <!-- hidding logo for now for simple desgin -->
+                  <img src="${this.getLogo()}" alt="session image" style="z-index: 9999; display:none;"/>
                   <h1 class="title is-1" style="z-index: 9999;">${this.getTitle()}</h1>
                   <h4 class="subtitle is-4" style="z-index: 9999;">${this.getSubTitle()}</h4>
                 </div>
@@ -3845,7 +3856,7 @@ h4 {
             </div>
           </div>
         </div>
-    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}getLogo(){const bg_image=JSON.parse(this.details).logo;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://nenasasa.com/media/administration_gateway_logo/Nena_sasa_background__white.png"}}getBgImage(){const bg_image=JSON.parse(this.details).bg_image;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://images.unsplash.com/photo-1605201100110-1f07883d2882?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"}}getSubTitle2(){const subTitle=JSON.parse(this.details).logInSubtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}getSubTitle(){const subTitle=JSON.parse(this.details).subtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}getTitle(){const title=JSON.parse(this.details).title;if(title!=void 0&&""!=title){return title}else{return""}}_computeLogo(gateway){let defaultUrl="https://ui-avatars.com/api/?background=FFFFFF&name="+gateway.name;if(gateway.iconImage){defaultUrl=`/media/${gateway.iconImage}`}if(gateway.logo){defaultUrl=`/media/${gateway.logo}`}return defaultUrl}}register$2(SessionX);class FormRender extends FormRenderBase{constructor(){super()}render(){let form;const af=this.__computeActiveFeed(),formType=af.element,formDetailsString=JSON.stringify(this.feed.getInputVar()[14]);if(formType===FORM_TYPE_FORM){form=html$3`
+    `}getForm(){return this.shadowRoot.querySelector("slot[name='body']").assignedNodes()[0]}_back(){this.pos-=1;this._notifyPosChange(this.pos)}_hideB(p){return 0===p}_notifyPosChange(newPos){this.dispatchEvent(new CustomEvent("pos-change",{bubbles:!0,composed:!0,detail:{pos:newPos}}))}getLogo(){const bg_image=JSON.parse(this.details).logo;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://nenasasa.com/media/administration_gateway_logo/Nena_sasa_background__white.png"}}getBgImage(){const bg_image=JSON.parse(this.details).bg_image;if(bg_image!=void 0&&""!=bg_image){return bg_image}else{return"https://images.unsplash.com/photo-1605201100110-1f07883d2882?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"}}getSubTitle2(){const subTitle=JSON.parse(this.details).logInSubtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}getSubTitle(){const subTitle=JSON.parse(this.details).subtitle;if(subTitle!=void 0&&""!=subTitle){return subTitle}else{return""}}getTitle(){const title=JSON.parse(this.details).title;if(title!=void 0&&""!=title){return title}else{return""}}checkloading(){if("true"===this.loading){return!0}else{return!1}}_computeLogo(gateway){let defaultUrl="https://ui-avatars.com/api/?background=FFFFFF&name="+gateway.name;if(gateway.iconImage){defaultUrl=`/media/${gateway.iconImage}`}if(gateway.logo){defaultUrl=`/media/${gateway.logo}`}return defaultUrl}}register$2(SessionX);class FormRender extends FormRenderBase{constructor(){super()}render(){let form;const af=this.__computeActiveFeed(),formType=af.element,formDetailsString=JSON.stringify(this.feed.getInputVar()[14]);if(formType===FORM_TYPE_FORM){form=html$3`
        <form-x id="form" .sections=${this.sections} .pos=${this.pos} @pos-change=${this._onPosChange}>
         <p slot="header" class="card-header-title">${this.feed.title}</p> 
         <e-list 
@@ -3880,7 +3891,7 @@ h4 {
           text-align: center;
         }
         </style>
-        <session-x id="form" details="${formDetailsString}" title="${this.feed.title}">
+        <session-x id="form" details="${formDetailsString}" title="${this.feed.title}" loading="${this.loading}" sections=${this.sections} .pos=${this.pos} @pos-change=${this._onPosChange}>
           <p slot="header" class="is-capitalized has-text-weight-light session__title is-size-1">${FormRenderBase.toTitleCase(this.feed.title)}</p> 
           <e-list slot="body" .fr=${this} .oe=${this.activeFeedOe(this.feed,this.pos)} ></e-list>
         </session-x>
@@ -3914,8 +3925,9 @@ h4 {
    
     
     </style>
-    ${this.loading?html$3`<span>Processing...</span>
-    <progress class="progress is-small is-primary" max="100">15%</progress>
+    ${this.loading?html$3`
+     ${formType!=FORM_TYPE_SESSION_FORM?html$3`<span>Processing...</span> 
+             <progress class="progress is-small is-primary" max="100">15%</progress>`:html$3``}
     `:html$3``}
      ${form}
      `}}register$2(FormRender);const ACTION_SERVICE_CALL="1",ACTION_LINK_WINDOW="2",ACTION_SUBMIT="3",buttonMixin=BaseClass=>class extends BaseClass{renderDefault(){return html$3`
