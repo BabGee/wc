@@ -3833,6 +3833,7 @@ h4 {
                 <span class="session-title padd">
                 <adaptive-ui-icon style="float: left;position:relative;top: 30px; cursor:pointer;"
                    icon="icons:arrow-back"
+                   ?hidden="${this._hideB(this.pos,this.sections)}"
                    @click="${this._back}"></adaptive-ui-icon>
                   <slot name="header"></slot>
                   <p class="subtitle is-4">${this.getSubTitle2()}</p>
@@ -3957,7 +3958,7 @@ h4 {
       `}
     </div>
 
-`}static get properties(){return{icon:Boolean,rounded:Boolean,large:Boolean,size:String,color:String}}constructor(){super();this.icon=!1;this.rounded=!1;this.large=!1;this.size=32;this.color="#0040bf";this.type="";this.addEventListener("click",this._onAction.bind(this))}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.icon=this.e.details.icon||!1;this.large=this.e.details.large||!1;this.rounded=this.e.details.rounded||!1;this.size=this.e.details.size||32;this.color=this.e.details.color||"#0040bf"}get action(){return ACTION_SUBMIT}_onAction(){switch(this.action){case ACTION_SERVICE_CALL:this.pl._dialog(this.e.service,this.params);break;case ACTION_LINK_WINDOW:break;case ACTION_SUBMIT:default:this.pl.submitForm();}}};var buttonMixin$1={ACTION_SERVICE_CALL:ACTION_SERVICE_CALL,ACTION_LINK_WINDOW:ACTION_LINK_WINDOW,ACTION_SUBMIT:ACTION_SUBMIT,buttonMixin:buttonMixin};const InputRenderDefaultStyles=css`
+`}static get properties(){return{icon:Boolean,rounded:Boolean,large:Boolean,size:String,color:String}}constructor(){super();this.icon=!1;this.rounded=!1;this.large=!1;this.size=32;this.color="#0040bf";this.type="";this.addEventListener("click",this._onAction.bind(this))}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.icon=this.e.details.icon||!1;this.large=this.e.details.large||!1;this.rounded=this.e.details.rounded||!1;this.size=this.e.details.size||32;this.color=this.e.details.color||"#0040bf"}_onAction(){switch(this.action){case ACTION_SERVICE_CALL:this.pl._dialog(this.e.service,this.params);break;case ACTION_LINK_WINDOW:break;case ACTION_SUBMIT:default:this.pl.submitForm();}}};var buttonMixin$1={ACTION_SERVICE_CALL:ACTION_SERVICE_CALL,ACTION_LINK_WINDOW:ACTION_LINK_WINDOW,ACTION_SUBMIT:ACTION_SUBMIT,buttonMixin:buttonMixin};const InputRenderDefaultStyles=css`
 `;var inputRenderDefaultStyles={InputRenderDefaultStyles:InputRenderDefaultStyles};const InputRenderServiceStyles=css`
 
 `;var inputRenderServiceStyles={InputRenderServiceStyles:InputRenderServiceStyles};const Reset=css`

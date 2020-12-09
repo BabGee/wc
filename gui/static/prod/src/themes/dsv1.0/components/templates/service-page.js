@@ -703,6 +703,45 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
             z-index: 20;
           }
         }
+
+        .close{
+          display: none;
+          width: 100%;
+          height: 27px;
+        }
+        .close a{
+          position: absolute;
+          right: 30px;
+        }
+
+        @media screen and (max-width: 1023px) {
+          .logo {
+                width: 140px;
+          }
+          .page-container {
+              margin-left: 0!important;
+              position: absolute;
+              left: 0;
+              /* background-color: #e5e5e5; */
+          }
+          .close{
+            display: block;
+            position: relative;
+            top: 18px;
+            /* cursor: pointer; */
+            z-index: 9999;
+          }
+          .header{
+            width: 100%!important
+          }
+          .sidebar.active {
+              width: 100%!important;
+              left: 0!important;
+          }
+          .sidebar{
+            left: -60px;
+          }
+        }
       </style>
       <div class="main-wrapper">
         
@@ -713,6 +752,11 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
         `}
       <div class="is-flex">
         <div class="sidebar" id="sidebar"  @click=${this.closeProfile}>
+          <div class="close">
+            <a @click=${this.closeSidebar}>
+              <fa-icon class="fas fa-times" color="#ffffff" size="2em"></fa-icon>
+            </a>
+          </div>
           <div class="sidebar-inner">
             <div class="sidebar-logo">
               <div class="peers flex-nw align-c">
@@ -841,7 +885,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}reloadPage(){window.location.reload()}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}drawer(evt){evt.preventDefault();this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");hum.firstElementChild.classList.remove("active");hum.lastElementChild.classList.remove("active");hum.children[1].classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");hum.firstElementChild.classList.add("active");hum.lastElementChild.classList.add("active");hum.children[1].classList.add("active");this.isSideMenuVisible=!0}if(aside.clientWidth==this.sideBarOpen){const menuItems=document.querySelectorAll(".sub-menu");menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(!this.isSideMenuVisible){this.drawer(evt)}else{if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}}}fitstUpdated(){var parent=document.querySelector(".sidebar"),child=document.querySelector(".sidebar-inner");child.style.right=child.clientWidth-child.offsetWidth+"px"}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}closeProfile(){let profile=document.querySelector("#profile");if(this.isProfileVisible){if(profile.classList.contains("is-block")){profile.classList.toggle("is-block");this.isProfileVisible=!1}}}getMainFontPath(url){if(url!=void 0||null!=url||""!=url){return url}else{return""}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
+     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}closeSidebar(){const sidebar=document.querySelector("#sidebar"),cont=document.querySelectorAll(".page-container span");sidebar.classList.remove("active");cont.forEach(item=>{item.classList.remove("active")})}reloadPage(){window.location.reload()}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}drawer(evt){evt.preventDefault();this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");hum.firstElementChild.classList.remove("active");hum.lastElementChild.classList.remove("active");hum.children[1].classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");hum.firstElementChild.classList.add("active");hum.lastElementChild.classList.add("active");hum.children[1].classList.add("active");this.isSideMenuVisible=!0}if(aside.clientWidth==this.sideBarOpen){const menuItems=document.querySelectorAll(".sub-menu");menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(!this.isSideMenuVisible){this.drawer(evt)}else{if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}}}fitstUpdated(){var parent=document.querySelector(".sidebar"),child=document.querySelector(".sidebar-inner");child.style.right=child.clientWidth-child.offsetWidth+"px"}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}closeProfile(){let profile=document.querySelector("#profile");if(this.isProfileVisible){if(profile.classList.contains("is-block")){profile.classList.toggle("is-block");this.isProfileVisible=!1}}}getMainFontPath(url){if(url!=void 0||null!=url||""!=url){return url}else{return""}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
         :host {
           display: block;
         }

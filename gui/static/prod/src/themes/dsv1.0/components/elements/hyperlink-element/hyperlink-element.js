@@ -38,4 +38,4 @@ button.btn:hover{
         :host {
           display: block;
         }
-      `]}get action(){return[ACTION_SERVICE_CALL]}}customElements.define(HyperlinkElement.is,HyperlinkElement);export{hyperlinkElement as $hyperlinkElement,hyperlinkElementCss as $hyperlinkElementCss,HyperlinkElementBase,HyperlinkElementStyles};
+      `]}get action(){return ACTION_SERVICE_CALL}}customElements.define(HyperlinkElement.is,HyperlinkElement);export{hyperlinkElement as $hyperlinkElement,hyperlinkElementCss as $hyperlinkElementCss,HyperlinkElementBase,HyperlinkElementStyles};
