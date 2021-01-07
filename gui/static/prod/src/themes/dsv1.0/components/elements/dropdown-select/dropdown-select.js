@@ -115,7 +115,7 @@ import{dataSourceMixin,utilsMixin,SerializableElement,css,html,RENDER_M_SIDE_BY_
   list-style-type: none;
   padding: 0;
   margin-bottom: 0;
-  height: 196px;
+  max-height: 196px;
   overflow-y: auto;
 }
 .ss-dropdown-collapsable ul.ss-dropdown-items li {
