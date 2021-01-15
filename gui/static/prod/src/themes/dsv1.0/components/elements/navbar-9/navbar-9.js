@@ -121,12 +121,16 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
             <div id="navbarBasicExample" class="navbar-menu">
               <div class="navbar-end">
                ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
-                  ${pageGroup.pages.map((menu,menuIndex)=>html`
-                  <a tabindex="${menuIndex+1}" class="navbar-item nav__item is-capitalized"
-                  @click="${this.scrollToSection}"
-                  data-name="${menu.id}"  pageGroup="${pageGroupIndex}" page="${menuIndex}" 
-                  >${menu.title}</a>
-                  `)}
+                ${pageGroup.pages.map((menu,menuIndex)=>html`
+                  ${this.e.details.hide.includes(menu.title)?html``:html`
+
+                    <a tabindex="${menuIndex+1}" class="navbar-item nav__item is-capitalized"
+                    @click="${this.scrollToSection}"
+                    data-name="${menu.id}"  pageGroup="${pageGroupIndex}" page="${menuIndex}" 
+                    >${menu.title}</a>
+                    
+                  `}
+                `)}
                   
                 `)}
                 
