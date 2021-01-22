@@ -107,7 +107,7 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
         <div class="ii__container-main">
           <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:var(--app-default-color)">
             <div class="navbar-brand">
-              <a class="navbar-item" href="/" @click=${this.reloadPage} style="width: 200px;">
+              <a class="navbar-item" href="/" @click=${this.redirectPage} style="width: 200px;">
                 <img class="logo-img" src="/media/${this.gateway.logo}" alt="brand" >
               </a>
                 
@@ -141,4 +141,4 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
       </header>
     </div>
 
-     `}reloadPage(){window.location.reload()}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){let targetElement=event.target,selectedPagegroup=event.target.getAttribute("pageGroup"),selectedPage=event.target.getAttribute("page");if(this._pageGroup==selectedPagegroup){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}}else{window.location.hash="#/"+selectedPagegroup+"/"+selectedPage}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);export{navbar9Css as $navbar$9Css,NavbarNineStyles};
+     `}reloadPage(){window.location.reload()}redirectPage(){window.location.href="/"}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){let targetElement=event.target,selectedPagegroup=event.target.getAttribute("pageGroup"),selectedPage=event.target.getAttribute("page");if(this._pageGroup==selectedPagegroup){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}}else{window.location.hash="#/"+selectedPagegroup+"/"+selectedPage}}static get is(){return"navbar-9"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar9.is,Navbar9);export{navbar9Css as $navbar$9Css,NavbarNineStyles};

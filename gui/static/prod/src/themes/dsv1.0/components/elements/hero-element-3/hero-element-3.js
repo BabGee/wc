@@ -166,10 +166,22 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
            
 
             box-shadow: 0px 3px 6px #00000029;
-            opacity: 0.68;
-            filter: blur(7px);
+            
             }
         </style>
+        ${this.e.details.hide_filter?html``:html`
+            
+            <style>
+            .parallax{
+
+              opacity: 0.68;
+              filter: blur(7px);
+
+            }
+            
+            </style>
+        
+        `}
      
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         <div class="hero-container" style="margin-top: ${this.e.details.margin_top}">
@@ -184,4 +196,4 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
                 </div>
             </
         </div>
-        `}static get is(){return`hero-element-3`}}customElements.define(HeroElement3.is,HeroElement3);export{heroElement3Css as $heroElement$3Css,HeroElement3Styles};
+        `}static get is(){return`hero-element-3`}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(HeroElement3.is,HeroElement3);export{heroElement3Css as $heroElement$3Css,HeroElement3Styles};

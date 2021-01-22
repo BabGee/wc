@@ -48,13 +48,13 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
     position: relative;
   }
   .single-services-box::before {
-    content: '';
+    content: "";
     height: 3px;
     width: 20px;
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color:var(--app-default-color);
+    left: 0px;
+    bottom: 0px;
+    background-color: var(--app-default-color);
     -webkit-transition: 0.5s;
     transition: 0.5s;
   }
@@ -62,8 +62,8 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
     margin-bottom: 18px;
     background-color:var(--app-default-color);
     border-radius: 5px;
-    width: 75px;
-    height: 75px;
+    width: 253px;
+    height: 200px;
     line-height: 75px;
     -webkit-transition: 0.5s;
     transition: 0.5s;
@@ -87,6 +87,31 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
     -webkit-box-shadow: 0 0 40px 3px rgba(0, 0, 0, 0.05);
     box-shadow: 0 0 40px 3px rgba(0, 0, 0, 0.05);
   }
+
+  a{
+
+    color:var(--app-default-color)!important;
+
+  }
+  a:hover {
+
+    cursor:unset!important;
+    color:var(--app-default-color)!important;
+
+  }
+
+  /*animations*/
+
+  .animate1{
+      opacity:0;
+      transform:translateX(100px);
+      transition:0.7s all ease-in-out;
+  }
+  .animate1-appear{
+      opacity: 1;
+      transform:translateX(0px);
+  
+  }
 `;var section11Css={Section11Styles:Section11Styles};class Section11 extends SectionPElementDsc{static get styles(){return[Section11Styles,css` 
             :host{
                 disply: block;
@@ -100,12 +125,20 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
             <h2>${this.e.name}</h2>
             <p>${this.e.details.subtitle}</p>
           </div>
-          <div class="columns">
+          <div id="mainColumn" class="columns animate1">
           ${this.rows.map(slide=>html`
             <div class="column">
                 <div class="single-services-box">
                   <div class="icon">
-                  <fa-icon class="${this.getIcon(slide[1])}" color="#fff" style="height:43px; width: 36px;"></fa-icon>
+                  ${this.checkIcon(slide[1])?html`
+
+                      <fa-icon class="${this.getIcon(slide[1])}" color="#fff" style="height:68px; width: 72px;"></fa-icon>
+
+                  
+                  `:html`
+                  <img src="/media/${slide[3]}" alt="${slide[1]}" />
+
+                  `}
                   </div>
                   <h3><a>${this.getTitle(slide[1])}</a></h3>
                   <p>${slide[2]}</p>
@@ -116,4 +149,4 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
           </div> <!--main -->
         <div>
       </section>
-        `}getIcon(dscname){let[title,icon]=dscname.split("|");return icon}getTitle(dscname){let[title,icon]=dscname.split("|");return title}static get is(){return"section-11"}}customElements.define(Section11.is,Section11);export{section11Css as $section$11Css,Section11Styles};
+        `}checkIcon(dscname){if(dscname.includes("|")){return!0}else{return!1}}getIcon(dscname){let[title,icon]=dscname.split("|");return icon}getTitle(dscname){let[title,icon]=dscname.split("|");return title}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{window.addEventListener("scroll",()=>{self.scrollAppear()})})}scrollAppear(){const self=this;let contentContainer=self.shadowRoot.querySelector(".solution-area"),mainColumn=self.shadowRoot.getElementById("mainColumn"),contentStartPosition=contentContainer.getBoundingClientRect().top,screenPosition=window.innerHeight/2;if(contentStartPosition<screenPosition){mainColumn.classList.add("animate1-appear")}}static get is(){return"section-11"}}customElements.define(Section11.is,Section11);export{section11Css as $section$11Css,Section11Styles};

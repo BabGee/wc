@@ -79,7 +79,7 @@ a {
             <nav class="navbar">
                 <div class="container">
                     <div class="navbar-brand navbar-start">
-                        <a class="navbar-item" href="/" style="width: 200px;"  @click=${this.reloadPage}>
+                        <a class="navbar-item" href="/" style="width: 200px;"  @click=${this.redirectPage}>
                             <img class="logo-img" src="/media/${this.gateway.logo}" alt="${this.gateway.name}">
                         </a>
                         <a role="button" @click=${this.toggleMenu} class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -111,4 +111,4 @@ a {
                 </div>
             </nav>
         </header>
-        `}reloadPage(){window.location.reload()}scrollToSection(event){let targetElement=event.target,selectedPagegroup=event.target.getAttribute("pageGroup"),selectedPage=event.target.getAttribute("page");if(this._pageGroup==selectedPagegroup){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}}else{window.location.hash="#/"+selectedPagegroup+"/"+selectedPage}}}customElements.define(Navbar14.is,Navbar14);export{navbar14 as $navbar$14,navbar14Css as $navbar$14Css,Navbar14Base,Navbar14Styles};
+        `}reloadPage(){window.location.reload()}redirectPage(){window.location.href="/"}scrollToSection(event){let targetElement=event.target,selectedPagegroup=event.target.getAttribute("pageGroup"),selectedPage=event.target.getAttribute("page");if(this._pageGroup==selectedPagegroup){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}}else{window.location.hash="#/"+selectedPagegroup+"/"+selectedPage}}}customElements.define(Navbar14.is,Navbar14);export{navbar14 as $navbar$14,navbar14Css as $navbar$14Css,Navbar14Base,Navbar14Styles};
