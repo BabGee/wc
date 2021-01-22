@@ -1,4 +1,4 @@
-import{dataSourceMixin,BaseElement,utilsMixin,css,html}from"../../../../../components/adaptive-ui.js";const HeroElement7Base=class extends utilsMixin(dataSourceMixin(BaseElement)){constructor(){super()}static get is(){return"hero-element-7"}init(pElement,loader){super.init(pElement,loader);this}};var heroElement7={HeroElement7Base:HeroElement7Base};const HeroElement7Styles=css`
+import{dataSourceMixin,BaseElement,utilsMixin,css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js";const HeroElement7Base=class extends utilsMixin(dataSourceMixin(BaseElement)){constructor(){super()}static get is(){return"hero-element-7"}init(pElement,loader){super.init(pElement,loader);this}};var heroElement7={HeroElement7Base:HeroElement7Base};const HeroElement7Styles=css`
 a {
     display: block;
     -webkit-transition: 0.5s;
@@ -16,16 +16,9 @@ a {
     position: relative;
     overflow: hidden;
     background: #ffffff;
-    margin-top: 96px;
+    margin-top: 83px;
 }
-.hero-img-cont{
-    width: 50%;
-    height: 91vh;
-    border-top-left-radius: 50px;
-    position: absolute;
-    right: 0;
-    z-index: 1;
-}
+
 .hero-img-cont .overlay{
     width: 100%;
     height: 91vh;
@@ -79,7 +72,13 @@ a {
     color: #fff;
     font-weight: 600;
     margin-top: 30px;
+    height: 4em!important;
+    width: 267px!important;
     font-family: 'Montserrat', sans-serif;
+}
+.btn.button:hover{
+    background-color: var(--app-default-color)!important;
+
 }
 // @keyframes loadIn {
 // 0% {
@@ -90,10 +89,31 @@ a {
 // }
 // }
 
+
+/*animations*/
+
+.animate1{
+    opacity:0;
+    transform:translateX(-40px);
+    transition:0.7s all ease-in-out;
+}
+.animate1-appear{
+    opacity: 1;
+    transform:translateX(0px);
+
+}
+
+
+
+
 @media screen and (max-width: 1024px){
 .wrapper{
     width: 100%;
     position: relative;
+}
+.hero-img-cont {
+    background-size: cover;
+    background-position-x: unset;
 }
 .hero-img-cont,
 .hero-img-cont img,
@@ -106,6 +126,7 @@ a {
     width: 100%;
     padding: 39px;
     margin: 0;
+    padding-top: 160px;
 }
 .hero-text-container h1{
     font-size: 55px!important;
@@ -122,29 +143,51 @@ a {
         margin-top: 62px;
     }
 }
-`;var heroElement7Css={HeroElement7Styles:HeroElement7Styles};class HeroElement7 extends HeroElement7Base{static get styles(){return[HeroElement7Styles,css` 
+`;var heroElement7Css={HeroElement7Styles:HeroElement7Styles};class HeroElement7 extends SectionPElementDsc{static get styles(){return[HeroElement7Styles,css` 
             :host{
                 disply: block;
             }
             `]}static get is(){return`hero-element-7`}render(){return html`
+
+        <style>
+
+            .hero-img-cont{
+                width: 50%;
+                height: 91vh;
+                border-top-left-radius: 50px;
+                position: absolute;
+                right: 0;
+                z-index: 1;
+                background-image: url("${this.e.details.hero_image_src}");
+
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-position-x: 599px;
+                background-position-y: center;
+                background-size: 74%;
+            }
+        
+        
+        </style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" type="text/css"/>   
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;900&display=swap" rel="stylesheet">
         <section class="hero section is-paddingless">
             <div class="hero-text-container">
                 <div class="heading">
-                    <h1 class="title">${this.e.name}</h1>
+                    <h1 id="title" class="title animate1">${this.e.name}</h1>
                 </div>
                 <div class="hero-content parallax" data-speed="30">
-                    <h2 class="hero-subtitle has-text-weight-bold">${this.e.details.subtitle}</h2>
+                    <h2 id="subtitle" class="hero-subtitle has-text-weight-bold animate1">${this.e.details.subtitle}</h2>
                     <p>${this.e.defaultValue}</p>
                 </div>
-                <div class="hero-cta">
+                <div id="button" class="hero-cta animate1">
                     <a href=${this.e.details.path} class="btn button">${this.e.details.button_title}</a>
                 </div>
             </div>
             <div class="hero-img-cont" id="01">
             <div class="overlay"></div>
-            <img src="${this.e.details.hero_image_src}" alt="${this.e.name}">
+           
             </div>
         </section>
-        `}}customElements.define(HeroElement7.is,HeroElement7);export{heroElement7 as $heroElement$7,heroElement7Css as $heroElement$7Css,HeroElement7Base,HeroElement7Styles};
+        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{self.onLoadAppear()})}onLoadAppear(){const self=this,title=self.shadowRoot.querySelector("#title"),subtitle=self.shadowRoot.querySelector("#subtitle"),button=self.shadowRoot.querySelector("#button");setTimeout(()=>{title.classList.add("animate1-appear");subtitle.classList.add("animate1-appear");button.classList.add("animate1-appear")},700)}}customElements.define(HeroElement7.is,HeroElement7);export{heroElement7 as $heroElement$7,heroElement7Css as $heroElement$7Css,HeroElement7Base,HeroElement7Styles};

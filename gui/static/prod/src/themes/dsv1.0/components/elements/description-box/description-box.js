@@ -79,7 +79,7 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
     -o-animation: fadein 2s; /* Opera */
 }
 .content p {
-    text-align: start;
+    text-align: center;
 
 }
 .descriptionBox__content{
