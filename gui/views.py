@@ -200,7 +200,7 @@ class UI:
 
 						class_name = str(permissions[0].page.module.display_name.replace(" ","_").title())
 						#lgr.info('Class Name: %s' % class_name)
-						processing_function = page.lower().replace(" ","_")
+						processing_function = page.lower().replace(" ","_").replace("-","_")
 						#lgr.info('Processing Function: %s' % processing_function)
 
 						import importlib

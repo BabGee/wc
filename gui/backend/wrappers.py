@@ -12,6 +12,27 @@ lgr = logging.getLogger('gui')
 class responseParam: pass
 
 class Home:
+	def forgot_password_reset(self, request, page, subdomain):
+			payload = request.GET.copy()
+			payload.update(request.POST)
+			session_id = request.session.get('session_id')
+			if session_id is not None:
+				lgr.info('Logged Out an Active session')
+				logout(request)
+			if subdomain:
+				payload['subdomain'] = subdomain
+				payload['trigger'] = "with_subdomain"
+
+
+			responseParam.request = payload
+			payload = WebService().request_processor(request, page.service, payload)
+			payload = WebService().response_processor(request, page.service, payload)
+
+
+			responseParam.response = payload
+			return responseParam
+
+
 	def manifest(self, request, page, subdomain):
 			params = request.GET.copy()
 			params.update(request.POST)
