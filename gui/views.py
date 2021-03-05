@@ -135,6 +135,7 @@ class UI:
 		try:
 			lgr.info('Sub-domain %s' % subdomain)
 			lgr.info('Request Host: %s' % request.get_host())
+			lgr.info('Page %s' % page)
 
 			host = request.get_host()
 
