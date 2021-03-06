@@ -15,16 +15,20 @@ class WebService:
 		try:
 			#lgr.info('Service: %s' % service)
 			#lgr.info('Payload: %s' % payload)
-
+			#SESSION UPDATE ONLY WORKS WITH POST REQUESTS!!!!!
 			if payload['response_status'] == '00':
-				lgr.info('Succesful Response Status')
-				if 'login' in payload['response'].keys(): 
-					if 'api_key' in payload['response']['login'].keys(): request.session['api_key'] = payload['response']['login']['api_key']
-					if 'status' in payload['response']['login'].keys(): request.session['status'] = payload['response']['login']['status']
-					if 'access_level' in payload['response']['login'].keys(): request.session['access_level'] = payload['response']['login']['access_level']
-
+				lgr.info('Succesful Response Status: %s' % payload['response'])
+				if 'login' in payload['response'].keys() and isinstance(payload['response']['login'], dict): 
+					lgr.info('Login Exists')
+					request.session['api_key'] = payload['response']['login']['api_key']
+					request.session['status'] = payload['response']['login']['status']
+					request.session['access_level'] = payload['response']['login']['access_level']
 				if 'session' in payload['response'].keys(): 
+					lgr.info('Session Exists')
 					request.session['session_id'] = payload['response']['session']
+					#if request.session.get('session_id', False):
+					#	#Set session as modified to force save
+					#	request.session.modified = True
 			elif payload['response_status'] != '00':
 				lgr.info('Failed Transaction')
 

@@ -16,6 +16,10 @@ class Home:
 			payload = request.GET.copy()
 			payload.update(request.POST)
 			session_id = request.session.get('session_id')
+
+			lgr.info('Session: %s' % request.session.get('session_id') )
+			lgr.info('API KEY: %s' % request.session.get('api_key') )
+
 			if session_id is not None:
 				lgr.info('Logged Out an Active session')
 				logout(request)
@@ -28,6 +32,8 @@ class Home:
 			payload = WebService().request_processor(request, page.service, payload)
 			payload = WebService().response_processor(request, page.service, payload)
 
+			lgr.info('Session Shoulda Started: %s' % request.session.get('session_id') )
+			lgr.info('API KEY: %s' % request.session.get('api_key') )
 
 			responseParam.response = payload
 			return responseParam
