@@ -199,7 +199,7 @@ class UI:
 						request.xframe_exempted = xframe_exempted
 
 						class_name = str(permissions[0].page.module.display_name.title())
-						class_name = '_'+''.join(re.findall(r'[\d\w]+', class_name))
+						class_name = ''.join(re.findall(r'[\d\w]+', class_name))
 						#lgr.info('Class Name: %s' % class_name)
 						processing_function = page.lower()
 						processing_function = '_'+''.join(re.findall(r'[\d\w]+', processing_function))
