@@ -10,10 +10,33 @@ import simplejson as json
 import string
 from processor.models import *
 from administration.views import persist_session_vars
+from functools import wraps
 
 import logging
 lgr = logging.getLogger('processor')
 
+class persist_session_vars(object):
+	""" Some views, such as login and logout, will reset all session state.
+	However, we occasionally want to persist some of those session variables.
+	"""
+	session_backup = {}
+	def __init__(self, vars):
+		self.vars = vars
+	def __enter__(self):
+		for var in self.vars:
+			self.session_backup[var] = self.request.session.get(var)
+	def __exit__(self, exc_type, exc_value, traceback):
+		for var in self.vars:
+			self.request.session[var] = self.session_backup.get(var)
+	def __call__(self, test_func, *args, **kwargs):
+		@wraps(test_func)
+		def inner(*args, **kwargs):
+			if not args:
+				raise Exception('Must decorate a view, ie a function taking request as the first parameter')
+			self.request = args[0]
+			with self:
+				return test_func(*args, **kwargs)
+		return inner
 
 class Authorize:
 	def secure(self, payload, API_KEY):
@@ -122,6 +145,7 @@ class Wrappers(Authorize):
 			payload['gateway_host'] = request.META['X-GATEWAY_HOST']
 		else:
 			payload['gateway_host'] = request.get_host()
+
 
 		@persist_session_vars(['session_key'])
 		def on_site(request, service, payload):
