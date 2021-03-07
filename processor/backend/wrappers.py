@@ -9,7 +9,6 @@ from django.shortcuts import HttpResponseRedirect, HttpResponse
 import simplejson as json
 import string
 from processor.models import *
-from administration.views import persist_session_vars
 from functools import wraps
 
 import logging
