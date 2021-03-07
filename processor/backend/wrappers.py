@@ -126,6 +126,20 @@ class Wrappers(Authorize):
 			#payload['SERVICE'] = service.command_function
 			payload['CHID'] = '1'
 			payload['csrf_token'] = get_token(request)
+			user_agent = request.META.get("HTTP_USER_AGENT", "")
+			payload['user_agent'] = user_agent
+
+			#Create Browser Fingerprint
+			if not request.session.session_key:
+				request.session.save()
+
+			session_key = request.session.session_key
+			payload['session_key'] = session_key
+
+			fingerprint_raw = "".join((user_agent,request.META.get("HTTP_ACCEPT_ENCODING", ""), session_key, "",ip_address, "",))
+			lgr.info('Fingerint Raw')
+			browser_fingerprint = hashlib.md5(fingerprint_raw.encode('utf-8')).hexdigest()
+			payload['fingerprint'] = get_token(request)
 
 			g = GeoIP2()
 			try: city = g.city(ip_address)
