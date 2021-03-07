@@ -9,7 +9,7 @@ from django.shortcuts import HttpResponseRedirect, HttpResponse
 import simplejson as json
 import string
 from processor.models import *
-#from administration.views import persist_session_vars
+from administration.views import persist_session_vars
 
 import logging
 lgr = logging.getLogger('processor')
@@ -123,7 +123,7 @@ class Wrappers(Authorize):
 		else:
 			payload['gateway_host'] = request.get_host()
 
-		#@persist_session_vars(['session_key'])
+		@persist_session_vars(['session_key'])
 		def on_site(request, service, payload):
 			#payload['SERVICE'] = service.command_function
 			payload['CHID'] = '1'

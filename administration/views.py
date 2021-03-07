@@ -11,7 +11,6 @@ from functools import wraps
 import logging
 lgr = logging.getLogger('administration')
 
-'''
 class persist_session_vars(object):
     """ Some views, such as login and logout, will reset all session state.
     However, we occasionally want to persist some of those session variables.
@@ -41,7 +40,6 @@ class persist_session_vars(object):
                 return test_func(*args, **kwargs)
 
         return inner
-'''
 
 class WebService:
 	def response_processor(self, request, service, payload):
