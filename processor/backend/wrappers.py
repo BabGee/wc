@@ -136,10 +136,13 @@ class Wrappers(Authorize):
 			session_key = request.session.session_key
 			payload['session_key'] = session_key
 
-			fingerprint_raw = "".join((user_agent,request.META.get("HTTP_ACCEPT_ENCODING", ""), session_key, "",ip_address, "",))
-			lgr.info('Fingerint Raw')
+			lgr.info('Session Key: %s' % session_key)
+
+			fingerprint_raw = ".".join((user_agent,request.META.get("HTTP_ACCEPT_ENCODING", ""), session_key, ip_address))
+			lgr.info('Fingerint Raw: %s' % fingerprint_raw)
 			browser_fingerprint = hashlib.md5(fingerprint_raw.encode('utf-8')).hexdigest()
-			payload['fingerprint'] = get_token(request)
+			lgr.info('FingerPrint: %s' % browser_fingerprint)
+			payload['fingerprint'] = browser_fingerprint
 
 			g = GeoIP2()
 			try: city = g.city(ip_address)
