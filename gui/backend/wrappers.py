@@ -12,7 +12,7 @@ lgr = logging.getLogger('gui')
 class responseParam: pass
 
 class Home:
-	def forgot_password_reset(self, request, page, subdomain):
+	def _forgotpasswordreset(self, request, page, subdomain):
 			payload = request.GET.copy()
 			payload.update(request.POST)
 			session_id = request.session.get('session_id')
@@ -39,7 +39,7 @@ class Home:
 			return responseParam
 
 
-	def manifest(self, request, page, subdomain):
+	def _manifest(self, request, page, subdomain):
 			params = request.GET.copy()
 			params.update(request.POST)
 
@@ -106,7 +106,7 @@ class Home:
 
 
 
-	def migs_url(self, request, page, subdomain):
+	def _migs_url(self, request, page, subdomain):
 			payload = request.GET.copy()
 			payload.update(request.POST)
 
@@ -129,7 +129,7 @@ class Home:
 
 
 
-	def email_verification(self, request, page, subdomain):
+	def _email_verification(self, request, page, subdomain):
 			payload = request.GET.copy()
 			payload.update(request.POST)
 			session_id = request.session.get('session_id')
@@ -151,7 +151,7 @@ class Home:
 
 
 
-	def index(self, request, page, subdomain):
+	def _index(self, request, page, subdomain):
 			params = request.POST.copy()
 
 			if subdomain:
@@ -171,7 +171,7 @@ class Home:
 
 
 class My_Profile:
-	def profile(self, request, page, subdomain):
+	def _profile(self, request, page, subdomain):
 			payload = {}
 
 			responseParam.request = payload

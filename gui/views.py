@@ -138,7 +138,7 @@ class UI:
 			lgr.info('Page %s' % page)
 
 			host = request.get_host()
-
+			#Routes are used on a SPA to route within the same page to bring a section into view
 			lgr.info('Route %s' % route)
 			lgr.info('Request META: %s' % request.META)
 			if 'X-SUBDOMAIN' in request.META.keys(): subdomain=request.META['X-SUBDOMAIN']
@@ -198,9 +198,11 @@ class UI:
 						request.csrf_exempted = csrf_exempted
 						request.xframe_exempted = xframe_exempted
 
-						class_name = str(permissions[0].page.module.display_name.replace(" ","_").title())
+						class_name = str(permissions[0].page.module.display_name.title())
+						class_name = '_'+''.join(re.findall(r'[\d\w]+', class_name))
 						#lgr.info('Class Name: %s' % class_name)
-						processing_function = page.lower().replace(" ","_").replace("-","_")
+						processing_function = page.lower()
+						processing_function = '_'+''.join(re.findall(r'[\d\w]+', processing_function))
 						#lgr.info('Processing Function: %s' % processing_function)
 
 						import importlib
