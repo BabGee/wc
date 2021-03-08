@@ -23,16 +23,19 @@ class WebService:
 					request.session['api_key'] = payload['response']['login']['api_key']
 					request.session['status'] = payload['response']['login']['status']
 					request.session['access_level'] = payload['response']['login']['access_level']
-				if 'session' in payload['response'].keys(): 
+
+				if 'session' in payload.keys(): 
+					lgr.info('Session Exists')
+					request.session['session_id'] = payload['session']
+				elif 'session' in payload['response'].keys(): 
 					lgr.info('Session Exists')
 					request.session['session_id'] = payload['response']['session']
-					#if request.session.get('session_id', False):
-					#	#Set session as modified to force save
-					#	request.session.modified = True
+
 			elif payload['response_status'] != '00':
 				lgr.info('Failed Transaction')
 
 			#remove secure data
+			if 'session' in payload.keys():del payload['session']
 			if 'SESSION_ID' in payload.keys():del payload['SESSION_ID']
 			if 'sec_hash' in payload.keys():del payload['sec_hash']
 			if 'access_level' in payload.keys():del payload['access_level']
