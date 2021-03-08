@@ -27,9 +27,6 @@ class WebService:
 				if 'session' in payload.keys(): 
 					lgr.info('Session Exists')
 					request.session['session_id'] = payload['session']
-				elif 'session' in payload['response'].keys(): 
-					lgr.info('Session Exists')
-					request.session['session_id'] = payload['response']['session']
 
 			elif payload['response_status'] != '00':
 				lgr.info('Failed Transaction')
