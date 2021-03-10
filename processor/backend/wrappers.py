@@ -124,24 +124,21 @@ class Wrappers(Authorize):
 		def on_site(request, service, payload):
 			#payload['SERVICE'] = service.command_function
 			payload['CHID'] = '1'
-			payload['csrf_token'] = get_token(request)
+			#payload['csrf_token'] = get_token(request)
+
+			csrf_token = request.META.get('CSRF_COOKIE', get_token(request))
+			payload['csrf_token'] = csrf_token
+
 			user_agent = request.META.get("HTTP_USER_AGENT", "")
 			payload['user_agent'] = user_agent
 
-			#Create Browser Fingerprint
-			if not request.session.session_key and not request.session.persistent_session_key:
-				request.session.save()
-				request.session['persistent_session_key'] = request.session.session_key
-			elif not request.session.persistent_session_key:
-				request.session['persistent_session_key'] = request.session.session_key
+			##Create Browser Fingerprint
+			#if not request.session.session_key:
+			#	request.session.save()
+			#session_key = request.session.session_key
+			#lgr.info('Session Key: %s' % session_key)
 
-			session_key = request.session.session_key
-			payload['persistent_session_key'] = session_key
-
-			lgr.info('Persistent Session Key: %s' % persistent_session_key)
-			lgr.info('Session Key: %s' % session_key)
-
-			fingerprint_raw = ".".join((user_agent,request.META.get("HTTP_ACCEPT_ENCODING", ""), persistent_session_key, ip_address))
+			fingerprint_raw = ".".join((user_agent,request.META.get("HTTP_ACCEPT_ENCODING", ""), csrf_token, ip_address))
 			lgr.info('Fingerint Raw: %s' % fingerprint_raw)
 			browser_fingerprint = hashlib.md5(fingerprint_raw.encode('utf-8')).hexdigest()
 			lgr.info('FingerPrint: %s' % browser_fingerprint)
