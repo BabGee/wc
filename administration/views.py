@@ -18,6 +18,10 @@ class WebService:
 			#SESSION UPDATE ONLY WORKS WITH POST REQUESTS!!!!!
 			if payload['response_status'] == '00':
 				lgr.info('Succesful Response Status: %s' % payload['response'])
+				if 'persistent_session_key' in payload.keys(): 
+					lgr.info('Persistent Session Key Exists')
+					if not request.session.persistent_session_key: request.session['persistent_session_key'] = payload['persistent_session_key']
+
 				if 'login' in payload['response'].keys() and isinstance(payload['response']['login'], dict): 
 					lgr.info('Login Exists')
 					request.session['api_key'] = payload['response']['login']['api_key']
