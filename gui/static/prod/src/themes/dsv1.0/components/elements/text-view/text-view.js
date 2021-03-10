@@ -1,4 +1,4 @@
-import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const TextViewBase=class extends utilsMixin(BaseElement){static get is(){return"text-view"}static get properties(){return{icon:String,text:String,name:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}init(pElement,loader){super.init(pElement,loader);this.name=TextViewBase.toTitleCase(pElement.name);this.text=pElement.defaultValue}};var textView={TextViewBase:TextViewBase};const TextViewStyles=css`
+import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-ui.js";const TextViewBase=class extends utilsMixin(BaseElement){static get is(){return"text-view"}static get properties(){return{icon:String,text:String,name:String,style:String}}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}checkStyles(){console.log("check style called");if(this.style){return!0}else{return!1}}init(pElement,loader){super.init(pElement,loader);this.name=TextViewBase.toTitleCase(pElement.name);this.text=pElement.defaultValue;this.style=pElement.styles}};var textView={TextViewBase:TextViewBase};const TextViewStyles=css`
 
 `;var textViewCss={TextViewStyles:TextViewStyles};class TextView extends TextViewBase{static get styles(){return[TextViewStyles,css`
         :host {
@@ -17,4 +17,4 @@ import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-u
 </article>
 </div>
 
-        `}}window.customElements.define(TextView.is,TextView);export{textView as $textView,textViewCss as $textViewCss,TextViewBase,TextViewStyles};
+        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties);if(this.checkStyles){this.loadStyle()}}loadStyle(){const style=document.createElement("style");style.innerHTML=unescape(this.style);this.shadowRoot.appendChild(style)}}window.customElements.define(TextView.is,TextView);export{textView as $textView,textViewCss as $textViewCss,TextViewBase,TextViewStyles};

@@ -200,7 +200,8 @@ import{PageViewElement,VIEW_MODE_DIALOG,html}from"../../../../components/adaptiv
 `)}
         `}
             
-        <snack-bar id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
 
       </div>
+      <snack-bar  style="z-index: 9999;" id="snack-bar" ?active="${this._snackbarOpened}"  context="${this._snackbarContext}"> ${this._snackbarTitle} ${this._snackbarMessage}</snack-bar>
+
 `}constructor(){super()}getMainFontPath(url){if(url!=void 0||null!=url||""!=url){return url}else{return""}}scrollPage(evt){const index=evt.currentTarget.pageIndex;var elementToFocus=this.shadowRoot.querySelector("#section_"+index);if(elementToFocus){elementToFocus.scrollIntoView({block:"start",behavior:"smooth"})}}static get properties(){return{title:String,name:String,logo:String,defaultColor:String,pages:Array,tab:Object,group:Object,toggle:Boolean}}toggleNav(){let nav=document.getElementsByClassName("navbar-menu");nav[0].classList.toggle("mob-nav")}stateChanged(state){super.stateChanged(state)}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("landing-page",LandingPage);export{landingPage as $landingPage,LandingPageBase};

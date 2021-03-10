@@ -28,6 +28,23 @@ button.btn:hover{
     position: relative;
     padding-right: 22px;
 }
+.link-container{
+    position: relative;
+    display: flex!important;
+    align-items: center!important;
+    justify-content: center!important;
+    text-decoration: underline!important;
+    color: var(--app-default-color)!important;
+    cursor: pointer!important;
+}
+
+.link-container:hover{
+    text-decoration: none!important;
+}
+
+p {
+    color: var(--app-default-color)!important;
+}
 
 .awesome-icon{
     position: absolute;

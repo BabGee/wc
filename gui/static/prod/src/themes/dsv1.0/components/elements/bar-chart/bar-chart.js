@@ -26,7 +26,7 @@ import{mqttMixin,dataSourceMixin,utilsMixin,SerializableElement,scaleBand,scaleL
         padding: 0;
         border: 0 solid transparent;
         -webkit-box-shadow: 0 0 20px rgba(0,0,0,.08);
-        box-shadow: 0 0 20px rgba(0,0,0,.08);
+        box-shadow: 0 0 40px rgba(51, 59, 102, 0.5);
         padding: 25px;
     }
     .chart_container-card{
@@ -68,9 +68,9 @@ import{mqttMixin,dataSourceMixin,utilsMixin,SerializableElement,scaleBand,scaleL
                 display: block;
                 }
             `]}renderDefault(){return html`
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">      
-        <div class="chart_container-card chart_container">
-            <div id="chart"></div>
-        </div>
-
+          <script src="https://d3js.org/d3.v6.min.js"></script>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">      
+          <div class="chart_container-card chart_container">
+              <div id="chart"></div>
+          </div>
         `}static get properties(){return{icon:Boolean,rounded:Boolean,large:Boolean,size:String,color:String}}constructor(){super();this.icon=!1;this.rounded=!1;this.large=!1;this.size=32;this.color="#0040bf";this.type="";this.addEventListener("click",this._onAction.bind(this))}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}_onAction(){switch(this.action){case ACTION_SERVICE_CALL:this.pl._dialog(this.e.service,this.params);break;case ACTION_LINK_WINDOW:break;case ACTION_SUBMIT:default:this.pl.submitForm();}}};var chartStyleMixin={ChartStyleMixin:ChartStyleMixin};class BarChart extends ChartStyleMixin(BarChartBase){}customElements.define(BarChart.is,BarChart);export{barChart as $barChart,barChartCss as $barChartCss,chartStyleMixin as $chartStyleMixin,chartUiStyles as $chartUiStyles,BarChartBase,BarChartStyles,ChartStyleMixin,ChartUIStyles};
