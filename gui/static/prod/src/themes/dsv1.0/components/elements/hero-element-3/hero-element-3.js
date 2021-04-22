@@ -99,7 +99,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     .c-title-xl {
         
         color: var(--app-default-color)!important;
-        font-size: 50px;
+        font-size: 65px;
     }
 
     .hero-column{
@@ -112,7 +112,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     .c-title-xl {
         
         color: var(--app-default-color)!important;
-        font-size: 45px;
+        font-size: 55px;
     }
 
     
@@ -123,7 +123,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     .c-title-xl {
         
         color: var(--app-default-color)!important;
-        font-size: 40px;
+        font-size: 50px;
     }
 
     
@@ -134,7 +134,7 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     .c-title-xl {
         
         color: var(--app-default-color)!important;
-        font-size: 35px;
+        font-size: 45px;
     }
 
     

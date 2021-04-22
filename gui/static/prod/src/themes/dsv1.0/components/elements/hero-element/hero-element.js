@@ -28,6 +28,26 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
             font-size: 1.5rem;
             line-height: 1.33333333333333333333;
         }
+        .text-animation-disappear{
+            opacity:0;
+            transform:translateX(-100%);
+            transition:1.5s all ease-in-out;
+        }
+        .text-animation-appear{
+            opacity: 1;
+            transform:translateX(0px);  
+            transition:1.5s all ease-in-out;     
+        }
+        .image-animation-disappear{
+            opacity:0;
+            transform:translateX(100%);
+            transition:1.5s all ease-in-out;
+        }
+        .image-animation-appear{
+            opacity: 1;
+            transform:translateX(0px);  
+            transition:1.5s all ease-in-out;     
+        }
 
 `;var heroElementCss={HeroElementStyles:HeroElementStyles};class HeroElement extends BaseElement{static get styles(){return[HeroElementStyles,css`
             :host {
@@ -40,11 +60,11 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
             <div class="module-inner">
                 <div class="module-wrap">
                     <div class="columns">
-                        <div class="column">
+                        <div id="textContainer" class="column text-animation-disappear">
                             <h1 class="ii__hero-title">${this.e.name} </h1>
                             <p class="ii__hero-text">${this.e.defaultValue}</p>
                         </div>
-                        <div class="column">
+                        <div id="imageContainer" class="column image-animation-disappear">
                             <div class="ii__hero-image">
                                 <img src="${this.e.details.hero_image_src}" alt="hero image"/>
                             </div>
@@ -53,4 +73,4 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
                 </div>
             </div>
         </section>
-        `}static get is(){return"hero-element"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(HeroElement.is,HeroElement);export{heroElementCss as $heroElementCss,HeroElementStyles};
+        `}firstUpdated(){this.onLoadAppear()}onLoadAppear(){const textContainer=this.shadowRoot.querySelector("#textContainer"),imageContainer=this.shadowRoot.querySelector("#imageContainer");setTimeout(()=>{textContainer.classList.remove("text-animation-disappear");imageContainer.classList.remove("image-animation-disappear");textContainer.classList.add("text-animation-appear");imageContainer.classList.add("image-animation-appear")},700)}static get is(){return"hero-element"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(HeroElement.is,HeroElement);export{heroElementCss as $heroElementCss,HeroElementStyles};

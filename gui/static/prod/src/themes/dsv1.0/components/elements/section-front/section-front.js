@@ -29,6 +29,17 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     border-radius: 6px;
     text-align: center;
 }
+.animation-appear {
+    opacity: 1;
+    animation: fadeIn ease 2s;
+}
+.animation-disappear {
+    opacity: 0;
+}
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
 
 `;var sectionFrontCss={SectionFrontStyles:SectionFrontStyles};class SectionFront extends BaseElement{static get styles(){return[SectionFrontStyles,css`
             :host {
@@ -41,10 +52,10 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
         <div class="module-inner">
             <div class="module-wrap">
                 <div class="box">
-                    <p style="margin-bottom: 21px;font-size: 20px;"><i>${this.e.name}</i></p>
-                    <p class="section-text">${this.e.defaultValue}</p>
+                  <p id="title" style="margin-bottom: 21px;font-size: 20px;" class="animation-disappear"><i>${this.e.name}</i></p>
+                  <p id="content" class="section-text animation-disappear">${this.e.defaultValue}</p>
                 </div>
             </div>
         </div>  
     </div>
-        `}static get is(){return"section-front"}static get properties(){return{}}}customElements.define(SectionFront.is,SectionFront);var sectionFront={SectionFront:SectionFront};export{sectionFrontCss as $sectionFrontCss,sectionFront as $sectionFront,SectionFrontStyles,SectionFront};
+        `}firstUpdated(){window.addEventListener("scroll",()=>this.scrollToFadeInText())}scrollToFadeInText(){const contentContainer=this.shadowRoot.querySelector(".box"),title=this.shadowRoot.querySelector("#title"),content=this.shadowRoot.querySelector("#content"),contentContainerTop=contentContainer.getBoundingClientRect().top,windowHeight=window.innerHeight-20;if(windowHeight>contentContainerTop){title.classList.remove("animation-disappear");content.classList.remove("animation-disappear");title.classList.add("animation-appear");content.classList.add("animation-appear")}}static get is(){return"section-front"}static get properties(){return{}}}customElements.define(SectionFront.is,SectionFront);var sectionFront={SectionFront:SectionFront};export{sectionFrontCss as $sectionFrontCss,sectionFront as $sectionFront,SectionFrontStyles,SectionFront};

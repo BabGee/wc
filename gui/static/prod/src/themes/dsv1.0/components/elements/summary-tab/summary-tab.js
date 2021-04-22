@@ -14,20 +14,28 @@ h1{
     padding-left: 29px!important;
 }
 .column {
-    display: block;
+    display:flex;
+}
+.details {
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
     flex-basis: 0;
     flex-grow: 1;
     flex-shrink: 1;
     padding: 1.75rem;
     padding-right: 2rem;
+    border:1px solid grey;
+    border-radius:4px;
+}
+.block {
+    margin-bottom:0;
 }
 .summary-p{
-    background-color: var(--app-default-color)!important;
-    color: #fff!important;
-    padding: 0.5rem;
-    border-radius: 0.2rem;
+    color:white;
 }
 .summary-info{
+    color:white;
     font-weight: normal!important;
     margin-bottom: 15px;
 }
@@ -64,10 +72,13 @@ h1{
              ${this._getSubGroupTitles(groupTitle).map(subTitle=>html`
              
                 <div class="column">
-                    <p class="summary-p ">${subTitle}</p>
-                    <p class="summary-info">${this._getSubtitleValue(groupTitle,subTitle)}</p>
-                    
-
+                  <div class="details" style="background-color:hsl(${this.hueGenerator()},50%,50%)">
+                    <div>
+                      <p class="summary-p ">${subTitle}</p>
+                      <p class="summary-info">${this._getSubtitleValue(groupTitle,subTitle)}</p>
+                    </div>
+                    <iron-icon class="iron-icon" style="width:50px !important;height: 50px !important; color: white!important;" icon="${this.e.icon}"></iron-icon>
+                  </div> 
                 </div>
             
              
@@ -83,4 +94,4 @@ h1{
         
     </section>
         
-        `}static get is(){return"summary-tab"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}getGroupTitles(mainObject){return Object.keys(mainObject)}_getSubGroupTitles(objectKeyTitle){let obj=JSON.parse(this.e.defaultValue),subtilesObject=obj[objectKeyTitle],subTitles=Object.keys(subtilesObject);return subTitles}_getSubtitleValue(objectKeyTitle,subTitleKey){let obj=JSON.parse(this.e.defaultValue),subtilesObject=obj[objectKeyTitle],subTitlesValue=subtilesObject[subTitleKey];return subTitlesValue}}customElements.define(SummaryTab.is,SummaryTab);export{summaryTab as $summaryTab,summaryTabCss as $summaryTabCss,SummaryTabBase,SummaryTabStyles};
+        `}static get is(){return"summary-tab"}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}getGroupTitles(mainObject){return Object.keys(mainObject)}_getSubGroupTitles(objectKeyTitle){let obj=JSON.parse(this.e.defaultValue),subtilesObject=obj[objectKeyTitle],subTitles=Object.keys(subtilesObject);return subTitles}_getSubtitleValue(objectKeyTitle,subTitleKey){let obj=JSON.parse(this.e.defaultValue),subtilesObject=obj[objectKeyTitle],subTitlesValue=subtilesObject[subTitleKey];return subTitlesValue}hueGenerator(){let hue=360*Math.random();if(38<=hue&&103>=hue||169<=hue&&189>=hue){this.hueGenerator()}return hue}}customElements.define(SummaryTab.is,SummaryTab);export{summaryTab as $summaryTab,summaryTabCss as $summaryTabCss,SummaryTabBase,SummaryTabStyles};
