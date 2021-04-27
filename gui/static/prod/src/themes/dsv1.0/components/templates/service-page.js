@@ -1,4 +1,4 @@
-import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors,Fonts}from"../../../../components/adaptive-ui.js";import"./section-page.js";const template=html`<iron-iconset-svg name="communication" size="24">
+import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors,Fonts,ServiceStyles}from"../../../../components/adaptive-ui.js";import"./section-page.js";const template=html`<iron-iconset-svg name="communication" size="24">
 <svg><defs>
 <g id="business"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"></path></g>
 <g id="call"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></g>
@@ -179,47 +179,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
 <g id="wc"><path d="M5.5 22v-7.5H4V9c0-1.1.9-2 2-2h3c1.1 0 2 .9 2 2v5.5H9.5V22h-4zM18 22v-6h3l-2.54-7.63C18.18 7.55 17.42 7 16.56 7h-.12c-.86 0-1.63.55-1.9 1.37L12 16h3v6h3zM7.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm9 0c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2z"></path></g>
 <g id="wifi"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"></path></g>
 </defs></svg>
-</iron-iconset-svg>`;document.head.appendChild(template$2.content);const ServicePageBase=class extends PageViewElement{constructor(){super()}async _computeTop(){await this.updateComplete;return this.qs("#top")}static get is(){return"service-page"}};var servicePage={ServicePageBase:ServicePageBase};const ServiceStyles=css`
-    
-    @font-face {
-        font-family: 'TT Norms';
-        src:  url('../fonts/tt_norms_pro/tt_norms_pro_bold-webfont.eot');
-        src:  url('../fonts/tt_norms_pro/tt_norms_pro_bold-webfont.woff') format('woff'), 
-              url('../fonts/tt_norms_pro/tt_norms_pro_bold-webfont.ttf') format('truetype'),
-              url('../fonts/tt_norms_pro/tt_norms_pro_bold-webfont.svg#TT Norms-700') format('svg');
-        /* font-style: normal; */
-        font-weight: 700;
-        text-rendering: optimizeLegibility;
-      }
-      
-      @font-face {
-        font-family: 'TT Norms';
-        src:  url('../fonts/tt_norms_pro/tt_norms_pro_light-webfont.eot');/* IE9 Compat Modes */
-        src:  url('../fonts/tt_norms_pro/tt_norms_pro_light-webfont.woff') format('woff'), /* Modern Browsers */
-              url('../fonts/tt_norms_pro/tt_norms_pro_light-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
-              url('../fonts/tt_norms_pro/tt_norms_pro_light-webfont.svg#TT Norms-300') format('svg');/* Legacy iOS */
-        /* font-style: medium; */
-        font-weight: 300;
-        text-rendering: optimizeLegibility;
-      }
-      
-      @font-face {
-        font-family: 'TT Norms';
-        src:  url('../fonts/tt_norms_pro/tt_norms_pro_regular-webfont.eot');/* IE9 Compat Modes */
-        src:  url('../fonts/tt_norms_pro/tt_norms_pro_regular-webfont.woff') format('woff'), /* Modern Browsers */
-              url('../fonts/tt_norms_pro/tt_norms_pro_regular-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
-              url('../fonts/tt_norms_pro/tt_norms_pro_regular-webfont.svg#TT Norms-400') format('svg');/* Legacy iOS */
-        /* font-style: normal; */
-        font-weight: 400;
-        text-rendering: optimizeLegibility;
-      }
-      
-      .menu-list li a{
-            color: #FFFFFF;
-          }
-      
-
-`;var service={ServiceStyles:ServiceStyles};class ServicePage extends ServicePageBase{render(){if(!this.interface){return html$1`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html$1`
+</iron-iconset-svg>`;document.head.appendChild(template$2.content);const ServicePageBase=class extends PageViewElement{constructor(){super()}async _computeTop(){await this.updateComplete;return this.qs("#top")}static get is(){return"service-page"}};var servicePage={ServicePageBase:ServicePageBase};class ServicePage extends ServicePageBase{render(){if(!this.interface){return html$1`<div>Cannot render an UNDEFINED tab!!.</div>`}else if(!this.pageGroup||!this.page){return html$1`
       <missing-page></missing-page>
       `}return html$1`
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
@@ -478,8 +438,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
         }
         .sub-menu-animation-disappear {
           opacity:0;
-          transform:translateY(-50%);
-          transition:0.2s all ease-in-out;
+          transform:translateY(-10%);
         }
         .sub-menu-animation-appear {
           opacity:1;
@@ -761,7 +720,7 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
         
         `}
       <div class="is-flex">
-        <div class="sidebar" id="sidebar"  @click=${this.closeProfile}>
+        <div class="sidebar" id="sidebar"  @click=${this.closeProfile} @mouseenter=${this.sidebarMouseEnterHandler} @mouseleave=${this.sidebarMouseLeaveHandler}>
           <div class="close">
             <a @click=${this.closeSidebar}>
               <fa-icon class="fas fa-times" color="#ffffff" size="2em"></fa-icon>
@@ -787,8 +746,8 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
             <div class="sidebar-menu scrollable ps" style="overflow-y: scroll!important">
               <ul>
                 ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html$1`
-                <li class="nav-item" title="${ServicePage.toTitleCase(pageGroup.title)}">
-                  <a href="$1" id="menu-item" class="nav-menu-item ${pageGroupIndex==this._pageGroup?"selected  active":""} items" @click=${this.handleClick}>
+                <li class="nav-item" title="${ServicePage.toTitleCase(pageGroup.title)}" @mouseenter=${this.pageGroupMouseEnterHandler} @mouseleave=${this.pageGroupMouseLeaveHandler}>
+                  <a href="$1" id="menu-item" class="nav-menu-item ${pageGroupIndex==this._pageGroup?"selected  active":""} items" @click=${evt=>evt.preventDefault()}>
                     <span class="icon-holder">
                       <adaptive-ui-icon style="width: 19px;height: 19px;fill: #fff;" icon="${pageGroup.icon||"icons:info"}"></adaptive-ui-icon>
                     </span>
@@ -808,11 +767,12 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
                   </ul> -->
                   <ul class="sub-menu sub-menu-animation-disappear">
                     ${pageGroup.pages.map((menu,menuIndex)=>html$1`
-                        <li @click="${this.toggleMenu}" class="${pageGroupIndex==this._pageGroup&&menuIndex==this._page?"selected  active":""}">
+                        <li class="${pageGroupIndex==this._pageGroup&&menuIndex==this._page?"selected  active":""}">
                             <a
-                            class="nav-item"
-                            href="${window.location.pathname+window.location.search}#/${pageGroupIndex}/${menuIndex}/"
-                            >${ServicePage.toTitleCase(menu.title)}</a
+                              @click=${this.menuItemClickHandler}
+                              class="nav-item"
+                              href="${window.location.pathname+window.location.search}#/${pageGroupIndex}/${menuIndex}/"
+                              >${ServicePage.toTitleCase(menu.title)}</a
                             >
                         </li>
                         `)}
@@ -895,8 +855,8 @@ import{html$1 as html,PageViewElement,VIEW_MODE_DIALOG,css,html as html$1,Colors
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}closeSidebar(){const sidebar=document.querySelector("#sidebar"),cont=document.querySelectorAll(".page-container span");sidebar.classList.remove("active");cont.forEach(item=>{item.classList.remove("active")})}reloadPage(){window.location.reload()}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}drawer(evt){evt.preventDefault();this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");hum.firstElementChild.classList.remove("active");hum.lastElementChild.classList.remove("active");hum.children[1].classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");hum.firstElementChild.classList.add("active");hum.lastElementChild.classList.add("active");hum.children[1].classList.add("active");this.isSideMenuVisible=!0}if(aside.clientWidth==this.sideBarOpen){const menuItems=document.querySelectorAll(".sub-menu");menuItems.forEach(item=>{item.classList.remove("is-block")})}}handleClick(evt){evt.preventDefault();const menuItems=evt.currentTarget.nextElementSibling,toggleClass="is-block",highLight="selected";if(!this.isSideMenuVisible){this.drawer(evt)}else{if(menuItems.classList.contains(toggleClass)){menuItems.classList.remove(toggleClass)}else{this.qsa(".aside-sub-menu, .is-block").forEach(function(el){el.classList.remove(toggleClass)});menuItems.classList.add(toggleClass)}this.qsa(".selected").forEach(function(el){if(!el.classList.contains("active"))el.classList.remove(highLight)});this.qsa(".selected").forEach(function(el){if(!el.classList.contains("is-block"))el.classList.remove(highLight)});if(!menuItems.classList.contains(highLight)){menuItems.classList.add(highLight)}this.animateSideMenu()}}fitstUpdated(){var parent=document.querySelector(".sidebar"),child=document.querySelector(".sidebar-inner");child.style.right=child.clientWidth-child.offsetWidth+"px"}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}closeProfile(){let profile=document.querySelector("#profile");if(this.isProfileVisible){if(profile.classList.contains("is-block")){profile.classList.toggle("is-block");this.isProfileVisible=!1}}}getMainFontPath(url){if(url!=void 0||null!=url||""!=url){return url}else{return""}}animateSideMenu(){const subMenuList=document.querySelectorAll(".sub-menu");setTimeout(()=>{subMenuList.forEach(subMenu=>{if(subMenu.classList.contains("is-block")){subMenu.classList.remove("sub-menu-animation-disappear");subMenu.classList.add("sub-menu-animation-appear")}else{subMenu.classList.remove("sub-menu-animation-appear");subMenu.classList.add("sub-menu-animation-disappear")}})},50)}static get styles(){return[Colors,Fonts,ServiceStyles,css`
+     `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}closeSidebar(){const sidebar=document.querySelector("#sidebar"),cont=document.querySelectorAll(".page-container span");sidebar.classList.remove("active");cont.forEach(item=>{item.classList.remove("active")})}reloadPage(){window.location.reload()}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}drawer(){this.closeProfile();const aside=document.querySelector("#sidebar"),content=document.querySelector(".page-container"),hum=document.querySelector(".navbar-burger");if(this.isSideMenuVisible){aside.classList.remove("active");content.classList.remove("active");hum.firstElementChild.classList.remove("active");hum.lastElementChild.classList.remove("active");hum.children[1].classList.remove("active");this.isSideMenuVisible=!1}else{aside.classList.add("active");content.classList.add("active");hum.firstElementChild.classList.add("active");hum.lastElementChild.classList.add("active");hum.children[1].classList.add("active");this.isSideMenuVisible=!0}if(aside.clientWidth==this.sideBarOpen){const menuItems=document.querySelectorAll(".sub-menu");menuItems.forEach(item=>{item.classList.remove("is-block")})}}sidebarMouseEnterHandler(evt){if(!this.isSideMenuVisible){this.drawer(evt)}}sidebarMouseLeaveHandler(evt){if(this.isSideMenuVisible){this.drawer(evt)}}pageGroupMouseEnterHandler(evt){const subMenu=evt.currentTarget.querySelector(".sub-menu");subMenu.classList.add("is-block","selected");this.animateSubMenu(subMenu)}pageGroupMouseLeaveHandler(evt){const subMenu=evt.currentTarget.querySelector(".sub-menu");subMenu.classList.remove("is-block","selected");this.animateSubMenu(subMenu)}animateSubMenu(subMenu){setTimeout(()=>{if(subMenu.classList.contains("is-block")){subMenu.classList.remove("sub-menu-animation-disappear");subMenu.classList.add("sub-menu-animation-appear")}else{subMenu.classList.remove("sub-menu-animation-appear");subMenu.classList.add("sub-menu-animation-disappear")}},40)}menuItemClickHandler(evt){setTimeout(()=>{this.drawer(evt)},50)}firstUpdated(){var parent=document.querySelector(".sidebar"),child=document.querySelector(".sidebar-inner");child.style.right=child.clientWidth-child.offsetWidth+"px"}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}closeProfile(){let profile=document.querySelector("#profile");if(this.isProfileVisible){if(profile.classList.contains("is-block")){profile.classList.toggle("is-block");this.isProfileVisible=!1}}}getMainFontPath(url){if(url!=void 0||null!=url||""!=url){return url}else{return""}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
         :host {
           display: block;
         }
-      `]}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{servicePage as $servicePage,service as $service,ServicePageBase,ServiceStyles};
+      `]}_viewList(){this.mainNavigation()}_gridClasses(feed){const grid=super._gridClasses(feed),grids=grid.split("|");try{return`is-${Math.floor(+(grids[0]/2))}`}catch(e){return"is-12"}}}window.customElements.define("service-page",ServicePage);export{servicePage as $servicePage,ServicePageBase};
