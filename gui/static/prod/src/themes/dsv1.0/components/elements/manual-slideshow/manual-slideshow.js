@@ -9,55 +9,92 @@ h4{
   margin-block-end: 12px;
 }
 
-/* Slideshow container */
-.slideshow-container {
-    max-width: 100%;
-    height: 574px;
-    width: 100%;
+  /* Slideshow container */
+  .slideshow-container {
+    display: flex;
+    flex-direction: column;
+    height: 820px;
+    align-items: center;
     position: relative;
     margin: auto;
-}
+    padding:12px;
+  }
 
-/* Hide the images by default */
-.mySlides {
-  display: none;
-  height: inherit;
-  width: 100%;
-}
+  .slides {
+    height:inherit;
+    wwidth:100%;
+  }
+  .slide {
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    height:100%;
+    justify-content:space-evenly;
+  }
+  .title {
+    margin:5px;
+  }
+  .image {
+    width:100%;
+    object-fit:contain;
+    max-height:500px;
+  }
+  .content {
+    display:flex;
+    align-items:flex-start;
+  }
+  .page-number {
+    position:absolute;
+    top:0;
+    right:0;
+  }
+  .bottom-bar {
+    display:flex;
+    justify-content:center;
+    position:relative;
+  }
+  .navigator {
+    display: flex;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    margin:12px;
+  }
 
-img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
+  .captions {
+    display:flex;
+    height:fit-content;
+    max-height:120px;
+    overflow:auto;
+    align-items:center;
+    flex-wrap:wrap;
+    justify-content:space-evenly;
+    margin:5px;
+  }
+  .caption {
+    display:flex;
+    flex-direction:column;
+    max-width:300px;
+    margin:5px;
+  }
+  .caption-title {
+    color:blue;
+    margin:0;
+  }
+  .caption-desc{
+    margin:0;
+  }
 
 /* Next & previous buttons */
 .prev, .next {
   cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  background-color: var(--app-default-color);
+  border:1px solid black;
+  border-radius:50%;
+  margin-right:7px;
 }
 .dots-container{
     text-align: center;
-    position: absolute;
-    width: 100%;
-    bottom: 8px;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+    width: fit-content;
 }
 
 /* On hover, add a black background color with a little bit see-through */
@@ -67,46 +104,17 @@ img{
 /* Caption text */
 .text {
   display: none;
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  right: 80px;
-  width: auto;
-  max-width: 20%;
-  bottom:111px;
-  text-align: left;
-  max-height: 250px;
-  border-radius: 12px;
-  //filter: brightness(100%);
-  background-color: var(--app-secondary-color);
-  border-radius: 12px;
-
-}
-
-.text:after {
-  content: '';
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border: 28px solid transparent;
-	border-top-color:  var(--app-secondary-color);
-	border-bottom: 0;
-	border-left: 0;
-	margin-left: -14px;
-	margin-bottom: -28px;
 }
 
 /* Number text (1/3 etc) */
 .numbertext {
-  color: #f2f2f2;
+  color: black;
   font-size: 14px;
   padding: 8px 12px;
   position: absolute;
   top: 0;
-  background-color: var(--app-secondary-color);
+  right:0;
+  margin:16px;
   border-radius: 4px;
   font-weight: 700;
 }
@@ -114,9 +122,9 @@ img{
 /* The dots/bullets/indicators */
 .dot {
   cursor:pointer;
-  border-radius: 50%;
+  border-radius: 3px;
   width: 18px;
-  height: 18px;
+  height: 7px;
   margin: 0 2px;
   display: inline-block;
   transition: background-color 1.2s ease;
@@ -135,7 +143,7 @@ img{
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
-  animation-duration: 1.5s;
+  animation-duration: 1.0s;
   transition:1.5s all ease-in-out;
 }
 
@@ -149,12 +157,12 @@ img{
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4; transform:translateX(600px);}
+  from {opacity: .4; transform:translateX(50px);}
   to {opacity: 1; transform:translateX(0px);}
 }
 
 @keyframes fade {
-  from {opacity: .4; transform:translateX(600px);}
+  from {opacity: .4; transform:translateX(50px);}
   to {opacity: 1; transform:translateX(0px);}
 }
 
@@ -182,102 +190,91 @@ img{
 
 
 @media screen and (max-width: 360px) {
-  .text {
-    font-size: 12px;
-    
-    right: 50px;
-    max-width: 50%;
-    bottom: 388px;
-    max-height:124px;
-    overflow-y:auto;
-
- 
-    }
-
-    .dot{
-      width:10px;
-      height:10px;
-    }
+  .slideshow-container {
+    height:540px;
+  }
+  .numbertext {
+    margin:0;
+  }
+  
+  .dot{
+    width:10px;
+    height:10px;
+  }
+  .navigator {
+    position:static;
+    margin:5px 0 0 0;
+  }
 
 }
 
 @media screen and (max-width: 414px) {
-  .text {
-    font-size: 12px;
-    
-    right: 50px;
-    max-width: 50%;
-    bottom: 388px;
-    max-height:124px;
-    overflow-y:auto;
+  .slideshow-container {
+    height:540px;
+  }
+  .numbertext {
+    margin:0;
+  }
 
- 
-    }
-
-    .dot{
-      width:10px;
-      height:10px;
-    }
+  .dot{
+    width:10px;
+    height:10px;
+  }
+  .navigator {
+    position:static;
+    margin:5px 0 0 0;
+  }
 
 }
 @media screen and (max-width: 540px) {
-  .text {
-    font-size: 14px;
-    
-    right: 50px;
-    max-width: 50%;
-    bottom: 388px;
-    max-height:124px;
-    overflow-y:auto;
-
- 
-    }
-
-    .dot{
+  .dot{
       width:10px;
       height:10px;
     }
-
-}
-
+  }
 `;var manualSlideshowCss={ManualSlideShowStyles:ManualSlideShowStyles};class ManualSlideshow extends ManualSlideshowBase{static get styles(){return[ManualSlideShowStyles,css`
-            :host {
-              display: block;
-            }
-          `]}renderDefault(){return html`
-
-    <!-- Slideshow container -->
-    <h1>${this.e.name}</h1>
-    <h4>${this.e.details.sub_title}</h4>
-   
+          :host {
+            display: block;
+          }
+        `]}renderDefault(){return html`
+        <!-- Slideshow container -->
         <div class="slideshow-container">
-
-                <!-- Full-width images with number and caption text -->
-
-                ${this.rows.map((slide,index)=>html` 
-
-                    <div class="mySlides fade">
-                      <div class="numbertext">${index+1}/${this.rows.length}</div>
-                      <img src="/media/${slide[3]}" alt="${slide[1]}" style="width:100%">
-                      <div id="pop-text-${index}" class="text pop-up">${this.checkNewLine(slide[2],index)}</div> 
-                    </div>
-
-	              `)}  
-
-
-                <!-- Next and previous buttons -->
-                <a class="prev" move="-1" @click="${this.moveSlide}">&#10094;</a>
-                <a class="next" move="1" @click="${this.moveSlide}">&#10095;</a>
-
-                <!-- The dots/circles -->
-                <div class="dots-container">
-                  ${this.rows.map((slide,index)=>html`
-                    <span class="dot" @click="${this.currentSlide}" currentSlide="${index+1}"></span>
-
-                  `)}
+          <h1 style="align-self:flex-start;">${this.e.name}</h1>
+          <h4 style="align-self:flex-start;">${this.e.details.sub_title}</h4>
+          
+          <!-- Full-width images with number and caption text -->
+          <div class="slides">
+            ${this.rows.map((slide,index)=>html` 
+              <div class="slide fade">
+                <div class="numbertext">${index+1}/${this.rows.length}</div>
+                <h3 class="title">${slide[1]}</h3>
+                <img class="image" src="/media/${slide[3]}" alt="${slide[1]}"/> 
+                <div class="captions text">
+                  ${this.getCaptions(slide[2]).map(caption=>html`
+                      <div class="caption">
+                        <h3 class="caption-title">${caption.title}</h3>
+                        <h3 class="caption-desc">${caption.desc}</h3>
+                      </div>
+                    `)}
                 </div>
+              </div>
+            `)}
           </div>
-               
 
-               
-`}constructor(){super();this.slideIndex=1}static get properties(){return{slideIndex:Number}}static get is(){return"manual-slideshow"}checkNewLine(text,index){if(text.includes("<br/>")||text.includes("<b>")){this.loader.then(()=>{let pop=this.shadowRoot.querySelector("#pop-text-"+index);pop.innerHTML=text})}else{return text}}moveSlide(e){let moveValue=parseInt(e.target.getAttribute("move"));console.log("move value",moveValue);this.showSlides(this.slideIndex+=moveValue)}currentSlide(e){let currentSlideValue=parseInt(e.target.getAttribute("currentSlide"));this.showSlides(this.slideIndex=currentSlideValue)}showSlides(n){var i;let slides=this.shadowRoot.querySelectorAll(".mySlides"),captions=this.shadowRoot.querySelectorAll(".text"),dots=this.shadowRoot.querySelectorAll(".dot");if(n>slides.length){this.slideIndex=1}if(1>n){this.slideIndex=slides.length}for(i=0;i<slides.length;i++){slides[i].style.display="none"}for(i=0;i<slides.length;i++){captions[i].style.display="none"}for(i=0;i<dots.length;i++){dots[i].className=dots[i].className.replace(" active","")}slides[this.slideIndex-1].style.display="block";if(0==this.slideIndex-1){captions[this.slideIndex-1].style.display="none"}else{captions[this.slideIndex-1].style.display="block"}dots[this.slideIndex-1].className+=" active"}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{self.showSlides(self.slideIndex)})}}customElements.define(ManualSlideshow.is,ManualSlideshow);export{manualSlideshow as $manualSlideshow,manualSlideshowCss as $manualSlideshowCss,ManualSlideshowBase,ManualSlideShowStyles};
+          <!-- The dots/circles -->
+          <div class="dots-container">
+            ${this.rows.map((slide,index)=>html`
+              <span class="dot" @click="${this.currentSlide}" currentSlide="${index+1}"></span>
+            `)}
+          </div>
+
+          <div class="navigator">
+            <div class="prev">
+              <iron-icon class="iron-icon " style="width:28px !important;height: 28px !important;" icon="chevron-left" move="-1"; @click=${this.moveSlide}></iron-icon>
+            </div>
+            <div class="next">
+              <iron-icon class="iron-icon" style="width:28px !important;height: 28px !important;" icon="chevron-right" move="1"; @click=${this.moveSlide}></iron-icon>
+            </div>
+          </div>
+      </div>       
+    `}constructor(){super();this.slideIndex=1}static get properties(){return{slideIndex:Number}}static get is(){return"manual-slideshow"}getCaptions(content){let captions=[];const breakTextSeparator=text=>text.split("<br/>"),textExtractor=text=>{const title=text.match(/<b>(.*?)<\/b>/)[1];let desc=text.match(/:(.*)/)[1];if(" "===desc[0]){desc=desc.substr(1)}return{title:title,desc:desc}};if(content.includes("<br/>")||content.includes("<b>")){captions=breakTextSeparator(content).map(item=>textExtractor(item))}else{captions=[{desc:content}]}return captions}checkNewLine(text,index){if(text.includes("<br/>")||text.includes("<b>")){this.loader.then(()=>{let pop=this.shadowRoot.querySelector("#pop-text-"+index);pop.innerHTML=text})}else{return text}}moveSlide(e){let moveValue=parseInt(e.target.getAttribute("move"));console.log("move value",moveValue);this.showSlides(this.slideIndex+=moveValue)}currentSlide(e){let currentSlideValue=parseInt(e.target.getAttribute("currentSlide"));this.showSlides(this.slideIndex=currentSlideValue)}showSlides(n){var i;let slides=this.shadowRoot.querySelectorAll(".slide"),captions=this.shadowRoot.querySelectorAll(".text"),dots=this.shadowRoot.querySelectorAll(".dot");if(n>slides.length){this.slideIndex=1}if(1>n){this.slideIndex=slides.length}for(i=0;i<slides.length;i++){slides[i].style.display="none"}for(i=0;i<slides.length;i++){captions[i].style.display="none"}for(i=0;i<dots.length;i++){dots[i].className=dots[i].className.replace(" active","")}slides[this.slideIndex-1].style.display="flex";if(0==this.slideIndex-1){captions[this.slideIndex-1].style.display="none"}else{captions[this.slideIndex-1].style.display="flex"}dots[this.slideIndex-1].className+=" active"}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{self.showSlides(self.slideIndex)})}}customElements.define(ManualSlideshow.is,ManualSlideshow);export{manualSlideshow as $manualSlideshow,manualSlideshowCss as $manualSlideshowCss,ManualSlideshowBase,ManualSlideShowStyles};

@@ -24,6 +24,7 @@ import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const 
     font-weight: regular;
     font-size: 16px;
     color: #fff;
+    font-weight: 450;
 }
 .nav__item:hover{
     /* font-weight: bolder; */

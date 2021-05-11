@@ -17,7 +17,7 @@ import{css,html,SectionPElementDsc}from"../../../../../components/adaptive-ui.js
 }
 p{
     font-size: 24px;
-    font-weight: 400;
+    font-weight: 600;
     margin-top: 12px;
 }
 .title{
