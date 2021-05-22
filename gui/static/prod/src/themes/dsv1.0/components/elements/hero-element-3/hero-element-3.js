@@ -62,15 +62,24 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     font-weight: bold;
     
     letter-spacing: .22px;
-
-    font-size: 80px;
-    line-height: 77px;
+    font-size: 60px;
+    max-width: 300px;
+    text-align: left;
+    line-height: 55px;
+}
+.mid-text {
+    font-size:19px;
+    font-weight: bold;
+    margin-bottom:18px;
+    color: var(--app-default-color)!important;
 }
 .c-paragraph {
     font-size: 19px;
     line-height: 20px;
     font-weight: 600;
     letter-spacing: .15px;
+    max-width: 550px;
+    text-align: left;
     color: #fff!important;
 }
 .str-btn {
@@ -78,12 +87,11 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
     
     background-color: var(--app-secondary-color)!important;
     color: #fff!important;
-    margin-top: 20px;
+    margin-top: 30px;
     border: none!important;
     font-weight: bold;
 
-    width: 274px !important;
-    height: 4em !important;
+    padding: 25px;
     font-size: 19px!important;
 }
 
@@ -188,7 +196,8 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
             <div class="parallax" ></div>
             <div class="container">
                 <div class="column">
-                    <h1 class="c-title-xl">${this.e.name}</h1>
+                    <h1 class="c-title-xl">${this.topText(this.e.name)}</h1>
+                    <h1 class="mid-text">${this.midText(this.e.name)}</h1>
                     <p class="c-paragraph">${this.e.defaultValue}</p>
                     <a href="${this.e.details.path}" class="button str-btn">${this.e.details.button_title}</a>
                 </div>
@@ -196,4 +205,4 @@ import{css,html,BaseElement}from"../../../../../components/adaptive-ui.js";const
                 </div>
             </
         </div>
-        `}static get is(){return`hero-element-3`}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}}customElements.define(HeroElement3.is,HeroElement3);export{heroElement3Css as $heroElement$3Css,HeroElement3Styles};
+        `}static get is(){return`hero-element-3`}firstUpdated(changedProperties){super.firstUpdated(changedProperties)}topText(text){const firstThreeWords=text.split(" ").filter((word,index)=>3>index);return firstThreeWords.join(" ")}midText(text){const restWords=text.split(" ").filter((word,index)=>3<=index);return restWords.join(" ")}}customElements.define(HeroElement3.is,HeroElement3);export{heroElement3Css as $heroElement$3Css,HeroElement3Styles};

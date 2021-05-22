@@ -80,12 +80,58 @@ import{PageViewElement,VIEW_MODE_DIALOG,css,html,Colors,Fonts,ServiceStyles}from
         .img-content{
           color: #fff;
           position: absolute;
-          bottom: 64px;
+          margin-top: 30px;
         }
         .img-content h1, .img-content p{
           color: inherit;
           text-transform: capitalize!important;
         }
+        nav {
+          display:flex;
+          flex-direction:column;
+          
+        }
+        .tabs-list{
+          display:flex;
+          flex-direction:row;
+          position:relative;
+        }
+        .tab-item {
+          display: flex;
+          width: 100%;
+          min-width: fit-content;
+          justify-content: center;
+          position:relative;
+          align-items:flex-end;
+          padding:5px 10px 5px 10px;
+        }
+        .glider-container{
+          width:100%;
+          display: flex;
+          position:relative;
+          margin-bottom:7px;
+        }
+        .glider {
+          display: flex;
+          height: 4px;
+          position:relative;
+          background-color: var(--app-accent-color);
+          margin:0;
+          border-radius: 99px;
+          transition: 0.25s ease-out;
+        }
+        .frame-bg {
+          color:black;
+        }
+        .is-active {
+          color: var(--app-accent-color);
+          font-size:20px;
+          font-weight: 400;
+        }
+        .is-active:hover {
+          color: var(--app-accent-color);
+        }
+
 
         @media only screen and (min-width: 421px) and (max-width: 767px) {
           .form-column {
@@ -123,20 +169,51 @@ import{PageViewElement,VIEW_MODE_DIALOG,css,html,Colors,Fonts,ServiceStyles}from
             <div class="form-column column-sm">
               <div class="overlay"></div>
               <div class="img-content">
+                <img src="${this.gateway.logo}" alt="logo" width="112" height="28">
                 <div class="heading">
-                  <h1 class="title"></h1>
-                  <p class="subtitle"></p>
+                  <h1 class="title">${this.gateway.name}</h1>
+                  <p class="subtitle">${this.gateway.tagLine}</p>
                 </div>
               </div>
             </div>
-
             <div class="column-lg form-col">
+              <header class="header card-head is-marginless">
+                <nav
+                  style="overflow: auto; overflow-y:hidden; width: 95%; margin: 0 auto"
+                >
+                  <ul class="tabs-list">
+                    ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+                        <link
+                          rel="stylesheet"
+                          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css"
+                          type="text/css"
+                        />
+                        ${pageGroup.pages.map((tab,tabIndex)=>html`
+                            <li
+                              id="tab_${tabIndex}"
+                              class="tab-item"
+                            >
+                              <a
+                                href="${this._changeLink(pageGroupIndex,tabIndex)}"
+                                @click=${this.addActive}
+                                class="frame-bg  ${pageGroupIndex==this._pageGroup&&tabIndex==this._page?"is-active":""}"
+                                >${tab.title}</a
+                              >
+                            </li>
+                          `)}
+                      `)}
+                  </ul>
+                  <div class="glider-container">
+                    <hr class="glider"/>
+                  </div>
+                </nav>
+              </header>
               <div class="content">
                 <div class="content-tab">
                   <div class="columns is-multiline cols is-paddingless">
                     ${this.page.pageInputGroups.map(feed=>html`
                         <div
-                          class="column is-paddingless w__cols ${this._gridClasses(feed)}"
+                          class="column w__cols ${this._gridClasses(feed)}"
                         >
                           <form-render
                             .feed="${feed}"
@@ -160,7 +237,7 @@ import{PageViewElement,VIEW_MODE_DIALOG,css,html,Colors,Fonts,ServiceStyles}from
         <span slot="title">${this._snackbarTitle}</span>
         <span>${this._snackbarMessage}</span>
       </snack-bar>
-   `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}fitstUpdated(){var parent=document.querySelector(".sidebar"),child=document.querySelector(".sidebar-inner");console.log("anwar");child.style.right=child.clientWidth-child.offsetWidth+"px"}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}getMainFontPath(url){if(url!=void 0||null!=url||""!=url){return url}else{return""}}static get styles(){return[Colors,Fonts,ServiceStyles,css`
+   `}constructor(){super();this.isSideMenuVisible=!1;this.isSideMenuVisible=!1;this.sideBarOpen=280;this.sideBarClose=60}static get properties(){return{pages:Array,tab:Object,profile:{type:Object,value:""},page:Number,mainColor:String,isSideMenuVisible:Boolean,isSubMenuOpen:Boolean,isProfileVisible:Boolean}}getMainFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}getBackupFont(url){if(url!=void 0){let[half,link]=url.split("&"),[part,font]=half.split("=");return font}else{return""}}firstUpdated(){var parent=document.querySelector(".sidebar"),child=document.querySelector(".sidebar-inner");this.positionGlider();console.log("anwar");const gliderContainer=document.querySelector(".glider-container"),resizeObserver=new ResizeObserver(entries=>{for(let entry of entries){if(entry.contentBoxSize){this.positionGlider()}}});resizeObserver.observe(gliderContainer);child.style.right=child.clientWidth-child.offsetWidth+"px"}selectToggle(){profile.classList.toggle("is-block");profile.classList.contains("is-block")?this.isProfileVisible=!0:this.isProfileVisible=!1}_changeLink(pageGroupIndex,tabIndex){var url=window.location.pathname+window.location.search+"#/"+pageGroupIndex+"/"+tabIndex+"/";return url}addActive(e){let current=document.getElementsByClassName("active");if(0<current.length){current[0].className=current[0].className.replace(" active","")}this.className+=" active";this.moveGlider(e)}getMainFontPath(url){if(url!=void 0||null!=url||""!=url){return url}else{return""}}positionGlider(){const glider=document.querySelector(".glider"),activeTab=document.querySelector(".is-active");glider.style.left=`${activeTab.parentNode.offsetLeft}px`;glider.style.width=`${activeTab.parentNode.getBoundingClientRect().width}px`}moveGlider(e){const glider=document.querySelector(".glider"),clickedElement=e.currentTarget,resizeObserver=new ResizeObserver(entries=>{for(let entry of entries){if(entry.contentBoxSize){glider.style.width=`${clickedElement.parentNode.getBoundingClientRect().width}px`;const transformDistance=clickedElement.parentNode.offsetLeft-glider.offsetLeft;glider.style.transform=`translateX(${transformDistance}px)`}}});resizeObserver.observe(clickedElement)}static get styles(){return[Colors,Fonts,ServiceStyles,css`
          :host {
            display: block;
          }

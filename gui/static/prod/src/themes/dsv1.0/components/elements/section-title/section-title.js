@@ -32,6 +32,13 @@ import{css,html,SectionPElementBase}from"../../../../../components/adaptive-ui.j
     letter-spacing: 0.15px;
     color: #1d1d1d;
 }
+.underline {
+    height:7px;
+    width:70px;
+    border-radius:2px;
+    border-width:0px;
+    background-color:var(--app-secondary-color)
+}
 
 `;var sectionTitleCss={SectionTitleStyles:SectionTitleStyles};class SectionTitle extends SectionPElementBase{static get styles(){return[SectionTitleStyles,css`
         :host {
@@ -42,6 +49,6 @@ import{css,html,SectionPElementBase}from"../../../../../components/adaptive-ui.j
         <div class="c-title-container" style="margin-top: 25px;">
             <h3 class="ii__title is-centered">${this.e.name}</h3>
             <p class="ii__paragraph" style="color: #1d1d1d">${this.e.defaultValue}</p> 
-                   
+            <hr class="underline">
         </div>    
     `}static get is(){return"section-title"}}customElements.define(SectionTitle.is,SectionTitle);export{sectionTitleCss as $sectionTitleCss,SectionTitleStyles};

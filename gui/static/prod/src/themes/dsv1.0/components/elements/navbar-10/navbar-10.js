@@ -1,260 +1,175 @@
 import{css,html,NavbarBase}from"../../../../../components/adaptive-ui.js";const NavbarTenStyles=css`
-nav {
-	font-size: 16px;
+.ii__container-main{
+  margin: 0 auto;
+  padding: 0 90px;
+  background-color: white;
 }
-      .bind-box {
-	margin-bottom: 1.5rem;
-	background-color: white;
-	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-	color: #4a4a4a;
-    display: block;
-    padding: 1.25rem 4.5rem;
-    
+/* header */
+.ii__main-header{
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  box-shadow: 0 1px 0 0 #d9d9d9;
+  /* background: #fff; */
 }
-
-.icon {
-  margin-left:2px;
-  margin-right:2px;
+.navbar{
+  background: transparent;
+  height: 5.5em;
+  background-color: white;
 }
-.level p a{
-  color: #D4D3D3;
-}
-
-.level p a:hover{
-  color: #4a4a4a;
-}
-
-.navbar-link{
-  color: #FFFFFF;
-}
-
-nav a{
-  font-size: 12px;
-}
-
-.menu-label {
-  color: #7a7a7a;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-#drop-down-container a{
+.nav__item{
+  font-weight: regular;
   font-size: 16px;
-  font-weight: 420;
+  font-weight: 450;
 }
-a.news::after, aside.menu ul.menu-list li a.news::after {
-  color: #fff;
-  content: " new ";
-  font-size: 10px;
-  background-color: #3273dc;
-  text-align: center;
+.nav__item:hover{
+  /* font-weight: bolder; */
+  position: relative;
+  color: #fff!important;
+  position: relative;
+  background: transparent!important;
 }
+.nav__item:hover::after{
+  position: absolute;
+  width: 100%;
+  border-bottom: 4px solid var(--app-secondary-color);
+  z-index: 9999;
+  content: '';
+  bottom: 0;
+  left: 0;
+}
+.nav__item:focus::after{
+  position: absolute!important;
+  width: 100%!important;
+  border-bottom: 4px solid var(--app-secondary-color)!important;
+  z-index: 9999!important;
+  content: ''!important;
+  bottom: 0!important;
+  left: 0!important;
+  background-color:white!important;
+  color:#fff!important;
+}
+a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
+  background-color:white!important;
+  color:black !important;
+}
+/* .nav__item:hover::after{
+  content: '';
+  position: absolute;
+  width: 90%;
+  height: 3px;
+  top: 50px;
+  left: 0;
+  background: #409DB5;
+} */
+.navbar-item .buttons .button{
+  font-size: 13px;
+  font-weight: inherit;
+  width: 115px;
+  height: 3em;
+}
+.navbar-item .logo-img {
+height: auto;
+object-fit: contain;
+width: 100%;
+}
+.navbar-item img{
+min-height: 3.75rem!important; 
+}
+.navbar-menu{
+  background-color: white!important;
+  margin-left: 50px;
+}
+.navbar-burger{
+  color:black!important;
+  margin: auto 0px auto auto;
+}
+.navbar-end {
+  width:100%;
+  justify-content:flex-start;
+}
+.login-btn {
+  display:block;
+  background-color:var(--app-secondary-color);
+  color:white;
+  border-radius:8px;
+  font-size: 16px;
+  font-weight: inherit;
+  height: fit-content;
+  padding: 7px 14px;
+  margin:7px;
+  text-align:center;
+  align-self: center;
+}
+.login-btn:hover {
+  border:2px solid var(--app-default-color);
 
-#site-name {
-	font-size: 25px;
 }
-`;var navbar10Css={NavbarTenStyles:NavbarTenStyles};class Navbar10 extends NavbarBase{static get properties(){return{categoriesDropDownMenuHidden:Boolean,newProductsDropDownMenuHidden:Boolean}}constructor(){super();this.categoriesDropDownMenuHidden=!0;this.newProductsDropDownMenuHidden=!0}static get styles(){return[NavbarTenStyles,css`
+@media screen and (max-width: 1023px){
+.ii__container-main{
+      margin: 0 auto;
+      padding: 0 10px;
+  }
+  .top{
+      position: relative;
+      top: 44px;
+  }
+  .login-btn {
+    border-radius:0;
+    text-align:left;
+    margin:0;
+  }
+}
+`;var navbar10Css={NavbarTenStyles:NavbarTenStyles};class Navbar10 extends NavbarBase{static get styles(){return[NavbarTenStyles,css`
         :host{
           display: block;
         }
       `]}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
-      <div id="section12" class="bind-box has-background-dark">
-        <div class="block">
-          <nav class="level">
-          <!-- left side -->
-            <div class="level-left is-size-7">
-              <p class="level-item"><a href="">Home</a></p>
-              <p class="level-item"><a href="">Shop</a></p>
-              <p class="level-item"><a href="">About</a></p>
-              <p class="level-item"><a href="">Blog</a></p>
-              <p class="level-item"><a href="">Vacancies</a></p>
-              <p class="level-item"><a href="">Contacts</a></p>
+    <div id="section11" class="bind-box">
+      <header class="ii__main-header">
+        <div class="ii__container-main">
+          <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:white">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="/" @click=${this.redirectPage} style="width: 200px;">
+                <img class="logo-img" src="/media/${this.gateway.logo}" alt="brand" >
+              </a>
+                
+              <a role="button" class="navbar-burger burger" @click=${this.addBlock} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
             </div>
-            <!-- right side -->
-            <div class="level-right has-text-white">
-              <div class="level-item">
-                <div class="field">
-                  <p class="control">
-                    <span class = "icon">
-                      <fa-icon class="fab fa-facebook-square" color="#FFFFFF" size="16px"></fa-icon>
-                   </span>
-                    <span class="icon">
-                    <fa-icon class="fab fa-instagram" color="#FFFFFF" size="16px"></fa-icon>
-                    </span>
-                    <span class="icon">
-                    <fa-icon class="fab fa-twitter" color="#FFFFFF" size="16px"></fa-icon>
-                    </span>
-                    <span class="icon">
-                    <fa-icon class="fab fa-pinterest-p" color="#FFFFFF" size="16px"></fa-icon>
-                    </span>
-                    <span class="icon">
-                    <fa-icon class="fab fa-google-plus" color="#FFFFFF" size="16px"></fa-icon>
-                    </span>
-                  </p>
-                </div>
+                
+            <div id="navbarBasicExample" class="navbar-menu">
+              <div class="navbar-end">
+               ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
+                ${pageGroup.pages.map((menu,menuIndex)=>html`
+                  ${this.e.details.hide.includes(menu.title)?html``:html`
+
+                    <a tabindex="${menuIndex+1}" class="${"Login"===menu.title?"login-btn":"navbar-item nav__item is-capitalized"}"
+                      @click="${this.scrollToSection}"
+                      style=${0===pageGroupIndex&&menuIndex===pageGroup.pages.length-1?"margin-right:auto;":""}
+                      data-name="${menu.id}"  pageGroup="${pageGroupIndex}" page="${menuIndex}" 
+                    >
+                      ${menu.title}
+                    </a>
+                    
+                  `}
+                `)}
+                  
+                `)}
+                
               </div>
             </div>
           </nav>
         </div>
-        <hr class="navbar-divider" clear="all">
-        <nav class="navbar has-background-dark has-text-white is-size-7"role="navigation" aria-label="dropdown navigation">
-          <div class="navbar-item has-dropdown is-active">
-            <a class="navbar-link has-background-info" @click = "${()=>this.dropCategoriesMenu()}">
-              Categories
-            </a>
-            <div class="navbar-dropdown has-background-info is-hidden">
-              <hr class="navbar-divider">
-              <div class="navbar-item">
-                New
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
-                Women
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item is-active">
-                Men
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
-                Kids
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
-                Accessories
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
-                Top Sales
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
-                Discounts
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
-                Collections
-              </div>
-              <hr class="navbar-divider">
-            </div>
-          </div>
-            <div class="navbar-brand has-text-centered">
-              <a class="navbar-item site-name" href="https://bulma.io">
-                <img src="https://bulma.io/images/bulma-logo-white.png" width="112" height="28">
-              </a>
-            </div>
-          <div class="navbar-menu">
-            <div class="navbar-end">
-              <div class="field">
-                <p class="control">
-                  <span class="icon">
-                  <fa-icon class="fas fa-shopping-cart" color="#FFFFFF" size="18px"></fa-icon>
-                  </span>
-                </p>
-              </div>
-                <div class="navbar-item has-dropdown">
-                  <a class="navbar-item">
-                    <figure class="image is-32x32">
-                      <img id="user-pic" class="is-rounded" src="https://bulma.io/images/placeholders/32x32.png">
-                    </figure>
-                  </a>
-                  <a class="navbar-link">
-                    Patrick Lawrence
-                  </a>
-                </div>
-            </div>
-          </div>
-        </nav>        
-      </div>
-      <div id="drop-down-container" class="bind-box is-hidden">
-        <div class="columns">
-          <div id="drop-down-categories-menu" class="column has-background-info">
-            <aside class="menu">
-              <ul id="category-menu" class="menu-list">
-                <li><a class= "is-active" @click='${()=>this.toggleProductMenu("new")}'>New</a></li>
-                <li><a @click='${()=>this.toggleProductMenu("men")}'>Men</a></li>
-                <li><a @click='${()=>this.toggleProductMenu("women")}'>Women</a></li>
-                <li><a @click='${()=>this.toggleProductMenu("kids")}'>Kids</a></li>
-                <li><a @click='${()=>this.toggleProductMenu("accessories")}'>Accessories</a></li>
-                <li><a @click='${()=>this.toggleProductMenu("discounts")}'>Discounts</a></li>
-                <li><a @click='${()=>this.toggleProductMenu("collections")}'>Collections</a></li>
-              </ul>
-            </aside>
-          </div>
-        <div class="column">
-          <aside class="menu">
-            <p class="menu-label">
-            Outerwear
-            </p>
-            <ul class="menu-list">
-              <li><a href="">Coats</a></li>
-              <li><a href="">Jacket</a></li>
-              <li><a href="" class="news">Cloaks</a></li>
-              <li><a href="">Winter Jackets</a></li>
-              <li><a href="">Wind Breakers</a></li>
-            </ul>
-            <p class="menu-label">
-            Jumpers & Cardigans
-            </p>
-            <ul class="menu-list">
-              <li><a href="">Vests</a></li>
-              <li><a href="">Jumpers</a></li>
-              <li><a href="">Sweaters</a></li>
-              <li><a href="">Cardigans</a></li>
-            </ul>
-          </aside>
-        </div>
-        <div class="column">
-          <aside class="menu">
-            <p class="menu-label">
-            Pants & Jeans
-            </p>
-            <ul class="menu-list">
-              <li><a href="">Classic</a></li>
-              <li><a href="" class="news">Sport</a></li>
-              <li><a href="">Jeans</a></li>
-              <li><a href="">Daily</a></li>
-              <li><a href="">Warm</a></li>
-            </ul>
-            <p class="menu-label">
-            T-Shirts & Shirts
-            </p>
-            <ul class="menu-list">
-              <li><a href="">T-Shirts</a></li>
-              <li><a href="" class="news">Polo</a></li>
-              <li><a href="">Shirts</a></li>
-              <li><a href="">Undershirts</a></li>
-            </ul>
-          </aside>
-        </div>
-        <div class="column">
-          <aside class="menu">
-            <p class="menu-label">
-            Shoes
-            </p>
-            <ul class="menu-list">
-              <li><a href="">Sport</a></li>
-              <li><a href="">Classic</a></li>
-              <li><a href="" class="news">Essentials</a></li>
-              <li><a href="">Evening</a></li>
-              <li><a href="">Slippers</a></li>
-            </ul>
-            <p class="menu-label">
-            Underwears
-            </p>
-            <ul class="menu-list">
-              <li><a href="">Boxers</a></li>
-              <li><a href="">Briefs</a></li>
-              <li><a href="">Complects</a></li>
-              <li><a href="">Shorts</a></li>
-            </ul>
-          </aside>
-        </div>
+      </header>
+    </div>
 
-      </div>
-      </div>
-
-     `}dropCategoriesMenu(){const dropDownContainer=this.shadowRoot.getElementById("drop-down-container");if(!0===this.categoriesDropDownMenuHidden){dropDownContainer.classList.remove("is-hidden");this.categoriesDropDownMenuHidden=!1}else{dropDownContainer.classList.add("is-hidden");this.categoriesDropDownMenuHidden=!0;const menuItems=this.shadowRoot.querySelector("#category-menu").querySelectorAll("a");menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[0].classList.add("is-active")}}toggleProductMenu(product){const menuItems=this.shadowRoot.querySelector("#category-menu").querySelectorAll("a");if("new"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[0].classList.add("is-active")}else if("men"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[1].classList.add("is-active")}else if("women"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[2].classList.add("is-active")}else if("kids"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[3].classList.add("is-active")}else if("accessories"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[4].classList.add("is-active")}else if("discounts"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[5].classList.add("is-active")}else if("collections"===product){menuItems.forEach(item=>item.classList.remove("is-active"));menuItems[6].classList.add("is-active")}}static get is(){return"navbar-10"}}customElements.define(Navbar10.is,Navbar10);export{navbar10Css as $navbar$10Css,NavbarTenStyles};
+     `}loginBtn(){}reloadPage(){window.location.reload()}redirectPage(){window.location.href="/"}addBlock(){let nav=this.shadowRoot.querySelector(".navbar-menu");nav.classList.toggle("is-block")}scrollToSection(event){let targetElement=event.target,selectedPagegroup=event.target.getAttribute("pageGroup"),selectedPage=event.target.getAttribute("page");if(this._pageGroup==selectedPagegroup){var menuId=event.target.getAttribute("data-name");let navHeight=this.shadowRoot.querySelector(".navbar").offsetHeight;const element=document.getElementById(menuId);if(element){const bodyRect=document.body.getBoundingClientRect().top,elementRect=element.getBoundingClientRect().top;window.scrollTo({top:elementRect-bodyRect-navHeight,behavior:"smooth"})}}else{window.location.hash="#/"+selectedPagegroup+"/"+selectedPage}}static get is(){return"navbar-10"}init(pElement,loader){super.init(pElement,loader)}}customElements.define(Navbar10.is,Navbar10);export{navbar10Css as $navbar$10Css,NavbarTenStyles};
