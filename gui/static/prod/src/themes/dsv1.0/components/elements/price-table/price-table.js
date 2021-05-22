@@ -23,11 +23,6 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
 
 .price-title{
     text-align: center;
-    background-color: var(--app-default-color);
-    color: #fff;
-    padding: 24px;
-    border-top-left-radius: 80px;
-    border-top-right-radius: 8px;
 }
 
 .price-title h2 {
@@ -42,10 +37,6 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
     justify-content: center;
     align-items: center;
     background:#fff;
-    border-radius: 8px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 80px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
     
@@ -71,16 +62,10 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
 }
 
 .price {
-    margin-top: 16px;
     text-align: center;
     border-radius: 50%;
-    height: 180px;
-    width: 180px;
-    line-height: 180px;
     background: transparent;
-    color: var(--app-secondary-color);
-    border: 3px solid var(--app-secondary-color);
-    transition: 1.0s;
+    transition: all 1s ease 0s;
 }
 
 .price p {
@@ -89,11 +74,7 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
 }
 
 .price:hover {
-    background: linear-gradient(var(--app-accent-color), var(--app-secondary-color));
-    color: #fff;
-    border-radius: 50%;
-    border: none;
-    
+
 }
 .description {
     margin-top: 16px;
@@ -110,18 +91,32 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
 .button {
     margin-top:16px;
     margin-bottom:38px;
-    width: 80%!important;
-    background-color: var(--app-accent-color)!important;
+    width: 70%!important;
+    background-color: var(--app-secondary-color)!important;
     color: #fff!important;
-    border-radius:8px!important;
+    border-radius:20px 20px !important;
 }
 .button:hover {
     background-color:var(--app-accent-color)!important;
     color:var(--app-secondary-color)!important;
     border:3px solid var(--app-secondary-color)!important;
-    border-radius:8px!important;
     border-color: var(--app-secondary-color)!important;
     
+}
+.item-index {
+    display: flex;
+    width:35px;
+    height:35px;
+    margin:16px;
+    border-radius:50%;
+    background-color:var(--app-secondary-color)!important;
+    color: white;
+    font-size:24px;
+    justify-content: center;
+    align-items: center;
+}
+.item-index:hover {
+    background-color:var(--app-accent-color)!important;
 }
 
 
@@ -215,24 +210,27 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
                   </div>
 
                   <div class="columns is-multiline container-group-${index}">
-                  ${this._getData(group).map(item=>html`
+                  ${this._getData(group).map((item,index)=>html`
                   <div class="column">
-    
                   <div  class="ii__product">
-                    <div class="price-title">
-                      <h2>${item.name}</h2>
-                    </div>
                     <div class="contents">
+                          <div class="item-index">
+                            ${index+1}
+                          </div>
+                          <div class="price-title">
+                            <h2>${item.name}</h2>
+                          </div>
+                          <div class="description">
+                            <p>${this.priceText(item.description)}</p>
+                            <p>${this.dayText(item.description)}</p>
+                            <p>${this.bestText(item.description)}</p>
+                          </div>
                           <div class="price">
                             <p>${item.count}</p>
                           </div>
-                          <div class="description">
-                              <p>${item.description}</p>
-    
-                            
-                          </div>
+                          <p>${this.perTypeText(item.name)}</p>
                           <a href="${item.kind}"  target="_blank" class="button is-normal is-fullwidth" service="${item.kind}" @click="${this.launchService}">
-                              <p>BUY NOW</p>
+                              <p>BUY</p>
                           </a>
                     </div>
                   </div>
@@ -248,4 +246,4 @@ import{dataSourceMixin,utilsMixin,BaseElement,css,html}from"../../../../../compo
 
               
       
-  `}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{this.shadowRoot.querySelectorAll(".column-group-0");window.addEventListener("scroll",()=>{self.scrollAppear()})})}getGroupTitles(detailsObject){return Object.keys(detailsObject)}_getData(key){return this.e.details[key]}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}getTitle(text){let[title,subtitle]=text.split("|");return title}getSubTitle(text){let[title,subtitle]=text.split("|");return subtitle}scrollAppear(){const self=this;let contentContainer=self.shadowRoot.querySelector(".price-content"),contentStartPosition=contentContainer.getBoundingClientRect().top,screenPosition=window.innerHeight/2;if(contentStartPosition<screenPosition){contentContainer.classList.add("animate1-appear")}}onLoadData(dsc){super.onLoadData(dsc)}}customElements.define(PriceTable.is,PriceTable);export{priceTable as $priceTable,priceTableCss as $priceTableCss,PriceTableBase,PriceTableStyles};
+  `}priceText(text){return text.split(" ").find((word,index)=>3===index)}dayText(text){const firstSentence=text.split(".")[0];return firstSentence.split(" ").filter((word,index)=>3<index).map(word=>{if("sms"===word){return word.toUpperCase()}else{return word}}).join(" ")}bestText(text){return text.split(".")[1]}perTypeText(text){return text.split(" ").includes("Email")?"per Email":"per SMS"}firstUpdated(changedProperties){super.firstUpdated(changedProperties);const self=this;this.loader.then(()=>{this.shadowRoot.querySelectorAll(".column-group-0");window.addEventListener("scroll",()=>{self.scrollAppear()})})}getGroupTitles(detailsObject){return Object.keys(detailsObject)}_getData(key){return this.e.details[key]}_computeData(index){return this.data[index]}_rowsOrColumns(cData){if(cData===void 0){return}return cData.length}getTitle(text){let[title,subtitle]=text.split("|");return title}getSubTitle(text){let[title,subtitle]=text.split("|");return subtitle}scrollAppear(){const self=this;let contentContainer=self.shadowRoot.querySelector(".price-content"),contentStartPosition=contentContainer.getBoundingClientRect().top,screenPosition=window.innerHeight/2;if(contentStartPosition<screenPosition){contentContainer.classList.add("animate1-appear")}}onLoadData(dsc){super.onLoadData(dsc)}}customElements.define(PriceTable.is,PriceTable);export{priceTable as $priceTable,priceTableCss as $priceTableCss,PriceTableBase,PriceTableStyles};

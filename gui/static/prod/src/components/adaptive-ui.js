@@ -2979,11 +2979,12 @@ var extendStatics=function(d,b){extendStatics=Object.setPrototypeOf||{__proto__:
 
 `;var datalistCalenderStylesCss={DatalistCalenderStyles:DatalistCalenderStyles};const DatasourceTableActionsStyles=css`
 /* CSS rules for your element */
-:host {
-    display: block;
-    min-width: max-content;
-}
 
+@media screen and (max-width: 414px){ 
+    :host {
+        justify-content: center;
+    }
+}
 `;var datasourceTableActionsCss={DatasourceTableActionsStyles:DatasourceTableActionsStyles};const DatasourceTableFootertyles=css`
 
 `;var datasourceTableFooterCss={DatasourceTableFootertyles:DatasourceTableFootertyles};const DatasourceTableHeadStyles=css`
@@ -3018,7 +3019,7 @@ var extendStatics=function(d,b){extendStatics=Object.setPrototypeOf||{__proto__:
 
 `;var loaderElementCss={LoaderElementStyles:LoaderElementStyles};class DataSourceTableActions extends LitElement{static get styles(){return[DatasourceTableActionsStyles,css`
         :host {
-          display: block;
+          display: flex;
         }
       `]}render(){return html$3`
        

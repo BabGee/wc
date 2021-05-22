@@ -52,10 +52,18 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.75) 9px 11px 49px -21px;
 }
+.buttons {
+  align-items:flex-end;
+  
+}
+.button {
+  padding: 8px .75em;
+}
 
 @media screen and (min-width: 280px) and (max-width: 320px){
   .table-header-buttons .search_box {
     width: 164px!important;
+    min-width:100%;
   }
   .search_field input{
     width: 88px!important;
@@ -71,6 +79,20 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
       width: 86%;
       margin: 0!important;
       display: block!important;
+  }
+
+  .buttons {
+    margin-top:20px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .buttons .button {
+    display: flex;
+    flex: 1;
+  }
+  #search-btns {
+    flex-direction: row;
+    display: flex;
   }
 }
 
@@ -93,11 +115,25 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
       margin: 0!important;
       display: block!important;
   }
+  .buttons {
+    margin-top:20px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .buttons .button {
+    display: flex;
+    flex: 1;
+  }
+  #search-btns {
+    flex-direction: row;
+    display: flex;
+  }
 }
 
 @media screen and (min-width: 360px) and (max-width: 406px){
   .table-header-buttons .search_box {
-    width: 241px!important;
+    max-width: 100%;
+    margin:0;
   }
   .search_field input{
     width: 168px!important;
@@ -110,15 +146,29 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
   }
   .dl-buttons{
       top: 12px;
-      width: 88%;
+      width: 83%;
       margin: 0!important;
       display: block!important;
+  }
+  .buttons {
+    margin-top:20px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .buttons .button {
+    display: flex;
+    flex: 1;
+  }
+  #search-btns {
+    flex-direction: row;
+    display: flex;
   }
 }
 
 @media screen and (min-width: 407px) and (max-width: 480px){
   .table-header-buttons .search_box {
     width: 175px!important;
+    flex:2;
   }
   .search_field input{
     width: 95px!important;
@@ -126,11 +176,28 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
   .table-header-buttons .search_box .dropdown::before{
       right: 7px!important;
   }
+  .buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .buttons .button {
+    display: flex;
+    flex: 1;
+  }
 }
 
 @media screen and (min-width: 481px) and (max-width: 540px){
   .table-header-buttons .search_box {
-    width: 250px!important;
+    width: 175px!important;
+    flex:2;
+  }
+  .buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .buttons .button {
+    display: flex;
+    flex: 1;
   }
   .search_field input{
     width: 150px!important;
@@ -138,18 +205,35 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
   .table-header-buttons .search_box .dropdown::before{
       right: 10px!important;
   }
+  
 }
 
 @media screen and (min-width: 541px) and (max-width: 570px){
-  .table-header-buttons .search_box {
-    width: 250px!important;
-  }
   .search_field input{
     width: 150px!important;
   }
   .table-header-buttons .search_box .dropdown::before{
       right: 10px!important;
   }
+
+  .table-header-buttons .search_box {
+    width: 175px!important;
+    flex:2;
+  }
+  .buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .buttons .button {
+    display: flex;
+    flex: 1;
+  }
+  #search-btns {
+    flex-direction: row;
+    display: flex;
+  }
+
+
 }
 
 @media screen and (min-width: 571px) and (max-width: 606px){
@@ -164,10 +248,30 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
   }
 }
 
+@media only screen and (min-device-width: 766px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+  #search-btns {
+    flex-direction: row;
+    display: flex;
+  }
+  .table-header-buttons .search_box {
+    min-width:83%;
+  }
+  .search_field {
+    width: 100%;
+  }
+  #q {
+    width: 95%;
+  }
+}
+
 #search_area{
-    justify-content: center!important;
     align-items: center!important;
-    padding-top: 30px;
+    padding-top: 20px;
+}
+#refresh-button {
+  background: var(--app-default-color)!important;
+  color:#fff!important;
+  border: none!important;
 }
 #pdf-btn{
     background: var(--app-default-color)!important;
@@ -275,6 +379,7 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
         flex-direction: column;
 
     }
+    
 }
 `;var tableTypeHeaderCss={TableTypeHeaderStyles:TableTypeHeaderStyles};const TableStyles=css`
 
@@ -1115,42 +1220,43 @@ border-bottom: 0;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <div class="table-header-buttons" style="margin-bottom: 15px;">
       <div class="columns">
-        <div class="column">
+        <div class="column is-flex-direction-column">
           <div class="heading">
             <h1 class="title is-size-6">${this.title}</h1>
           </div>
-          <div class="buttons is-pulled-left is-flex" style="width:45%;">
-            <button id ="pdf-btn" @click="${this.generatePDF}" class="button is-size-7 is-rounded">Export PDF</button>
-            <button id ="csv-btn" @click="${this.generateCSV}" class="button is-size-7 is-rounded">Export CSV</button>
-            <span class="refresh-button" @click="${this.refresh}">
-            <fa-icon class="fas fa-sync" size="1em" color="#fff"></fa-icon>
-           </span>
+          <div id="search_area" class="is-flex">
+            <div class="search_box">
+              <div class="dropdown" @click=${this.dropdown}>
+                <div id="qIn" @click="${this.specificDropdown}" class="default_option">All</div>
+                  <ul class="search_ul">
+                    <li class="search_item" @click="${this.updateSearchItem}">All</li>
+                      ${this.searchFields(this.columns).map(item=>html`<li class="search_item" @click="${this.updateSearchItem}" param="${item.propertyPath}">${item.header}</li>`)}
+                    </ul>
+                  </div>
+                  <div class="search_field">
+                    <input id="q" type="text" name="serach" class="input" placeholder="Search..." value="${this.searchText}"/>
+                  </div>
+                </div>
+                <div id="search-btns">
+                  <button class="button is-size-7 dl-buttons" style="height: 23px; background-color:var(--app-default-color); color: #fff; padding: 8px .75em;" type="submit" @click="${this._search}">Search</button>
+                  <button class="button is-size-7 dl-buttons" style="height: 23px; background-color:var(--app-secondary-color);margin-left: 3px; color: #fff; padding: 8px .75em;" type="button" @click="${this._searchReset}">Clear</button>
+                </div>
+              </div>     
+            </div>
+            ${this._searchFieldsExist(this.columns)?html`
+                <div class="column is-flex" style="justify-content: flex-end;">
+                  <div class="buttons is-pulled-left" >
+                    <span id="refresh-button" class="button is-size-7" @click="${this.refresh}">
+                      <fa-icon class="fas fa-redo" size="1.4em" color="#fff"></fa-icon>
+                    </span>
+                    <button id ="pdf-btn" @click="${this.generatePDF}" class="button is-size-7">Export PDF</button>
+                    <button id ="csv-btn" @click="${this.generateCSV}" class="button is-size-7">Export CSV</button>
+                </div>
+              </div>  
+              `:html``}
+            
           </div>
         </div>
-        ${this._searchFieldsExist(this.columns)?html`
-
-        <div id="search_area" class="column is-flex">
-          <div class="search_box">
-            <div class="dropdown" @click=${this.dropdown}>
-              <div id="qIn" @click="${this.specificDropdown}" class="default_option">All</div>
-              <ul class="search_ul">
-              <li class="search_item" @click="${this.updateSearchItem}">All</li>
-              ${this.searchFields(this.columns).map(item=>html`<li class="search_item" @click="${this.updateSearchItem}" param="${item.propertyPath}">${item.header}</li>`)}
-              </ul>
-            </div>
-            <div class="search_field">
-              <input id="q" type="text" name="serach" class="input" placeholder="Search..." value="${this.searchText}"/>
-            </div>
-          </div>
-          <button class="button is-size-7 is-rounded dl-buttons" style="height: 23px; background-color:var(--app-default-color); color: #fff; padding: 8px .75em;" type="submit" @click="${this._search}">Search</button>
-          <button class="button is-size-7 is-rounded dl-buttons" style="height: 23px; background-color:var(--app-secondary-color);margin-left: 3px; color: #fff; padding: 8px .75em;" type="button" @click="${this._searchReset}">Clear</button>
-        </div>
-        
-        
-        `:html``}
-        
-      </div>
-    </div>
 
 
 
