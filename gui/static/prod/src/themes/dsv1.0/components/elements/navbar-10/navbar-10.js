@@ -127,7 +127,15 @@ min-height: 3.75rem!important;
         :host{
           display: block;
         }
-      `]}renderDefault(){return html`
+      `]}visibleMenuTitles(pageGroup,pageGroupIndex){return pageGroup.pages.map((menu,menuIndex)=>{let firstVisibleMenuIndex=0;if(!this.e.details.hide.includes(menu.title)){firstVisibleMenuIndex+=1;return html`
+          <a tabindex="${menuIndex+1}" class="${"Log In"===menu.title?"login-btn":"navbar-item nav__item is-capitalized"}"
+            @click="${this.scrollToSection}"
+            style=${1===pageGroupIndex&&1===firstVisibleMenuIndex?"margin-left:auto;":""}
+            data-name="${menu.id}"  pageGroup="${pageGroupIndex}" page="${menuIndex}" 
+          >
+            ${menu.title}
+          </a>            
+        `}else{return html``}})}renderDefault(){return html`
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 
     <div id="section11" class="bind-box">
@@ -148,23 +156,7 @@ min-height: 3.75rem!important;
                 
             <div id="navbarBasicExample" class="navbar-menu">
               <div class="navbar-end">
-               ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>html`
-                ${pageGroup.pages.map((menu,menuIndex)=>html`
-                  ${this.e.details.hide.includes(menu.title)?html``:html`
-
-                    <a tabindex="${menuIndex+1}" class="${"Login"===menu.title?"login-btn":"navbar-item nav__item is-capitalized"}"
-                      @click="${this.scrollToSection}"
-                      style=${0===pageGroupIndex&&menuIndex===pageGroup.pages.length-1?"margin-right:auto;":""}
-                      data-name="${menu.id}"  pageGroup="${pageGroupIndex}" page="${menuIndex}" 
-                    >
-                      ${menu.title}
-                    </a>
-                    
-                  `}
-                `)}
-                  
-                `)}
-                
+                ${this.interface.pageGroups.map((pageGroup,pageGroupIndex)=>this.visibleMenuTitles(pageGroup,pageGroupIndex))} 
               </div>
             </div>
           </nav>
