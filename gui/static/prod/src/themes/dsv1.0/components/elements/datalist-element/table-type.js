@@ -53,220 +53,18 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
     box-shadow: rgba(0, 0, 0, 0.75) 9px 11px 49px -21px;
 }
 .buttons {
-  align-items:flex-end;
-  
+  height: fit-content;
+  align-self: flex-end;
+  width: 100%;
+  justify-content: flex-end;
 }
 .button {
-  padding: 8px .75em;
-}
-
-@media screen and (min-width: 280px) and (max-width: 320px){
-  .table-header-buttons .search_box {
-    width: 164px!important;
-    min-width:100%;
-  }
-  .search_field input{
-    width: 88px!important;
-  }
-  #search_area{
-    display: block!important;
-  }
-  .table-header-buttons .search_box .dropdown::before{
-      right: 4px!important;
-  }
-  .dl-buttons{
-      top: 12px;
-      width: 86%;
-      margin: 0!important;
-      display: block!important;
-  }
-
-  .buttons {
-    margin-top:20px;
-    width: 100%;
-    justify-content: space-between;
-  }
-  .buttons .button {
-    display: flex;
-    flex: 1;
-  }
-  #search-btns {
-    flex-direction: row;
-    display: flex;
-  }
-}
-
-@media screen and (min-width: 321px) and (max-width: 359px){
-  .table-header-buttons .search_box {
-    width: 198px!important;
-  }
-  .search_field input{
-    width: 124px!important;
-  }
-  #search_area{
-    display: block!important;
-  }
-  .table-header-buttons .search_box .dropdown::before{
-      right: 2px!important;
-  }
-  .dl-buttons{
-      top: 12px;
-      width: 86%;
-      margin: 0!important;
-      display: block!important;
-  }
-  .buttons {
-    margin-top:20px;
-    width: 100%;
-    justify-content: space-between;
-  }
-  .buttons .button {
-    display: flex;
-    flex: 1;
-  }
-  #search-btns {
-    flex-direction: row;
-    display: flex;
-  }
-}
-
-@media screen and (min-width: 360px) and (max-width: 406px){
-  .table-header-buttons .search_box {
-    max-width: 100%;
-    margin:0;
-  }
-  .search_field input{
-    width: 168px!important;
-  }
-  #search_area{
-    display: block!important;
-  }
-  .table-header-buttons .search_box .dropdown::before{
-      right: 2px!important;
-  }
-  .dl-buttons{
-      top: 12px;
-      width: 83%;
-      margin: 0!important;
-      display: block!important;
-  }
-  .buttons {
-    margin-top:20px;
-    width: 100%;
-    justify-content: space-between;
-  }
-  .buttons .button {
-    display: flex;
-    flex: 1;
-  }
-  #search-btns {
-    flex-direction: row;
-    display: flex;
-  }
-}
-
-@media screen and (min-width: 407px) and (max-width: 480px){
-  .table-header-buttons .search_box {
-    width: 175px!important;
-    flex:2;
-  }
-  .search_field input{
-    width: 95px!important;
-  }
-  .table-header-buttons .search_box .dropdown::before{
-      right: 7px!important;
-  }
-  .buttons {
-    width: 100%;
-    justify-content: space-between;
-  }
-  .buttons .button {
-    display: flex;
-    flex: 1;
-  }
-}
-
-@media screen and (min-width: 481px) and (max-width: 540px){
-  .table-header-buttons .search_box {
-    width: 175px!important;
-    flex:2;
-  }
-  .buttons {
-    width: 100%;
-    justify-content: space-between;
-  }
-  .buttons .button {
-    display: flex;
-    flex: 1;
-  }
-  .search_field input{
-    width: 150px!important;
-  }
-  .table-header-buttons .search_box .dropdown::before{
-      right: 10px!important;
-  }
-  
-}
-
-@media screen and (min-width: 541px) and (max-width: 570px){
-  .search_field input{
-    width: 150px!important;
-  }
-  .table-header-buttons .search_box .dropdown::before{
-      right: 10px!important;
-  }
-
-  .table-header-buttons .search_box {
-    width: 175px!important;
-    flex:2;
-  }
-  .buttons {
-    width: 100%;
-    justify-content: space-between;
-  }
-  .buttons .button {
-    display: flex;
-    flex: 1;
-  }
-  #search-btns {
-    flex-direction: row;
-    display: flex;
-  }
-
-
-}
-
-@media screen and (min-width: 571px) and (max-width: 606px){
-  .table-header-buttons .search_box {
-    width: 303px!important;
-  }
-  .search_field input{
-    width: 210px!important;
-  }
-  .table-header-buttons .search_box .dropdown::before{
-      right: 10px!important;
-  }
-}
-
-@media only screen and (min-device-width: 766px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
-  #search-btns {
-    flex-direction: row;
-    display: flex;
-  }
-  .table-header-buttons .search_box {
-    min-width:83%;
-  }
-  .search_field {
-    width: 100%;
-  }
-  #q {
-    width: 95%;
-  }
+  padding: 7px 20px;
+  margin:0 0 0 40px;
 }
 
 #search_area{
     align-items: center!important;
-    padding-top: 20px;
 }
 #refresh-button {
   background: var(--app-default-color)!important;
@@ -277,6 +75,7 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
     background: var(--app-default-color)!important;
     color:#fff!important;
     border: none!important;
+    margin-right:-1.5rem!important;
 }
 #csv-btn{
     background: var(--app-secondary-color)!important;
@@ -288,23 +87,23 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
     background: #fff;
     border-radius: 6px; 
     display: flex;
-    height: 40px;
-    width: 378px;
+    flex:2;
     margin-right: 10px;
     /* width: 200px; */
     /* box-shadow: 0 8px 6px -10px #b3c6ff; */
 }
 .table-header-buttons .search_box .dropdown{
-    width: 150px;
+    flex:1;
     border-right: 2px solid #dde2f1;
     color: rgb(1, 50, 67);
     position: relative;
     cursor: pointer;
+    border-radius:0px;
 }
 .table-header-buttons .search_box .dropdown::before{
     content: '';
     position: absolute;
-    top: 18px;
+    top: 20px;
     right: 20px;
     border: 5px solid;
     border-color: #9B9B9B transparent transparent transparent;
@@ -312,9 +111,10 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
 .table-header-buttons .search_box .dropdown .default_option{
     padding: 13px 15px;
     font-size: 14px;
-    position: relative;
-    top: -3px;
+    position: static;
+    top:0;
     font-weight: 500;
+    
 }
 .table-header-buttons .search_box .dropdown ul{
     display: none;
@@ -338,16 +138,17 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
     background-color: #e5e5e5;
 }
 .search_field{
-    width: 250px;
+    display:flex;
+    flex: 3;
     position: relative;
 }
 .search_field input{
-    border-color: transparent;
-    width: 227px;
-    font-size: 16px; 
-    padding: none;
-    height: 38px;
-    padding: 0 0 0 20px;
+  border-color: transparent;
+  font-size: 16px;
+  height:inherit;
+  padding:0 7px 0 7px;
+  box-shadow:none;
+  border-radius:0 6px 6px 0;
 }
 .search_field input:hover{
     border-color: transparent;
@@ -357,6 +158,11 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
 }
 .search_field input:focus{
     outline: none;
+    border-color: transparent;
+}
+.input {
+    border-radius:none;
+    border-color:none;
 }
 
 .refresh-button{
@@ -371,15 +177,32 @@ import{css,LitElement,html,DatalistHeaderStyles}from"../../../../../components/a
 .refresh-button:hover {
     background-color: var(--app-secondary-color);
 }
-
-@media screen and (max-width: 769px){ 
-    .columns{
-
-        display: flex;
-        flex-direction: column;
-
-    }
-    
+@media screen and (max-width: 600px) {
+  #pdf-btn{
+    margin-right:0.5rem!important;
+}
+  #search_area {
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-wrap:wrap;
+  }
+  .search_box {
+    min-width: 100%;
+  }
+  #search-btns {
+    margin-top:20px;
+    width:100%;
+    display:flex;
+  }
+  .button {
+    flex:1;
+  }
+  .table-header-buttons .search_box{
+    margin-right:0px;   
+  }
+  .button {
+    margin:5px;
+  }
 }
 `;var tableTypeHeaderCss={TableTypeHeaderStyles:TableTypeHeaderStyles};const TableStyles=css`
 
@@ -1225,7 +1048,7 @@ border-bottom: 0;
             <h1 class="title is-size-6">${this.title}</h1>
           </div>
           <div id="search_area" class="is-flex">
-            <div class="search_box">
+            <div class="search_box is-flex">
               <div class="dropdown" @click=${this.dropdown}>
                 <div id="qIn" @click="${this.specificDropdown}" class="default_option">All</div>
                   <ul class="search_ul">
@@ -1238,14 +1061,14 @@ border-bottom: 0;
                   </div>
                 </div>
                 <div id="search-btns">
-                  <button class="button is-size-7 dl-buttons" style="height: 23px; background-color:var(--app-default-color); color: #fff; padding: 8px .75em;" type="submit" @click="${this._search}">Search</button>
-                  <button class="button is-size-7 dl-buttons" style="height: 23px; background-color:var(--app-secondary-color);margin-left: 3px; color: #fff; padding: 8px .75em;" type="button" @click="${this._searchReset}">Clear</button>
+                  <button class="button is-size-7 dl-buttons" style="background-color:var(--app-default-color); color: #fff; margin:5px;" type="submit" @click="${this._search}">Search</button>
+                  <button class="button is-size-7 dl-buttons" style="background-color:var(--app-secondary-color); margin:5px; color: #fff;" type="button" @click="${this._searchReset}">Clear</button>
                 </div>
               </div>     
             </div>
-            ${this._searchFieldsExist(this.columns)?html`
+          
                 <div class="column is-flex" style="justify-content: flex-end;">
-                  <div class="buttons is-pulled-left" >
+                  <div class="buttons" style="margin:0px;margin-right:32px;">
                     <span id="refresh-button" class="button is-size-7" @click="${this.refresh}">
                       <fa-icon class="fas fa-redo" size="1.4em" color="#fff"></fa-icon>
                     </span>
@@ -1253,7 +1076,8 @@ border-bottom: 0;
                     <button id ="csv-btn" @click="${this.generateCSV}" class="button is-size-7">Export CSV</button>
                 </div>
               </div>  
-              `:html``}
+             
+         
             
           </div>
         </div>
