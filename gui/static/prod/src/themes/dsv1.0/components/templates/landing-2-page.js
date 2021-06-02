@@ -210,7 +210,7 @@ import{PageViewElement,VIEW_MODE_DIALOG,css,html,Colors,Fonts,ServiceStyles}from
               </header>
               <div class="content">
                 <div class="content-tab">
-                  <div class="columns is-multiline cols is-paddingless">
+                  <div style="justify-content:center!important;" class="columns is-multiline cols is-paddingless">
                     ${this.page.pageInputGroups.map(feed=>html`
                         <div
                           class="column w__cols ${this._gridClasses(feed)}"
