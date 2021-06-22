@@ -146,10 +146,10 @@ class Interface(Wrapper):
 					obj = str(file_object.content_type).split("/")[0]
 					lgr.info('Object is: %s' % obj)
 					if  (int(file_object.size) > 25000000 and obj in ['image','text']) or \
-					(int(file_object.size) > 25000000 and file_object.content_type in ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']) or \
 					(int(file_object.size) > 25000000 and obj in ['audio']) or \
 					obj not in ['image','text','audio'] and file_object.content_type \
-									not in ['application/vnd.ms-excel','application/pdf']:
+									not in ['application/vnd.ms-excel','application/pdf',
+										'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']:
 						payload['response'] = 'FAIL | Please check the upload type, file size and extension'
 						payload['response_status'] = '05'
 					else:
