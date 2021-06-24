@@ -9,7 +9,7 @@ import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-u
 <div class="field">
 <article class="message is-primary">
   <div class="message-header">
-    <p>${this.name}</p>
+    <p></p>
   </div>
   <div class="message-body">
    ${this.text}
@@ -17,4 +17,4 @@ import{utilsMixin,BaseElement,css,html}from"../../../../../components/adaptive-u
 </article>
 </div>
 
-        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties);if(this.checkStyles){this.loadStyle()}}loadStyle(){const style=document.createElement("style");style.innerHTML=unescape(this.style);this.shadowRoot.appendChild(style)}}window.customElements.define(TextView.is,TextView);export{textView as $textView,textViewCss as $textViewCss,TextViewBase,TextViewStyles};
+        `}firstUpdated(changedProperties){super.firstUpdated(changedProperties);this.loadText();if(this.checkStyles){this.loadStyle()}}loadText(){const textToLoad=this.name,paragraph=this.shadowRoot.querySelector("p");paragraph.innerHTML=textToLoad}loadStyle(){const style=document.createElement("style");style.innerHTML=unescape(this.style);this.shadowRoot.appendChild(style)}}window.customElements.define(TextView.is,TextView);export{textView as $textView,textViewCss as $textViewCss,TextViewBase,TextViewStyles};

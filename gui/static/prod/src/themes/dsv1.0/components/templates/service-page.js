@@ -654,7 +654,7 @@ import{PageViewElement,VIEW_MODE_DIALOG,css,html,Colors,Fonts,ServiceStyles}from
           <main class="main-container" @click="${this.closeProfile}">
             <div class="row">
               ${this.page.pageInputGroups.map(feed=>html`
-                  <div class="column ${this._gridClasses(feed)} is-paddingless">
+                  <div class="column ${this._gridClasses(feed)} is-paddingless" style="margin-bottom:16px;">
                     <form-render
                       .feed="${feed}"
                       .params=${this.parseParams()}
