@@ -214,6 +214,7 @@ import{PageViewElement,VIEW_MODE_DIALOG,css,html,Colors,Fonts,ServiceStyles}from
                     ${this.page.pageInputGroups.map(feed=>html`
                         <div
                           class="column w__cols ${this._gridClasses(feed)}"
+                          style="margin-bottom:16px;"
                         >
                           <form-render
                             .feed="${feed}"

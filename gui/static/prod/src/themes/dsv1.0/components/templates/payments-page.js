@@ -413,6 +413,7 @@ import{PageViewElement,html}from"../../../../components/adaptive-ui.js";const Pa
                   ${this.page.pageInputGroups.map(feed=>html`
                       <div
                         class="column is-paddingless w__cols ${this._gridClasses(feed)}"
+                        style="margin-bottom:16px;"
                       >
                         <form-render
                           .feed="${feed}"

@@ -191,7 +191,7 @@ import{PageViewElement,VIEW_MODE_DIALOG,html}from"../../../../components/adaptiv
                                     
             <div class="is-fullWidth columns is-centered is-multiline">
                   ${page.pageInputGroups.map(feed=>html`
-                  <div class="column ${this._gridClasses(feed)} is-paddingless">
+                  <div class="column ${this._gridClasses(feed)} is-paddingless" style="margin-bottom:16px;">
                     <form-render .feed="${feed}" .top=${this._computeTop()} .params=${this.parseParams()}></form-render>
                   </div>
                   `)}
