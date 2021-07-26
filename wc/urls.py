@@ -1,5 +1,7 @@
 from django.conf.urls import *
 from django.contrib import admin
+
+
 admin.autodiscover()
 
 '''
@@ -19,5 +21,5 @@ urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	url(r'^processor/', include('processor.urls')),
 	url(r'^api/', include('api.urls')),
-	url(r'^', include('gui.urls'))
+	url(r'^', include('gui.urls')), 
 ]

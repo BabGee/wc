@@ -45,7 +45,6 @@ installed_apps = (
     'gui',
     'processor',
     'api',
-
 )
 
 
